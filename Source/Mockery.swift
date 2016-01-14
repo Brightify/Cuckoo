@@ -31,16 +31,16 @@ public class MockManager<STUBBING: StubbingProxy, VERIFICATION: VerificationProx
         self.callOriginalIfNotStubbed = callOriginalIfNotStubbed
     }
     
-    public func call<OUT>(method: String) -> OUT {
-        return call(method, parameters: Void())
+    public func call<OUT>(method: String, original: (Void throws -> OUT)? = nil) -> OUT {
+        return call(method, parameters: Void(), original: original)
     }
     
-    public func call<IN, OUT>(method: String, parameters: IN) -> OUT {
-        return try! callThrows(method, parameters: parameters)
+    public func call<IN, OUT>(method: String, parameters: IN, original: (IN throws -> OUT)? = nil) -> OUT {
+        return try! callThrows(method, parameters: parameters, original: original)
     }
     
-    public func callThrows<OUT>(method: String) throws -> OUT {
-        return try callThrows(method, parameters: Void())
+    public func callThrows<OUT>(method: String, original: (Void throws -> OUT)? = nil) throws -> OUT {
+        return try callThrows(method, parameters: Void(), original: original)
     }
     
     public func callThrows<IN, OUT>(method: String, parameters: IN, original: (IN throws -> OUT)? = nil) throws -> OUT {
