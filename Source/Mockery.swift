@@ -31,19 +31,11 @@ public class MockManager<STUBBING: StubbingProxy, VERIFICATION: VerificationProx
         self.callOriginalIfNotStubbed = callOriginalIfNotStubbed
     }
     
-    public func call<OUT>(method: String, original: (Void throws -> OUT)? = nil) -> OUT {
-        return call(method, parameters: Void(), original: original)
+    private func doCall<IN, OUT>(method: String, parameters: IN, @noescape original: Void -> OUT?) -> OUT {
+        return try! doCallThrows(method, parameters: parameters, original: original)
     }
     
-    public func call<IN, OUT>(method: String, parameters: IN, original: (IN throws -> OUT)? = nil) -> OUT {
-        return try! callThrows(method, parameters: parameters, original: original)
-    }
-    
-    public func callThrows<OUT>(method: String, original: (Void throws -> OUT)? = nil) throws -> OUT {
-        return try callThrows(method, parameters: Void(), original: original)
-    }
-    
-    public func callThrows<IN, OUT>(method: String, parameters: IN, original: (IN throws -> OUT)? = nil) throws -> OUT {
+    private func doCallThrows<IN, OUT>(method: String, parameters: IN, @noescape original: Void throws -> OUT?) throws -> OUT {
         if let stub = findStub(method, parameters: parameters) {
             switch stub.call() {
             case .ReturnValue(let value):
@@ -56,10 +48,10 @@ public class MockManager<STUBBING: StubbingProxy, VERIFICATION: VerificationProx
                 let message = "No stub for method `\(method)` using parameters \(parameters) and forwarding to original is disabled!"
                 XCTFail(message)
                 fatalError(message)
-            } else if let original = original {
-                return try original(parameters)
+            } else if let output = try original() {
+                 return output
             } else {
-                let message = "No stup for method `\(method)` using parameters \(parameters). Forwarding to original is enabled, but no original was supplied!"
+                let message = "No stub for method `\(method)` using parameters \(parameters). Forwarding to original is enabled, but no original was supplied!"
                 XCTFail(message)
                 fatalError(message)
             }
@@ -100,6 +92,40 @@ extension MockManager {
         return VERIFICATION(handler: VerificationHandler(matcher: matcher, verifyCall: verify))
     }
     
+}
+
+public extension MockManager {
+    public func call<OUT>(method: String) -> OUT {
+        return doCall(method, parameters: Void(), original: { nil })
+    }
+    
+    public func call<OUT>(method: String, @autoclosure original: Void -> OUT) -> OUT {
+        return doCall(method, parameters: Void(), original: original)
+    }
+    
+    public func call<IN, OUT>(method: String, parameters: IN) -> OUT {
+        return doCall(method, parameters: parameters, original: { nil })
+    }
+    
+    public func call<IN, OUT>(method: String, parameters: IN, @autoclosure original: Void -> OUT) -> OUT {
+        return doCall(method, parameters: parameters, original: original)
+    }
+    
+    public func callThrows<OUT>(method: String) throws -> OUT {
+        return try doCallThrows(method, parameters: Void(), original: { nil })
+    }
+    
+    public func callThrows<OUT>(method: String, @autoclosure original: Void throws -> OUT) throws -> OUT {
+        return try doCallThrows(method, parameters: Void(), original: original)
+    }
+    
+    public func callThrows<IN, OUT>(method: String, parameters: IN) throws -> OUT {
+        return try doCallThrows(method, parameters: parameters, original: { nil })
+    }
+    
+    public func callThrows<IN, OUT>(method: String, parameters: IN, @autoclosure original: Void throws -> OUT) throws -> OUT {
+        return try doCallThrows(method, parameters: parameters, original: original)
+    }
 }
 
 public protocol Mock {
