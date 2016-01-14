@@ -11,6 +11,8 @@ Pod::Spec.new do |s|
   s.version          = "0.1.0"
   s.summary          = "Mockery - first boilerplate-free Swift mocking framework."
   s.description      = <<-DESC
+                        Mockery is a mocking framework with an easy to use API (inspired by Mockito).
+                        It generates mocks and some helper structures automatically to enable this functionality.
                        DESC
 
   s.homepage         = "https://github.com/SwiftKit/Mockery"
@@ -23,8 +25,10 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target       = '8.0'
   s.osx.deployment_target       = '10.9'
-  s.watchos.deployment_target   = '2.0'
+  #s.watchos.deployment_target   = '2.0' # watchos does not include XCTest framework :(
   s.tvos.deployment_target      = '9.0'
   s.source_files                = 'Source/**/*.swift'
-  s.frameworks                  = 'XCTest'
+  s.frameworks                  = 'XCTest', 'Foundation'
+  s.requires_arc                = true
+  s.pod_target_xcconfig         = { 'ENABLE_BITCODE' => 'NO' }
 end

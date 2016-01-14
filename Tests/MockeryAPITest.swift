@@ -71,8 +71,8 @@ protocol Something {
 }
 
 // MARK: - Begin of generated
-struct Mock_Something: Something, Mock {
-    let manager: MockManager<StubbingProxyImpl, VerificationProxyImpl> = .init()
+struct Mock_Something: Something, Mockery.Mock {
+    let manager: Mockery.MockManager<StubbingProxyImpl, VerificationProxyImpl> = Mockery.MockManager()
     
     func noParameter() {
         return manager.call("noParameter()")
@@ -90,38 +90,38 @@ struct Mock_Something: Something, Mock {
         return try manager.callThrows("withThrows()")
     }
     
-    struct StubbingProxyImpl: StubbingProxy {
-        let handler: StubbingHandler
+    struct StubbingProxyImpl: Mockery.StubbingProxy {
+        let handler: Mockery.StubbingHandler
         
-        init(handler: StubbingHandler) {
+        init(handler: Mockery.StubbingHandler) {
             self.handler = handler
         }
         
         @warn_unused_result
-        func noParameter() -> ToBeStubbedFunction<Void, Void> {
+        func noParameter() -> Mockery.ToBeStubbedFunction<Void, Void> {
             return handler.stub("noParameter()", parameters: ())
         }
-        
+    
         @warn_unused_result
-        func countCharacters(test: String) -> ToBeStubbedFunction<String, Int> {
+        func countCharacters(test: String) -> Mockery.ToBeStubbedFunction<String, Int> {
             return handler.stub("countCharacters(String)", parameters: test)
         }
         
         @warn_unused_result
-        func withReturn() -> ToBeStubbedFunction<Void, String> {
+        func withReturn() -> Mockery.ToBeStubbedFunction<Void, String> {
             return handler.stub("withReturn()", parameters: ())
         }
         
         @warn_unused_result
-        func withThrows() -> ToBeStubbedThrowingFunction<Void, Void> {
+        func withThrows() -> Mockery.ToBeStubbedThrowingFunction<Void, Void> {
             return handler.stubThrowing("withThrows()", parameters: ())
         }
     }
     
-    struct VerificationProxyImpl: VerificationProxy {
-        let handler: VerificationHandler
+    struct VerificationProxyImpl: Mockery.VerificationProxy {
+        let handler: Mockery.VerificationHandler
         
-        init(handler: VerificationHandler) {
+        init(handler: Mockery.VerificationHandler) {
             self.handler = handler
         }
         

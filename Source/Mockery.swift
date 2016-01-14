@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import XCTest
 
 enum Mode {
     case Stubbing
@@ -20,13 +21,14 @@ enum ReturnValueOrError {
 }
 
 public class MockManager<STUBBING: StubbingProxy, VERIFICATION: VerificationProxy> {
-    public var callOriginalIfNotStubbed: Bool = false
+    public var callOriginalIfNotStubbed: Bool
     
     private var mode: Mode = .Default
     
     private var stubs: [String: [Stub]] = [:]
     
-    public init() {
+    public init(callOriginalIfNotStubbed: Bool = false) {
+        self.callOriginalIfNotStubbed = callOriginalIfNotStubbed
     }
     
     public func call<OUT>(method: String) -> OUT {
@@ -41,7 +43,7 @@ public class MockManager<STUBBING: StubbingProxy, VERIFICATION: VerificationProx
         return try callThrows(method, parameters: Void())
     }
     
-    public func callThrows<IN, OUT>(method: String, parameters: IN, original: (IN -> OUT)? = nil) throws -> OUT {
+    public func callThrows<IN, OUT>(method: String, parameters: IN, original: (IN throws -> OUT)? = nil) throws -> OUT {
         if let stub = findStub(method, parameters: parameters) {
             switch stub.call() {
             case .ReturnValue(let value):
@@ -51,12 +53,17 @@ public class MockManager<STUBBING: StubbingProxy, VERIFICATION: VerificationProx
             }
         } else {
             if callOriginalIfNotStubbed == false {
-                fatalError("No stub for method `\(method)` using parameters \(parameters) and forwarding to original is disabled!")
+                let message = "No stub for method `\(method)` using parameters \(parameters) and forwarding to original is disabled!"
+                XCTFail(message)
+                fatalError(message)
+            } else if let original = original {
+                return try original(parameters)
+            } else {
+                let message = "No stup for method `\(method)` using parameters \(parameters). Forwarding to original is enabled, but no original was supplied!"
+                XCTFail(message)
+                fatalError(message)
             }
         }
-        
-        print(method, parameters)
-        fatalError("\(method) -- \(parameters)")
     }
     
     private func findStub<IN>(method: String, parameters: IN) -> Stub? {
@@ -74,7 +81,8 @@ public class MockManager<STUBBING: StubbingProxy, VERIFICATION: VerificationProx
     
     private func verify<IN>(method: String, parameters: IN, matcher: AnyMatcher<Stub?>) {
         let foundStub = findStub(method, parameters: parameters)
-        assert(matcher.matches(foundStub), matcher.describe(foundStub))
+        
+        XCTAssertTrue(matcher.matches(foundStub), matcher.describe(foundStub))
     }
 }
 
@@ -83,8 +91,6 @@ extension MockManager {
     public func getStubbingProxy() -> STUBBING {
         return STUBBING(handler: StubbingHandler(createNewStub: createNewStub))
     }
-    
-    
     
 }
 
