@@ -31,11 +31,12 @@ public class MockManager<STUBBING: StubbingProxy, VERIFICATION: VerificationProx
         self.callOriginalIfNotStubbed = callOriginalIfNotStubbed
     }
     
-    private func doCall<IN, OUT>(method: String, parameters: IN, @noescape original: Void -> OUT?) -> OUT {
-        return try! doCallThrows(method, parameters: parameters, original: original)
+    private func doCall<IN, OUT>(method: String, @noescape futureParameters: Void -> IN, @noescape original: Void -> OUT?) -> OUT {
+        return try! doCallThrows(method, futureParameters: futureParameters, original: original)
     }
     
-    private func doCallThrows<IN, OUT>(method: String, parameters: IN, @noescape original: Void throws -> OUT?) throws -> OUT {
+    private func doCallThrows<IN, OUT>(method: String, @noescape futureParameters: Void -> IN, @noescape original: Void throws -> OUT?) throws -> OUT {
+        let parameters = futureParameters()
         if let stub = findStub(method, parameters: parameters) {
             switch stub.call() {
             case .ReturnValue(let value):
@@ -96,35 +97,35 @@ extension MockManager {
 
 public extension MockManager {
     public func call<OUT>(method: String) -> OUT {
-        return doCall(method, parameters: Void(), original: { nil })
+        return doCall(method, futureParameters: { Void() }, original: { nil })
     }
     
     public func call<OUT>(method: String, @autoclosure original: Void -> OUT) -> OUT {
-        return doCall(method, parameters: Void(), original: original)
+        return doCall(method, futureParameters: { Void() }, original: original)
     }
     
-    public func call<IN, OUT>(method: String, parameters: IN) -> OUT {
-        return doCall(method, parameters: parameters, original: { nil })
+    public func call<IN, OUT>(method: String, @autoclosure parameters: Void -> IN) -> OUT {
+        return doCall(method, futureParameters: parameters, original: { nil })
     }
     
-    public func call<IN, OUT>(method: String, parameters: IN, @autoclosure original: Void -> OUT) -> OUT {
-        return doCall(method, parameters: parameters, original: original)
+    public func call<IN, OUT>(method: String, @autoclosure parameters: Void -> IN, @autoclosure original: Void -> OUT) -> OUT {
+        return doCall(method, futureParameters: parameters, original: original)
     }
     
     public func callThrows<OUT>(method: String) throws -> OUT {
-        return try doCallThrows(method, parameters: Void(), original: { nil })
+        return try doCallThrows(method, futureParameters: { Void() }, original: { nil })
     }
     
     public func callThrows<OUT>(method: String, @autoclosure original: Void throws -> OUT) throws -> OUT {
-        return try doCallThrows(method, parameters: Void(), original: original)
+        return try doCallThrows(method, futureParameters: { Void() }, original: original)
     }
     
-    public func callThrows<IN, OUT>(method: String, parameters: IN) throws -> OUT {
-        return try doCallThrows(method, parameters: parameters, original: { nil })
+    public func callThrows<IN, OUT>(method: String, @autoclosure parameters: Void -> IN) throws -> OUT {
+        return try doCallThrows(method, futureParameters: parameters, original: { nil })
     }
     
-    public func callThrows<IN, OUT>(method: String, parameters: IN, @autoclosure original: Void throws -> OUT) throws -> OUT {
-        return try doCallThrows(method, parameters: parameters, original: original)
+    public func callThrows<IN, OUT>(method: String, @autoclosure parameters: Void -> IN, @autoclosure original: Void throws -> OUT) throws -> OUT {
+        return try doCallThrows(method, futureParameters: parameters, original: original)
     }
 }
 
