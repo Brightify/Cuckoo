@@ -10,33 +10,35 @@ public protocol StubbingProxy {
     init(handler: StubbingHandler)
 }
 
-public class Stub {
+public struct Stub {
     let name: String
     let inputMatcher: AnyMatcher<Any>
-    let output: () -> ReturnValueOrError
-    
-    var calledTimes: Int = 0
-    
-    init(name: String, inputMatcher: AnyMatcher<Any>, output: () -> ReturnValueOrError) {
-        self.name = name
-        self.inputMatcher = inputMatcher
-        self.output = output
-    }
-    
-    func call() -> ReturnValueOrError {
-        calledTimes += 1
-        
-        return output()
-    }
+    let output: Any -> ReturnValueOrError
+}
+
+public struct StubCall {
+    let method: String
+    let parameters: Any
 }
 
 public struct ToBeStubbedFunction<IN, OUT> {
     let handler: StubbingHandler
     
     let name: String
+    let matcher: AnyMatcher<IN>
+    
+    func setOutput(output: Any -> ReturnValueOrError) {
+        handler.createStubReturningValue(name, inputMatcher: matcher, output: output)
+    }
+}
+
+public struct ToBeStubbedFunctionNeedingMatcher<IN, OUT> {
+    let handler: StubbingHandler
+    
+    let name: String
     let parameters: IN
     
-    func setInputMatcher(matcher: AnyMatcher<IN>, @autoclosure(escaping) andOutput output: Void -> ReturnValueOrError) {
+    func setInputMatcher(matcher: AnyMatcher<IN>, andOutput output: Any -> ReturnValueOrError) {
         handler.createStubReturningValue(name, inputMatcher: matcher, output: output)
     }
 }
@@ -45,25 +47,46 @@ public struct ToBeStubbedThrowingFunction<IN, OUT> {
     let handler: StubbingHandler
     
     let name: String
-    let parameters: IN
+    let matcher: AnyMatcher<IN>
     
-    func setInputMatcher(matcher: AnyMatcher<IN>, @autoclosure(escaping) andOutput output: Void -> ReturnValueOrError) {
+    func setOutput(output: Any -> ReturnValueOrError) {
         handler.createStubReturningValue(name, inputMatcher: matcher, output: output)
     }
 }
 
+public struct ToBeStubbedThrowingFunctionNeedingMatcher<IN, OUT> {
+    let handler: StubbingHandler
+    
+    let name: String
+    let parameters: IN
+    
+    func setInputMatcher(matcher: AnyMatcher<IN>, andOutput output: Any -> ReturnValueOrError) {
+        handler.createStubReturningValue(name, inputMatcher: matcher, output: output)
+    }
+}
+
+
+
 public struct StubbingHandler {
     let createNewStub: Stub -> ()
     
-    public func stub<IN, OUT>(method: String, parameters: IN) -> ToBeStubbedFunction<IN, OUT> {
-        return ToBeStubbedFunction(handler: self, name: method, parameters: parameters)
+    public func stub<IN, OUT>(method: String, matcher: AnyMatcher<IN>) -> ToBeStubbedFunction<IN, OUT> {
+        return ToBeStubbedFunction(handler: self, name: method, matcher: matcher)
     }
     
-    public func stubThrowing<IN, OUT>(method: String, parameters: IN) -> ToBeStubbedThrowingFunction<IN, OUT> {
-        return ToBeStubbedThrowingFunction(handler: self, name: method, parameters: parameters)
+    public func stub<IN, OUT>(method: String, parameters: IN) -> ToBeStubbedFunctionNeedingMatcher<IN, OUT> {
+        return ToBeStubbedFunctionNeedingMatcher(handler: self, name: method, parameters: parameters)
     }
     
-    private func createStubReturningValue<IN>(method: String, inputMatcher: AnyMatcher<IN>, output: Void -> ReturnValueOrError) {
+    public func stubThrowing<IN, OUT>(method: String, matcher: AnyMatcher<IN>) -> ToBeStubbedThrowingFunction<IN, OUT> {
+        return ToBeStubbedThrowingFunction(handler: self, name: method, matcher: matcher)
+    }
+    
+    public func stubThrowing<IN, OUT>(method: String, parameters: IN) -> ToBeStubbedThrowingFunctionNeedingMatcher<IN, OUT> {
+        return ToBeStubbedThrowingFunctionNeedingMatcher(handler: self, name: method, parameters: parameters)
+    }
+    
+    private func createStubReturningValue<IN>(method: String, inputMatcher: AnyMatcher<IN>, output: Any -> ReturnValueOrError) {
         let stub = Stub(name: method, inputMatcher: AnyMatcher(inputMatcher), output: output)
         
         self.createNewStub(stub)
@@ -77,11 +100,39 @@ public struct StubbingHandler {
 }
 
 public struct ThenReturnValue<IN, OUT> {
-    public let thenReturn: OUT -> ()
+    internal let setOutput: (Any -> ReturnValueOrError) -> Void
+    
+    public func then(implementation: IN -> OUT) {
+        setOutput {
+            guard let parameters = $0 as? IN else { fatalError("Implementation called with wrong input type \($0.self). This is probably a bug in Mockery, please file a ticker.") }
+            return .ReturnValue(implementation(parameters))
+        }
+    }
+    
+    public func thenReturn(output: OUT) {
+        setOutput { _ in .ReturnValue(output) }
+    }
 }
 
 public struct ThenReturnValueOrThrow<IN, OUT> {
-    public let thenReturn: OUT -> ()
+    internal let setOutput: (Any -> ReturnValueOrError) -> Void
     
-    public let thenThrow: ErrorType -> ()
+    public func then(implementation: IN throws -> OUT) {
+        setOutput {
+            guard let parameters = $0 as? IN else { fatalError("") }
+            do {
+                return try .ReturnValue(implementation(parameters))
+            } catch let error {
+                return .Error(error)
+            }
+        }
+    }
+    
+    public func thenReturn(output: OUT) {
+        setOutput { _ in .ReturnValue(output) }
+    }
+    
+    public func thenThrow(error: ErrorType) {
+        setOutput { _ in .Error(error) }
+    }
 }

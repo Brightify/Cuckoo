@@ -22,23 +22,28 @@ enum ReturnValueOrError {
 
 public class MockManager<STUBBING: StubbingProxy, VERIFICATION: VerificationProxy> {
     public var callOriginalIfNotStubbed: Bool
-    
+
     private var mode: Mode = .Default
-    
+
     private var stubs: [String: [Stub]] = [:]
-    
+    private var stubCalls: [StubCall] = []
+
     public init(callOriginalIfNotStubbed: Bool = false) {
         self.callOriginalIfNotStubbed = callOriginalIfNotStubbed
     }
-    
+
     private func doCall<IN, OUT>(method: String, @noescape futureParameters: Void -> IN, @noescape original: Void -> OUT?) -> OUT {
         return try! doCallThrows(method, futureParameters: futureParameters, original: original)
     }
-    
+
     private func doCallThrows<IN, OUT>(method: String, @noescape futureParameters: Void -> IN, @noescape original: Void throws -> OUT?) throws -> OUT {
         let parameters = futureParameters()
+
+        let stubCall = StubCall(method: method, parameters: parameters)
+        stubCalls.append(stubCall)
+        
         if let stub = findStub(method, parameters: parameters) {
-            switch stub.call() {
+            switch stub.output(parameters) {
             case .ReturnValue(let value):
                 return value as! OUT
             case .Error(let error):
@@ -58,72 +63,82 @@ public class MockManager<STUBBING: StubbingProxy, VERIFICATION: VerificationProx
             }
         }
     }
-    
+
     private func findStub<IN>(method: String, parameters: IN) -> Stub? {
         guard let stubsWithSameName = stubs[method] else { return nil }
         return stubsWithSameName.filter { $0.inputMatcher.matches(parameters) }.first
     }
-    
+
     private func createNewStub(stub: Stub) {
         if !stubs.keys.contains(stub.name) {
             stubs[stub.name] = []
         }
-        
+
         stubs[stub.name]?.insert(stub, atIndex: 0)
     }
-    
-    private func verify<IN>(method: String, parameters: IN, matcher: AnyMatcher<Stub?>) {
-        let foundStub = findStub(method, parameters: parameters)
+
+    private func verify(method: String, callMatcher: AnyMatcher<StubCall>, verificationMatcher: AnyMatcher<[StubCall]>) {
+        let calls = stubCalls.filter(callMatcher.matches)
         
-        XCTAssertTrue(matcher.matches(foundStub), matcher.describe(foundStub))
+        if verificationMatcher.matches(calls) == false {
+            let description = StringDescription()
+            description
+                .appendText("Expected: ")
+                .appendDescriptionOf(verificationMatcher)
+                .appendText("\n     but: ");
+            verificationMatcher.describeMismatch(calls, to: description);
+            
+            XCTFail(description.description)
+        }
+        
     }
 }
 
 extension MockManager {
-    
+
     public func getStubbingProxy() -> STUBBING {
         return STUBBING(handler: StubbingHandler(createNewStub: createNewStub))
     }
-    
+
 }
 
 extension MockManager {
-    
-    public func getVerificationProxy(matcher: AnyMatcher<Stub?>) -> VERIFICATION {
+
+    public func getVerificationProxy(matcher: AnyMatcher<[StubCall]>) -> VERIFICATION {
         return VERIFICATION(handler: VerificationHandler(matcher: matcher, verifyCall: verify))
     }
-    
+
 }
 
 public extension MockManager {
     public func call<OUT>(method: String) -> OUT {
         return doCall(method, futureParameters: { Void() }, original: { nil })
     }
-    
+
     public func call<OUT>(method: String, @autoclosure original: Void -> OUT) -> OUT {
         return doCall(method, futureParameters: { Void() }, original: original)
     }
-    
+
     public func call<IN, OUT>(method: String, @autoclosure parameters: Void -> IN) -> OUT {
         return doCall(method, futureParameters: parameters, original: { nil })
     }
-    
+
     public func call<IN, OUT>(method: String, @autoclosure parameters: Void -> IN, @autoclosure original: Void -> OUT) -> OUT {
         return doCall(method, futureParameters: parameters, original: original)
     }
-    
+
     public func callThrows<OUT>(method: String) throws -> OUT {
         return try doCallThrows(method, futureParameters: { Void() }, original: { nil })
     }
-    
+
     public func callThrows<OUT>(method: String, @autoclosure original: Void throws -> OUT) throws -> OUT {
         return try doCallThrows(method, futureParameters: { Void() }, original: original)
     }
-    
+
     public func callThrows<IN, OUT>(method: String, @autoclosure parameters: Void -> IN) throws -> OUT {
         return try doCallThrows(method, futureParameters: parameters, original: { nil })
     }
-    
+
     public func callThrows<IN, OUT>(method: String, @autoclosure parameters: Void -> IN, @autoclosure original: Void throws -> OUT) throws -> OUT {
         return try doCallThrows(method, futureParameters: parameters, original: original)
     }
@@ -132,6 +147,6 @@ public extension MockManager {
 public protocol Mock {
     typealias Stubbing: StubbingProxy
     typealias Verification: VerificationProxy
-    
+
     var manager: MockManager<Stubbing, Verification> { get }
 }

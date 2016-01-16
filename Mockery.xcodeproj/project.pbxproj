@@ -19,6 +19,8 @@
 		183D04161C46926A00EBAEF3 /* Mockery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183D04151C46926A00EBAEF3 /* Mockery.swift */; };
 		183D041A1C46C14000EBAEF3 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183D04191C46C14000EBAEF3 /* Utils.swift */; };
 		183D041C1C46C65300EBAEF3 /* Stubbing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183D041B1C46C65300EBAEF3 /* Stubbing.swift */; };
+		189755551C4A56F800C7931F /* Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189755541C4A56F800C7931F /* Description.swift */; };
+		189755571C4A5E8400C7931F /* Matchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189755561C4A5E8400C7931F /* Matchable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,8 @@
 		183D04151C46926A00EBAEF3 /* Mockery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mockery.swift; sourceTree = "<group>"; };
 		183D04191C46C14000EBAEF3 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		183D041B1C46C65300EBAEF3 /* Stubbing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stubbing.swift; sourceTree = "<group>"; };
+		189755541C4A56F800C7931F /* Description.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Description.swift; sourceTree = "<group>"; };
+		189755561C4A5E8400C7931F /* Matchable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Matchable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +104,8 @@
 				181F41A41C46CBBD005BAB70 /* Matcher.swift */,
 				181F41A61C46CC3D005BAB70 /* Matchers.swift */,
 				181F41A81C46D491005BAB70 /* MatcherFunctions.swift */,
+				189755541C4A56F800C7931F /* Description.swift */,
+				189755561C4A5E8400C7931F /* Matchable.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -223,7 +229,9 @@
 			files = (
 				181F41A11C46C6E7005BAB70 /* Verification.swift in Sources */,
 				181F419F1C46C6B3005BAB70 /* StubbingFunctions.swift in Sources */,
+				189755551C4A56F800C7931F /* Description.swift in Sources */,
 				183D04161C46926A00EBAEF3 /* Mockery.swift in Sources */,
+				189755571C4A5E8400C7931F /* Matchable.swift in Sources */,
 				181F41A71C46CC3D005BAB70 /* Matchers.swift in Sources */,
 				181F41A91C46D491005BAB70 /* MatcherFunctions.swift in Sources */,
 				181F41A51C46CBBD005BAB70 /* Matcher.swift in Sources */,

@@ -46,7 +46,7 @@ class MockeryAPITest: XCTestCase {
         
         verify(mock).noParameter()
         
-        verify(mock).countCharacters("hello")
+        verify(mock).countCharacters(eq("hello"))
         
         verify(mock).withReturn()
         
@@ -90,6 +90,14 @@ struct Mock_Something: Something, Mockery.Mock {
         return try manager.callThrows("withThrows()")
     }
     
+    func withClosure(closure: String -> Int) {
+        return manager.call("withClosure(String->Int)")
+    }
+    
+    func withMultipleParameters(a: String, b: Int, c: Float) {
+        return manager.call("withMultipleParameters(String,b:Int,c:Float)")
+    }
+    
     struct StubbingProxyImpl: Mockery.StubbingProxy {
         let handler: Mockery.StubbingHandler
         
@@ -98,23 +106,28 @@ struct Mock_Something: Something, Mockery.Mock {
         }
         
         @warn_unused_result
-        func noParameter() -> Mockery.ToBeStubbedFunction<Void, Void> {
+        func noParameter() -> Mockery.ToBeStubbedFunctionNeedingMatcher<Void, Void> {
             return handler.stub("noParameter()", parameters: ())
         }
     
         @warn_unused_result
-        func countCharacters(test: String) -> Mockery.ToBeStubbedFunction<String, Int> {
+        func countCharacters(test: String) -> Mockery.ToBeStubbedFunctionNeedingMatcher<String, Int> {
             return handler.stub("countCharacters(String)", parameters: test)
         }
         
         @warn_unused_result
-        func withReturn() -> Mockery.ToBeStubbedFunction<Void, String> {
+        func withReturn() -> Mockery.ToBeStubbedFunctionNeedingMatcher<Void, String> {
             return handler.stub("withReturn()", parameters: ())
         }
         
         @warn_unused_result
-        func withThrows() -> Mockery.ToBeStubbedThrowingFunction<Void, Void> {
+        func withThrows() -> Mockery.ToBeStubbedThrowingFunctionNeedingMatcher<Void, Void> {
             return handler.stubThrowing("withThrows()", parameters: ())
+        }
+        
+        @warn_unused_result
+        func withClosure(matcher: AnyMatcher<String -> Int>) -> Mockery.ToBeStubbedFunction<String -> Int, Void> {
+            return handler.stub("withClosure(String->Int)", matcher: matcher)
         }
     }
     
@@ -125,21 +138,45 @@ struct Mock_Something: Something, Mockery.Mock {
             self.handler = handler
         }
         
-        func noParameter() {
-            return handler.verify("noParameter()", parameters: ())
+        func noParameter() -> __DoNotUse<Void> {
+            return handler.verify("noParameter()")
         }
         
-        func countCharacters(test: String) {
-            return handler.verify("countCharacters(String)", parameters: test)
+        func countCharacters<
+            P1: Matchable
+            where P1.MatchedType == String
+        >(test: P1) -> __DoNotUse<Int> {
+            let matchers: [AnyMatcher<(String)>] = [parameterMatcher(test.matcher) { $0 }]
+            return handler.verify("countCharacters(String)", parameterMatchers: matchers)
         }
         
-        func withReturn() {
-            return handler.verify("withReturn()", parameters: ())
+        func withReturn() -> __DoNotUse<String> {
+            return handler.verify("withReturn()")
         }
         
-        func withThrows() {
-            return handler.verify("withThrows()", parameters: ())
+        func withThrows() -> __DoNotUse<Void> {
+            return handler.verify("withThrows()")
         }
         
+        func withClosure<
+            P1: Matchable
+            where P1.MatchedType == (String -> Int)
+        >(closure: P1) -> __DoNotUse<String -> Int> {
+            let matchers: [AnyMatcher<(String -> Int)>] = [parameterMatcher(closure.matcher) { $0 }]
+            return handler.verify("withClosure(String->Int)", parameterMatchers: matchers)
+        }
+        
+        func withMultipleParameters<
+            P1: Matchable, P2: Matchable, P3: Matchable
+            where P1.MatchedType == String, P2.MatchedType == Int, P3.MatchedType == Float
+            >(a: P1, b: P2, c: P3) -> __DoNotUse<Void>
+        {
+            let matchers: [AnyMatcher<(String, b: Int, c: Float)>] = [
+                parameterMatcher(a.matcher) { $0.0 },
+                parameterMatcher(b.matcher) { $0.b },
+                parameterMatcher(c.matcher) { $0.c }
+            ]
+            return handler.verify("withMultipleParameters(String,b:Int,c:Float)", parameterMatchers: matchers)
+        }
     }
 }

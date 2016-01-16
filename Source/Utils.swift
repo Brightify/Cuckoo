@@ -34,6 +34,13 @@ enum TypeStripingError: ErrorType {
     case CalledWithIncorrectType
 }
 
+internal func stripInputTypeInformation<IN_A, IN_B, OUT>(stripType: IN_A.Type, from function: (IN_A, IN_B) -> OUT)(_ inputA: Any, _ inputB: IN_B) throws -> OUT {
+    guard let castInputA = inputA as? IN_A else {
+        throw TypeStripingError.CalledWithIncorrectType
+    }
+    return function(castInputA, inputB)
+}
+
 internal func stripInputTypeInformation<IN, OUT>(function: IN -> OUT)(_ input: Any) throws -> OUT {
     return try stripInputTypeInformation(IN.self, from: function)(input)
 }

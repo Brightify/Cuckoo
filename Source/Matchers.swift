@@ -9,12 +9,15 @@
 // Heavy type erasure in this class. Might be very dangerous!
 public struct AnyMatcher<T>: Matcher {
     let targetType: Any.Type
-    let describeFunction: T throws -> String
+    let describeToFunction: Description -> Void
+    let describeMismatchFunction: (T, to: Description) throws -> Void
     let matchesFunction: T throws -> Bool
     
     init<M: Matcher>(_ wrapped: M) {
         self.targetType = M.MatchedType.self
-        self.describeFunction = stripInputTypeInformation(wrapped.describe)
+        
+        self.describeToFunction = wrapped.describeTo
+        self.describeMismatchFunction = stripInputTypeInformation(M.MatchedType.self, from: wrapped.describeMismatch)
         self.matchesFunction = stripInputTypeInformation(wrapped.matches)
     }
     
@@ -22,17 +25,22 @@ public struct AnyMatcher<T>: Matcher {
         self.targetType = T.self
         
         // Stubs to enable simple type matching
-        self.describeFunction = stripInputTypeInformation(T.self, from: { _ in "" })
-        self.matchesFunction = stripInputTypeInformation(T.self, from: { _ in true })
+        self.describeToFunction = { _ in }
+        self.describeMismatchFunction = { _ in }
+        self.matchesFunction = { _ in true }
     }
     
-    public func describe(input: T) -> String {
+    public func describeTo(description: Description) {
+        describeToFunction(description)
+    }
+    
+    public func describeMismatch(input: T, to description: Description) {
         do {
-            return try describeFunction(input)
+            return try describeMismatchFunction(input, to: description)
         } catch TypeStripingError.CalledWithIncorrectType {
-            return "expected instance of <\(targetType)> got <\(input.dynamicType.self)>"
+            description.appendText("instance of").appendValue(targetType)
         } catch let error {
-            return "Unknown error occured while matching: \(error)"
+            description.appendText("Unknown error occured while matching: \(error)")
         }
     }
     
@@ -46,24 +54,34 @@ public struct AnyMatcher<T>: Matcher {
 }
 
 public struct FunctionMatcher<T>: Matcher {
-    private let function: T -> Bool
-    private let description: T -> String
+    private let matchesFunction: T -> Bool
+    private let describeToFunction: Description -> Void
+    private let describeMismatchFunction: ((T, to: Description) -> Void)?
     
-    public init(original: T, function: (T, T) -> Bool, description: (T, T) -> String) {
-        self.function = curry(function)(original)
-        self.description = curry(description)(original)
+    public init(original: T, function: (T, T) -> Bool, describeMismatch: ((T, to: Description) -> Void)? = nil, describeTo: Description -> Void) {
+        self.init(function: curry(function)(original), describeMismatch: describeMismatch, describeTo: describeTo)
     }
     
-    public init(function: T -> Bool, description: T -> String) {
-        self.function = function
-        self.description = description
+    public init(function: T -> Bool, describeMismatch: ((T, to: Description) -> Void)? = nil, describeTo: Description -> Void) {
+        self.matchesFunction = function
+        self.describeToFunction = describeTo
+        self.describeMismatchFunction = describeMismatch
     }
     
-    public func describe(input: T) -> String {
-        return description(input)
+    public func describeTo(description: Description) {
+        describeToFunction(description)
+    }
+    
+    public func describeMismatch(input: T, to description: Description) {
+        if let describeMismatchFunction = describeMismatchFunction {
+            describeMismatchFunction(input, to: description)
+        } else {
+            description.appendText("was ").appendValue(input)
+        }
+        
     }
     
     public func matches(input: T) -> Bool {
-        return function(input)
+        return matchesFunction(input)
     }
 }

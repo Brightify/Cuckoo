@@ -12,6 +12,6 @@ public func verify<M: Mock>(mock: M) -> M.Verification {
 }
 
 @warn_unused_result
-public func verify<M: Mock>(mock: M, _ matcher: AnyMatcher<Stub?>) -> M.Verification {
+public func verify<M: Mock>(mock: M, _ matcher: AnyMatcher<[StubCall]>) -> M.Verification {
     return mock.manager.getVerificationProxy(matcher)
 }
