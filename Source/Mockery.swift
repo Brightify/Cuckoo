@@ -66,7 +66,7 @@ public class MockManager<STUBBING: StubbingProxy, VERIFICATION: VerificationProx
 
     private func findStub<IN>(method: String, parameters: IN) -> Stub? {
         guard let stubsWithSameName = stubs[method] else { return nil }
-        return stubsWithSameName.filter { $0.inputMatcher.matches(parameters) }.first
+        return stubsWithSameName.filter { $0.parameterMatchers.reduce(true) { $0 && $1.matches(parameters) } }.first
     }
 
     private func createNewStub(stub: Stub) {

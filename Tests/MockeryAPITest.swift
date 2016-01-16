@@ -117,28 +117,30 @@ class Mock_Something: Something, Mockery.Mock {
         }
         
         @warn_unused_result
-        func noParameter() -> Mockery.ToBeStubbedFunctionNeedingMatcher<Void, Void> {
-            return handler.stub("noParameter()", parameters: ())
+        func noParameter() -> Mockery.ToBeStubbedFunction<Void, Void> {
+            return handler.stub("noParameter()", parameterMatchers: [])
         }
     
         @warn_unused_result
-        func countCharacters(test: String) -> Mockery.ToBeStubbedFunctionNeedingMatcher<String, Int> {
-            return handler.stub("countCharacters(String)", parameters: test)
+        func countCharacters<M1: Matchable where M1.MatchedType == String>(test: M1) -> Mockery.ToBeStubbedFunction<String, Int> {
+            let matchers: [AnyMatcher<(String)>] = [parameterMatcher(test.matcher, mapping: { $0 })]
+            return handler.stub("countCharacters(String)", parameterMatchers: matchers)
         }
         
         @warn_unused_result
-        func withReturn() -> Mockery.ToBeStubbedFunctionNeedingMatcher<Void, String> {
-            return handler.stub("withReturn()", parameters: ())
+        func withReturn() -> Mockery.ToBeStubbedFunction<Void, String> {
+            return handler.stub("withReturn()", parameterMatchers: [])
         }
         
         @warn_unused_result
-        func withThrows() -> Mockery.ToBeStubbedThrowingFunctionNeedingMatcher<Void, Void> {
-            return handler.stubThrowing("withThrows()", parameters: ())
+        func withThrows() -> Mockery.ToBeStubbedThrowingFunction<Void, Void> {
+            return handler.stubThrowing("withThrows()", parameterMatchers: [])
         }
         
         @warn_unused_result
-        func withClosure(matcher: AnyMatcher<String -> Int>) -> Mockery.ToBeStubbedFunction<String -> Int, Void> {
-            return handler.stub("withClosure(String->Int)", matcher: matcher)
+        func withClosure<M1: Matchable where M1.MatchedType == (String -> Int)>(closure: M1) -> Mockery.ToBeStubbedFunction<String -> Int, Void> {
+            let matchers: [AnyMatcher<(String -> Int)>] = [parameterMatcher(closure.matcher) { $0 }]
+            return handler.stub("withClosure(String->Int)", parameterMatchers: matchers)
         }
     }
     

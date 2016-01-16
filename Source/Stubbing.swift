@@ -12,7 +12,7 @@ public protocol StubbingProxy {
 
 public struct Stub {
     let name: String
-    let inputMatcher: AnyMatcher<Any>
+    let parameterMatchers: [AnyMatcher<Any>]
     let output: Any -> ReturnValueOrError
 }
 
@@ -25,21 +25,10 @@ public struct ToBeStubbedFunction<IN, OUT> {
     let handler: StubbingHandler
     
     let name: String
-    let matcher: AnyMatcher<IN>
+    let parameterMatchers: [AnyMatcher<IN>]
     
     func setOutput(output: Any -> ReturnValueOrError) {
-        handler.createStubReturningValue(name, inputMatcher: matcher, output: output)
-    }
-}
-
-public struct ToBeStubbedFunctionNeedingMatcher<IN, OUT> {
-    let handler: StubbingHandler
-    
-    let name: String
-    let parameters: IN
-    
-    func setInputMatcher(matcher: AnyMatcher<IN>, andOutput output: Any -> ReturnValueOrError) {
-        handler.createStubReturningValue(name, inputMatcher: matcher, output: output)
+        handler.createStubReturningValue(name, parameterMatchers: parameterMatchers, output: output)
     }
 }
 
@@ -47,47 +36,26 @@ public struct ToBeStubbedThrowingFunction<IN, OUT> {
     let handler: StubbingHandler
     
     let name: String
-    let matcher: AnyMatcher<IN>
+    let parameterMatchers: [AnyMatcher<IN>]
     
     func setOutput(output: Any -> ReturnValueOrError) {
-        handler.createStubReturningValue(name, inputMatcher: matcher, output: output)
+        handler.createStubReturningValue(name, parameterMatchers: parameterMatchers, output: output)
     }
 }
-
-public struct ToBeStubbedThrowingFunctionNeedingMatcher<IN, OUT> {
-    let handler: StubbingHandler
-    
-    let name: String
-    let parameters: IN
-    
-    func setInputMatcher(matcher: AnyMatcher<IN>, andOutput output: Any -> ReturnValueOrError) {
-        handler.createStubReturningValue(name, inputMatcher: matcher, output: output)
-    }
-}
-
-
 
 public struct StubbingHandler {
     let createNewStub: Stub -> ()
     
-    public func stub<IN, OUT>(method: String, matcher: AnyMatcher<IN>) -> ToBeStubbedFunction<IN, OUT> {
-        return ToBeStubbedFunction(handler: self, name: method, matcher: matcher)
+    public func stub<IN, OUT>(method: String, parameterMatchers: [AnyMatcher<IN>]) -> ToBeStubbedFunction<IN, OUT> {
+        return ToBeStubbedFunction(handler: self, name: method, parameterMatchers: parameterMatchers)
     }
     
-    public func stub<IN, OUT>(method: String, parameters: IN) -> ToBeStubbedFunctionNeedingMatcher<IN, OUT> {
-        return ToBeStubbedFunctionNeedingMatcher(handler: self, name: method, parameters: parameters)
+    public func stubThrowing<IN, OUT>(method: String, parameterMatchers: [AnyMatcher<IN>]) -> ToBeStubbedThrowingFunction<IN, OUT> {
+        return ToBeStubbedThrowingFunction(handler: self, name: method, parameterMatchers: parameterMatchers)
     }
     
-    public func stubThrowing<IN, OUT>(method: String, matcher: AnyMatcher<IN>) -> ToBeStubbedThrowingFunction<IN, OUT> {
-        return ToBeStubbedThrowingFunction(handler: self, name: method, matcher: matcher)
-    }
-    
-    public func stubThrowing<IN, OUT>(method: String, parameters: IN) -> ToBeStubbedThrowingFunctionNeedingMatcher<IN, OUT> {
-        return ToBeStubbedThrowingFunctionNeedingMatcher(handler: self, name: method, parameters: parameters)
-    }
-    
-    private func createStubReturningValue<IN>(method: String, inputMatcher: AnyMatcher<IN>, output: Any -> ReturnValueOrError) {
-        let stub = Stub(name: method, inputMatcher: AnyMatcher(inputMatcher), output: output)
+    private func createStubReturningValue<IN>(method: String, parameterMatchers: [AnyMatcher<IN>], output: Any -> ReturnValueOrError) {
+        let stub = Stub(name: method, parameterMatchers: parameterMatchers.map(AnyMatcher.init), output: output)
         
         self.createNewStub(stub)
     }
