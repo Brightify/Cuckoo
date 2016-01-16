@@ -105,7 +105,8 @@ class Mock_Something: Something, Mockery.Mock {
     }
     
     override func withNoescape(a: String, @noescape closure: String -> Void) {
-        return manager.call("withNoescape(String,closure:String->Void)", parameters: (a: a, markerFunction(String.self, Void.self)), original: super.withNoescape(a, closure: closure))
+        let escapingParameters: (String, closure: String -> Void) = (a, closure: markerFunction())
+        return manager.call("withNoescape(String,closure:String->Void)", parameters: escapingParameters, original: super.withNoescape(a, closure: closure))
     }
     
     struct StubbingProxyImpl: Mockery.StubbingProxy {
