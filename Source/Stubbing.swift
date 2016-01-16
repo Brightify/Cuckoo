@@ -46,8 +46,16 @@ public struct ToBeStubbedThrowingFunction<IN, OUT> {
 public struct StubbingHandler {
     let createNewStub: Stub -> ()
     
+    public func stub<OUT>(method: String) -> ToBeStubbedFunction<Void, OUT> {
+        return stub(method, parameterMatchers: [] as [AnyMatcher<Void>])
+    }
+
     public func stub<IN, OUT>(method: String, parameterMatchers: [AnyMatcher<IN>]) -> ToBeStubbedFunction<IN, OUT> {
         return ToBeStubbedFunction(handler: self, name: method, parameterMatchers: parameterMatchers)
+    }
+    
+    public func stubThrowing<OUT>(method: String) -> ToBeStubbedThrowingFunction<Void, OUT> {
+        return stubThrowing(method, parameterMatchers: [] as [AnyMatcher<Void>])
     }
     
     public func stubThrowing<IN, OUT>(method: String, parameterMatchers: [AnyMatcher<IN>]) -> ToBeStubbedThrowingFunction<IN, OUT> {

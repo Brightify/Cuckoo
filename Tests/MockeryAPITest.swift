@@ -118,7 +118,7 @@ class Mock_Something: Something, Mockery.Mock {
         
         @warn_unused_result
         func noParameter() -> Mockery.ToBeStubbedFunction<Void, Void> {
-            return handler.stub("noParameter()", parameterMatchers: [])
+            return handler.stub("noParameter()")
         }
     
         @warn_unused_result
@@ -129,12 +129,12 @@ class Mock_Something: Something, Mockery.Mock {
         
         @warn_unused_result
         func withReturn() -> Mockery.ToBeStubbedFunction<Void, String> {
-            return handler.stub("withReturn()", parameterMatchers: [])
+            return handler.stub("withReturn()")
         }
         
         @warn_unused_result
         func withThrows() -> Mockery.ToBeStubbedThrowingFunction<Void, Void> {
-            return handler.stubThrowing("withThrows()", parameterMatchers: [])
+            return handler.stubThrowing("withThrows()")
         }
         
         @warn_unused_result
