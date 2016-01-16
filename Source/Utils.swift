@@ -51,3 +51,11 @@ internal func stripInputTypeInformation<IN, OUT>(inputType: IN.Type, from functi
     }
     return function(castInput)
 }
+
+public func markerFunction<IN, OUT>(input: IN.Type, _ output: OUT.Type) -> IN -> OUT {
+    return { _ in
+        assert(false, "Marker function cannot be called")
+        // Will never be called, but Swift cannot infer the type without it
+        return OUT.self as! OUT
+    }
+}

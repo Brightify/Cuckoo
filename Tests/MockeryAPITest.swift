@@ -60,42 +60,52 @@ class MockeryAPITest: XCTestCase {
 
 
 // MARK: - Source
-protocol Something {
-    func noParameter()
+class Something {
+    func noParameter() { }
     
-    func countCharacters(test: String) -> Int
+    func countCharacters(test: String) -> Int { return test.characters.count }
     
-    func withReturn() -> String
+    func withReturn() -> String { return "" }
     
-    func withThrows() throws
+    func withThrows() throws { }
+    
+    func withClosure(closure: String -> Int) { closure("hello") }
+    
+    func withMultipleParameters(a: String, b: Int, c: Float) { }
+    
+    func withNoescape(a: String, @noescape closure: String -> Void) { closure(a) }
 }
 
 // MARK: - Begin of generated
-struct Mock_Something: Something, Mockery.Mock {
+class Mock_Something: Something, Mockery.Mock {
     let manager: Mockery.MockManager<StubbingProxyImpl, VerificationProxyImpl> = Mockery.MockManager()
     
-    func noParameter() {
+    override func noParameter() {
         return manager.call("noParameter()")
     }
     
-    func countCharacters(test: String) -> Int {
+    override func countCharacters(test: String) -> Int {
         return manager.call("countCharacters(String)", parameters: test)
     }
     
-    func withReturn() -> String {
+    override func withReturn() -> String {
         return manager.call("withReturn()")
     }
     
-    func withThrows() throws {
+    override func withThrows() throws {
         return try manager.callThrows("withThrows()")
     }
     
-    func withClosure(closure: String -> Int) {
+    override func withClosure(closure: String -> Int) {
         return manager.call("withClosure(String->Int)")
     }
     
-    func withMultipleParameters(a: String, b: Int, c: Float) {
+    override func withMultipleParameters(a: String, b: Int, c: Float) {
         return manager.call("withMultipleParameters(String,b:Int,c:Float)")
+    }
+    
+    override func withNoescape(a: String, @noescape closure: String -> Void) {
+        return manager.call("withNoescape(String,closure:String->Void)", parameters: (a: a, markerFunction(String.self, Void.self)), original: super.withNoescape(a, closure: closure))
     }
     
     struct StubbingProxyImpl: Mockery.StubbingProxy {
