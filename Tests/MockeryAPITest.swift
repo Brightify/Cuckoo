@@ -27,7 +27,7 @@ class MockeryAPITest: XCTestCase {
             case Unknown
         }
         
-        let mock = Mock_Something()
+        let mock = Mockery.mock(Something)
         
         // FIXME Should be fatalError when method was not throwing
         
@@ -51,9 +51,6 @@ class MockeryAPITest: XCTestCase {
         verify(mock).withReturn()
         
         verify(mock, never()).withThrows()
-        
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
         
 }
@@ -76,12 +73,25 @@ class Something {
     func withNoescape(a: String, @noescape closure: String -> Void) { closure(a) }
 }
 
+extension Something: Mockery.Mockable {
+    typealias MockType = MockSomething
+}
+
 // MARK: - Begin of generated
-class Mock_Something: Something, Mockery.Mock {
+class MockSomething: Something, Mockery.Mock {
     let manager: Mockery.MockManager<StubbingProxyImpl, VerificationProxyImpl> = Mockery.MockManager()
+    let observed: Something?
+    
+    required override init() {
+        self.observed = nil
+    }
+    
+    required init(spyOn: Something) {
+        self.observed = spyOn
+    }
     
     override func noParameter() {
-        return manager.call("noParameter()")
+        return manager.call("noParameter()", original: { () -> () in observed?.noParameter() })
     }
     
     override func countCharacters(test: String) -> Int {
@@ -106,7 +116,7 @@ class Mock_Something: Something, Mockery.Mock {
     
     override func withNoescape(a: String, @noescape closure: String -> Void) {
         let escapingParameters: (String, closure: String -> Void) = (a, closure: markerFunction())
-        return manager.call("withNoescape(String,closure:String->Void)", parameters: escapingParameters, original: super.withNoescape(a, closure: closure))
+        return manager.call("withNoescape(String,closure:String->Void)", parameters: escapingParameters, original: { () -> (Void) in super.withNoescape(a, closure: closure) })
     }
     
     struct StubbingProxyImpl: Mockery.StubbingProxy {
