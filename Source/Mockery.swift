@@ -9,56 +9,42 @@
 import Foundation
 import XCTest
 
-enum Mode {
-    case Stubbing
-    case Verification
-    case Default
-}
-
 enum ReturnValueOrError {
     case ReturnValue(Any)
     case Error(ErrorType)
 }
 
 public class MockManager<STUBBING: StubbingProxy, VERIFICATION: VerificationProxy> {
-    public var callOriginalIfNotStubbed: Bool
-
-    private var mode: Mode = .Default
-
     private var stubs: [String: [Stub]] = [:]
     private var stubCalls: [StubCall] = []
 
-    public init(callOriginalIfNotStubbed: Bool = false) {
-        self.callOriginalIfNotStubbed = callOriginalIfNotStubbed
+    public init() {
+        
     }
 
-    private func doCall<IN, OUT>(method: String, parameters: IN, @noescape original: Void -> OUT?) -> OUT {
-        return try! doCallThrows(method, parameters: parameters, original: original)
+    private func doCall<IN, OUT>(method: String, parameters: IN, original: (IN -> OUT)? = nil) -> IN -> OUT {
+        return { try! self.doCallThrows(method, parameters: parameters, original: original)($0) }
     }
 
-    private func doCallThrows<IN, OUT>(method: String, parameters: IN, @noescape original: Void throws -> OUT?) throws -> OUT {
+    private func doCallThrows<IN, OUT>(method: String, parameters: IN, original: (IN throws -> OUT)? = nil) -> IN throws -> OUT {
         let stubCall = StubCall(method: method, parameters: parameters)
         stubCalls.append(stubCall)
         
         if let stub = findStub(method, parameters: parameters) {
-            switch stub.output(parameters) {
-            case .ReturnValue(let value):
-                return value as! OUT
-            case .Error(let error):
-                throw error
+            return {
+                switch stub.output($0) {
+                case .ReturnValue(let value):
+                    return value as! OUT
+                case .Error(let error):
+                    throw error
+                }
             }
+        } else if let original = original {
+            return { try original($0) }
         } else {
-            if callOriginalIfNotStubbed == false {
-                let message = "No stub for method `\(method)` using parameters \(parameters) and forwarding to original is disabled!"
-                XCTFail(message)
-                fatalError(message)
-            } else if let output = try original() {
-                 return output
-            } else {
-                let message = "No stub for method `\(method)` using parameters \(parameters). Forwarding to original is enabled, but no original was supplied!"
-                XCTFail(message)
-                fatalError(message)
-            }
+            let message = "No stub for method `\(method)` using parameters \(parameters) and no original implementation was provided."
+            XCTFail(message)
+            fatalError(message)
         }
     }
 
@@ -109,36 +95,20 @@ extension MockManager {
 }
 
 public extension MockManager {
-    public func call<OUT>(method: String) -> OUT {
-        return doCall(method, parameters: Void(), original: { nil })
-    }
-
-    public func call<OUT>(method: String, @noescape original: Void -> OUT) -> OUT {
+    public func call<OUT>(method: String, original: (Void -> OUT)? = nil) -> Void -> OUT {
         return doCall(method, parameters: Void(), original: original)
     }
 
-    public func call<IN, OUT>(method: String, parameters: IN) -> OUT {
-        return doCall(method, parameters: parameters, original: { nil })
-    }
-
-    public func call<IN, OUT>(method: String, parameters: IN, @noescape original: Void -> OUT) -> OUT {
+    public func call<IN, OUT>(method: String, parameters: IN, original: (IN -> OUT)? = nil) -> IN -> OUT {
         return doCall(method, parameters: parameters, original: original)
     }
 
-    public func callThrows<OUT>(method: String) throws -> OUT {
-        return try doCallThrows(method, parameters: Void(), original: { nil })
+    public func callThrows<OUT>(method: String, original: (Void throws -> OUT)? = nil) -> Void throws -> OUT {
+        return doCallThrows(method, parameters: Void(), original: original)
     }
 
-    public func callThrows<OUT>(method: String, @noescape original: Void throws -> OUT) throws -> OUT {
-        return try doCallThrows(method, parameters: Void(), original: original)
-    }
-
-    public func callThrows<IN, OUT>(method: String, parameters: IN) throws -> OUT {
-        return try doCallThrows(method, parameters: parameters, original: { nil })
-    }
-
-    public func callThrows<IN, OUT>(method: String, parameters: IN, @noescape original: Void throws -> OUT) throws -> OUT {
-        return try doCallThrows(method, parameters: parameters, original: original)
+    public func callThrows<IN, OUT>(method: String, parameters: IN, original: (IN throws -> OUT)? = nil) -> IN throws -> OUT {
+        return doCallThrows(method, parameters: parameters, original: original)
     }
 }
 

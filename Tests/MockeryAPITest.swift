@@ -27,7 +27,7 @@ class MockeryAPITest: XCTestCase {
             case Unknown
         }
         
-        let mock = Mockery.mock(Something)
+        let mock = MockSomething()
         
         // FIXME Should be fatalError when method was not throwing
         
@@ -35,7 +35,11 @@ class MockeryAPITest: XCTestCase {
             when(mock.noParameter()).thenReturn()
             when(mock.countCharacters("hello")).thenReturn(1000)
             when(mock.withReturn()).thenReturn("hello world!")
-            //            when(mock.withThrows()).thenThrow(TestError.Unknown)
+            when(mock.withThrows()).thenThrow(TestError.Unknown)
+            
+            when(mock.withNoescape("hello", closure: anyClosure())).then {
+                $1($0 + " world")
+            }
         }
         
         mock.noParameter()
@@ -44,6 +48,12 @@ class MockeryAPITest: XCTestCase {
         
         XCTAssertEqual(mock.withReturn(), "hello world!")
         
+        var helloWorld: String = ""
+        mock.withNoescape("hello") {
+            helloWorld = $0
+        }
+        XCTAssertEqual(helloWorld, "hello world")
+        
         verify(mock).noParameter()
         
         verify(mock).countCharacters(eq("hello"))
@@ -51,30 +61,27 @@ class MockeryAPITest: XCTestCase {
         verify(mock).withReturn()
         
         verify(mock, never()).withThrows()
+        
     }
         
 }
 
 
 // MARK: - Source
-class Something {
-    func noParameter() { }
+protocol Something {
+    func noParameter()
     
-    func countCharacters(test: String) -> Int { return test.characters.count }
+    func countCharacters(test: String) -> Int
     
-    func withReturn() -> String { return "" }
+    func withReturn() -> String
     
-    func withThrows() throws { }
+    func withThrows() throws
     
-    func withClosure(closure: String -> Int) { closure("hello") }
+    func withClosure(closure: String -> Int)
     
-    func withMultipleParameters(a: String, b: Int, c: Float) { }
+    func withMultipleParameters(a: String, b: Int, c: Float)
     
-    func withNoescape(a: String, @noescape closure: String -> Void) { closure(a) }
-}
-
-extension Something: Mockery.Mockable {
-    typealias MockType = MockSomething
+    func withNoescape(a: String, @noescape closure: String -> Void)
 }
 
 // MARK: - Begin of generated
@@ -82,7 +89,7 @@ class MockSomething: Something, Mockery.Mock {
     let manager: Mockery.MockManager<StubbingProxyImpl, VerificationProxyImpl> = Mockery.MockManager()
     let observed: Something?
     
-    required override init() {
+    required init() {
         self.observed = nil
     }
     
@@ -90,33 +97,32 @@ class MockSomething: Something, Mockery.Mock {
         self.observed = spyOn
     }
     
-    override func noParameter() {
-        return manager.call("noParameter()", original: { () -> () in observed?.noParameter() })
+    func noParameter() {
+        return manager.call("noParameter()", original: observed?.noParameter)()
     }
     
-    override func countCharacters(test: String) -> Int {
-        return manager.call("countCharacters(String)", parameters: test)
+    func countCharacters(test: String) -> Int {
+        return manager.call("countCharacters(String)", parameters: test, original: observed?.countCharacters)(test)
     }
     
-    override func withReturn() -> String {
-        return manager.call("withReturn()")
+    func withReturn() -> String {
+        return manager.call("withReturn()", original: observed?.withReturn)()
     }
     
-    override func withThrows() throws {
-        return try manager.callThrows("withThrows()")
+    func withThrows() throws {
+        return try manager.callThrows("withThrows()", original: observed?.withThrows)()
     }
     
-    override func withClosure(closure: String -> Int) {
-        return manager.call("withClosure(String->Int)")
+    func withClosure(closure: String -> Int) {
+        return manager.call("withClosure(String->Int)", parameters: markerFunction(), original: observed?.withClosure)(closure)
     }
     
-    override func withMultipleParameters(a: String, b: Int, c: Float) {
-        return manager.call("withMultipleParameters(String,b:Int,c:Float)")
+    func withMultipleParameters(a: String, b: Int, c: Float) {
+        return manager.call("withMultipleParameters(String,b:Int,c:Float)", parameters: (a, b, c), original: observed?.withMultipleParameters)(a: a, b: b, c: c)
     }
     
-    override func withNoescape(a: String, @noescape closure: String -> Void) {
-        let escapingParameters: (String, closure: String -> Void) = (a, closure: markerFunction())
-        return manager.call("withNoescape(String,closure:String->Void)", parameters: escapingParameters, original: { () -> (Void) in super.withNoescape(a, closure: closure) })
+    func withNoescape(a: String, @noescape closure: String -> Void) {
+        return manager.call("withNoescape(String,closure:String->Void)", parameters: (a, closure: markerFunction()), original: observed?.withNoescape)(a, closure: closure)
     }
     
     struct StubbingProxyImpl: Mockery.StubbingProxy {
@@ -151,6 +157,19 @@ class MockSomething: Something, Mockery.Mock {
         func withClosure<M1: Matchable where M1.MatchedType == (String -> Int)>(closure: M1) -> Mockery.ToBeStubbedFunction<String -> Int, Void> {
             let matchers: [AnyMatcher<(String -> Int)>] = [parameterMatcher(closure.matcher) { $0 }]
             return handler.stub("withClosure(String->Int)", parameterMatchers: matchers)
+        }
+        
+        @warn_unused_result
+        func withNoescape<
+            M1: Matchable, M2: Matchable
+            where M1.MatchedType == String, M2.MatchedType == (String -> Void)
+            >(a: M1, closure: M2) -> Mockery.ToBeStubbedFunction<(String, closure: String -> Void), Void>
+        {
+            let matchers: [AnyMatcher<(String, closure: String -> Void)>] = [
+                parameterMatcher(a.matcher) { $0.0 },
+                parameterMatcher(closure.matcher) { $0.closure }
+            ]
+            return handler.stub("withNoescape(String,closure:String->Void)", parameterMatchers: matchers)
         }
     }
     

@@ -80,7 +80,7 @@ public struct ThenReturnValue<IN, OUT> {
     
     public func then(implementation: IN -> OUT) {
         setOutput {
-            guard let parameters = $0 as? IN else { fatalError("Implementation called with wrong input type \($0.self). This is probably a bug in Mockery, please file a ticker.") }
+            guard let parameters = $0 as? IN else { fatalError("Implementation called with wrong input type \($0.self). This is probably a bug in Mockery, please file a ticket.") }
             return .ReturnValue(implementation(parameters))
         }
     }
@@ -95,7 +95,7 @@ public struct ThenReturnValueOrThrow<IN, OUT> {
     
     public func then(implementation: IN throws -> OUT) {
         setOutput {
-            guard let parameters = $0 as? IN else { fatalError("") }
+            guard let parameters = $0 as? IN else { fatalError("Implementation called with wrong input type \($0.self). This is probably a bug in Mockery, please file a ticket.") }
             do {
                 return try .ReturnValue(implementation(parameters))
             } catch let error {
