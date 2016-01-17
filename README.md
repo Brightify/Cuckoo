@@ -1,10 +1,10 @@
 # Cuckoo
 ## Mock your Swift objects!
 
-[![CI Status](http://img.shields.io/travis/SwiftKit/Mockery.svg?style=flat)](https://travis-ci.org/SwiftKit/Mockery)
-[![Version](https://img.shields.io/cocoapods/v/Mockery.svg?style=flat)](http://cocoapods.org/pods/Mockery)
-[![License](https://img.shields.io/cocoapods/l/Mockery.svg?style=flat)](http://cocoapods.org/pods/Mockery)
-[![Platform](https://img.shields.io/cocoapods/p/Mockery.svg?style=flat)](http://cocoapods.org/pods/Mockery)
+[![CI Status](http://img.shields.io/travis/SwiftKit/Cuckoo.svg?style=flat)](https://travis-ci.org/SwiftKit/Cuckoo)
+[![Version](https://img.shields.io/cocoapods/v/Cuckoo.svg?style=flat)](http://cocoapods.org/pods/Cuckoo)
+[![License](https://img.shields.io/cocoapods/l/Cuckoo.svg?style=flat)](http://cocoapods.org/pods/Cuckoo)
+[![Platform](https://img.shields.io/cocoapods/p/Cuckoo.svg?style=flat)](http://cocoapods.org/pods/Cuckoo)
 
 ## Introduction
 
@@ -41,7 +41,7 @@ And add the following `Run script` build phase to your test target's configurati
 
 ```
 # Find the installed Cuckoo version 
-CUCKOO_VERSION=$(grep '\- Mockery' "$PROJECT_DIR/Podfile.lock" | grep -o '[0-9]\{1,\}\.[0-9]\{1,\}\.[0-9]\{1,\}')
+CUCKOO_VERSION=$(grep '\- Cuckoo' "$PROJECT_DIR/Podfile.lock" | grep -o '[0-9]\{1,\}\.[0-9]\{1,\}\.[0-9]\{1,\}')
 
 cuckoo runtime --check $CUCKOO_VERSION
 cuckooReturn=$?
@@ -74,4 +74,4 @@ Tadeas Kriz, tadeas@brightify.org
 
 ## License
 
-Mockery is available under the MIT license. See the LICENSE file for more info.
+Cuckoo is available under the MIT license. See the LICENSE file for more info.

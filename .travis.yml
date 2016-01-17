@@ -1,6 +1,6 @@
 language: objective-c
 osx_image: xcode7.2
-xcode_workspace: Cuckoo.xcworkspace
+xcode_project: Cuckoo.xcodeproj
 xcode_scheme: Cuckoo
 xcode_sdk: iphonesimulator
 
