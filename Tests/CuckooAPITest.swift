@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import Mockery
+import Cuckoo
 
 class MockeryAPITest: XCTestCase {
     
@@ -85,8 +85,8 @@ protocol Something {
 }
 
 // MARK: - Begin of generated
-class MockSomething: Something, Mockery.Mock {
-    let manager: Mockery.MockManager<StubbingProxyImpl, VerificationProxyImpl> = Mockery.MockManager()
+class MockSomething: Something, Cuckoo.Mock {
+    let manager: Cuckoo.MockManager<StubbingProxyImpl, VerificationProxyImpl> = Cuckoo.MockManager()
     let observed: Something?
     
     required init() {
@@ -125,36 +125,36 @@ class MockSomething: Something, Mockery.Mock {
         return manager.call("withNoescape(String,closure:String->Void)", parameters: (a, closure: markerFunction()), original: observed?.withNoescape)(a, closure: closure)
     }
     
-    struct StubbingProxyImpl: Mockery.StubbingProxy {
-        let handler: Mockery.StubbingHandler
+    struct StubbingProxyImpl: Cuckoo.StubbingProxy {
+        let handler: Cuckoo.StubbingHandler
         
-        init(handler: Mockery.StubbingHandler) {
+        init(handler: Cuckoo.StubbingHandler) {
             self.handler = handler
         }
         
         @warn_unused_result
-        func noParameter() -> Mockery.ToBeStubbedFunction<Void, Void> {
+        func noParameter() -> Cuckoo.ToBeStubbedFunction<Void, Void> {
             return handler.stub("noParameter()")
         }
     
         @warn_unused_result
-        func countCharacters<M1: Matchable where M1.MatchedType == String>(test: M1) -> Mockery.ToBeStubbedFunction<String, Int> {
+        func countCharacters<M1: Cuckoo.Matchable where M1.MatchedType == String>(test: M1) -> Cuckoo.ToBeStubbedFunction<String, Int> {
             let matchers: [AnyMatcher<(String)>] = [parameterMatcher(test.matcher, mapping: { $0 })]
             return handler.stub("countCharacters(String)", parameterMatchers: matchers)
         }
         
         @warn_unused_result
-        func withReturn() -> Mockery.ToBeStubbedFunction<Void, String> {
+        func withReturn() -> Cuckoo.ToBeStubbedFunction<Void, String> {
             return handler.stub("withReturn()")
         }
         
         @warn_unused_result
-        func withThrows() -> Mockery.ToBeStubbedThrowingFunction<Void, Void> {
+        func withThrows() -> Cuckoo.ToBeStubbedThrowingFunction<Void, Void> {
             return handler.stubThrowing("withThrows()")
         }
         
         @warn_unused_result
-        func withClosure<M1: Matchable where M1.MatchedType == (String -> Int)>(closure: M1) -> Mockery.ToBeStubbedFunction<String -> Int, Void> {
+        func withClosure<M1: Matchable where M1.MatchedType == (String -> Int)>(closure: M1) -> Cuckoo.ToBeStubbedFunction<String -> Int, Void> {
             let matchers: [AnyMatcher<(String -> Int)>] = [parameterMatcher(closure.matcher) { $0 }]
             return handler.stub("withClosure(String->Int)", parameterMatchers: matchers)
         }
@@ -163,7 +163,7 @@ class MockSomething: Something, Mockery.Mock {
         func withNoescape<
             M1: Matchable, M2: Matchable
             where M1.MatchedType == String, M2.MatchedType == (String -> Void)
-            >(a: M1, closure: M2) -> Mockery.ToBeStubbedFunction<(String, closure: String -> Void), Void>
+            >(a: M1, closure: M2) -> Cuckoo.ToBeStubbedFunction<(String, closure: String -> Void), Void>
         {
             let matchers: [AnyMatcher<(String, closure: String -> Void)>] = [
                 parameterMatcher(a.matcher) { $0.0 },
@@ -173,10 +173,10 @@ class MockSomething: Something, Mockery.Mock {
         }
     }
     
-    struct VerificationProxyImpl: Mockery.VerificationProxy {
-        let handler: Mockery.VerificationHandler
+    struct VerificationProxyImpl: Cuckoo.VerificationProxy {
+        let handler: Cuckoo.VerificationHandler
         
-        init(handler: Mockery.VerificationHandler) {
+        init(handler: Cuckoo.VerificationHandler) {
             self.handler = handler
         }
         

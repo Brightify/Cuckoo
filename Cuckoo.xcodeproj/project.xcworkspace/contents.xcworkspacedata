@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:Mockery.xcodeproj">
+      location = "self:/Users/TadeasKriz/Development/Sources/Mockery/Cuckoo.xcodeproj">
    </FileRef>
 </Workspace>

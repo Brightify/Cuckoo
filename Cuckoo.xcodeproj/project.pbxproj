@@ -13,12 +13,12 @@
 		181F41A51C46CBBD005BAB70 /* Matcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181F41A41C46CBBD005BAB70 /* Matcher.swift */; };
 		181F41A71C46CC3D005BAB70 /* Matchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181F41A61C46CC3D005BAB70 /* Matchers.swift */; };
 		181F41A91C46D491005BAB70 /* MatcherFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181F41A81C46D491005BAB70 /* MatcherFunctions.swift */; };
-		183D03FF1C4691C600EBAEF3 /* Mockery.h in Headers */ = {isa = PBXBuildFile; fileRef = 183D03FE1C4691C600EBAEF3 /* Mockery.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		183D04061C4691C600EBAEF3 /* Mockery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 183D03FB1C4691C600EBAEF3 /* Mockery.framework */; };
-		183D040B1C4691C600EBAEF3 /* MockeryAPITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183D040A1C4691C600EBAEF3 /* MockeryAPITest.swift */; };
-		183D04161C46926A00EBAEF3 /* Mockery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183D04151C46926A00EBAEF3 /* Mockery.swift */; };
+		183D03FF1C4691C600EBAEF3 /* Cuckoo.h in Headers */ = {isa = PBXBuildFile; fileRef = 183D03FE1C4691C600EBAEF3 /* Cuckoo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		183D04061C4691C600EBAEF3 /* Cuckoo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 183D03FB1C4691C600EBAEF3 /* Cuckoo.framework */; };
+		183D04161C46926A00EBAEF3 /* Cuckoo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183D04151C46926A00EBAEF3 /* Cuckoo.swift */; };
 		183D041A1C46C14000EBAEF3 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183D04191C46C14000EBAEF3 /* Utils.swift */; };
 		183D041C1C46C65300EBAEF3 /* Stubbing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183D041B1C46C65300EBAEF3 /* Stubbing.swift */; };
+		1890298B1C4C318A002FF826 /* CuckooAPITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183D040A1C4691C600EBAEF3 /* CuckooAPITest.swift */; };
 		189755551C4A56F800C7931F /* Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189755541C4A56F800C7931F /* Description.swift */; };
 		189755571C4A5E8400C7931F /* Matchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189755561C4A5E8400C7931F /* Matchable.swift */; };
 /* End PBXBuildFile section */
@@ -40,13 +40,13 @@
 		181F41A41C46CBBD005BAB70 /* Matcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Matcher.swift; sourceTree = "<group>"; };
 		181F41A61C46CC3D005BAB70 /* Matchers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Matchers.swift; sourceTree = "<group>"; };
 		181F41A81C46D491005BAB70 /* MatcherFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatcherFunctions.swift; sourceTree = "<group>"; };
-		183D03FB1C4691C600EBAEF3 /* Mockery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Mockery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		183D03FE1C4691C600EBAEF3 /* Mockery.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Mockery.h; sourceTree = "<group>"; };
+		183D03FB1C4691C600EBAEF3 /* Cuckoo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cuckoo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		183D03FE1C4691C600EBAEF3 /* Cuckoo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Cuckoo.h; sourceTree = "<group>"; };
 		183D04001C4691C600EBAEF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		183D04051C4691C600EBAEF3 /* MockeryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MockeryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		183D040A1C4691C600EBAEF3 /* MockeryAPITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockeryAPITest.swift; sourceTree = "<group>"; };
+		183D04051C4691C600EBAEF3 /* CuckooTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CuckooTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		183D040A1C4691C600EBAEF3 /* CuckooAPITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuckooAPITest.swift; sourceTree = "<group>"; };
 		183D040C1C4691C600EBAEF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		183D04151C46926A00EBAEF3 /* Mockery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mockery.swift; sourceTree = "<group>"; };
+		183D04151C46926A00EBAEF3 /* Cuckoo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cuckoo.swift; sourceTree = "<group>"; };
 		183D04191C46C14000EBAEF3 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		183D041B1C46C65300EBAEF3 /* Stubbing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stubbing.swift; sourceTree = "<group>"; };
 		189755541C4A56F800C7931F /* Description.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Description.swift; sourceTree = "<group>"; };
@@ -65,7 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				183D04061C4691C600EBAEF3 /* Mockery.framework in Frameworks */,
+				183D04061C4691C600EBAEF3 /* Cuckoo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,8 +84,8 @@
 		183D03FC1C4691C600EBAEF3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				183D03FB1C4691C600EBAEF3 /* Mockery.framework */,
-				183D04051C4691C600EBAEF3 /* MockeryTests.xctest */,
+				183D03FB1C4691C600EBAEF3 /* Cuckoo.framework */,
+				183D04051C4691C600EBAEF3 /* CuckooTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -93,9 +93,9 @@
 		183D03FD1C4691C600EBAEF3 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				183D03FE1C4691C600EBAEF3 /* Mockery.h */,
+				183D03FE1C4691C600EBAEF3 /* Cuckoo.h */,
 				183D04001C4691C600EBAEF3 /* Info.plist */,
-				183D04151C46926A00EBAEF3 /* Mockery.swift */,
+				183D04151C46926A00EBAEF3 /* Cuckoo.swift */,
 				183D04191C46C14000EBAEF3 /* Utils.swift */,
 				183D041B1C46C65300EBAEF3 /* Stubbing.swift */,
 				181F419E1C46C6B3005BAB70 /* StubbingFunctions.swift */,
@@ -113,7 +113,7 @@
 		183D04091C4691C600EBAEF3 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				183D040A1C4691C600EBAEF3 /* MockeryAPITest.swift */,
+				183D040A1C4691C600EBAEF3 /* CuckooAPITest.swift */,
 				183D040C1C4691C600EBAEF3 /* Info.plist */,
 			);
 			path = Tests;
@@ -126,16 +126,16 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				183D03FF1C4691C600EBAEF3 /* Mockery.h in Headers */,
+				183D03FF1C4691C600EBAEF3 /* Cuckoo.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		183D03FA1C4691C600EBAEF3 /* Mockery */ = {
+		183D03FA1C4691C600EBAEF3 /* Cuckoo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 183D040F1C4691C600EBAEF3 /* Build configuration list for PBXNativeTarget "Mockery" */;
+			buildConfigurationList = 183D040F1C4691C600EBAEF3 /* Build configuration list for PBXNativeTarget "Cuckoo" */;
 			buildPhases = (
 				183D03F61C4691C600EBAEF3 /* Sources */,
 				183D03F71C4691C600EBAEF3 /* Frameworks */,
@@ -146,14 +146,14 @@
 			);
 			dependencies = (
 			);
-			name = Mockery;
+			name = Cuckoo;
 			productName = Mockery;
-			productReference = 183D03FB1C4691C600EBAEF3 /* Mockery.framework */;
+			productReference = 183D03FB1C4691C600EBAEF3 /* Cuckoo.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		183D04041C4691C600EBAEF3 /* MockeryTests */ = {
+		183D04041C4691C600EBAEF3 /* CuckooTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 183D04121C4691C600EBAEF3 /* Build configuration list for PBXNativeTarget "MockeryTests" */;
+			buildConfigurationList = 183D04121C4691C600EBAEF3 /* Build configuration list for PBXNativeTarget "CuckooTests" */;
 			buildPhases = (
 				183D04011C4691C600EBAEF3 /* Sources */,
 				183D04021C4691C600EBAEF3 /* Frameworks */,
@@ -164,9 +164,9 @@
 			dependencies = (
 				183D04081C4691C600EBAEF3 /* PBXTargetDependency */,
 			);
-			name = MockeryTests;
+			name = CuckooTests;
 			productName = MockeryTests;
-			productReference = 183D04051C4691C600EBAEF3 /* MockeryTests.xctest */;
+			productReference = 183D04051C4691C600EBAEF3 /* CuckooTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -187,7 +187,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 183D03F51C4691C600EBAEF3 /* Build configuration list for PBXProject "Mockery" */;
+			buildConfigurationList = 183D03F51C4691C600EBAEF3 /* Build configuration list for PBXProject "Cuckoo" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -199,8 +199,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				183D03FA1C4691C600EBAEF3 /* Mockery */,
-				183D04041C4691C600EBAEF3 /* MockeryTests */,
+				183D03FA1C4691C600EBAEF3 /* Cuckoo */,
+				183D04041C4691C600EBAEF3 /* CuckooTests */,
 			);
 		};
 /* End PBXProject section */
@@ -230,7 +230,7 @@
 				181F41A11C46C6E7005BAB70 /* Verification.swift in Sources */,
 				181F419F1C46C6B3005BAB70 /* StubbingFunctions.swift in Sources */,
 				189755551C4A56F800C7931F /* Description.swift in Sources */,
-				183D04161C46926A00EBAEF3 /* Mockery.swift in Sources */,
+				183D04161C46926A00EBAEF3 /* Cuckoo.swift in Sources */,
 				189755571C4A5E8400C7931F /* Matchable.swift in Sources */,
 				181F41A71C46CC3D005BAB70 /* Matchers.swift in Sources */,
 				181F41A91C46D491005BAB70 /* MatcherFunctions.swift in Sources */,
@@ -245,7 +245,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				183D040B1C4691C600EBAEF3 /* MockeryAPITest.swift in Sources */,
+				1890298B1C4C318A002FF826 /* CuckooAPITest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,7 +254,7 @@
 /* Begin PBXTargetDependency section */
 		183D04081C4691C600EBAEF3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 183D03FA1C4691C600EBAEF3 /* Mockery */;
+			target = 183D03FA1C4691C600EBAEF3 /* Cuckoo */;
 			targetProxy = 183D04071C4691C600EBAEF3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -366,8 +366,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				PRODUCT_BUNDLE_IDENTIFIER = org.brightify.Mockery;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.brightify.Cuckoo;
+				PRODUCT_NAME = Cuckoo;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TVOS_DEPLOYMENT_TARGET = 9.0;
@@ -391,8 +391,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				PRODUCT_BUNDLE_IDENTIFIER = org.brightify.Mockery;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.brightify.Cuckoo;
+				PRODUCT_NAME = Cuckoo;
 				SKIP_INSTALL = YES;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
@@ -403,8 +403,8 @@
 			buildSettings = {
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = org.brightify.MockeryTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.brightify.CuckooTests;
+				PRODUCT_NAME = CuckooTests;
 			};
 			name = Debug;
 		};
@@ -413,15 +413,15 @@
 			buildSettings = {
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = org.brightify.MockeryTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.brightify.CuckooTests;
+				PRODUCT_NAME = CuckooTests;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		183D03F51C4691C600EBAEF3 /* Build configuration list for PBXProject "Mockery" */ = {
+		183D03F51C4691C600EBAEF3 /* Build configuration list for PBXProject "Cuckoo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				183D040D1C4691C600EBAEF3 /* Debug */,
@@ -430,7 +430,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		183D040F1C4691C600EBAEF3 /* Build configuration list for PBXNativeTarget "Mockery" */ = {
+		183D040F1C4691C600EBAEF3 /* Build configuration list for PBXNativeTarget "Cuckoo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				183D04101C4691C600EBAEF3 /* Debug */,
@@ -439,7 +439,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		183D04121C4691C600EBAEF3 /* Build configuration list for PBXNativeTarget "MockeryTests" */ = {
+		183D04121C4691C600EBAEF3 /* Build configuration list for PBXNativeTarget "CuckooTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				183D04131C4691C600EBAEF3 /* Debug */,
