@@ -19,6 +19,8 @@
 		183D041A1C46C14000EBAEF3 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183D04191C46C14000EBAEF3 /* Utils.swift */; };
 		183D041C1C46C65300EBAEF3 /* Stubbing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183D041B1C46C65300EBAEF3 /* Stubbing.swift */; };
 		1890298B1C4C318A002FF826 /* CuckooAPITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183D040A1C4691C600EBAEF3 /* CuckooAPITest.swift */; };
+		1894D0F21C4D09CF00879512 /* TestedProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1894D0F01C4D09AB00879512 /* TestedProtocol.swift */; };
+		1894D0F71C4D127D00879512 /* GeneratedMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1894D0F51C4D123000879512 /* GeneratedMocks.swift */; };
 		189755551C4A56F800C7931F /* Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189755541C4A56F800C7931F /* Description.swift */; };
 		189755571C4A5E8400C7931F /* Matchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189755561C4A5E8400C7931F /* Matchable.swift */; };
 /* End PBXBuildFile section */
@@ -49,6 +51,8 @@
 		183D04151C46926A00EBAEF3 /* Cuckoo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cuckoo.swift; sourceTree = "<group>"; };
 		183D04191C46C14000EBAEF3 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		183D041B1C46C65300EBAEF3 /* Stubbing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stubbing.swift; sourceTree = "<group>"; };
+		1894D0F01C4D09AB00879512 /* TestedProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestedProtocol.swift; sourceTree = "<group>"; };
+		1894D0F51C4D123000879512 /* GeneratedMocks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratedMocks.swift; sourceTree = "<group>"; };
 		189755541C4A56F800C7931F /* Description.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Description.swift; sourceTree = "<group>"; };
 		189755561C4A5E8400C7931F /* Matchable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Matchable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -113,8 +117,10 @@
 		183D04091C4691C600EBAEF3 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				1894D0F51C4D123000879512 /* GeneratedMocks.swift */,
 				183D040A1C4691C600EBAEF3 /* CuckooAPITest.swift */,
 				183D040C1C4691C600EBAEF3 /* Info.plist */,
+				1894D0F01C4D09AB00879512 /* TestedProtocol.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -155,6 +161,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 183D04121C4691C600EBAEF3 /* Build configuration list for PBXNativeTarget "CuckooTests" */;
 			buildPhases = (
+				1894D0F31C4D119A00879512 /* Generate mocks */,
 				183D04011C4691C600EBAEF3 /* Sources */,
 				183D04021C4691C600EBAEF3 /* Frameworks */,
 				183D04031C4691C600EBAEF3 /* Resources */,
@@ -222,6 +229,23 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1894D0F31C4D119A00879512 /* Generate mocks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate mocks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Find the installed Cuckoo version\nCUCKOO_VERSION=\"0.1.0\"\n\ncuckoo runtime --check $CUCKOO_VERSION\ncuckooReturn=$?\n\nif [ $cuckooReturn == 1 ]; then\n# Update local brew repository and upgrade to latest Cuckoo generator\nbrew update\nbrew upgrade SwiftKit/cuckoo/cuckoo\nelif [ $cuckooReturn == 127 ]; then\n# Update local brew repository and install latest Cuckoo generator\nbrew install SwiftKit/cuckoo/cuckoo\nfi\n\ncuckoo generate --runtime $CUCKOO_VERSION --output \"$PROJECT_DIR/Tests/GeneratedMocks.swift\" \"$PROJECT_DIR/Tests/TestedProtocol.swift\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		183D03F61C4691C600EBAEF3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -245,6 +269,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1894D0F21C4D09CF00879512 /* TestedProtocol.swift in Sources */,
+				1894D0F71C4D127D00879512 /* GeneratedMocks.swift in Sources */,
 				1890298B1C4C318A002FF826 /* CuckooAPITest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

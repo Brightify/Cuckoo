@@ -61,18 +61,18 @@ public class MockManager<STUBBING: StubbingProxy, VERIFICATION: VerificationProx
         stubs[stub.name]?.insert(stub, atIndex: 0)
     }
 
-    private func verify(method: String, callMatcher: AnyMatcher<StubCall>, verificationMatcher: AnyMatcher<[StubCall]>) {
+    private func verify(method: String, file: String, line: UInt, callMatcher: AnyMatcher<StubCall>, verificationMatcher: AnyMatcher<[StubCall]>) {
         let calls = stubCalls.filter(callMatcher.matches)
         
         if verificationMatcher.matches(calls) == false {
             let description = StringDescription()
             description
-                .appendText("Expected: ")
+                .appendText("Expected ")
                 .appendDescriptionOf(verificationMatcher)
-                .appendText("\n     but: ");
+                .appendText(", but ");
             verificationMatcher.describeMismatch(calls, to: description);
             
-            XCTFail(description.description)
+            XCTFail(description.description, file: file, line: line)
         }
         
     }

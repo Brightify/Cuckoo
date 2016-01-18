@@ -12,18 +12,18 @@ public protocol VerificationProxy {
 
 public struct VerificationHandler {
     let matcher: AnyMatcher<[StubCall]>
-    let verifyCall: (method: String, callMatcher: AnyMatcher<StubCall>, verificationMatcher: AnyMatcher<[StubCall]>) -> ()
+    let verifyCall: (method: String, file: String, line: UInt, callMatcher: AnyMatcher<StubCall>, verificationMatcher: AnyMatcher<[StubCall]>) -> ()
 
-    public func verify<OUT>(method: String) -> __DoNotUse<OUT> {
-        return verify(method, parameterMatchers: [] as [AnyMatcher<Void>])
+    public func verify<OUT>(method: String, file: String, line: UInt) -> __DoNotUse<OUT> {
+        return verify(method, file: file, line: line, parameterMatchers: [] as [AnyMatcher<Void>])
     }
 
-    public func verify<IN, OUT>(method: String, parameterMatchers: [AnyMatcher<IN>]) -> __DoNotUse<OUT> {
-        return verify(method, callMatcher: callMatcher(method, parameterMatchers: parameterMatchers))
+    public func verify<IN, OUT>(method: String, file: String, line: UInt, parameterMatchers: [AnyMatcher<IN>]) -> __DoNotUse<OUT> {
+        return verify(method, file: file, line: line, callMatcher: callMatcher(method, parameterMatchers: parameterMatchers))
     }
 
-    public func verify<OUT>(method: String, callMatcher: AnyMatcher<StubCall>) -> __DoNotUse<OUT> {
-        verifyCall(method: method, callMatcher: callMatcher, verificationMatcher: matcher)
+    public func verify<OUT>(method: String, file: String, line: UInt, callMatcher: AnyMatcher<StubCall>) -> __DoNotUse<OUT> {
+        verifyCall(method: method, file: file, line: line, callMatcher: callMatcher, verificationMatcher: matcher)
         return __DoNotUse()
     }
 }

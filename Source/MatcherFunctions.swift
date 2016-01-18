@@ -10,10 +10,14 @@ private func compareCalls(count: Int, whenNil: Bool = false, using function: (In
     return function(count, calls.count)
 }
 
+private func describeCallMismatch(calls: [StubCall], description: Description) {
+    description.appendText("was called ").appendValue(calls.count).appendText(" times")
+}
+
 @warn_unused_result
 public func times(count: Int) -> AnyMatcher<[StubCall]> {
-    return FunctionMatcher(function: compareCalls(count, using: ==)) {
-        $0.appendValue(count)
+    return FunctionMatcher(function: compareCalls(count, using: ==), describeMismatch: describeCallMismatch) {
+        $0.appendText("to be called ").appendValue(count).appendText(" times")
     }.typeErased()
 }
 
@@ -29,14 +33,14 @@ public func atLeastOnce() -> AnyMatcher<[StubCall]> {
 
 @warn_unused_result
 public func atLeast(count: Int) -> AnyMatcher<[StubCall]> {
-    return FunctionMatcher(function: compareCalls(count, using: >=)) {
+    return FunctionMatcher(function: compareCalls(count, using: >=), describeMismatch: describeCallMismatch) {
         $0.appendText("called at least").appendValue(count)
     }.typeErased()
 }
 
 @warn_unused_result
 public func atMost(count: Int) -> AnyMatcher<[StubCall]> {
-    return FunctionMatcher(function: compareCalls(count, whenNil: true, using: <=)) {
+    return FunctionMatcher(function: compareCalls(count, whenNil: true, using: <=), describeMismatch: describeCallMismatch) {
         $0.appendText("called at most").appendValue(count)
     }.typeErased()
 }

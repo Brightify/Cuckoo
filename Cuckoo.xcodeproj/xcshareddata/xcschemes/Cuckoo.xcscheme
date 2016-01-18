@@ -34,7 +34,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "183D04041C4691C600EBAEF3"
-               BuildableName = "Cuckoo.xctest"
+               BuildableName = "CuckooTests.xctest"
                BlueprintName = "CuckooTests"
                ReferencedContainer = "container:Cuckoo.xcodeproj">
             </BuildableReference>
