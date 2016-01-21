@@ -43,16 +43,19 @@ And add the following `Run script` build phase to your test target's configurati
 # Find the installed Cuckoo version 
 CUCKOO_VERSION=$(grep '\- Cuckoo' "$PROJECT_DIR/Podfile.lock" | grep -o '[0-9]\{1,\}\.[0-9]\{1,\}\.[0-9]\{1,\}')
 
+# Used to ignore Xcode's environment
+alias run="env -i PATH=$PATH, HOME=$HOME"
+
 cuckoo runtime --check $CUCKOO_VERSION
 cuckooReturn=$?
 
 if [ $cuckooReturn == 1 ]; then
     # Update local brew repository and upgrade to latest Cuckoo generator
-    brew update
-    brew upgrade SwiftKit/cuckoo/cuckoo
+    run brew update
+    run brew upgrade SwiftKit/cuckoo/cuckoo
 elif [ $cuckooReturn == 127 ]; then
     # Update local brew repository and install latest Cuckoo generator
-    brew install SwiftKit/cuckoo/cuckoo
+    run brew install SwiftKit/cuckoo/cuckoo
 fi
 
 # Generate mock files (you can use xcode build variables to declare relative paths)
