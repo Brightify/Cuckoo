@@ -6,6 +6,7 @@
 //  Copyright © 2016 Brightify. All rights reserved.
 //
 
+/// Start the stubbing for the given mock. Can be used multiple times.
 public func stub<M: Mock>(mock: M, @noescape block: M.Stubbing -> Void) {
     block(mock.manager.getStubbingProxy())
 }

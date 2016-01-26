@@ -78,6 +78,7 @@ public struct StubbingHandler {
 public struct ThenReturnValue<IN, OUT> {
     internal let setOutput: (Any -> ReturnValueOrError) -> Void
     
+    /// Invoke `implementation` when invoked.
     public func then(implementation: IN -> OUT) {
         setOutput {
             guard let parameters = $0 as? IN else { fatalError("Implementation called with wrong input type \($0.self). This is probably a bug in Mockery, please file a ticket.") }
@@ -85,6 +86,7 @@ public struct ThenReturnValue<IN, OUT> {
         }
     }
     
+    /// Return `output` when invoked.
     public func thenReturn(output: OUT) {
         setOutput { _ in .ReturnValue(output) }
     }
@@ -93,6 +95,7 @@ public struct ThenReturnValue<IN, OUT> {
 public struct ThenReturnValueOrThrow<IN, OUT> {
     internal let setOutput: (Any -> ReturnValueOrError) -> Void
     
+    /// Invoke `implementation` when invoked.
     public func then(implementation: IN throws -> OUT) {
         setOutput {
             guard let parameters = $0 as? IN else { fatalError("Implementation called with wrong input type \($0.self). This is probably a bug in Mockery, please file a ticket.") }
@@ -104,10 +107,12 @@ public struct ThenReturnValueOrThrow<IN, OUT> {
         }
     }
     
+    /// Return `output` when invoked.
     public func thenReturn(output: OUT) {
         setOutput { _ in .ReturnValue(output) }
     }
     
+    /// Throw `error` when invoked.
     public func thenThrow(error: ErrorType) {
         setOutput { _ in .Error(error) }
     }

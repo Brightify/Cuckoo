@@ -1,14 +1,19 @@
 //
 //  Matchable.swift
-//  Mockery
+//  Cuckoo
 //
 //  Created by Tadeas Kriz on 16/01/16.
 //  Copyright © 2016 Brightify. All rights reserved.
 //
 
+/**
+    Matchable can be anything that can produce its own matcher.
+    It is used instead of concrete value for stubbing and verification.
+*/
 public protocol Matchable {
     typealias MatchedType
     
+    /// Matcher for this instance. This should be an equalTo type of a matcher, but it is not required.
     var matcher: AnyMatcher<MatchedType> { get }
 }
 

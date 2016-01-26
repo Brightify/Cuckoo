@@ -14,6 +14,7 @@ private func describeCallMismatch(calls: [StubCall], description: Description) {
     description.appendText("was called ").appendValue(calls.count).appendText(" times")
 }
 
+/// Returns a matcher ensuring a call was made **`count`** times.
 @warn_unused_result
 public func times(count: Int) -> AnyMatcher<[StubCall]> {
     return FunctionMatcher(function: compareCalls(count, using: ==), describeMismatch: describeCallMismatch) {
@@ -21,16 +22,19 @@ public func times(count: Int) -> AnyMatcher<[StubCall]> {
     }.typeErased()
 }
 
+/// Returns a matcher ensuring no call was made.
 @warn_unused_result
 public func never() -> AnyMatcher<[StubCall]> {
     return times(0)
 }
 
+/// Returns a matcher ensuring at least one call was made.
 @warn_unused_result
 public func atLeastOnce() -> AnyMatcher<[StubCall]> {
     return atLeast(1)
 }
 
+/// Returns a matcher ensuring call was made at least `count` times.
 @warn_unused_result
 public func atLeast(count: Int) -> AnyMatcher<[StubCall]> {
     return FunctionMatcher(function: compareCalls(count, using: >=), describeMismatch: describeCallMismatch) {
@@ -38,6 +42,7 @@ public func atLeast(count: Int) -> AnyMatcher<[StubCall]> {
     }.typeErased()
 }
 
+/// Returns a matcher ensuring call was made at most `count` times.
 @warn_unused_result
 public func atMost(count: Int) -> AnyMatcher<[StubCall]> {
     return FunctionMatcher(function: compareCalls(count, whenNil: true, using: <=), describeMismatch: describeCallMismatch) {
@@ -45,31 +50,37 @@ public func atMost(count: Int) -> AnyMatcher<[StubCall]> {
     }.typeErased()
 }
 
+/// Returns an equality matcher. A shorthand for `equalTo`.
 @warn_unused_result
 public func eq<T: Equatable>(value: T) -> AnyMatcher<T> {
     return equalTo(value)
 }
 
+/// Returns an identity matcher. A shorthand for `equalTo`
 @warn_unused_result
 public func eq<T: AnyObject>(value: T) -> AnyMatcher<T> {
     return equalTo(value)
 }
 
+/// Returns a matcher using the supplied function. A shorthand for `equalTo`
 @warn_unused_result
 public func eq<T>(value: T, equalWhen equalityFunction: (T, T) -> Bool) -> AnyMatcher<T> {
     return equalTo(value, equalWhen: equalityFunction)
 }
 
+/// Returns an equality matcher.
 @warn_unused_result
 public func equalTo<T: Equatable>(value: T) -> AnyMatcher<T> {
     return equalTo(value, equalWhen: ==)
 }
 
+/// Returns an identity matcher.
 @warn_unused_result
 public func equalTo<T: AnyObject>(value: T) -> AnyMatcher<T> {
     return equalTo(value, equalWhen: ===)
 }
 
+/// Returns a matcher using the supplied function.
 @warn_unused_result
 public func equalTo<T>(value: T, equalWhen equalityFunction: (T, T) -> Bool) -> AnyMatcher<T> {
     return FunctionMatcher(original: value, function: equalityFunction) {
@@ -77,21 +88,25 @@ public func equalTo<T>(value: T, equalWhen equalityFunction: (T, T) -> Bool) -> 
     }.typeErased()
 }
 
+/// Returns a matcher matching any Int value.
 @warn_unused_result
 public func anyInt() -> AnyMatcher<Int> {
     return AnyMatcher()
 }
 
+/// Returns a matcher matching any String value.
 @warn_unused_result
 public func anyString() -> AnyMatcher<String> {
     return AnyMatcher()
 }
 
+/// Returns a matcher matching any T value.
 @warn_unused_result
 public func any<T>(type: T.Type = T.self) -> AnyMatcher<T> {
     return AnyMatcher()
 }
 
+/// Returns a matcher matching any closure.
 @warn_unused_result
 public func anyClosure<IN, OUT>() -> AnyMatcher<IN -> OUT> {
     return AnyMatcher()

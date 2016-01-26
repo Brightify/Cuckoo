@@ -28,9 +28,8 @@ public struct VerificationHandler {
     }
 }
 
+/// Marker struct for use as a return type in verification.
 public struct __DoNotUse<T> { }
-
-// parameterMatcher<IN, M: Matchable>(mapping: IN -> M) -> AnyMatcher<StubCall>
 
 public func parameterMatcher<IN, PARAM, M: Matcher where M.MatchedType == PARAM>(matcher: M, mapping: IN -> PARAM) -> AnyMatcher<IN> {
     let function: IN -> Bool = {

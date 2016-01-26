@@ -64,7 +64,72 @@ cuckoo generate -version $CUCKOO_VERSION -testable SomeAppModule -output ./Gener
 
 ## Usage
 
+For the example, lets say we generate the mock for the following protocol:
 
+```
+protocol Greeter {
+    func greet()
+    
+    func greetWithMessage(message: String)
+    
+    func messageForName(name: String) -> String
+}
+```
+
+Then the generated mock will be named `MockGreeter`. Let's use it! 
+
+```
+// Create a mock instance
+let mock = MockGreeter()
+
+// Create a spy instance
+let spy = MockGenerator(spyOn: aRealInstanceOfGreeter)
+
+// Start
+stub(mock) { mock in
+    // Allows calling the `greet` method, making it a `nop`.
+    when(mock.greet()).thenReturn()
+    
+    // Allows calling the `greetWithMessage` with "Hello world". 
+    when(mock.greetWithMessage("Hello world")).then { message in
+        print(message)
+    }
+    
+    // When calling method `messageForName` with any string, we make it return "Still the same" value.
+    when(mock.messageForName(anyString())).thenReturn("Still the same")
+    
+    // Lets override the previous statement. Now calling the method with "Swift", it will return "Awesome!"
+    // This does not change the behavior for input other than the "Swift".
+    // The stubbing works in layers, the later defined is used.
+    when(mock.messageForName("Swift")).thenReturn("Awesome!")
+}
+
+// Now it would be the time to use the mock, however for the sake of this example, we will only do some simple calls.
+
+mock.greet() // This will work
+
+mock.greetWithMessage("Hello world") // This will work as well and will print the message "Hello world" to console
+
+mock.greetWithMessage("Well...") // This will fail, because it is was not stubbed
+
+mock.messageForName("Anything in this world") // This will work and will return "Still the same"
+mock.messageForName("Another thing in this world") // This will work and will return "Still the same" again
+
+mock.messageForName("Swift") // Will work and will return "Awesome!"
+
+
+// Last but not least, let's verify the mock was used as expected. All of these will succeed.
+verify(mock).greet()
+
+verify(mock, times(2)).greetWithMessage(anyString())
+verify(mock).greetWithMessage("Hello world")
+verify(mock).greetWithMessage("Well...")
+verify(mock, never()).greetWithMessage("Was not called.")
+
+verify(mock, times(3)).messageForName(anyString())
+verify(mock).messageForName("Swift")
+
+```
 
 ## Author
 

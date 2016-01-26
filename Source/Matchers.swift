@@ -6,7 +6,6 @@
 //  Copyright © 2016 Brightify. All rights reserved.
 //
 
-// Heavy type erasure in this class. Might be very dangerous!
 public struct AnyMatcher<T>: Matcher {
     let targetType: Any.Type
     let describeToFunction: Description -> Void
