@@ -59,7 +59,7 @@ elif [ $cuckooReturn == 127 ]; then
 fi
 
 # Generate mock files (you can use xcode build variables to declare relative paths)
-cuckoo generate -version $CUCKOO_VERSION -testable SomeAppModule -output ./GeneratedMocks/ FileToMock.swift FileToMock2.swift FileToMock3.swift
+cuckoo generate --runtime $CUCKOO_VERSION --testable SomeAppModule --output ./GeneratedMocks/ FileToMock.swift FileToMock2.swift FileToMock3.swift
 ```
 
 ## Usage
