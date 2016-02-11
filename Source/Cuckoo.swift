@@ -14,6 +14,14 @@ enum ReturnValueOrError {
     case Error(ErrorType)
 }
 
+func getterName(property: String) -> String {
+    return property + "#get"
+}
+
+func setterName(property: String) -> String {
+    return property + "#set"
+}
+
 public class MockManager<STUBBING: StubbingProxy, VERIFICATION: VerificationProxy> {
     private var stubs: [String: [Stub]] = [:]
     private var stubCalls: [StubCall] = []
@@ -61,7 +69,7 @@ public class MockManager<STUBBING: StubbingProxy, VERIFICATION: VerificationProx
         stubs[stub.name]?.insert(stub, atIndex: 0)
     }
 
-    private func verify(method: String, file: String, line: UInt, callMatcher: AnyMatcher<StubCall>, verificationMatcher: AnyMatcher<[StubCall]>) {
+    private func verify(method: String, sourceLocation: SourceLocation, callMatcher: AnyMatcher<StubCall>, verificationMatcher: AnyMatcher<[StubCall]>) {
         let calls = stubCalls.filter(callMatcher.matches)
         
         if verificationMatcher.matches(calls) == false {
@@ -72,7 +80,7 @@ public class MockManager<STUBBING: StubbingProxy, VERIFICATION: VerificationProx
                 .appendText(", but ");
             verificationMatcher.describeMismatch(calls, to: description);
             
-            XCTFail(description.description, file: file, line: line)
+            XCTFail(description.description, file: sourceLocation.file, line: sourceLocation.line)
         }
         
     }
@@ -88,13 +96,21 @@ extension MockManager {
 
 extension MockManager {
 
-    public func getVerificationProxy(matcher: AnyMatcher<[StubCall]>) -> VERIFICATION {
-        return VERIFICATION(handler: VerificationHandler(matcher: matcher, verifyCall: verify))
+    public func getVerificationProxy(matcher: AnyMatcher<[StubCall]>, sourceLocation: SourceLocation) -> VERIFICATION {
+        return VERIFICATION(handler: VerificationHandler(matcher: matcher, sourceLocation: sourceLocation, verifyCall: verify))
     }
 
 }
 
 public extension MockManager {
+    public func getter<T>(property: String, original: (Void -> T)? = nil) -> (Void -> T) {
+        return call(getterName(property), original: original)
+    }
+    
+    public func setter<T>(property: String, value: T, original: (T -> Void)? = nil) -> (T -> Void) {
+        return call(setterName(property), parameters: value, original: original)
+    }
+    
     public func call<OUT>(method: String, original: (Void -> OUT)? = nil) -> Void -> OUT {
         return doCall(method, parameters: Void(), original: original)
     }
@@ -102,7 +118,7 @@ public extension MockManager {
     public func call<IN, OUT>(method: String, parameters: IN, original: (IN -> OUT)? = nil) -> IN -> OUT {
         return doCall(method, parameters: parameters, original: original)
     }
-
+ 
     public func callThrows<OUT>(method: String, original: (Void throws -> OUT)? = nil) -> Void throws -> OUT {
         return doCallThrows(method, parameters: Void(), original: original)
     }

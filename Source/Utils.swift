@@ -59,3 +59,8 @@ public func markerFunction<IN, OUT>(input: IN.Type = IN.self, _ output: OUT.Type
         return OUT.self as! OUT
     }
 }
+
+public struct SourceLocation {
+    let file: String
+    let line: UInt
+}

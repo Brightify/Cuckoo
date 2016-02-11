@@ -43,8 +43,40 @@ public struct ToBeStubbedThrowingFunction<IN, OUT> {
     }
 }
 
+public struct ToBeStubbedReadOnlyProperty<T> {
+    let handler: StubbingHandler
+    
+    let name: String
+    
+    public var get: ToBeStubbedFunction<Void, T> {
+        return ToBeStubbedFunction(handler: handler, name: getterName(name), parameterMatchers: [])
+    }
+}
+
+public struct ToBeStubbedProperty<T> {
+    let handler: StubbingHandler
+    
+    let name: String
+    
+    public var get: ToBeStubbedFunction<Void, T> {
+        return ToBeStubbedFunction(handler: handler, name: getterName(name), parameterMatchers: [])
+    }
+    
+    public func set<M: Matchable where M.MatchedType == T>(matcher: M) -> ToBeStubbedFunction<T, Void> {
+        return ToBeStubbedFunction(handler: handler, name: setterName(name), parameterMatchers: [matcher.matcher])
+    }
+}
+
 public struct StubbingHandler {
     let createNewStub: Stub -> ()
+    
+    public func stubProperty<T>(property: String) -> ToBeStubbedProperty<T> {
+        return ToBeStubbedProperty(handler: self, name: property)
+    }
+    
+    public func stubReadOnlyProperty<T>(property: String) -> ToBeStubbedReadOnlyProperty<T> {
+        return ToBeStubbedReadOnlyProperty(handler: self, name: property)
+    }
     
     public func stub<OUT>(method: String) -> ToBeStubbedFunction<Void, OUT> {
         return stub(method, parameterMatchers: [] as [AnyMatcher<Void>])

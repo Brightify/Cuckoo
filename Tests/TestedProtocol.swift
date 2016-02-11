@@ -7,6 +7,10 @@
 //
 
 protocol TestedProtocol {
+    var readOnlyProperty: String { get }
+    
+    var readWriteProperty: Int { get set }
+    
     func noParameter()
     
     func countCharacters(test: String) -> Int

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		181C6C2A1C6A67B5009A8CA7 /* TestedClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181C6C281C6A6591009A8CA7 /* TestedClass.swift */; };
 		181F419F1C46C6B3005BAB70 /* StubbingFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181F419E1C46C6B3005BAB70 /* StubbingFunctions.swift */; };
 		181F41A11C46C6E7005BAB70 /* Verification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181F41A01C46C6E7005BAB70 /* Verification.swift */; };
 		181F41A31C46C716005BAB70 /* VerificationFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181F41A21C46C716005BAB70 /* VerificationFunctions.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		181C6C281C6A6591009A8CA7 /* TestedClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestedClass.swift; sourceTree = "<group>"; };
 		181F419E1C46C6B3005BAB70 /* StubbingFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StubbingFunctions.swift; sourceTree = "<group>"; };
 		181F41A01C46C6E7005BAB70 /* Verification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Verification.swift; sourceTree = "<group>"; };
 		181F41A21C46C716005BAB70 /* VerificationFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerificationFunctions.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 				183D040A1C4691C600EBAEF3 /* CuckooAPITest.swift */,
 				183D040C1C4691C600EBAEF3 /* Info.plist */,
 				1894D0F01C4D09AB00879512 /* TestedProtocol.swift */,
+				181C6C281C6A6591009A8CA7 /* TestedClass.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -232,7 +235,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		1894D0F31C4D119A00879512 /* Generate mocks */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			files = (
 			);
 			inputPaths = (
@@ -240,9 +243,9 @@
 			name = "Generate mocks";
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
-			shellScript = "# Find the installed Cuckoo version\nCUCKOO_VERSION=\"0.1.0\"\n\n# Used to ignore Xcode's environment\nalias run=\"env -i PATH=$PATH, HOME=$HOME\"\n\ncuckoo runtime --check $CUCKOO_VERSION\ncuckooReturn=$?\n\nif [ $cuckooReturn == 1 ]; then\n# Update local brew repository and upgrade to latest Cuckoo generator\nrun brew update --verbose\nrun brew upgrade --verbose SwiftKit/cuckoo/cuckoo\nelif [ $cuckooReturn == 127 ]; then\n# Update local brew repository and install latest Cuckoo generator\nrun brew install --verbose SwiftKit/cuckoo/cuckoo\nfi\n\ncuckoo generate --runtime $CUCKOO_VERSION --output \"$PROJECT_DIR/Tests/GeneratedMocks.swift\" \"$PROJECT_DIR/Tests/TestedProtocol.swift\"";
+			shellScript = "# Find the installed Cuckoo version\nCUCKOO_VERSION=\"0.1.0\"\n\n# Used to ignore Xcode's environment\nalias run=\"env -i PATH=$PATH, HOME=$HOME\"\n\ncuckoo runtime --check $CUCKOO_VERSION\ncuckooReturn=$?\n\nif [ $cuckooReturn == 1 ]; then\n# Update local brew repository and upgrade to latest Cuckoo generator\nrun brew update --verbose\nrun brew upgrade --verbose SwiftKit/cuckoo/cuckoo\nelif [ $cuckooReturn == 127 ]; then\n# Update local brew repository and install latest Cuckoo generator\nrun brew install --verbose SwiftKit/cuckoo/cuckoo\nfi\n\ncuckoo generate --runtime $CUCKOO_VERSION --output \"$PROJECT_DIR/Tests/GeneratedMocks.swift\" \"$PROJECT_DIR/Tests/TestedProtocol.swift\" \"$PROJECT_DIR/Tests/TestedClass.swift\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -272,6 +275,7 @@
 				1894D0F21C4D09CF00879512 /* TestedProtocol.swift in Sources */,
 				1894D0F71C4D127D00879512 /* GeneratedMocks.swift in Sources */,
 				1890298B1C4C318A002FF826 /* CuckooAPITest.swift in Sources */,
+				181C6C2A1C6A67B5009A8CA7 /* TestedClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

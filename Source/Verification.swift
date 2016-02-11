@@ -12,24 +12,56 @@ public protocol VerificationProxy {
 
 public struct VerificationHandler {
     let matcher: AnyMatcher<[StubCall]>
-    let verifyCall: (method: String, file: String, line: UInt, callMatcher: AnyMatcher<StubCall>, verificationMatcher: AnyMatcher<[StubCall]>) -> ()
+    let sourceLocation: SourceLocation
+    let verifyCall: (method: String, sourceLocation: SourceLocation, callMatcher: AnyMatcher<StubCall>, verificationMatcher: AnyMatcher<[StubCall]>) -> ()
 
-    public func verify<OUT>(method: String, file: String, line: UInt) -> __DoNotUse<OUT> {
-        return verify(method, file: file, line: line, parameterMatchers: [] as [AnyMatcher<Void>])
+    public func verifyProperty<T>(property: String) -> VerifyProperty<T> {
+        return VerifyProperty(name: property, handler: self)
+    }
+    
+    public func verifyReadOnlyProperty<T>(property: String) -> VerifyReadOnlyProperty<T> {
+        return VerifyReadOnlyProperty(name: property, handler: self)
+    }
+    
+    public func verify<OUT>(method: String) -> __DoNotUse<OUT> {
+        return verify(method, parameterMatchers: [] as [AnyMatcher<Void>])
     }
 
-    public func verify<IN, OUT>(method: String, file: String, line: UInt, parameterMatchers: [AnyMatcher<IN>]) -> __DoNotUse<OUT> {
-        return verify(method, file: file, line: line, callMatcher: callMatcher(method, parameterMatchers: parameterMatchers))
+    public func verify<IN, OUT>(method: String, parameterMatchers: [AnyMatcher<IN>]) -> __DoNotUse<OUT> {
+        return verify(method, callMatcher: callMatcher(method, parameterMatchers: parameterMatchers))
     }
 
-    public func verify<OUT>(method: String, file: String, line: UInt, callMatcher: AnyMatcher<StubCall>) -> __DoNotUse<OUT> {
-        verifyCall(method: method, file: file, line: line, callMatcher: callMatcher, verificationMatcher: matcher)
+    public func verify<OUT>(method: String, callMatcher: AnyMatcher<StubCall>) -> __DoNotUse<OUT> {
+        verifyCall(method: method, sourceLocation: sourceLocation, callMatcher: callMatcher, verificationMatcher: matcher)
         return __DoNotUse()
     }
 }
 
 /// Marker struct for use as a return type in verification.
 public struct __DoNotUse<T> { }
+
+public struct VerifyReadOnlyProperty<T> {
+    let name: String
+    let handler: VerificationHandler
+    
+    public var get: __DoNotUse<T> {
+        return handler.verify(getterName(name))
+    }
+}
+
+public struct VerifyProperty<T> {
+    let name: String
+    let handler: VerificationHandler
+    
+    public var get: __DoNotUse<T> {
+        return handler.verify(getterName(name))
+    }
+    
+    public func set<M: Matchable where M.MatchedType == T>(matcher: M) -> __DoNotUse<Void> {
+        return handler.verify(setterName(name), parameterMatchers: [matcher.matcher])
+    }
+    
+}
 
 public func parameterMatcher<IN, PARAM, M: Matcher where M.MatchedType == PARAM>(matcher: M, mapping: IN -> PARAM) -> AnyMatcher<IN> {
     let function: IN -> Bool = {
