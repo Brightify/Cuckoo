@@ -235,7 +235,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		1894D0F31C4D119A00879512 /* Generate mocks */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
@@ -243,9 +243,9 @@
 			name = "Generate mocks";
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Find the installed Cuckoo version\nCUCKOO_VERSION=\"0.1.0\"\n\n# Used to ignore Xcode's environment\nalias run=\"env -i PATH=$PATH, HOME=$HOME\"\n\ncuckoo runtime --check $CUCKOO_VERSION\ncuckooReturn=$?\n\nif [ $cuckooReturn == 1 ]; then\n# Update local brew repository and upgrade to latest Cuckoo generator\nrun brew update --verbose\nrun brew upgrade --verbose SwiftKit/cuckoo/cuckoo\nelif [ $cuckooReturn == 127 ]; then\n# Update local brew repository and install latest Cuckoo generator\nrun brew install --verbose SwiftKit/cuckoo/cuckoo\nfi\n\ncuckoo generate --runtime $CUCKOO_VERSION --output \"$PROJECT_DIR/Tests/GeneratedMocks.swift\" \"$PROJECT_DIR/Tests/TestedProtocol.swift\" \"$PROJECT_DIR/Tests/TestedClass.swift\"";
+			shellScript = "# Find the installed Cuckoo version\nCUCKOO_VERSION=\"0.3.0\"\n\n# Used to ignore Xcode's environment\nalias run=\"env -i PATH=$PATH, HOME=$HOME\"\n\ncuckoo runtime --check $CUCKOO_VERSION\ncuckooReturn=$?\n\nif [ $cuckooReturn == 1 ]; then\n# Update local brew repository and upgrade to latest Cuckoo generator\nrun brew update --verbose\nrun brew upgrade --verbose SwiftKit/cuckoo/cuckoo\nelif [ $cuckooReturn == 127 ]; then\n# Update local brew repository and install latest Cuckoo generator\nrun brew install --verbose SwiftKit/cuckoo/cuckoo\nfi\n\ncuckoo generate --runtime $CUCKOO_VERSION --output \"$PROJECT_DIR/Tests/GeneratedMocks.swift\" \"$PROJECT_DIR/Tests/TestedProtocol.swift\" \"$PROJECT_DIR/Tests/TestedClass.swift\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
