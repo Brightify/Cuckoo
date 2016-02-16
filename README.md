@@ -66,7 +66,7 @@ cuckoo generate --runtime $CUCKOO_VERSION --testable SomeAppModule --output ./Ge
 
 For the example, lets say we generate the mock for the following protocol:
 
-```
+```Swift
 protocol Greeter {
     func greet()
     
@@ -78,7 +78,7 @@ protocol Greeter {
 
 Then the generated mock will be named `MockGreeter`. Let's use it! 
 
-```
+```Swift
 // Create a mock instance
 let mock = MockGreeter()
 
