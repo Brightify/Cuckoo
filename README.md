@@ -37,29 +37,47 @@ it, simply add the following line to your test target in your Podfile:
 pod "Cuckoo"
 ```
 
-And add the following `Run script` build phase to your test target's configuration:
+And add the following `Run script` build phase to your test target's `Build Phases`:
 
 ```
-# Find the installed Cuckoo version 
-CUCKOO_VERSION=$(grep '\- Cuckoo' "$PROJECT_DIR/Podfile.lock" | grep -o '[0-9]\{1,\}\.[0-9]\{1,\}\.[0-9]\{1,\}')
+# This script assumes you have home brew installed; see http://brew.sh/
 
-# Used to ignore Xcode's environment
-alias run="env -i PATH=$PATH, HOME=$HOME"
+# Find the installed Cuckoo version
+CUCKOO_VERSION=$(grep '\- Cuckoo' "${PROJECT_DIR}/Podfile.lock" | grep -o '[0-9]\{1,\}\.[0-9]\{1,\}\.[0-9]\{1,\}')
+
+# Ignore Xcode's environment
+alias run="env -i PATH=${PATH}, HOME=${HOME}"
 
 cuckoo runtime --check $CUCKOO_VERSION
 cuckooReturn=$?
 
 if [ $cuckooReturn == 1 ]; then
-    # Update local brew repository and upgrade to latest Cuckoo generator
-    run brew update
-    run brew upgrade SwiftKit/cuckoo/cuckoo
+# If cuckoo generator already installed, update local brew repo and upgrade to latest Cuckoo generator
+run brew update
+run brew upgrade SwiftKit/cuckoo/cuckoo
+
 elif [ $cuckooReturn == 127 ]; then
-    # Update local brew repository and install latest Cuckoo generator
-    run brew install SwiftKit/cuckoo/cuckoo
+# Else if cuckoo generator not installed, install it
+run brew install SwiftKit/cuckoo/cuckoo
 fi
 
-# Generate mock files (you can use xcode build variables to declare relative paths)
-cuckoo generate --runtime $CUCKOO_VERSION --testable SomeAppModule --output ./GeneratedMocks/ FileToMock.swift FileToMock2.swift FileToMock3.swift
+# Define output file; change "${PROJECT_NAME}Tests" to your test's root source folder, if it's not the default name
+OUTPUT_FILE="./${PROJECT_NAME}Tests/GeneratedMocks.swift"
+echo "Generated Mocks File = ${OUTPUT_FILE}"
+
+# Define input directory; change "${PROJECT_NAME}" to your project's root source folder, if it's not the default name
+INPUT_DIR="./${PROJECT_NAME}"
+echo "Mocks Input Directory = ${INPUT_DIR}"
+
+# Generate mock files; include as many input files as you'd like to create mocks for
+cuckoo generate --runtime $CUCKOO_VERSION --testable EyeSightEnvironments \
+--output ${OUTPUT_FILE} \
+${INPUT_DIR}/FileName1.swift \
+${INPUT_DIR}/FileName2.swift \
+${INPUT_DIR}/FileName3.swift
+# ... and so forth
+
+# After running once, locate `GeneratedMocks.swift` and drag it into your Xcode test target group
 ```
 
 ## Usage
