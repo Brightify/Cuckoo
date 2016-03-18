@@ -5,10 +5,13 @@
 [![Version](https://img.shields.io/cocoapods/v/Cuckoo.svg?style=flat)](http://cocoapods.org/pods/Cuckoo)
 [![License](https://img.shields.io/cocoapods/l/Cuckoo.svg?style=flat)](http://cocoapods.org/pods/Cuckoo)
 [![Platform](https://img.shields.io/cocoapods/p/Cuckoo.svg?style=flat)](http://cocoapods.org/pods/Cuckoo)
+[![Slack Status](http://swiftkit.tmspark.com/badge.svg)](http://swiftkit.tmspark.com)
 
 ## Introduction
 
 Cuckoo was created due to lack of a proper Swift mocking framework. We built the DSL to be very similar to Mockito, so anyone using it in Java/Android can immediately pick it up and use it.
+
+To have a chat, [join our Slack team](http://swiftkit.tmspark.com)!
 
 ## How does it work
 
