@@ -70,7 +70,7 @@ INPUT_DIR="./${PROJECT_NAME}"
 echo "Mocks Input Directory = ${INPUT_DIR}"
 
 # Generate mock files; include as many input files as you'd like to create mocks for
-cuckoo generate --runtime $CUCKOO_VERSION --testable EyeSightEnvironments \
+cuckoo generate --runtime $CUCKOO_VERSION --testable ${PROJECT_NAME} \
 --output ${OUTPUT_FILE} \
 ${INPUT_DIR}/FileName1.swift \
 ${INPUT_DIR}/FileName2.swift \
