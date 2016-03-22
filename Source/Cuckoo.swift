@@ -129,9 +129,9 @@ public extension MockManager {
 }
 
 public protocol Mock {
-    typealias MocksType
-    typealias Stubbing: StubbingProxy
-    typealias Verification: VerificationProxy
+    associatedtype MocksType
+    associatedtype Stubbing: StubbingProxy
+    associatedtype Verification: VerificationProxy
     
     var manager: MockManager<Stubbing, Verification> { get }
 
@@ -141,7 +141,7 @@ public protocol Mock {
 }
 
 public protocol Mockable {
-    typealias MockType: Mock
+    associatedtype MockType: Mock
 }
 
 public func mock<M: Mockable>(mockable: M.Type) -> M.MockType {

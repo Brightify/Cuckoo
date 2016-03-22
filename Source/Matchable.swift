@@ -11,7 +11,7 @@
     It is used instead of concrete value for stubbing and verification.
 */
 public protocol Matchable {
-    typealias MatchedType
+    associatedtype MatchedType
     
     /// Matcher for this instance. This should be an equalTo type of a matcher, but it is not required.
     var matcher: AnyMatcher<MatchedType> { get }

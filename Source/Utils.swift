@@ -6,50 +6,60 @@
 //  Copyright © 2016 Brightify. All rights reserved.
 //
 
-internal func curry<A>(function: A -> ())(_ a: A)() {
-    function(a)
+internal func curry<A>(function: A -> ()) -> A -> () {
+    return { a in function(a) }
 }
 
-internal func curry<A, B>(function: A -> B)(_ a: A) -> B {
-    return function(a)
+internal func curry<A, B>(function: A -> B) -> A -> B {
+    return { a in function(a) }
 }
 
-internal func curry<A, B, C>(function: (A, B) -> C)(_ a: A)(_ b: B) -> C {
-    return function(a, b)
+internal func curry<A, B, C>(function: (A, B) -> C) -> A -> B -> C {
+    return { a in { b in function(a, b) } }
 }
 
-internal func curry<A, B, C, D>(function: (A, B, C) -> D)(_ a: A)(_ b: B)(_ c: C) -> D {
-    return function(a, b, c)
+internal func curry<A, B, C, D>(function: (A, B, C) -> D) -> A -> B -> C -> D {
+    return { a in { b in { c in function(a, b, c) } } }
 }
 
-internal func curry<A, B, C, D, E>(function: (A, B, C, D) -> E)(_ a: A)(_ b: B)(_ c: C)(_ d: D) -> E {
-    return function(a, b, c, d)
+internal func curry<A, B, C, D, E>(function: (A, B, C, D) -> E) -> A -> B -> C -> D -> E {
+    return { a in { b in { c in { d in function(a, b, c, d) } } } }
 }
 
-internal func curry<A, B, C, D, E, F>(function: (A, B, C, D, E) -> F)(_ a: A)(_ b: B)(_ c: C)(_ d: D)(_ e: E) -> F {
-    return function(a, b, c, d, e)
+internal func curry<A, B, C, D, E, F>(function: (A, B, C, D, E) -> F) -> A -> B -> C -> D -> E -> F {
+    return { a in { b in { c in { d in { e in function(a, b, c, d, e) } } } } }
 }
 
 enum TypeStripingError: ErrorType {
     case CalledWithIncorrectType
 }
 
-internal func stripInputTypeInformation<IN_A, IN_B, OUT>(stripType: IN_A.Type, from function: (IN_A, IN_B) -> OUT)(_ inputA: Any, _ inputB: IN_B) throws -> OUT {
-    guard let castInputA = inputA as? IN_A else {
-        throw TypeStripingError.CalledWithIncorrectType
+internal func stripInputTypeInformation<IN_A, IN_B, OUT>(stripType: IN_A.Type, from function: (IN_A, IN_B) -> OUT) -> (Any, IN_B) throws -> OUT {
+    return { inputA, inputB in
+        guard let castInputA = inputA as? IN_A else {
+            throw TypeStripingError.CalledWithIncorrectType
+        }
+        return function(castInputA, inputB)
     }
-    return function(castInputA, inputB)
 }
 
-internal func stripInputTypeInformation<IN, OUT>(function: IN -> OUT)(_ input: Any) throws -> OUT {
-    return try stripInputTypeInformation(IN.self, from: function)(input)
+internal func stripInputTypeInformation<IN, OUT>(function: IN -> OUT) -> Any throws -> OUT {
+    return { input in
+        return try stripInputTypeInformation(IN.self, from: function)(input)
+    }
 }
 
-internal func stripInputTypeInformation<IN, OUT>(inputType: IN.Type, from function: IN -> OUT)(_ input: Any) throws -> OUT {
-    guard let castInput = input as? IN else {
-        throw TypeStripingError.CalledWithIncorrectType
+internal func stripInputTypeInformation<IN, OUT>(inputType: IN.Type, from function: IN -> OUT) -> Any throws -> OUT {
+    return { input in
+        guard let castInput = input as? IN else {
+            throw TypeStripingError.CalledWithIncorrectType
+        }
+        return function(castInput)
     }
-    return function(castInput)
+}
+
+public func typed<OWNER, IN, OUT>(function: OWNER -> IN -> OUT) -> IN -> IN {
+    return { $0 }
 }
 
 public func markerFunction<IN, OUT>(input: IN.Type = IN.self, _ output: OUT.Type = OUT.self) -> IN -> OUT {
@@ -61,6 +71,6 @@ public func markerFunction<IN, OUT>(input: IN.Type = IN.self, _ output: OUT.Type
 }
 
 public struct SourceLocation {
-    let file: String
+    let file: StaticString
     let line: UInt
 }

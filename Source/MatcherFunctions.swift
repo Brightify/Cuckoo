@@ -6,8 +6,8 @@
 //  Copyright © 2016 Brightify. All rights reserved.
 //
 
-private func compareCalls(count: Int, whenNil: Bool = false, using function: (Int, Int) -> Bool)(calls: [StubCall]) -> Bool {
-    return function(count, calls.count)
+private func compareCalls(count: Int, whenNil: Bool = false, using function: (Int, Int) -> Bool) -> (calls: [StubCall]) -> Bool {
+    return { calls in function(count, calls.count) }
 }
 
 private func describeCallMismatch(calls: [StubCall], description: Description) {

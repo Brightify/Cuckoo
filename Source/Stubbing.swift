@@ -100,10 +100,12 @@ public struct StubbingHandler {
         self.createNewStub(stub)
     }
     
-    private func inputEqualWith<IN>(input: IN, equalWhen: (IN, IN) -> Bool)(otherInput: Any) -> Bool {
-        guard let castOtherInput = otherInput as? IN else { return false }
+    private func inputEqualWith<IN>(input: IN, equalWhen: (IN, IN) -> Bool) -> Any -> Bool {
+        return { otherInput in
+            guard let castOtherInput = otherInput as? IN else { return false }
         
-        return equalWhen(input, castOtherInput)
+            return equalWhen(input, castOtherInput)
+        }
     }
 }
 

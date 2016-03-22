@@ -7,7 +7,7 @@
 //
 
 public protocol Matcher: SelfDescribing, Matchable {
-    typealias MatchedType
+    associatedtype MatchedType
     
     /**
      Describes the mismatch to the given description.
