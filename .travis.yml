@@ -4,6 +4,9 @@ xcode_project: Cuckoo.xcodeproj
 xcode_scheme: Cuckoo
 xcode_sdk: macosx
 
+before_script:
+    - travis_wait &
+
 after_script:
     - sleep 20
 
