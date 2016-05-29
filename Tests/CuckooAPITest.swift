@@ -1,6 +1,6 @@
 //
-//  MockeryTests.swift
-//  MockeryTests
+//  CuckooAPITest.swift
+//  CuckooTests
 //
 //  Created by Tadeas Kriz on 13/01/16.
 //  Copyright © 2016 Brightify. All rights reserved.
@@ -9,7 +9,7 @@
 import XCTest
 import Cuckoo
 
-class MockeryAPITest: XCTestCase {
+class CuckooAPITest: XCTestCase {
     
     override func setUp() {
         super.setUp()
@@ -59,12 +59,12 @@ class MockeryAPITest: XCTestCase {
         
         XCTAssertEqual(mock.withReturn(), "hello world!")
         
-        var helloWorld: String = ""
+        /*var helloWorld: String = ""
         mock.withNoescape("hello") {
             helloWorld = $0
         }
         XCTAssertEqual(helloWorld, "hello world")
-        
+        */
         verify(mock).readOnlyProperty.get
         verify(mock, times(2)).readWriteProperty.get
         verify(mock).readWriteProperty.set(400)
@@ -109,12 +109,12 @@ class MockeryAPITest: XCTestCase {
         
         XCTAssertEqual(mock.withReturn(), "hello world!")
         
-        var helloWorld: String = ""
+        /*var helloWorld: String = ""
         mock.withNoescape("hello") {
             helloWorld = $0
         }
         XCTAssertEqual(helloWorld, "hello world")
-        
+        */
         verify(mock).readOnlyProperty.get
         verify(mock, times(2)).readWriteProperty.get
         verify(mock).readWriteProperty.set(400)

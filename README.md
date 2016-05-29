@@ -104,7 +104,7 @@ Then the generated mock will be named `MockGreeter`. Let's use it!
 let mock = MockGreeter()
 
 // Create a spy instance
-let spy = MockGenerator(spyOn: aRealInstanceOfGreeter)
+let spy = MockGreeter(spyOn: aRealInstanceOfGreeter)
 
 // Start
 stub(mock) { mock in

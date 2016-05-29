@@ -1,6 +1,6 @@
 //
 //  Matcher.swift
-//  Mockery
+//  Cuckoo
 //
 //  Created by Tadeas Kriz on 13/01/16.
 //  Copyright © 2016 Brightify. All rights reserved.
@@ -24,10 +24,6 @@ extension Matcher {
     public var matcher: AnyMatcher<MatchedType> {
         return typeErased()
     }
-    
-    public func describeMismatch(input: MatchedType, to description: Description) {
-        description.appendText("was ").appendValue(input)
-    }
 }
 
 extension Matcher {
@@ -40,7 +36,7 @@ extension Matcher {
             return self.matches($0) || otherMatcher.matches($0)
         }
         let description: Description -> Void = {
-            $0.appendText("either").appendDescriptionOf(self).appendText("or").appendDescriptionOf(otherMatcher)
+            $0.append("either", self, "or", otherMatcher)
         }
         
         return FunctionMatcher(function: function, describeTo: description).typeErased()
@@ -51,7 +47,7 @@ extension Matcher {
             return self.matches($0) && otherMatcher.matches($0)
         }
         let description: Description -> Void = {
-            $0.appendText("both").appendDescriptionOf(self).appendText("and").appendDescriptionOf(otherMatcher)
+            $0.append("both", self, "and", otherMatcher)
         }
         
         return FunctionMatcher(function: function, describeTo: description).typeErased()

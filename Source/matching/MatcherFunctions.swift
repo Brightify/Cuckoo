@@ -1,6 +1,6 @@
 //
-//  VerificationMatchers.swift
-//  Mockery
+//  MatcherFunctions.swift
+//  Cuckoo
 //
 //  Created by Tadeas Kriz on 13/01/16.
 //  Copyright © 2016 Brightify. All rights reserved.
@@ -11,14 +11,14 @@ private func compareCalls(count: Int, whenNil: Bool = false, using function: (In
 }
 
 private func describeCallMismatch(calls: [StubCall], description: Description) {
-    description.appendText("was called ").appendValue(calls.count).appendText(" times")
+    description.append("was called ", calls.count, " times")
 }
 
 /// Returns a matcher ensuring a call was made **`count`** times.
 @warn_unused_result
 public func times(count: Int) -> AnyMatcher<[StubCall]> {
     return FunctionMatcher(function: compareCalls(count, using: ==), describeMismatch: describeCallMismatch) {
-        $0.appendText("to be called ").appendValue(count).appendText(" times")
+        $0.append("to be called ", count, " times")
     }.typeErased()
 }
 
@@ -38,7 +38,7 @@ public func atLeastOnce() -> AnyMatcher<[StubCall]> {
 @warn_unused_result
 public func atLeast(count: Int) -> AnyMatcher<[StubCall]> {
     return FunctionMatcher(function: compareCalls(count, using: >=), describeMismatch: describeCallMismatch) {
-        $0.appendText("called at least").appendValue(count)
+        $0.append("called at least", count)
     }.typeErased()
 }
 
@@ -46,7 +46,7 @@ public func atLeast(count: Int) -> AnyMatcher<[StubCall]> {
 @warn_unused_result
 public func atMost(count: Int) -> AnyMatcher<[StubCall]> {
     return FunctionMatcher(function: compareCalls(count, whenNil: true, using: <=), describeMismatch: describeCallMismatch) {
-        $0.appendText("called at most").appendValue(count)
+        $0.append("called at most", count)
     }.typeErased()
 }
 
@@ -84,7 +84,7 @@ public func equalTo<T: AnyObject>(value: T) -> AnyMatcher<T> {
 @warn_unused_result
 public func equalTo<T>(value: T, equalWhen equalityFunction: (T, T) -> Bool) -> AnyMatcher<T> {
     return FunctionMatcher(original: value, function: equalityFunction) {
-        $0.appendValue($0)
+        $0.append($0)
     }.typeErased()
 }
 
