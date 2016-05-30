@@ -15,16 +15,23 @@ public class MockManager<STUBBING: StubbingProxy, VERIFICATION: VerificationProx
     public init() {
         
     }
-    
-    private func doCall<IN, OUT>(method: String, parameters: IN, original: (IN -> OUT)? = nil) -> IN -> OUT {
-        return { try! self.doCallThrows(method, parameters: parameters, original: original)($0) }
+    public func getter<T>(property: String, original: (Void -> T)? = nil) -> (Void -> T) {
+        return call(getterName(property), parameters: Void(), original: original)
     }
     
-    private func doCallThrows<IN, OUT>(method: String, parameters: IN, original: (IN throws -> OUT)? = nil) -> IN throws -> OUT {
+    public func setter<T>(property: String, value: T, original: (T -> Void)? = nil) -> (T -> Void) {
+        return call(setterName(property), parameters: value, original: original)
+    }
+    
+    public func call<IN, OUT>(method: String, parameters: IN, original: (IN -> OUT)? = nil) -> IN -> OUT {
+        return { try! self.callThrows(method, parameters: parameters, original: original)($0) }
+    }
+    
+    public func callThrows<IN, OUT>(method: String, parameters: IN, original: (IN throws -> OUT)? = nil) -> IN throws -> OUT {
         let stubCall = StubCall(method: method, parameters: parameters)
         stubCalls.append(stubCall)
-        
-        if let stub = findStub(method, parameters: parameters) {
+            
+        if let stub = (stubs[method]?.filter { $0.parameterMatchers.reduce(true) { $0 && $1.matches(parameters) } }.first) {
             return {
                 switch stub.output($0) {
                 case .ReturnValue(let value):
@@ -42,65 +49,28 @@ public class MockManager<STUBBING: StubbingProxy, VERIFICATION: VerificationProx
         }
     }
     
-    private func findStub<IN>(method: String, parameters: IN) -> Stub? {
-        guard let stubsWithSameName = stubs[method] else { return nil }
-        return stubsWithSameName.filter { $0.parameterMatchers.reduce(true) { $0 && $1.matches(parameters) } }.first
-    }
-    
-    private func createNewStub(stub: Stub) {
-        if !stubs.keys.contains(stub.name) {
-            stubs[stub.name] = []
-        }
-        
-        stubs[stub.name]?.insert(stub, atIndex: 0)
-    }
-    
-    private func verify(method: String, sourceLocation: SourceLocation, callMatcher: AnyMatcher<StubCall>, verificationMatcher: AnyMatcher<[StubCall]>) {
-        let calls = stubCalls.filter(callMatcher.matches)
-        
-        if verificationMatcher.matches(calls) == false {
-            let description = Description()
-            description.append("Expected ", verificationMatcher, ", but ");
-            verificationMatcher.describeMismatch(calls, to: description);
-            XCTFail(description.description, file: sourceLocation.file, line: sourceLocation.line)
-        }
-    }
-}
-
-extension MockManager {
     public func getStubbingProxy() -> STUBBING {
-        return STUBBING(handler: StubbingHandler(createNewStub: createNewStub))
+        let handler = StubbingHandler { stub in
+            if self.stubs[stub.name] == nil {
+                self.stubs[stub.name] = []
+            }
+            
+            self.stubs[stub.name]?.insert(stub, atIndex: 0)
+        }
+        return STUBBING(handler: handler)
     }
-}
 
-extension MockManager {
     public func getVerificationProxy(matcher: AnyMatcher<[StubCall]>, sourceLocation: SourceLocation) -> VERIFICATION {
-        return VERIFICATION(handler: VerificationHandler(matcher: matcher, sourceLocation: sourceLocation, verifyCall: verify))
-    }
-}
-
-public extension MockManager {
-    public func getter<T>(property: String, original: (Void -> T)? = nil) -> (Void -> T) {
-        return call(getterName(property), original: original)
-    }
-    
-    public func setter<T>(property: String, value: T, original: (T -> Void)? = nil) -> (T -> Void) {
-        return call(setterName(property), parameters: value, original: original)
-    }
-    
-    public func call<OUT>(method: String, original: (Void -> OUT)? = nil) -> Void -> OUT {
-        return doCall(method, parameters: Void(), original: original)
-    }
-    
-    public func call<IN, OUT>(method: String, parameters: IN, original: (IN -> OUT)? = nil) -> IN -> OUT {
-        return doCall(method, parameters: parameters, original: original)
-    }
-    
-    public func callThrows<OUT>(method: String, original: (Void throws -> OUT)? = nil) -> Void throws -> OUT {
-        return doCallThrows(method, parameters: Void(), original: original)
-    }
-    
-    public func callThrows<IN, OUT>(method: String, parameters: IN, original: (IN throws -> OUT)? = nil) -> IN throws -> OUT {
-        return doCallThrows(method, parameters: parameters, original: original)
+        let handler = VerificationHandler(matcher: matcher, sourceLocation: sourceLocation) { method, sourceLocation, callMatcher, verificationMatcher in
+            let calls = self.stubCalls.filter(callMatcher.matches)
+            
+            if !verificationMatcher.matches(calls) {
+                let description = Description()
+                description.append("Expected ", verificationMatcher, ", but ");
+                verificationMatcher.describeMismatch(calls, to: description);
+                XCTFail(description.description, file: sourceLocation.file, line: sourceLocation.line)
+            }
+        }
+        return VERIFICATION(handler: handler)
     }
 }

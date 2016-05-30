@@ -27,8 +27,28 @@ public struct VerificationHandler {
         return verify(method, callMatcher: callMatcher(method, parameterMatchers: parameterMatchers))
     }
     
-    public func verify<OUT>(method: String, callMatcher: AnyMatcher<StubCall>) -> __DoNotUse<OUT> {
+    private func verify<OUT>(method: String, callMatcher: AnyMatcher<StubCall>) -> __DoNotUse<OUT> {
         verifyCall(method: method, sourceLocation: sourceLocation, callMatcher: callMatcher, verificationMatcher: matcher)
         return __DoNotUse()
     }
+    
+    private func callMatcher<IN>(method: String, parameterMatchers: [AnyMatcher<IN>]) -> AnyMatcher<StubCall> {
+        let typeErasedParameterMatchers: [AnyMatcher<Any>] = parameterMatchers.map(AnyMatcher.init)
+        
+        let function: StubCall -> Bool = { call in
+            typeErasedParameterMatchers.reduce(call.method == method) {
+                $0 && $1.matches(call.parameters)
+            }
+        }
+        let description: Description -> Void = {
+            if method != method {
+                $0.append("method name", method)
+            }
+            // FIXME Describe params
+            //typedMatcher.describeTo($0)
+        }
+        
+        return FunctionMatcher(function: function, describeTo: description).typeErased()
+    }
+
 }
