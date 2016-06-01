@@ -24,6 +24,10 @@ extension Matcher {
     public var matcher: AnyMatcher<MatchedType> {
         return typeErased()
     }
+    
+    public func describeMismatch(input: MatchedType, to description: Description) {
+        description.append("was ", input)
+    }
 }
 
 extension Matcher {

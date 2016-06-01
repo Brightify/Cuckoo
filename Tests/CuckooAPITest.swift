@@ -59,6 +59,7 @@ class CuckooAPITest: XCTestCase {
         
         XCTAssertEqual(mock.withReturn(), "hello world!")
         
+        // Calling @noescape closure is not currently supported
         /*var helloWorld: String = ""
         mock.withNoescape("hello") {
             helloWorld = $0
@@ -109,6 +110,7 @@ class CuckooAPITest: XCTestCase {
         
         XCTAssertEqual(mock.withReturn(), "hello world!")
         
+        // Calling @noescape closure is not currently supported
         /*var helloWorld: String = ""
         mock.withNoescape("hello") {
             helloWorld = $0

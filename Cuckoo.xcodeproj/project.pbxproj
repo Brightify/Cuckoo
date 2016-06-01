@@ -136,11 +136,11 @@
 		183D03FD1C4691C600EBAEF3 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				DC9EFA3A1CFC2FA30034DFE5 /* mock */,
-				DC9EFA221CFADB8B0034DFE5 /* describing */,
-				DC9EFA151CFADAA00034DFE5 /* matching */,
-				DC5600EE1CFAD499001F339D /* verification */,
-				DC5600E91CFAD467001F339D /* stubbing */,
+				DC9EFA3A1CFC2FA30034DFE5 /* Mock */,
+				DC9EFA221CFADB8B0034DFE5 /* Describing */,
+				DC9EFA151CFADAA00034DFE5 /* Matching */,
+				DC5600EE1CFAD499001F339D /* Verification */,
+				DC5600E91CFAD467001F339D /* Stubbing */,
 				183D03FE1C4691C600EBAEF3 /* Cuckoo.h */,
 				183D04001C4691C600EBAEF3 /* Info.plist */,
 				183D04151C46926A00EBAEF3 /* CuckooFunctions.swift */,
@@ -162,7 +162,7 @@
 			path = Tests;
 			sourceTree = "<group>";
 		};
-		DC5600E91CFAD467001F339D /* stubbing */ = {
+		DC5600E91CFAD467001F339D /* Stubbing */ = {
 			isa = PBXGroup;
 			children = (
 				DC9EFA411CFC31B10034DFE5 /* ReturnValueOrError.swift */,
@@ -176,10 +176,10 @@
 				DC9EFA0B1CFAD5BD0034DFE5 /* ThenReturnValue.swift */,
 				DC5600EA1CFAD474001F339D /* ThenReturnValueOrThrow.swift */,
 			);
-			name = stubbing;
+			name = Stubbing;
 			sourceTree = "<group>";
 		};
-		DC5600EE1CFAD499001F339D /* verification */ = {
+		DC5600EE1CFAD499001F339D /* Verification */ = {
 			isa = PBXGroup;
 			children = (
 				DC9EFA431CFC326B0034DFE5 /* SourceLocation.swift */,
@@ -188,10 +188,10 @@
 				DC9EFA111CFAD7360034DFE5 /* VerifyReadOnlyProperty.swift */,
 				DC9EFA131CFAD7430034DFE5 /* VerifyProperty.swift */,
 			);
-			name = verification;
+			name = Verification;
 			sourceTree = "<group>";
 		};
-		DC9EFA151CFADAA00034DFE5 /* matching */ = {
+		DC9EFA151CFADAA00034DFE5 /* Matching */ = {
 			isa = PBXGroup;
 			children = (
 				DC9EFA161CFADAD70034DFE5 /* Matchable.swift */,
@@ -200,26 +200,26 @@
 				DC9EFA1E1CFADB060034DFE5 /* AnyMatcher.swift */,
 				DC9EFA201CFADB190034DFE5 /* FunctionMatcher.swift */,
 			);
-			name = matching;
+			name = Matching;
 			sourceTree = "<group>";
 		};
-		DC9EFA221CFADB8B0034DFE5 /* describing */ = {
+		DC9EFA221CFADB8B0034DFE5 /* Describing */ = {
 			isa = PBXGroup;
 			children = (
 				DC9EFA231CFADB970034DFE5 /* Description.swift */,
 				DC9EFA251CFADBA70034DFE5 /* SelfDescribing.swift */,
 			);
-			name = describing;
+			name = Describing;
 			sourceTree = "<group>";
 		};
-		DC9EFA3A1CFC2FA30034DFE5 /* mock */ = {
+		DC9EFA3A1CFC2FA30034DFE5 /* Mock */ = {
 			isa = PBXGroup;
 			children = (
 				DC9EFA3B1CFC2FE20034DFE5 /* Mock.swift */,
 				DC9EFA3C1CFC2FE20034DFE5 /* StubbingProxy.swift */,
 				DC9EFA3D1CFC2FE20034DFE5 /* VerificationProxy.swift */,
 			);
-			name = mock;
+			name = Mock;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -340,7 +340,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Find the installed Cuckoo version\nCUCKOO_VERSION=\"0.4.0\"\n\n# Used to ignore Xcode's environment\nalias run=\"env -i PATH=$PATH, HOME=$HOME\"\n\ncuckoo runtime --check $CUCKOO_VERSION\ncuckooReturn=$?\n\nif [ $cuckooReturn == 1 ]; then\n# Update local brew repository and upgrade to latest Cuckoo generator\nrun brew update --verbose\nrun brew upgrade --verbose SwiftKit/cuckoo/cuckoo\nelif [ $cuckooReturn == 127 ]; then\n# Update local brew repository and install latest Cuckoo generator\nrun brew install --verbose SwiftKit/cuckoo/cuckoo\nfi\n\n#cuckoo generate --runtime $CUCKOO_VERSION --output \"$PROJECT_DIR/Tests/GeneratedMocks.swift\" \"$PROJECT_DIR/Tests/TestedProtocol.swift\" \"$PROJECT_DIR/Tests/TestedClass.swift\"";
+			shellScript = "# Find the installed Cuckoo version\nCUCKOO_VERSION=\"0.4.1\"\n\n# Used to ignore Xcode's environment\nalias run=\"env -i PATH=$PATH, HOME=$HOME\"\n\ncuckoo runtime --check $CUCKOO_VERSION\ncuckooReturn=$?\n\nif [ $cuckooReturn == 1 ]; then\n# Update local brew repository and upgrade to latest Cuckoo generator\nrun brew update --verbose\nrun brew upgrade --verbose SwiftKit/cuckoo/cuckoo\nelif [ $cuckooReturn == 127 ]; then\n# Update local brew repository and install latest Cuckoo generator\nrun brew install --verbose SwiftKit/cuckoo/cuckoo\nfi\n\ncuckoo generate --runtime $CUCKOO_VERSION --output \"$PROJECT_DIR/Tests/GeneratedMocks.swift\" \"$PROJECT_DIR/Tests/TestedProtocol.swift\" \"$PROJECT_DIR/Tests/TestedClass.swift\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
