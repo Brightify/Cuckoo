@@ -36,13 +36,13 @@ We plan to add a **watchOS 2+** support soon.
 Cuckoo runtime is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your test target in your Podfile:
 
-```
+```Ruby
 pod "Cuckoo"
 ```
 
 And add the following `Run script` build phase to your test target's `Build Phases`:
 
-```
+```Bash
 # This script assumes you have home brew installed; see http://brew.sh/
 
 # Find the installed Cuckoo version
