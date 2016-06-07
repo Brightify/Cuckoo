@@ -29,7 +29,7 @@ public struct FunctionMatcher<T>: Matcher {
         if let describeMismatchFunction = describeMismatchFunction {
             describeMismatchFunction(input, to: description)
         } else {
-            description.append("was ", input)
+            description.append("was ").appendValue(input)
         }
     }
     

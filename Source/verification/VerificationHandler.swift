@@ -42,7 +42,7 @@ public struct VerificationHandler {
         }
         let description: Description -> Void = {
             if method != method {
-                $0.append("method name", method)
+                $0.append("method name ").appendValue(method)
             }
             // FIXME Describe params
             //typedMatcher.describeTo($0)

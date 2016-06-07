@@ -40,7 +40,7 @@ extension Matcher {
             return self.matches($0) || otherMatcher.matches($0)
         }
         let description: Description -> Void = {
-            $0.append("either", self, "or", otherMatcher)
+            $0.append("either ").appendValue(self).append(" or ").appendValue(otherMatcher)
         }
         
         return FunctionMatcher(function: function, describeTo: description).typeErased()
@@ -51,7 +51,7 @@ extension Matcher {
             return self.matches($0) && otherMatcher.matches($0)
         }
         let description: Description -> Void = {
-            $0.append("both", self, "and", otherMatcher)
+            $0.append("both ").appendValue(self).append(" and ").appendValue(otherMatcher)
         }
         
         return FunctionMatcher(function: function, describeTo: description).typeErased()

@@ -66,7 +66,7 @@ public class MockManager<STUBBING: StubbingProxy, VERIFICATION: VerificationProx
             
             if !verificationMatcher.matches(calls) {
                 let description = Description()
-                description.append("Expected ", verificationMatcher, ", but ");
+                description.append("Expected ").appendValue(verificationMatcher).append(", but ");
                 verificationMatcher.describeMismatch(calls, to: description);
                 XCTFail(description.description, file: sourceLocation.file, line: sourceLocation.line)
             }

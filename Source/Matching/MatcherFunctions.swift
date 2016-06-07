@@ -38,7 +38,7 @@ public func atLeastOnce() -> AnyMatcher<[StubCall]> {
 @warn_unused_result
 public func atLeast(count: Int) -> AnyMatcher<[StubCall]> {
     return FunctionMatcher(function: compareCalls(count, using: >=), describeMismatch: describeCallMismatch) {
-        $0.append("called at least", count)
+        $0.append("called at least ", count, " times")
     }.typeErased()
 }
 
@@ -46,7 +46,7 @@ public func atLeast(count: Int) -> AnyMatcher<[StubCall]> {
 @warn_unused_result
 public func atMost(count: Int) -> AnyMatcher<[StubCall]> {
     return FunctionMatcher(function: compareCalls(count, whenNil: true, using: <=), describeMismatch: describeCallMismatch) {
-        $0.append("called at most", count)
+        $0.append("called at most ", count, " times")
     }.typeErased()
 }
 
@@ -84,7 +84,7 @@ public func equalTo<T: AnyObject>(value: T) -> AnyMatcher<T> {
 @warn_unused_result
 public func equalTo<T>(value: T, equalWhen equalityFunction: (T, T) -> Bool) -> AnyMatcher<T> {
     return FunctionMatcher(original: value, function: equalityFunction) {
-        $0.append($0)
+        $0.appendValue($0)
     }.typeErased()
 }
 

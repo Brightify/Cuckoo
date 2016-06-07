@@ -9,13 +9,18 @@
 public class Description: CustomStringConvertible {
     public private(set) var description = ""
     
-    func append(values: Any...) -> Description {
-        values.forEach {
-            if let value = $0 as? SelfDescribing {
-                value.describeTo(self)
-            } else {
-                description += "\($0)"
-            }
+    func append(texts: Any...) -> Description {
+        texts.forEach {
+            description += "\($0)"
+        }
+        return self
+    }
+    
+    func appendValue(value: Any) -> Description {
+        if let value = value as? SelfDescribing {
+            value.describeTo(self)
+        } else {
+            description += "\(value)"
         }
         return self
     }
