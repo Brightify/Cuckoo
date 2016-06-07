@@ -15,6 +15,7 @@ public class MockManager<STUBBING: StubbingProxy, VERIFICATION: VerificationProx
     public init() {
         
     }
+
     public func getter<T>(property: String, original: (Void -> T)? = nil) -> (Void -> T) {
         return call(getterName(property), parameters: Void(), original: original)
     }
@@ -64,13 +65,18 @@ public class MockManager<STUBBING: StubbingProxy, VERIFICATION: VerificationProx
         let handler = VerificationHandler(matcher: matcher, sourceLocation: sourceLocation) { method, sourceLocation, callMatcher, verificationMatcher in
             let calls = self.stubCalls.filter(callMatcher.matches)
             
-            if !verificationMatcher.matches(calls) {
-                let description = Description()
-                description.append("Expected ").appendValue(verificationMatcher).append(", but ");
-                verificationMatcher.describeMismatch(calls, to: description);
+            if verificationMatcher.matches(calls) == false {
+                let description = StringDescription()
+                description
+                    .append(text: "Expected ")
+                    .append(descriptionOf: verificationMatcher)
+                    .append(text: ", but ")
+                verificationMatcher.describeMismatch(calls, to: description)
+
                 XCTFail(description.description, file: sourceLocation.file, line: sourceLocation.line)
             }
         }
+
         return VERIFICATION(handler: handler)
     }
 }

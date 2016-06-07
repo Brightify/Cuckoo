@@ -26,7 +26,7 @@ extension Matcher {
     }
     
     public func describeMismatch(input: MatchedType, to description: Description) {
-        description.append("was ", input)
+        description.append(text: "was ").append(value: input)
     }
 }
 
@@ -40,7 +40,7 @@ extension Matcher {
             return self.matches($0) || otherMatcher.matches($0)
         }
         let description: Description -> Void = {
-            $0.append("either ").appendValue(self).append(" or ").appendValue(otherMatcher)
+            $0.append(text: "either ").append(descriptionOf: self).append(text: " or ").append(descriptionOf: otherMatcher)
         }
         
         return FunctionMatcher(function: function, describeTo: description).typeErased()
@@ -51,7 +51,7 @@ extension Matcher {
             return self.matches($0) && otherMatcher.matches($0)
         }
         let description: Description -> Void = {
-            $0.append("both ").appendValue(self).append(" and ").appendValue(otherMatcher)
+            $0.append(text: "both ").append(descriptionOf: self).append(text: " and ").append(descriptionOf: otherMatcher)
         }
         
         return FunctionMatcher(function: function, describeTo: description).typeErased()

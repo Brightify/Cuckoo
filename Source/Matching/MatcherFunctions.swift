@@ -11,14 +11,14 @@ private func compareCalls(count: Int, whenNil: Bool = false, using function: (In
 }
 
 private func describeCallMismatch(calls: [StubCall], description: Description) {
-    description.append("was called ", calls.count, " times")
+    description.append(text: "was called ").append(value: calls.count).append(text: " times")
 }
 
 /// Returns a matcher ensuring a call was made **`count`** times.
 @warn_unused_result
 public func times(count: Int) -> AnyMatcher<[StubCall]> {
     return FunctionMatcher(function: compareCalls(count, using: ==), describeMismatch: describeCallMismatch) {
-        $0.append("to be called ", count, " times")
+        $0.append(text: "to be called ").append(value: count).append(text: " times")
     }.typeErased()
 }
 
@@ -38,7 +38,7 @@ public func atLeastOnce() -> AnyMatcher<[StubCall]> {
 @warn_unused_result
 public func atLeast(count: Int) -> AnyMatcher<[StubCall]> {
     return FunctionMatcher(function: compareCalls(count, using: >=), describeMismatch: describeCallMismatch) {
-        $0.append("called at least ", count, " times")
+        $0.append(text: "called at least ").append(value: count).append(text: " times")
     }.typeErased()
 }
 
@@ -46,7 +46,7 @@ public func atLeast(count: Int) -> AnyMatcher<[StubCall]> {
 @warn_unused_result
 public func atMost(count: Int) -> AnyMatcher<[StubCall]> {
     return FunctionMatcher(function: compareCalls(count, whenNil: true, using: <=), describeMismatch: describeCallMismatch) {
-        $0.append("called at most ", count, " times")
+        $0.append(text: "called at most ").append(value: count).append(text: " times")
     }.typeErased()
 }
 
@@ -84,7 +84,7 @@ public func equalTo<T: AnyObject>(value: T) -> AnyMatcher<T> {
 @warn_unused_result
 public func equalTo<T>(value: T, equalWhen equalityFunction: (T, T) -> Bool) -> AnyMatcher<T> {
     return FunctionMatcher(original: value, function: equalityFunction) {
-        $0.appendValue($0)
+        $0.append(text: "Expected to be equal to")
     }.typeErased()
 }
 

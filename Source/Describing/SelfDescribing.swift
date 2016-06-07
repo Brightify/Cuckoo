@@ -14,39 +14,39 @@ extension Optional: SelfDescribing {
     public func describeTo(description: Description) {
         switch self {
         case .None:
-            description.append("nil")
+            description.append(text: "nil")
         case .Some(let value):
-            description.append(value)
+            description.append(value: value)
         }
     }
 }
 
 extension String: SelfDescribing {
     public func describeTo(description: Description) {
-        description.append("\"\(self)\"")
+        description.append(text: "\"\(self)\"")
     }
 }
 
 extension Bool: SelfDescribing {
     public func describeTo(description: Description) {
-        description.append("<\(self)>")
+        description.append(text: "<\(self)>")
     }
 }
 
 extension Int: SelfDescribing {
     public func describeTo(description: Description) {
-        description.append("<\(self)>")
+        description.append(text: "<\(self)>")
     }
 }
 
 extension Float: SelfDescribing {
     public func describeTo(description: Description) {
-        description.append("<\(self)>")
+        description.append(text: "<\(self)>")
     }
 }
 
 extension Double: SelfDescribing {
     public func describeTo(description: Description) {
-        description.append("<\(self)>")
+        description.append(text: "<\(self)>")
     }
 }

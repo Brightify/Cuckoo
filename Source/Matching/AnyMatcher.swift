@@ -37,9 +37,9 @@ public struct AnyMatcher<T>: Matcher {
         do {
             return try describeMismatchFunction(input, to: description)
         } catch TypeStripingError.CalledWithIncorrectType {
-            description.append("instance of", targetType)
+            description.append(text: "instance of").append(value: targetType)
         } catch let error {
-            description.append("Unknown error occured while matching: \(error)")
+            description.append(text: "Unknown error occured while matching: \(error)")
         }
     }
     
