@@ -14,6 +14,9 @@
 		1890298B1C4C318A002FF826 /* CuckooAPITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183D040A1C4691C600EBAEF3 /* CuckooAPITest.swift */; };
 		1894D0F21C4D09CF00879512 /* TestedProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1894D0F01C4D09AB00879512 /* TestedProtocol.swift */; };
 		1894D0F71C4D127D00879512 /* GeneratedMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1894D0F51C4D123000879512 /* GeneratedMocks.swift */; };
+		18F354A31D0747530053E119 /* StringDescriptionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F354A11D0745D20053E119 /* StringDescriptionTest.swift */; };
+		18F354A61D0749C90053E119 /* SelfDescribingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F354A41D0748C50053E119 /* SelfDescribingTest.swift */; };
+		18F354A91D074C4D0053E119 /* MatcherDescriptionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F354A71D074C4C0053E119 /* MatcherDescriptionsTest.swift */; };
 		DC5600EC1CFAD474001F339D /* ThenReturnValueOrThrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5600EA1CFAD474001F339D /* ThenReturnValueOrThrow.swift */; };
 		DC5600F11CFAD4A4001F339D /* __DoNotUse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5600EF1CFAD4A4001F339D /* __DoNotUse.swift */; };
 		DC5A3A5D1CF6F8D600F520E3 /* Cuckoo.podspec in Resources */ = {isa = PBXBuildFile; fileRef = DC5A3A5C1CF6F8D600F520E3 /* Cuckoo.podspec */; };
@@ -65,6 +68,9 @@
 		183D04151C46926A00EBAEF3 /* CuckooFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CuckooFunctions.swift; sourceTree = "<group>"; };
 		1894D0F01C4D09AB00879512 /* TestedProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestedProtocol.swift; sourceTree = "<group>"; };
 		1894D0F51C4D123000879512 /* GeneratedMocks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratedMocks.swift; sourceTree = "<group>"; };
+		18F354A11D0745D20053E119 /* StringDescriptionTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringDescriptionTest.swift; sourceTree = "<group>"; };
+		18F354A41D0748C50053E119 /* SelfDescribingTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfDescribingTest.swift; sourceTree = "<group>"; };
+		18F354A71D074C4C0053E119 /* MatcherDescriptionsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatcherDescriptionsTest.swift; sourceTree = "<group>"; };
 		DC5600EA1CFAD474001F339D /* ThenReturnValueOrThrow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ThenReturnValueOrThrow.swift; path = stubbing/ThenReturnValueOrThrow.swift; sourceTree = "<group>"; };
 		DC5600EF1CFAD4A4001F339D /* __DoNotUse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = __DoNotUse.swift; path = verification/__DoNotUse.swift; sourceTree = "<group>"; };
 		DC5A3A5C1CF6F8D600F520E3 /* Cuckoo.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cuckoo.podspec; sourceTree = "<group>"; };
@@ -158,6 +164,9 @@
 				183D040C1C4691C600EBAEF3 /* Info.plist */,
 				1894D0F01C4D09AB00879512 /* TestedProtocol.swift */,
 				181C6C281C6A6591009A8CA7 /* TestedClass.swift */,
+				18F354A11D0745D20053E119 /* StringDescriptionTest.swift */,
+				18F354A41D0748C50053E119 /* SelfDescribingTest.swift */,
+				18F354A71D074C4C0053E119 /* MatcherDescriptionsTest.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -385,9 +394,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				1894D0F21C4D09CF00879512 /* TestedProtocol.swift in Sources */,
+				18F354A61D0749C90053E119 /* SelfDescribingTest.swift in Sources */,
 				1894D0F71C4D127D00879512 /* GeneratedMocks.swift in Sources */,
 				1890298B1C4C318A002FF826 /* CuckooAPITest.swift in Sources */,
+				18F354A31D0747530053E119 /* StringDescriptionTest.swift in Sources */,
 				181C6C2A1C6A67B5009A8CA7 /* TestedClass.swift in Sources */,
+				18F354A91D074C4D0053E119 /* MatcherDescriptionsTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
