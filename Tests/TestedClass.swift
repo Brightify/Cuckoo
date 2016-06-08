@@ -15,6 +15,8 @@ class TestedClass {
     
     lazy var readWriteProperty: Int = 0
     
+    lazy var optionalProperty: Int? = 0
+    
     func noParameter() {
     
     }
@@ -31,8 +33,8 @@ class TestedClass {
         
     }
     
-    func withClosure(closure: String -> Int) {
-        closure("hello")
+    func withClosure(closure: String -> Int) -> Int {
+        return closure("hello")
     }
     
     func withMultipleParameters(a: String, b: Int, c: Float) {

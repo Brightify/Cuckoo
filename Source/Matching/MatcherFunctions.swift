@@ -100,7 +100,7 @@ public func anyString() -> AnyMatcher<String> {
     return AnyMatcher()
 }
 
-/// Returns a matcher matching any T value.
+/// Returns a matcher matching any T value or nil.
 @warn_unused_result
 public func any<T>(type: T.Type = T.self) -> AnyMatcher<T> {
     return AnyMatcher()
@@ -112,11 +112,66 @@ public func anyClosure<IN, OUT>() -> AnyMatcher<IN -> OUT> {
     return AnyMatcher()
 }
 
-/// Returns a matcher matching any optional closure.
+/// Returns an equality matcher. A shorthand for `equalTo`.
 @warn_unused_result
-public func anyNillableClosure<IN, OUT>() -> AnyMatcher<(IN -> OUT)?> {
-    let compare: (IN -> OUT)? -> Bool = {
-        if case .None = $0 { return false } else { return true }
-    }
-    return FunctionMatcher<(IN -> OUT)?>(function: compare, describeTo: { _ in }).typeErased()
+public func eq<T: Equatable>(value: T?) -> AnyMatcher<T?> {
+    return equalTo(value)
+}
+
+/// Returns an identity matcher. A shorthand for `equalTo`
+@warn_unused_result
+public func eq<T: AnyObject>(value: T?) -> AnyMatcher<T?> {
+    return equalTo(value)
+}
+
+/// Returns a matcher using the supplied function. A shorthand for `equalTo`
+@warn_unused_result
+public func eq<T>(value: T?, equalWhen equalityFunction: (T?, T?) -> Bool) -> AnyMatcher<T?> {
+    return equalTo(value, equalWhen: equalityFunction)
+}
+
+/// Returns an equality matcher.
+@warn_unused_result
+public func equalTo<T: Equatable>(value: T?) -> AnyMatcher<T?> {
+    return equalTo(value, equalWhen: ==)
+}
+
+/// Returns an identity matcher.
+@warn_unused_result
+public func equalTo<T: AnyObject>(value: T?) -> AnyMatcher<T?> {
+    return equalTo(value, equalWhen: ===)
+}
+
+/// Returns a matcher using the supplied function.
+@warn_unused_result
+public func equalTo<T>(value: T?, equalWhen equalityFunction: (T?, T?) -> Bool) -> AnyMatcher<T?> {
+    return FunctionMatcher(original: value, function: equalityFunction) {
+        $0.append($0)
+    }.typeErased()
+}
+
+/// Returns a matcher matching any Int value.
+@warn_unused_result
+public func anyInt() -> AnyMatcher<Int?> {
+    return notNil()
+}
+
+/// Returns a matcher matching any String value.
+@warn_unused_result
+public func anyString() -> AnyMatcher<String?> {
+    return notNil()
+}
+
+/// Returns a matcher matching any closure.
+@warn_unused_result
+public func anyClosure<IN, OUT>() -> AnyMatcher<(IN -> OUT)?> {
+    return notNil()
+}
+
+/// Returns a matcher matching any non nil value.
+@warn_unused_result
+public func notNil<T>() -> AnyMatcher<T?> {
+    return FunctionMatcher(function: {
+            if case .None = $0 { return false } else { return true }
+        }, describeTo: { _ in }).typeErased()
 }
