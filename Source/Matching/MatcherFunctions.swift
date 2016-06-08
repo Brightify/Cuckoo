@@ -111,3 +111,12 @@ public func any<T>(type: T.Type = T.self) -> AnyMatcher<T> {
 public func anyClosure<IN, OUT>() -> AnyMatcher<IN -> OUT> {
     return AnyMatcher()
 }
+
+/// Returns a matcher matching any optional closure.
+@warn_unused_result
+public func anyNillableClosure<IN, OUT>() -> AnyMatcher<(IN -> OUT)?> {
+    let compare: (IN -> OUT)? -> Bool = {
+        if case .None = $0 { return false } else { return true }
+    }
+    return FunctionMatcher<(IN -> OUT)?>(function: compare, describeTo: { _ in }).typeErased()
+}

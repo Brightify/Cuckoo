@@ -46,6 +46,9 @@ class CuckooAPITest: XCTestCase {
             when(mock.withNoescape("hello", closure: anyClosure())).then {
                 $1($0 + " world")
             }
+            when(mock.withOptionalClosure("hello", closure: anyNillableClosure())).then {
+                $1?($0 + " world")
+            }
         }
         
         XCTAssertEqual(mock.readOnlyProperty, "properties!")
@@ -66,6 +69,13 @@ class CuckooAPITest: XCTestCase {
         }
         XCTAssertEqual(helloWorld, "hello world")
         */
+        
+        var helloWorld: String = ""
+        mock.withOptionalClosure("hello") {
+            helloWorld = $0
+        }
+        XCTAssertEqual(helloWorld, "hello world")
+        
         verify(mock).readOnlyProperty.get
         verify(mock, times(2)).readWriteProperty.get
         verify(mock).readWriteProperty.set(400)
@@ -97,6 +107,9 @@ class CuckooAPITest: XCTestCase {
             when(mock.withNoescape("hello", closure: anyClosure())).then {
                 $1($0 + " world")
             }
+            when(mock.withOptionalClosure("hello", closure: anyNillableClosure())).then {
+                $1?($0 + " world")
+            }
         }
         
         XCTAssertEqual(mock.readOnlyProperty, "properties!")
@@ -117,6 +130,13 @@ class CuckooAPITest: XCTestCase {
         }
         XCTAssertEqual(helloWorld, "hello world")
         */
+        
+        var helloWorld: String = ""
+        mock.withOptionalClosure("hello") {
+            helloWorld = $0
+        }
+        XCTAssertEqual(helloWorld, "hello world")
+        
         verify(mock).readOnlyProperty.get
         verify(mock, times(2)).readWriteProperty.get
         verify(mock).readWriteProperty.set(400)
@@ -124,7 +144,5 @@ class CuckooAPITest: XCTestCase {
         verify(mock).countCharacters(eq("hello"))
         verify(mock).withReturn()
         verify(mock, never()).withThrows()
-        
     }
-        
 }

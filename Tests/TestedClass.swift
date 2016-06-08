@@ -42,4 +42,8 @@ class TestedClass {
     func withNoescape(a: String, @noescape closure: String -> Void) {
         closure(a)
     }
+    
+    func withOptionalClosure(a: String, closure: (String -> Void)?) {
+        closure?(a)
+    }
 }
