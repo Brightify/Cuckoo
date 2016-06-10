@@ -28,6 +28,9 @@ class CuckooAPITest: XCTestCase {
             when(mock.optionalProperty.set(anyInt())).then { _ in
                 when(mock.optionalProperty.get).thenReturn(10)
             }
+            when(mock.optionalProperty.set(eq(1))).then { _ in
+                when(mock.optionalProperty.get).thenReturn(1)
+            }
             
             when(mock.noParameter()).thenReturn()
             when(mock.countCharacters("hello")).thenReturn(1000)
@@ -50,8 +53,10 @@ class CuckooAPITest: XCTestCase {
         
         mock.optionalProperty = nil
         XCTAssertNil(mock.optionalProperty)
-        mock.optionalProperty = 1
+        mock.optionalProperty = 5
         XCTAssertEqual(mock.optionalProperty, 10)
+        mock.optionalProperty = 1
+        XCTAssertEqual(mock.optionalProperty, 1)
         
         mock.noParameter()
         
@@ -102,6 +107,9 @@ class CuckooAPITest: XCTestCase {
             when(mock.optionalProperty.set(anyInt())).then { _ in
                 when(mock.optionalProperty.get).thenReturn(10)
             }
+            when(mock.optionalProperty.set(eq(1))).then { _ in
+                when(mock.optionalProperty.get).thenReturn(1)
+            }
             
             when(mock.noParameter()).thenReturn()
             when(mock.countCharacters("hello")).thenReturn(1000)
@@ -124,8 +132,10 @@ class CuckooAPITest: XCTestCase {
         
         mock.optionalProperty = nil
         XCTAssertNil(mock.optionalProperty)
-        mock.optionalProperty = 1
+        mock.optionalProperty = 5
         XCTAssertEqual(mock.optionalProperty, 10)
+        mock.optionalProperty = 1
+        XCTAssertEqual(mock.optionalProperty, 1)
         
         mock.noParameter()
         
