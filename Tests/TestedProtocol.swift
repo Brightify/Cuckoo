@@ -21,7 +21,9 @@ protocol TestedProtocol {
     
     func withThrows() throws
     
-    func withClosure(closure: String -> Int) -> Int
+    func withClosure(closure: String -> Int)
+    
+    func withClosureReturningInt(closure: String -> Int) -> Int
     
     func withMultipleParameters(a: String, b: Int, c: Float)
     

@@ -37,7 +37,10 @@ class CuckooAPITest: XCTestCase {
             when(mock.withReturn()).thenReturn("hello world!")
             when(mock.withThrows()).thenThrow(TestError.Unknown)
             
-            when(mock.withClosure(anyClosure())).thenReturn(1000)
+            when(mock.withClosure(anyClosure())).then {
+                $0("hello world")
+            }
+            when(mock.withClosureReturningInt(anyClosure())).thenReturn(1000)
             when(mock.withNoescape("hello", closure: anyClosure())).then {
                 $1($0 + " world")
             }
@@ -64,17 +67,24 @@ class CuckooAPITest: XCTestCase {
         
         XCTAssertEqual(mock.withReturn(), "hello world!")
         
-        XCTAssertEqual(mock.withClosure { _ in 10 }, 1000)
+        XCTAssertEqual(mock.withClosureReturningInt { _ in 10 }, 1000)
+        
+        var helloWorld: String = ""
+        mock.withClosure {
+            helloWorld = $0
+            return 10
+        }
+        XCTAssertEqual(helloWorld, "hello world")
         
         // Calling @noescape closure is not currently supported
         /*var helloWorld: String = ""
-        mock.withNoescape("hello") {
-            helloWorld = $0
-        }
-        XCTAssertEqual(helloWorld, "hello world")
-        */
+         mock.withNoescape("hello") {
+         helloWorld = $0
+         }
+         XCTAssertEqual(helloWorld, "hello world")
+         */
         
-        var helloWorld: String = ""
+        helloWorld = ""
         mock.withOptionalClosure("hello") {
             helloWorld = $0
         }
@@ -88,7 +98,7 @@ class CuckooAPITest: XCTestCase {
         verify(mock).countCharacters(eq("hello"))
         verify(mock).withReturn()
         verify(mock, never()).withThrows()
-        verify(mock).withClosure(anyClosure())
+        verify(mock).withClosureReturningInt(anyClosure())
         verify(mock).withOptionalClosure("hello", closure: anyClosure())
     }
     
@@ -116,7 +126,10 @@ class CuckooAPITest: XCTestCase {
             when(mock.withReturn()).thenReturn("hello world!")
             when(mock.withThrows()).thenThrow(TestError.Unknown)
             
-            when(mock.withClosure(anyClosure())).thenReturn(1000)
+            when(mock.withClosure(anyClosure())).then {
+                $0("hello world")
+            }
+            when(mock.withClosureReturningInt(anyClosure())).thenReturn(1000)
             when(mock.withNoescape("hello", closure: anyClosure())).then {
                 $1($0 + " world")
             }
@@ -143,7 +156,14 @@ class CuckooAPITest: XCTestCase {
         
         XCTAssertEqual(mock.withReturn(), "hello world!")
         
-        XCTAssertEqual(mock.withClosure { _ in 10 }, 1000)
+        XCTAssertEqual(mock.withClosureReturningInt { _ in 10 }, 1000)
+        
+        var helloWorld: String = ""
+        mock.withClosure {
+            helloWorld = $0
+            return 10
+        }
+        XCTAssertEqual(helloWorld, "hello world")
         
         // Calling @noescape closure is not currently supported
         /*var helloWorld: String = ""
@@ -153,7 +173,7 @@ class CuckooAPITest: XCTestCase {
         XCTAssertEqual(helloWorld, "hello world")
         */
         
-        var helloWorld: String = ""
+        helloWorld = ""
         mock.withOptionalClosure("hello") {
             helloWorld = $0
         }
@@ -166,7 +186,7 @@ class CuckooAPITest: XCTestCase {
         verify(mock).countCharacters(eq("hello"))
         verify(mock).withReturn()
         verify(mock, never()).withThrows()
-        verify(mock).withClosure(anyClosure())
+        verify(mock).withClosureReturningInt(anyClosure())
         verify(mock).withOptionalClosure("hello", closure: anyClosure())
     }
     

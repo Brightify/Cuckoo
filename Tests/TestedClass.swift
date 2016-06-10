@@ -33,7 +33,11 @@ class TestedClass {
         
     }
     
-    func withClosure(closure: String -> Int) -> Int {
+    func withClosure(closure: String -> Int) {
+        closure("hello")
+    }
+    
+    func withClosureReturningInt(closure: String -> Int) -> Int {
         return closure("hello")
     }
     
