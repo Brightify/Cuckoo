@@ -43,27 +43,6 @@ pod "Cuckoo"
 And add the following `Run script` build phase to your test target's `Build Phases`:
 
 ```
-# This script assumes you have home brew installed; see http://brew.sh/
-
-# Find the installed Cuckoo version
-CUCKOO_VERSION=$(grep '\- Cuckoo' "${PROJECT_DIR}/Podfile.lock" | grep -o '[0-9]\{1,\}\.[0-9]\{1,\}\.[0-9]\{1,\}')
-
-# Ignore Xcode's environment
-alias run="env -i PATH=${PATH}, HOME=${HOME}"
-
-cuckoo runtime --check $CUCKOO_VERSION
-cuckooReturn=$?
-
-if [ $cuckooReturn == 1 ]; then
-# If cuckoo generator already installed, update local brew repo and upgrade to latest Cuckoo generator
-run brew update
-run brew upgrade SwiftKit/cuckoo/cuckoo
-
-elif [ $cuckooReturn == 127 ]; then
-# Else if cuckoo generator not installed, install it
-run brew install SwiftKit/cuckoo/cuckoo
-fi
-
 # Define output file; change "${PROJECT_NAME}Tests" to your test's root source folder, if it's not the default name
 OUTPUT_FILE="./${PROJECT_NAME}Tests/GeneratedMocks.swift"
 echo "Generated Mocks File = ${OUTPUT_FILE}"
@@ -73,7 +52,7 @@ INPUT_DIR="./${PROJECT_NAME}"
 echo "Mocks Input Directory = ${INPUT_DIR}"
 
 # Generate mock files; include as many input files as you'd like to create mocks for
-cuckoo generate --runtime $CUCKOO_VERSION --testable ${PROJECT_NAME} \
+Pods/Cuckoo/run generate --testable ${PROJECT_NAME} \
 --output ${OUTPUT_FILE} \
 ${INPUT_DIR}/FileName1.swift \
 ${INPUT_DIR}/FileName2.swift \
