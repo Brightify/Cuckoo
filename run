@@ -14,7 +14,7 @@ if [ ! -e $FILE_PATH ]; then
 	cd CuckooGenerator
 	git checkout $VERSION
 	git submodule update --init --recursive
-	env -i xcodebuild -project 'CuckooGenerator.xcodeproj' -scheme 'CuckooGenerator' -configuration 'Release' CONFIGURATION_BUILD_DIR=$(pwd)/.. clean build
+	env -i PATH=${PATH}, HOME=${HOME} xcodebuild -project 'CuckooGenerator.xcodeproj' -scheme 'CuckooGenerator' -configuration 'Release' CONFIGURATION_BUILD_DIR=$(pwd)/.. clean build
 	cd ../..
 	mv Build/cuckoo.app $FILE_NAME
 	rm -rf Build

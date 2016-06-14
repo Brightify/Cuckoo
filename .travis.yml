@@ -5,7 +5,7 @@ xcode_scheme: Cuckoo
 xcode_sdk: macosx
 
 script:
-    - travis_wait xctool -project Cuckoo.xcodeproj -scheme Cuckoo -sdk macosx build test CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+    - travis_wait xctool -project Cuckoo.xcodeproj -scheme Cuckoo -sdk macosx build test
 
 after_script:
     - sleep 20
