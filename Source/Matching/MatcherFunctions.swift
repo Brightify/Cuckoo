@@ -146,7 +146,7 @@ public func equalTo<T: AnyObject>(value: T?) -> AnyMatcher<T?> {
 @warn_unused_result
 public func equalTo<T>(value: T?, equalWhen equalityFunction: (T?, T?) -> Bool) -> AnyMatcher<T?> {
     return FunctionMatcher(original: value, function: equalityFunction) {
-        $0.append($0)
+        $0.append(text: "to be equal to ").append(value: value).append(character: " ")
     }.typeErased()
 }
 
