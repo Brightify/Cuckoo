@@ -343,13 +343,14 @@
 			files = (
 			);
 			inputPaths = (
+				"$(SRCROOT)/Tests/TestedProtocol.swift",
 			);
 			name = "Generate mocks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./run generate --output \"$PROJECT_DIR/Tests/GeneratedMocks.swift\" \"$PROJECT_DIR/Tests/TestedProtocol.swift\" \"$PROJECT_DIR/Tests/TestedClass.swift\"";
+			shellScript = "./run generate --output \"$PROJECT_DIR/Tests/GeneratedMocks.swift\" \"$PROJECT_DIR/Tests/TestedClass.swift\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
