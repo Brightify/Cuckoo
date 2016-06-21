@@ -10,7 +10,7 @@
 
 ## Introduction
 
-Cuckoo was created due to lack of a proper Swift mocking framework. We built the DSL to be very similar to Mockito, so anyone using it in Java/Android can immediately pick it up and use it.
+Cuckoo was created due to lack of a proper Swift mocking framework. We built the DSL to be very similar to [Mockito](http://mockito.org/), so anyone using it in Java/Android can immediately pick it up and use it.
 
 To have a chat, [join our Slack team](http://swiftkit.tmspark.com)!
 
@@ -67,7 +67,7 @@ ${INPUT_DIR}/FileName3.swift
 Input files can be also specified directly in `Run script` in `Input Files` form.
 
 ### Carthage
-To use Cuckoo with Carthage add in your Cartfile this line:
+To use Cuckoo with [Carthage](https://github.com/Carthage/Carthage) add in your Cartfile this line:
 ```
   github "SwiftKit/Cuckoo"
 ```
@@ -81,75 +81,147 @@ with
 Carthage/Checkouts/Cuckoo/run
 ```
 
-Also don`t forget to add the Framework into your project.
+Also don't forget to add the Framework into your project.
 
 ## Usage
 
-For the example, lets say we generate the mock for the following protocol:
+Usage of Cuckoo is similar to [Mockito](http://mockito.org/) and [Hamcrest](http://hamcrest.org/). But there are some differences and limitations caused by generating the mocks and Swift language itself. List of all supported features can be found [here](https://github.com/SwiftKit/CuckooGenerator). You can find complete example in [tests](Tests) concretely in [CuckooAPITest](Tests/CuckooAPITest).
+
+### Mock initialization
+
+Mocks can be created with parameterless constructor. If you want to spy on object instead, pass it as `spyOn` parameter. Name of mock class always corresponds to name of the mocked class/protocol with 'Mock' prefix. For example mock of protocol `Greeter` has a name `MockGreeter`.  
 
 ```Swift
-protocol Greeter {
-    func greet()
+let mock = MockGreeter()
+let spy = MockGreeter(spyOn: aRealInstanceOfGreeter)
+```
 
-    func greetWithMessage(message: String)
+### Stubbing
 
-    func messageForName(name: String) -> String
+Stubbing can be done by calling methods as parameter of `when` function. The stub call must be done on special stubbing object. You can get a reference to it with `stub` function. This function takes an instance of mock which you want to stub and a closure in which you can do the stubbing. Parameter of this closure is the stubbing object.
+
+Note: It is currently possible for the subbing object to escape from the closure. You can still use it to stub calls but it is not recommended practice and behavior of this may change in the future.
+
+After calling the `when` function you can specify what to do next with following methods:
+
+```Swift
+/// Invoke `implementation` when invoked.
+then(implementation: IN throws -> OUT)
+
+/// Return `output` when invoked.
+thenReturn(output: OUT)
+
+/// Throw `error` when invoked.
+thenThrow(error: ErrorType)
+```
+
+The stubbing of method can look like this:
+
+```Swift
+stub(mock) { stub in
+  when(stub.greetWithMessage("Hello world")).then { message in
+      print(message)
+  }
 }
 ```
 
-Then the generated mock will be named `MockGreeter`. Let's use it!
+And for property:
 
 ```Swift
-// Create a mock instance
-let mock = MockGreeter()
-
-// Create a spy instance
-let spy = MockGreeter(spyOn: aRealInstanceOfGreeter)
-
-// Start
-stub(mock) { mock in
-    // Allows calling the `greet` method, making it a `nop`.
-    when(mock.greet()).thenReturn()
-
-    // Allows calling the `greetWithMessage` with "Hello world".
-    when(mock.greetWithMessage("Hello world")).then { message in
-        print(message)
-    }
-
-    // When calling method `messageForName` with any string, we make it return "Still the same" value.
-    when(mock.messageForName(anyString())).thenReturn("Still the same")
-
-    // Lets override the previous statement. Now calling the method with "Swift", it will return "Awesome!"
-    // This does not change the behavior for input other than the "Swift".
-    // The stubbing works in layers, the later defined is used.
-    when(mock.messageForName("Swift")).thenReturn("Awesome!")
+stub(mock) { stub in
+  when(stub.readWriteProperty.get).thenReturn(10)
+  when(stub.readWriteProperty.set(anyInt())).then {
+      print($0)
+  }
 }
+```
 
-// Now it would be the time to use the mock, however for the sake of this example, we will only do some simple calls.
+### Usage in real code
 
-mock.greet() // This will work
+After previous steps the stubbed method can be called. It is up to you to inject this mock into your production code.
 
-mock.greetWithMessage("Hello world") // This will work as well and will print the message "Hello world" to console
+Note: Call on mock which wasn't stubbed will cause error. In case of spy, the real code will execute.
 
-mock.greetWithMessage("Well...") // This will fail, because it is was not stubbed
+### Verification
 
-mock.messageForName("Anything in this world") // This will work and will return "Still the same"
-mock.messageForName("Another thing in this world") // This will work and will return "Still the same" again
+For verifying calls there is function `verify`. Its first parameter is mocked object, optional second parameter is call matcher. Then the call with its parameters follows.
 
-mock.messageForName("Swift") // Will work and will return "Awesome!"
-
-
-// Last but not least, let's verify the mock was used as expected. All of these will succeed.
-verify(mock).greet()
-
-verify(mock, times(2)).greetWithMessage(anyString())
+```Swift
 verify(mock).greetWithMessage("Hello world")
-verify(mock).greetWithMessage("Well...")
-verify(mock, never()).greetWithMessage("Was not called.")
+```
 
-verify(mock, times(3)).messageForName(anyString())
-verify(mock).messageForName("Swift")
+Verification of properties is similar to their stubbing.
 
+### Parameter matchers
+
+As parameters of methods in stubbing and verification you can use either basic value types or parameter matchers.
+
+Value types which can be used directly are:
+
+* `Bool`
+* `Int`
+* `String`
+* `Float`
+* `Double`
+* `Character`
+
+And this is list of available parameter matchers:
+
+```Swift
+/// All equalTo matchers have shortcut eq.
+
+/// Returns an equality matcher.
+equalTo<T: Equatable>(value: T)
+
+/// Returns an identity matcher.
+equalTo<T: AnyObject>(value: T)
+
+/// Returns a matcher using the supplied function.
+equalTo<T>(value: T, equalWhen equalityFunction: (T, T) -> Bool)
+
+/// Returns a matcher matching any Int value.
+anyInt()
+
+/// Returns a matcher matching any String value.
+anyString()
+
+/// Returns a matcher matching any T value or nil.
+any<T>(type: T.Type = T.self)
+
+/// Returns a matcher matching any closure.
+anyClosure()
+
+/// Returns a matcher matching any non nil value.
+notNil()
+```
+
+Matching of nil can be achieved with `eq(nil)`.
+
+Both parameter matchers and call matchers can be chained with methods `or` and `and` like so:
+
+```Swift
+verify(mock).greetWithMessage(eq("Hello world").or("Hallo Welt"))
+```
+
+### Call matchers
+
+As second parameter of `verify` function you can use call matcher, which specify how many times should be the call made. Supported call matchers are:
+
+```Swift
+/// Returns a matcher ensuring a call was made `count` times.
+times(count: Int)
+
+/// Returns a matcher ensuring no call was made.
+never()
+
+/// Returns a matcher ensuring at least one call was made.
+atLeastOnce()
+
+/// Returns a matcher ensuring call was made at least `count` times.
+atLeast(count: Int)
+
+/// Returns a matcher ensuring call was made at most `count` times.
+atMost(count: Int)
 ```
 
 ## Author
@@ -163,4 +235,4 @@ Tadeas Kriz, tadeas@brightify.org
 
 ## License
 
-Cuckoo is available under the MIT license. See the LICENSE file for more info.
+Cuckoo is available under the [MIT License](LICENSE).
