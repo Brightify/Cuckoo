@@ -3,6 +3,7 @@
 
 [![CI Status](http://img.shields.io/travis/SwiftKit/Cuckoo.svg?style=flat)](https://travis-ci.org/SwiftKit/Cuckoo)
 [![Version](https://img.shields.io/cocoapods/v/Cuckoo.svg?style=flat)](http://cocoapods.org/pods/Cuckoo)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![License](https://img.shields.io/cocoapods/l/Cuckoo.svg?style=flat)](http://cocoapods.org/pods/Cuckoo)
 [![Platform](https://img.shields.io/cocoapods/p/Cuckoo.svg?style=flat)](http://cocoapods.org/pods/Cuckoo)
 [![Slack Status](http://swiftkit.tmspark.com/badge.svg)](http://swiftkit.tmspark.com)
@@ -33,16 +34,17 @@ We plan to add a **watchOS 2+** support soon.
 
 ## Installation
 
+### CocoaPods
 Cuckoo runtime is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your test target in your Podfile:
 
-```
+```Ruby
 pod "Cuckoo"
 ```
 
 And add the following `Run script` build phase to your test target's `Build Phases`:
 
-```
+```Bash
 # Define output file; change "${PROJECT_NAME}Tests" to your test's root source folder, if it's not the default name
 OUTPUT_FILE="./${PROJECT_NAME}Tests/GeneratedMocks.swift"
 echo "Generated Mocks File = ${OUTPUT_FILE}"
@@ -62,6 +64,25 @@ ${INPUT_DIR}/FileName3.swift
 # After running once, locate `GeneratedMocks.swift` and drag it into your Xcode test target group
 ```
 
+Input files can be also specified directly in `Run script` in `Input Files` form.
+
+### Carthage
+To use Cuckoo with Carthage add in your Cartfile this line:
+```
+  github "SwiftKit/Cuckoo"
+```
+
+Then use the `Run script` from above and replace
+```Bash
+${PODS_ROOT}/Cuckoo/run
+```
+with
+```Bash
+Carthage/Checkouts/Cuckoo/run
+```
+
+Also don`t forget to add the Framework into your project.
+
 ## Usage
 
 For the example, lets say we generate the mock for the following protocol:
@@ -69,14 +90,14 @@ For the example, lets say we generate the mock for the following protocol:
 ```Swift
 protocol Greeter {
     func greet()
-    
+
     func greetWithMessage(message: String)
-    
+
     func messageForName(name: String) -> String
 }
 ```
 
-Then the generated mock will be named `MockGreeter`. Let's use it! 
+Then the generated mock will be named `MockGreeter`. Let's use it!
 
 ```Swift
 // Create a mock instance
@@ -89,15 +110,15 @@ let spy = MockGreeter(spyOn: aRealInstanceOfGreeter)
 stub(mock) { mock in
     // Allows calling the `greet` method, making it a `nop`.
     when(mock.greet()).thenReturn()
-    
-    // Allows calling the `greetWithMessage` with "Hello world". 
+
+    // Allows calling the `greetWithMessage` with "Hello world".
     when(mock.greetWithMessage("Hello world")).then { message in
         print(message)
     }
-    
+
     // When calling method `messageForName` with any string, we make it return "Still the same" value.
     when(mock.messageForName(anyString())).thenReturn("Still the same")
-    
+
     // Lets override the previous statement. Now calling the method with "Swift", it will return "Awesome!"
     // This does not change the behavior for input other than the "Swift".
     // The stubbing works in layers, the later defined is used.
@@ -137,7 +158,7 @@ Tadeas Kriz, tadeas@brightify.org
 
 ## Inspiration
 
-* [Mockito](http://mockito.org/) - Mocking DSL 
+* [Mockito](http://mockito.org/) - Mocking DSL
 * [Hamcrest](http://hamcrest.org/) - Matcher API
 
 ## License
