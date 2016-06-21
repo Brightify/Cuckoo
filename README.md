@@ -85,7 +85,7 @@ Also don't forget to add the Framework into your project.
 
 ## Usage
 
-Usage of Cuckoo is similar to [Mockito](http://mockito.org/) and [Hamcrest](http://hamcrest.org/). But there are some differences and limitations caused by generating the mocks and Swift language itself. List of all supported features can be found [here](https://github.com/SwiftKit/CuckooGenerator). You can find complete example in [tests](Tests) concretely in [CuckooAPITest](Tests/CuckooAPITest).
+Usage of Cuckoo is similar to [Mockito](http://mockito.org/) and [Hamcrest](http://hamcrest.org/). But there are some differences and limitations caused by generating the mocks and Swift language itself. List of all supported features can be found [here](https://github.com/SwiftKit/CuckooGenerator). You can find complete example in [tests](Tests) concretely in [CuckooAPITest](Tests/CuckooAPITest.swift).
 
 ### Mock initialization
 
