@@ -20,7 +20,21 @@ Cuckoo has two parts. One is the [runtime](https://github.com/SwiftKit/Cuckoo) a
 
 Unfortunately Swift does not have a proper reflection, so we decided to use a compile-time generator to go through files you specify and generate supporting structs/classes that will be used by the runtime in your test target.
 
-The generated files contain enough information to give you the right amount of power.
+The generated files contain enough information to give you the right amount of power. They work based on inheritance and protocol adoption. This means that only overridable things can be mocked. We currently support all features which fulfill this rule except for things listed in TODO. Due to the complexity of Swift it is not easy to check for all edge cases so if you find some unexpected behavior please report it in issues.  
+
+## TODO
+
+We are still missing support for some important features like:
+* static properties
+* static methods
+* generics
+
+## What will not be supported
+
+Due to the limitations mentioned above, basically all things which don't allow overriding cannot be supported. This includes:
+* `struct` - workaround is to use a common protocol
+* everything with `final` or `private` modifier
+* global constants and functions
 
 ## Requirements
 
@@ -32,9 +46,11 @@ Cuckoo works on the following platforms:
 
 We plan to add a **watchOS 2+** support soon.
 
-## Installation
+## Cuckoo
 
-### CocoaPods
+### Installation
+
+#### CocoaPods
 Cuckoo runtime is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your test target in your Podfile:
 
@@ -66,7 +82,7 @@ ${INPUT_DIR}/FileName3.swift
 
 Input files can be also specified directly in `Run script` in `Input Files` form.
 
-### Carthage
+#### Carthage
 To use Cuckoo with [Carthage](https://github.com/Carthage/Carthage) add in your Cartfile this line:
 ```
   github "SwiftKit/Cuckoo"
@@ -83,11 +99,11 @@ Carthage/Checkouts/Cuckoo/run
 
 Also don't forget to add the Framework into your project.
 
-## Usage
+### Usage
 
 Usage of Cuckoo is similar to [Mockito](http://mockito.org/) and [Hamcrest](http://hamcrest.org/). But there are some differences and limitations caused by generating the mocks and Swift language itself. List of all supported features can be found [here](https://github.com/SwiftKit/CuckooGenerator). You can find complete example in [tests](Tests) concretely in [CuckooAPITest](Tests/CuckooAPITest.swift).
 
-### Mock initialization
+#### Mock initialization
 
 Mocks can be created with parameterless constructor. If you want to spy on object instead, pass it as `spyOn` parameter. Name of mock class always corresponds to name of the mocked class/protocol with 'Mock' prefix. For example mock of protocol `Greeter` has a name `MockGreeter`.  
 
@@ -96,7 +112,7 @@ let mock = MockGreeter()
 let spy = MockGreeter(spyOn: aRealInstanceOfGreeter)
 ```
 
-### Stubbing
+#### Stubbing
 
 Stubbing can be done by calling methods as parameter of `when` function. The stub call must be done on special stubbing object. You can get a reference to it with `stub` function. This function takes an instance of mock which you want to stub and a closure in which you can do the stubbing. Parameter of this closure is the stubbing object.
 
@@ -136,13 +152,13 @@ stub(mock) { stub in
 }
 ```
 
-### Usage in real code
+#### Usage in real code
 
 After previous steps the stubbed method can be called. It is up to you to inject this mock into your production code.
 
 Note: Call on mock which wasn't stubbed will cause error. In case of spy, the real code will execute.
 
-### Verification
+#### Verification
 
 For verifying calls there is function `verify`. Its first parameter is mocked object, optional second parameter is call matcher. Then the call with its parameters follows.
 
@@ -152,7 +168,7 @@ verify(mock).greetWithMessage("Hello world")
 
 Verification of properties is similar to their stubbing.
 
-### Parameter matchers
+#### Parameter matchers
 
 As parameters of methods in stubbing and verification you can use either basic value types or parameter matchers.
 
@@ -203,7 +219,7 @@ Both parameter matchers and call matchers can be chained with methods `or` and `
 verify(mock).greetWithMessage(eq("Hello world").or("Hallo Welt"))
 ```
 
-### Call matchers
+#### Call matchers
 
 As second parameter of `verify` function you can use call matcher, which specify how many times should be the call made. Supported call matchers are:
 
@@ -224,14 +240,82 @@ atLeast(count: Int)
 atMost(count: Int)
 ```
 
-## Author
+## Cuckoo generator
 
-Tadeas Kriz, tadeas@brightify.org
+### Installation
+
+For normal use you can skip this because [run script](https://github.com/SwiftKit/Cuckoo/blob/master/run) in Cuckoo downloads and builds correct version of the generator automatically.
+
+#### Homebrew
+
+Simply run `brew install cuckoo` and you are ready to go.
+
+#### Custom
+
+This is more complicated path. You need to clone this repository and build it yourself. You can look in the [run script](https://github.com/SwiftKit/Cuckoo/blob/master/run) for more inspiration.
+
+### Usage
+
+Generator can be called through a terminal. Each call consists of command, options and arguments. Options and arguments depends on used command. Options can have additional parameters. Names of all of them are case sensitive. The order goes like this:
+
+```Bash
+cuckoo command options arguments
+```
+
+#### `generate` command
+
+Generates mock files.
+
+This command accepts arguments, in this case list (separated by spaces) of files for which you want to generate mocks. Also more options can be used to adjust behavior, these are listed below.
+
+##### `--output` (string)
+
+Where to put the generated mocks.
+
+If a path to a directory is supplied, each input file will have a respective output file with mocks.
+
+If a path to a Swift file is supplied, all mocks will be in a single file.
+
+Default value is `GeneratedMocks.swift`.
+
+##### `--testable` (string)
+
+A comma separated list of frameworks that should be imported as @testable in the mock files.
+
+##### `--no-header`
+
+Do not generate file headers.
+
+##### `--no-timestamp`
+
+Do not generate timestamp.
+
+#### `version` command
+
+Prints the version of this generator.
+
+#### `help` command
+
+Display general or command-specific help.
+
+After the `help` you can write name of another command for displaying a command-specific help.
+
+## Authors
+
+* Tadeas Kriz, [tadeas@brightify.org](mailto:tadeas@brightify.org)
+* Filip Dolník, [filip@brightify.org](mailto:filip@brightify.org)
 
 ## Inspiration
 
 * [Mockito](http://mockito.org/) - Mocking DSL
 * [Hamcrest](http://hamcrest.org/) - Matcher API
+
+## Used libraries
+
+* [Commandant](https://github.com/Carthage/Commandant)
+* [Result](https://github.com/antitypical/Result)
+* [FileKit](https://github.com/nvzqz/FileKit)
+* [SourceKitten](https://github.com/jpsim/SourceKitten)
 
 ## License
 
