@@ -7,7 +7,7 @@
 //
 
 public struct ThenReturnValue<IN, OUT> {
-    let setOutput: (Any -> ReturnValueOrError) -> Void
+    let setOutput: (Any -> OnStubCall) -> Void
     
     /// Invoke `implementation` when invoked.
     public func then(implementation: IN -> OUT) {
@@ -20,5 +20,10 @@ public struct ThenReturnValue<IN, OUT> {
     /// Return `output` when invoked.
     public func thenReturn(output: OUT) {
         setOutput { _ in .ReturnValue(output) }
+    }
+    
+    /// Invoke real implementation when invoked.
+    public func thenCallRealImplementation() {
+        setOutput { _ in .CallRealImplementation }
     }
 }

@@ -9,5 +9,5 @@
 public struct Stub {
     let name: String
     let parameterMatchers: [AnyMatcher<Any>]
-    let output: Any -> ReturnValueOrError
+    let output: Any -> OnStubCall
 }

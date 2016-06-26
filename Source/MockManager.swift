@@ -16,33 +16,35 @@ public class MockManager<STUBBING: StubbingProxy, VERIFICATION: VerificationProx
         
     }
 
-    public func getter<T>(property: String, original: (Void -> T)? = nil) -> (Void -> T) {
+    public func getter<T>(property: String, original: (Void -> T)? = nil) -> T {
         return call(getterName(property), parameters: Void(), original: original)
     }
     
-    public func setter<T>(property: String, value: T, original: (T -> Void)? = nil) -> (T -> Void) {
+    public func setter<T>(property: String, value: T, original: (T -> Void)? = nil) {
         return call(setterName(property), parameters: value, original: original)
     }
     
-    public func call<IN, OUT>(method: String, parameters: IN, original: (IN -> OUT)? = nil) -> IN -> OUT {
-        return { try! self.callThrows(method, parameters: parameters, original: original)($0) }
+    public func call<IN, OUT>(method: String, parameters: IN, original: (IN -> OUT)? = nil) -> OUT {
+        return try! self.callThrows(method, parameters: parameters, original: original)
     }
     
-    public func callThrows<IN, OUT>(method: String, parameters: IN, original: (IN throws -> OUT)? = nil) -> IN throws -> OUT {
+    public func callThrows<IN, OUT>(method: String, parameters: IN, original: (IN throws -> OUT)? = nil) throws -> OUT {
         let stubCall = StubCall(method: method, parameters: parameters)
         stubCalls.append(stubCall)
             
         if let stub = (stubs[method]?.filter { $0.parameterMatchers.reduce(true) { $0 && $1.matches(parameters) } }.first) {
-            return {
-                switch stub.output($0) {
-                case .ReturnValue(let value):
-                    return value as! OUT
-                case .Error(let error):
-                    throw error
-                }
+            switch stub.output(parameters) {
+            case .ReturnValue(let value):
+                return value as! OUT
+            case .ThrowError(let error):
+                throw error
+            case .CallRealImplementation:
+                break
             }
-        } else if let original = original {
-            return { try original($0) }
+        }
+        
+        if let original = original {
+            return try original(parameters)
         } else {
             let message = "No stub for method `\(method)` using parameters \(parameters) and no original implementation was provided."
             XCTFail(message)
