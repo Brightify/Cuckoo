@@ -6,8 +6,13 @@
 //  Copyright © 2016 Brightify. All rights reserved.
 //
 
-public struct Stub {
+public class Stub {
     let name: String
     let parameterMatchers: [AnyMatcher<Any>]
-    let output: Any -> OnStubCall
+    var outputs: [Any -> ReturnValueOrError] = []
+    
+    init(name: String, parameterMatchers: [AnyMatcher<Any>]) {
+        self.name = name
+        self.parameterMatchers = parameterMatchers
+    }
 }

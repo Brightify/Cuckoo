@@ -26,13 +26,14 @@ class CuckooAPITest: XCTestCase {
                 when(mock.optionalProperty.get).thenReturn(nil)
             }
             when(mock.optionalProperty.set(anyInt())).then { _ in
+                
                 when(mock.optionalProperty.get).thenReturn(10)
             }
             when(mock.optionalProperty.set(eq(1))).then { _ in
                 when(mock.optionalProperty.get).thenReturn(1)
             }
             
-            when(mock.noParameter()).thenReturn()
+            when(mock.noParameter()).thenReturn(Void())
             when(mock.countCharacters("hello")).thenReturn(1000)
             when(mock.withReturn()).thenReturn("hello world!")
             when(mock.withThrows()).thenThrow(TestError.Unknown)
@@ -121,7 +122,7 @@ class CuckooAPITest: XCTestCase {
                 when(mock.optionalProperty.get).thenReturn(1)
             }
             
-            when(mock.noParameter()).thenReturn()
+            when(mock.noParameter()).thenReturn(Void())
             when(mock.countCharacters("hello")).thenReturn(1000)
             when(mock.withReturn()).thenReturn("hello world!")
             when(mock.withThrows()).thenThrow(TestError.Unknown)
@@ -230,6 +231,28 @@ class CuckooAPITest: XCTestCase {
         verify(mock, never()).countCharacters("a")
         XCTAssertEqual(mock.countCharacters("a"), 10)
         verify(mock).countCharacters("a")
+    }
+    
+    func testThenCallRealImplementation() {
+        let mock = MockTestedClass(spyOn: TestedClass())
+        stub(mock) { mock in
+            when(mock.countCharacters("a")).thenReturn(10)
+            when(mock.countCharacters(anyString())).thenCallRealImplementation()
+        }
+        
+        XCTAssertEqual(mock.countCharacters("a"), 1)
+    }
+    
+    func testMultipleStubsInRow() {
+        let mock = MockTestedClass()
+        stub(mock) { mock in
+            when(mock.readOnlyProperty.get).thenReturn("a").thenReturn("b", "c")
+        }
+
+        XCTAssertEqual(mock.readOnlyProperty, "a")
+        XCTAssertEqual(mock.readOnlyProperty, "b")
+        XCTAssertEqual(mock.readOnlyProperty, "c")
+        XCTAssertEqual(mock.readOnlyProperty, "c")
     }
     
     private enum TestError: ErrorType {

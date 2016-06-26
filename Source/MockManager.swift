@@ -32,17 +32,27 @@ public class MockManager<STUBBING: StubbingProxy, VERIFICATION: VerificationProx
         let stubCall = StubCall(method: method, parameters: parameters)
         stubCalls.append(stubCall)
             
-        if let stub = (stubs[method]?.filter { $0.parameterMatchers.reduce(true) { $0 && $1.matches(parameters) } }.first) {
-            switch stub.output(parameters) {
-            case .ReturnValue(let value):
-                return value as! OUT
-            case .ThrowError(let error):
-                throw error
-            case .CallRealImplementation:
-                break
+        if let stub = stubs[method]?.filter ({ $0.parameterMatchers.reduce(true) { $0 && $1.matches(parameters) } }).first {
+            if let output = stub.outputs.first {
+                if stub.outputs.count > 1 {
+                    // Bug in Swift, this expression resolves as uncalled function
+                    _ = stub.outputs.removeFirst()
+                }
+                switch output(parameters) {
+                case .ReturnValue(let value):
+                    return value as! OUT
+                case .Error(let error):
+                    throw error
+                case .CallRealImplementation:
+                    break
+                }
+            } else {
+                let message = "Stubbing of method `\(method)` using parameters \(parameters) wasn't finished (missing thenReturn())."
+                XCTFail(message)
+                fatalError(message)
             }
         }
-        
+
         if let original = original {
             return try original(parameters)
         } else {

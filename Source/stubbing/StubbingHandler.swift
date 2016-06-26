@@ -33,9 +33,9 @@ public struct StubbingHandler {
         return ToBeStubbedThrowingFunction(handler: self, name: method, parameterMatchers: parameterMatchers)
     }
     
-    func createStubReturningValue<IN>(method: String, parameterMatchers: [AnyMatcher<IN>], output: Any -> OnStubCall) {
-        let stub = Stub(name: method, parameterMatchers: parameterMatchers.map(AnyMatcher.init), output: output)
-        
-        self.createNewStub(stub)
+    func createStub<IN>(method: String, parameterMatchers: [AnyMatcher<IN>]) -> Stub {
+        let stub = Stub(name: method, parameterMatchers: parameterMatchers.map(AnyMatcher.init))
+        createNewStub(stub)
+        return stub
     }
 }

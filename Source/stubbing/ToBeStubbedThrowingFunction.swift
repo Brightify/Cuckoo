@@ -11,8 +11,4 @@ public struct ToBeStubbedThrowingFunction<IN, OUT> {
     
     let name: String
     let parameterMatchers: [AnyMatcher<IN>]
-    
-    func setOutput(output: Any -> OnStubCall) {
-        handler.createStubReturningValue(name, parameterMatchers: parameterMatchers, output: output)
-    }
 }

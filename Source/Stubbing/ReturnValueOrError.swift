@@ -1,13 +1,13 @@
 //
-//  OnStubCall.swift
+//  ReturnValueOrError.swift
 //  Cuckoo
 //
 //  Created by Filip Dolnik on 29.05.16.
 //  Copyright © 2016 Brightify. All rights reserved.
 //
 
-enum OnStubCall {
+enum ReturnValueOrError {
     case ReturnValue(Any)
-    case ThrowError(ErrorType)
+    case Error(ErrorType)
     case CallRealImplementation
 }
