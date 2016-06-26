@@ -7,7 +7,7 @@
 //
 
 public struct StubbingHandler {
-    let createNewStub: Stub -> ()
+    let registerStub: Stub -> ()
     
     public func stubProperty<T>(property: String) -> ToBeStubbedProperty<T> {
         return ToBeStubbedProperty(handler: self, name: property)
@@ -33,9 +33,9 @@ public struct StubbingHandler {
         return ToBeStubbedThrowingFunction(handler: self, name: method, parameterMatchers: parameterMatchers)
     }
     
-    func createStub<IN>(method: String, parameterMatchers: [AnyMatcher<IN>]) -> Stub {
-        let stub = Stub(name: method, parameterMatchers: parameterMatchers.map(AnyMatcher.init))
-        createNewStub(stub)
+    func createStub<IN, OUT>(method: String, parameterMatchers: [AnyMatcher<IN>]) -> ConcreteStub<IN, OUT> {
+        let stub = ConcreteStub<IN, OUT>(name: method, parameterMatchers: parameterMatchers)
+        registerStub(stub)
         return stub
     }
 }

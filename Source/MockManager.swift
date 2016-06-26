@@ -9,7 +9,7 @@
 import XCTest
 
 public class MockManager<STUBBING: StubbingProxy, VERIFICATION: VerificationProxy> {
-    private var stubs: [String: [Stub]] = [:]
+    private var stubs: [Stub] = []
     private var stubCalls: [StubCall] = []
     
     public init() {
@@ -31,17 +31,19 @@ public class MockManager<STUBBING: StubbingProxy, VERIFICATION: VerificationProx
     public func callThrows<IN, OUT>(method: String, parameters: IN, original: (IN throws -> OUT)? = nil) throws -> OUT {
         let stubCall = StubCall(method: method, parameters: parameters)
         stubCalls.append(stubCall)
-            
-        if let stub = stubs[method]?.filter ({ $0.parameterMatchers.reduce(true) { $0 && $1.matches(parameters) } }).first {
-            if let output = stub.outputs.first {
-                if stub.outputs.count > 1 {
+        
+        if let stub = (stubs.filter { $0.name == method }.flatMap { $0 as? ConcreteStub<IN, OUT> }.filter { $0.parameterMatchers.reduce(true) { $0 && $1.matches(parameters) } }.first) {
+            if let action = stub.actions.first {
+                if stub.actions.count > 1 {
                     // Bug in Swift, this expression resolves as uncalled function
-                    _ = stub.outputs.removeFirst()
+                    _ = stub.actions.removeFirst()
                 }
-                switch output(parameters) {
+                switch action {
+                case .CallImplementation(let implementation):
+                    return try implementation(parameters)
                 case .ReturnValue(let value):
-                    return value as! OUT
-                case .Error(let error):
+                    return value
+                case .ThrowError(let error):
                     throw error
                 case .CallRealImplementation:
                     break
@@ -64,11 +66,7 @@ public class MockManager<STUBBING: StubbingProxy, VERIFICATION: VerificationProx
     
     public func getStubbingProxy() -> STUBBING {
         let handler = StubbingHandler { stub in
-            if self.stubs[stub.name] == nil {
-                self.stubs[stub.name] = []
-            }
-            
-            self.stubs[stub.name]?.insert(stub, atIndex: 0)
+            self.stubs.insert(stub, atIndex: 0)
         }
         return STUBBING(handler: handler)
     }

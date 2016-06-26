@@ -6,12 +6,16 @@
 //  Copyright © 2016 Brightify. All rights reserved.
 //
 
-public class Stub {
-    let name: String
-    let parameterMatchers: [AnyMatcher<Any>]
-    var outputs: [Any -> ReturnValueOrError] = []
+public protocol Stub {
+    var name: String { get }
+}
+
+public class ConcreteStub<IN, OUT>: Stub {
+    public let name: String
+    let parameterMatchers: [AnyMatcher<IN>]
+    var actions: [StubAction<IN, OUT>] = []
     
-    init(name: String, parameterMatchers: [AnyMatcher<Any>]) {
+    init(name: String, parameterMatchers: [AnyMatcher<IN>]) {
         self.name = name
         self.parameterMatchers = parameterMatchers
     }
