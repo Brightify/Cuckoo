@@ -85,7 +85,7 @@ Input files can be also specified directly in `Run script` in `Input Files` form
 #### Carthage
 To use Cuckoo with [Carthage](https://github.com/Carthage/Carthage) add in your Cartfile this line:
 ```
-  github "SwiftKit/Cuckoo"
+github "SwiftKit/Cuckoo"
 ```
 
 Then use the `Run script` from above and replace
@@ -122,13 +122,16 @@ After calling the `when` function you can specify what to do next with following
 
 ```Swift
 /// Invoke `implementation` when invoked.
-then(implementation: IN throws -> OUT)
+then(implementation: IN throws -> OUT) -> ThenReturnValue
 
 /// Return `output` when invoked.
-thenReturn(output: OUT)
+thenReturn(output: OUT, _ outputs: OUT...) -> ThenReturnValue
 
 /// Throw `error` when invoked.
-thenThrow(error: ErrorType)
+thenThrow(error: ErrorType, _ outputs: OUT...) -> ThenReturnValue
+
+/// Invoke real implementation when invoked.
+thenCallRealImplementation() -> ThenReturnValue
 ```
 
 The stubbing of method can look like this:
@@ -151,6 +154,31 @@ stub(mock) { stub in
   }
 }
 ```
+
+It is possible to chain stubbing. This is useful if you need to set different behavior for multiple calls in order. The last behavior will last for all other calls. Syntax goes like this:
+
+```Swift
+when(stub.readWriteProperty.get).thenReturn(10).thenReturn(20)
+```
+
+which is equivalent to:
+
+```Swift
+when(stub.readWriteProperty.get).thenReturn(10, 20)
+```
+
+In both cases first call to `readWriteProperty` will return `10` and every other will return `20`.
+
+You can combine the stubbing method as you like.
+
+When looking for stub match Cuckoo gives the highest priority to last call of `when`. This means that calling `when` multiple times with the same function and matchers effectively overrides previous call. Also more general parameter matchers have to be used before specific ones.
+
+```Swift
+when(stub.countCharacters(anyString())).thenReturn(10)
+when(stub.countCharacters("a")).thenReturn(1)
+```
+
+In this example calling `countCharacters` with `a` will return `1`. If you reversed the order of stubbing then the output would be `10`.
 
 #### Usage in real code
 
