@@ -30,3 +30,24 @@ public func verify<M: Mock>(mock: M, file: StaticString = #file, line: UInt = #l
 public func verify<M: Mock>(mock: M, _ matcher: AnyMatcher<[StubCall]>, file: StaticString = #file, line: UInt = #line) -> M.Verification {
     return mock.manager.getVerificationProxy(matcher, sourceLocation: SourceLocation(file: file, line: line))
 }
+
+/// Clear all invocations and stubs of mocks.
+public func reset<M: Mock>(mocks: M...) {
+    mocks.forEach { mock in
+        mock.manager.reset()
+    }
+}
+
+/// Clear all stubs of mocks.
+public func clearStubs<M: Mock>(mocks: M...) {
+    mocks.forEach { mock in
+        mock.manager.clearStubs()
+    }
+}
+
+/// Clear all invocations of mocks.
+public func clearInvocations<M: Mock>(mocks: M...) {
+    mocks.forEach { mock in
+        mock.manager.clearInvocations()
+    }
+}

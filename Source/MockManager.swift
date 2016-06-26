@@ -79,4 +79,17 @@ public class MockManager<STUBBING: StubbingProxy, VERIFICATION: VerificationProx
 
         return VERIFICATION(handler: handler)
     }
+    
+    public func reset() {
+        clearStubs()
+        clearInvocations()
+    }
+    
+    public func clearStubs() {
+        stubs.removeAll()
+    }
+    
+    public func clearInvocations() {
+        stubCalls.removeAll()
+    }
 }

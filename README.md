@@ -240,6 +240,21 @@ atLeast(count: Int)
 atMost(count: Int)
 ```
 
+#### Resetting mocks
+
+Following functions are used to reset stubbing and/or invocations on mocks.
+
+```Swift
+/// Clear all invocations and stubs of mocks.
+reset<M: Mock>(mocks: M...)
+
+/// Clear all stubs of mocks.
+clearStubs<M: Mock>(mocks: M...)
+
+/// Clear all invocations of mocks.
+clearInvocations<M: Mock>(mocks: M...)
+```
+
 ## Cuckoo generator
 
 ### Installation

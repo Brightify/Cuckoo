@@ -190,6 +190,48 @@ class CuckooAPITest: XCTestCase {
         verify(mock).withOptionalClosure("hello", closure: anyClosure())
     }
     
+    func testReset() {
+        let mock = MockTestedClass(spyOn: TestedClass())
+        stub(mock) { mock in
+            when(mock.countCharacters(anyString())).thenReturn(10)
+        }
+        XCTAssertEqual(mock.countCharacters("a"), 10)
+        
+        reset(mock)
+        
+        verify(mock, never()).countCharacters("a")
+        XCTAssertEqual(mock.countCharacters("a"), 1)
+        verify(mock).countCharacters("a")
+    }
+    
+    func testClearStubs() {
+        let mock = MockTestedClass(spyOn: TestedClass())
+        stub(mock) { mock in
+            when(mock.countCharacters(anyString())).thenReturn(10)
+        }
+        XCTAssertEqual(mock.countCharacters("a"), 10)
+        
+        clearStubs(mock)
+        
+        verify(mock).countCharacters("a")
+        XCTAssertEqual(mock.countCharacters("a"), 1)
+        verify(mock, times(2)).countCharacters("a")
+    }
+    
+    func testClearInvocations() {
+        let mock = MockTestedClass(spyOn: TestedClass())
+        stub(mock) { mock in
+            when(mock.countCharacters(anyString())).thenReturn(10)
+        }
+        XCTAssertEqual(mock.countCharacters("a"), 10)
+        
+        clearInvocations(mock)
+        
+        verify(mock, never()).countCharacters("a")
+        XCTAssertEqual(mock.countCharacters("a"), 10)
+        verify(mock).countCharacters("a")
+    }
+    
     private enum TestError: ErrorType {
         case Unknown
     }
