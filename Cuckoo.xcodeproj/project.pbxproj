@@ -17,17 +17,23 @@
 		18F354A31D0747530053E119 /* StringDescriptionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F354A11D0745D20053E119 /* StringDescriptionTest.swift */; };
 		18F354A61D0749C90053E119 /* SelfDescribingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F354A41D0748C50053E119 /* SelfDescribingTest.swift */; };
 		18F354A91D074C4D0053E119 /* MatcherDescriptionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F354A71D074C4C0053E119 /* MatcherDescriptionsTest.swift */; };
-		DC5600EC1CFAD474001F339D /* StubThrowingFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5600EA1CFAD474001F339D /* StubThrowingFunction.swift */; };
+		DC4094E71D2114D6006FB137 /* ToBeStubbedFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4094E51D2114D6006FB137 /* ToBeStubbedFunction.swift */; };
+		DC4094E81D2114D6006FB137 /* ToBeStubbedThrowingFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4094E61D2114D6006FB137 /* ToBeStubbedThrowingFunction.swift */; };
+		DC4094EA1D2114EC006FB137 /* BaseToBeStubbedFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4094E91D2114EC006FB137 /* BaseToBeStubbedFunction.swift */; };
+		DC4094EE1D211563006FB137 /* StubFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4094EC1D211563006FB137 /* StubFunction.swift */; };
+		DC4094EF1D211563006FB137 /* StubThrowingFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4094ED1D211563006FB137 /* StubThrowingFunction.swift */; };
+		DC4094F31D211598006FB137 /* ToBeStubbedProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4094F11D211598006FB137 /* ToBeStubbedProperty.swift */; };
+		DC4094F41D211598006FB137 /* ToBeStubbedReadOnlyProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4094F21D211598006FB137 /* ToBeStubbedReadOnlyProperty.swift */; };
+		DC4094F71D2116B1006FB137 /* BaseStubFunctionTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4094F61D2116B1006FB137 /* BaseStubFunctionTrait.swift */; };
+		DC4094FC1D2116DA006FB137 /* StubFunctionThenThrowTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4094F81D2116DA006FB137 /* StubFunctionThenThrowTrait.swift */; };
+		DC4094FD1D2116DA006FB137 /* StubFunctionThenCallRealImplementationTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4094F91D2116DA006FB137 /* StubFunctionThenCallRealImplementationTrait.swift */; };
+		DC4094FE1D2116DA006FB137 /* StubFunctionThenReturnTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4094FA1D2116DA006FB137 /* StubFunctionThenReturnTrait.swift */; };
+		DC4094FF1D2116DA006FB137 /* StubFunctionThenTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4094FB1D2116DA006FB137 /* StubFunctionThenTrait.swift */; };
 		DC5600F11CFAD4A4001F339D /* __DoNotUse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5600EF1CFAD4A4001F339D /* __DoNotUse.swift */; };
 		DC5A3A5D1CF6F8D600F520E3 /* Cuckoo.podspec in Resources */ = {isa = PBXBuildFile; fileRef = DC5A3A5C1CF6F8D600F520E3 /* Cuckoo.podspec */; };
 		DC9EF9FE1CFAD4F10034DFE5 /* Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EF9FD1CFAD4F10034DFE5 /* Stub.swift */; };
 		DC9EFA001CFAD5660034DFE5 /* StubCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EF9FF1CFAD5660034DFE5 /* StubCall.swift */; };
-		DC9EFA021CFAD5760034DFE5 /* ToBeStubbedFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EFA011CFAD5760034DFE5 /* ToBeStubbedFunction.swift */; };
-		DC9EFA041CFAD5850034DFE5 /* ToBeStubbedThrowingFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EFA031CFAD5850034DFE5 /* ToBeStubbedThrowingFunction.swift */; };
-		DC9EFA061CFAD5930034DFE5 /* ToBeStubbedReadOnlyProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EFA051CFAD5930034DFE5 /* ToBeStubbedReadOnlyProperty.swift */; };
-		DC9EFA081CFAD5A10034DFE5 /* ToBeStubbedProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EFA071CFAD5A10034DFE5 /* ToBeStubbedProperty.swift */; };
 		DC9EFA0A1CFAD5AE0034DFE5 /* StubbingHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EFA091CFAD5AE0034DFE5 /* StubbingHandler.swift */; };
-		DC9EFA0C1CFAD5BD0034DFE5 /* StubFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EFA0B1CFAD5BD0034DFE5 /* StubFunction.swift */; };
 		DC9EFA101CFAD7260034DFE5 /* VerificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EFA0F1CFAD7260034DFE5 /* VerificationHandler.swift */; };
 		DC9EFA121CFAD7360034DFE5 /* VerifyReadOnlyProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EFA111CFAD7360034DFE5 /* VerifyReadOnlyProperty.swift */; };
 		DC9EFA141CFAD7430034DFE5 /* VerifyProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EFA131CFAD7430034DFE5 /* VerifyProperty.swift */; };
@@ -71,17 +77,23 @@
 		18F354A11D0745D20053E119 /* StringDescriptionTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringDescriptionTest.swift; sourceTree = "<group>"; };
 		18F354A41D0748C50053E119 /* SelfDescribingTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfDescribingTest.swift; sourceTree = "<group>"; };
 		18F354A71D074C4C0053E119 /* MatcherDescriptionsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatcherDescriptionsTest.swift; sourceTree = "<group>"; };
-		DC5600EA1CFAD474001F339D /* StubThrowingFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StubThrowingFunction.swift; path = stubbing/StubThrowingFunction.swift; sourceTree = "<group>"; };
+		DC4094E51D2114D6006FB137 /* ToBeStubbedFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ToBeStubbedFunction.swift; path = Stubbing/ToBeStubbedFunction/ToBeStubbedFunction.swift; sourceTree = "<group>"; };
+		DC4094E61D2114D6006FB137 /* ToBeStubbedThrowingFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ToBeStubbedThrowingFunction.swift; path = Stubbing/ToBeStubbedFunction/ToBeStubbedThrowingFunction.swift; sourceTree = "<group>"; };
+		DC4094E91D2114EC006FB137 /* BaseToBeStubbedFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseToBeStubbedFunction.swift; path = Stubbing/ToBeStubbedFunction/BaseToBeStubbedFunction.swift; sourceTree = "<group>"; };
+		DC4094EC1D211563006FB137 /* StubFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StubFunction.swift; path = Stubbing/StubFunction/StubFunction.swift; sourceTree = "<group>"; };
+		DC4094ED1D211563006FB137 /* StubThrowingFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StubThrowingFunction.swift; path = Stubbing/StubFunction/StubThrowingFunction.swift; sourceTree = "<group>"; };
+		DC4094F11D211598006FB137 /* ToBeStubbedProperty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ToBeStubbedProperty.swift; path = Stubbing/ToBeStubbedProperty/ToBeStubbedProperty.swift; sourceTree = "<group>"; };
+		DC4094F21D211598006FB137 /* ToBeStubbedReadOnlyProperty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ToBeStubbedReadOnlyProperty.swift; path = Stubbing/ToBeStubbedProperty/ToBeStubbedReadOnlyProperty.swift; sourceTree = "<group>"; };
+		DC4094F61D2116B1006FB137 /* BaseStubFunctionTrait.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseStubFunctionTrait.swift; path = Stubbing/StubFunction/Trait/BaseStubFunctionTrait.swift; sourceTree = "<group>"; };
+		DC4094F81D2116DA006FB137 /* StubFunctionThenThrowTrait.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StubFunctionThenThrowTrait.swift; path = Stubbing/StubFunction/Trait/StubFunctionThenThrowTrait.swift; sourceTree = "<group>"; };
+		DC4094F91D2116DA006FB137 /* StubFunctionThenCallRealImplementationTrait.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StubFunctionThenCallRealImplementationTrait.swift; path = Stubbing/StubFunction/Trait/StubFunctionThenCallRealImplementationTrait.swift; sourceTree = "<group>"; };
+		DC4094FA1D2116DA006FB137 /* StubFunctionThenReturnTrait.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StubFunctionThenReturnTrait.swift; path = Stubbing/StubFunction/Trait/StubFunctionThenReturnTrait.swift; sourceTree = "<group>"; };
+		DC4094FB1D2116DA006FB137 /* StubFunctionThenTrait.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StubFunctionThenTrait.swift; path = Stubbing/StubFunction/Trait/StubFunctionThenTrait.swift; sourceTree = "<group>"; };
 		DC5600EF1CFAD4A4001F339D /* __DoNotUse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = __DoNotUse.swift; path = verification/__DoNotUse.swift; sourceTree = "<group>"; };
 		DC5A3A5C1CF6F8D600F520E3 /* Cuckoo.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cuckoo.podspec; sourceTree = "<group>"; };
 		DC9EF9FD1CFAD4F10034DFE5 /* Stub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Stub.swift; path = stubbing/Stub.swift; sourceTree = "<group>"; };
 		DC9EF9FF1CFAD5660034DFE5 /* StubCall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StubCall.swift; path = stubbing/StubCall.swift; sourceTree = "<group>"; };
-		DC9EFA011CFAD5760034DFE5 /* ToBeStubbedFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ToBeStubbedFunction.swift; path = stubbing/ToBeStubbedFunction.swift; sourceTree = "<group>"; };
-		DC9EFA031CFAD5850034DFE5 /* ToBeStubbedThrowingFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ToBeStubbedThrowingFunction.swift; path = stubbing/ToBeStubbedThrowingFunction.swift; sourceTree = "<group>"; };
-		DC9EFA051CFAD5930034DFE5 /* ToBeStubbedReadOnlyProperty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ToBeStubbedReadOnlyProperty.swift; path = stubbing/ToBeStubbedReadOnlyProperty.swift; sourceTree = "<group>"; };
-		DC9EFA071CFAD5A10034DFE5 /* ToBeStubbedProperty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ToBeStubbedProperty.swift; path = stubbing/ToBeStubbedProperty.swift; sourceTree = "<group>"; };
 		DC9EFA091CFAD5AE0034DFE5 /* StubbingHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StubbingHandler.swift; path = stubbing/StubbingHandler.swift; sourceTree = "<group>"; };
-		DC9EFA0B1CFAD5BD0034DFE5 /* StubFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StubFunction.swift; path = stubbing/StubFunction.swift; sourceTree = "<group>"; };
 		DC9EFA0F1CFAD7260034DFE5 /* VerificationHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VerificationHandler.swift; path = verification/VerificationHandler.swift; sourceTree = "<group>"; };
 		DC9EFA111CFAD7360034DFE5 /* VerifyReadOnlyProperty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VerifyReadOnlyProperty.swift; path = verification/VerifyReadOnlyProperty.swift; sourceTree = "<group>"; };
 		DC9EFA131CFAD7430034DFE5 /* VerifyProperty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VerifyProperty.swift; path = verification/VerifyProperty.swift; sourceTree = "<group>"; };
@@ -171,19 +183,57 @@
 			path = Tests;
 			sourceTree = "<group>";
 		};
+		DC4094E41D2114C2006FB137 /* ToBeStubbedFunction */ = {
+			isa = PBXGroup;
+			children = (
+				DC4094E51D2114D6006FB137 /* ToBeStubbedFunction.swift */,
+				DC4094E61D2114D6006FB137 /* ToBeStubbedThrowingFunction.swift */,
+				DC4094E91D2114EC006FB137 /* BaseToBeStubbedFunction.swift */,
+			);
+			name = ToBeStubbedFunction;
+			sourceTree = "<group>";
+		};
+		DC4094EB1D211540006FB137 /* StubFunction */ = {
+			isa = PBXGroup;
+			children = (
+				DC4094F51D21169B006FB137 /* Trait */,
+				DC4094EC1D211563006FB137 /* StubFunction.swift */,
+				DC4094ED1D211563006FB137 /* StubThrowingFunction.swift */,
+			);
+			name = StubFunction;
+			sourceTree = "<group>";
+		};
+		DC4094F01D21158B006FB137 /* ToBeStubbedProperty */ = {
+			isa = PBXGroup;
+			children = (
+				DC4094F11D211598006FB137 /* ToBeStubbedProperty.swift */,
+				DC4094F21D211598006FB137 /* ToBeStubbedReadOnlyProperty.swift */,
+			);
+			name = ToBeStubbedProperty;
+			sourceTree = "<group>";
+		};
+		DC4094F51D21169B006FB137 /* Trait */ = {
+			isa = PBXGroup;
+			children = (
+				DC4094F81D2116DA006FB137 /* StubFunctionThenThrowTrait.swift */,
+				DC4094F91D2116DA006FB137 /* StubFunctionThenCallRealImplementationTrait.swift */,
+				DC4094FA1D2116DA006FB137 /* StubFunctionThenReturnTrait.swift */,
+				DC4094FB1D2116DA006FB137 /* StubFunctionThenTrait.swift */,
+				DC4094F61D2116B1006FB137 /* BaseStubFunctionTrait.swift */,
+			);
+			name = Trait;
+			sourceTree = "<group>";
+		};
 		DC5600E91CFAD467001F339D /* Stubbing */ = {
 			isa = PBXGroup;
 			children = (
+				DC4094F01D21158B006FB137 /* ToBeStubbedProperty */,
+				DC4094EB1D211540006FB137 /* StubFunction */,
+				DC4094E41D2114C2006FB137 /* ToBeStubbedFunction */,
 				DC9EFA411CFC31B10034DFE5 /* StubAction.swift */,
 				DC9EF9FD1CFAD4F10034DFE5 /* Stub.swift */,
 				DC9EF9FF1CFAD5660034DFE5 /* StubCall.swift */,
-				DC9EFA011CFAD5760034DFE5 /* ToBeStubbedFunction.swift */,
-				DC9EFA031CFAD5850034DFE5 /* ToBeStubbedThrowingFunction.swift */,
-				DC9EFA051CFAD5930034DFE5 /* ToBeStubbedReadOnlyProperty.swift */,
-				DC9EFA071CFAD5A10034DFE5 /* ToBeStubbedProperty.swift */,
 				DC9EFA091CFAD5AE0034DFE5 /* StubbingHandler.swift */,
-				DC9EFA0B1CFAD5BD0034DFE5 /* StubFunction.swift */,
-				DC5600EA1CFAD474001F339D /* StubThrowingFunction.swift */,
 			);
 			name = Stubbing;
 			sourceTree = "<group>";
@@ -363,30 +413,36 @@
 				DC9EFA441CFC326B0034DFE5 /* SourceLocation.swift in Sources */,
 				DC9EFA1F1CFADB060034DFE5 /* AnyMatcher.swift in Sources */,
 				DC9EFA461CFC43A70034DFE5 /* Utils.swift in Sources */,
-				DC9EFA0C1CFAD5BD0034DFE5 /* StubFunction.swift in Sources */,
 				DC5600F11CFAD4A4001F339D /* __DoNotUse.swift in Sources */,
+				DC4094EF1D211563006FB137 /* StubThrowingFunction.swift in Sources */,
+				DC4094EE1D211563006FB137 /* StubFunction.swift in Sources */,
 				183D04161C46926A00EBAEF3 /* CuckooFunctions.swift in Sources */,
 				DC9EFA211CFADB190034DFE5 /* FunctionMatcher.swift in Sources */,
 				DC9EFA261CFADBA70034DFE5 /* SelfDescribing.swift in Sources */,
-				DC9EFA081CFAD5A10034DFE5 /* ToBeStubbedProperty.swift in Sources */,
-				DC9EFA041CFAD5850034DFE5 /* ToBeStubbedThrowingFunction.swift in Sources */,
 				DC9EFA141CFAD7430034DFE5 /* VerifyProperty.swift in Sources */,
+				DC4094F41D211598006FB137 /* ToBeStubbedReadOnlyProperty.swift in Sources */,
 				DC9EFA401CFC2FE20034DFE5 /* VerificationProxy.swift in Sources */,
 				DC9EFA001CFAD5660034DFE5 /* StubCall.swift in Sources */,
 				DC9EFA3E1CFC2FE20034DFE5 /* Mock.swift in Sources */,
 				DC9EFA241CFADB970034DFE5 /* Description.swift in Sources */,
+				DC4094FF1D2116DA006FB137 /* StubFunctionThenTrait.swift in Sources */,
 				DC9EFA421CFC31B10034DFE5 /* StubAction.swift in Sources */,
+				DC4094F31D211598006FB137 /* ToBeStubbedProperty.swift in Sources */,
 				DC9EFA101CFAD7260034DFE5 /* VerificationHandler.swift in Sources */,
-				DC9EFA061CFAD5930034DFE5 /* ToBeStubbedReadOnlyProperty.swift in Sources */,
 				DC9EF9FE1CFAD4F10034DFE5 /* Stub.swift in Sources */,
 				DC9EFA1C1CFADAD70034DFE5 /* MatcherFunctions.swift in Sources */,
 				DC9EFA1B1CFADAD70034DFE5 /* Matcher.swift in Sources */,
+				DC4094FC1D2116DA006FB137 /* StubFunctionThenThrowTrait.swift in Sources */,
+				DC4094EA1D2114EC006FB137 /* BaseToBeStubbedFunction.swift in Sources */,
+				DC4094E81D2114D6006FB137 /* ToBeStubbedThrowingFunction.swift in Sources */,
 				DC9EFA0A1CFAD5AE0034DFE5 /* StubbingHandler.swift in Sources */,
-				DC9EFA021CFAD5760034DFE5 /* ToBeStubbedFunction.swift in Sources */,
+				DC4094E71D2114D6006FB137 /* ToBeStubbedFunction.swift in Sources */,
 				DC9EFA121CFAD7360034DFE5 /* VerifyReadOnlyProperty.swift in Sources */,
 				DC9EFA1A1CFADAD70034DFE5 /* Matchable.swift in Sources */,
+				DC4094FE1D2116DA006FB137 /* StubFunctionThenReturnTrait.swift in Sources */,
 				DC9EFA2D1CFAE16C0034DFE5 /* MockManager.swift in Sources */,
-				DC5600EC1CFAD474001F339D /* StubThrowingFunction.swift in Sources */,
+				DC4094F71D2116B1006FB137 /* BaseStubFunctionTrait.swift in Sources */,
+				DC4094FD1D2116DA006FB137 /* StubFunctionThenCallRealImplementationTrait.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

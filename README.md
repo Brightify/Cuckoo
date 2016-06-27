@@ -122,16 +122,16 @@ After calling the `when` function you can specify what to do next with following
 
 ```Swift
 /// Invoke `implementation` when invoked.
-then(implementation: IN throws -> OUT) -> ThenReturnValue
+then(implementation: IN throws -> OUT)
 
 /// Return `output` when invoked.
-thenReturn(output: OUT, _ outputs: OUT...) -> ThenReturnValue
+thenReturn(output: OUT, _ outputs: OUT...)
 
 /// Throw `error` when invoked.
-thenThrow(error: ErrorType, _ outputs: OUT...) -> ThenReturnValue
+thenThrow(error: ErrorType, _ outputs: OUT...)
 
 /// Invoke real implementation when invoked.
-thenCallRealImplementation() -> ThenReturnValue
+thenCallRealImplementation()
 ```
 
 The stubbing of method can look like this:

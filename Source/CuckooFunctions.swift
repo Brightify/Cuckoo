@@ -12,15 +12,8 @@ public func stub<M: Mock>(mock: M, @noescape block: M.Stubbing -> Void) {
 }
 
 @warn_unused_result
-public func when<IN, OUT>(function: ToBeStubbedFunction<IN, OUT>) -> StubFunction<IN, OUT> {
-    let stub: ConcreteStub<IN, OUT> = function.handler.createStub(function.name, parameterMatchers: function.parameterMatchers)
-    return StubFunction(stub: stub)
-}
-
-@warn_unused_result
-public func when<IN, OUT>(function: ToBeStubbedThrowingFunction<IN, OUT>) -> StubThrowingFunction<IN, OUT> {
-    let stub: ConcreteStub<IN, OUT> = function.handler.createStub(function.name, parameterMatchers: function.parameterMatchers)
-    return StubThrowingFunction(stub: stub)
+public func when<F where F: BaseToBeStubbedFunction>(function: F) -> F.StubFunction {
+    return function.createStubFunction()
 }
 
 @warn_unused_result
