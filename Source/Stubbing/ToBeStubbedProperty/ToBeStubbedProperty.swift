@@ -11,11 +11,16 @@ public struct ToBeStubbedProperty<T> {
     
     let name: String
     
-    public var get: ToBeStubbedFunction<Void, T> {
-        return ToBeStubbedFunction(handler: handler, name: getterName(name), parameterMatchers: [])
+    public var get: StubFunction<Void, T> {
+        return StubFunction(stub: handler.createStub(getterName(name), parameterMatchers: []))
     }
     
-    public func set<M: Matchable where M.MatchedType == T>(matcher: M) -> ToBeStubbedNoReturnFunction<T> {
-        return ToBeStubbedNoReturnFunction(handler: handler, name: setterName(name), parameterMatchers: [matcher.matcher])
+    public func set<M: Matchable where M.MatchedType == T>(matcher: M) -> StubNoReturnFunction<T> {
+        return StubNoReturnFunction(stub: handler.createStub(setterName(name), parameterMatchers: [matcher.matcher]))
+    }
+    
+    public init(handler: StubbingHandler, name: String) {
+        self.handler = handler
+        self.name = name
     }
 }

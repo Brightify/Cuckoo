@@ -11,4 +11,8 @@ public struct StubFunction<IN, OUT>: StubFunctionThenTrait, StubFunctionThenRetu
     public var this: StubFunction {
         return self
     }
+    
+    public init(stub: ConcreteStub<IN, OUT>) {
+        self.stub = stub
+    }
 }

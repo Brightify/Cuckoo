@@ -17,9 +17,6 @@
 		18F354A31D0747530053E119 /* StringDescriptionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F354A11D0745D20053E119 /* StringDescriptionTest.swift */; };
 		18F354A61D0749C90053E119 /* SelfDescribingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F354A41D0748C50053E119 /* SelfDescribingTest.swift */; };
 		18F354A91D074C4D0053E119 /* MatcherDescriptionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F354A71D074C4C0053E119 /* MatcherDescriptionsTest.swift */; };
-		DC4094E71D2114D6006FB137 /* ToBeStubbedFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4094E51D2114D6006FB137 /* ToBeStubbedFunction.swift */; };
-		DC4094E81D2114D6006FB137 /* ToBeStubbedThrowingFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4094E61D2114D6006FB137 /* ToBeStubbedThrowingFunction.swift */; };
-		DC4094EA1D2114EC006FB137 /* BaseToBeStubbedFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4094E91D2114EC006FB137 /* BaseToBeStubbedFunction.swift */; };
 		DC4094EE1D211563006FB137 /* StubFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4094EC1D211563006FB137 /* StubFunction.swift */; };
 		DC4094EF1D211563006FB137 /* StubThrowingFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4094ED1D211563006FB137 /* StubThrowingFunction.swift */; };
 		DC4094F31D211598006FB137 /* ToBeStubbedProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4094F11D211598006FB137 /* ToBeStubbedProperty.swift */; };
@@ -30,8 +27,6 @@
 		DC4094FE1D2116DA006FB137 /* StubFunctionThenReturnTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4094FA1D2116DA006FB137 /* StubFunctionThenReturnTrait.swift */; };
 		DC4094FF1D2116DA006FB137 /* StubFunctionThenTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4094FB1D2116DA006FB137 /* StubFunctionThenTrait.swift */; };
 		DC4095011D2120D0006FB137 /* StubFunctionThenDoNothingTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4095001D2120D0006FB137 /* StubFunctionThenDoNothingTrait.swift */; };
-		DC4095041D2120DB006FB137 /* ToBeStubbedNoReturnFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4095021D2120DB006FB137 /* ToBeStubbedNoReturnFunction.swift */; };
-		DC4095051D2120DB006FB137 /* ToBeStubbedNoReturnThrowingFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4095031D2120DB006FB137 /* ToBeStubbedNoReturnThrowingFunction.swift */; };
 		DC4095081D2120E6006FB137 /* StubNoReturnFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4095061D2120E6006FB137 /* StubNoReturnFunction.swift */; };
 		DC4095091D2120E6006FB137 /* StubNoReturnThrowingFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4095071D2120E6006FB137 /* StubNoReturnThrowingFunction.swift */; };
 		DC5600F11CFAD4A4001F339D /* __DoNotUse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5600EF1CFAD4A4001F339D /* __DoNotUse.swift */; };
@@ -82,9 +77,6 @@
 		18F354A11D0745D20053E119 /* StringDescriptionTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringDescriptionTest.swift; sourceTree = "<group>"; };
 		18F354A41D0748C50053E119 /* SelfDescribingTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfDescribingTest.swift; sourceTree = "<group>"; };
 		18F354A71D074C4C0053E119 /* MatcherDescriptionsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatcherDescriptionsTest.swift; sourceTree = "<group>"; };
-		DC4094E51D2114D6006FB137 /* ToBeStubbedFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ToBeStubbedFunction.swift; path = Stubbing/ToBeStubbedFunction/ToBeStubbedFunction.swift; sourceTree = "<group>"; };
-		DC4094E61D2114D6006FB137 /* ToBeStubbedThrowingFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ToBeStubbedThrowingFunction.swift; path = Stubbing/ToBeStubbedFunction/ToBeStubbedThrowingFunction.swift; sourceTree = "<group>"; };
-		DC4094E91D2114EC006FB137 /* BaseToBeStubbedFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseToBeStubbedFunction.swift; path = Stubbing/ToBeStubbedFunction/BaseToBeStubbedFunction.swift; sourceTree = "<group>"; };
 		DC4094EC1D211563006FB137 /* StubFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StubFunction.swift; path = Stubbing/StubFunction/StubFunction.swift; sourceTree = "<group>"; };
 		DC4094ED1D211563006FB137 /* StubThrowingFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StubThrowingFunction.swift; path = Stubbing/StubFunction/StubThrowingFunction.swift; sourceTree = "<group>"; };
 		DC4094F11D211598006FB137 /* ToBeStubbedProperty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ToBeStubbedProperty.swift; path = Stubbing/ToBeStubbedProperty/ToBeStubbedProperty.swift; sourceTree = "<group>"; };
@@ -95,8 +87,6 @@
 		DC4094FA1D2116DA006FB137 /* StubFunctionThenReturnTrait.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StubFunctionThenReturnTrait.swift; path = Stubbing/StubFunction/Trait/StubFunctionThenReturnTrait.swift; sourceTree = "<group>"; };
 		DC4094FB1D2116DA006FB137 /* StubFunctionThenTrait.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StubFunctionThenTrait.swift; path = Stubbing/StubFunction/Trait/StubFunctionThenTrait.swift; sourceTree = "<group>"; };
 		DC4095001D2120D0006FB137 /* StubFunctionThenDoNothingTrait.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StubFunctionThenDoNothingTrait.swift; path = Stubbing/StubFunction/Trait/StubFunctionThenDoNothingTrait.swift; sourceTree = "<group>"; };
-		DC4095021D2120DB006FB137 /* ToBeStubbedNoReturnFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ToBeStubbedNoReturnFunction.swift; path = Stubbing/ToBeStubbedFunction/ToBeStubbedNoReturnFunction.swift; sourceTree = "<group>"; };
-		DC4095031D2120DB006FB137 /* ToBeStubbedNoReturnThrowingFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ToBeStubbedNoReturnThrowingFunction.swift; path = Stubbing/ToBeStubbedFunction/ToBeStubbedNoReturnThrowingFunction.swift; sourceTree = "<group>"; };
 		DC4095061D2120E6006FB137 /* StubNoReturnFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StubNoReturnFunction.swift; path = Stubbing/StubFunction/StubNoReturnFunction.swift; sourceTree = "<group>"; };
 		DC4095071D2120E6006FB137 /* StubNoReturnThrowingFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StubNoReturnThrowingFunction.swift; path = Stubbing/StubFunction/StubNoReturnThrowingFunction.swift; sourceTree = "<group>"; };
 		DC5600EF1CFAD4A4001F339D /* __DoNotUse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = __DoNotUse.swift; path = verification/__DoNotUse.swift; sourceTree = "<group>"; };
@@ -193,18 +183,6 @@
 			path = Tests;
 			sourceTree = "<group>";
 		};
-		DC4094E41D2114C2006FB137 /* ToBeStubbedFunction */ = {
-			isa = PBXGroup;
-			children = (
-				DC4095021D2120DB006FB137 /* ToBeStubbedNoReturnFunction.swift */,
-				DC4095031D2120DB006FB137 /* ToBeStubbedNoReturnThrowingFunction.swift */,
-				DC4094E51D2114D6006FB137 /* ToBeStubbedFunction.swift */,
-				DC4094E61D2114D6006FB137 /* ToBeStubbedThrowingFunction.swift */,
-				DC4094E91D2114EC006FB137 /* BaseToBeStubbedFunction.swift */,
-			);
-			name = ToBeStubbedFunction;
-			sourceTree = "<group>";
-		};
 		DC4094EB1D211540006FB137 /* StubFunction */ = {
 			isa = PBXGroup;
 			children = (
@@ -244,7 +222,6 @@
 			children = (
 				DC4094F01D21158B006FB137 /* ToBeStubbedProperty */,
 				DC4094EB1D211540006FB137 /* StubFunction */,
-				DC4094E41D2114C2006FB137 /* ToBeStubbedFunction */,
 				DC9EFA411CFC31B10034DFE5 /* StubAction.swift */,
 				DC9EF9FD1CFAD4F10034DFE5 /* Stub.swift */,
 				DC9EF9FF1CFAD5660034DFE5 /* StubCall.swift */,
@@ -415,7 +392,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#./run generate --output \"$PROJECT_DIR/Tests/GeneratedMocks.swift\" \"$PROJECT_DIR/Tests/TestedClass.swift\"";
+			shellScript = "./run generate --output \"$PROJECT_DIR/Tests/GeneratedMocks.swift\" \"$PROJECT_DIR/Tests/TestedClass.swift\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -438,7 +415,6 @@
 				DC9EFA141CFAD7430034DFE5 /* VerifyProperty.swift in Sources */,
 				DC4094F41D211598006FB137 /* ToBeStubbedReadOnlyProperty.swift in Sources */,
 				DC9EFA401CFC2FE20034DFE5 /* VerificationProxy.swift in Sources */,
-				DC4095041D2120DB006FB137 /* ToBeStubbedNoReturnFunction.swift in Sources */,
 				DC9EFA001CFAD5660034DFE5 /* StubCall.swift in Sources */,
 				DC9EFA3E1CFC2FE20034DFE5 /* Mock.swift in Sources */,
 				DC9EFA241CFADB970034DFE5 /* Description.swift in Sources */,
@@ -451,11 +427,7 @@
 				DC4095081D2120E6006FB137 /* StubNoReturnFunction.swift in Sources */,
 				DC9EFA1B1CFADAD70034DFE5 /* Matcher.swift in Sources */,
 				DC4094FC1D2116DA006FB137 /* StubFunctionThenThrowTrait.swift in Sources */,
-				DC4094EA1D2114EC006FB137 /* BaseToBeStubbedFunction.swift in Sources */,
-				DC4094E81D2114D6006FB137 /* ToBeStubbedThrowingFunction.swift in Sources */,
 				DC9EFA0A1CFAD5AE0034DFE5 /* StubbingHandler.swift in Sources */,
-				DC4095051D2120DB006FB137 /* ToBeStubbedNoReturnThrowingFunction.swift in Sources */,
-				DC4094E71D2114D6006FB137 /* ToBeStubbedFunction.swift in Sources */,
 				DC9EFA121CFAD7360034DFE5 /* VerifyReadOnlyProperty.swift in Sources */,
 				DC9EFA1A1CFADAD70034DFE5 /* Matchable.swift in Sources */,
 				DC4094FE1D2116DA006FB137 /* StubFunctionThenReturnTrait.swift in Sources */,

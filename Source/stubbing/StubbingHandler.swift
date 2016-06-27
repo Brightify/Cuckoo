@@ -9,7 +9,7 @@
 public struct StubbingHandler {
     let registerStub: Stub -> ()
     
-    func createStub<IN, OUT>(method: String, parameterMatchers: [AnyMatcher<IN>]) -> ConcreteStub<IN, OUT> {
+    public func createStub<IN, OUT>(method: String, parameterMatchers: [AnyMatcher<IN>]) -> ConcreteStub<IN, OUT> {
         let stub = ConcreteStub<IN, OUT>(name: method, parameterMatchers: parameterMatchers)
         registerStub(stub)
         return stub

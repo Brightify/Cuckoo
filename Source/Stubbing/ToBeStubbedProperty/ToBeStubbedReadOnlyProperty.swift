@@ -11,7 +11,12 @@ public struct ToBeStubbedReadOnlyProperty<T> {
     
     let name: String
     
-    public var get: ToBeStubbedFunction<Void, T> {
-        return ToBeStubbedFunction(handler: handler, name: getterName(name), parameterMatchers: [])
+    public var get: StubFunction<Void, T> {
+        return StubFunction(stub: handler.createStub(getterName(name), parameterMatchers: []))
+    }
+    
+    public init(handler: StubbingHandler, name: String) {
+        self.handler = handler
+        self.name = name
     }
 }

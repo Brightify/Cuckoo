@@ -11,4 +11,8 @@ public struct StubNoReturnThrowingFunction<IN>: StubFunctionThenTrait, StubFunct
     public var this: StubNoReturnThrowingFunction {
         return self
     }
+    
+    public init(stub: ConcreteStub<IN, Void>) {
+        self.stub = stub
+    }
 }
