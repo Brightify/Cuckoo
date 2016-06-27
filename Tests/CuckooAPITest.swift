@@ -255,7 +255,7 @@ class CuckooAPITest: XCTestCase {
         XCTAssertEqual(mock.readOnlyProperty, "c")
     }
     
-    func testTheDoNothing() {
+    func testThenDoNothing() {
         let mock = MockTestedClass()
         stub(mock) { mock in
             when(mock.noParameter()).thenDoNothing()
@@ -264,6 +264,18 @@ class CuckooAPITest: XCTestCase {
         
         mock.noParameter()
         try! mock.withThrows()
+    }
+    
+    func testVerifyNoMoreInteractions() {
+        let mock = MockTestedClass()
+        stub(mock) { mock in
+            when(mock.noParameter()).thenDoNothing()
+        }
+        
+        mock.noParameter()
+        verify(mock).noParameter()
+        
+        verifyNoMoreInteractions(mock)
     }
     
     private enum TestError: ErrorType {

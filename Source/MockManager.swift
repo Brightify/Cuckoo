@@ -11,6 +11,7 @@ import XCTest
 public class MockManager<STUBBING: StubbingProxy, VERIFICATION: VerificationProxy> {
     private var stubs: [Stub] = []
     private var stubCalls: [StubCall] = []
+    private var unverifiedStubCallsIndexes: [Int] = []
     
     public init() {
         
@@ -31,6 +32,7 @@ public class MockManager<STUBBING: StubbingProxy, VERIFICATION: VerificationProx
     public func callThrows<IN, OUT>(method: String, parameters: IN, original: (IN throws -> OUT)? = nil) throws -> OUT {
         let stubCall = StubCall(method: method, parameters: parameters)
         stubCalls.append(stubCall)
+        unverifiedStubCallsIndexes.append(stubCalls.count - 1)
         
         if let stub = (stubs.filter { $0.name == method }.flatMap { $0 as? ConcreteStub<IN, OUT> }.filter { $0.parameterMatchers.reduce(true) { $0 && $1.matches(parameters) } }.first) {
             if let action = stub.actions.first {
@@ -73,7 +75,13 @@ public class MockManager<STUBBING: StubbingProxy, VERIFICATION: VerificationProx
 
     public func getVerificationProxy(matcher: AnyMatcher<[StubCall]>, sourceLocation: SourceLocation) -> VERIFICATION {
         let handler = VerificationHandler(matcher: matcher, sourceLocation: sourceLocation) { method, sourceLocation, callMatcher, verificationMatcher in
-            let calls = self.stubCalls.filter(callMatcher.matches)
+            var calls: [StubCall] = []
+            for (i, stubCall) in self.stubCalls.enumerate() {
+                if callMatcher.matches(stubCall) {
+                    self.unverifiedStubCallsIndexes = self.unverifiedStubCallsIndexes.filter { $0 != i }
+                    calls.append(stubCall)
+                }
+            }
             
             if verificationMatcher.matches(calls) == false {
                 let description = StringDescription()
@@ -90,16 +98,24 @@ public class MockManager<STUBBING: StubbingProxy, VERIFICATION: VerificationProx
         return VERIFICATION(handler: handler)
     }
     
-    public func reset() {
+    func reset() {
         clearStubs()
         clearInvocations()
     }
     
-    public func clearStubs() {
+    func clearStubs() {
         stubs.removeAll()
     }
     
-    public func clearInvocations() {
+    func clearInvocations() {
         stubCalls.removeAll()
+        unverifiedStubCallsIndexes.removeAll()
+    }
+    
+    func verifyNoMoreInteractions(file: StaticString, line: UInt) {
+        if unverifiedStubCallsIndexes.isEmpty == false {
+            let unverifiedCalls = unverifiedStubCallsIndexes.map { stubCalls[$0] }.map { String($0) }.joinWithSeparator(", ")
+            XCTFail("Found unverified call(s): " + unverifiedCalls, file: file, line: line)
+        }
     }
 }

@@ -199,6 +199,8 @@ verify(mock).greetWithMessage("Hello world")
 
 Verification of properties is similar to their stubbing.
 
+You can check if there are no more interactions on mock with function `verifyNoMoreInteractions`.
+
 #### Parameter matchers
 
 As parameters of methods in stubbing and verification you can use either basic value types or parameter matchers.

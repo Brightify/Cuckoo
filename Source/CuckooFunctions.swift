@@ -46,3 +46,10 @@ public func clearInvocations<M: Mock>(mocks: M...) {
         mock.manager.clearInvocations()
     }
 }
+
+/// Checks if there are no more uverified calls.
+public func verifyNoMoreInteractions<M: Mock>(mocks: M..., file: StaticString = #file, line: UInt = #line) {
+    mocks.forEach { mock in
+        mock.manager.verifyNoMoreInteractions(file, line: line)
+    }
+}
