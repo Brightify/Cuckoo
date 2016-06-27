@@ -33,7 +33,7 @@ class CuckooAPITest: XCTestCase {
                 when(mock.optionalProperty.get).thenReturn(1)
             }
             
-            when(mock.noParameter()).thenReturn(Void())
+            when(mock.noParameter()).thenDoNothing()
             when(mock.countCharacters("hello")).thenReturn(1000)
             when(mock.withReturn()).thenReturn("hello world!")
             when(mock.withThrows()).thenThrow(TestError.Unknown)
@@ -122,7 +122,7 @@ class CuckooAPITest: XCTestCase {
                 when(mock.optionalProperty.get).thenReturn(1)
             }
             
-            when(mock.noParameter()).thenReturn(Void())
+            when(mock.noParameter()).thenDoNothing()
             when(mock.countCharacters("hello")).thenReturn(1000)
             when(mock.withReturn()).thenReturn("hello world!")
             when(mock.withThrows()).thenThrow(TestError.Unknown)
@@ -253,6 +253,17 @@ class CuckooAPITest: XCTestCase {
         XCTAssertEqual(mock.readOnlyProperty, "b")
         XCTAssertEqual(mock.readOnlyProperty, "c")
         XCTAssertEqual(mock.readOnlyProperty, "c")
+    }
+    
+    func testTheDoNothing() {
+        let mock = MockTestedClass()
+        stub(mock) { mock in
+            when(mock.noParameter()).thenDoNothing()
+            when(mock.withThrows()).thenDoNothing()
+        }
+        
+        mock.noParameter()
+        try! mock.withThrows()
     }
     
     private enum TestError: ErrorType {

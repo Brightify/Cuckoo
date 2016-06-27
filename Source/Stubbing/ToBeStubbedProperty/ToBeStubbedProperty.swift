@@ -15,7 +15,7 @@ public struct ToBeStubbedProperty<T> {
         return ToBeStubbedFunction(handler: handler, name: getterName(name), parameterMatchers: [])
     }
     
-    public func set<M: Matchable where M.MatchedType == T>(matcher: M) -> ToBeStubbedFunction<T, Void> {
-        return ToBeStubbedFunction(handler: handler, name: setterName(name), parameterMatchers: [matcher.matcher])
+    public func set<M: Matchable where M.MatchedType == T>(matcher: M) -> ToBeStubbedNoReturnFunction<T> {
+        return ToBeStubbedNoReturnFunction(handler: handler, name: setterName(name), parameterMatchers: [matcher.matcher])
     }
 }

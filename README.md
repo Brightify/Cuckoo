@@ -132,6 +132,9 @@ thenThrow(error: ErrorType, _ outputs: OUT...)
 
 /// Invoke real implementation when invoked.
 thenCallRealImplementation()
+
+/// Do nothing when invoked.
+thenDoNothing()
 ```
 
 The stubbing of method can look like this:
