@@ -14,7 +14,7 @@ public protocol StubFunctionThenReturnTrait: BaseStubFunctionTrait {
 public extension StubFunctionThenReturnTrait {
     func thenReturn(output: OUT, _ outputs: OUT...) -> Self {
         ([output] + outputs).forEach { output in
-            stub.actions.append(.ReturnValue(output))
+            stub.appendAction(.ReturnValue(output))
         }
         return self
     }

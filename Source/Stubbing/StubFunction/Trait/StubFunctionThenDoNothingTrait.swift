@@ -13,7 +13,7 @@ public protocol StubFunctionThenDoNothingTrait: BaseStubFunctionTrait {
 
 public extension StubFunctionThenDoNothingTrait where OUT == Void {
     func thenDoNothing() -> Self {
-        stub.actions.append(.ReturnValue(Void()))
+        stub.appendAction(.ReturnValue(Void()))
         return self
     }
 }

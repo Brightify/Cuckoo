@@ -13,7 +13,7 @@ public protocol StubFunctionThenTrait: BaseStubFunctionTrait {
 
 public extension StubFunctionThenTrait {
     func then(implementation: IN -> OUT) -> Self {
-        stub.actions.append(.CallImplementation(implementation))
+        stub.appendAction(.CallImplementation(implementation))
         return self
     }
 }

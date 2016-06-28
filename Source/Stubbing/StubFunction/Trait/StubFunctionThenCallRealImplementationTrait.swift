@@ -13,7 +13,7 @@ public protocol StubFunctionThenCallRealImplementationTrait: BaseStubFunctionTra
 
 public extension StubFunctionThenCallRealImplementationTrait {
     public func thenCallRealImplementation() -> Self {
-        stub.actions.append(.CallRealImplementation)
+        stub.appendAction(.CallRealImplementation)
         return self
     }
 }

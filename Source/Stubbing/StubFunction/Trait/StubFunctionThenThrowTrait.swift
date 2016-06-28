@@ -14,7 +14,7 @@ public protocol StubFunctionThenThrowTrait: BaseStubFunctionTrait {
 public extension StubFunctionThenThrowTrait {
     public func thenThrow(error: ErrorType, _ errors: ErrorType...) -> Self {
         ([error] + errors).forEach { error in
-            stub.actions.append(.ThrowError(error))
+            stub.appendAction(.ThrowError(error))
         }
         return self
     }

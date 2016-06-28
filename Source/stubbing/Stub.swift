@@ -19,4 +19,8 @@ public class ConcreteStub<IN, OUT>: Stub {
         self.name = name
         self.parameterMatchers = parameterMatchers
     }
+    
+    func appendAction(action: StubAction<IN, OUT>) {
+        actions.append(action)
+    }
 }
