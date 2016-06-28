@@ -8,9 +8,6 @@
 
 public struct StubNoReturnFunction<IN>: StubFunctionThenTrait, StubFunctionThenCallRealImplementationTrait, StubFunctionThenDoNothingTrait {
     public let stub: ConcreteStub<IN, Void>
-    public var this: StubNoReturnFunction {
-        return self
-    }
     
     public init(stub: ConcreteStub<IN, Void>) {
         self.stub = stub

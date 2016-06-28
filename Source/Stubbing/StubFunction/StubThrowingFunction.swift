@@ -8,10 +8,7 @@
 
 public struct StubThrowingFunction<IN, OUT>: StubFunctionThenTrait, StubFunctionThenReturnTrait, StubFunctionThenCallRealImplementationTrait, StubFunctionThenThrowTrait {
     public let stub: ConcreteStub<IN, OUT>
-    public var this: StubThrowingFunction {
-        return self
-    }
-    
+
     public init(stub: ConcreteStub<IN, OUT>) {
         self.stub = stub
     }

@@ -8,12 +8,12 @@
 
 public protocol StubFunctionThenCallRealImplementationTrait: BaseStubFunctionTrait {
     /// Invoke real implementation when invoked.
-    func thenCallRealImplementation() -> SELF
+    func thenCallRealImplementation() -> Self
 }
 
 public extension StubFunctionThenCallRealImplementationTrait {
-    public func thenCallRealImplementation() -> SELF {
+    public func thenCallRealImplementation() -> Self {
         stub.actions.append(.CallRealImplementation)
-        return this
+        return self
     }
 }

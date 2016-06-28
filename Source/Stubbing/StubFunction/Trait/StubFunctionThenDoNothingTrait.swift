@@ -8,12 +8,12 @@
 
 public protocol StubFunctionThenDoNothingTrait: BaseStubFunctionTrait {   
     /// Do nothing when invoked.
-    func thenDoNothing() -> SELF
+    func thenDoNothing() -> Self
 }
 
 public extension StubFunctionThenDoNothingTrait where OUT == Void {
-    func thenDoNothing() -> SELF {
+    func thenDoNothing() -> Self {
         stub.actions.append(.ReturnValue(Void()))
-        return this
+        return self
     }
 }

@@ -9,9 +9,6 @@
 public protocol BaseStubFunctionTrait {
     associatedtype IN
     associatedtype OUT
-    associatedtype SELF
-    
+
     var stub: ConcreteStub<IN, OUT> { get }
-    // It is not possible to write SELF: Base
-    var this: SELF { get }
 }
