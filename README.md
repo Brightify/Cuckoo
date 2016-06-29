@@ -22,6 +22,18 @@ Unfortunately Swift does not have a proper reflection, so we decided to use a co
 
 The generated files contain enough information to give you the right amount of power. They work based on inheritance and protocol adoption. This means that only overridable things can be mocked. We currently support all features which fulfill this rule except for things listed in TODO. Due to the complexity of Swift it is not easy to check for all edge cases so if you find some unexpected behavior please report it in issues.  
 
+## Release notes
+
+### 0.6.0
+
+* Add release notes
+* Add stub resetting
+* Add thenCallRealImplementation
+* Add argument capturing
+* Add verifyNoMoreInteractions
+* Add on going stubbing
+* Add thenDoNothing
+
 ## TODO
 
 We are still missing support for some important features like:
