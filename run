@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-VERSION=0.5.2
+VERSION=0.6.0
 FILE_NAME=cuckoo_generator_$VERSION.app
 FILE_PATH=.build/CuckooGenerator/$FILE_NAME
 if [ ! -e $FILE_PATH ]; then
