@@ -48,21 +48,21 @@ public class MockManager<STUBBING: StubbingProxy, VERIFICATION: VerificationProx
                 case .ThrowError(let error):
                     throw error
                 case .CallRealImplementation:
-                    break
+                    if let original = original {
+                        return try original(parameters)
+                    } else {
+                        fail("No real implementation found for method `\(method)`. This may happend because stubbed object is mock or spy of protocol.")
+                    }
                 }
             } else {
-                let message = "Stubbing of method `\(method)` using parameters \(parameters) wasn't finished (missing thenReturn())."
-                XCTFail(message)
-                fatalError(message)
+                fail("Stubbing of method `\(method)` using parameters \(parameters) wasn't finished (missing thenReturn()).")
             }
         }
 
         if let original = original {
             return try original(parameters)
         } else {
-            let message = "No stub for method `\(method)` using parameters \(parameters) and no original implementation was provided."
-            XCTFail(message)
-            fatalError(message)
+            fail("No stub for method `\(method)` using parameters \(parameters) and no original implementation was provided.")
         }
     }
     
@@ -117,5 +117,11 @@ public class MockManager<STUBBING: StubbingProxy, VERIFICATION: VerificationProx
             let unverifiedCalls = unverifiedStubCallsIndexes.map { stubCalls[$0] }.map { String($0) }.joinWithSeparator(", ")
             XCTFail("Found unverified call(s): " + unverifiedCalls, file: file, line: line)
         }
+    }
+    
+    @noreturn
+    private func fail(message: String) {
+        XCTFail(message)
+        fatalError(message)
     }
 }

@@ -280,6 +280,9 @@ class CuckooAPITest: XCTestCase {
     
     func testArgumentCaptor() {
         let mock = MockTestedClass()
+        stub(mock) { mock in
+            when(mock.readWriteProperty.set(anyInt())).thenDoNothing()
+        }
         mock.readWriteProperty = 10
         mock.readWriteProperty = 20
         mock.readWriteProperty = 30
