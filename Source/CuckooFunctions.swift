@@ -12,7 +12,7 @@ public func stub<M: Mock>(mock: M, @noescape block: M.Stubbing -> Void) {
 }
 
 @warn_unused_result
-public func when<F: BaseStubFunctionTrait>(function: F) -> F {
+public func when<F>(function: F) -> F {
     return function
 }
 

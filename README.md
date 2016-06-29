@@ -201,6 +201,23 @@ Verification of properties is similar to their stubbing.
 
 You can check if there are no more interactions on mock with function `verifyNoMoreInteractions`.
 
+##### Argument capture
+
+You can use `ArgumentCaptor` to capture arguments in verification of calls (doing that in stubbing is not recommended). Here is an example code:
+
+```Swift
+mock.readWriteProperty = 10
+mock.readWriteProperty = 20
+mock.readWriteProperty = 30
+
+let argumentCaptor = ArgumentCaptor<Int>()
+verify(mock, times(3)).readWriteProperty.set(argumentCaptor.capture())
+argumentCaptor.value // Returns 30
+argumentCaptor.allValues // Returns [10, 20, 30]
+```
+
+As you can see, method `capture()` is used to create matcher for the call and then you can get the arguments via properties `value` and `allValues`. `value` returns last captured argument or nil if none. `allValues` returns array with all captured values.
+
 #### Parameter matchers
 
 As parameters of methods in stubbing and verification you can use either basic value types or parameter matchers.

@@ -278,6 +278,21 @@ class CuckooAPITest: XCTestCase {
         verifyNoMoreInteractions(mock)
     }
     
+    func testArgumentCaptor() {
+        let mock = MockTestedClass()
+        mock.readWriteProperty = 10
+        mock.readWriteProperty = 20
+        mock.readWriteProperty = 30
+        let captor = ArgumentCaptor<Int>()
+        
+        XCTAssertNil(captor.value)
+        XCTAssertTrue(captor.allValues.isEmpty)
+        
+        verify(mock, times(3)).readWriteProperty.set(captor.capture())
+        XCTAssertEqual(captor.value, 30)
+        XCTAssertEqual(captor.allValues, [10, 20, 30])
+    }
+    
     private enum TestError: ErrorType {
         case Unknown
     }

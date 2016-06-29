@@ -12,7 +12,7 @@ public protocol StubFunctionThenThrowTrait: BaseStubFunctionTrait {
 }
 
 public extension StubFunctionThenThrowTrait {
-    public func thenThrow(error: ErrorType, _ errors: ErrorType...) -> Self {
+    func thenThrow(error: ErrorType, _ errors: ErrorType...) -> Self {
         ([error] + errors).forEach { error in
             stub.appendAction(.ThrowError(error))
         }

@@ -29,6 +29,7 @@
 		DC4095011D2120D0006FB137 /* StubFunctionThenDoNothingTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4095001D2120D0006FB137 /* StubFunctionThenDoNothingTrait.swift */; };
 		DC4095081D2120E6006FB137 /* StubNoReturnFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4095061D2120E6006FB137 /* StubNoReturnFunction.swift */; };
 		DC4095091D2120E6006FB137 /* StubNoReturnThrowingFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4095071D2120E6006FB137 /* StubNoReturnThrowingFunction.swift */; };
+		DC40950B1D23A813006FB137 /* ArgumentCaptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC40950A1D23A813006FB137 /* ArgumentCaptor.swift */; };
 		DC5600F11CFAD4A4001F339D /* __DoNotUse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5600EF1CFAD4A4001F339D /* __DoNotUse.swift */; };
 		DC5A3A5D1CF6F8D600F520E3 /* Cuckoo.podspec in Resources */ = {isa = PBXBuildFile; fileRef = DC5A3A5C1CF6F8D600F520E3 /* Cuckoo.podspec */; };
 		DC9EF9FE1CFAD4F10034DFE5 /* Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EF9FD1CFAD4F10034DFE5 /* Stub.swift */; };
@@ -89,6 +90,7 @@
 		DC4095001D2120D0006FB137 /* StubFunctionThenDoNothingTrait.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StubFunctionThenDoNothingTrait.swift; path = Stubbing/StubFunction/Trait/StubFunctionThenDoNothingTrait.swift; sourceTree = "<group>"; };
 		DC4095061D2120E6006FB137 /* StubNoReturnFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StubNoReturnFunction.swift; path = Stubbing/StubFunction/StubNoReturnFunction.swift; sourceTree = "<group>"; };
 		DC4095071D2120E6006FB137 /* StubNoReturnThrowingFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StubNoReturnThrowingFunction.swift; path = Stubbing/StubFunction/StubNoReturnThrowingFunction.swift; sourceTree = "<group>"; };
+		DC40950A1D23A813006FB137 /* ArgumentCaptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArgumentCaptor.swift; path = Verification/ArgumentCaptor.swift; sourceTree = "<group>"; };
 		DC5600EF1CFAD4A4001F339D /* __DoNotUse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = __DoNotUse.swift; path = verification/__DoNotUse.swift; sourceTree = "<group>"; };
 		DC5A3A5C1CF6F8D600F520E3 /* Cuckoo.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cuckoo.podspec; sourceTree = "<group>"; };
 		DC9EF9FD1CFAD4F10034DFE5 /* Stub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Stub.swift; path = stubbing/Stub.swift; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 				DC9EFA0F1CFAD7260034DFE5 /* VerificationHandler.swift */,
 				DC9EFA111CFAD7360034DFE5 /* VerifyReadOnlyProperty.swift */,
 				DC9EFA131CFAD7430034DFE5 /* VerifyProperty.swift */,
+				DC40950A1D23A813006FB137 /* ArgumentCaptor.swift */,
 			);
 			name = Verification;
 			sourceTree = "<group>";
@@ -428,6 +431,7 @@
 				DC9EFA1B1CFADAD70034DFE5 /* Matcher.swift in Sources */,
 				DC4094FC1D2116DA006FB137 /* StubFunctionThenThrowTrait.swift in Sources */,
 				DC9EFA0A1CFAD5AE0034DFE5 /* StubbingHandler.swift in Sources */,
+				DC40950B1D23A813006FB137 /* ArgumentCaptor.swift in Sources */,
 				DC9EFA121CFAD7360034DFE5 /* VerifyReadOnlyProperty.swift in Sources */,
 				DC9EFA1A1CFADAD70034DFE5 /* Matchable.swift in Sources */,
 				DC4094FE1D2116DA006FB137 /* StubFunctionThenReturnTrait.swift in Sources */,
