@@ -16,7 +16,7 @@ private func describeCallMismatch(calls: [StubCall], description: Description) {
 
 /// Returns a matcher ensuring a call was made **`count`** times.
 @warn_unused_result
-public func times(count: Int) -> AnyMatcher<[StubCall]> {
+public func times(count: Int) -> CallMatcher {
     return FunctionMatcher(function: compareCalls(count, using: ==), describeMismatch: describeCallMismatch) {
         $0.append(text: "to be called ").append(value: count).append(text: " times ")
     }.typeErased()
@@ -24,19 +24,19 @@ public func times(count: Int) -> AnyMatcher<[StubCall]> {
 
 /// Returns a matcher ensuring no call was made.
 @warn_unused_result
-public func never() -> AnyMatcher<[StubCall]> {
+public func never() -> CallMatcher {
     return times(0)
 }
 
 /// Returns a matcher ensuring at least one call was made.
 @warn_unused_result
-public func atLeastOnce() -> AnyMatcher<[StubCall]> {
+public func atLeastOnce() -> CallMatcher {
     return atLeast(1)
 }
 
 /// Returns a matcher ensuring call was made at least `count` times.
 @warn_unused_result
-public func atLeast(count: Int) -> AnyMatcher<[StubCall]> {
+public func atLeast(count: Int) -> CallMatcher {
     return FunctionMatcher(function: compareCalls(count, using: >=), describeMismatch: describeCallMismatch) {
         $0.append(text: "to be called at least ").append(value: count).append(text: " times ")
     }.typeErased()
@@ -44,7 +44,7 @@ public func atLeast(count: Int) -> AnyMatcher<[StubCall]> {
 
 /// Returns a matcher ensuring call was made at most `count` times.
 @warn_unused_result
-public func atMost(count: Int) -> AnyMatcher<[StubCall]> {
+public func atMost(count: Int) -> CallMatcher {
     return FunctionMatcher(function: compareCalls(count, whenNil: true, using: <=), describeMismatch: describeCallMismatch) {
         $0.append(text: "to be called at most ").append(value: count).append(text: " times ")
     }.typeErased()

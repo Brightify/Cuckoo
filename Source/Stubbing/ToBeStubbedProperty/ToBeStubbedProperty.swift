@@ -7,9 +7,8 @@
 //
 
 public struct ToBeStubbedProperty<T> {
-    let handler: StubbingHandler
-    
-    let name: String
+    private let handler: StubbingHandler
+    private let name: String
     
     public var get: StubFunction<Void, T> {
         return StubFunction(stub: handler.createStub(getterName(name), parameterMatchers: []))

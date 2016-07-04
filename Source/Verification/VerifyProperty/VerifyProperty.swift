@@ -7,14 +7,19 @@
 //
 
 public struct VerifyProperty<T> {
-    let name: String
-    let handler: VerificationHandler
+    private let name: String
+    private let handler: VerificationHandler
     
     public var get: __DoNotUse<T> {
-        return handler.verify(getterName(name))
+        return handler.verify(getterName(name), parameterMatchers: [] as [AnyMatcher<Void>])
     }
     
     public func set<M: Matchable where M.MatchedType == T>(matcher: M) -> __DoNotUse<Void> {
         return handler.verify(setterName(name), parameterMatchers: [matcher.matcher])
+    }
+    
+    public init(name: String, handler: VerificationHandler) {
+        self.name = name
+        self.handler = handler
     }
 }

@@ -73,26 +73,14 @@ public class MockManager<STUBBING: StubbingProxy, VERIFICATION: VerificationProx
         return STUBBING(handler: handler)
     }
 
-    public func getVerificationProxy(matcher: AnyMatcher<[StubCall]>, sourceLocation: SourceLocation) -> VERIFICATION {
-        let handler = VerificationHandler(matcher: matcher, sourceLocation: sourceLocation) { method, sourceLocation, callMatcher, verificationMatcher in
-            var calls: [StubCall] = []
-            for (i, stubCall) in self.stubCalls.enumerate() {
-                if callMatcher.matches(stubCall) {
-                    self.unverifiedStubCallsIndexes = self.unverifiedStubCallsIndexes.filter { $0 != i }
-                    calls.append(stubCall)
-                }
+    public func getVerificationProxy(callMatcher: CallMatcher, sourceLocation: SourceLocation) -> VERIFICATION {
+        let handler = VerificationHandler(callMatcher: callMatcher, sourceLocation: sourceLocation) { method, parameterMatchers in
+            let calls = self.stubCalls.enumerate().filter { i, call in
+                parameterMatchers.reduce(call.method == method) { $0 && $1.matches(call.parameters) }
             }
-            
-            if verificationMatcher.matches(calls) == false {
-                let description = StringDescription()
-                description
-                    .append(text: "Expected ")
-                    .append(descriptionOf: verificationMatcher)
-                    .append(text: ", but ")
-                verificationMatcher.describeMismatch(calls, to: description)
-
-                XCTFail(description.description, file: sourceLocation.file, line: sourceLocation.line)
-            }
+            let indexes = calls.map { $0.index }
+            self.unverifiedStubCallsIndexes = self.unverifiedStubCallsIndexes.filter { !indexes.contains($0) }
+            return calls.map { $0.element }
         }
 
         return VERIFICATION(handler: handler)
@@ -112,10 +100,10 @@ public class MockManager<STUBBING: StubbingProxy, VERIFICATION: VerificationProx
         unverifiedStubCallsIndexes.removeAll()
     }
     
-    func verifyNoMoreInteractions(file: StaticString, line: UInt) {
+    func verifyNoMoreInteractions(sourceLocation: SourceLocation) {
         if unverifiedStubCallsIndexes.isEmpty == false {
             let unverifiedCalls = unverifiedStubCallsIndexes.map { stubCalls[$0] }.map { String($0) }.joinWithSeparator(", ")
-            XCTFail("Found unverified call(s): " + unverifiedCalls, file: file, line: line)
+            XCTFail("Found unverified call(s): " + unverifiedCalls, file: sourceLocation.file, line: sourceLocation.line)
         }
     }
     

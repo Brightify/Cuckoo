@@ -22,8 +22,8 @@ public func verify<M: Mock>(mock: M, file: StaticString = #file, line: UInt = #l
 }
 
 @warn_unused_result
-public func verify<M: Mock>(mock: M, _ matcher: AnyMatcher<[StubCall]>, file: StaticString = #file, line: UInt = #line) -> M.Verification {
-    return mock.manager.getVerificationProxy(matcher, sourceLocation: SourceLocation(file: file, line: line))
+public func verify<M: Mock>(mock: M, _ callMatcher: CallMatcher, file: StaticString = #file, line: UInt = #line) -> M.Verification {
+    return mock.manager.getVerificationProxy(callMatcher, sourceLocation: (file, line))
 }
 
 /// Clear all invocations and stubs of mocks.
@@ -50,6 +50,6 @@ public func clearInvocations<M: Mock>(mocks: M...) {
 /// Checks if there are no more uverified calls.
 public func verifyNoMoreInteractions<M: Mock>(mocks: M..., file: StaticString = #file, line: UInt = #line) {
     mocks.forEach { mock in
-        mock.manager.verifyNoMoreInteractions(file, line: line)
+        mock.manager.verifyNoMoreInteractions((file, line))
     }
 }

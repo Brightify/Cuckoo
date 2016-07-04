@@ -32,3 +32,5 @@ public func parameterMatcher<IN, PARAM, M: Matcher where M.MatchedType == PARAM>
     
     return FunctionMatcher(function: function, describeMismatch: describeMismatch, describeTo: matcher.describeTo).typeErased()
 }
+
+public typealias SourceLocation = (file: StaticString, line: UInt)

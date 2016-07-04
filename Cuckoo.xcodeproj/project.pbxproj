@@ -30,14 +30,14 @@
 		DC4095081D2120E6006FB137 /* StubNoReturnFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4095061D2120E6006FB137 /* StubNoReturnFunction.swift */; };
 		DC4095091D2120E6006FB137 /* StubNoReturnThrowingFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4095071D2120E6006FB137 /* StubNoReturnThrowingFunction.swift */; };
 		DC40950B1D23A813006FB137 /* ArgumentCaptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC40950A1D23A813006FB137 /* ArgumentCaptor.swift */; };
+		DC40951F1D2948C2006FB137 /* VerifyProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC40951D1D2948C2006FB137 /* VerifyProperty.swift */; };
+		DC4095201D2948C2006FB137 /* VerifyReadOnlyProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC40951E1D2948C2006FB137 /* VerifyReadOnlyProperty.swift */; };
 		DC5600F11CFAD4A4001F339D /* __DoNotUse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5600EF1CFAD4A4001F339D /* __DoNotUse.swift */; };
 		DC5A3A5D1CF6F8D600F520E3 /* Cuckoo.podspec in Resources */ = {isa = PBXBuildFile; fileRef = DC5A3A5C1CF6F8D600F520E3 /* Cuckoo.podspec */; };
 		DC9EF9FE1CFAD4F10034DFE5 /* Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EF9FD1CFAD4F10034DFE5 /* Stub.swift */; };
 		DC9EFA001CFAD5660034DFE5 /* StubCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EF9FF1CFAD5660034DFE5 /* StubCall.swift */; };
 		DC9EFA0A1CFAD5AE0034DFE5 /* StubbingHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EFA091CFAD5AE0034DFE5 /* StubbingHandler.swift */; };
 		DC9EFA101CFAD7260034DFE5 /* VerificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EFA0F1CFAD7260034DFE5 /* VerificationHandler.swift */; };
-		DC9EFA121CFAD7360034DFE5 /* VerifyReadOnlyProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EFA111CFAD7360034DFE5 /* VerifyReadOnlyProperty.swift */; };
-		DC9EFA141CFAD7430034DFE5 /* VerifyProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EFA131CFAD7430034DFE5 /* VerifyProperty.swift */; };
 		DC9EFA1A1CFADAD70034DFE5 /* Matchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EFA161CFADAD70034DFE5 /* Matchable.swift */; };
 		DC9EFA1B1CFADAD70034DFE5 /* Matcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EFA171CFADAD70034DFE5 /* Matcher.swift */; };
 		DC9EFA1C1CFADAD70034DFE5 /* MatcherFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EFA181CFADAD70034DFE5 /* MatcherFunctions.swift */; };
@@ -50,7 +50,6 @@
 		DC9EFA3F1CFC2FE20034DFE5 /* StubbingProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EFA3C1CFC2FE20034DFE5 /* StubbingProxy.swift */; };
 		DC9EFA401CFC2FE20034DFE5 /* VerificationProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EFA3D1CFC2FE20034DFE5 /* VerificationProxy.swift */; };
 		DC9EFA421CFC31B10034DFE5 /* StubAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EFA411CFC31B10034DFE5 /* StubAction.swift */; };
-		DC9EFA441CFC326B0034DFE5 /* SourceLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EFA431CFC326B0034DFE5 /* SourceLocation.swift */; };
 		DC9EFA461CFC43A70034DFE5 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EFA451CFC43A70034DFE5 /* Utils.swift */; };
 /* End PBXBuildFile section */
 
@@ -91,14 +90,14 @@
 		DC4095061D2120E6006FB137 /* StubNoReturnFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StubNoReturnFunction.swift; path = Stubbing/StubFunction/StubNoReturnFunction.swift; sourceTree = "<group>"; };
 		DC4095071D2120E6006FB137 /* StubNoReturnThrowingFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StubNoReturnThrowingFunction.swift; path = Stubbing/StubFunction/StubNoReturnThrowingFunction.swift; sourceTree = "<group>"; };
 		DC40950A1D23A813006FB137 /* ArgumentCaptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArgumentCaptor.swift; path = Verification/ArgumentCaptor.swift; sourceTree = "<group>"; };
+		DC40951D1D2948C2006FB137 /* VerifyProperty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VerifyProperty.swift; path = Verification/VerifyProperty/VerifyProperty.swift; sourceTree = "<group>"; };
+		DC40951E1D2948C2006FB137 /* VerifyReadOnlyProperty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VerifyReadOnlyProperty.swift; path = Verification/VerifyProperty/VerifyReadOnlyProperty.swift; sourceTree = "<group>"; };
 		DC5600EF1CFAD4A4001F339D /* __DoNotUse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = __DoNotUse.swift; path = verification/__DoNotUse.swift; sourceTree = "<group>"; };
 		DC5A3A5C1CF6F8D600F520E3 /* Cuckoo.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cuckoo.podspec; sourceTree = "<group>"; };
 		DC9EF9FD1CFAD4F10034DFE5 /* Stub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Stub.swift; path = stubbing/Stub.swift; sourceTree = "<group>"; };
 		DC9EF9FF1CFAD5660034DFE5 /* StubCall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StubCall.swift; path = stubbing/StubCall.swift; sourceTree = "<group>"; };
 		DC9EFA091CFAD5AE0034DFE5 /* StubbingHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StubbingHandler.swift; path = stubbing/StubbingHandler.swift; sourceTree = "<group>"; };
 		DC9EFA0F1CFAD7260034DFE5 /* VerificationHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VerificationHandler.swift; path = verification/VerificationHandler.swift; sourceTree = "<group>"; };
-		DC9EFA111CFAD7360034DFE5 /* VerifyReadOnlyProperty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VerifyReadOnlyProperty.swift; path = verification/VerifyReadOnlyProperty.swift; sourceTree = "<group>"; };
-		DC9EFA131CFAD7430034DFE5 /* VerifyProperty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VerifyProperty.swift; path = verification/VerifyProperty.swift; sourceTree = "<group>"; };
 		DC9EFA161CFADAD70034DFE5 /* Matchable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Matchable.swift; path = matching/Matchable.swift; sourceTree = "<group>"; };
 		DC9EFA171CFADAD70034DFE5 /* Matcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Matcher.swift; path = matching/Matcher.swift; sourceTree = "<group>"; };
 		DC9EFA181CFADAD70034DFE5 /* MatcherFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MatcherFunctions.swift; path = matching/MatcherFunctions.swift; sourceTree = "<group>"; };
@@ -111,7 +110,6 @@
 		DC9EFA3C1CFC2FE20034DFE5 /* StubbingProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StubbingProxy.swift; path = mock/StubbingProxy.swift; sourceTree = "<group>"; };
 		DC9EFA3D1CFC2FE20034DFE5 /* VerificationProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VerificationProxy.swift; path = mock/VerificationProxy.swift; sourceTree = "<group>"; };
 		DC9EFA411CFC31B10034DFE5 /* StubAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StubAction.swift; path = stubbing/StubAction.swift; sourceTree = "<group>"; };
-		DC9EFA431CFC326B0034DFE5 /* SourceLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SourceLocation.swift; path = verification/SourceLocation.swift; sourceTree = "<group>"; };
 		DC9EFA451CFC43A70034DFE5 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -219,6 +217,15 @@
 			name = Trait;
 			sourceTree = "<group>";
 		};
+		DC40951C1D294899006FB137 /* VerifyProperty */ = {
+			isa = PBXGroup;
+			children = (
+				DC40951D1D2948C2006FB137 /* VerifyProperty.swift */,
+				DC40951E1D2948C2006FB137 /* VerifyReadOnlyProperty.swift */,
+			);
+			name = VerifyProperty;
+			sourceTree = "<group>";
+		};
 		DC5600E91CFAD467001F339D /* Stubbing */ = {
 			isa = PBXGroup;
 			children = (
@@ -235,11 +242,9 @@
 		DC5600EE1CFAD499001F339D /* Verification */ = {
 			isa = PBXGroup;
 			children = (
-				DC9EFA431CFC326B0034DFE5 /* SourceLocation.swift */,
+				DC40951C1D294899006FB137 /* VerifyProperty */,
 				DC5600EF1CFAD4A4001F339D /* __DoNotUse.swift */,
 				DC9EFA0F1CFAD7260034DFE5 /* VerificationHandler.swift */,
-				DC9EFA111CFAD7360034DFE5 /* VerifyReadOnlyProperty.swift */,
-				DC9EFA131CFAD7430034DFE5 /* VerifyProperty.swift */,
 				DC40950A1D23A813006FB137 /* ArgumentCaptor.swift */,
 			);
 			name = Verification;
@@ -405,8 +410,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC9EFA3F1CFC2FE20034DFE5 /* StubbingProxy.swift in Sources */,
-				DC9EFA441CFC326B0034DFE5 /* SourceLocation.swift in Sources */,
 				DC9EFA1F1CFADB060034DFE5 /* AnyMatcher.swift in Sources */,
+				DC4095201D2948C2006FB137 /* VerifyReadOnlyProperty.swift in Sources */,
 				DC9EFA461CFC43A70034DFE5 /* Utils.swift in Sources */,
 				DC5600F11CFAD4A4001F339D /* __DoNotUse.swift in Sources */,
 				DC4094EF1D211563006FB137 /* StubThrowingFunction.swift in Sources */,
@@ -415,7 +420,6 @@
 				183D04161C46926A00EBAEF3 /* CuckooFunctions.swift in Sources */,
 				DC9EFA211CFADB190034DFE5 /* FunctionMatcher.swift in Sources */,
 				DC9EFA261CFADBA70034DFE5 /* SelfDescribing.swift in Sources */,
-				DC9EFA141CFAD7430034DFE5 /* VerifyProperty.swift in Sources */,
 				DC4094F41D211598006FB137 /* ToBeStubbedReadOnlyProperty.swift in Sources */,
 				DC9EFA401CFC2FE20034DFE5 /* VerificationProxy.swift in Sources */,
 				DC9EFA001CFAD5660034DFE5 /* StubCall.swift in Sources */,
@@ -428,11 +432,11 @@
 				DC9EF9FE1CFAD4F10034DFE5 /* Stub.swift in Sources */,
 				DC9EFA1C1CFADAD70034DFE5 /* MatcherFunctions.swift in Sources */,
 				DC4095081D2120E6006FB137 /* StubNoReturnFunction.swift in Sources */,
+				DC40951F1D2948C2006FB137 /* VerifyProperty.swift in Sources */,
 				DC9EFA1B1CFADAD70034DFE5 /* Matcher.swift in Sources */,
 				DC4094FC1D2116DA006FB137 /* StubFunctionThenThrowTrait.swift in Sources */,
 				DC9EFA0A1CFAD5AE0034DFE5 /* StubbingHandler.swift in Sources */,
 				DC40950B1D23A813006FB137 /* ArgumentCaptor.swift in Sources */,
-				DC9EFA121CFAD7360034DFE5 /* VerifyReadOnlyProperty.swift in Sources */,
 				DC9EFA1A1CFADAD70034DFE5 /* Matchable.swift in Sources */,
 				DC4094FE1D2116DA006FB137 /* StubFunctionThenReturnTrait.swift in Sources */,
 				DC9EFA2D1CFAE16C0034DFE5 /* MockManager.swift in Sources */,

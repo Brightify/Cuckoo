@@ -52,6 +52,8 @@ public struct AnyMatcher<T>: Matcher {
     }
 }
 
+public typealias CallMatcher = AnyMatcher<[StubCall]>
+
 enum TypeStripingError: ErrorType {
     case CalledWithIncorrectType
 }
