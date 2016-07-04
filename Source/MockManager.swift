@@ -64,13 +64,13 @@ public class MockManager {
         }
     }
     
-    public func createStub<IN, OUT>(method: String, parameterMatchers: [AnyMatcher<IN>]) -> ConcreteStub<IN, OUT> {
+    public func createStub<IN, OUT>(method: String, parameterMatchers: [ParameterMatcher<IN>]) -> ConcreteStub<IN, OUT> {
         let stub = ConcreteStub<IN, OUT>(method: method, parameterMatchers: parameterMatchers)
         stubs.insert(stub, atIndex: 0)
         return stub
     }
     
-    public func verify<IN, OUT>(method: String, callMatcher: CallMatcher, parameterMatchers: [AnyMatcher<IN>], sourceLocation: SourceLocation) -> __DoNotUse<OUT> {
+    public func verify<IN, OUT>(method: String, callMatcher: CallMatcher, parameterMatchers: [ParameterMatcher<IN>], sourceLocation: SourceLocation) -> __DoNotUse<OUT> {
         var calls: [StubCall] = []
         var indexesToRemove: [Int] = []
         for (i, stubCall) in stubCalls.enumerate() {
@@ -83,12 +83,6 @@ public class MockManager {
         
         if callMatcher.matches(calls) == false {
             let description = Description()
-            description
-                .append(text: "Expected ")
-                .append(descriptionOf: callMatcher)
-                .append(text: ", but ")
-            callMatcher.describeMismatch(calls, to: description)
-            
             XCTFail(description.description, file: sourceLocation.file, line: sourceLocation.line)
         }
         return __DoNotUse()

@@ -17,12 +17,7 @@ public func when<F>(function: F) -> F {
 }
 
 @warn_unused_result
-public func verify<M: Mock>(mock: M, file: StaticString = #file, line: UInt = #line) -> M.Verification {
-    return verify(mock, times(1), file: file, line: line)
-}
-
-@warn_unused_result
-public func verify<M: Mock>(mock: M, _ callMatcher: CallMatcher, file: StaticString = #file, line: UInt = #line) -> M.Verification {
+public func verify<M: Mock>(mock: M, _ callMatcher: CallMatcher = times(1), file: StaticString = #file, line: UInt = #line) -> M.Verification {
     return mock.getVerificationProxy(callMatcher, sourceLocation: (file, line))
 }
 

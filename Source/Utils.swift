@@ -22,15 +22,11 @@ public func markerFunction<IN, OUT>(input: IN.Type = IN.self, _ output: OUT.Type
     }
 }
 
-public func parameterMatcher<IN, PARAM, M: Matcher where M.MatchedType == PARAM>(matcher: M, mapping: IN -> PARAM) -> AnyMatcher<IN> {
-    let function: IN -> Bool = {
+// TODO Refactor
+public func parameterMatcher<IN, PARAM>(matcher: ParameterMatcher<PARAM>, mapping: IN -> PARAM) -> ParameterMatcher<IN> {
+    return ParameterMatcher {
         return matcher.matches(mapping($0))
     }
-    let describeMismatch: (IN, Description) -> Void = {
-        matcher.describeMismatch(mapping($0), to: $1)
-    }
-    
-    return FunctionMatcher(function: function, describeMismatch: describeMismatch, describeTo: matcher.describeTo).typeErased()
 }
 
 public typealias SourceLocation = (file: StaticString, line: UInt)

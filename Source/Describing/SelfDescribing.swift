@@ -50,3 +50,9 @@ extension Double: SelfDescribing {
         description.append(text: "<\(self)>")
     }
 }
+
+extension Character: SelfDescribing {
+    public func describeTo(description: Description) {
+        description.append(text: "'\(self)'")
+    }
+}

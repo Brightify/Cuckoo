@@ -18,7 +18,8 @@ class SelfDescribingTest: XCTestCase {
         ("bool with false", false, "<false>"),
         ("int", 33, "<33>"),
         ("float", Float(12.33), "<12.33>"),
-        ("double", Double(12.33), "<12.33>")
+        ("double", Double(12.33), "<12.33>"),
+        ("character", Character("a"), "'a'")
     ]
 
     func testParameterizedTests() {

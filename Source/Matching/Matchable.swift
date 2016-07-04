@@ -7,48 +7,62 @@
 //
 
 /**
-    Matchable can be anything that can produce its own matcher.
+    Matchable can be anything that can produce its own parameter matcher.
     It is used instead of concrete value for stubbing and verification.
 */
 public protocol Matchable {
     associatedtype MatchedType
     
     /// Matcher for this instance. This should be an equalTo type of a matcher, but it is not required.
-    var matcher: AnyMatcher<MatchedType> { get }
+    var matcher: ParameterMatcher<MatchedType> { get }
+}
+
+public extension Matchable {
+    public func or(otherMatchable: Self) -> ParameterMatcher<MatchedType> {
+        return ParameterMatcher {
+            return self.matcher.matches($0) || otherMatchable.matcher.matches($0)
+        }
+    }
+    
+    public func and(otherMatchable: Self) -> ParameterMatcher<MatchedType> {
+        return ParameterMatcher {
+            return self.matcher.matches($0) && otherMatchable.matcher.matches($0)
+        }
+    }
 }
 
 extension Bool: Matchable {
-    public var matcher: AnyMatcher<Bool> {
+    public var matcher: ParameterMatcher<Bool> {
         return equalTo(self)
     }
 }
 
 extension Int: Matchable {
-    public var matcher: AnyMatcher<Int> {
+    public var matcher: ParameterMatcher<Int> {
         return equalTo(self)
     }
 }
 
 extension String: Matchable {
-    public var matcher: AnyMatcher<String> {
+    public var matcher: ParameterMatcher<String> {
         return equalTo(self)
     }
 }
 
 extension Float: Matchable {
-    public var matcher: AnyMatcher<Float> {
+    public var matcher: ParameterMatcher<Float> {
         return equalTo(self)
     }
 }
 
 extension Double: Matchable {
-    public var matcher: AnyMatcher<Double> {
+    public var matcher: ParameterMatcher<Double> {
         return equalTo(self)
     }
 }
 
 extension Character: Matchable {
-    public var matcher: AnyMatcher<Character> {
+    public var matcher: ParameterMatcher<Character> {
         return equalTo(self)
     }
 }

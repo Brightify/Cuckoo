@@ -12,10 +12,10 @@ public protocol Stub {
 
 public class ConcreteStub<IN, OUT>: Stub {
     public let method: String
-    let parameterMatchers: [AnyMatcher<IN>]
+    let parameterMatchers: [ParameterMatcher<IN>]
     var actions: [StubAction<IN, OUT>] = []
     
-    init(method: String, parameterMatchers: [AnyMatcher<IN>]) {
+    init(method: String, parameterMatchers: [ParameterMatcher<IN>]) {
         self.method = method
         self.parameterMatchers = parameterMatchers
     }

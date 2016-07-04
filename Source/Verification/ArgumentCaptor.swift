@@ -21,11 +21,11 @@ public class ArgumentCaptor<T> {
 
     }
     
-    // Return matcher which capture the argument.
-    public func capture() -> AnyMatcher<T> {
-        return FunctionMatcher(function: {
+    // Return parameter matcher which capture the argument.
+    public func capture() -> ParameterMatcher<T> {
+        return ParameterMatcher {
             self.allValues.append($0)
             return true
-        }) { _ in }.typeErased()
+        }
     }
 }

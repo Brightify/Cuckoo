@@ -13,7 +13,7 @@ public struct VerifyProperty<T> {
     private let sourceLocation: SourceLocation
     
     public var get: __DoNotUse<T> {
-        return manager.verify(getterName(name), callMatcher: callMatcher, parameterMatchers: [] as [AnyMatcher<Void>], sourceLocation: sourceLocation)
+        return manager.verify(getterName(name), callMatcher: callMatcher, parameterMatchers: [] as [ParameterMatcher<Void>], sourceLocation: sourceLocation)
     }
     
     public func set<M: Matchable where M.MatchedType == T>(matcher: M) -> __DoNotUse<Void> {
