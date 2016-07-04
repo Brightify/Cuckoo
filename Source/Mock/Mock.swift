@@ -11,9 +11,23 @@ public protocol Mock {
     associatedtype Stubbing: StubbingProxy
     associatedtype Verification: VerificationProxy
     
-    var manager: MockManager<Stubbing, Verification> { get }
+    var manager: MockManager { get }
     
     init()
     
     init(spyOn: MocksType)
+    
+    func getStubbingProxy() -> Stubbing
+    
+    func getVerificationProxy(callMatcher: CallMatcher, sourceLocation: SourceLocation) -> Verification
+}
+
+public extension Mock {
+    func getStubbingProxy() -> Stubbing {
+        return Stubbing(manager: manager)
+    }
+    
+    func getVerificationProxy(callMatcher: CallMatcher, sourceLocation: SourceLocation) -> Verification {
+        return Verification(manager: manager, callMatcher: callMatcher, sourceLocation: sourceLocation)
+    }
 }

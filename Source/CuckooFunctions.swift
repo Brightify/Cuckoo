@@ -8,7 +8,7 @@
 
 /// Start the stubbing for the given mock. Can be used multiple times.
 public func stub<M: Mock>(mock: M, @noescape block: M.Stubbing -> Void) {
-    block(mock.manager.getStubbingProxy())
+    block(mock.getStubbingProxy())
 }
 
 @warn_unused_result
@@ -23,7 +23,7 @@ public func verify<M: Mock>(mock: M, file: StaticString = #file, line: UInt = #l
 
 @warn_unused_result
 public func verify<M: Mock>(mock: M, _ callMatcher: CallMatcher, file: StaticString = #file, line: UInt = #line) -> M.Verification {
-    return mock.manager.getVerificationProxy(callMatcher, sourceLocation: (file, line))
+    return mock.getVerificationProxy(callMatcher, sourceLocation: (file, line))
 }
 
 /// Clear all invocations and stubs of mocks.

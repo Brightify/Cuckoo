@@ -8,7 +8,7 @@
 
 import XCTest
 
-public class MockManager<STUBBING: StubbingProxy, VERIFICATION: VerificationProxy> {
+public class MockManager {
     private var stubs: [Stub] = []
     private var stubCalls: [StubCall] = []
     private var unverifiedStubCallsIndexes: [Int] = []
@@ -26,15 +26,15 @@ public class MockManager<STUBBING: StubbingProxy, VERIFICATION: VerificationProx
     }
     
     public func call<IN, OUT>(method: String, parameters: IN, original: (IN -> OUT)? = nil) -> OUT {
-        return try! self.callThrows(method, parameters: parameters, original: original)
+        return try! callThrows(method, parameters: parameters, original: original)
     }
     
     public func callThrows<IN, OUT>(method: String, parameters: IN, original: (IN throws -> OUT)? = nil) throws -> OUT {
-        let stubCall = StubCall(method: method, parameters: parameters)
+        let stubCall = ConcreteStubCall(method: method, parameters: parameters)
         stubCalls.append(stubCall)
         unverifiedStubCallsIndexes.append(stubCalls.count - 1)
         
-        if let stub = (stubs.filter { $0.name == method }.flatMap { $0 as? ConcreteStub<IN, OUT> }.filter { $0.parameterMatchers.reduce(true) { $0 && $1.matches(parameters) } }.first) {
+        if let stub = (stubs.filter { $0.method == method }.flatMap { $0 as? ConcreteStub<IN, OUT> }.filter { $0.parameterMatchers.reduce(true) { $0 && $1.matches(parameters) } }.first) {
             if let action = stub.actions.first {
                 if stub.actions.count > 1 {
                     // Bug in Swift, this expression resolves as uncalled function
@@ -57,33 +57,41 @@ public class MockManager<STUBBING: StubbingProxy, VERIFICATION: VerificationProx
             } else {
                 fail("Stubbing of method `\(method)` using parameters \(parameters) wasn't finished (missing thenReturn()).")
             }
-        }
-
-        if let original = original {
+        } else if let original = original {
             return try original(parameters)
         } else {
             fail("No stub for method `\(method)` using parameters \(parameters) and no original implementation was provided.")
         }
     }
     
-    public func getStubbingProxy() -> STUBBING {
-        let handler = StubbingHandler { stub in
-            self.stubs.insert(stub, atIndex: 0)
-        }
-        return STUBBING(handler: handler)
+    public func createStub<IN, OUT>(method: String, parameterMatchers: [AnyMatcher<IN>]) -> ConcreteStub<IN, OUT> {
+        let stub = ConcreteStub<IN, OUT>(method: method, parameterMatchers: parameterMatchers)
+        stubs.insert(stub, atIndex: 0)
+        return stub
     }
-
-    public func getVerificationProxy(callMatcher: CallMatcher, sourceLocation: SourceLocation) -> VERIFICATION {
-        let handler = VerificationHandler(callMatcher: callMatcher, sourceLocation: sourceLocation) { method, parameterMatchers in
-            let calls = self.stubCalls.enumerate().filter { i, call in
-                parameterMatchers.reduce(call.method == method) { $0 && $1.matches(call.parameters) }
+    
+    public func verify<IN, OUT>(method: String, callMatcher: CallMatcher, parameterMatchers: [AnyMatcher<IN>], sourceLocation: SourceLocation) -> __DoNotUse<OUT> {
+        var calls: [StubCall] = []
+        var indexesToRemove: [Int] = []
+        for (i, stubCall) in stubCalls.enumerate() {
+            if let stubCall = stubCall as? ConcreteStubCall<IN> where (parameterMatchers.reduce(stubCall.method == method) { $0 && $1.matches(stubCall.parameters) }) {
+                calls.append(stubCall)
+                indexesToRemove.append(i)
             }
-            let indexes = calls.map { $0.index }
-            self.unverifiedStubCallsIndexes = self.unverifiedStubCallsIndexes.filter { !indexes.contains($0) }
-            return calls.map { $0.element }
         }
-
-        return VERIFICATION(handler: handler)
+        unverifiedStubCallsIndexes = unverifiedStubCallsIndexes.filter { !indexesToRemove.contains($0) }
+        
+        if callMatcher.matches(calls) == false {
+            let description = Description()
+            description
+                .append(text: "Expected ")
+                .append(descriptionOf: callMatcher)
+                .append(text: ", but ")
+            callMatcher.describeMismatch(calls, to: description)
+            
+            XCTFail(description.description, file: sourceLocation.file, line: sourceLocation.line)
+        }
+        return __DoNotUse()
     }
     
     func reset() {

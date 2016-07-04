@@ -7,15 +7,19 @@
 //
 
 public struct VerifyReadOnlyProperty<T> {
+    private let manager: MockManager
     private let name: String
-    private let handler: VerificationHandler
+    private let callMatcher: CallMatcher
+    private let sourceLocation: SourceLocation
     
     public var get: __DoNotUse<T> {
-        return handler.verify(getterName(name), parameterMatchers: [] as [AnyMatcher<Void>])
+        return manager.verify(getterName(name), callMatcher: callMatcher, parameterMatchers: [] as [AnyMatcher<Void>], sourceLocation: sourceLocation)
     }
     
-    public init(name: String, handler: VerificationHandler) {
+    public init(manager: MockManager, name: String, callMatcher: CallMatcher, sourceLocation: SourceLocation) {
+        self.manager = manager
         self.name = name
-        self.handler = handler
+        self.callMatcher = callMatcher
+        self.sourceLocation = sourceLocation
     }
 }

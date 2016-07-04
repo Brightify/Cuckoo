@@ -7,5 +7,5 @@
 //
 
 public protocol VerificationProxy {
-    init(handler: VerificationHandler)
+    init(manager: MockManager, callMatcher: CallMatcher, sourceLocation: SourceLocation)
 }

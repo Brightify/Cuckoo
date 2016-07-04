@@ -7,5 +7,5 @@
 //
 
 public protocol StubbingProxy {
-    init(handler: StubbingHandler)
+    init(manager: MockManager)
 }

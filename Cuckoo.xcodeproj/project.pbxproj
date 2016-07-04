@@ -36,8 +36,6 @@
 		DC5A3A5D1CF6F8D600F520E3 /* Cuckoo.podspec in Resources */ = {isa = PBXBuildFile; fileRef = DC5A3A5C1CF6F8D600F520E3 /* Cuckoo.podspec */; };
 		DC9EF9FE1CFAD4F10034DFE5 /* Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EF9FD1CFAD4F10034DFE5 /* Stub.swift */; };
 		DC9EFA001CFAD5660034DFE5 /* StubCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EF9FF1CFAD5660034DFE5 /* StubCall.swift */; };
-		DC9EFA0A1CFAD5AE0034DFE5 /* StubbingHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EFA091CFAD5AE0034DFE5 /* StubbingHandler.swift */; };
-		DC9EFA101CFAD7260034DFE5 /* VerificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EFA0F1CFAD7260034DFE5 /* VerificationHandler.swift */; };
 		DC9EFA1A1CFADAD70034DFE5 /* Matchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EFA161CFADAD70034DFE5 /* Matchable.swift */; };
 		DC9EFA1B1CFADAD70034DFE5 /* Matcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EFA171CFADAD70034DFE5 /* Matcher.swift */; };
 		DC9EFA1C1CFADAD70034DFE5 /* MatcherFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EFA181CFADAD70034DFE5 /* MatcherFunctions.swift */; };
@@ -96,8 +94,6 @@
 		DC5A3A5C1CF6F8D600F520E3 /* Cuckoo.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cuckoo.podspec; sourceTree = "<group>"; };
 		DC9EF9FD1CFAD4F10034DFE5 /* Stub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Stub.swift; path = stubbing/Stub.swift; sourceTree = "<group>"; };
 		DC9EF9FF1CFAD5660034DFE5 /* StubCall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StubCall.swift; path = stubbing/StubCall.swift; sourceTree = "<group>"; };
-		DC9EFA091CFAD5AE0034DFE5 /* StubbingHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StubbingHandler.swift; path = stubbing/StubbingHandler.swift; sourceTree = "<group>"; };
-		DC9EFA0F1CFAD7260034DFE5 /* VerificationHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VerificationHandler.swift; path = verification/VerificationHandler.swift; sourceTree = "<group>"; };
 		DC9EFA161CFADAD70034DFE5 /* Matchable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Matchable.swift; path = matching/Matchable.swift; sourceTree = "<group>"; };
 		DC9EFA171CFADAD70034DFE5 /* Matcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Matcher.swift; path = matching/Matcher.swift; sourceTree = "<group>"; };
 		DC9EFA181CFADAD70034DFE5 /* MatcherFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MatcherFunctions.swift; path = matching/MatcherFunctions.swift; sourceTree = "<group>"; };
@@ -234,7 +230,6 @@
 				DC9EFA411CFC31B10034DFE5 /* StubAction.swift */,
 				DC9EF9FD1CFAD4F10034DFE5 /* Stub.swift */,
 				DC9EF9FF1CFAD5660034DFE5 /* StubCall.swift */,
-				DC9EFA091CFAD5AE0034DFE5 /* StubbingHandler.swift */,
 			);
 			name = Stubbing;
 			sourceTree = "<group>";
@@ -244,7 +239,6 @@
 			children = (
 				DC40951C1D294899006FB137 /* VerifyProperty */,
 				DC5600EF1CFAD4A4001F339D /* __DoNotUse.swift */,
-				DC9EFA0F1CFAD7260034DFE5 /* VerificationHandler.swift */,
 				DC40950A1D23A813006FB137 /* ArgumentCaptor.swift */,
 			);
 			name = Verification;
@@ -428,14 +422,12 @@
 				DC4094FF1D2116DA006FB137 /* StubFunctionThenTrait.swift in Sources */,
 				DC9EFA421CFC31B10034DFE5 /* StubAction.swift in Sources */,
 				DC4094F31D211598006FB137 /* ToBeStubbedProperty.swift in Sources */,
-				DC9EFA101CFAD7260034DFE5 /* VerificationHandler.swift in Sources */,
 				DC9EF9FE1CFAD4F10034DFE5 /* Stub.swift in Sources */,
 				DC9EFA1C1CFADAD70034DFE5 /* MatcherFunctions.swift in Sources */,
 				DC4095081D2120E6006FB137 /* StubNoReturnFunction.swift in Sources */,
 				DC40951F1D2948C2006FB137 /* VerifyProperty.swift in Sources */,
 				DC9EFA1B1CFADAD70034DFE5 /* Matcher.swift in Sources */,
 				DC4094FC1D2116DA006FB137 /* StubFunctionThenThrowTrait.swift in Sources */,
-				DC9EFA0A1CFAD5AE0034DFE5 /* StubbingHandler.swift in Sources */,
 				DC40950B1D23A813006FB137 /* ArgumentCaptor.swift in Sources */,
 				DC9EFA1A1CFADAD70034DFE5 /* Matchable.swift in Sources */,
 				DC4094FE1D2116DA006FB137 /* StubFunctionThenReturnTrait.swift in Sources */,

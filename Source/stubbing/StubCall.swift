@@ -6,7 +6,16 @@
 //  Copyright © 2016 Brightify. All rights reserved.
 //
 
-public struct StubCall {
-    let method: String
-    let parameters: Any
+public protocol StubCall {
+    var method: String { get }
+}
+
+public struct ConcreteStubCall<IN>: StubCall {
+    public let method: String
+    let parameters: IN
+    
+    public init(method: String, parameters: IN) {
+        self.method = method
+        self.parameters = parameters
+    }
 }

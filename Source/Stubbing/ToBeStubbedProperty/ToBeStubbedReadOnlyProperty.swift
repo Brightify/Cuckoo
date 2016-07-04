@@ -7,15 +7,15 @@
 //
 
 public struct ToBeStubbedReadOnlyProperty<T> {
-    private let handler: StubbingHandler
+    private let manager: MockManager
     private let name: String
     
     public var get: StubFunction<Void, T> {
-        return StubFunction(stub: handler.createStub(getterName(name), parameterMatchers: []))
+        return StubFunction(stub: manager.createStub(getterName(name), parameterMatchers: []))
     }
     
-    public init(handler: StubbingHandler, name: String) {
-        self.handler = handler
+    public init(manager: MockManager, name: String) {
+        self.manager = manager
         self.name = name
     }
 }
