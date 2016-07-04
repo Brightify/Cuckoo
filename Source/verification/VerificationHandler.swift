@@ -16,7 +16,7 @@ public struct VerificationHandler {
     public func verify<IN, OUT>(method: String, parameterMatchers: [AnyMatcher<IN>]) -> __DoNotUse<OUT> {
         let calls = getStubCallsFor(method: method, parameterMatchers: parameterMatchers.map { AnyMatcher($0) })
         if callMatcher.matches(calls) == false {
-            let description = StringDescription()
+            let description = Description()
             description
                 .append(text: "Expected ")
                 .append(descriptionOf: callMatcher)

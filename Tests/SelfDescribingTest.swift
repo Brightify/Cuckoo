@@ -10,66 +10,24 @@
 import XCTest
 
 class SelfDescribingTest: XCTestCase {
+    private let tests: [(message: String, value: SelfDescribing, expected: String)] = [
+        ("optional with nil", nil as String?, "nil"),
+        ("optional with value", "this is not nil" as String?, "\"this is not nil\""),
+        ("string", "hello world", "\"hello world\""),
+        ("bool with true", true, "<true>"),
+        ("bool with false", false, "<false>"),
+        ("int", 33, "<33>"),
+        ("float", Float(12.33), "<12.33>"),
+        ("double", Double(12.33), "<12.33>")
+    ]
 
-    var stringDescription: StringDescription!
-
-    override func setUp() {
-        super.setUp()
-
-        stringDescription = StringDescription()
-    }
-
-    func testOptional() {
-        let nilValue: String? = nil
-        let stringValue: String? = "this is not nil"
-
-        nilValue.describeTo(stringDescription)
-        stringDescription.append(character: " ")
-        stringValue.describeTo(stringDescription)
-
-        XCTAssertEqual(stringDescription.description, "nil \"this is not nil\"")
-    }
-
-    func testString() {
-        let value: String = "hello world"
-
-        value.describeTo(stringDescription)
-
-        XCTAssertEqual(stringDescription.description, "\"hello world\"")
-    }
-
-    func testBool() {
-        let trueValue: Bool = true
-        let falseValue: Bool = false
-
-        trueValue.describeTo(stringDescription)
-        stringDescription.append(character: " ")
-        falseValue.describeTo(stringDescription)
-
-        XCTAssertEqual(stringDescription.description, "<true> <false>")
-    }
-
-    func testInt() {
-        let value: Int = 33
-
-        value.describeTo(stringDescription)
-
-        XCTAssertEqual(stringDescription.description, "<33>")
-    }
-
-    func testFloat() {
-        let value: Float = 12.33
-
-        value.describeTo(stringDescription)
-
-        XCTAssertEqual(stringDescription.description, "<12.33>")
-    }
-
-    func testDouble() {
-        let value: Double = 12.33
-
-        value.describeTo(stringDescription)
-
-        XCTAssertEqual(stringDescription.description, "<12.33>")
+    func testParameterizedTests() {
+        tests.forEach { test in
+            let description = Description()
+            
+            test.value.describeTo(description)
+            
+            XCTAssertEqual(description.description, test.expected, test.message)
+        }
     }
 }

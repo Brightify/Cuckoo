@@ -11,12 +11,12 @@ import XCTest
 
 class MatcherDescriptionsTest: XCTestCase {
 
-    var stringDescription: StringDescription!
+    var stringDescription: Description!
 
     override func setUp() {
         super.setUp()
 
-        stringDescription = StringDescription()
+        stringDescription = Description()
     }
 
     func testEqualTo() {
