@@ -25,8 +25,7 @@ The generated files contain enough information to give you the right amount of p
 ## TODO
 
 We are still missing support for some important features like:
-* static properties
-* static methods
+* inheritance
 * generics
 
 ## What will not be supported
@@ -35,6 +34,7 @@ Due to the limitations mentioned above, basically all things which don't allow o
 * `struct` - workaround is to use a common protocol
 * everything with `final` or `private` modifier
 * global constants and functions
+* static properties and methods
 
 ## Requirements
 
@@ -101,7 +101,7 @@ Also don't forget to add the Framework into your project.
 
 ### Usage
 
-Usage of Cuckoo is similar to [Mockito](http://mockito.org/) and [Hamcrest](http://hamcrest.org/). But there are some differences and limitations caused by generating the mocks and Swift language itself. List of all supported features can be found [here](https://github.com/SwiftKit/CuckooGenerator). You can find complete example in [tests](Tests) concretely in [CuckooAPITest](Tests/CuckooAPITest.swift).
+Usage of Cuckoo is similar to [Mockito](http://mockito.org/) and [Hamcrest](http://hamcrest.org/). But there are some differences and limitations caused by generating the mocks and Swift language itself. List of all supported features can be found below. You can find complete example in [tests](Tests).
 
 #### Mock initialization
 
@@ -137,6 +137,8 @@ thenCallRealImplementation()
 thenDoNothing()
 ```
 
+Which methods can be used depends on the stubbed method. For example you cannot use the `thenThrow` method with method which cannot throw exception.
+
 The stubbing of method can look like this:
 
 ```Swift
@@ -158,6 +160,10 @@ stub(mock) { stub in
 }
 ```
 
+Notice the `get` and `set` these will be used in verification later.
+
+##### Chain stubbing
+
 It is possible to chain stubbing. This is useful if you need to set different behavior for multiple calls in order. The last behavior will last for all other calls. Syntax goes like this:
 
 ```Swift
@@ -172,7 +178,9 @@ when(stub.readWriteProperty.get).thenReturn(10, 20)
 
 In both cases first call to `readWriteProperty` will return `10` and every other will return `20`.
 
-You can combine the stubbing method as you like.
+You can combine the stubbing methods as you like.
+
+##### Overriding of stubbing
 
 When looking for stub match Cuckoo gives the highest priority to last call of `when`. This means that calling `when` multiple times with the same function and matchers effectively overrides previous call. Also more general parameter matchers have to be used before specific ones.
 
@@ -220,9 +228,9 @@ As you can see, method `capture()` is used to create matcher for the call and th
 
 #### Parameter matchers
 
-As parameters of methods in stubbing and verification you can use either basic value types or parameter matchers.
+As parameters of methods in stubbing and verification you can use objects which conform to `Matchable` protocol.
 
-Value types which can be used directly are:
+These basic values are extended to conform to `Matchable`:
 
 * `Bool`
 * `Int`
@@ -231,7 +239,9 @@ Value types which can be used directly are:
 * `Double`
 * `Character`
 
-And this is list of available parameter matchers:
+Note: Optional types (for example `Int?`) cannot be used directly. You need to wrap them with `eq` function.
+
+`ParameterMatcher` also conform to `Matchable`. You can create your own `ParameterMatcher` instances or if you want to directly use your custom types there is the `Matchable` protocol. Standard instances of `ParameterMatcher` can be obtain via these functions:
 
 ```Swift
 /// All equalTo matchers have shortcut eq.
@@ -263,15 +273,19 @@ notNil()
 
 Matching of nil can be achieved with `eq(nil)`.
 
-Both parameter matchers and call matchers can be chained with methods `or` and `and` like so:
+`Matchable` can be chained with methods `or` and `and` like so:
 
 ```Swift
-verify(mock).greetWithMessage(eq("Hello world").or("Hallo Welt"))
+verify(mock).greetWithMessage("Hello world".or("Hallo Welt"))
 ```
 
 #### Call matchers
 
-As second parameter of `verify` function you can use call matcher, which specify how many times should be the call made. Supported call matchers are:
+As a second parameter of `verify` function you can use instances of `CallMatcher`. Its primary function is to assert how many times was the call made. But the `matches` function has a parameter of type `[StubCall]` which means you can use custom `CallMatcher` to inspect the stub calls or for some side effect.
+
+Note: Call matchers are applied after the parameter matchers. So you get only stub calls of wanted method with correct arguments.
+
+Standard call matchers are:
 
 ```Swift
 /// Returns a matcher ensuring a call was made `count` times.
@@ -289,6 +303,8 @@ atLeast(count: Int)
 /// Returns a matcher ensuring call was made at most `count` times.
 atMost(count: Int)
 ```
+
+As with `Matchable` you can chain `CallMatcher` with methods `or` and `and`. But you cannot mix `Matchable` and `CallMatcher` together.
 
 #### Resetting mocks
 
@@ -309,7 +325,7 @@ clearInvocations<M: Mock>(mocks: M...)
 
 ### Installation
 
-For normal use you can skip this because [run script](https://github.com/SwiftKit/Cuckoo/blob/master/run) in Cuckoo downloads and builds correct version of the generator automatically.
+For normal use you can skip this because [run script](run) in Cuckoo downloads and builds correct version of the generator automatically.
 
 #### Homebrew
 
@@ -317,7 +333,7 @@ Simply run `brew install cuckoo` and you are ready to go.
 
 #### Custom
 
-This is more complicated path. You need to clone this repository and build it yourself. You can look in the [run script](https://github.com/SwiftKit/Cuckoo/blob/master/run) for more inspiration.
+This is more complicated path. You need to clone this repository and build it yourself. You can look in the [run script](run) for more inspiration.
 
 ### Usage
 
@@ -354,6 +370,10 @@ Do not generate file headers.
 ##### `--no-timestamp`
 
 Do not generate timestamp.
+
+##### `--file-prefix`
+
+Names of generated files in directory will start with this prefix. Only works when output path is directory.
 
 #### `version` command
 
