@@ -2,6 +2,12 @@
 
 ## 0.7.0 [pending release]
 
+* Updated documentation
+* Added more automated tests
+* Added --file-prefix parameter to generator
+* `and` and `or` methods can now be used with `Matchable` (literals)
+* Using of custom `Matchable`, `ParameterMatcher` and `CallMatcher` is now easier
+
 ## 0.6.0
 
 * Added release notes
