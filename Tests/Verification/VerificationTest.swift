@@ -1,0 +1,60 @@
+//
+//  VerificationTest.swift
+//  Cuckoo
+//
+//  Created by Filip Dolnik on 04.07.16.
+//  Copyright © 2016 Brightify. All rights reserved.
+//
+
+import XCTest
+import Cuckoo
+
+class VerificationTest: XCTestCase {
+    
+    func testVerify() {
+        let mock = MockTestedClass()
+        stub(mock) { mock in
+            when(mock.noReturn()).thenDoNothing()
+        }
+        
+        mock.noReturn()
+        
+        verify(mock).noReturn()
+    }
+    
+    func testVerifyWithCallMatcher() {
+        let mock = MockTestedClass()
+        stub(mock) { mock in
+            when(mock.noReturn()).thenDoNothing()
+        }
+        
+        mock.noReturn()
+        mock.noReturn()
+        
+        verify(mock, times(2)).noReturn()
+    }
+    
+    func testVerifyWithMultipleDifferentCalls() {
+        let mock = MockTestedClass()
+        stub(mock) { mock in
+            when(mock.noReturn()).thenDoNothing()
+            when(mock.countCharacters(anyString())).thenReturn(1)
+        }
+        
+        mock.countCharacters("a")
+        mock.noReturn()
+        
+        verify(mock).noReturn()
+        verify(mock).countCharacters(anyString())
+    }
+    
+    func testVerifyFail() {
+        let error = TestUtils.catchCuckooFail {
+            let mock = MockTestedClass()
+            
+            verify(mock).noReturn()
+        }
+        
+        XCTAssertNotNil(error)
+    }
+}

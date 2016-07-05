@@ -13,19 +13,15 @@ protocol TestedProtocol {
     
     var optionalProperty: Int? { get set }
     
-    func noParameter()
+    func noReturn()
     
     func countCharacters(test: String) -> Int
     
-    func withReturn() -> String
+    func withThrows() throws -> Int
     
-    func withThrows() throws
+    func withNoReturnThrows() throws
     
-    func withClosure(closure: String -> Int)
-    
-    func withClosureReturningInt(closure: String -> Int) -> Int
-    
-    func withMultipleParameters(a: String, b: Int, c: Float)
+    func withClosure(closure: String -> Int) -> Int
     
     func withNoescape(a: String, @noescape closure: String -> Void)
     

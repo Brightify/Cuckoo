@@ -23,7 +23,7 @@ class DescriptionTest: XCTestCase {
             let description = Description()
             
             test.appendTo(description)
-            
+
             XCTAssertEqual(description.description, test.expected, test.message)
         }
     }

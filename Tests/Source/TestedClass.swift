@@ -10,39 +10,31 @@ class TestedClass {
     let constant: Float = 0.0
     
     var readOnlyProperty: String {
-        return ""
+        return "a"
     }
     
     lazy var readWriteProperty: Int = 0
     
     lazy var optionalProperty: Int? = 0
     
-    func noParameter() {
-    
+    func noReturn() {
+        
     }
     
     func countCharacters(test: String) -> Int {
         return test.characters.count
     }
     
-    func withReturn() -> String {
-        return "yello world"
+    func withThrows() throws -> Int {
+        return 0
     }
     
-    func withThrows() throws {
+    func withNoReturnThrows() throws {
         
     }
     
-    func withClosure(closure: String -> Int) {
-        closure("hello")
-    }
-    
-    func withClosureReturningInt(closure: String -> Int) -> Int {
+    func withClosure(closure: String -> Int) -> Int {
         return closure("hello")
-    }
-    
-    func withMultipleParameters(a: String, b: Int, c: Float) {
-        
     }
     
     func withNoescape(a: String, @noescape closure: String -> Void) {

@@ -13,9 +13,9 @@ public struct CallMatcher {
         self.matchesFunction = matchesFunction
     }
     
-    public init(numberOfExpectedCalls: Int, compareCallsFunction: (Int, Int) -> Bool) {
+    public init(numberOfExpectedCalls: Int, compareCallsFunction: (expected: Int, actual: Int) -> Bool) {
         self.matchesFunction = {
-            return compareCallsFunction(numberOfExpectedCalls, $0.count)
+            return compareCallsFunction(expected: numberOfExpectedCalls, actual: $0.count)
         }
     }
     
@@ -24,6 +24,18 @@ public struct CallMatcher {
             return try matchesFunction(calls)
         } catch {
             return false
+        }
+    }
+    
+    public func or(otherMatcher: CallMatcher) -> CallMatcher {
+        return CallMatcher {
+            return self.matches($0) || otherMatcher.matches($0)
+        }
+    }
+    
+    public func and(otherMatcher: CallMatcher) -> CallMatcher {
+        return CallMatcher {
+            return self.matches($0) && otherMatcher.matches($0)
         }
     }
 }

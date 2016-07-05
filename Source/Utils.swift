@@ -22,7 +22,7 @@ public func markerFunction<IN, OUT>(input: IN.Type = IN.self, _ output: OUT.Type
     }
 }
 
-// TODO Refactor
+// TODO Refactor wrapMatchable
 public func parameterMatcher<IN, PARAM>(matcher: ParameterMatcher<PARAM>, mapping: IN -> PARAM) -> ParameterMatcher<IN> {
     return ParameterMatcher {
         return matcher.matches(mapping($0))

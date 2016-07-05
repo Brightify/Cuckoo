@@ -56,15 +56,15 @@ public func anyString() -> ParameterMatcher<String> {
     return ParameterMatcher()
 }
 
-/// Returns a matcher matching any T value or nil.
-@warn_unused_result
-public func any<T>(type: T.Type = T.self) -> ParameterMatcher<T> {
-    return ParameterMatcher()
-}
-
 /// Returns a matcher matching any closure.
 @warn_unused_result
 public func anyClosure<IN, OUT>() -> ParameterMatcher<IN -> OUT> {
+    return ParameterMatcher()
+}
+
+/// Returns a matcher matching any T value or nil.
+@warn_unused_result
+public func any<T>(type: T.Type = T.self) -> ParameterMatcher<T> {
     return ParameterMatcher()
 }
 

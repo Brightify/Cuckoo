@@ -9,6 +9,8 @@
 import XCTest
 
 public class MockManager {
+    static var fail: (message: String, file: StaticString, line: UInt) -> () = XCTFail
+    
     private var stubs: [Stub] = []
     private var stubCalls: [StubCall] = []
     private var unverifiedStubCallsIndexes: [Int] = []
@@ -51,16 +53,16 @@ public class MockManager {
                     if let original = original {
                         return try original(parameters)
                     } else {
-                        fail("No real implementation found for method `\(method)`. This may happend because stubbed object is mock or spy of protocol.")
+                        failAndCrash("No real implementation found for method `\(method)`. This may happend because stubbed object is mock or spy of protocol.")
                     }
                 }
             } else {
-                fail("Stubbing of method `\(method)` using parameters \(parameters) wasn't finished (missing thenReturn()).")
+                failAndCrash("Stubbing of method `\(method)` using parameters \(parameters) wasn't finished (missing thenReturn()).")
             }
         } else if let original = original {
             return try original(parameters)
         } else {
-            fail("No stub for method `\(method)` using parameters \(parameters) and no original implementation was provided.")
+            failAndCrash("No stub for method `\(method)` using parameters \(parameters) and no original implementation was provided.")
         }
     }
     
@@ -83,7 +85,7 @@ public class MockManager {
         
         if callMatcher.matches(calls) == false {
             let description = Description()
-            XCTFail(description.description, file: sourceLocation.file, line: sourceLocation.line)
+            MockManager.fail(message: description.description, file: sourceLocation.file, line: sourceLocation.line)
         }
         return __DoNotUse()
     }
@@ -105,13 +107,13 @@ public class MockManager {
     func verifyNoMoreInteractions(sourceLocation: SourceLocation) {
         if unverifiedStubCallsIndexes.isEmpty == false {
             let unverifiedCalls = unverifiedStubCallsIndexes.map { stubCalls[$0] }.map { String($0) }.joinWithSeparator(", ")
-            XCTFail("Found unverified call(s): " + unverifiedCalls, file: sourceLocation.file, line: sourceLocation.line)
+            MockManager.fail(message: "Found unverified call(s): " + unverifiedCalls, file: sourceLocation.file, line: sourceLocation.line)
         }
     }
     
     @noreturn
-    private func fail(message: String) {
-        XCTFail(message)
+    private func failAndCrash(message: String, file: StaticString = #file, line: UInt = #line) {
+        MockManager.fail(message: message, file: file, line: line)
         fatalError(message)
     }
 }
