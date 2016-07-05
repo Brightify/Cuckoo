@@ -7,7 +7,7 @@
 //
 
 public protocol StubFunctionThenDoNothingTrait: BaseStubFunctionTrait {   
-    /// Do nothing when invoked.
+    /// Does nothing when invoked.
     func thenDoNothing() -> Self
 }
 

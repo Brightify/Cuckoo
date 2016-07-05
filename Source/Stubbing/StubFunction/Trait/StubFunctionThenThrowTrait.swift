@@ -7,7 +7,7 @@
 //
 
 public protocol StubFunctionThenThrowTrait: BaseStubFunctionTrait {
-    /// Throw `error` when invoked.
+    /// Throws `error` when invoked.
     func thenThrow(error: ErrorType, _ errors: ErrorType...) -> Self
 }
 

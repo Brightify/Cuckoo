@@ -6,6 +6,7 @@
 //  Copyright © 2016 Brightify. All rights reserved.
 //
 
+/// CallMatcher is used in verification to assert how many times was the call made. It can also be used to do different asserts on stub calls matched with parameter matchers.
 public struct CallMatcher {
     private let matchesFunction: [StubCall] throws -> Bool
     
@@ -18,7 +19,7 @@ public struct CallMatcher {
             return compareCallsFunction(expected: numberOfExpectedCalls, actual: $0.count)
         }
     }
-    
+
     public func matches(calls: [StubCall]) -> Bool {
         do {
             return try matchesFunction(calls)

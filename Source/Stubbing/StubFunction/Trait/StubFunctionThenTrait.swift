@@ -7,7 +7,7 @@
 //
 
 public protocol StubFunctionThenTrait: BaseStubFunctionTrait {
-    /// Invoke `implementation` when invoked.
+    /// Invokes `implementation` when invoked.
     func then(implementation: IN -> OUT) -> Self
 }
 

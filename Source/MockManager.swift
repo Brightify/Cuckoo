@@ -9,7 +9,7 @@
 import XCTest
 
 public class MockManager {
-    static var fail: (message: String, file: StaticString, line: UInt) -> () = XCTFail
+    static var fail: (message: String, sourceLocation: SourceLocation) -> () = { XCTFail($0, file: $1.file, line: $1.line) }
     
     private var stubs: [Stub] = []
     private var stubCalls: [StubCall] = []
@@ -85,7 +85,7 @@ public class MockManager {
         
         if callMatcher.matches(calls) == false {
             let description = Description()
-            MockManager.fail(message: description.description, file: sourceLocation.file, line: sourceLocation.line)
+            MockManager.fail(message: description.description, sourceLocation: sourceLocation)
         }
         return __DoNotUse()
     }
@@ -107,13 +107,13 @@ public class MockManager {
     func verifyNoMoreInteractions(sourceLocation: SourceLocation) {
         if unverifiedStubCallsIndexes.isEmpty == false {
             let unverifiedCalls = unverifiedStubCallsIndexes.map { stubCalls[$0] }.map { String($0) }.joinWithSeparator(", ")
-            MockManager.fail(message: "Found unverified call(s): " + unverifiedCalls, file: sourceLocation.file, line: sourceLocation.line)
+            MockManager.fail(message: "Found unverified call(s): " + unverifiedCalls, sourceLocation: sourceLocation)
         }
     }
     
     @noreturn
-    private func failAndCrash(message: String, file: StaticString = #file, line: UInt = #line) {
-        MockManager.fail(message: message, file: file, line: line)
+    private func failAndCrash(message: String, sourceLocation: SourceLocation = (#file, #line)) {
+        MockManager.fail(message: message, sourceLocation: sourceLocation)
         fatalError(message)
     }
 }

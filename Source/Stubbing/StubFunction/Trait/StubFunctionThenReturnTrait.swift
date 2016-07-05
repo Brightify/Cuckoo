@@ -7,7 +7,7 @@
 //
 
 public protocol StubFunctionThenReturnTrait: BaseStubFunctionTrait {
-    /// Return `output` when invoked.
+    /// Returns `output` when invoked.
     func thenReturn(output: OUT, _ outputs: OUT...) -> Self
 }
 

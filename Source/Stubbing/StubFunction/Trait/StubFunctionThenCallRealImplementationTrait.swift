@@ -7,7 +7,7 @@
 //
 
 public protocol StubFunctionThenCallRealImplementationTrait: BaseStubFunctionTrait {
-    /// Invoke real implementation when invoked.
+    /// Invokes real implementation when invoked.
     func thenCallRealImplementation() -> Self
 }
 

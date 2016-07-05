@@ -6,6 +6,7 @@
 //  Copyright © 2016 Brightify. All rights reserved.
 //
 
+/// ParameterMatcher matches parameters of methods in stubbing and verification.
 public struct ParameterMatcher<T>: Matchable {
     private let matchesFunction: T throws -> Bool
     

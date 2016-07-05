@@ -121,19 +121,19 @@ Note: It is currently possible for the subbing object to escape from the closure
 After calling the `when` function you can specify what to do next with following methods:
 
 ```Swift
-/// Invoke `implementation` when invoked.
+/// Invokes `implementation` when invoked.
 then(implementation: IN throws -> OUT)
 
-/// Return `output` when invoked.
+/// Returns `output` when invoked.
 thenReturn(output: OUT, _ outputs: OUT...)
 
-/// Throw `error` when invoked.
+/// Throws `error` when invoked.
 thenThrow(error: ErrorType, _ outputs: OUT...)
 
-/// Invoke real implementation when invoked.
+/// Invokes real implementation when invoked.
 thenCallRealImplementation()
 
-/// Do nothing when invoked.
+/// Does nothing when invoked.
 thenDoNothing()
 ```
 
@@ -311,13 +311,13 @@ As with `Matchable` you can chain `CallMatcher` with methods `or` and `and`. But
 Following functions are used to reset stubbing and/or invocations on mocks.
 
 ```Swift
-/// Clear all invocations and stubs of mocks.
+/// Clears all invocations and stubs of mocks.
 reset<M: Mock>(mocks: M...)
 
-/// Clear all stubs of mocks.
+/// Clears all stubs of mocks.
 clearStubs<M: Mock>(mocks: M...)
 
-/// Clear all invocations of mocks.
+/// Clears all invocations of mocks.
 clearInvocations<M: Mock>(mocks: M...)
 ```
 
