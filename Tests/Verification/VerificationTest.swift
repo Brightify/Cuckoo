@@ -47,14 +47,4 @@ class VerificationTest: XCTestCase {
         verify(mock).noReturn()
         verify(mock).countCharacters(anyString())
     }
-    
-    func testVerifyFail() {
-        let error = TestUtils.catchCuckooFail {
-            let mock = MockTestedClass()
-            
-            verify(mock).noReturn()
-        }
-        
-        XCTAssertNotNil(error)
-    }
 }

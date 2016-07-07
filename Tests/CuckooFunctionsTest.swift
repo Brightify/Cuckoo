@@ -64,19 +64,4 @@ class CuckooFunctionsTest: XCTestCase {
         
         verifyNoMoreInteractions(mock)
     }
-    
-    func testVerifyNoMoreInteractionsFail() {
-        let error = TestUtils.catchCuckooFail {
-            let mock = MockTestedClass()
-            stub(mock) { mock in
-                when(mock.noReturn()).thenDoNothing()
-            }
-            
-            mock.noReturn()
-            
-            verifyNoMoreInteractions(mock)
-        }
-        
-        XCTAssertNotNil(error)
-    }
 }

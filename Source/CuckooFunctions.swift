@@ -19,8 +19,8 @@ public func when<F>(function: F) -> F {
 
 /// Creates object used for verification of calls.
 @warn_unused_result
-public func verify<M: Mock>(mock: M, _ callMatcher: CallMatcher = times(1), sourceLocation: SourceLocation = (#file, #line)) -> M.Verification {
-    return mock.getVerificationProxy(callMatcher, sourceLocation: sourceLocation)
+public func verify<M: Mock>(mock: M, _ callMatcher: CallMatcher = times(1), file: StaticString = #file, line: UInt = #line) -> M.Verification {
+    return mock.getVerificationProxy(callMatcher, sourceLocation: (file, line))
 }
 
 /// Clears all invocations and stubs of mocks.
@@ -45,8 +45,8 @@ public func clearInvocations<M: Mock>(mocks: M...) {
 }
 
 /// Checks if there are no more uverified calls.
-public func verifyNoMoreInteractions<M: Mock>(mocks: M..., sourceLocation: SourceLocation = (#file, #line)) {
+public func verifyNoMoreInteractions<M: Mock>(mocks: M..., file: StaticString = #file, line: UInt = #line) {
     mocks.forEach { mock in
-        mock.manager.verifyNoMoreInteractions(sourceLocation)
+        mock.manager.verifyNoMoreInteractions((file, line))
     }
 }

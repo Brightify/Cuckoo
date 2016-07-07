@@ -8,11 +8,23 @@
 
 public protocol StubCall {
     var method: String { get }
+    var parametersAsString: String { get }
 }
 
 public struct ConcreteStubCall<IN>: StubCall {
     public let method: String
-    let parameters: IN
+    public let parameters: IN
+    
+    public var parametersAsString: String {
+        let string = String(parameters)
+        if (string.rangeOfString(",") != nil && string.hasPrefix("(")) || string == "()" {
+            return string
+        } else {
+            // If only one parameter add brackets and quotes
+            let wrappedParameter = String((parameters, 0))
+            return wrappedParameter.substringToIndex(wrappedParameter.endIndex.advancedBy(-4)) + ")"
+        }
+    }
     
     public init(method: String, parameters: IN) {
         self.method = method

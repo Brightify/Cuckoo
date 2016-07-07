@@ -84,8 +84,8 @@ public class MockManager {
         unverifiedStubCallsIndexes = unverifiedStubCallsIndexes.filter { !indexesToRemove.contains($0) }
         
         if callMatcher.matches(calls) == false {
-            let description = Description()
-            MockManager.fail(message: description.description, sourceLocation: sourceLocation)
+            let message = "Wanted \(callMatcher.name) but \(calls.count == 0 ? "not invoked" : "invoked \(calls.count) times")."
+            MockManager.fail(message: message, sourceLocation: sourceLocation)
         }
         return __DoNotUse()
     }
@@ -106,14 +106,26 @@ public class MockManager {
     
     func verifyNoMoreInteractions(sourceLocation: SourceLocation) {
         if unverifiedStubCallsIndexes.isEmpty == false {
-            let unverifiedCalls = unverifiedStubCallsIndexes.map { stubCalls[$0] }.map { String($0) }.joinWithSeparator(", ")
-            MockManager.fail(message: "Found unverified call(s): " + unverifiedCalls, sourceLocation: sourceLocation)
+            let unverifiedCalls = unverifiedStubCallsIndexes.map { stubCalls[$0] }.map { call in
+                    if let bracketIndex = call.method.rangeOfString("(")?.startIndex {
+                        let name = call.method.substringToIndex(bracketIndex)
+                        return name + call.parametersAsString
+                    } else {
+                        if call.method.hasSuffix("#set") {
+                            return call.method + call.parametersAsString
+                        } else {
+                            return call.method
+                        }
+                    }
+                }.enumerate().map { "\($0 + 1). " + $1 }.joinWithSeparator("\n")
+            let message = "No more interactions wanted but some found:\n"
+            MockManager.fail(message: message + unverifiedCalls, sourceLocation: sourceLocation)
         }
     }
     
     @noreturn
-    private func failAndCrash(message: String, sourceLocation: SourceLocation = (#file, #line)) {
-        MockManager.fail(message: message, sourceLocation: sourceLocation)
+    private func failAndCrash(message: String, file: StaticString = #file, line: UInt = #line) {
+        MockManager.fail(message: message, sourceLocation: (file, line))
         fatalError(message)
     }
 }
