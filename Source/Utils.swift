@@ -22,10 +22,9 @@ public func markerFunction<IN, OUT>(input: IN.Type = IN.self, _ output: OUT.Type
     }
 }
 
-// TODO Refactor wrapMatchable
-public func parameterMatcher<IN, PARAM>(matcher: ParameterMatcher<PARAM>, mapping: IN -> PARAM) -> ParameterMatcher<IN> {
+public func wrapMatchable<M: Matchable, IN>(matchable: M, mapping: IN -> M.MatchedType) -> ParameterMatcher<IN> {
     return ParameterMatcher {
-        return matcher.matches(mapping($0))
+        return matchable.matcher.matches(mapping($0))
     }
 }
 
