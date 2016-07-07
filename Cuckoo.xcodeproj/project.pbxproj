@@ -38,8 +38,6 @@
 		DC70D0AF1D2AB64A00014C5F /* ParameterMatcherFunctionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC70D0AE1D2AB64A00014C5F /* ParameterMatcherFunctionsTest.swift */; };
 		DC70D0B11D2AB67000014C5F /* CallMatcherFunctionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC70D0B01D2AB67000014C5F /* CallMatcherFunctionsTest.swift */; };
 		DC70D0B31D2AB6B900014C5F /* MatchableTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC70D0B21D2AB6B900014C5F /* MatchableTest.swift */; };
-		DC70D0B41D2AB70F00014C5F /* SelfDescribingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC70D0A31D2AB58700014C5F /* SelfDescribingTest.swift */; };
-		DC70D0B51D2AB71200014C5F /* DescriptionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC70D0A21D2AB58700014C5F /* DescriptionTest.swift */; };
 		DC70D0B81D2ABA3100014C5F /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC70D0B71D2ABA3100014C5F /* TestUtils.swift */; };
 		DC70D0BE1D2AF40800014C5F /* TestedClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC70D0BB1D2AF40800014C5F /* TestedClass.swift */; };
 		DC70D0BF1D2AF40800014C5F /* TestedProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC70D0BC1D2AF40800014C5F /* TestedProtocol.swift */; };
@@ -56,8 +54,6 @@
 		DC9EF9FE1CFAD4F10034DFE5 /* Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EF9FD1CFAD4F10034DFE5 /* Stub.swift */; };
 		DC9EFA001CFAD5660034DFE5 /* StubCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EF9FF1CFAD5660034DFE5 /* StubCall.swift */; };
 		DC9EFA1A1CFADAD70034DFE5 /* Matchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EFA161CFADAD70034DFE5 /* Matchable.swift */; };
-		DC9EFA241CFADB970034DFE5 /* Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EFA231CFADB970034DFE5 /* Description.swift */; };
-		DC9EFA261CFADBA70034DFE5 /* SelfDescribing.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EFA251CFADBA70034DFE5 /* SelfDescribing.swift */; };
 		DC9EFA2D1CFAE16C0034DFE5 /* MockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EFA2C1CFAE16C0034DFE5 /* MockManager.swift */; };
 		DC9EFA3E1CFC2FE20034DFE5 /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EFA3B1CFC2FE20034DFE5 /* Mock.swift */; };
 		DC9EFA3F1CFC2FE20034DFE5 /* StubbingProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EFA3C1CFC2FE20034DFE5 /* StubbingProxy.swift */; };
@@ -105,8 +101,6 @@
 		DC40952B1D2A5155006FB137 /* CallMatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CallMatcher.swift; path = Matching/CallMatcher.swift; sourceTree = "<group>"; };
 		DC5600EF1CFAD4A4001F339D /* __DoNotUse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = __DoNotUse.swift; path = verification/__DoNotUse.swift; sourceTree = "<group>"; };
 		DC5A3A5C1CF6F8D600F520E3 /* Cuckoo.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cuckoo.podspec; sourceTree = "<group>"; };
-		DC70D0A21D2AB58700014C5F /* DescriptionTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DescriptionTest.swift; path = Describing/DescriptionTest.swift; sourceTree = "<group>"; };
-		DC70D0A31D2AB58700014C5F /* SelfDescribingTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelfDescribingTest.swift; path = Describing/SelfDescribingTest.swift; sourceTree = "<group>"; };
 		DC70D0A61D2AB5B300014C5F /* CuckooFunctionsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CuckooFunctionsTest.swift; sourceTree = "<group>"; };
 		DC70D0A91D2AB5F500014C5F /* ClassTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassTest.swift; sourceTree = "<group>"; };
 		DC70D0AC1D2AB62100014C5F /* ProtocolTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProtocolTest.swift; sourceTree = "<group>"; };
@@ -129,8 +123,6 @@
 		DC9EF9FD1CFAD4F10034DFE5 /* Stub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Stub.swift; path = stubbing/Stub.swift; sourceTree = "<group>"; };
 		DC9EF9FF1CFAD5660034DFE5 /* StubCall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StubCall.swift; path = stubbing/StubCall.swift; sourceTree = "<group>"; };
 		DC9EFA161CFADAD70034DFE5 /* Matchable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Matchable.swift; path = matching/Matchable.swift; sourceTree = "<group>"; };
-		DC9EFA231CFADB970034DFE5 /* Description.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Description.swift; path = describing/Description.swift; sourceTree = "<group>"; };
-		DC9EFA251CFADBA70034DFE5 /* SelfDescribing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelfDescribing.swift; path = describing/SelfDescribing.swift; sourceTree = "<group>"; };
 		DC9EFA2C1CFAE16C0034DFE5 /* MockManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockManager.swift; sourceTree = "<group>"; };
 		DC9EFA3B1CFC2FE20034DFE5 /* Mock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Mock.swift; path = mock/Mock.swift; sourceTree = "<group>"; };
 		DC9EFA3C1CFC2FE20034DFE5 /* StubbingProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StubbingProxy.swift; path = mock/StubbingProxy.swift; sourceTree = "<group>"; };
@@ -185,7 +177,6 @@
 				183D04151C46926A00EBAEF3 /* CuckooFunctions.swift */,
 				DC9EFA2C1CFAE16C0034DFE5 /* MockManager.swift */,
 				DC9EFA451CFC43A70034DFE5 /* Utils.swift */,
-				DC9EFA221CFADB8B0034DFE5 /* Describing */,
 				DC9EFA151CFADAA00034DFE5 /* Matching */,
 				DC9EFA3A1CFC2FA30034DFE5 /* Mock */,
 				DC5600E91CFAD467001F339D /* Stubbing */,
@@ -203,7 +194,6 @@
 				DC1A82B31D2D6A2100A217F0 /* FailTest.swift */,
 				DC70D0AC1D2AB62100014C5F /* ProtocolTest.swift */,
 				DC70D0B71D2ABA3100014C5F /* TestUtils.swift */,
-				DC70D0A01D2AB53D00014C5F /* Describing */,
 				DC70D0D01D2B006200014C5F /* Generated */,
 				DC70D0A11D2AB54700014C5F /* Matching */,
 				DC70D0B91D2AF3FA00014C5F /* Source */,
@@ -278,15 +268,6 @@
 			name = Verification;
 			sourceTree = "<group>";
 		};
-		DC70D0A01D2AB53D00014C5F /* Describing */ = {
-			isa = PBXGroup;
-			children = (
-				DC70D0A21D2AB58700014C5F /* DescriptionTest.swift */,
-				DC70D0A31D2AB58700014C5F /* SelfDescribingTest.swift */,
-			);
-			name = Describing;
-			sourceTree = "<group>";
-		};
 		DC70D0A11D2AB54700014C5F /* Matching */ = {
 			isa = PBXGroup;
 			children = (
@@ -347,15 +328,6 @@
 				DC4095251D2A50BE006FB137 /* ParameterMatcherFunctions.swift */,
 			);
 			name = Matching;
-			sourceTree = "<group>";
-		};
-		DC9EFA221CFADB8B0034DFE5 /* Describing */ = {
-			isa = PBXGroup;
-			children = (
-				DC9EFA231CFADB970034DFE5 /* Description.swift */,
-				DC9EFA251CFADBA70034DFE5 /* SelfDescribing.swift */,
-			);
-			name = Describing;
 			sourceTree = "<group>";
 		};
 		DC9EFA3A1CFC2FA30034DFE5 /* Mock */ = {
@@ -505,12 +477,10 @@
 				DC4095011D2120D0006FB137 /* StubFunctionThenDoNothingTrait.swift in Sources */,
 				DC4094EE1D211563006FB137 /* StubFunction.swift in Sources */,
 				183D04161C46926A00EBAEF3 /* CuckooFunctions.swift in Sources */,
-				DC9EFA261CFADBA70034DFE5 /* SelfDescribing.swift in Sources */,
 				DC4094F41D211598006FB137 /* ToBeStubbedReadOnlyProperty.swift in Sources */,
 				DC9EFA401CFC2FE20034DFE5 /* VerificationProxy.swift in Sources */,
 				DC9EFA001CFAD5660034DFE5 /* StubCall.swift in Sources */,
 				DC9EFA3E1CFC2FE20034DFE5 /* Mock.swift in Sources */,
-				DC9EFA241CFADB970034DFE5 /* Description.swift in Sources */,
 				DC4094FF1D2116DA006FB137 /* StubFunctionThenTrait.swift in Sources */,
 				DC9EFA421CFC31B10034DFE5 /* StubAction.swift in Sources */,
 				DC4094F31D211598006FB137 /* ToBeStubbedProperty.swift in Sources */,
@@ -538,7 +508,6 @@
 				DC70D0C21D2AF4FF00014C5F /* ArgumentCaptorTest.swift in Sources */,
 				DC70D0C91D2AFAD200014C5F /* StubNoReturnFunctionTest.swift in Sources */,
 				DC70D0CD1D2AFB1100014C5F /* StubThrowingFunctionTest.swift in Sources */,
-				DC70D0B51D2AB71200014C5F /* DescriptionTest.swift in Sources */,
 				DC70D0CB1D2AFAF200014C5F /* StubNoReturnThrowingFunctionTest.swift in Sources */,
 				DC70D0B81D2ABA3100014C5F /* TestUtils.swift in Sources */,
 				DC70D0B11D2AB67000014C5F /* CallMatcherFunctionsTest.swift in Sources */,
@@ -555,7 +524,6 @@
 				DC70D0AD1D2AB62100014C5F /* ProtocolTest.swift in Sources */,
 				DC70D0C51D2AFA8E00014C5F /* StubFunctionTest.swift in Sources */,
 				DC70D0D81D2B9FD400014C5F /* CallMatcherTest.swift in Sources */,
-				DC70D0B41D2AB70F00014C5F /* SelfDescribingTest.swift in Sources */,
 				DC70D0A81D2AB5B700014C5F /* CuckooFunctionsTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
