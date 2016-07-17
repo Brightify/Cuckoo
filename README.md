@@ -74,11 +74,11 @@ INPUT_DIR="./${PROJECT_NAME}"
 echo "Mocks Input Directory = ${INPUT_DIR}"
 
 # Generate mock files; include as many input files as you'd like to create mocks for
-${PODS_ROOT}/Cuckoo/run generate --testable ${PROJECT_NAME} \
---output ${OUTPUT_FILE} \
-${INPUT_DIR}/FileName1.swift \
-${INPUT_DIR}/FileName2.swift \
-${INPUT_DIR}/FileName3.swift
+${PODS_ROOT}/Cuckoo/run generate --testable "${PROJECT_NAME}" \
+--output "${OUTPUT_FILE}" \
+"${INPUT_DIR}/FileName1.swift" \
+"${INPUT_DIR}/FileName2.swift" \
+"${INPUT_DIR}/FileName3.swift"
 # ... and so forth
 
 # After running once, locate `GeneratedMocks.swift` and drag it into your Xcode test target group
