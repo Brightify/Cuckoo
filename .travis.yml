@@ -12,7 +12,8 @@ script:
     - cd Generator
     - bash run_tests.sh
     - cd ..
-    - xcodebuild -workspace 'Cuckoo.xcworkspace' -scheme 'Cuckoo' clean test
+    - cat Generator/Tests/SourceFiles/Expected/GeneratedMocks.swift
+    - cat Generator/Build/tmp/Actual.swift
 
 after_script:
     - sleep 5
