@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
 
   s.homepage         = "https://github.com/SwiftKit/Cuckoo"
   s.license          = 'MIT'
-  s.author           = { "Tadeas Kriz" => "tadeas@brightify.org" }
+  s.author           = { "Tadeas Kriz" => "tadeas@brightify.org", "Filip Dolnik" => "filip@brightify.org" }
   s.source           = {
       :git => "https://github.com/SwiftKit/Cuckoo.git",
       :tag => s.version.to_s
@@ -19,7 +19,12 @@ Pod::Spec.new do |s|
   s.osx.deployment_target       = '10.9'
   #s.watchos.deployment_target   = '2.0' # watchos does not include XCTest framework :(
   s.tvos.deployment_target      = '9.0'
-  s.source_files                = ['Source/**/*.swift', 'run']
+  s.source_files                = ['Source/**/*.swift']
+  s.preserve_paths              = ['Generator/**/*', 'run', 'build_generator']
+  s.prepare_command             = <<-CMD
+                                    git submodule update --init --recursive
+                                    ./build_generator
+                                CMD
   s.frameworks                  = 'XCTest', 'Foundation'
   s.requires_arc                = true
   s.pod_target_xcconfig         = { 'ENABLE_BITCODE' => 'NO' }

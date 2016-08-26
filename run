@@ -1,29 +1,11 @@
 #!/usr/bin/env bash
-VERSION=0.6.0
-FILE_NAME=cuckoo_generator_$VERSION.app
-FILE_PATH=.build/CuckooGenerator/$FILE_NAME
+
+SCRIPT_PATH="`dirname \"$0\"`"
+FILE_NAME=cuckoo_generator.app
+FILE_PATH=$SCRIPT_PATH/Generator/$FILE_NAME
+
 if [ ! -e $FILE_PATH ]; then
-	mkdir .build 2>/dev/null
-	cd .build
-	mkdir CuckooGenerator 2>/dev/null
-	cd CuckooGenerator
-	rm -rf Build
-	mkdir Build
-	cd Build
-	git clone https://github.com/SwiftKit/CuckooGenerator.git
-	cd CuckooGenerator
-	git checkout $VERSION
-	git submodule update --init --recursive
-	env -i PATH=${PATH}, HOME=${HOME} xcodebuild -project 'CuckooGenerator.xcodeproj' -scheme 'CuckooGenerator' -configuration 'Release' CONFIGURATION_BUILD_DIR=$(pwd)/.. clean build
-	cd ../..
-	mv Build/cuckoo.app $FILE_NAME
-	rm -rf Build
-	cd ../..
+	$SCRIPT_PATH/build_generator
 fi
-INPUT_FILES=""
-for (( i=0; i<SCRIPT_INPUT_FILE_COUNT; i++ ))
-do
-	VARIABLE=SCRIPT_INPUT_FILE_${i}
-	INPUT_FILES+=" "${!VARIABLE}
-done
-$FILE_PATH/Contents/MacOS/cuckoo "$@" ${INPUT_FILES}
+
+$FILE_PATH/Contents/MacOS/cuckoo_generator "$@"
