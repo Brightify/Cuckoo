@@ -99,7 +99,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1808B15F1C4575AA0036E924"
-               BuildableName = "cuckoo.app"
+               BuildableName = "cuckoo_generator.app"
                BlueprintName = "CuckooGenerator"
                ReferencedContainer = "container:CuckooGenerator.xcodeproj">
             </BuildableReference>
@@ -117,7 +117,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1808B15F1C4575AA0036E924"
-            BuildableName = "cuckoo.app"
+            BuildableName = "cuckoo_generator.app"
             BlueprintName = "CuckooGenerator"
             ReferencedContainer = "container:CuckooGenerator.xcodeproj">
          </BuildableReference>
@@ -140,7 +140,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1808B15F1C4575AA0036E924"
-            BuildableName = "cuckoo.app"
+            BuildableName = "cuckoo_generator.app"
             BlueprintName = "CuckooGenerator"
             ReferencedContainer = "container:CuckooGenerator.xcodeproj">
          </BuildableReference>
@@ -159,7 +159,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1808B15F1C4575AA0036E924"
-            BuildableName = "cuckoo.app"
+            BuildableName = "cuckoo_generator.app"
             BlueprintName = "CuckooGenerator"
             ReferencedContainer = "container:CuckooGenerator.xcodeproj">
          </BuildableReference>
