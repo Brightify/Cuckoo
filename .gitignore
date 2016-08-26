@@ -33,4 +33,4 @@ DerivedData
 
 Carthage/Build
 .DS_Store
-GeneratedMocks.swift
+Tests/Generated/*.swift
