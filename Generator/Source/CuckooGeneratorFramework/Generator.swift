@@ -84,6 +84,10 @@ public struct Generator {
         
         let override = token is ClassMethod ? "override " : ""
         let parametersSignature = token.parameters.enumerate().map { "\($1.attributes.sourceRepresentation)\($1.labelAndNameAtPosition($0)): \($1.type)" }.joinWithSeparator(", ")
+
+        let parametersSignatureWithoutNames = token.parameters.map {
+                "\($0.attributes.sourceRepresentation)\($0.name): \($0.type)"
+            }.joinWithSeparator(", ")
         
         var managerCall: String
         let tryIfThrowing: String
@@ -103,7 +107,7 @@ public struct Generator {
         }.joinWithSeparator(", ")
         managerCall += ", parameters: (\(escapingParameters))"
         let methodCall = token.parameters.enumerate().map { ($1.labelOrNameAtPosition($0), $1.name ) }.map { $0.isEmpty ? $1 : "\($0): \($1)" }.joinWithSeparator(", ")
-        managerCall += ", original: observed.map { o in return { (\(parametersSignature))\(token.returnSignature) in \(tryIfThrowing)o.\(token.rawName)(\(methodCall)) } })"
+        managerCall += ", original: observed.map { o in return { (\(parametersSignatureWithoutNames))\(token.returnSignature) in \(tryIfThrowing)o.\(token.rawName)(\(methodCall)) } })"
         
         code += ""
         code += "\(token.accessibility.sourceName)\(override)\(token.isInit ? "" : "func " )\(token.rawName)(\(parametersSignature))\(token.returnSignature) {"

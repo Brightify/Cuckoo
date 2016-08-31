@@ -143,6 +143,17 @@ class ClassTest: XCTestCase {
         XCTAssertTrue(called)
         verify(mock).withOptionalClosure(anyString(), closure: anyClosure())
     }
+
+    func testWithLabel() {
+        var called = false
+        stub(mock) { mock in
+            when(mock.withLabel(labelA: anyString())).then { _ in called = true }
+        }
+
+        mock.withLabel(labelA: "a")
+        XCTAssertTrue(called)
+        verify(mock).withLabel(labelA: anyString())
+    }
     
     private enum TestError: ErrorType {
         case Unknown

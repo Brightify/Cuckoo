@@ -44,4 +44,8 @@ class TestedClass {
     func withOptionalClosure(a: String, closure: (String -> Void)?) {
         closure?(a)
     }
+
+    func withLabel(labelA a: String) {
+        
+    }
 }

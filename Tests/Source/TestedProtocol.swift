@@ -26,4 +26,6 @@ protocol TestedProtocol {
     func withNoescape(a: String, @noescape closure: String -> Void)
     
     func withOptionalClosure(a: String, closure: (String -> Void)?)
+
+    func withLabel(labelA a: String)
 }
