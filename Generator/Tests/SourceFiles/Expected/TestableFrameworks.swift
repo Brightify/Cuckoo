@@ -22,10 +22,10 @@ class MockEmptyClass: EmptyClass, Cuckoo.Mock {
     
     private var observed: EmptyClass?
     
-    required override init() {
+    override init() {
     }
     
-    required init(spyOn victim: EmptyClass) {
+    init(spyOn victim: EmptyClass) {
         observed = victim
     }
     

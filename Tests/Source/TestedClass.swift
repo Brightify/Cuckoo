@@ -37,7 +37,7 @@ class TestedClass {
         return closure("hello")
     }
     
-    func withNoescape(a: String, @noescape closure: String -> Void) {
+    func withNoescape(a: String, @noescape action closure: String -> Void) {
         closure(a)
     }
     

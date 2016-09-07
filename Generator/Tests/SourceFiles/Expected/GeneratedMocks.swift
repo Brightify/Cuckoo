@@ -16,10 +16,10 @@ class MockTestedClass: TestedClass, Cuckoo.Mock {
     
     private var observed: TestedClass?
     
-    required override init() {
+    override init() {
     }
     
-    required init(spyOn victim: TestedClass) {
+    init(spyOn victim: TestedClass) {
         observed = victim
     }
     
@@ -67,8 +67,8 @@ class MockTestedClass: TestedClass, Cuckoo.Mock {
         return manager.call("withClosure(_: String -> Int) -> Int", parameters: (closure), original: observed.map { o in return { (closure: String -> Int) -> Int in o.withClosure(closure) } })
     }
     
-    override func withNoescape(a: String, @noescape closure: String -> Void) {
-        return manager.call("withNoescape(_: String, closure: String -> Void)", parameters: (a, Cuckoo.markerFunction()), original: observed.map { o in return { (a: String, @noescape closure: String -> Void) in o.withNoescape(a, closure: closure) } })
+    override func withNoescape(a: String, @noescape action closure: String -> Void) {
+        return manager.call("withNoescape(_: String, action: String -> Void)", parameters: (a, Cuckoo.markerFunction()), original: observed.map { o in return { (a: String, @noescape closure: String -> Void) in o.withNoescape(a, action: closure) } })
     }
     
     override func withOptionalClosure(a: String, closure: (String -> Void)?) {
@@ -122,9 +122,9 @@ class MockTestedClass: TestedClass, Cuckoo.Mock {
         }
         
         @warn_unused_result
-        func withNoescape<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable where M1.MatchedType == String, M2.MatchedType == String -> Void>(a: M1, closure: M2) -> Cuckoo.StubNoReturnFunction<(String, String -> Void)> {
+        func withNoescape<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable where M1.MatchedType == String, M2.MatchedType == String -> Void>(a: M1, action closure: M2) -> Cuckoo.StubNoReturnFunction<(String, String -> Void)> {
             let matchers: [Cuckoo.ParameterMatcher<(String, String -> Void)>] = [wrapMatchable(a) { $0.0 }, wrapMatchable(closure) { $0.1 }]
-            return Cuckoo.StubNoReturnFunction(stub: manager.createStub("withNoescape(_: String, closure: String -> Void)", parameterMatchers: matchers))
+            return Cuckoo.StubNoReturnFunction(stub: manager.createStub("withNoescape(_: String, action: String -> Void)", parameterMatchers: matchers))
         }
         
         @warn_unused_result
@@ -179,9 +179,9 @@ class MockTestedClass: TestedClass, Cuckoo.Mock {
             return manager.verify("withClosure(_: String -> Int) -> Int", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
         }
         
-        func withNoescape<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable where M1.MatchedType == String, M2.MatchedType == String -> Void>(a: M1, closure: M2) -> Cuckoo.__DoNotUse<Void> {
+        func withNoescape<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable where M1.MatchedType == String, M2.MatchedType == String -> Void>(a: M1, action closure: M2) -> Cuckoo.__DoNotUse<Void> {
             let matchers: [Cuckoo.ParameterMatcher<(String, String -> Void)>] = [wrapMatchable(a) { $0.0 }, wrapMatchable(closure) { $0.1 }]
-            return manager.verify("withNoescape(_: String, closure: String -> Void)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+            return manager.verify("withNoescape(_: String, action: String -> Void)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
         }
         
         func withOptionalClosure<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable where M1.MatchedType == String, M2.MatchedType == (String -> Void)?>(a: M1, closure: M2) -> Cuckoo.__DoNotUse<Void> {
@@ -209,10 +209,10 @@ class MockTestedProtocol: TestedProtocol, Cuckoo.Mock {
     
     private var observed: TestedProtocol?
     
-    required init() {
+    init() {
     }
     
-    required init(spyOn victim: TestedProtocol) {
+    init(spyOn victim: TestedProtocol) {
         observed = victim
     }
     

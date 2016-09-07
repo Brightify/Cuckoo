@@ -40,3 +40,6 @@ Feature: Generate command
 		When I run `runcuckoo generate --no-timestamp --file-prefix Mock --output . SourceFiles/ClassWithAttributes.swift SourceFiles/Imports.swift`
 		Then the file "SourceFiles/Expected/ClassWithAttributes.swift" should be equal to file "MockClassWithAttributes.swift"
 		And the file "SourceFiles/Expected/Imports.swift" should be equal to file "MockImports.swift"
+	Scenario: class with init
+		When I run `runcuckoo generate --no-timestamp --output Actual.swift SourceFiles/ClassWithInit.swift`
+		Then the file "SourceFiles/Expected/ClassWithInit.swift" should be equal to file "Actual.swift"

@@ -7,15 +7,10 @@
 //
 
 public protocol Mock {
-    associatedtype MocksType
     associatedtype Stubbing: StubbingProxy
     associatedtype Verification: VerificationProxy
     
     var manager: MockManager { get }
-    
-    init()
-    
-    init(spyOn: MocksType)
     
     func getStubbingProxy() -> Stubbing
     

@@ -123,13 +123,13 @@ class ClassTest: XCTestCase {
     func testWithNoescape() {
         var called = false
         stub(mock) { mock in
-            when(mock.withNoescape(anyString(), closure: anyClosure())).then { _ in called = true }
+            when(mock.withNoescape(anyString(), action: anyClosure())).then { _ in called = true }
         }
         
         mock.withNoescape("a") { _ in 1 }
         
         XCTAssertTrue(called)
-        verify(mock).withNoescape(anyString(), closure: anyClosure())
+        verify(mock).withNoescape(anyString(), action: anyClosure())
     }
     
     func testWithOptionalClosure() {

@@ -12,10 +12,10 @@ public class MockClassWithAttributes: ClassWithAttributes, Cuckoo.Mock {
     
     private var observed: ClassWithAttributes?
     
-    public required override init() {
+    public override init() {
     }
     
-    public required init(spyOn victim: ClassWithAttributes) {
+    public init(spyOn victim: ClassWithAttributes) {
         observed = victim
     }
     

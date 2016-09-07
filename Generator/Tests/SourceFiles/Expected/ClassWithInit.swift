@@ -1,22 +1,22 @@
+// MARK: - Mocks generated from file: SourceFiles/ClassWithInit.swift
+//
+//  ClassWithInit.swift
+//  Cuckoo
+//
+//  Created by Tadeas Kriz on 09/02/16.
+//  Copyright © 2016 Brightify. All rights reserved.
+//
+
 import Cuckoo
 
-import Foundation
-
-class MockEmptyClass: EmptyClass, Cuckoo.Mock {
-    typealias Stubbing = __StubbingProxy_EmptyClass
-    typealias Verification = __VerificationProxy_EmptyClass
+class MockClassWithInit: ClassWithInit, Cuckoo.Mock {
+    typealias Stubbing = __StubbingProxy_ClassWithInit
+    typealias Verification = __VerificationProxy_ClassWithInit
     let manager = Cuckoo.MockManager()
     
-    private var observed: EmptyClass?
+    private var observed: ClassWithInit?
     
-    override init() {
-    }
-    
-    init(spyOn victim: EmptyClass) {
-        observed = victim
-    }
-    
-    struct __StubbingProxy_EmptyClass: Cuckoo.StubbingProxy {
+    struct __StubbingProxy_ClassWithInit: Cuckoo.StubbingProxy {
         private let manager: Cuckoo.MockManager
         
         init(manager: Cuckoo.MockManager) {
@@ -24,7 +24,7 @@ class MockEmptyClass: EmptyClass, Cuckoo.Mock {
         }
     }
     
-    struct __VerificationProxy_EmptyClass: Cuckoo.VerificationProxy {
+    struct __VerificationProxy_ClassWithInit: Cuckoo.VerificationProxy {
         private let manager: Cuckoo.MockManager
         private let callMatcher: Cuckoo.CallMatcher
         private let sourceLocation: Cuckoo.SourceLocation

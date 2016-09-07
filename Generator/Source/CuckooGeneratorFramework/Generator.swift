@@ -45,13 +45,15 @@ public struct Generator {
             code += "\(token.accessibility.sourceName)let manager = Cuckoo.MockManager()"
             code += ""
             code += "private var observed: \(token.name)?"
-            code += ""
-            code += "\(token.accessibility.sourceName)required\(token.implementation ? " override" : "") init() {"
-            code += "}"
-            code += ""
-            code += "\(token.accessibility.sourceName)required init(spyOn victim: \(token.name)) {"
-            code.nest("observed = victim")
-            code += "}"
+            if (token.children.filter { ($0 as? Method)?.isInit == true }.isEmpty) {
+                code += ""
+                code += "\(token.accessibility.sourceName)\(token.implementation ? "override " : "")init() {"
+                code += "}"
+                code += ""
+                code += "\(token.accessibility.sourceName)init(spyOn victim: \(token.name)) {"
+                code.nest("observed = victim")
+                code += "}"
+            }
             token.children.forEach { generate($0) }
             code += ""
             generateStubbing(token)
@@ -81,13 +83,12 @@ public struct Generator {
     
     private func generateMockingMethod(token: Method) {
         guard token.accessibility != .Private else { return }
+        guard !token.isInit else { return }
         
         let override = token is ClassMethod ? "override " : ""
         let parametersSignature = token.parameters.enumerate().map { "\($1.attributes.sourceRepresentation)\($1.labelAndNameAtPosition($0)): \($1.type)" }.joinWithSeparator(", ")
 
-        let parametersSignatureWithoutNames = token.parameters.map {
-                "\($0.attributes.sourceRepresentation)\($0.name): \($0.type)"
-            }.joinWithSeparator(", ")
+        let parametersSignatureWithoutNames = token.parameters.map { "\($0.attributes.sourceRepresentation)\($0.name): \($0.type)" }.joinWithSeparator(", ")
         
         var managerCall: String
         let tryIfThrowing: String
@@ -156,6 +157,7 @@ public struct Generator {
     
     private func generateStubbingMethod(token: Method) {
         guard token.accessibility != .Private else { return }
+        guard !token.isInit else { return }
         
         let stubFunction: String
         if token.isThrowing {
@@ -242,6 +244,7 @@ public struct Generator {
     
     private func generateVerificationMethod(token: Method) {
         guard token.accessibility != .Private else { return }
+        guard !token.isInit else { return }
         
         code += ""
         code += ("\(token.accessibility.sourceName)func \(token.rawName)\(matchableGenerics(token.parameters))" +

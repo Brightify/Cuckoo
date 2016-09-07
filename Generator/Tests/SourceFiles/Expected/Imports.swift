@@ -26,10 +26,10 @@ class MockA: A, Cuckoo.Mock {
     
     private var observed: A?
     
-    required override init() {
+    override init() {
     }
     
-    required init(spyOn victim: A) {
+    init(spyOn victim: A) {
         observed = victim
     }
     
