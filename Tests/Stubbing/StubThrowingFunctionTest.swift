@@ -32,7 +32,7 @@ class StubThrowingFunctionTest: XCTestCase {
     }
     
     func testThenCallRealImplementation() {
-        let mock = MockTestedClass(spyOn: TestedClass())
+        let mock = MockTestedClass().spy(on: TestedClass())
         stub(mock) { mock in
             when(mock.withThrows()).thenCallRealImplementation()
         }

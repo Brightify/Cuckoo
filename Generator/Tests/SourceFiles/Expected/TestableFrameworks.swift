@@ -25,8 +25,9 @@ class MockEmptyClass: EmptyClass, Cuckoo.Mock {
     override init() {
     }
     
-    init(spyOn victim: EmptyClass) {
+    func spy(on victim: EmptyClass) -> MockEmptyClass {
         observed = victim
+        return self
     }
     
     struct __StubbingProxy_EmptyClass: Cuckoo.StubbingProxy {

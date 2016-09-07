@@ -49,11 +49,14 @@ public struct Generator {
                 code += ""
                 code += "\(token.accessibility.sourceName)\(token.implementation ? "override " : "")init() {"
                 code += "}"
-                code += ""
-                code += "\(token.accessibility.sourceName)init(spyOn victim: \(token.name)) {"
-                code.nest("observed = victim")
-                code += "}"
             }
+            code += ""
+            code += "\(token.accessibility.sourceName)func spy(on victim: \(token.name)) -> \(mockClassName(token.name)) {"
+            code.nest {
+                code += "observed = victim"
+                code += "return self"
+            }
+            code += "}"
             token.children.forEach { generate($0) }
             code += ""
             generateStubbing(token)

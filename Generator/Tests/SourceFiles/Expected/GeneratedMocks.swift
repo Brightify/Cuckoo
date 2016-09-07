@@ -19,8 +19,9 @@ class MockTestedClass: TestedClass, Cuckoo.Mock {
     override init() {
     }
     
-    init(spyOn victim: TestedClass) {
+    func spy(on victim: TestedClass) -> MockTestedClass {
         observed = victim
+        return self
     }
     
     override var readOnlyProperty: String {
@@ -212,8 +213,9 @@ class MockTestedProtocol: TestedProtocol, Cuckoo.Mock {
     init() {
     }
     
-    init(spyOn victim: TestedProtocol) {
+    func spy(on victim: TestedProtocol) -> MockTestedProtocol {
         observed = victim
+        return self
     }
     
     var readOnlyProperty: String {

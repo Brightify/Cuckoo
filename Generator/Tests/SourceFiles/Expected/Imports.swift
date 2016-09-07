@@ -29,8 +29,9 @@ class MockA: A, Cuckoo.Mock {
     override init() {
     }
     
-    init(spyOn victim: A) {
+    func spy(on victim: A) -> MockA {
         observed = victim
+        return self
     }
     
     struct __StubbingProxy_A: Cuckoo.StubbingProxy {

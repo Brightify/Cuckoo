@@ -16,6 +16,11 @@ class MockClassWithInit: ClassWithInit, Cuckoo.Mock {
     
     private var observed: ClassWithInit?
     
+    func spy(on victim: ClassWithInit) -> MockClassWithInit {
+        observed = victim
+        return self
+    }
+    
     struct __StubbingProxy_ClassWithInit: Cuckoo.StubbingProxy {
         private let manager: Cuckoo.MockManager
         

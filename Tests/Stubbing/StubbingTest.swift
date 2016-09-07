@@ -44,7 +44,7 @@ class StubbingTest: XCTestCase {
     }
     
     func testUnstubbedSpy() {
-        let mock = MockTestedClass(spyOn: TestedClass())
+        let mock = MockTestedClass().spy(on: TestedClass())
         
         XCTAssertEqual(mock.countCharacters("a"), 1)
     }

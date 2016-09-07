@@ -12,7 +12,7 @@ import Cuckoo
 class CuckooFunctionsTest: XCTestCase {
     
     func testReset() {
-        let mock = MockTestedClass(spyOn: TestedClass())
+        let mock = MockTestedClass().spy(on: TestedClass())
         stub(mock) { mock in
             when(mock.countCharacters(anyString())).thenReturn(10)
         }
@@ -26,7 +26,7 @@ class CuckooFunctionsTest: XCTestCase {
     }
     
     func testClearStubs() {
-        let mock = MockTestedClass(spyOn: TestedClass())
+        let mock = MockTestedClass().spy(on: TestedClass())
         stub(mock) { mock in
             when(mock.countCharacters(anyString())).thenReturn(10)
         }

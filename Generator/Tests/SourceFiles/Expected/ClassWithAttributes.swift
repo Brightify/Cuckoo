@@ -15,8 +15,9 @@ public class MockClassWithAttributes: ClassWithAttributes, Cuckoo.Mock {
     public override init() {
     }
     
-    public init(spyOn victim: ClassWithAttributes) {
+    public func spy(on victim: ClassWithAttributes) -> MockClassWithAttributes {
         observed = victim
+        return self
     }
     
     public struct __StubbingProxy_ClassWithAttributes: Cuckoo.StubbingProxy {

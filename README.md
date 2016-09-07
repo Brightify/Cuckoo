@@ -109,11 +109,11 @@ Usage of Cuckoo is similar to [Mockito](http://mockito.org/) and [Hamcrest](http
 
 #### Mock initialization
 
-Mocks can be created with parameterless constructor. If you want to spy on object instead, pass it as `spyOn` parameter. Name of mock class always corresponds to name of the mocked class/protocol with 'Mock' prefix. For example mock of protocol `Greeter` has a name `MockGreeter`.  
+Mocks can be created with the same constructors as the mocked type. If the type has no init specified then parameterless one is generated. If you want to spy on object you can call `spy(on: Type)' method. Name of mock class always corresponds to name of the mocked class/protocol with 'Mock' prefix. For example mock of protocol `Greeter` has a name `MockGreeter`.  
 
 ```Swift
 let mock = MockGreeter()
-let spy = MockGreeter(spyOn: aRealInstanceOfGreeter)
+let spy = MockGreeter().spy(on: aRealInstanceOfGreeter)
 ```
 
 #### Stubbing
