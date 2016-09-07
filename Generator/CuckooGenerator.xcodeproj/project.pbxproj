@@ -611,9 +611,11 @@
 				TargetAttributes = {
 					1808B15F1C4575AA0036E924 = {
 						CreatedOnToolsVersion = 7.2;
+						LastSwiftMigration = 0800;
 					};
 					18E16D651C45D8280084EF54 = {
 						CreatedOnToolsVersion = 7.2;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -1052,6 +1054,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.brightify.CuckooGenerator;
 				PRODUCT_NAME = cuckoo_generator;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -1069,6 +1072,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks/CuckooGeneratorFramework.framework/Versions/Current/Frameworks @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.brightify.CuckooGenerator;
 				PRODUCT_NAME = cuckoo_generator;
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};
@@ -1090,6 +1094,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.brightify.CuckooGeneratorFramework;
 				PRODUCT_NAME = CuckooGeneratorFramework;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 2.3;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -1113,6 +1118,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.brightify.CuckooGeneratorFramework;
 				PRODUCT_NAME = CuckooGeneratorFramework;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 2.3;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
