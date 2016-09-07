@@ -7,10 +7,13 @@
 //
 
 public protocol Mock {
+    associatedtype MocksType
     associatedtype Stubbing: StubbingProxy
     associatedtype Verification: VerificationProxy
     
     var manager: MockManager { get }
+    
+    func spy(on victim: MocksType) -> Self
     
     func getStubbingProxy() -> Stubbing
     

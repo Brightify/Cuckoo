@@ -10,6 +10,7 @@
 import Cuckoo
 
 class MockTestedClass: TestedClass, Cuckoo.Mock {
+    typealias MocksType = TestedClass
     typealias Stubbing = __StubbingProxy_TestedClass
     typealias Verification = __VerificationProxy_TestedClass
     let manager = Cuckoo.MockManager()
@@ -19,7 +20,7 @@ class MockTestedClass: TestedClass, Cuckoo.Mock {
     override init() {
     }
     
-    func spy(on victim: TestedClass) -> MockTestedClass {
+    func spy(on victim: TestedClass) -> Self {
         observed = victim
         return self
     }
@@ -204,6 +205,7 @@ class MockTestedClass: TestedClass, Cuckoo.Mock {
 import Cuckoo
 
 class MockTestedProtocol: TestedProtocol, Cuckoo.Mock {
+    typealias MocksType = TestedProtocol
     typealias Stubbing = __StubbingProxy_TestedProtocol
     typealias Verification = __VerificationProxy_TestedProtocol
     let manager = Cuckoo.MockManager()
@@ -213,7 +215,7 @@ class MockTestedProtocol: TestedProtocol, Cuckoo.Mock {
     init() {
     }
     
-    func spy(on victim: TestedProtocol) -> MockTestedProtocol {
+    func spy(on victim: TestedProtocol) -> Self {
         observed = victim
         return self
     }

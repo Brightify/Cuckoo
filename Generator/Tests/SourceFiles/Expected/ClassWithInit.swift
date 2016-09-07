@@ -10,13 +10,14 @@
 import Cuckoo
 
 class MockClassWithInit: ClassWithInit, Cuckoo.Mock {
+    typealias MocksType = ClassWithInit
     typealias Stubbing = __StubbingProxy_ClassWithInit
     typealias Verification = __VerificationProxy_ClassWithInit
     let manager = Cuckoo.MockManager()
     
     private var observed: ClassWithInit?
     
-    func spy(on victim: ClassWithInit) -> MockClassWithInit {
+    func spy(on victim: ClassWithInit) -> Self {
         observed = victim
         return self
     }

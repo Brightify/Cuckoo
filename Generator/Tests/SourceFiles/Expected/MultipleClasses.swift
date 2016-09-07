@@ -10,6 +10,7 @@
 import Cuckoo
 
 class MockA: A, Cuckoo.Mock {
+    typealias MocksType = A
     typealias Stubbing = __StubbingProxy_A
     typealias Verification = __VerificationProxy_A
     let manager = Cuckoo.MockManager()
@@ -19,7 +20,7 @@ class MockA: A, Cuckoo.Mock {
     override init() {
     }
     
-    func spy(on victim: A) -> MockA {
+    func spy(on victim: A) -> Self {
         observed = victim
         return self
     }
@@ -46,6 +47,7 @@ class MockA: A, Cuckoo.Mock {
 }
 
 class MockB: B, Cuckoo.Mock {
+    typealias MocksType = B
     typealias Stubbing = __StubbingProxy_B
     typealias Verification = __VerificationProxy_B
     let manager = Cuckoo.MockManager()
@@ -55,7 +57,7 @@ class MockB: B, Cuckoo.Mock {
     override init() {
     }
     
-    func spy(on victim: B) -> MockB {
+    func spy(on victim: B) -> Self {
         observed = victim
         return self
     }

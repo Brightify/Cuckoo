@@ -20,6 +20,7 @@ import h
 import i
 
 class MockA: A, Cuckoo.Mock {
+    typealias MocksType = A
     typealias Stubbing = __StubbingProxy_A
     typealias Verification = __VerificationProxy_A
     let manager = Cuckoo.MockManager()
@@ -29,7 +30,7 @@ class MockA: A, Cuckoo.Mock {
     override init() {
     }
     
-    func spy(on victim: A) -> MockA {
+    func spy(on victim: A) -> Self {
         observed = victim
         return self
     }

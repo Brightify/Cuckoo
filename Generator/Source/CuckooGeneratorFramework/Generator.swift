@@ -40,6 +40,7 @@ public struct Generator {
         code += ""
         code += "\(token.accessibility.sourceName)class \(mockClassName(token.name)): \(token.name), Cuckoo.Mock {"
         code.nest {
+            code += "\(token.accessibility.sourceName)typealias MocksType = \(token.name)"
             code += "\(token.accessibility.sourceName)typealias Stubbing = \(stubbingProxyName(token.name))"
             code += "\(token.accessibility.sourceName)typealias Verification = \(verificationProxyName(token.name))"
             code += "\(token.accessibility.sourceName)let manager = Cuckoo.MockManager()"
@@ -51,7 +52,7 @@ public struct Generator {
                 code += "}"
             }
             code += ""
-            code += "\(token.accessibility.sourceName)func spy(on victim: \(token.name)) -> \(mockClassName(token.name)) {"
+            code += "\(token.accessibility.sourceName)func spy(on victim: \(token.name)) -> Self {"
             code.nest {
                 code += "observed = victim"
                 code += "return self"

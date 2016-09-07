@@ -3,6 +3,7 @@ import Cuckoo
 import Foundation
 
 class MockEmptyClass: EmptyClass, Cuckoo.Mock {
+    typealias MocksType = EmptyClass
     typealias Stubbing = __StubbingProxy_EmptyClass
     typealias Verification = __VerificationProxy_EmptyClass
     let manager = Cuckoo.MockManager()
@@ -12,7 +13,7 @@ class MockEmptyClass: EmptyClass, Cuckoo.Mock {
     override init() {
     }
     
-    func spy(on victim: EmptyClass) -> MockEmptyClass {
+    func spy(on victim: EmptyClass) -> Self {
         observed = victim
         return self
     }

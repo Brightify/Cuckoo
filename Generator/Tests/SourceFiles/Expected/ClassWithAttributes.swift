@@ -6,6 +6,7 @@
 import Cuckoo
 
 public class MockClassWithAttributes: ClassWithAttributes, Cuckoo.Mock {
+    public typealias MocksType = ClassWithAttributes
     public typealias Stubbing = __StubbingProxy_ClassWithAttributes
     public typealias Verification = __VerificationProxy_ClassWithAttributes
     public let manager = Cuckoo.MockManager()
@@ -15,7 +16,7 @@ public class MockClassWithAttributes: ClassWithAttributes, Cuckoo.Mock {
     public override init() {
     }
     
-    public func spy(on victim: ClassWithAttributes) -> MockClassWithAttributes {
+    public func spy(on victim: ClassWithAttributes) -> Self {
         observed = victim
         return self
     }
