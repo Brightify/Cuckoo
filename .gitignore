@@ -33,4 +33,5 @@ DerivedData
 
 Carthage/Build
 .DS_Store
+default.profraw
 Tests/Generated/*.swift
