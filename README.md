@@ -379,6 +379,10 @@ Do not generate timestamp.
 
 Names of generated files in directory will start with this prefix. Only works when output path is directory.
 
+##### `--no-class-mocking`
+
+Do not generate mocks for classes.
+
 #### `version` command
 
 Prints the version of this generator.

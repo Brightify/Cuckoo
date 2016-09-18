@@ -34,6 +34,10 @@ Feature: Generate command
 		When I run `runcuckoo generate --no-timestamp --testable "Cuckoo,A b,A-c,A.d" --output TestableFrameworks.swift SourceFiles/EmptyClass.swift`
 		Then the file "Expected/TestableFrameworks.swift" should be equal to file "TestableFrameworks.swift"
 
+	Scenario: --no-class-mocking
+		When I run `runcuckoo generate --no-timestamp --no-class-mocking --output TestedProtocol.swift SourceFiles/TestedClass.swift SourceFiles/TestedProtocol.swift`
+		Then the file "Expected/TestedProtocol.swift" should be equal to file "TestedProtocol.swift"
+
 	# Not recorded tests
 
 	Scenario: non existing input file
@@ -43,7 +47,7 @@ Feature: Generate command
 		Could not read contents of `non_existing_file.swift`
 		"""
 
-	# File structure tests (They reuse code from recoreded tests so if they fail these will fail because of it.)
+	# Tests reusing code from recoreded tests (if they fail these will fail because of it.)
 
 	Scenario: in file
 		When I run `runcuckoo generate --no-timestamp --output Actual.swift SourceFiles/TestedClass.swift SourceFiles/TestedProtocol.swift`

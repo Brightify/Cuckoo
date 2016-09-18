@@ -11,4 +11,9 @@ import SourceKittenFramework
 public struct FileRepresentation {
     public let sourceFile: File
     public let declarations: [Token]
+    
+    public init(sourceFile: File, declarations: [Token]) {
+        self.sourceFile = sourceFile
+        self.declarations = declarations
+    }
 }

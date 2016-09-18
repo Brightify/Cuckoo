@@ -1,5 +1,9 @@
 # Changelog
 
+##
+
+* Added --no-class-mocking parameter to generator
+
 ## 0.7.0
 
 * Updated documentation
