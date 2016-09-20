@@ -25,6 +25,7 @@ public struct Generator {
         switch token {
         case let containerToken as ContainerToken:
             generateMockingClass(containerToken)
+            generateNoImplStubClass(containerToken)
         case let property as InstanceVariable:
             generateMockingProperty(property)
         case let method as Method:
@@ -263,9 +264,71 @@ public struct Generator {
         code.nest("return manager.verify(\"\(token.fullyQualifiedName)\", callMatcher: callMatcher, parameterMatchers: \(matchers), sourceLocation: sourceLocation)")
         code += "}"
     }
+
+    private func generateNoImplStubClass(token: ContainerToken) {
+        guard token.accessibility != .Private else { return }
+
+        code += ""
+        code += "\(token.accessibility.sourceName)class \(stubClassName(token.name)): \(token.name) {"
+        code.nest {
+            if (token.children.filter { ($0 as? Method)?.isInit == true }.isEmpty) {
+                code += ""
+                code += "\(token.accessibility.sourceName)\(token.implementation ? "override " : "")init() {"
+                code += "}"
+            }
+            code += ""
+            token.children.forEach { generateNoImplStubs($0) }
+        }
+        code += "}"
+    }
+
+    private func generateNoImplStubs(token: Token) {
+        switch token {
+        case let property as InstanceVariable:
+            generateNoImplStubProperty(property)
+        case let method as Method:
+            generateNoImplStubMethod(method)
+        default:
+            break
+        }
+    }
+
+    private func generateNoImplStubProperty(token: InstanceVariable) {
+        guard token.accessibility != .Private else { return }
+
+        code += ""
+        code += "\(token.accessibility.sourceName)\(token.overriding ? "override " : "")var \(token.name): \(token.type) {"
+        code.nest {
+            code += "get {"
+            code.nest("return DefaultValueRegistry.defaultValue(\(token.type))")
+            code += "}"
+            if token.readOnly == false {
+                code += "set {"
+                code += "}"
+            }
+        }
+        code += "}"
+    }
+
+    private func generateNoImplStubMethod(token: Method) {
+        guard token.accessibility != .Private else { return }
+        guard !token.isInit else { return }
+
+        let override = token is ClassMethod ? "override " : ""
+        let parametersSignature = token.parameters.enumerate().map { "\($1.attributes.sourceRepresentation)\($1.labelAndNameAtPosition($0)): \($1.type)" }.joinWithSeparator(", ")
+
+        code += ""
+        code += "\(token.accessibility.sourceName)\(override)\(token.isInit ? "" : "func " )\(token.rawName)(\(parametersSignature))\(token.returnSignature) {"
+        code.nest("return DefaultValueRegistry.defaultValue(\(token.returnType))")
+        code += "}"
+    }
     
     private func mockClassName(originalName: String) -> String {
         return "Mock" + originalName
+    }
+
+    private func stubClassName(originalName: String) -> String {
+        return originalName + "Stub"
     }
     
     private func stubbingProxyName(originalName: String) -> String {
