@@ -114,7 +114,7 @@ class FailTest: XCTestCase {
             
             mock.withOptionalClosure("a", closure: nil)
             mock.noReturn()
-            mock.countCharacters("b")
+            _ = mock.count(characters: "b")
             let _ = mock.readWriteProperty
             mock.readWriteProperty = 1
             mock.withOptionalClosure("c", closure: { _ in })
@@ -122,12 +122,12 @@ class FailTest: XCTestCase {
             verifyNoMoreInteractions(mock)
         }
         
-        XCTAssertEqual(error, "No more interactions wanted but some found:\n" +
-                              "1. withOptionalClosure(\"a\", nil)\n" +
-                              "2. noReturn()\n" +
-                              "3. countCharacters(\"b\")\n" +
-                              "4. readWriteProperty#get\n" +
-                              "5. readWriteProperty#set(1)\n" +
-                              "6. withOptionalClosure(\"c\", Optional((Function)))")
+        XCTAssertEqual(error, ["No more interactions wanted but some found:",
+                               "1. withOptionalClosure(\"a\", nil)",
+                               "2. noReturn()",
+                               "3. count(\"b\")",
+                               "4. readWriteProperty#get",
+                               "5. readWriteProperty#set(1)",
+                               "6. withOptionalClosure(\"c\", Optional((Function)))"].joined(separator: "\n"))
     }
 }

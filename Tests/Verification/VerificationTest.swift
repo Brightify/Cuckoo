@@ -38,13 +38,13 @@ class VerificationTest: XCTestCase {
         let mock = MockTestedClass()
         stub(mock) { mock in
             when(mock.noReturn()).thenDoNothing()
-            when(mock.countCharacters(anyString())).thenReturn(1)
+            when(mock.count(characters: anyString())).thenReturn(1)
         }
         
-        mock.countCharacters("a")
+        _ = mock.count(characters: "a")
         mock.noReturn()
         
         verify(mock).noReturn()
-        verify(mock).countCharacters(anyString())
+        verify(mock).count(characters: anyString())
     }
 }

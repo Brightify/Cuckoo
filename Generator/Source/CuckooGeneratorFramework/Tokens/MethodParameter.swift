@@ -12,25 +12,16 @@ public struct MethodParameter: Token {
     public let type: String
     public let range: CountableRange<Int>
     public let nameRange: CountableRange<Int>
-    public let attributes: Attributes
     
-    public func labelAndName(atPosition position: Int) -> String {
-        let isFirst = position == 0
+    public var labelAndName: String {
         if let label = label {
-            return label != name || isFirst ? "\(label) \(name)" : name
+            return label != name ? "\(label) \(name)" : name
         } else {
-            return isFirst ? name : "_ \(name)"
+            return "_ \(name)"
         }
     }
     
-    public func labelOrName(atPosition position: Int) -> String {
-        let isFirst = position == 0
-        if let label = label {
-            return label
-        } else if isFirst {
-            return ""
-        } else {
-            return name
-        }
+    public var typeWithoutAttributes: String {
+        return type.replacingOccurrences(of: "@escaping", with: "").replacingOccurrences(of: "@autoclosure", with: "").trimmed
     }
 }

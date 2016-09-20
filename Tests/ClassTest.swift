@@ -72,11 +72,11 @@ class ClassTest: XCTestCase {
     
     func testCountCharacters() {
         stub(mock) { mock in
-            when(mock.countCharacters("a")).thenReturn(1)
+            when(mock.count(characters: "a")).thenReturn(1)
         }
         
-        XCTAssertEqual(mock.countCharacters("a"), 1)
-        verify(mock).countCharacters("a")
+        XCTAssertEqual(mock.count(characters: "a"), 1)
+        verify(mock).count(characters: "a")
     }
     
     func testWithThrows() {
@@ -86,7 +86,7 @@ class ClassTest: XCTestCase {
         
         var catched = false
         do {
-            try mock.withThrows()
+            _ = try mock.withThrows()
         } catch {
             catched = true
         }
@@ -113,32 +113,32 @@ class ClassTest: XCTestCase {
     
     func testWithClosure() {
         stub(mock) { mock in
-            when(mock.withClosure(anyClosure())).thenReturn(0)
+            when(mock.withClosure(anyClosure())).then { $0("a") }
         }
         
-        XCTAssertEqual(mock.withClosure { _ in 1 }, 0)
+        XCTAssertEqual(mock.withClosure { _ in 1 }, 1)
         verify(mock).withClosure(anyClosure())
     }
     
-    func testWithNoescape() {
+    func testWithEscape() {
         var called = false
         stub(mock) { mock in
-            when(mock.withNoescape(anyString(), action: anyClosure())).then { _ in called = true }
+            when(mock.withEscape(anyString(), action: anyClosure())).then { text, closure in closure(text) }
         }
         
-        mock.withNoescape("a") { _ in 1 }
+        mock.withEscape("a") { called = $0 == "a" }
         
         XCTAssertTrue(called)
-        verify(mock).withNoescape(anyString(), action: anyClosure())
+        verify(mock).withEscape(anyString(), action: anyClosure())
     }
     
     func testWithOptionalClosure() {
         var called = false
         stub(mock) { mock in
-            when(mock.withOptionalClosure(anyString(), closure: anyClosure())).then { _ in called = true }
+            when(mock.withOptionalClosure(anyString(), closure: anyClosure())).then { text, closure in closure?(text)  }
         }
         
-        mock.withOptionalClosure("a") { _ in 1 }
+        mock.withOptionalClosure("a") { called = $0 == "a" }
         
         XCTAssertTrue(called)
         verify(mock).withOptionalClosure(anyString(), closure: anyClosure())
@@ -147,12 +147,12 @@ class ClassTest: XCTestCase {
     func testWithLabel() {
         var called = false
         stub(mock) { mock in
-            when(mock.withLabel(labelA: anyString())).then { _ in called = true }
+            when(mock.withLabelAndUnderscore(labelA: anyString(), anyString())).then { _ in called = true }
         }
 
-        mock.withLabel(labelA: "a")
+        mock.withLabelAndUnderscore(labelA: "a", "b")
         XCTAssertTrue(called)
-        verify(mock).withLabel(labelA: anyString())
+        verify(mock).withLabelAndUnderscore(labelA: anyString(), anyString())
     }
     
     private enum TestError: Error {

@@ -14,8 +14,5 @@ public enum Kinds: String {
     case ExtensionDeclaration = "source.lang.swift.decl.extension"
     case InstanceVariable = "source.lang.swift.decl.var.instance"
     
-    case NoescapeAttribute = "source.decl.attribute.noescape"
-    case AutoclosureAttribute = "source.decl.attribute.autoclosure"
-    
     case Mark = "source.lang.swift.syntaxtype.comment.mark"
 }

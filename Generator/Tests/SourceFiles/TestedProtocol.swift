@@ -15,15 +15,17 @@ protocol TestedProtocol {
     
     func noReturn()
     
-    func countCharacters(test: String) -> Int
+    func count(characters: String) -> Int
     
     func withThrows() throws -> Int
     
     func withNoReturnThrows() throws
     
-    func withClosure(closure: String -> Int) -> Int
+    func withClosure(_ closure: (String) -> Int) -> Int
     
-    func withNoescape(a: String, @noescape closure: String -> Void)
+    func withEscape(_ a: String, action closure: @escaping (String) -> Void)
     
-    func withOptionalClosure(a: String, closure: (String -> Void)?)
+    func withOptionalClosure(_ a: String, closure: ((String) -> Void)?)
+
+    func withLabelAndUnderscore(labelA a: String, _ b: String)
 }

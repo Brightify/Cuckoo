@@ -18,11 +18,10 @@ class TestedClass {
     lazy var optionalProperty: Int? = 0
     
     func noReturn() {
-        
     }
     
-    func countCharacters(test: String) -> Int {
-        return test.characters.count
+    func count(characters: String) -> Int {
+        return characters.characters.count
     }
     
     func withThrows() throws -> Int {
@@ -30,18 +29,20 @@ class TestedClass {
     }
     
     func withNoReturnThrows() throws {
-        
     }
     
-    func withClosure(closure: String -> Int) -> Int {
+    func withClosure(_ closure: (String) -> Int) -> Int {
         return closure("hello")
     }
     
-    func withNoescape(a: String, @noescape action closure: String -> Void) {
+    func withEscape(_ a: String, action closure: @escaping (String) -> Void) {
         closure(a)
     }
     
-    func withOptionalClosure(a: String, closure: (String -> Void)?) {
+    func withOptionalClosure(_ a: String, closure: ((String) -> Void)?) {
         closure?(a)
+    }
+
+    func withLabelAndUnderscore(labelA a: String, _ b: String) {
     }
 }

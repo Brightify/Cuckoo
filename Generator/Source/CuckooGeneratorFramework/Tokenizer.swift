@@ -36,7 +36,7 @@ public struct Tokenizer {
         
         // Common fields
         let name = dictionary[Key.Name.rawValue] as? String ?? "name not set"
-        let kind = dictionary[Key.Kind.rawValue] as? String ?? dictionary[Key.Attribute.rawValue] as? String ?? "unknown type"
+        let kind = dictionary[Key.Kind.rawValue] as? String ?? "unknown type"
         
         // Optional fields
         let range = extractRange(dictionary, offsetKey: .Offset, lengthKey: .Length)
@@ -164,45 +164,18 @@ public struct Tokenizer {
         guard let dictionary = representable as? [String: SourceKitRepresentable] else { return nil }
         
         let name = dictionary[Key.Name.rawValue] as? String ?? "name not set"
-        let kind = dictionary[Key.Kind.rawValue] as? String ?? dictionary[Key.Attribute.rawValue] as? String ?? "unknown type"
+        let kind = dictionary[Key.Kind.rawValue] as? String ?? "unknown type"
         let range = extractRange(dictionary, offsetKey: .Offset, lengthKey: .Length)
         let nameRange = extractRange(dictionary, offsetKey: .NameOffset, lengthKey: .NameLength)
         let type = dictionary[Key.TypeName.rawValue] as? String
         
         switch kind {
         case Kinds.MethodParameter.rawValue:
-            let attributes = tokenizeAttributes(dictionary[Key.Attributes.rawValue] as? [SourceKitRepresentable] ?? [])
-            return MethodParameter(label: label, name: name, type: type!, range: range!, nameRange: nameRange!, attributes: attributes)
+            return MethodParameter(label: label, name: name, type: type!, range: range!, nameRange: nameRange!)
             
         default:
             fputs("Unknown method parameter kind: \(kind)", stderr)
             return nil
-        }
-    }
-    
-    private func tokenizeAttributes(_ representables: [SourceKitRepresentable]) -> Attributes {
-        return representables.map(tokenizeAttribute).reduce(Attributes.none) { $0.union($1) }
-    }
-    
-    private func tokenizeAttribute(_ representable: SourceKitRepresentable) -> Attributes {
-        guard let dictionary = representable as? [String: SourceKitRepresentable] else { return Attributes.none }
-        
-        let kind = dictionary[Key.Kind.rawValue] as? String ?? dictionary[Key.Attribute.rawValue] as? String ?? "unknown type"
-        let range = extractRange(dictionary, offsetKey: .Offset, lengthKey: .Length)
-        
-        switch kind {
-        case Kinds.AutoclosureAttribute.rawValue:
-            let autoclosure = "@autoclosure" + source[0..<range!.startIndex].components(separatedBy: "@autoclosure").last!
-            let escaping = autoclosure.contains("escaping")
-            
-            return escaping ? Attributes.escapingAutoclosure : Attributes.autoclosure
-            
-        case Kinds.NoescapeAttribute.rawValue:
-            return Attributes.noescape
-            
-        default:
-            fputs("Unknown attribute kind: \(kind)", stderr)
-            return Attributes.none
         }
     }
     
@@ -223,8 +196,11 @@ public struct Tokenizer {
             return results.filter { result in
                     rangesToIgnore.filter { $0 ~= result.range.location }.isEmpty
                 }.map {
-                    let range = $0.range.location..<$0.range.length
-                    let library = (source as NSString).substring(with: $0.rangeAt(1))
+                    let libraryRange = $0.rangeAt(1)
+                    let fromIndex = source.index(source.startIndex, offsetBy: libraryRange.location)
+                    let toIndex = source.index(fromIndex, offsetBy: libraryRange.length)
+                    let library = source.substring(with: fromIndex..<toIndex)
+                    let range = $0.range.location..<($0.range.location + $0.range.length)
                     return Import(range: range, library: library)
                 }
         } catch let error as NSError {

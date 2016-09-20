@@ -48,7 +48,7 @@ class StubThrowingFunctionTest: XCTestCase {
         
         var catched = false
         do {
-            try mock.withThrows()
+            _ = try mock.withThrows()
         } catch {
             catched = true
         }

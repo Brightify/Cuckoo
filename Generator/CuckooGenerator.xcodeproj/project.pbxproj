@@ -31,7 +31,6 @@
 		DC9EFA721CFC4F4D0034DFE5 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EFA581CFC4F420034DFE5 /* Key.swift */; };
 		DC9EFA731CFC4F4D0034DFE5 /* Kinds.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EFA591CFC4F420034DFE5 /* Kinds.swift */; };
 		DC9EFA741CFC4F4D0034DFE5 /* Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EFA5A1CFC4F420034DFE5 /* Accessibility.swift */; };
-		DC9EFA751CFC4F4D0034DFE5 /* Attributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EFA5B1CFC4F420034DFE5 /* Attributes.swift */; };
 		DC9EFA761CFC4F4D0034DFE5 /* FileRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EFA5C1CFC4F420034DFE5 /* FileRepresentation.swift */; };
 		DC9EFA771CFC4F4D0034DFE5 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EFA5D1CFC4F420034DFE5 /* Token.swift */; };
 		DC9EFA781CFC4F4D0034DFE5 /* ContainerToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EFA5E1CFC4F420034DFE5 /* ContainerToken.swift */; };
@@ -331,7 +330,6 @@
 		DC9EFA581CFC4F420034DFE5 /* Key.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
 		DC9EFA591CFC4F420034DFE5 /* Kinds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Kinds.swift; sourceTree = "<group>"; };
 		DC9EFA5A1CFC4F420034DFE5 /* Accessibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Accessibility.swift; sourceTree = "<group>"; };
-		DC9EFA5B1CFC4F420034DFE5 /* Attributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attributes.swift; sourceTree = "<group>"; };
 		DC9EFA5C1CFC4F420034DFE5 /* FileRepresentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileRepresentation.swift; sourceTree = "<group>"; };
 		DC9EFA5D1CFC4F420034DFE5 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		DC9EFA5E1CFC4F420034DFE5 /* ContainerToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerToken.swift; sourceTree = "<group>"; };
@@ -503,7 +501,6 @@
 			isa = PBXGroup;
 			children = (
 				DC9EFA5A1CFC4F420034DFE5 /* Accessibility.swift */,
-				DC9EFA5B1CFC4F420034DFE5 /* Attributes.swift */,
 				DC9EFA601CFC4F420034DFE5 /* ClassDeclaration.swift */,
 				DC9EFA7F1CFC4FCF0034DFE5 /* ClassMethod.swift */,
 				DC9EFA5E1CFC4F420034DFE5 /* ContainerToken.swift */,
@@ -921,7 +918,6 @@
 				18E16D841C45D8B30084EF54 /* Tokenizer.swift in Sources */,
 				DC9EFA911CFC50070034DFE5 /* InstanceVariable.swift in Sources */,
 				DC9EFA7C1CFC4F4D0034DFE5 /* ProtocolMethod.swift in Sources */,
-				DC9EFA751CFC4F4D0034DFE5 /* Attributes.swift in Sources */,
 				DC9EFA731CFC4F4D0034DFE5 /* Kinds.swift in Sources */,
 				DC9EFA761CFC4F4D0034DFE5 /* FileRepresentation.swift in Sources */,
 				DC9EFA7E1CFC4F4D0034DFE5 /* MethodParameter.swift in Sources */,

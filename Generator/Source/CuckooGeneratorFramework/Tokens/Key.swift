@@ -22,7 +22,4 @@ public enum Key: String {
     
     case BodyLength = "key.bodylength"
     case BodyOffset = "key.bodyoffset"
-    
-    case Attributes = "key.attributes"
-    case Attribute = "key.attribute"
 }

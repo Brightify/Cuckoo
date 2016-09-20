@@ -15,7 +15,7 @@ protocol TestedProtocol {
     
     func noReturn()
     
-    func countCharacters(_ test: String) -> Int
+    func count(characters: String) -> Int
     
     func withThrows() throws -> Int
     
@@ -23,9 +23,9 @@ protocol TestedProtocol {
     
     func withClosure(_ closure: (String) -> Int) -> Int
     
-    func withNoescape(_ a: String, closure: (String) -> Void)
+    func withEscape(_ a: String, action closure: @escaping (String) -> Void)
     
     func withOptionalClosure(_ a: String, closure: ((String) -> Void)?)
 
-    func withLabel(labelA a: String)
+    func withLabelAndUnderscore(labelA a: String, _ b: String)
 }

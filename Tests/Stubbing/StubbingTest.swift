@@ -26,37 +26,37 @@ class StubbingTest: XCTestCase {
     func testOverrideStubWithMoreGeneralParameterMatcher() {
         let mock = MockTestedClass()
         stub(mock) { mock in
-            when(mock.countCharacters("a")).thenReturn(2)
-            when(mock.countCharacters(anyString())).thenReturn(1)
+            when(mock.count(characters: "a")).thenReturn(2)
+            when(mock.count(characters: anyString())).thenReturn(1)
         }
         
-        XCTAssertEqual(mock.countCharacters("a"), 1)
+        XCTAssertEqual(mock.count(characters: "a"), 1)
     }
     
     func testOverrideStubWithMoreSpecificParameterMatcher() {
         let mock = MockTestedClass()
         stub(mock) { mock in
-            when(mock.countCharacters(anyString())).thenReturn(1)
-            when(mock.countCharacters("a")).thenReturn(2)
+            when(mock.count(characters: anyString())).thenReturn(1)
+            when(mock.count(characters: "a")).thenReturn(2)
         }
         
-        XCTAssertEqual(mock.countCharacters("a"), 2)
+        XCTAssertEqual(mock.count(characters: "a"), 2)
     }
     
     func testUnstubbedSpy() {
         let mock = MockTestedClass().spy(on: TestedClass())
         
-        XCTAssertEqual(mock.countCharacters("a"), 1)
+        XCTAssertEqual(mock.count(characters: "a"), 1)
     }
     
     func testStubOfMultipleDifferentCalls() {
         let mock = MockTestedClass()
         stub(mock) { mock in
             when(mock.readOnlyProperty.get).thenReturn("a")
-            when(mock.countCharacters("a")).thenReturn(1)
+            when(mock.count(characters: "a")).thenReturn(1)
         }
         
         XCTAssertEqual(mock.readOnlyProperty, "a")
-        XCTAssertEqual(mock.countCharacters("a"), 1)
+        XCTAssertEqual(mock.count(characters: "a"), 1)
     }
 }
