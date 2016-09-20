@@ -11,8 +11,8 @@ public struct InstanceVariable: Token {
     public var type: String
     public var accessibility: Accessibility
     public var setterAccessibility: Accessibility?
-    public var range: Range<Int>
-    public var nameRange: Range<Int>
+    public var range: CountableRange<Int>
+    public var nameRange: CountableRange<Int>
     public var overriding: Bool
     
     public var readOnly: Bool {

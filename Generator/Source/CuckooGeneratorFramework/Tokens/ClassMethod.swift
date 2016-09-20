@@ -10,9 +10,9 @@ public struct ClassMethod: Method {
     public let name: String
     public let accessibility: Accessibility
     public let returnSignature: String
-    public let range: Range<Int>
-    public let nameRange: Range<Int>
+    public let range: CountableRange<Int>
+    public let nameRange: CountableRange<Int>
     public let parameters: [MethodParameter]
 
-    public let bodyRange: Range<Int>
+    public let bodyRange: CountableRange<Int>
 }

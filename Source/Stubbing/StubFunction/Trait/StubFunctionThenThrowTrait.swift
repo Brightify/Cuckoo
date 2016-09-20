@@ -8,13 +8,14 @@
 
 public protocol StubFunctionThenThrowTrait: BaseStubFunctionTrait {
     /// Throws `error` when invoked.
-    func thenThrow(error: ErrorType, _ errors: ErrorType...) -> Self
+    func thenThrow(_ error: Error, _ errors: Error...) -> Self
 }
 
 public extension StubFunctionThenThrowTrait {
-    func thenThrow(error: ErrorType, _ errors: ErrorType...) -> Self {
+    @discardableResult
+    func thenThrow(_ error: Error, _ errors: Error...) -> Self {
         ([error] + errors).forEach { error in
-            stub.appendAction(.ThrowError(error))
+            stub.appendAction(.throwError(error))
         }
         return self
     }

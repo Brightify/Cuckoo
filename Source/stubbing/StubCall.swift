@@ -16,13 +16,13 @@ public struct ConcreteStubCall<IN>: StubCall {
     public let parameters: IN
     
     public var parametersAsString: String {
-        let string = String(parameters)
-        if (string.rangeOfString(",") != nil && string.hasPrefix("(")) || string == "()" {
+        let string = String(describing: parameters)
+        if (string.range(of: ",") != nil && string.hasPrefix("(")) || string == "()" {
             return string
         } else {
             // If only one parameter add brackets and quotes
-            let wrappedParameter = String((parameters, 0))
-            return wrappedParameter.substringToIndex(wrappedParameter.endIndex.advancedBy(-4)) + ")"
+            let wrappedParameter = String(describing: (parameters, 0))
+            return wrappedParameter.substring(to: wrappedParameter.characters.index(wrappedParameter.endIndex, offsetBy: -4)) + ")"
         }
     }
     

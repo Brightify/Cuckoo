@@ -7,8 +7,8 @@
 //
 
 enum StubAction<IN, OUT> {
-    case CallImplementation(IN throws -> OUT)
-    case ReturnValue(OUT)
-    case ThrowError(ErrorType)
-    case CallRealImplementation
+    case callImplementation((IN) throws -> OUT)
+    case returnValue(OUT)
+    case throwError(Error)
+    case callRealImplementation
 }

@@ -12,8 +12,9 @@ public protocol StubFunctionThenCallRealImplementationTrait: BaseStubFunctionTra
 }
 
 public extension StubFunctionThenCallRealImplementationTrait {
+    @discardableResult
     func thenCallRealImplementation() -> Self {
-        stub.appendAction(.CallRealImplementation)
+        stub.appendAction(.callRealImplementation)
         return self
     }
 }

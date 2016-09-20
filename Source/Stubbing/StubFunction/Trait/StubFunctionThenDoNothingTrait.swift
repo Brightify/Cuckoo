@@ -12,8 +12,9 @@ public protocol StubFunctionThenDoNothingTrait: BaseStubFunctionTrait {
 }
 
 public extension StubFunctionThenDoNothingTrait where OUT == Void {
+    @discardableResult
     func thenDoNothing() -> Self {
-        stub.appendAction(.ReturnValue(Void()))
+        stub.appendAction(.returnValue(Void()))
         return self
     }
 }

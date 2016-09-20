@@ -6,7 +6,7 @@
 //  Copyright © 2016 Brightify. All rights reserved.
 //
 
-public struct Attributes: OptionSetType {
+public struct Attributes: OptionSet {
     public static let none = Attributes(rawValue: 0)
     public static let noescape = Attributes(rawValue: 1 << 0)
     public static let autoclosure = Attributes(rawValue: 1 << 1)
@@ -21,7 +21,7 @@ public struct Attributes: OptionSetType {
     }
     
     public var sourceRepresentation: String {
-        return !self.isEmpty ? sourceRepresentations.joinWithSeparator(" ") + " " : ""
+        return !self.isEmpty ? sourceRepresentations.joined(separator: " ") + " " : ""
     }
     
     public var sourceRepresentations: [String] {

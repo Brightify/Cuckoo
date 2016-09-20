@@ -11,21 +11,21 @@ import Result
 
 public struct VersionCommand: CommandType {
     
-    static let appVersion = NSBundle.allFrameworks().filter {
+    static let appVersion = Bundle.allFrameworks.filter {
         $0.bundleIdentifier == "org.brightify.CuckooGeneratorFramework"
-        }.first?.objectForInfoDictionaryKey("CFBundleShortVersionString") as? String ?? ""
+        }.first?.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
     
     public let verb = "version"
     public let function = "Prints the version of this generator."
     
-    public func run(options: Options) -> Result<Void, CuckooGeneratorError> {
+    public func run(_ options: Options) -> Result<Void, CuckooGeneratorError> {
         print(VersionCommand.appVersion)
-        return .Success()
+        return .success()
     }
     
     public struct Options: OptionsType {
-        public static func evaluate(m: CommandMode) -> Result<Options, CommandantError<CuckooGeneratorError>> {
-            return .Success(Options())
+        public static func evaluate(_ m: CommandMode) -> Result<Options, CommandantError<CuckooGeneratorError>> {
+            return .success(Options())
         }
     }
 }

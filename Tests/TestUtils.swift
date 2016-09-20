@@ -10,7 +10,7 @@
 
 struct TestUtils {
     
-    static func catchCuckooFail(@noescape inClosure closure: () -> ()) -> String? {
+    static func catchCuckooFail(inClosure closure: () -> ()) -> String? {
         let fail = MockManager.fail
         var message: String?
         MockManager.fail = { message = $0.0 }

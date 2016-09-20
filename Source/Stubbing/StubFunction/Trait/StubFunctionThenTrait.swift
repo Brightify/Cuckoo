@@ -8,12 +8,13 @@
 
 public protocol StubFunctionThenTrait: BaseStubFunctionTrait {
     /// Invokes `implementation` when invoked.
-    func then(implementation: IN -> OUT) -> Self
+    func then(_ implementation: @escaping (IN) -> OUT) -> Self
 }
 
 public extension StubFunctionThenTrait {
-    func then(implementation: IN -> OUT) -> Self {
-        stub.appendAction(.CallImplementation(implementation))
+    @discardableResult
+    func then(_ implementation: @escaping (IN) -> OUT) -> Self {
+        stub.appendAction(.callImplementation(implementation))
         return self
     }
 }

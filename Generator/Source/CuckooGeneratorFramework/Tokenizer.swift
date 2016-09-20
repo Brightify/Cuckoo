@@ -27,11 +27,11 @@ public struct Tokenizer {
         return FileRepresentation(sourceFile: file, declarations: declarations + imports)
     }
     
-    private func tokenize(representables: [SourceKitRepresentable]) -> [Token] {
+    private func tokenize(_ representables: [SourceKitRepresentable]) -> [Token] {
         return representables.flatMap(tokenize)
     }
     
-    private func tokenize(representable: SourceKitRepresentable) -> Token? {
+    private func tokenize(_ representable: SourceKitRepresentable) -> Token? {
         guard let dictionary = representable as? [String: SourceKitRepresentable] else { return nil }
         
         // Common fields
@@ -49,8 +49,8 @@ public struct Tokenizer {
         switch kind {
         case Kinds.ProtocolDeclaration.rawValue:
             let subtokens = tokenize(dictionary[Key.Substructure.rawValue] as? [SourceKitRepresentable] ?? [])
-            let initializers = subtokens.only(Initializer)
-            let children = subtokens.noneOf(Initializer)
+            let initializers = subtokens.only(Initializer.self)
+            let children = subtokens.noneOf(Initializer.self)
             
             return ProtocolDeclaration(
                 name: name,
@@ -63,8 +63,8 @@ public struct Tokenizer {
             
         case Kinds.ClassDeclaration.rawValue:
             let subtokens = tokenize(dictionary[Key.Substructure.rawValue] as? [SourceKitRepresentable] ?? [])
-            let initializers = subtokens.only(Initializer)
-            let children = subtokens.noneOf(Initializer).map { child -> Token in
+            let initializers = subtokens.only(Initializer.self)
+            let children = subtokens.noneOf(Initializer.self).map { child -> Token in
                 if var property = child as? InstanceVariable {
                     property.overriding = true
                     return property
@@ -88,7 +88,7 @@ public struct Tokenizer {
         case Kinds.InstanceVariable.rawValue:
             let setterAccessibility = (dictionary[Key.SetterAccessibility.rawValue] as? String).flatMap(Accessibility.init)
             
-            if String(source.utf8.dropFirst(range!.startIndex)).takeUntilStringOccurs(name)?.trimmed.hasPrefix("let") == true {
+            if String(describing: source.utf8.dropFirst(range!.startIndex)).takeUntil(occurence: name)?.trimmed.hasPrefix("let") == true {
                 return nil
             }
             
@@ -106,14 +106,14 @@ public struct Tokenizer {
             
             var returnSignature: String
             if let bodyRange = bodyRange {
-                returnSignature = source[nameRange!.endIndex..<bodyRange.startIndex].takeUntilStringOccurs("{")?.trimmed ?? ""
+                returnSignature = source[nameRange!.endIndex..<bodyRange.startIndex].takeUntil(occurence: "{")?.trimmed ?? ""
             } else {
                 returnSignature = source[nameRange!.endIndex..<range!.endIndex].trimmed
                 if returnSignature.isEmpty {
                     let untilThrows = String(source.utf8.dropFirst(nameRange!.endIndex))?
-                        .takeUntilStringOccurs("throws").map { $0 + "throws" }?
+                        .takeUntil(occurence: "throws").map { $0 + "throws" }?
                         .trimmed
-                    if let untilThrows = untilThrows where untilThrows == "throws" || untilThrows == "rethrows" {
+                    if let untilThrows = untilThrows, untilThrows == "throws" || untilThrows == "rethrows" {
                         returnSignature = "\(untilThrows)"
                     }
                 }
@@ -152,15 +152,15 @@ public struct Tokenizer {
         }
     }
     
-    private func tokenizeMethodParameters(methodName: String, _ representables: [SourceKitRepresentable]) -> [MethodParameter] {
+    private func tokenizeMethodParameters(_ methodName: String, _ representables: [SourceKitRepresentable]) -> [MethodParameter] {
         // Takes the string between `(` and `)`
-        let parameters = methodName.componentsSeparatedByString("(").last?.characters.dropLast(1).map { "\($0)" }.joinWithSeparator("")
-        let parameterLabels: [String?] = parameters?.componentsSeparatedByString(":").map { $0 != "_" ? $0 : nil } ?? []
+        let parameters = methodName.components(separatedBy: "(").last?.characters.dropLast(1).map { "\($0)" }.joined(separator: "")
+        let parameterLabels: [String?] = parameters?.components(separatedBy: ":").map { $0 != "_" ? $0 : nil } ?? []
         
         return zip(parameterLabels, representables).flatMap(tokenizeMethodParameter)
     }
     
-    private func tokenizeMethodParameter(label: String?, _ representable: SourceKitRepresentable) -> MethodParameter? {
+    private func tokenizeMethodParameter(_ label: String?, _ representable: SourceKitRepresentable) -> MethodParameter? {
         guard let dictionary = representable as? [String: SourceKitRepresentable] else { return nil }
         
         let name = dictionary[Key.Name.rawValue] as? String ?? "name not set"
@@ -180,11 +180,11 @@ public struct Tokenizer {
         }
     }
     
-    private func tokenizeAttributes(representables: [SourceKitRepresentable]) -> Attributes {
+    private func tokenizeAttributes(_ representables: [SourceKitRepresentable]) -> Attributes {
         return representables.map(tokenizeAttribute).reduce(Attributes.none) { $0.union($1) }
     }
     
-    private func tokenizeAttribute(representable: SourceKitRepresentable) -> Attributes {
+    private func tokenizeAttribute(_ representable: SourceKitRepresentable) -> Attributes {
         guard let dictionary = representable as? [String: SourceKitRepresentable] else { return Attributes.none }
         
         let kind = dictionary[Key.Kind.rawValue] as? String ?? dictionary[Key.Attribute.rawValue] as? String ?? "unknown type"
@@ -192,8 +192,8 @@ public struct Tokenizer {
         
         switch kind {
         case Kinds.AutoclosureAttribute.rawValue:
-            let autoclosure = "@autoclosure" + source[0..<range!.startIndex].componentsSeparatedByString("@autoclosure").last!
-            let escaping = autoclosure.containsString("escaping")
+            let autoclosure = "@autoclosure" + source[0..<range!.startIndex].components(separatedBy: "@autoclosure").last!
+            let escaping = autoclosure.contains("escaping")
             
             return escaping ? Attributes.escapingAutoclosure : Attributes.autoclosure
             
@@ -206,8 +206,8 @@ public struct Tokenizer {
         }
     }
     
-    private func tokenizeImports(otherTokens: [Token]) -> [Token] {
-        let rangesToIgnore: [Range<Int>] = otherTokens.flatMap { token in
+    private func tokenizeImports(_ otherTokens: [Token]) -> [Token] {
+        let rangesToIgnore: [CountableRange<Int>] = otherTokens.flatMap { token in
             switch token {
             case let container as ContainerToken:
                 return container.range
@@ -219,13 +219,12 @@ public struct Tokenizer {
         }
         do {
             let regex = try NSRegularExpression(pattern: "(?:\\b|;)import(?:\\s|(?:\\/\\/.*\\n)|(?:\\/\\*.*\\*\\/))+([^\\s;\\/]+)", options: [])
-            let results = regex.matchesInString(source, options: [], range: NSMakeRange(0, source.characters.count))
+            let results = regex.matches(in: source, options: [], range: NSMakeRange(0, source.characters.count))
             return results.filter { result in
                     rangesToIgnore.filter { $0 ~= result.range.location }.isEmpty
                 }.map {
-                    // This NSRange is always a valid Range
-                    let range = $0.range.toRange()!
-                    let library = (source as NSString).substringWithRange($0.rangeAtIndex(1))
+                    let range = $0.range.location..<$0.range.length
+                    let library = (source as NSString).substring(with: $0.rangeAt(1))
                     return Import(range: range, library: library)
                 }
         } catch let error as NSError {

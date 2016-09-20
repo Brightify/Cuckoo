@@ -10,14 +10,14 @@ public protocol Method: Token {
     var name: String { get }
     var accessibility: Accessibility { get }
     var returnSignature: String { get }
-    var range: Range<Int> { get }
-    var nameRange: Range<Int> { get }
+    var range: CountableRange<Int> { get }
+    var nameRange: CountableRange<Int> { get }
     var parameters: [MethodParameter] { get }
 }
 
 public extension Method {
     var rawName: String {
-        return name.takeUntilStringOccurs("(") ?? ""
+        return name.takeUntil(occurence: "(") ?? ""
     }
     
     var isInit: Bool {
@@ -26,12 +26,12 @@ public extension Method {
     
     var fullyQualifiedName: String {
         let parameterTypes = parameters.map { $0.type }
-        let nameParts = name.componentsSeparatedByString(":")
+        let nameParts = name.components(separatedBy: ":")
         let lastNamePart = nameParts.last ?? ""
         
         return zip(nameParts.dropLast(), parameterTypes)
             .map { $0 + ": " + $1 }
-            .joinWithSeparator(", ") + lastNamePart + returnSignature
+            .joined(separator: ", ") + lastNamePart + returnSignature
     }
     
     var isThrowing: Bool {
@@ -39,8 +39,8 @@ public extension Method {
     }
     
     var returnType: String {
-        if let range = returnSignature.rangeOfString("->") {
-            return returnSignature.substringFromIndex(range.endIndex).trimmed
+        if let range = returnSignature.range(of: "->") {
+            return returnSignature.substring(from: range.upperBound).trimmed
         } else {
             return "Void"
         }

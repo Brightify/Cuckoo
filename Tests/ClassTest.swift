@@ -81,7 +81,7 @@ class ClassTest: XCTestCase {
     
     func testWithThrows() {
         stub(mock) { mock in
-            when(mock.withThrows()).thenThrow(TestError.Unknown)
+            when(mock.withThrows()).thenThrow(TestError.unknown)
         }
         
         var catched = false
@@ -97,7 +97,7 @@ class ClassTest: XCTestCase {
     
     func testWithNoReturnThrows() {
         stub(mock) { mock in
-            when(mock.withNoReturnThrows()).thenThrow(TestError.Unknown)
+            when(mock.withNoReturnThrows()).thenThrow(TestError.unknown)
         }
         
         var catched = false
@@ -155,7 +155,7 @@ class ClassTest: XCTestCase {
         verify(mock).withLabel(labelA: anyString())
     }
     
-    private enum TestError: ErrorType {
-        case Unknown
+    private enum TestError: Error {
+        case unknown
     }
 }

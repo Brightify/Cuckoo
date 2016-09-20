@@ -27,7 +27,7 @@ class TestedClass {
         
     }
     
-    func countCharacters(test: String) -> Int {
+    func countCharacters(_ test: String) -> Int {
         return test.characters.count
     }
     
@@ -39,15 +39,15 @@ class TestedClass {
         
     }
     
-    func withClosure(closure: String -> Int) -> Int {
+    func withClosure(_ closure: (String) -> Int) -> Int {
         return closure("hello")
     }
     
-    func withNoescape(a: String, @noescape action closure: String -> Void) {
+    func withNoescape(_ a: String, action closure: (String) -> Void) {
         closure(a)
     }
     
-    func withOptionalClosure(a: String, closure: (String -> Void)?) {
+    func withOptionalClosure(_ a: String, closure: ((String) -> Void)?) {
         closure?(a)
     }
 

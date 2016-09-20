@@ -8,9 +8,9 @@
 
 /// ParameterMatcher matches parameters of methods in stubbing and verification.
 public struct ParameterMatcher<T>: Matchable {
-    private let matchesFunction: T -> Bool
+    private let matchesFunction: (T) -> Bool
     
-    public init(matchesFunction: T -> Bool = { _ in true }) {
+    public init(matchesFunction: @escaping (T) -> Bool = { _ in true }) {
         self.matchesFunction = matchesFunction
     }
     
@@ -18,7 +18,7 @@ public struct ParameterMatcher<T>: Matchable {
         return self
     }
     
-    public func matches(input: T) -> Bool {
+    public func matches(_ input: T) -> Bool {
         return matchesFunction(input)
     }
 }

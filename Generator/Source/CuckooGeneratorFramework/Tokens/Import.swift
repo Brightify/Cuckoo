@@ -7,6 +7,6 @@
 //
 
 public struct Import: Token {
-    public let range: Range<Int>
+    public let range: CountableRange<Int>
     public let library: String
 }

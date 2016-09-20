@@ -8,13 +8,14 @@
 
 public protocol StubFunctionThenReturnTrait: BaseStubFunctionTrait {
     /// Returns `output` when invoked.
-    func thenReturn(output: OUT, _ outputs: OUT...) -> Self
+    func thenReturn(_ output: OUT, _ outputs: OUT...) -> Self
 }
 
 public extension StubFunctionThenReturnTrait {
-    func thenReturn(output: OUT, _ outputs: OUT...) -> Self {
+    @discardableResult
+    func thenReturn(_ output: OUT, _ outputs: OUT...) -> Self {
         ([output] + outputs).forEach { output in
-            stub.appendAction(.ReturnValue(output))
+            stub.appendAction(.returnValue(output))
         }
         return self
     }

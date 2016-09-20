@@ -8,5 +8,5 @@
 
 public struct ExtensionDeclaration: Token {
     // TODO Implement support for extensions
-    public let range: Range<Int>
+    public let range: CountableRange<Int>
 }

@@ -17,7 +17,7 @@ public protocol Mock {
     
     func getStubbingProxy() -> Stubbing
     
-    func getVerificationProxy(callMatcher: CallMatcher, sourceLocation: SourceLocation) -> Verification
+    func getVerificationProxy(_ callMatcher: CallMatcher, sourceLocation: SourceLocation) -> Verification
 }
 
 public extension Mock {
@@ -25,7 +25,7 @@ public extension Mock {
         return Stubbing(manager: manager)
     }
     
-    func getVerificationProxy(callMatcher: CallMatcher, sourceLocation: SourceLocation) -> Verification {
+    func getVerificationProxy(_ callMatcher: CallMatcher, sourceLocation: SourceLocation) -> Verification {
         return Verification(manager: manager, callMatcher: callMatcher, sourceLocation: sourceLocation)
     }
 }

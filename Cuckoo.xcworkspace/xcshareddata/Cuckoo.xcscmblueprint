@@ -21,7 +21,7 @@
     "64ACE19A884E8C30BC53E2E0CE86010ECED70B5A" : "Cuckoo\/Generator\/Dependencies\/FileKit\/",
     "FD7DA18210A2C280E9107E37D7344F243FEE5F75" : "Cuckoo\/Generator\/Dependencies\/SourceKitten\/",
     "EB2210CFD48672E403BED699D5D7F01B844069CF" : "Cuckoo\/Generator\/Dependencies\/SourceKitten\/Carthage\/Checkouts\/SWXMLHash\/",
-    "E084C86B03F81D63323C9E7510697EA528A758C7" : "Cuckoo\/Generator\/Dependencies\/SourceKitten\/Carthage\/Checkouts\/Commandant\/Carthage\/Checkouts\/xcconfigs\/",
+    "E084C86B03F81D63323C9E7510697EA528A758C7" : "Cuckoo\/Generator\/Dependencies\/SourceKitten\/Carthage\/Checkouts\/xcconfigs\/",
     "509FD5E949BB67AB92770169324D45AB1917F796" : "Cuckoo\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "Cuckoo",

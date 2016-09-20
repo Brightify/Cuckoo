@@ -16,7 +16,8 @@ public struct VerifyProperty<T> {
         return manager.verify(getterName(name), callMatcher: callMatcher, parameterMatchers: [] as [ParameterMatcher<Void>], sourceLocation: sourceLocation)
     }
     
-    public func set<M: Matchable where M.MatchedType == T>(matcher: M) -> __DoNotUse<Void> {
+    @discardableResult
+    public func set<M: Matchable>(_ matcher: M) -> __DoNotUse<Void> where M.MatchedType == T {
         return manager.verify(setterName(name), callMatcher: callMatcher, parameterMatchers: [matcher.matcher], sourceLocation: sourceLocation)
     }
     

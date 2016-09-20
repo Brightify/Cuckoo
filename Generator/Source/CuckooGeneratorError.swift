@@ -1,5 +1,5 @@
 //
-//  MockeryGeneratorError.swift
+//  CuckooGeneratorError.swift
 //  CuckooGenerator
 //
 //  Created by Tadeas Kriz on 13/01/16.
@@ -9,15 +9,15 @@
 import Foundation
 import FileKit
 
-public enum CuckooGeneratorError: ErrorType {
-    case IOError(FileKitError)
-    case UnknownError(ErrorType)
+public enum CuckooGeneratorError: Error {
+    case ioError(FileKitError)
+    case unknownError(Error)
     
     public var description: String {
         switch self {
-        case .IOError(let error):
+        case .ioError(let error):
             return error.description
-        case .UnknownError(let error):
+        case .unknownError(let error):
             return "\(error)"
         }
     }

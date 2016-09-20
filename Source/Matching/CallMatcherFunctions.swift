@@ -7,32 +7,27 @@
 //
 
 /// Returns a matcher ensuring a call was made **`count`** times.
-@warn_unused_result
-public func times(count: Int) -> CallMatcher {
+public func times(_ count: Int) -> CallMatcher {
     let name = count == 0 ? "never" : "\(count) times"
     return CallMatcher(name: name, numberOfExpectedCalls: count, compareCallsFunction: ==)
 }
 
 /// Returns a matcher ensuring no call was made.
-@warn_unused_result
 public func never() -> CallMatcher {
     return times(0)
 }
 
 /// Returns a matcher ensuring at least one call was made.
-@warn_unused_result
 public func atLeastOnce() -> CallMatcher {
     return atLeast(1)
 }
 
 /// Returns a matcher ensuring call was made at least `count` times.
-@warn_unused_result
-public func atLeast(count: Int) -> CallMatcher {
+public func atLeast(_ count: Int) -> CallMatcher {
     return CallMatcher(name: "at least \(count) times", numberOfExpectedCalls: count, compareCallsFunction: <=)
 }
 
 /// Returns a matcher ensuring call was made at most `count` times.
-@warn_unused_result
-public func atMost(count: Int) -> CallMatcher {
+public func atMost(_ count: Int) -> CallMatcher {
     return CallMatcher(name: "at most \(count) times",numberOfExpectedCalls: count, compareCallsFunction: >=)
 }

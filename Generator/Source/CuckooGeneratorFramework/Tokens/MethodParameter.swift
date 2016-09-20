@@ -10,11 +10,11 @@ public struct MethodParameter: Token {
     public let label: String?
     public let name: String
     public let type: String
-    public let range: Range<Int>
-    public let nameRange: Range<Int>
+    public let range: CountableRange<Int>
+    public let nameRange: CountableRange<Int>
     public let attributes: Attributes
     
-    public func labelAndNameAtPosition(position: Int) -> String {
+    public func labelAndName(atPosition position: Int) -> String {
         let isFirst = position == 0
         if let label = label {
             return label != name || isFirst ? "\(label) \(name)" : name
@@ -23,7 +23,7 @@ public struct MethodParameter: Token {
         }
     }
     
-    public func labelOrNameAtPosition(position: Int) -> String {
+    public func labelOrName(atPosition position: Int) -> String {
         let isFirst = position == 0
         if let label = label {
             return label

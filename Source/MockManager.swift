@@ -9,7 +9,7 @@
 import XCTest
 
 public class MockManager {
-    static var fail: (message: String, sourceLocation: SourceLocation) -> () = { XCTFail($0, file: $1.file, line: $1.line) }
+    static var fail: (_ message: String, _ sourceLocation: SourceLocation) -> () = { XCTFail($0, file: $1.file, line: $1.line) }
     
     private var stubs: [Stub] = []
     private var stubCalls: [StubCall] = []
@@ -19,19 +19,19 @@ public class MockManager {
         
     }
 
-    public func getter<T>(property: String, original: (Void -> T)? = nil) -> T {
+    public func getter<T>(_ property: String, original: ((Void) -> T)? = nil) -> T {
         return call(getterName(property), parameters: Void(), original: original)
     }
     
-    public func setter<T>(property: String, value: T, original: (T -> Void)? = nil) {
+    public func setter<T>(_ property: String, value: T, original: ((T) -> Void)? = nil) {
         return call(setterName(property), parameters: value, original: original)
     }
     
-    public func call<IN, OUT>(method: String, parameters: IN, original: (IN -> OUT)? = nil) -> OUT {
+    public func call<IN, OUT>(_ method: String, parameters: IN, original: ((IN) -> OUT)? = nil) -> OUT {
         return try! callThrows(method, parameters: parameters, original: original)
     }
     
-    public func callThrows<IN, OUT>(method: String, parameters: IN, original: (IN throws -> OUT)? = nil) throws -> OUT {
+    public func callThrows<IN, OUT>(_ method: String, parameters: IN, original: ((IN) throws -> OUT)? = nil) throws -> OUT {
         let stubCall = ConcreteStubCall(method: method, parameters: parameters)
         stubCalls.append(stubCall)
         unverifiedStubCallsIndexes.append(stubCalls.count - 1)
@@ -43,13 +43,13 @@ public class MockManager {
                     _ = stub.actions.removeFirst()
                 }
                 switch action {
-                case .CallImplementation(let implementation):
+                case .callImplementation(let implementation):
                     return try implementation(parameters)
-                case .ReturnValue(let value):
+                case .returnValue(let value):
                     return value
-                case .ThrowError(let error):
+                case .throwError(let error):
                     throw error
-                case .CallRealImplementation:
+                case .callRealImplementation:
                     if let original = original {
                         return try original(parameters)
                     } else {
@@ -66,17 +66,17 @@ public class MockManager {
         }
     }
     
-    public func createStub<IN, OUT>(method: String, parameterMatchers: [ParameterMatcher<IN>]) -> ConcreteStub<IN, OUT> {
+    public func createStub<IN, OUT>(_ method: String, parameterMatchers: [ParameterMatcher<IN>]) -> ConcreteStub<IN, OUT> {
         let stub = ConcreteStub<IN, OUT>(method: method, parameterMatchers: parameterMatchers)
-        stubs.insert(stub, atIndex: 0)
+        stubs.insert(stub, at: 0)
         return stub
     }
     
-    public func verify<IN, OUT>(method: String, callMatcher: CallMatcher, parameterMatchers: [ParameterMatcher<IN>], sourceLocation: SourceLocation) -> __DoNotUse<OUT> {
+    public func verify<IN, OUT>(_ method: String, callMatcher: CallMatcher, parameterMatchers: [ParameterMatcher<IN>], sourceLocation: SourceLocation) -> __DoNotUse<OUT> {
         var calls: [StubCall] = []
         var indexesToRemove: [Int] = []
-        for (i, stubCall) in stubCalls.enumerate() {
-            if let stubCall = stubCall as? ConcreteStubCall<IN> where (parameterMatchers.reduce(stubCall.method == method) { $0 && $1.matches(stubCall.parameters) }) {
+        for (i, stubCall) in stubCalls.enumerated() {
+            if let stubCall = stubCall as? ConcreteStubCall<IN> , (parameterMatchers.reduce(stubCall.method == method) { $0 && $1.matches(stubCall.parameters) }) {
                 calls.append(stubCall)
                 indexesToRemove.append(i)
             }
@@ -85,7 +85,7 @@ public class MockManager {
         
         if callMatcher.matches(calls) == false {
             let message = "Wanted \(callMatcher.name) but \(calls.count == 0 ? "not invoked" : "invoked \(calls.count) times")."
-            MockManager.fail(message: message, sourceLocation: sourceLocation)
+            MockManager.fail(message, sourceLocation)
         }
         return __DoNotUse()
     }
@@ -104,11 +104,11 @@ public class MockManager {
         unverifiedStubCallsIndexes.removeAll()
     }
     
-    func verifyNoMoreInteractions(sourceLocation: SourceLocation) {
+    func verifyNoMoreInteractions(_ sourceLocation: SourceLocation) {
         if unverifiedStubCallsIndexes.isEmpty == false {
             let unverifiedCalls = unverifiedStubCallsIndexes.map { stubCalls[$0] }.map { call in
-                    if let bracketIndex = call.method.rangeOfString("(")?.startIndex {
-                        let name = call.method.substringToIndex(bracketIndex)
+                    if let bracketIndex = call.method.range(of: "(")?.lowerBound {
+                        let name = call.method.substring(to: bracketIndex)
                         return name + call.parametersAsString
                     } else {
                         if call.method.hasSuffix("#set") {
@@ -117,15 +117,15 @@ public class MockManager {
                             return call.method
                         }
                     }
-                }.enumerate().map { "\($0 + 1). " + $1 }.joinWithSeparator("\n")
+                }.enumerated().map { "\($0 + 1). " + $1 }.joined(separator: "\n")
             let message = "No more interactions wanted but some found:\n"
-            MockManager.fail(message: message + unverifiedCalls, sourceLocation: sourceLocation)
+            MockManager.fail(message + unverifiedCalls, sourceLocation)
         }
     }
     
-    @noreturn
-    private func failAndCrash(message: String, file: StaticString = #file, line: UInt = #line) {
-        MockManager.fail(message: message, sourceLocation: (file, line))
+    
+    private func failAndCrash(_ message: String, file: StaticString = #file, line: UInt = #line) -> Never  {
+        MockManager.fail(message, (file, line))
         fatalError(message)
     }
 }

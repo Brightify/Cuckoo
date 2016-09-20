@@ -46,7 +46,7 @@ class StubNoReturnThrowingFunctionTest: XCTestCase {
     func testThenThrow() {
         let mock = MockTestedClass()
         stub(mock) { mock in
-            when(mock.withNoReturnThrows()).thenThrow(TestError.Unknown)
+            when(mock.withNoReturnThrows()).thenThrow(TestError.unknown)
         }
         
         var catched = false
@@ -59,7 +59,7 @@ class StubNoReturnThrowingFunctionTest: XCTestCase {
         XCTAssertTrue(catched)
     }
     
-    private enum TestError: ErrorType {
-        case Unknown
+    private enum TestError: Error {
+        case unknown
     }
 }

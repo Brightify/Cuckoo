@@ -10,35 +10,35 @@ import SourceKittenFramework
 
 extension String {
     var trimmed: String {
-        return self.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        return self.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
     }
     
-    func takeUntilStringOccurs(occurence: String) -> String? {
-        return self.componentsSeparatedByString(occurence).first
+    func takeUntil(occurence: String) -> String? {
+        return self.components(separatedBy: occurence).first
     }
     
     subscript(range: Range<Int>) -> String {
-        let stringRange = startIndex.advancedBy(range.startIndex)..<startIndex.advancedBy(range.endIndex)
+        let stringRange = characters.index(startIndex, offsetBy: range.lowerBound)..<characters.index(startIndex, offsetBy: range.upperBound)
         return self[stringRange]
     }
 }
 
-extension SequenceType {
+extension Sequence {
     
-    func only<T>(type: T.Type) -> [T] {
+    func only<T>(_ type: T.Type) -> [T] {
         return flatMap { $0 as? T }
     }
     
-    func noneOf<T>(type: T.Type) -> [Generator.Element] {
+    func noneOf<T>(_ type: T.Type) -> [Iterator.Element] {
         return filter { !($0 is T) }
     }
 }
 
-internal func extractRange(dictionary: [String: SourceKitRepresentable], offsetKey: Key, lengthKey: Key) -> Range<Int>? {
+internal func extractRange(_ dictionary: [String: SourceKitRepresentable], offsetKey: Key, lengthKey: Key) -> CountableRange<Int>? {
     guard let
         offset = (dictionary[offsetKey.rawValue] as? Int64).map({ Int($0) }),
-        length = (dictionary[lengthKey.rawValue] as? Int64).map({ Int($0) })
+        let length = (dictionary[lengthKey.rawValue] as? Int64).map({ Int($0) })
         else { return nil }
     
-    return offset..<offset.advancedBy(length)
+    return offset..<offset.advanced(by: length)
 }

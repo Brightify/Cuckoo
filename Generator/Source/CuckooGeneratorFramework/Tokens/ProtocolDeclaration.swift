@@ -9,9 +9,9 @@
 public struct ProtocolDeclaration: ContainerToken {
     public let name: String
     public let accessibility: Accessibility
-    public let range: Range<Int>
-    public let nameRange: Range<Int>
-    public let bodyRange: Range<Int>
+    public let range: CountableRange<Int>
+    public let nameRange: CountableRange<Int>
+    public let bodyRange: CountableRange<Int>
     public let initializers: [Initializer]
     public let children: [Token]
     public let implementation: Bool = false

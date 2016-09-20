@@ -9,9 +9,9 @@
 public protocol ContainerToken: Token {
     var name: String { get }
     var accessibility: Accessibility { get }
-    var range: Range<Int> { get }
-    var nameRange: Range<Int> { get }
-    var bodyRange: Range<Int> { get }
+    var range: CountableRange<Int> { get }
+    var nameRange: CountableRange<Int> { get }
+    var bodyRange: CountableRange<Int> { get }
     var initializers: [Initializer] { get }
     var children: [Token] { get }
     var implementation: Bool { get }

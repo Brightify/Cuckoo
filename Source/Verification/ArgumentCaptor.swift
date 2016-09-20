@@ -18,7 +18,6 @@ public class ArgumentCaptor<T> {
     public private(set) var allValues: [T] = []
     
     public init() {
-
     }
     
     // Return parameter matcher which capture the argument.

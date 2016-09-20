@@ -14,7 +14,7 @@ public struct ToBeStubbedProperty<T> {
         return StubFunction(stub: manager.createStub(getterName(name), parameterMatchers: []))
     }
     
-    public func set<M: Matchable where M.MatchedType == T>(matcher: M) -> StubNoReturnFunction<T> {
+    public func set<M: Matchable>(_ matcher: M) -> StubNoReturnFunction<T> where M.MatchedType == T {
         return StubNoReturnFunction(stub: manager.createStub(setterName(name), parameterMatchers: [matcher.matcher]))
     }
     
