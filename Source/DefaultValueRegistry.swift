@@ -22,19 +22,19 @@ public class DefaultValueRegistry {
     }
 
     public static func defaultValue<T>(type: Set<T>.Type) -> Set<T> {
-        return []
+        return defaultValueOrNil(type) ?? []
     }
 
     public static func defaultValue<T>(type: Array<T>.Type) -> Array<T> {
-        return []
+        return defaultValueOrNil(type) ?? []
     }
 
     public static func defaultValue<K, V>(type: Dictionary<K, V>.Type) -> Dictionary<K, V> {
-        return [:]
+        return defaultValueOrNil(type) ?? [:]
     }
 
     public static func defaultValue<T>(type: Optional<T>.Type) -> Optional<T> {
-        return nil
+        return defaultValueOrNil(type) ?? nil
     }
 
     public static func defaultValue<T>(type: T.Type) -> T {
