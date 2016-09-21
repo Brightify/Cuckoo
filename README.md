@@ -237,11 +237,20 @@ As parameters of methods in stubbing and verification you can use objects which 
 These basic values are extended to conform to `Matchable`:
 
 * `Bool`
-* `Int`
 * `String`
 * `Float`
 * `Double`
 * `Character`
+* `Int`
+* `Int8`
+* `Int16`
+* `Int32`
+* `Int64`
+* `UInt`
+* `UInt8`
+* `UInt16`
+* `UInt32`
+* `UInt64`
 
 Note: Optional types (for example `Int?`) cannot be used directly. You need to wrap them with `eq` function.
 

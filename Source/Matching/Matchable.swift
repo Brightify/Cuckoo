@@ -37,12 +37,6 @@ extension Bool: Matchable {
     }
 }
 
-extension Int: Matchable {
-    public var matcher: ParameterMatcher<Int> {
-        return equalTo(self)
-    }
-}
-
 extension String: Matchable {
     public var matcher: ParameterMatcher<String> {
         return equalTo(self)
@@ -63,6 +57,66 @@ extension Double: Matchable {
 
 extension Character: Matchable {
     public var matcher: ParameterMatcher<Character> {
+        return equalTo(self)
+    }
+}
+
+extension Int: Matchable {
+    public var matcher: ParameterMatcher<Int> {
+        return equalTo(self)
+    }
+}
+
+extension Int8: Matchable {
+    public var matcher: ParameterMatcher<Int8> {
+        return equalTo(self)
+    }
+}
+
+extension Int16: Matchable {
+    public var matcher: ParameterMatcher<Int16> {
+        return equalTo(self)
+    }
+}
+
+extension Int32: Matchable {
+    public var matcher: ParameterMatcher<Int32> {
+        return equalTo(self)
+    }
+}
+
+extension Int64: Matchable {
+    public var matcher: ParameterMatcher<Int64> {
+        return equalTo(self)
+    }
+}
+
+extension UInt: Matchable {
+    public var matcher: ParameterMatcher<UInt> {
+        return equalTo(self)
+    }
+}
+
+extension UInt8: Matchable {
+    public var matcher: ParameterMatcher<UInt8> {
+        return equalTo(self)
+    }
+}
+
+extension UInt16: Matchable {
+    public var matcher: ParameterMatcher<UInt16> {
+        return equalTo(self)
+    }
+}
+
+extension UInt32: Matchable {
+    public var matcher: ParameterMatcher<UInt32> {
+        return equalTo(self)
+    }
+}
+
+extension UInt64: Matchable {
+    public var matcher: ParameterMatcher<UInt64> {
         return equalTo(self)
     }
 }
