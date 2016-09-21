@@ -51,3 +51,10 @@ class MockEmptyClass: EmptyClass, Cuckoo.Mock {
         }
     }
 }
+
+class EmptyClassStub: EmptyClass {
+    
+    override init() {
+    }
+    
+}

@@ -55,3 +55,10 @@ class MockA: A, Cuckoo.Mock {
         }
     }
 }
+
+class AStub: A {
+    
+    override init() {
+    }
+    
+}

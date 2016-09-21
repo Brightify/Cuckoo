@@ -46,6 +46,13 @@ class MockA: A, Cuckoo.Mock {
     }
 }
 
+class AStub: A {
+    
+    override init() {
+    }
+    
+}
+
 class MockB: B, Cuckoo.Mock {
     typealias MocksType = B
     typealias Stubbing = __StubbingProxy_B
@@ -81,4 +88,11 @@ class MockB: B, Cuckoo.Mock {
             self.sourceLocation = sourceLocation
         }
     }
+}
+
+class BStub: B {
+    
+    override init() {
+    }
+    
 }

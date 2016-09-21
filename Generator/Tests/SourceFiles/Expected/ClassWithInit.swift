@@ -42,3 +42,7 @@ class MockClassWithInit: ClassWithInit, Cuckoo.Mock {
         }
     }
 }
+
+class ClassWithInitStub: ClassWithInit {
+    
+}

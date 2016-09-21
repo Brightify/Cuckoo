@@ -41,3 +41,10 @@ public class MockClassWithAttributes: ClassWithAttributes, Cuckoo.Mock {
         }
     }
 }
+
+public class ClassWithAttributesStub: ClassWithAttributes {
+    
+    public override init() {
+    }
+    
+}

@@ -193,6 +193,63 @@ class MockTestedClass: TestedClass, Cuckoo.Mock {
     }
 }
 
+class TestedClassStub: TestedClass {
+    
+    override init() {
+    }
+    
+    
+    override var readOnlyProperty: String {
+        get {
+            return DefaultValueRegistry.defaultValue(String)
+        }
+    }
+    
+    override var readWriteProperty: Int {
+        get {
+            return DefaultValueRegistry.defaultValue(Int)
+        }
+        set {
+        }
+    }
+    
+    override var optionalProperty: Int? {
+        get {
+            return DefaultValueRegistry.defaultValue(Int?)
+        }
+        set {
+        }
+    }
+    
+    override func noReturn() {
+        return DefaultValueRegistry.defaultValue(Void)
+    }
+    
+    override func countCharacters(test: String) -> Int {
+        return DefaultValueRegistry.defaultValue(Int)
+    }
+    
+    override func withThrows() throws -> Int {
+        return DefaultValueRegistry.defaultValue(Int)
+    }
+    
+    override func withNoReturnThrows() throws {
+        return DefaultValueRegistry.defaultValue(Void)
+    }
+    
+    override func withClosure(closure: String -> Int) -> Int {
+        return DefaultValueRegistry.defaultValue(Int)
+    }
+    
+    override func withNoescape(a: String, @noescape action closure: String -> Void) {
+        return DefaultValueRegistry.defaultValue(Void)
+    }
+    
+    override func withOptionalClosure(a: String, closure: (String -> Void)?) {
+        return DefaultValueRegistry.defaultValue(Void)
+    }
+}
+
 // MARK: - Mocks generated from file: SourceFiles/TestedProtocol.swift
 //
 //  TestedProtocol.swift
@@ -385,5 +442,62 @@ class MockTestedProtocol: TestedProtocol, Cuckoo.Mock {
             let matchers: [Cuckoo.ParameterMatcher<(String, (String -> Void)?)>] = [wrapMatchable(a) { $0.0 }, wrapMatchable(closure) { $0.1 }]
             return manager.verify("withOptionalClosure(_: String, closure: (String -> Void)?)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
         }
+    }
+}
+
+class TestedProtocolStub: TestedProtocol {
+    
+    init() {
+    }
+    
+    
+    var readOnlyProperty: String {
+        get {
+            return DefaultValueRegistry.defaultValue(String)
+        }
+    }
+    
+    var readWriteProperty: Int {
+        get {
+            return DefaultValueRegistry.defaultValue(Int)
+        }
+        set {
+        }
+    }
+    
+    var optionalProperty: Int? {
+        get {
+            return DefaultValueRegistry.defaultValue(Int?)
+        }
+        set {
+        }
+    }
+    
+    func noReturn() {
+        return DefaultValueRegistry.defaultValue(Void)
+    }
+    
+    func countCharacters(test: String) -> Int {
+        return DefaultValueRegistry.defaultValue(Int)
+    }
+    
+    func withThrows() throws -> Int {
+        return DefaultValueRegistry.defaultValue(Int)
+    }
+    
+    func withNoReturnThrows() throws {
+        return DefaultValueRegistry.defaultValue(Void)
+    }
+    
+    func withClosure(closure: String -> Int) -> Int {
+        return DefaultValueRegistry.defaultValue(Int)
+    }
+    
+    func withNoescape(a: String, @noescape closure: String -> Void) {
+        return DefaultValueRegistry.defaultValue(Void)
+    }
+    
+    func withOptionalClosure(a: String, closure: (String -> Void)?) {
+        return DefaultValueRegistry.defaultValue(Void)
     }
 }
