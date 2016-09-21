@@ -32,7 +32,7 @@ public struct GenerateMocksCommand: CommandType {
         
         let mergedFiles = zip(zip(headers, imports), mocks).map { $0.0 + $0.1 + $1 }
         let outputPath = Path(options.output)
-        
+
         do {
             if outputPath.isDirectory {
                 let inputPaths = options.files.map { Path($0) }

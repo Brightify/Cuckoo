@@ -25,7 +25,7 @@ class ProtocolTest: XCTestCase {
         }
         
         XCTAssertEqual(mock.readOnlyProperty, "a")
-        verify(mock).readOnlyProperty.get
+        _ = verify(mock).readOnlyProperty.get
     }
     
     func testReadWriteProperty() {
@@ -39,7 +39,7 @@ class ProtocolTest: XCTestCase {
         
         XCTAssertEqual(mock.readWriteProperty, 1)
         XCTAssertTrue(called)
-        verify(mock).readWriteProperty.get
+        _ = verify(mock).readWriteProperty.get
         verify(mock).readWriteProperty.set(0)
     }
     
@@ -54,7 +54,7 @@ class ProtocolTest: XCTestCase {
         
         XCTAssertNil(mock.optionalProperty)
         XCTAssertTrue(called)
-        verify(mock).optionalProperty.get
+        _ = verify(mock).optionalProperty.get
         verify(mock).optionalProperty.set(eq(0))
     }
     

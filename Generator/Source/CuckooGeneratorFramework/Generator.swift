@@ -25,6 +25,7 @@ public struct Generator {
         switch token {
         case let containerToken as ContainerToken:
             generate(class: containerToken)
+            generateStub(class: containerToken)
         case let property as InstanceVariable:
             generate(property: property)
         case let method as Method:
@@ -263,8 +264,70 @@ public struct Generator {
         code += "}"
     }
     
+    
+    private func generateStub(class token: ContainerToken) {
+        guard token.accessibility != .Private else { return }
+        
+        code += ""
+        code += "\(token.accessibility.sourceName)class \(stubClassName(token.name)): \(token.name) {"
+        code.nest {
+            if (token.children.filter { ($0 as? Method)?.isInit == true }.isEmpty) {
+                code += ""
+                code += "\(token.accessibility.sourceName)\(token.implementation ? "override " : "")init() {"
+                code += "}"
+            }
+            token.children.forEach { generateStub(token: $0) }
+        }
+        code += "}"
+    }
+    
+    private func generateStub(token: Token) {
+        switch token {
+        case let property as InstanceVariable:
+            generateStub(property: property)
+        case let method as Method:
+            generateStub(method: method)
+        default:
+            break
+        }
+    }
+    
+    private func generateStub(property token: InstanceVariable) {
+        guard token.accessibility != .Private else { return }
+        
+        code += ""
+        code += "\(token.accessibility.sourceName)\(token.overriding ? "override " : "")var \(token.name): \(token.type) {"
+        code.nest {
+            code += "get {"
+            code.nest("return DefaultValueRegistry.defaultValue(\(getTypeWithSelf(token.type)))")
+            code += "}"
+            if token.readOnly == false {
+                code += "set {"
+                code += "}"
+            }
+        }
+        code += "}"
+    }
+    
+    private func generateStub(method token: Method) {
+        guard token.accessibility != .Private else { return }
+        guard !token.isInit else { return }
+        
+        let override = token is ClassMethod ? "override " : ""
+        let parametersSignature = token.parameters.enumerated().map { "\($1.labelAndName): \($1.type)" }.joined(separator: ", ")
+        
+        code += ""
+        code += "\(token.accessibility.sourceName)\(override)func \(token.rawName)(\(parametersSignature))\(token.returnSignature) {"
+        code.nest("return DefaultValueRegistry.defaultValue(\(getTypeWithSelf(token.returnType)))")
+        code += "}"
+    }
+    
     private func mockClassName(_ originalName: String) -> String {
         return "Mock" + originalName
+    }
+    
+    private func stubClassName(_ originalName: String) -> String {
+        return originalName + "Stub"
     }
     
     private func stubbingProxyName(_ originalName: String) -> String {
@@ -301,5 +364,13 @@ public struct Generator {
         let tupleType = parameters.map { $0.typeWithoutAttributes }.joined(separator: ", ")
         let matchers = parameters.enumerated().map { "wrap(matchable: \($1.name)) { $0\(parameters.count > 1 ? ".\($0)" : "") }" }.joined(separator: ", ")
         return "let matchers: [Cuckoo.ParameterMatcher<(\(tupleType))>] = [\(matchers)]"
+    }
+    
+    private func getTypeWithSelf(_ type: String) -> String {
+        if (type.hasSuffix("?")) {
+            return "Optional<\(type.substring(to: type.index(before: type.endIndex)))>.self"
+        } else {
+            return type + ".self"
+        }
     }
 }

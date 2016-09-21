@@ -29,7 +29,7 @@ List of all changes and new features can be found [here](CHANGELOG.md).
 ## TODO
 
 We are still missing support for some important features like:
-* inheritance
+* inheritance (grandparent methods)
 * generics
 
 ## What will not be supported
@@ -324,6 +324,22 @@ clearStubs<M: Mock>(mocks: M...)
 /// Clears all invocations of mocks.
 clearInvocations<M: Mock>(mocks: M...)
 ```
+
+#### Stub objects
+
+Stubs are used in case when you want to suppress real code. Stubs are different from Mocks in that they don't support stubbing and verification. They can be created with the same constructors as the mocked type. Name of stub class always corresponds to name of the mocked class/protocol with `Stub` suffix. For example stub of protocol `Greeter` has a name `GreeterStub`.  
+
+```Swift
+let stub = GreeterStub()
+```
+
+When method or property is called on stub nothing happens. If some type has to be returned then `DefaultValueRegistry` will provide default value. Stubs can be used to set implicit (no) behavior to mocks without the need to use `thenDoNothing()` like this: `MockGreeter().spy(on: GreeterStub())`.
+
+##### DefaultValueRegistry
+
+`DefaultValueRegistry` is used in Stubs to get default values for return types. It knows only default Swift types, sets, arrays, dictionaries, optionals and tuples (up to 6 values). Tuples for more values can be added with extensions. Custom types must be registered before usage with `DefaultValueRegistry.register<T>(_ value: T, forType: T.Type)`. Default values can be changed with the same method. Sets, arrays, etc. do not have to be registered if their generic type is already registered.
+
+Method `DefaultValueRegistry.reset()` can be used to delete all value registered by user.
 
 ## Cuckoo generator
 

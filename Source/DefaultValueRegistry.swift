@@ -7,44 +7,101 @@
 //
 
 public class DefaultValueRegistry {
-
-    private static var registeredTypes: [ObjectIdentifier: Any] = [
-        ObjectIdentifier(Void): Void(),
-        ObjectIdentifier(Int): Int(),
-        ObjectIdentifier(String): String(),
-        ObjectIdentifier(Bool): Bool(),
-        ObjectIdentifier(Double): Double(),
-        ObjectIdentifier(Float): Float(),
+    
+    private static let defaultRegisteredTypes: [ObjectIdentifier: Any] = [
+        ObjectIdentifier(Void.self): Void(),
+        ObjectIdentifier(Int.self): Int(),
+        ObjectIdentifier(Int8.self): Int8(),
+        ObjectIdentifier(Int16.self): Int16(),
+        ObjectIdentifier(Int32.self): Int32(),
+        ObjectIdentifier(Int64.self): Int64(),
+        ObjectIdentifier(UInt.self): UInt(),
+        ObjectIdentifier(UInt8.self): UInt8(),
+        ObjectIdentifier(UInt16.self): UInt16(),
+        ObjectIdentifier(UInt32.self): UInt32(),
+        ObjectIdentifier(UInt64.self): UInt64(),
+        ObjectIdentifier(String.self): String(),
+        ObjectIdentifier(Bool.self): Bool(),
+        ObjectIdentifier(Double.self): Double(),
+        ObjectIdentifier(Float.self): Float()
     ]
-
-    public static func register<T>(value: T, forType type: T.Type) {
+    
+    private static var registeredTypes = defaultRegisteredTypes
+    
+    public static func register<T>(_ value: T, forType type: T.Type) {
         registeredTypes[ObjectIdentifier(type)] = value
     }
-
-    public static func defaultValue<T>(type: Set<T>.Type) -> Set<T> {
+    
+    public static func defaultValue<T>(_ type: Set<T>.Type) -> Set<T> {
         return defaultValueOrNil(type) ?? []
     }
-
-    public static func defaultValue<T>(type: Array<T>.Type) -> Array<T> {
+    
+    public static func defaultValue<T>(_ type: Array<T>.Type) -> Array<T> {
         return defaultValueOrNil(type) ?? []
     }
-
-    public static func defaultValue<K, V>(type: Dictionary<K, V>.Type) -> Dictionary<K, V> {
+    
+    public static func defaultValue<K, V>(_ type: Dictionary<K, V>.Type) -> Dictionary<K, V> {
         return defaultValueOrNil(type) ?? [:]
     }
-
-    public static func defaultValue<T>(type: Optional<T>.Type) -> Optional<T> {
+    
+    public static func defaultValue<T>(_ type: Optional<T>.Type) -> Optional<T> {
         return defaultValueOrNil(type) ?? nil
     }
-
-    public static func defaultValue<T>(type: T.Type) -> T {
-        if let registeredDefault: T = defaultValueOrNil(type) {
+    
+    public static func defaultValue<T>(_ type: T.Type) -> T {
+        if let registeredDefault = defaultValueOrNil(type) {
             return registeredDefault
         }
         fatalError("Type \(T.self) does not have default return value registered.")
     }
-
-    public static func defaultValueOrNil<T>(type: T.Type) -> T? {
+    
+    public static func reset() {
+        registeredTypes = defaultRegisteredTypes
+    }
+    
+    private static func defaultValueOrNil<T>(_ type: T.Type) -> T? {
         return registeredTypes[ObjectIdentifier(type)] as? T
+    }
+    
+    // Overloads for tuples.
+    
+    public static func defaultValue<P1, P2>(_ type: (P1, P2).Type) -> (P1, P2) {
+        if let registeredDefault = defaultValueOrNil(type) {
+            return registeredDefault
+        } else {
+            return (defaultValue(P1.self), defaultValue(P2.self))
+        }
+    }
+    
+    public static func defaultValue<P1, P2, P3>(_ type: (P1, P2, P3).Type) -> (P1, P2, P3) {
+        if let registeredDefault = defaultValueOrNil(type) {
+            return registeredDefault
+        } else {
+            return (defaultValue(P1.self), defaultValue(P2.self), defaultValue(P3.self))
+        }
+    }
+    
+    public static func defaultValue<P1, P2, P3, P4>(_ type: (P1, P2, P3, P4).Type) -> (P1, P2, P3, P4) {
+        if let registeredDefault = defaultValueOrNil(type) {
+            return registeredDefault
+        } else {
+            return (defaultValue(P1.self), defaultValue(P2.self), defaultValue(P3.self), defaultValue(P4.self))
+        }
+    }
+    
+    public static func defaultValue<P1, P2, P3, P4, P5>(_ type: (P1, P2, P3, P4, P5).Type) -> (P1, P2, P3, P4, P5) {
+        if let registeredDefault = defaultValueOrNil(type) {
+            return registeredDefault
+        } else {
+            return (defaultValue(P1.self), defaultValue(P2.self), defaultValue(P3.self), defaultValue(P4.self), defaultValue(P5.self))
+        }
+    }
+    
+    public static func defaultValue<P1, P2, P3, P4, P5, P6>(_ type: (P1, P2, P3, P4, P5, P6).Type) -> (P1, P2, P3, P4, P5, P6) {
+        if let registeredDefault = defaultValueOrNil(type) {
+            return registeredDefault
+        } else {
+            return (defaultValue(P1.self), defaultValue(P2.self), defaultValue(P3.self), defaultValue(P4.self), defaultValue(P5.self), defaultValue(P6.self))
+        }
     }
 }

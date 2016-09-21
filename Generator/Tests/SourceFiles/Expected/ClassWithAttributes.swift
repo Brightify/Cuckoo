@@ -46,5 +46,4 @@ public class ClassWithAttributesStub: ClassWithAttributes {
     
     public override init() {
     }
-    
 }

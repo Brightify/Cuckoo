@@ -56,5 +56,4 @@ class EmptyClassStub: EmptyClass {
     
     override init() {
     }
-    
 }

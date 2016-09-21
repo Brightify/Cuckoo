@@ -60,5 +60,4 @@ class AStub: A {
     
     override init() {
     }
-    
 }

@@ -50,7 +50,6 @@ class AStub: A {
     
     override init() {
     }
-    
 }
 
 class MockB: B, Cuckoo.Mock {
@@ -94,5 +93,4 @@ class BStub: B {
     
     override init() {
     }
-    
 }

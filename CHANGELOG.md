@@ -2,7 +2,9 @@
 
 ##
 
+* Support for Swift 3
 * Added --no-class-mocking parameter to generator
+* Added Stub objects
 
 ## 0.7.0
 

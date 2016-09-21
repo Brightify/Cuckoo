@@ -10,7 +10,7 @@ import XCTest
 import Cuckoo
 
 class CuckooFunctionsTest: XCTestCase {
-    
+       
     func testReset() {
         let mock = MockTestedClass().spy(on: TestedClass())
         stub(mock) { mock in
