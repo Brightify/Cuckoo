@@ -1,6 +1,6 @@
 [submodule "Generator/Dependencies/FileKit"]
 	path = Generator/Dependencies/FileKit
-	url = https://github.com/nvzqz/FileKit
+url=https://github.com/brightify/FileKit
 [submodule "Generator/Dependencies/SourceKitten"]
 	path = Generator/Dependencies/SourceKitten
 	url = https://github.com/jpsim/SourceKitten
