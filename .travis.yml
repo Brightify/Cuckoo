@@ -5,6 +5,7 @@ xcode_scheme: Cuckoo
 xcode_sdk: macosx
 
 before_script:
+    - export TOOLCHAINS=com.apple.dt.toolchain.Swift_2_3
     - gem install cucumber --no-rdoc --no-ri
     - gem install aruba --no-rdoc --no-ri
 

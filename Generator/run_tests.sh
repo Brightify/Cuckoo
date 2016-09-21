@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+export TOOLCHAINS=com.apple.dt.toolchain.Swift_2_3
 if [ "$1" != "--no-build" ]; then
 	rm -rf Build
 	mkdir Build
