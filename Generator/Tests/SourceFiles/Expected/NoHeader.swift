@@ -10,9 +10,6 @@ class MockEmptyClass: EmptyClass, Cuckoo.Mock {
     
     private var observed: EmptyClass?
     
-    override init() {
-    }
-    
     func spy(on victim: EmptyClass) -> Self {
         observed = victim
         return self
@@ -40,7 +37,4 @@ class MockEmptyClass: EmptyClass, Cuckoo.Mock {
 }
 
 class EmptyClassStub: EmptyClass {
-    
-    override init() {
-    }
 }

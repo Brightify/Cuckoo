@@ -27,9 +27,6 @@ class MockA: A, Cuckoo.Mock {
     
     private var observed: A?
     
-    override init() {
-    }
-    
     func spy(on victim: A) -> Self {
         observed = victim
         return self
@@ -57,7 +54,4 @@ class MockA: A, Cuckoo.Mock {
 }
 
 class AStub: A {
-    
-    override init() {
-    }
 }

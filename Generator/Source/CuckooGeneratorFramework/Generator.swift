@@ -47,11 +47,6 @@ public struct Generator {
             code += "\(token.accessibility.sourceName)let manager = Cuckoo.MockManager()"
             code += ""
             code += "private var observed: \(token.name)?"
-            if (token.children.filter { ($0 as? Method)?.isInit == true }.isEmpty) {
-                code += ""
-                code += "\(token.accessibility.sourceName)\(token.implementation ? "override " : "")init() {"
-                code += "}"
-            }
             code += ""
             code += "\(token.accessibility.sourceName)func spy(on victim: \(token.name)) -> Self {"
             code.nest {
@@ -271,11 +266,6 @@ public struct Generator {
         code += ""
         code += "\(token.accessibility.sourceName)class \(stubClassName(token.name)): \(token.name) {"
         code.nest {
-            if (token.children.filter { ($0 as? Method)?.isInit == true }.isEmpty) {
-                code += ""
-                code += "\(token.accessibility.sourceName)\(token.implementation ? "override " : "")init() {"
-                code += "}"
-            }
             token.children.forEach { generateStub(token: $0) }
         }
         code += "}"

@@ -13,9 +13,6 @@ public class MockClassWithAttributes: ClassWithAttributes, Cuckoo.Mock {
     
     private var observed: ClassWithAttributes?
     
-    public override init() {
-    }
-    
     public func spy(on victim: ClassWithAttributes) -> Self {
         observed = victim
         return self
@@ -43,7 +40,4 @@ public class MockClassWithAttributes: ClassWithAttributes, Cuckoo.Mock {
 }
 
 public class ClassWithAttributesStub: ClassWithAttributes {
-    
-    public override init() {
-    }
 }

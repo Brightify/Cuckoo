@@ -17,9 +17,6 @@ class MockTestedProtocol: TestedProtocol, Cuckoo.Mock {
     
     private var observed: TestedProtocol?
     
-    init() {
-    }
-    
     func spy(on victim: TestedProtocol) -> Self {
         observed = victim
         return self
@@ -209,9 +206,6 @@ class MockTestedProtocol: TestedProtocol, Cuckoo.Mock {
 }
 
 class TestedProtocolStub: TestedProtocol {
-    
-    init() {
-    }
     
     var readOnlyProperty: String {
         get {

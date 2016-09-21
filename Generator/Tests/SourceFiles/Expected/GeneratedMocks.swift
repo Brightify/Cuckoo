@@ -17,9 +17,6 @@ class MockTestedClass: TestedClass, Cuckoo.Mock {
     
     private var observed: TestedClass?
     
-    override init() {
-    }
-    
     func spy(on victim: TestedClass) -> Self {
         observed = victim
         return self
@@ -210,9 +207,6 @@ class MockTestedClass: TestedClass, Cuckoo.Mock {
 
 class TestedClassStub: TestedClass {
     
-    override init() {
-    }
-    
     override var readOnlyProperty: String {
         get {
             return DefaultValueRegistry.defaultValue(String.self)
@@ -286,9 +280,6 @@ class MockTestedProtocol: TestedProtocol, Cuckoo.Mock {
     let manager = Cuckoo.MockManager()
     
     private var observed: TestedProtocol?
-    
-    init() {
-    }
     
     func spy(on victim: TestedProtocol) -> Self {
         observed = victim
@@ -479,9 +470,6 @@ class MockTestedProtocol: TestedProtocol, Cuckoo.Mock {
 }
 
 class TestedProtocolStub: TestedProtocol {
-    
-    init() {
-    }
     
     var readOnlyProperty: String {
         get {

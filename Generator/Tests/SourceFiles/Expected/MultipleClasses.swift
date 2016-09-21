@@ -17,9 +17,6 @@ class MockA: A, Cuckoo.Mock {
     
     private var observed: A?
     
-    override init() {
-    }
-    
     func spy(on victim: A) -> Self {
         observed = victim
         return self
@@ -47,9 +44,6 @@ class MockA: A, Cuckoo.Mock {
 }
 
 class AStub: A {
-    
-    override init() {
-    }
 }
 
 class MockB: B, Cuckoo.Mock {
@@ -59,9 +53,6 @@ class MockB: B, Cuckoo.Mock {
     let manager = Cuckoo.MockManager()
     
     private var observed: B?
-    
-    override init() {
-    }
     
     func spy(on victim: B) -> Self {
         observed = victim
@@ -90,7 +81,4 @@ class MockB: B, Cuckoo.Mock {
 }
 
 class BStub: B {
-    
-    override init() {
-    }
 }
