@@ -17,12 +17,6 @@ class TestedClass {
     
     lazy var optionalProperty: Int? = 0
 
-    var arrayProperty: [Int] = []
-
-    var setProperty: Set<Int> = []
-
-    var dictionaryProperty: [String: Int] = [:]
-
     func noReturn() {
     }
     
