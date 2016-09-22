@@ -23,7 +23,8 @@ public struct GenerateMocksCommand: CommandType {
     public let function = "Generates mock files"
     
     public func run(_ options: Options) -> Result<Void, CuckooGeneratorError> {
-        let tokens = options.files.map { File(path: $0) }.flatMap { $0 }.map { Tokenizer(sourceFile: $0).tokenize() }
+        let inputPaths = Set(options.files.map { Path($0).absolute.standardRawValue })
+        let tokens = inputPaths.flatMap { File(path: $0) }.map { Tokenizer(sourceFile: $0).tokenize() }
         let parsedFiles = options.noClassMocking ? removeClasses(tokens) : tokens
         
         let headers = parsedFiles.map { options.noHeader ? "" : FileHeaderHandler.getHeader($0, withTimestamp: !options.noTimestamp) }
