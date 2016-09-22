@@ -23,8 +23,8 @@ public struct GenerateMocksCommand: CommandType {
     public let function = "Generates mock files"
     
     public func run(_ options: Options) -> Result<Void, CuckooGeneratorError> {
-        let inputPaths = Set(options.files.map { Path($0).absolute.standardRawValue })
-        let tokens = inputPaths.flatMap { File(path: $0) }.map { Tokenizer(sourceFile: $0).tokenize() }
+        let inputFiles = Array(Set(options.files.map { Path($0).standardRawValue }))
+        let tokens = inputFiles.flatMap { File(path: $0) }.map { Tokenizer(sourceFile: $0).tokenize() }
         let parsedFiles = options.noClassMocking ? removeClasses(tokens) : tokens
         
         let headers = parsedFiles.map { options.noHeader ? "" : FileHeaderHandler.getHeader($0, withTimestamp: !options.noTimestamp) }
@@ -36,7 +36,7 @@ public struct GenerateMocksCommand: CommandType {
 
         do {
             if outputPath.isDirectory {
-                let inputPaths = options.files.map { Path($0) }
+                let inputPaths = inputFiles.map { Path($0) }
                 for (inputPath, outputText) in zip(inputPaths, mergedFiles) {
                     let fileName = options.filePrefix + inputPath.fileName
                     let outputFile = TextFile(path: outputPath + fileName)
