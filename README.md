@@ -257,16 +257,14 @@ Note: Optional types (for example `Int?`) cannot be used directly. You need to w
 `ParameterMatcher` also conform to `Matchable`. You can create your own `ParameterMatcher` instances or if you want to directly use your custom types there is the `Matchable` protocol. Standard instances of `ParameterMatcher` can be obtain via these functions:
 
 ```Swift
-/// All equalTo matchers have shortcut eq.
-
 /// Returns an equality matcher.
-equalTo<T: Equatable>(value: T)
+equal<T: Equatable>(to value: T)
 
 /// Returns an identity matcher.
-equalTo<T: AnyObject>(value: T)
+equal<T: AnyObject>(to value: T)
 
 /// Returns a matcher using the supplied function.
-equalTo<T>(value: T, equalWhen equalityFunction: (T, T) -> Bool)
+equal<T>(to value: T, equalWhen equalityFunction: (T, T) -> Bool)
 
 /// Returns a matcher matching any Int value.
 anyInt()
@@ -284,7 +282,7 @@ anyClosure()
 notNil()
 ```
 
-Matching of nil can be achieved with `eq(nil)`.
+Matching of nil can be achieved with `equal(to: nil)`.
 
 `Matchable` can be chained with methods `or` and `and` like so:
 
@@ -346,7 +344,7 @@ When method or property is called on stub nothing happens. If some type has to b
 
 ##### DefaultValueRegistry
 
-`DefaultValueRegistry` is used in Stubs to get default values for return types. It knows only default Swift types, sets, arrays, dictionaries, optionals and tuples (up to 6 values). Tuples for more values can be added with extensions. Custom types must be registered before usage with `DefaultValueRegistry.register<T>(_ value: T, forType: T.Type)`. Default values can be changed with the same method. Sets, arrays, etc. do not have to be registered if their generic type is already registered.
+`DefaultValueRegistry` is used in Stubs to get default values for return types. It knows only default Swift types, sets, arrays, dictionaries, optionals and tuples (up to 6 values). Tuples for more values can be added with extensions. Custom types must be registered before usage with `DefaultValueRegistry.register<T>(value: T, forType: T.Type)`. Default values can be changed with the same method. Sets, arrays, etc. do not have to be registered if their generic type is already registered.
 
 Method `DefaultValueRegistry.reset()` can be used to delete all value registered by user.
 

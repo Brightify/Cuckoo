@@ -209,13 +209,13 @@ class TestedProtocolStub: TestedProtocol {
     
     var readOnlyProperty: String {
         get {
-            return DefaultValueRegistry.defaultValue(String.self)
+            return DefaultValueRegistry.defaultValue(for: String.self)
         }
     }
     
     var readWriteProperty: Int {
         get {
-            return DefaultValueRegistry.defaultValue(Int.self)
+            return DefaultValueRegistry.defaultValue(for: Int.self)
         }
         set {
         }
@@ -223,41 +223,41 @@ class TestedProtocolStub: TestedProtocol {
     
     var optionalProperty: Int? {
         get {
-            return DefaultValueRegistry.defaultValue(Optional<Int>.self)
+            return DefaultValueRegistry.defaultValue(for: Optional<Int>.self)
         }
         set {
         }
     }
     
     func noReturn() {
-        return DefaultValueRegistry.defaultValue(Void.self)
+        return DefaultValueRegistry.defaultValue(for: Void.self)
     }
     
     func count(characters: String) -> Int {
-        return DefaultValueRegistry.defaultValue(Int.self)
+        return DefaultValueRegistry.defaultValue(for: Int.self)
     }
     
     func withThrows() throws -> Int {
-        return DefaultValueRegistry.defaultValue(Int.self)
+        return DefaultValueRegistry.defaultValue(for: Int.self)
     }
     
     func withNoReturnThrows() throws {
-        return DefaultValueRegistry.defaultValue(Void.self)
+        return DefaultValueRegistry.defaultValue(for: Void.self)
     }
     
     func withClosure(_ closure: (String) -> Int) -> Int {
-        return DefaultValueRegistry.defaultValue(Int.self)
+        return DefaultValueRegistry.defaultValue(for: Int.self)
     }
     
     func withEscape(_ a: String, action closure: @escaping (String) -> Void) {
-        return DefaultValueRegistry.defaultValue(Void.self)
+        return DefaultValueRegistry.defaultValue(for: Void.self)
     }
     
     func withOptionalClosure(_ a: String, closure: ((String) -> Void)?) {
-        return DefaultValueRegistry.defaultValue(Void.self)
+        return DefaultValueRegistry.defaultValue(for: Void.self)
     }
     
     func withLabelAndUnderscore(labelA a: String, _ b: String) {
-        return DefaultValueRegistry.defaultValue(Void.self)
+        return DefaultValueRegistry.defaultValue(for: Void.self)
     }
 }

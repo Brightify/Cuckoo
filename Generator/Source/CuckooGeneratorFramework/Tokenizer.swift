@@ -22,7 +22,7 @@ public struct Tokenizer {
         let structure = Structure(file: file)
         
         let declarations = tokenize(structure.dictionary[Key.Substructure.rawValue] as? [SourceKitRepresentable] ?? [])
-        let imports = tokenizeImports(declarations)
+        let imports = tokenize(imports: declarations)
         
         return FileRepresentation(sourceFile: file, declarations: declarations + imports)
     }
@@ -39,9 +39,9 @@ public struct Tokenizer {
         let kind = dictionary[Key.Kind.rawValue] as? String ?? "unknown type"
         
         // Optional fields
-        let range = extractRange(dictionary, offsetKey: .Offset, lengthKey: .Length)
-        let nameRange = extractRange(dictionary, offsetKey: .NameOffset, lengthKey: .NameLength)
-        let bodyRange = extractRange(dictionary, offsetKey: .BodyOffset, lengthKey: .BodyLength)
+        let range = extractRange(from: dictionary, offset: .Offset, length: .Length)
+        let nameRange = extractRange(from: dictionary, offset: .NameOffset, length: .NameLength)
+        let bodyRange = extractRange(from: dictionary, offset: .BodyOffset, length: .BodyLength)
         
         let accessibility = (dictionary[Key.Accessibility.rawValue] as? String).flatMap { Accessibility(rawValue: $0) }
         let type = dictionary[Key.TypeName.rawValue] as? String
@@ -102,7 +102,7 @@ public struct Tokenizer {
                 overriding: false)
             
         case Kinds.InstanceMethod.rawValue:
-            let parameters = tokenizeMethodParameters(name, dictionary[Key.Substructure.rawValue] as? [SourceKitRepresentable] ?? [])
+            let parameters = tokenize(methodName: name, parameters: dictionary[Key.Substructure.rawValue] as? [SourceKitRepresentable] ?? [])
             
             var returnSignature: String
             if let bodyRange = bodyRange {
@@ -152,26 +152,26 @@ public struct Tokenizer {
         }
     }
     
-    private func tokenizeMethodParameters(_ methodName: String, _ representables: [SourceKitRepresentable]) -> [MethodParameter] {
+    private func tokenize(methodName: String, parameters: [SourceKitRepresentable]) -> [MethodParameter] {
         // Takes the string between `(` and `)`
-        let parameters = methodName.components(separatedBy: "(").last?.characters.dropLast(1).map { "\($0)" }.joined(separator: "")
-        let parameterLabels: [String?] = parameters?.components(separatedBy: ":").map { $0 != "_" ? $0 : nil } ?? []
+        let parameterNames = methodName.components(separatedBy: "(").last?.characters.dropLast(1).map { "\($0)" }.joined(separator: "")
+        let parameterLabels: [String?] = parameterNames?.components(separatedBy: ":").map { $0 != "_" ? $0 : nil } ?? []
         
-        return zip(parameterLabels, representables).flatMap(tokenizeMethodParameter)
+        return zip(parameterLabels, parameters).flatMap(tokenize)
     }
     
-    private func tokenizeMethodParameter(_ label: String?, _ representable: SourceKitRepresentable) -> MethodParameter? {
-        guard let dictionary = representable as? [String: SourceKitRepresentable] else { return nil }
+    private func tokenize(parameterLabel: String?, parameter: SourceKitRepresentable) -> MethodParameter? {
+        guard let dictionary = parameter as? [String: SourceKitRepresentable] else { return nil }
         
         let name = dictionary[Key.Name.rawValue] as? String ?? "name not set"
         let kind = dictionary[Key.Kind.rawValue] as? String ?? "unknown type"
-        let range = extractRange(dictionary, offsetKey: .Offset, lengthKey: .Length)
-        let nameRange = extractRange(dictionary, offsetKey: .NameOffset, lengthKey: .NameLength)
+        let range = extractRange(from: dictionary, offset: .Offset, length: .Length)
+        let nameRange = extractRange(from: dictionary, offset: .NameOffset, length: .NameLength)
         let type = dictionary[Key.TypeName.rawValue] as? String
         
         switch kind {
         case Kinds.MethodParameter.rawValue:
-            return MethodParameter(label: label, name: name, type: type!, range: range!, nameRange: nameRange!)
+            return MethodParameter(label: parameterLabel, name: name, type: type!, range: range!, nameRange: nameRange!)
             
         default:
             fputs("Unknown method parameter kind: \(kind)", stderr)
@@ -179,7 +179,7 @@ public struct Tokenizer {
         }
     }
     
-    private func tokenizeImports(_ otherTokens: [Token]) -> [Token] {
+    private func tokenize(imports otherTokens: [Token]) -> [Token] {
         let rangesToIgnore: [CountableRange<Int>] = otherTokens.flatMap { token in
             switch token {
             case let container as ContainerToken:

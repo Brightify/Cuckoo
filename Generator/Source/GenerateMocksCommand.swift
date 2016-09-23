@@ -27,8 +27,8 @@ public struct GenerateMocksCommand: CommandType {
         let tokens = inputFiles.flatMap { File(path: $0) }.map { Tokenizer(sourceFile: $0).tokenize() }
         let parsedFiles = options.noClassMocking ? removeClasses(tokens) : tokens
         
-        let headers = parsedFiles.map { options.noHeader ? "" : FileHeaderHandler.getHeader($0, withTimestamp: !options.noTimestamp) }
-        let imports = parsedFiles.map { FileHeaderHandler.getImports($0, testableFrameworks: options.testableFrameworks) }
+        let headers = parsedFiles.map { options.noHeader ? "" : FileHeaderHandler.getHeader(of: $0, includeTimestamp: !options.noTimestamp) }
+        let imports = parsedFiles.map { FileHeaderHandler.getImports(of: $0, testableFrameworks: options.testableFrameworks) }
         let mocks = parsedFiles.map { Generator(file: $0).generate() }
         
         let mergedFiles = zip(zip(headers, imports), mocks).map { $0.0 + $0.1 + $1 }

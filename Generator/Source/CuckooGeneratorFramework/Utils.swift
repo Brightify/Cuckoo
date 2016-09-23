@@ -10,11 +10,11 @@ import SourceKittenFramework
 
 extension String {
     var trimmed: String {
-        return self.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        return trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
     }
     
     func takeUntil(occurence: String) -> String? {
-        return self.components(separatedBy: occurence).first
+        return components(separatedBy: occurence).first
     }
     
     subscript(range: Range<Int>) -> String {
@@ -34,10 +34,10 @@ extension Sequence {
     }
 }
 
-internal func extractRange(_ dictionary: [String: SourceKitRepresentable], offsetKey: Key, lengthKey: Key) -> CountableRange<Int>? {
+internal func extractRange(from dictionary: [String: SourceKitRepresentable], offset: Key, length: Key) -> CountableRange<Int>? {
     guard let
-        offset = (dictionary[offsetKey.rawValue] as? Int64).map({ Int($0) }),
-        let length = (dictionary[lengthKey.rawValue] as? Int64).map({ Int($0) })
+        offset = (dictionary[offset.rawValue] as? Int64).map({ Int($0) }),
+        let length = (dictionary[length.rawValue] as? Int64).map({ Int($0) })
         else { return nil }
     
     return offset..<offset.advanced(by: length)

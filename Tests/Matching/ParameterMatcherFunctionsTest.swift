@@ -12,21 +12,15 @@ import Cuckoo
 class ParameterMatcherFunctionsTest: XCTestCase {  
     
     func testEqualToEquatable() {
-        XCTAssertTrue(eq(1).matches(1))
-        XCTAssertFalse(eq(1).matches(2))
-        
-        XCTAssertTrue(equalTo(1).matches(1))
-        XCTAssertFalse(equalTo(1).matches(2))
+        XCTAssertTrue(equal(to: 1).matches(1))
+        XCTAssertFalse(equal(to: 1).matches(2))
     }
     
     func testEqualToAnyObject() {
         let x = X()
         
-        XCTAssertTrue(eq(x).matches(x))
-        XCTAssertFalse(eq(x).matches(X()))
-        
-        XCTAssertTrue(equalTo(x).matches(x))
-        XCTAssertFalse(equalTo(x).matches(X()))
+        XCTAssertTrue(equal(to: x).matches(x))
+        XCTAssertFalse(equal(to: x).matches(X()))
     }
     
     func testEqualToWithFunction() {
@@ -35,11 +29,8 @@ class ParameterMatcherFunctionsTest: XCTestCase {
             return a.0 == b.0 && a.1 == b.1
         }
         
-        XCTAssertTrue(eq(tuple, equalWhen: function).matches((1, 1)))
-        XCTAssertFalse(eq(tuple, equalWhen: function).matches((1, 2)))
-        
-        XCTAssertTrue(equalTo(tuple, equalWhen: function).matches((1, 1)))
-        XCTAssertFalse(equalTo(tuple, equalWhen: function).matches((1, 2)))
+        XCTAssertTrue(equal(to: tuple, equalWhen: function).matches((1, 1)))
+        XCTAssertFalse(equal(to: tuple, equalWhen: function).matches((1, 2)))
     }
     
     func testAnyInt() {
@@ -59,29 +50,19 @@ class ParameterMatcherFunctionsTest: XCTestCase {
     }
     
     func testOptionalEqualToEquatable() {
-        XCTAssertTrue(eq(nil as Int?).matches(nil))
-        XCTAssertTrue(eq(1 as Int?).matches(1))
-        XCTAssertFalse(equalTo(1 as Int?).matches(2))
-        XCTAssertFalse(eq(nil).matches(1))
-        
-        XCTAssertTrue(equalTo(nil as Int?).matches(nil))
-        XCTAssertTrue(equalTo(1 as Int?).matches(1))
-        XCTAssertFalse(equalTo(1 as Int?).matches(2))
-        XCTAssertFalse(equalTo(nil).matches(1))
+        XCTAssertTrue(equal(to: nil as Int?).matches(nil))
+        XCTAssertTrue(equal(to: 1 as Int?).matches(1))
+        XCTAssertFalse(equal(to: 1 as Int?).matches(2))
+        XCTAssertFalse(equal(to: nil).matches(1))
     }
     
     func testOptionalEqualToAnyObject() {
         let x: X? = X()
-        
-        XCTAssertTrue(eq(nil as X?).matches(nil))
-        XCTAssertTrue(eq(x).matches(x))
-        XCTAssertFalse(eq(x).matches(X()))
-        XCTAssertFalse(eq(nil).matches(x))
-        
-        XCTAssertTrue(eq(nil as X?).matches(nil))
-        XCTAssertTrue(equalTo(x).matches(x))
-        XCTAssertFalse(equalTo(x).matches(X()))
-        XCTAssertFalse(eq(nil).matches(x))
+
+        XCTAssertTrue(equal(to: nil as X?).matches(nil))
+        XCTAssertTrue(equal(to: x).matches(x))
+        XCTAssertFalse(equal(to: x).matches(X()))
+        XCTAssertFalse(equal(to: nil).matches(x))
     }
     
     func testOptionalEqualToWithFunction() {
@@ -93,15 +74,10 @@ class ParameterMatcherFunctionsTest: XCTestCase {
             return x.0 == y.0 && x.1 == y.1
         }
         
-        XCTAssertTrue(eq(nil, equalWhen: function).matches(nil))
-        XCTAssertTrue(eq(tuple, equalWhen: function).matches((1, 1)))
-        XCTAssertFalse(eq(tuple, equalWhen: function).matches((1, 2)))
-        XCTAssertFalse(eq(nil, equalWhen: function).matches(tuple))
-        
-        XCTAssertTrue(equalTo(nil, equalWhen: function).matches(nil))
-        XCTAssertTrue(equalTo(tuple, equalWhen: function).matches((1, 1)))
-        XCTAssertFalse(equalTo(tuple, equalWhen: function).matches((1, 2)))
-        XCTAssertFalse(equalTo(nil, equalWhen: function).matches(tuple))
+        XCTAssertTrue(equal(to: nil, equalWhen: function).matches(nil))
+        XCTAssertTrue(equal(to: tuple, equalWhen: function).matches((1, 1)))
+        XCTAssertFalse(equal(to: tuple, equalWhen: function).matches((1, 2)))
+        XCTAssertFalse(equal(to: nil, equalWhen: function).matches(tuple))
     }
     
     func testOptionalAnyInt() {

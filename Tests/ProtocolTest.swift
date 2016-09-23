@@ -55,7 +55,7 @@ class ProtocolTest: XCTestCase {
         XCTAssertNil(mock.optionalProperty)
         XCTAssertTrue(called)
         _ = verify(mock).optionalProperty.get
-        verify(mock).optionalProperty.set(eq(0))
+        verify(mock).optionalProperty.set(equal(to: 0))
     }
     
     func testNoReturn() {
