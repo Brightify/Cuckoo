@@ -126,13 +126,13 @@ After calling the `when` function you can specify what to do next with following
 
 ```Swift
 /// Invokes `implementation` when invoked.
-then(implementation: IN throws -> OUT)
+then(_ implementation: IN throws -> OUT)
 
 /// Returns `output` when invoked.
-thenReturn(output: OUT, _ outputs: OUT...)
+thenReturn(_ output: OUT, _ outputs: OUT...)
 
 /// Throws `error` when invoked.
-thenThrow(error: ErrorType, _ outputs: OUT...)
+thenThrow(_ error: ErrorType, _ errors: Error...)
 
 /// Invokes real implementation when invoked.
 thenCallRealImplementation()
@@ -252,7 +252,7 @@ These basic values are extended to conform to `Matchable`:
 * `UInt32`
 * `UInt64`
 
-Note: Optional types (for example `Int?`) cannot be used directly. You need to wrap them with `eq` function.
+Note: Optional types (for example `Int?`) cannot be used directly. You need to wrap them with `equal(to)` function.
 
 `ParameterMatcher` also conform to `Matchable`. You can create your own `ParameterMatcher` instances or if you want to directly use your custom types there is the `Matchable` protocol. Standard instances of `ParameterMatcher` can be obtain via these functions:
 
@@ -300,7 +300,7 @@ Standard call matchers are:
 
 ```Swift
 /// Returns a matcher ensuring a call was made `count` times.
-times(count: Int)
+times(_ count: Int)
 
 /// Returns a matcher ensuring no call was made.
 never()
@@ -309,10 +309,10 @@ never()
 atLeastOnce()
 
 /// Returns a matcher ensuring call was made at least `count` times.
-atLeast(count: Int)
+atLeast(_ count: Int)
 
 /// Returns a matcher ensuring call was made at most `count` times.
-atMost(count: Int)
+atMost(_ count: Int)
 ```
 
 As with `Matchable` you can chain `CallMatcher` with methods `or` and `and`. But you cannot mix `Matchable` and `CallMatcher` together.
@@ -323,13 +323,13 @@ Following functions are used to reset stubbing and/or invocations on mocks.
 
 ```Swift
 /// Clears all invocations and stubs of mocks.
-reset<M: Mock>(mocks: M...)
+reset<M: Mock>(_ mocks: M...)
 
 /// Clears all stubs of mocks.
-clearStubs<M: Mock>(mocks: M...)
+clearStubs<M: Mock>(_ mocks: M...)
 
 /// Clears all invocations of mocks.
-clearInvocations<M: Mock>(mocks: M...)
+clearInvocations<M: Mock>(_ mocks: M...)
 ```
 
 #### Stub objects
@@ -366,7 +366,7 @@ This is more complicated path. You need to clone this repository and build it yo
 
 Generator can be called through a terminal. Each call consists of command, options and arguments. Options and arguments depends on used command. Options can have additional parameters. Names of all of them are case sensitive. The order goes like this:
 
-```Bash
+```
 cuckoo command options arguments
 ```
 
