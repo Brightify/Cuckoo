@@ -17,7 +17,7 @@ private func curry<P1, P2, P3, P4, P5, P6, P7, R>(_ f: @escaping (P1, P2, P3, P4
         return { p1 in { p2 in { p3 in { p4 in { p5 in { p6 in { p7 in f(p1, p2, p3, p4, p5, p6, p7) } } } } } } }
 }
 
-public struct GenerateMocksCommand: CommandType {
+public struct GenerateMocksCommand: CommandProtocol {
     
     public let verb = "generate"
     public let function = "Generates mock files"
@@ -61,7 +61,7 @@ public struct GenerateMocksCommand: CommandType {
             }.filter { !$0.declarations.isEmpty }
     }
     
-    public struct Options: OptionsType {
+    public struct Options: OptionsProtocol {
         let files: [String]
         let output: String
         let noHeader: Bool

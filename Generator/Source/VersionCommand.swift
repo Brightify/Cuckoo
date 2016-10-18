@@ -9,7 +9,7 @@
 import Commandant
 import Result
 
-public struct VersionCommand: CommandType {
+public struct VersionCommand: CommandProtocol {
     
     static let appVersion = Bundle.allFrameworks.filter {
         $0.bundleIdentifier == "org.brightify.CuckooGeneratorFramework"
@@ -23,7 +23,7 @@ public struct VersionCommand: CommandType {
         return .success()
     }
     
-    public struct Options: OptionsType {
+    public struct Options: OptionsProtocol {
         public static func evaluate(_ m: CommandMode) -> Result<Options, CommandantError<CuckooGeneratorError>> {
             return .success(Options())
         }
