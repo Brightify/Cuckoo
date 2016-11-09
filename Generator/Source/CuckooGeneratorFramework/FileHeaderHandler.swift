@@ -32,10 +32,10 @@ public struct FileHeaderHandler {
     
     private static func getRelativePath(from absolutePath: String) -> String {
         let path = Path(absolutePath)
-        let base = path.commonAncestor(Path.Current)
+        let base = path.commonAncestor(Path.current)
         let components = path.components.suffix(from: base.components.endIndex)
         let result = components.map { $0.rawValue }.joined(separator: Path.separator)
-        let difference = Path.Current.components.endIndex - base.components.endIndex
+        let difference = Path.current.components.endIndex - base.components.endIndex
         return (0..<difference).reduce(result) { acc, _ in ".." + Path.separator + acc }
     }
     
