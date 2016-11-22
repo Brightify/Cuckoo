@@ -31,7 +31,6 @@
 		DC40952A1D2A5143006FB137 /* ParameterMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4095291D2A5143006FB137 /* ParameterMatcher.swift */; };
 		DC40952C1D2A5155006FB137 /* CallMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC40952B1D2A5155006FB137 /* CallMatcher.swift */; };
 		DC5600F11CFAD4A4001F339D /* __DoNotUse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5600EF1CFAD4A4001F339D /* __DoNotUse.swift */; };
-		DC5A3A5D1CF6F8D600F520E3 /* Cuckoo.podspec in Resources */ = {isa = PBXBuildFile; fileRef = DC5A3A5C1CF6F8D600F520E3 /* Cuckoo.podspec */; };
 		DC70D0A81D2AB5B700014C5F /* CuckooFunctionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC70D0A61D2AB5B300014C5F /* CuckooFunctionsTest.swift */; };
 		DC70D0AB1D2AB5F800014C5F /* ClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC70D0A91D2AB5F500014C5F /* ClassTest.swift */; };
 		DC70D0AD1D2AB62100014C5F /* ProtocolTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC70D0AC1D2AB62100014C5F /* ProtocolTest.swift */; };
@@ -97,6 +96,7 @@
 		183D04051C4691C600EBAEF3 /* CuckooTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CuckooTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		183D040C1C4691C600EBAEF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		183D04151C46926A00EBAEF3 /* CuckooFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CuckooFunctions.swift; sourceTree = "<group>"; };
+		18F03D881DE454F50006A71E /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		DC1A82B31D2D6A2100A217F0 /* FailTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FailTest.swift; sourceTree = "<group>"; };
 		DC4094EC1D211563006FB137 /* StubFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StubFunction.swift; sourceTree = "<group>"; };
 		DC4094ED1D211563006FB137 /* StubThrowingFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StubThrowingFunction.swift; sourceTree = "<group>"; };
@@ -176,6 +176,7 @@
 		183D03F11C4691C600EBAEF3 = {
 			isa = PBXGroup;
 			children = (
+				18F03D881DE454F50006A71E /* CHANGELOG.md */,
 				DC5A3A5C1CF6F8D600F520E3 /* Cuckoo.podspec */,
 				183D03FD1C4691C600EBAEF3 /* Source */,
 				183D04091C4691C600EBAEF3 /* Tests */,
@@ -493,7 +494,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC5A3A5D1CF6F8D600F520E3 /* Cuckoo.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -648,6 +648,7 @@
 				SDKROOT = macosx;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_REFLECTION_METADATA_LEVEL = none;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "i386 x86_64 armv7 armv7s arm64";
@@ -694,6 +695,7 @@
 				SDKROOT = macosx;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_REFLECTION_METADATA_LEVEL = none;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;

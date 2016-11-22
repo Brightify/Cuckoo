@@ -1,6 +1,9 @@
 # Changelog
 
-##
+## 0.8.1
+* Set "Reflection Metadata" to "None" to fix #72
+
+## 0.8.0
 
 * Support for Swift 3
 * Added --no-class-mocking parameter to generator
