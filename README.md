@@ -354,10 +354,6 @@ Method `DefaultValueRegistry.reset()` can be used to delete all value registered
 
 For normal use you can skip this because [run script](run) in Cuckoo downloads and builds correct version of the generator automatically.
 
-#### Homebrew
-
-Simply run `brew install cuckoo` and you are ready to go.
-
 #### Custom
 
 This is more complicated path. You need to clone this repository and build it yourself. You can look in the [run script](run) for more inspiration.
