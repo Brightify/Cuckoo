@@ -12,7 +12,7 @@ script:
     - cd Generator
     - bash run_tests.sh
     - cd ..
-    - xcodebuild -workspace 'Cuckoo.xcworkspace' -scheme 'Cuckoo' clean test
+    - xcodebuild -workspace 'Cuckoo.xcworkspace' -scheme 'Cuckoo+Run' clean test
     - pod lib lint
 
 after_script:
