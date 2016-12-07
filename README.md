@@ -65,26 +65,26 @@ pod "Cuckoo"
 And add the following `Run script` build phase to your test target's `Build Phases`:
 
 ```Bash
-# Define output file; change "${PROJECT_NAME}Tests" to your test's root source folder, if it's not the default name
-OUTPUT_FILE="./${PROJECT_NAME}Tests/GeneratedMocks.swift"
-echo "Generated Mocks File = ${OUTPUT_FILE}"
+# Define output file. Change "$PROJECT_DIR/Tests" to your test's root source folder, if it's not the default name.
+OUTPUT_FILE="$PROJECT_DIR/Tests/GeneratedMocks.swift"
+echo "Generated Mocks File = $OUTPUT_FILE"
 
-# Define input directory; change "${PROJECT_NAME}" to your project's root source folder, if it's not the default name
-INPUT_DIR="./${PROJECT_NAME}"
-echo "Mocks Input Directory = ${INPUT_DIR}"
+# Define input directory. Change "$PROJECT_DIR" to your project's root source folder, if it's not the default name.
+INPUT_DIR="$PROJECT_DIR"
+echo "Mocks Input Directory = $INPUT_DIR"
 
-# Generate mock files; include as many input files as you'd like to create mocks for
-${PODS_ROOT}/Cuckoo/run generate --testable "${PROJECT_NAME}" \
+# Generate mock files, include as many input files as you'd like to create mocks for.
+${PODS_ROOT}/Cuckoo/run generate --testable "$PROJECT_NAME" \
 --output "${OUTPUT_FILE}" \
-"${INPUT_DIR}/FileName1.swift" \
-"${INPUT_DIR}/FileName2.swift" \
-"${INPUT_DIR}/FileName3.swift"
+"$INPUT_DIR/FileName1.swift" \
+"$INPUT_DIR/FileName2.swift" \
+"$INPUT_DIR/FileName3.swift"
 # ... and so forth
 
-# After running once, locate `GeneratedMocks.swift` and drag it into your Xcode test target group
+# After running once, locate `GeneratedMocks.swift` and drag it into your Xcode test target group.
 ```
 
-Input files can be also specified directly in `Run script` in `Input Files` form.
+Input files can be also specified directly in `Run script` in `Input Files` form. To force run script to rebuild generator even if it already exists, use `--clean` as first argument.
 
 #### Carthage
 To use Cuckoo with [Carthage](https://github.com/Carthage/Carthage) add in your Cartfile this line:

@@ -513,13 +513,15 @@
 			files = (
 			);
 			inputPaths = (
+				"$(SRCROOT)/Tests/Source/TestedProtocol.swift",
+				"$(SRCROOT)/Tests/Source/TestedClass.swift",
 			);
 			name = "Generate mocks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$BUILD_DIR/$CONFIGURATION/cuckoo_generator.app/Contents/MacOS/cuckoo_generator generate --output \"$PROJECT_DIR/Tests/Generated/GeneratedMocks.swift\" \"$PROJECT_DIR/Tests/Source/TestedClass.swift\" \"$PROJECT_DIR/Tests/Source/TestedProtocol.swift\" \"$PROJECT_DIR/Tests/Source/ClassForStubTesting.swift\"";
+			shellScript = "OUTPUT=\"$PROJECT_DIR/Tests/Generated/GeneratedMocks.swift\"\nINPUT=\"$PROJECT_DIR/Tests/Source/ClassForStubTesting.swift\"\n\"$BUILD_DIR/$CONFIGURATION/cuckoo_generator.app/Contents/MacOS/cuckoo_generator\" generate --output \"$OUTPUT\" \"$INPUT\"\n#\"$PROJECT_DIR/run\" --clean generate --output \"$OUTPUT\" \"$INPUT\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

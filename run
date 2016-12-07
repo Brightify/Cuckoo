@@ -1,18 +1,28 @@
 #!/usr/bin/env bash
 
-SCRIPT_PATH="`dirname \"$0\"`"
-FILE_NAME=cuckoo_generator.app
-FILE_PATH=$SCRIPT_PATH/Generator/$FILE_NAME
-if [ ! -e $FILE_PATH ]; then
-    CURRENT_PWD=$(pwd)
-	cd $SCRIPT_PATH
+SCRIPT_PATH="$(dirname "$0")"
+FILE_NAME="cuckoo_generator.app"
+FILE_PATH="$SCRIPT_PATH/Generator/$FILE_NAME"
+if [[ "$1" = "--clean" || ! -e "$FILE_PATH" ]]; then
+    CURRENT_PWD="$PWD"
+	cd "$SCRIPT_PATH"
 	./build_generator
-	cd $CURRENT_PWD
+	cd "$CURRENT_PWD"
 fi
+
+if [[ "$1" = "--clean" ]]; then
+	shift
+fi
+
 INPUT_FILES=""
-for (( i=0; i<SCRIPT_INPUT_FILE_COUNT; i++ ))
+if [[ "$#" > 0 ]]; then
+	INPUT_FILES=$(printf '%q ' "$@")
+fi
+
+for (( i=0; i<$SCRIPT_INPUT_FILE_COUNT; i++ ))
 do
-	VARIABLE=SCRIPT_INPUT_FILE_${i}
-	INPUT_FILES+=" "${!VARIABLE}
+	INPUT_FILE="SCRIPT_INPUT_FILE_$i"
+	INPUT_FILES+=" $(printf '%q' "${!INPUT_FILE}")"
 done
-$FILE_PATH/Contents/MacOS/cuckoo_generator "$@" ${INPUT_FILES}
+
+echo $INPUT_FILES | xargs "$FILE_PATH/Contents/MacOS/cuckoo_generator"

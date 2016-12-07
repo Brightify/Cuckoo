@@ -13,6 +13,7 @@ script:
     - bash run_tests.sh
     - cd ..
     - xcodebuild -workspace 'Cuckoo.xcworkspace' -scheme 'Cuckoo' clean test
+    - pod lib lint
 
 after_script:
     - sleep 5
