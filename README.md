@@ -86,6 +86,8 @@ ${PODS_ROOT}/Cuckoo/run generate --testable "$PROJECT_NAME" \
 
 Input files can be also specified directly in `Run script` in `Input Files` form. To force run script to rebuild generator even if it already exists, use `--clean` as first argument.
 
+Notes: All paths in the Run script must be absolute. Variable `PROJECT_DIR` automatically points to your project directory.
+
 #### Carthage
 To use Cuckoo with [Carthage](https://github.com/Carthage/Carthage) add in your Cartfile this line:
 ```
