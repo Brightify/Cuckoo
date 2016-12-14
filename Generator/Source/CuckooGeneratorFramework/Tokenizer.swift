@@ -94,7 +94,7 @@ public struct Tokenizer {
             
             return InstanceVariable(
                 name: name,
-                type: type!,
+                type: (type ?? "Type could not be inferred by Cuckoo").replacingOccurrences(of: "!", with: "?"),
                 accessibility: accessibility!,
                 setterAccessibility: setterAccessibility,
                 range: range!,
