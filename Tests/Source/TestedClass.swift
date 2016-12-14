@@ -17,6 +17,8 @@ class TestedClass {
     
     lazy var optionalProperty: Int? = 0
 
+    var bangOptionalStringProperty: String! = ""
+
     func noReturn() {
     }
     

@@ -58,6 +58,21 @@ class ClassTest: XCTestCase {
         verify(mock).optionalProperty.set(equal(to: 0))
     }
     
+    func testBangOptionalStringProperty() {
+        var called = false
+        stub(mock) { mock in
+            when(mock.bangOptionalStringProperty.get).thenReturn(nil)
+            when(mock.bangOptionalStringProperty.set(anyString())).then { _ in called = true }
+        }
+
+        mock.bangOptionalStringProperty = "Set it"
+
+        XCTAssertNil(mock.bangOptionalStringProperty)
+        XCTAssertTrue(called)
+        _ = verify(mock).bangOptionalStringProperty.get
+        verify(mock).bangOptionalStringProperty.set(equal(to: "Set it"))
+    }
+
     func testNoReturn() {
         var called = false
         stub(mock) { mock in
