@@ -92,9 +92,13 @@ public struct Tokenizer {
                 return nil
             }
             
+            if type == nil {
+                stderrPrint("Type of instance variable \(name) could not be inferred. Please specify it explicitly. (\(file.path ?? ""))")
+            }
+            
             return InstanceVariable(
                 name: name,
-                type: type!,
+                type: type ?? "__UnknownType",
                 accessibility: accessibility!,
                 setterAccessibility: setterAccessibility,
                 range: range!,
@@ -142,12 +146,9 @@ public struct Tokenizer {
                     parameters: parameters)
             }
 
-        case Kinds.Mark.rawValue:
-            // Do not log warning
-            return nil
-            
         default:
-            fputs("Unknown kind: \(kind)", stderr)
+            // Do not log anything, until the parser contains all known cases.
+            // stderrPrint("Unknown kind. Dictionary: \(dictionary) \(file.path ?? "")")
             return nil
         }
     }
@@ -155,9 +156,15 @@ public struct Tokenizer {
     private func tokenize(methodName: String, parameters: [SourceKitRepresentable]) -> [MethodParameter] {
         // Takes the string between `(` and `)`
         let parameterNames = methodName.components(separatedBy: "(").last?.characters.dropLast(1).map { "\($0)" }.joined(separator: "")
-        let parameterLabels: [String?] = parameterNames?.components(separatedBy: ":").map { $0 != "_" ? $0 : nil } ?? []
+        var parameterLabels: [String?] = parameterNames?.components(separatedBy: ":").map { $0 != "_" ? $0 : nil } ?? []
         
-        return zip(parameterLabels, parameters).flatMap(tokenize)
+        // Last element is not type.
+        parameterLabels = Array(parameterLabels.dropLast())
+        
+        // Substructure can contain some other informations after the parameters.
+        let filteredParameters = parameters[0..<min(parameterLabels.count, parameters.count)]
+        
+        return zip(parameterLabels, filteredParameters).flatMap(tokenize)
     }
     
     private func tokenize(parameterLabel: String?, parameter: SourceKitRepresentable) -> MethodParameter? {
@@ -174,7 +181,7 @@ public struct Tokenizer {
             return MethodParameter(label: parameterLabel, name: name, type: type!, range: range!, nameRange: nameRange!)
             
         default:
-            fputs("Unknown method parameter kind: \(kind)", stderr)
+            stderrPrint("Unknown method parameter. Dictionary: \(dictionary) \(file.path ?? "")")
             return nil
         }
     }

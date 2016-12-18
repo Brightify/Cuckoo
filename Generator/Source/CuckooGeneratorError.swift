@@ -12,6 +12,7 @@ import FileKit
 public enum CuckooGeneratorError: Error {
     case ioError(FileKitError)
     case unknownError(Error)
+    case stderrUsed
     
     public var description: String {
         switch self {
@@ -19,6 +20,8 @@ public enum CuckooGeneratorError: Error {
             return error.description
         case .unknownError(let error):
             return "\(error)"
+        case .stderrUsed:
+            return ""
         }
     }
 }

@@ -1,6 +1,12 @@
 # Changelog
 
+## 0.8.2
+
+* Show error in generator in build log.
+* Fixed crash of generator when instance variable type is not explicitly set.
+
 ## 0.8.1
+
 * Set "Reflection Metadata" to "None" to fix #72
 
 ## 0.8.0

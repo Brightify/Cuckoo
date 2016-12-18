@@ -23,8 +23,9 @@ public struct GenerateMocksCommand: CommandProtocol {
     public let function = "Generates mock files"
     
     public func run(_ options: Options) -> Result<Void, CuckooGeneratorError> {
-        let inputFiles = Array(Set(options.files.map { Path($0).standardRawValue }))
-        let tokens = inputFiles.flatMap { File(path: $0) }.map { Tokenizer(sourceFile: $0).tokenize() }
+        let inputPathValues = Array(Set(options.files.map { Path($0).standardRawValue }))
+        let inputFiles = inputPathValues.map { File(path: $0) }
+        let tokens = inputFiles.flatMap { $0 }.map { Tokenizer(sourceFile: $0).tokenize() }
         let parsedFiles = options.noClassMocking ? removeClasses(tokens) : tokens
         
         let headers = parsedFiles.map { options.noHeader ? "" : FileHeaderHandler.getHeader(of: $0, includeTimestamp: !options.noTimestamp) }
@@ -36,7 +37,7 @@ public struct GenerateMocksCommand: CommandProtocol {
 
         do {
             if outputPath.isDirectory {
-                let inputPaths = inputFiles.map { Path($0) }
+                let inputPaths = inputPathValues.map { Path($0) }
                 for (inputPath, outputText) in zip(inputPaths, mergedFiles) {
                     let fileName = options.filePrefix + inputPath.fileName
                     let outputFile = TextFile(path: outputPath + fileName)
@@ -51,7 +52,9 @@ public struct GenerateMocksCommand: CommandProtocol {
         } catch let error {
             return .failure(.unknownError(error))
         }
-        return .success()
+        
+        let couldNotOpenFile = inputFiles.contains { $0 == nil }
+        return stderrUsed || couldNotOpenFile ? .failure(.stderrUsed) : .success()
     }
     
     private func removeClasses(_ filesRepresentation: [FileRepresentation]) -> [FileRepresentation] {
