@@ -4,6 +4,7 @@
 
 * Show error in generator in build log.
 * Fixed crash of generator when instance variable type is not explicitly set.
+* Fixed support of closures and unwrapped optionals.
 
 ## 0.8.1
 

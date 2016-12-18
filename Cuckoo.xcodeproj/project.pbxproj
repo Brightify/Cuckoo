@@ -50,6 +50,7 @@
 		DC70D0D41D2B026200014C5F /* VerificationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC70D0D31D2B026200014C5F /* VerificationTest.swift */; };
 		DC70D0D61D2B9FBE00014C5F /* ParameterMatcherTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC70D0D51D2B9FBE00014C5F /* ParameterMatcherTest.swift */; };
 		DC70D0D81D2B9FD400014C5F /* CallMatcherTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC70D0D71D2B9FD400014C5F /* CallMatcherTest.swift */; };
+		DC78DE2C1E0715BD00279900 /* ClassWithOptionals.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE2DE0F1E071389006E462C /* ClassWithOptionals.swift */; };
 		DC9EF9FE1CFAD4F10034DFE5 /* Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EF9FD1CFAD4F10034DFE5 /* Stub.swift */; };
 		DC9EFA001CFAD5660034DFE5 /* StubCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EF9FF1CFAD5660034DFE5 /* StubCall.swift */; };
 		DC9EFA1A1CFADAD70034DFE5 /* Matchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EFA161CFADAD70034DFE5 /* Matchable.swift */; };
@@ -152,6 +153,7 @@
 		DCD432D11D9277D80023AADA /* ClassForStubTesting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassForStubTesting.swift; sourceTree = "<group>"; };
 		DCD432D31D92868C0023AADA /* StubTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StubTest.swift; sourceTree = "<group>"; };
 		DCD432D71D929B2A0023AADA /* DefaultValueRegistryTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultValueRegistryTest.swift; sourceTree = "<group>"; };
+		DCE2DE0F1E071389006E462C /* ClassWithOptionals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassWithOptionals.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -311,6 +313,7 @@
 			isa = PBXGroup;
 			children = (
 				DCD432D11D9277D80023AADA /* ClassForStubTesting.swift */,
+				DCE2DE0F1E071389006E462C /* ClassWithOptionals.swift */,
 				DC70D0BB1D2AF40800014C5F /* TestedClass.swift */,
 				DC70D0BC1D2AF40800014C5F /* TestedProtocol.swift */,
 			);
@@ -521,7 +524,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "OUTPUT=\"$PROJECT_DIR/Tests/Generated/GeneratedMocks.swift\"\nINPUT=\"$PROJECT_DIR/Tests/Source/ClassForStubTesting.swift\" # Use seperate variables for each file.\nfor definition in $GCC_PREPROCESSOR_DEFINITIONS; do\n    if [ $definition = \"USE_RUN\" ]; then\n        use_run=1\n    fi\ndone\nif [ $use_run ]; then\n    \"$PROJECT_DIR/run\" --clean generate --output \"$OUTPUT\" \"$INPUT\"\nelse\n    \"$BUILD_DIR/$CONFIGURATION/cuckoo_generator.app/Contents/MacOS/cuckoo_generator\" generate --output \"$OUTPUT\" \"$INPUT\" \"$PROJECT_DIR/Tests/Source/TestedProtocol.swift\" \"$PROJECT_DIR/Tests/Source/TestedClass.swift\"\nfi";
+			shellScript = "OUTPUT=\"$PROJECT_DIR/Tests/Generated/GeneratedMocks.swift\"\n# Use seperate variables for each file.\nINPUT_STUB=\"$PROJECT_DIR/Tests/Source/ClassForStubTesting.swift\"\nINPUT_OPTIONAL=\"$PROJECT_DIR/Tests/Source/ClassWithOptionals.swift\"\nfor definition in $GCC_PREPROCESSOR_DEFINITIONS; do\n    if [ $definition = \"USE_RUN\" ]; then\n        use_run=1\n    fi\ndone\nif [ $use_run ]; then\n    \"$PROJECT_DIR/run\" --clean generate --output \"$OUTPUT\" \"$INPUT_STUB\" \"$INPUT_OPTIONAL\"\nelse\n    \"$BUILD_DIR/$CONFIGURATION/cuckoo_generator.app/Contents/MacOS/cuckoo_generator\" generate --output \"$OUTPUT\" \"$INPUT_STUB\" \"$INPUT_OPTIONAL\" \"$PROJECT_DIR/Tests/Source/TestedProtocol.swift\" \"$PROJECT_DIR/Tests/Source/TestedClass.swift\"\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -582,6 +585,7 @@
 				DC70D0D61D2B9FBE00014C5F /* ParameterMatcherTest.swift in Sources */,
 				DCD432D61D9286D50023AADA /* ClassForStubTesting.swift in Sources */,
 				DC70D0AB1D2AB5F800014C5F /* ClassTest.swift in Sources */,
+				DC78DE2C1E0715BD00279900 /* ClassWithOptionals.swift in Sources */,
 				DC70D0B31D2AB6B900014C5F /* MatchableTest.swift in Sources */,
 				DC70D0BE1D2AF40800014C5F /* TestedClass.swift in Sources */,
 				DC70D0D21D2B007300014C5F /* GeneratedMocks.swift in Sources */,
