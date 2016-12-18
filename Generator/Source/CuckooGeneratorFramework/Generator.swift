@@ -149,7 +149,7 @@ public struct Generator {
         let propertyType = token.readOnly ? "Cuckoo.ToBeStubbedReadOnlyProperty" : "Cuckoo.ToBeStubbedProperty"
         
         code += ""
-        code += "var \(token.name): \(propertyType)<\(token.type)> {"
+        code += "var \(token.name): \(propertyType)<\(genericSafeType(from: token.type))> {"
         code.nest("return \(propertyType)(manager: manager, name: \"\(token.name)\")")
         code += "}"
     }
@@ -174,10 +174,10 @@ public struct Generator {
         }
         
         let inputTypes = token.parameters.map { $0.typeWithoutAttributes }.joined(separator: ", ")
-        var returnType = "\(stubFunction)<(\(inputTypes))"
+        var returnType = "\(stubFunction)<(\(genericSafeType(from: inputTypes)))"
         if token.returnType != "Void" {
             returnType += ", "
-            returnType += token.returnType
+            returnType += genericSafeType(from: token.returnType)
         }
         returnType += ">"
         
@@ -235,7 +235,7 @@ public struct Generator {
         let propertyType = token.readOnly ? "Cuckoo.VerifyReadOnlyProperty" : "Cuckoo.VerifyProperty"
         
         code += ""
-        code += "var \(token.name): \(propertyType)<\(token.type)> {"
+        code += "var \(token.name): \(propertyType)<\(genericSafeType(from: token.type))> {"
         code.nest("return \(propertyType)(manager: manager, name: \"\(token.name)\", callMatcher: callMatcher, sourceLocation: sourceLocation)")
         code += "}"
     }
@@ -247,7 +247,7 @@ public struct Generator {
         code += ""
         code += "@discardableResult"
         code += ("\(token.accessibility.sourceName)func \(token.rawName)\(matchableGenerics(with: token.parameters))" +
-            "(\(matchableParameterSignature(with: token.parameters))) -> Cuckoo.__DoNotUse<\(token.returnType)>\(matchableGenerics(where: token.parameters)) {")
+            "(\(matchableParameterSignature(with: token.parameters))) -> Cuckoo.__DoNotUse<\(genericSafeType(from: token.returnType))>\(matchableGenerics(where: token.parameters)) {")
         let matchers: String
         if token.parameters.isEmpty {
             matchers = "[] as [Cuckoo.ParameterMatcher<Void>]"
@@ -258,7 +258,6 @@ public struct Generator {
         code.nest("return manager.verify(\"\(token.fullyQualifiedName)\", callMatcher: callMatcher, parameterMatchers: \(matchers), sourceLocation: sourceLocation)")
         code += "}"
     }
-    
     
     private func generateNoImplStubClass(for token: ContainerToken) {
         guard token.accessibility != .Private else { return }
@@ -289,7 +288,7 @@ public struct Generator {
         code += "\(token.accessibility.sourceName)\(token.overriding ? "override " : "")var \(token.name): \(token.type) {"
         code.nest {
             code += "get {"
-            code.nest("return DefaultValueRegistry.defaultValue(for: \(getTypeWithSelfSuffix(for: token.type)))")
+            code.nest("return DefaultValueRegistry.defaultValue(for: (\(token.type)).self)")
             code += "}"
             if token.readOnly == false {
                 code += "set {"
@@ -308,7 +307,7 @@ public struct Generator {
         
         code += ""
         code += "\(token.accessibility.sourceName)\(override)func \(token.rawName)(\(parametersSignature))\(token.returnSignature) {"
-        code.nest("return DefaultValueRegistry.defaultValue(for: \(getTypeWithSelfSuffix(for: token.returnType)))")
+        code.nest("return DefaultValueRegistry.defaultValue(for: (\(token.returnType)).self)")
         code += "}"
     }
     
@@ -338,7 +337,7 @@ public struct Generator {
     private func matchableGenerics(where parameters: [MethodParameter]) -> String {
         guard parameters.isEmpty == false else { return "" }
         
-        let whereClause = parameters.enumerated().map { "M\($0 + 1).MatchedType == \($1.typeWithoutAttributes)" }.joined(separator: ", ")
+        let whereClause = parameters.enumerated().map { "M\($0 + 1).MatchedType == \(genericSafeType(from: $1.typeWithoutAttributes))" }.joined(separator: ", ")
         return " where \(whereClause)"
     }
     
@@ -353,14 +352,10 @@ public struct Generator {
         
         let tupleType = parameters.map { $0.typeWithoutAttributes }.joined(separator: ", ")
         let matchers = parameters.enumerated().map { "wrap(matchable: \($1.name)) { $0\(parameters.count > 1 ? ".\($0)" : "") }" }.joined(separator: ", ")
-        return "let matchers: [Cuckoo.ParameterMatcher<(\(tupleType))>] = [\(matchers)]"
+        return "let matchers: [Cuckoo.ParameterMatcher<(\(genericSafeType(from: tupleType)))>] = [\(matchers)]"
     }
     
-    private func getTypeWithSelfSuffix(for typeName: String) -> String {
-        if (typeName.hasSuffix("?")) {
-            return "Optional<\(typeName.substring(to: typeName.index(before: typeName.endIndex)))>.self"
-        } else {
-            return typeName + ".self"
-        }
+    private func genericSafeType(from type: String) -> String {
+        return type.replacingOccurrences(of: "!", with: "?")
     }
 }

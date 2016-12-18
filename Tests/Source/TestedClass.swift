@@ -7,6 +7,7 @@
 //
 
 class TestedClass {
+    
     let constant: Float = 0.0
     
     var readOnlyProperty: String {
@@ -16,7 +17,7 @@ class TestedClass {
     lazy var readWriteProperty: Int = 0
     
     lazy var optionalProperty: Int? = 0
-
+    
     func noReturn() {
     }
     
