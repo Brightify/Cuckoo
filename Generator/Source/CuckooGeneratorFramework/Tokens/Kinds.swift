@@ -13,6 +13,4 @@ public enum Kinds: String {
     case ClassDeclaration = "source.lang.swift.decl.class"
     case ExtensionDeclaration = "source.lang.swift.decl.extension"
     case InstanceVariable = "source.lang.swift.decl.var.instance"
-    
-    case Mark = "source.lang.swift.syntaxtype.comment.mark"
 }

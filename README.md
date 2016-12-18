@@ -31,6 +31,7 @@ List of all changes and new features can be found [here](CHANGELOG.md).
 We are still missing support for some important features like:
 * inheritance (grandparent methods)
 * generics
+* type inference for instance variables (you need to write it explicitly, otherwise it will be replaced with "__UnknownType")
 
 ## What will not be supported
 

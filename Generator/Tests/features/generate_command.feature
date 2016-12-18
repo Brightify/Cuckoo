@@ -40,12 +40,25 @@ Feature: Generate command
 
 	# Not recorded tests
 
+	Scenario: success
+		When I run `runcuckoo generate SourceFiles/EmptyClass.swift`
+		Then the exit status should be 0
+
 	Scenario: non existing input file
 		When I run `runcuckoo generate non_existing_file.swift`
 		Then the output should contain:
 		"""
 		Could not read contents of `non_existing_file.swift`
 		"""
+		And the exit status should be 1
+
+	Scenario: implicit instance variable type
+		When I run `runcuckoo generate SourceFiles/ImplicitInstanceVariableType.swift`
+		Then the output should contain:
+		"""
+		Type of instance variable variable could not be inferred. Please specify it explicitly. (/Users/filip/Documents/Brightify/Cuckoo/Generator/Build/tmp/SourceFiles/ImplicitInstanceVariableType.swift)
+		"""
+		And the exit status should be 1
 
 	# Tests reusing code from recoreded tests (if they fail these will fail because of it.)
 

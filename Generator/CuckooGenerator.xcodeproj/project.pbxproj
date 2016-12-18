@@ -48,6 +48,7 @@
 		DCAD1F141D0DB6540091EECE /* Commandant.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DCAD1ECC1D0DB3640091EECE /* Commandant.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DCDEE5141CFF124E007F18BC /* CuckooGeneratorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDEE5101CFF124E007F18BC /* CuckooGeneratorError.swift */; };
 		DCDEE5151CFF124E007F18BC /* GenerateMocksCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDEE5111CFF124E007F18BC /* GenerateMocksCommand.swift */; };
+		DCE2DDEF1E06F073006E462C /* StderrPrint.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE2DDEE1E06F073006E462C /* StderrPrint.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -345,6 +346,7 @@
 		DCAD1EC61D0DB3640091EECE /* Commandant.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Commandant.xcodeproj; path = Dependencies/SourceKitten/Carthage/Checkouts/Commandant/Commandant.xcodeproj; sourceTree = "<group>"; };
 		DCDEE5101CFF124E007F18BC /* CuckooGeneratorError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CuckooGeneratorError.swift; sourceTree = "<group>"; };
 		DCDEE5111CFF124E007F18BC /* GenerateMocksCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenerateMocksCommand.swift; sourceTree = "<group>"; };
+		DCE2DDEE1E06F073006E462C /* StderrPrint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StderrPrint.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -431,6 +433,7 @@
 				DC5176331D2EE4D300E922F2 /* CodeBuilder.swift */,
 				18E16D591C45A85E0084EF54 /* FileHeaderHandler.swift */,
 				18F2BC1B1C46E8760015A95F /* Generator.swift */,
+				DCE2DDEE1E06F073006E462C /* StderrPrint.swift */,
 				18E16D531C45A6AF0084EF54 /* Tokenizer.swift */,
 				18E16D511C45A6890084EF54 /* Utils.swift */,
 				18601E8A1C46FA7400693A66 /* Supporting Files */,
@@ -932,6 +935,7 @@
 				DC4094301D13F91F006FB137 /* Import.swift in Sources */,
 				18E16D831C45D8B30084EF54 /* Utils.swift in Sources */,
 				DC9EFA7B1CFC4F4D0034DFE5 /* Method.swift in Sources */,
+				DCE2DDEF1E06F073006E462C /* StderrPrint.swift in Sources */,
 				DC4094861D140184006FB137 /* ExtensionDeclaration.swift in Sources */,
 				DC9EFA741CFC4F4D0034DFE5 /* Accessibility.swift in Sources */,
 				DC9EFA781CFC4F4D0034DFE5 /* ContainerToken.swift in Sources */,
