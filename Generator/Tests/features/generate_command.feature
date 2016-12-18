@@ -60,7 +60,7 @@ Feature: Generate command
 		When I run `runcuckoo generate --output Actual.swift SourceFiles/ImplicitInstanceVariableType.swift`
 		Then the output should contain:
 		"""
-		Type of instance variable variable could not be inferred. Please specify it explicitly. (/Users/filip/Documents/Brightify/Cuckoo/Generator/Build/tmp/SourceFiles/ImplicitInstanceVariableType.swift)
+		Type of instance variable variable could not be inferred. Please specify it explicitly.
 		"""
 		And the exit status should be 1
 
