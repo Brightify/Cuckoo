@@ -17,7 +17,7 @@ class TestedClass {
     lazy var readWriteProperty: Int = 0
     
     lazy var optionalProperty: Int? = 0
-    
+
     func noReturn() {
     }
     
@@ -64,4 +64,11 @@ private class ThisClassShouldNotBeMocked1 {
 
 fileprivate class ThisClassShouldNotBeMocked2 {
     var property: Int?
+    // How to test that the expected output is generated??
+    func withTwoDefaultConstructedValues(value1: Int = Int(10), value2: Int = Int(10)) {
+    }
+
+    // How to test that the expected output is generated??
+    func withTwoDefaultConstructedValues(_ value3: Int = Int(10), value4: Int = Int(10)) {
+    }
 }
