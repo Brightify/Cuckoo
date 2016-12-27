@@ -46,4 +46,22 @@ class TestedClass {
 
     func withLabelAndUnderscore(labelA a: String, _ b: String) {
     }
+
+    // How to test for the absence of all these?
+    private func thisFunctionShouldNotBeMocked1() {
+    }
+
+    fileprivate func thisFunctionShouldNotBeMocked2() {
+    }
+
+    private var notMocked1: Int?
+    fileprivate var notMocked2: Int?
+}
+
+private class ThisClassShouldNotBeMocked1 {
+    var property: Int?
+}
+
+fileprivate class ThisClassShouldNotBeMocked2 {
+    var property: Int?
 }
