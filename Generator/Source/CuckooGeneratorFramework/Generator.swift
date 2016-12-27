@@ -36,7 +36,7 @@ public struct Generator {
     }
     
     private func generateClass(for token: ContainerToken) {
-        guard token.accessibility != .Private else { return }
+        guard token.accessibility != .Private && token.accessibility != .FilePrivate else { return }
         
         code += ""
         code += "\(token.accessibility.sourceName)class \(mockClassName(of: token.name)): \(token.name), Cuckoo.Mock {"
@@ -64,7 +64,7 @@ public struct Generator {
     }
     
     private func generateProperty(for token: InstanceVariable) {
-        guard token.accessibility != .Private else { return }
+        guard token.accessibility != .Private && token.accessibility != .FilePrivate else { return }
         
         code += ""
         code += "\(token.accessibility.sourceName)\(token.overriding ? "override " : "")var \(token.name): \(token.type) {"
@@ -82,7 +82,7 @@ public struct Generator {
     }
     
     private func generateMethod(for token: Method) {
-        guard token.accessibility != .Private else { return }
+        guard token.accessibility != .Private && token.accessibility != .FilePrivate else { return }
         guard !token.isInit else { return }
         
         let override = token is ClassMethod ? "override " : ""
@@ -129,7 +129,7 @@ public struct Generator {
     }
     
     private func generateStubbingClass(for token: ContainerToken) {
-        guard token.accessibility != .Private else { return }
+        guard token.accessibility != .Private && token.accessibility != .FilePrivate else { return }
         
         code += "\(token.accessibility.sourceName)struct \(stubbingProxyName(of: token.name)): Cuckoo.StubbingProxy {"
         code.nest {
@@ -144,7 +144,7 @@ public struct Generator {
     }
     
     private func generateStubbingProperty(for token: InstanceVariable) {
-        guard token.accessibility != .Private else { return }
+        guard token.accessibility != .Private && token.accessibility != .FilePrivate else { return }
         
         let propertyType = token.readOnly ? "Cuckoo.ToBeStubbedReadOnlyProperty" : "Cuckoo.ToBeStubbedProperty"
         
@@ -155,7 +155,7 @@ public struct Generator {
     }
     
     private func generateStubbingMethod(for token: Method) {
-        guard token.accessibility != .Private else { return }
+        guard token.accessibility != .Private && token.accessibility != .FilePrivate else { return }
         guard !token.isInit else { return }
         
         let stubFunction: String
@@ -209,7 +209,7 @@ public struct Generator {
     }
     
     private func generateVerificationClass(for token: ContainerToken) {
-        guard token.accessibility != .Private else { return }
+        guard token.accessibility != .Private && token.accessibility != .FilePrivate else { return }
         
         code += "\(token.accessibility.sourceName)struct \(verificationProxyName(of: token.name)): Cuckoo.VerificationProxy {"
         code.nest {
@@ -230,7 +230,7 @@ public struct Generator {
     }
     
     private func generateVerificationProperty(for token: InstanceVariable) {
-        guard token.accessibility != .Private else { return }
+        guard token.accessibility != .Private && token.accessibility != .FilePrivate else { return }
         
         let propertyType = token.readOnly ? "Cuckoo.VerifyReadOnlyProperty" : "Cuckoo.VerifyProperty"
         
@@ -241,7 +241,7 @@ public struct Generator {
     }
     
     private func generateVerificationMethod(for token: Method) {
-        guard token.accessibility != .Private else { return }
+        guard token.accessibility != .Private && token.accessibility != .FilePrivate else { return }
         guard !token.isInit else { return }
         
         code += ""
@@ -260,7 +260,7 @@ public struct Generator {
     }
     
     private func generateNoImplStubClass(for token: ContainerToken) {
-        guard token.accessibility != .Private else { return }
+        guard token.accessibility != .Private && token.accessibility != .FilePrivate else { return }
         
         code += ""
         code += "\(token.accessibility.sourceName)class \(stubClassName(of: token.name)): \(token.name) {"
@@ -282,7 +282,7 @@ public struct Generator {
     }
     
     private func generateNoImplStubProperty(for token: InstanceVariable) {
-        guard token.accessibility != .Private else { return }
+        guard token.accessibility != .Private && token.accessibility != .FilePrivate else { return }
         
         code += ""
         code += "\(token.accessibility.sourceName)\(token.overriding ? "override " : "")var \(token.name): \(token.type) {"
@@ -299,7 +299,7 @@ public struct Generator {
     }
     
     private func generateNoImplStubMethod(for token: Method) {
-        guard token.accessibility != .Private else { return }
+        guard token.accessibility != .Private && token.accessibility != .FilePrivate else { return }
         guard !token.isInit else { return }
         
         let override = token is ClassMethod ? "override " : ""
