@@ -157,13 +157,17 @@ public struct Tokenizer {
         // Takes the string between `(` and `)`
         let parameterNames = methodName.components(separatedBy: "(").last?.characters.dropLast(1).map { "\($0)" }.joined(separator: "")
         var parameterLabels: [String?] = parameterNames?.components(separatedBy: ":").map { $0 != "_" ? $0 : nil } ?? []
-        
+
         // Last element is not type.
         parameterLabels = Array(parameterLabels.dropLast())
-        
+
         // Substructure can contain some other informations after the parameters.
-        let filteredParameters = parameters[0..<min(parameterLabels.count, parameters.count)]
-        
+        let filteredParameters = parameters.filter({
+            let dictionary = $0 as? [String: SourceKitRepresentable]
+            let kind = dictionary?[Key.Kind.rawValue] as? String ?? ""
+            return kind == "source.lang.swift.decl.var.parameter"
+        })
+
         return zip(parameterLabels, filteredParameters).flatMap(tokenize)
     }
     
