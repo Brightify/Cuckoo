@@ -165,7 +165,7 @@ public struct Tokenizer {
         let filteredParameters = parameters.filter({
             let dictionary = $0 as? [String: SourceKitRepresentable]
             let kind = dictionary?[Key.Kind.rawValue] as? String ?? ""
-            return kind == "source.lang.swift.decl.var.parameter"
+            return kind == Kinds.MethodParameter.rawValue
         })
 
         return zip(parameterLabels, filteredParameters).flatMap(tokenize)
