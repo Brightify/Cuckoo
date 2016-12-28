@@ -72,3 +72,45 @@ fileprivate class ThisClassShouldNotBeMocked2 {
     func withTwoDefaultConstructedValues(_ value3: Int = Int(10), value4: Int = Int(10)) {
     }
 }
+
+// Notice the subtle difference, this class is public. The generated code does not compile.
+public class PublicTestedClass {
+    let constant: Float = 0.0
+
+    var readOnlyProperty: String {
+        return "a"
+    }
+
+    lazy var readWriteProperty: Int = 0
+
+    lazy var optionalProperty: Int? = 0
+
+    func noReturn() {
+    }
+
+    func count(characters: String) -> Int {
+        return characters.characters.count
+    }
+
+    func withThrows() throws -> Int {
+        return 0
+    }
+
+    func withNoReturnThrows() throws {
+    }
+
+    func withClosure(_ closure: (String) -> Int) -> Int {
+        return closure("hello")
+    }
+
+    func withEscape(_ a: String, action closure: @escaping (String) -> Void) {
+        closure(a)
+    }
+
+    func withOptionalClosure(_ a: String, closure: ((String) -> Void)?) {
+        closure?(a)
+    }
+
+    func withLabelAndUnderscore(labelA a: String, _ b: String) {
+    }
+}
