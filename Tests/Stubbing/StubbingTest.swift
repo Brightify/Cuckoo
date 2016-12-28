@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import Cuckoo
+@testable import Cuckoo
 
 class StubbingTest: XCTestCase {
     
