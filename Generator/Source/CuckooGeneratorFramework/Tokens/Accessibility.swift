@@ -24,4 +24,8 @@ public enum Accessibility: String {
             return "fileprivate "
         }
     }
+
+    public var isAccessible: Bool {
+        return self != .Private && self != .FilePrivate
+    }
 }
