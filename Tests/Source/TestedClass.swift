@@ -89,3 +89,44 @@ public class PublicTestedClass {
     func withLabelAndUnderscore(labelA a: String, _ b: String) {
     }
 }
+
+public class PublicPublicTestedClass {
+    public let constant: Float = 0.0
+
+    public var readOnlyProperty: String {
+        return "a"
+    }
+
+    public lazy var readWriteProperty: Int = 0
+
+    public lazy var optionalProperty: Int? = 0
+
+    public func noReturn() {
+    }
+
+    public func count(characters: String) -> Int {
+        return characters.characters.count
+    }
+
+    public func withThrows() throws -> Int {
+        return 0
+    }
+
+    public func withNoReturnThrows() throws {
+    }
+
+    public func withClosure(_ closure: (String) -> Int) -> Int {
+        return closure("hello")
+    }
+
+    public func withEscape(_ a: String, action closure: @escaping (String) -> Void) {
+        closure(a)
+    }
+
+    public func withOptionalClosure(_ a: String, closure: ((String) -> Void)?) {
+        closure?(a)
+    }
+
+    public func withLabelAndUnderscore(labelA a: String, _ b: String) {
+    }
+}

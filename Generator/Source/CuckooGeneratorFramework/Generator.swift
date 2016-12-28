@@ -17,24 +17,24 @@ public struct Generator {
     
     public func generate() -> String {
         code.clear()
-        declarations.forEach { generate(for: $0) }
+        declarations.forEach { generate(for: $0, withOuterAccessibility: .Internal) }
         return code.code
     }
     
-    private func generate(for token: Token) {
+    private func generate(for token: Token, withOuterAccessibility outerAccessibility: Accessibility) {
         switch token {
         case let containerToken as ContainerToken:
             generateClass(for: containerToken)
             generateNoImplStubClass(for: containerToken)
         case let property as InstanceVariable:
-            generateProperty(for: property)
+            generateProperty(for: property, withOuterAccessibility: outerAccessibility)
         case let method as Method:
-            generateMethod(for: method)
+            generateMethod(for: method, withOuterAccessibility: outerAccessibility)
         default:
             break
         }
     }
-    
+
     private func generateClass(for token: ContainerToken) {
         guard token.accessibility != .Private else { return }
         
@@ -54,7 +54,7 @@ public struct Generator {
                 code += "return self"
             }
             code += "}"
-            token.children.forEach { generate(for: $0) }
+            token.children.forEach { generate(for: $0, withOuterAccessibility: token.accessibility) }
             code += ""
             generateStubbing(for: token)
             code += ""
@@ -63,11 +63,24 @@ public struct Generator {
         code += "}"
     }
     
-    private func generateProperty(for token: InstanceVariable) {
+    private func minAccessibility(_ val1: Accessibility, _ val2: Accessibility) -> Accessibility {
+        if val1 == .Public || val2 == .Public {
+            return .Public
+        }
+
+        if val1 == .Internal || val2 == .Internal {
+            return .Internal
+        }
+
+        return .Private
+    }
+
+    private func generateProperty(for token: InstanceVariable, withOuterAccessibility outerAccessibility: Accessibility) {
         guard token.accessibility != .Private else { return }
-        
+
+        let accessibility = minAccessibility(token.accessibility, outerAccessibility)
         code += ""
-        code += "\(token.accessibility.sourceName)\(token.overriding ? "override " : "")var \(token.name): \(token.type) {"
+        code += "\(accessibility.sourceName)\(token.overriding ? "override " : "")var \(token.name): \(token.type) {"
         code.nest {
             code += "get {"
             code.nest("return manager.getter(\"\(token.name)\", original: observed.map { o in return { () -> \(token.type) in o.\(token.name) } })")
@@ -81,7 +94,7 @@ public struct Generator {
         code += "}"
     }
     
-    private func generateMethod(for token: Method) {
+    private func generateMethod(for token: Method, withOuterAccessibility outerAccessibility: Accessibility) {
         guard token.accessibility != .Private else { return }
         guard !token.isInit else { return }
         
@@ -109,8 +122,9 @@ public struct Generator {
             }.joined(separator: ", ")
         managerCall += ", original: observed.map { o in return { (\(parametersSignatureWithoutNames))\(token.returnSignature) in \(tryIfThrowing)o.\(token.rawName)(\(methodCall)) } })"
         
+        let accessibility = minAccessibility(token.accessibility, outerAccessibility)
         code += ""
-        code += "\(token.accessibility.sourceName)\(override)\(token.isInit ? "" : "func " )\(token.rawName)(\(parametersSignature))\(token.returnSignature) {"
+        code += "\(accessibility.sourceName)\(override)\(token.isInit ? "" : "func " )\(token.rawName)(\(parametersSignature))\(token.returnSignature) {"
         code.nest("return \(managerCall)")
         code += "}"
     }
@@ -265,27 +279,28 @@ public struct Generator {
         code += ""
         code += "\(token.accessibility.sourceName)class \(stubClassName(of: token.name)): \(token.name) {"
         code.nest {
-            token.children.forEach { generateNoImplStub(for: $0) }
+            token.children.forEach { generateNoImplStub(for: $0, withOuterAccessibility: token.accessibility) }
         }
         code += "}"
     }
     
-    private func generateNoImplStub(for token: Token) {
+    private func generateNoImplStub(for token: Token, withOuterAccessibility outerAccessibility: Accessibility) {
         switch token {
         case let property as InstanceVariable:
-            generateNoImplStubProperty(for: property)
+            generateNoImplStubProperty(for: property, withOuterAccessibility: outerAccessibility)
         case let method as Method:
-            generateNoImplStubMethod(for: method)
+            generateNoImplStubMethod(for: method, withOuterAccessibility: outerAccessibility)
         default:
             break
         }
     }
     
-    private func generateNoImplStubProperty(for token: InstanceVariable) {
+    private func generateNoImplStubProperty(for token: InstanceVariable, withOuterAccessibility outerAccessibility: Accessibility) {
         guard token.accessibility != .Private else { return }
         
+        let accessibility = minAccessibility(token.accessibility, outerAccessibility)
         code += ""
-        code += "\(token.accessibility.sourceName)\(token.overriding ? "override " : "")var \(token.name): \(token.type) {"
+        code += "\(accessibility.sourceName)\(token.overriding ? "override " : "")var \(token.name): \(token.type) {"
         code.nest {
             code += "get {"
             code.nest("return DefaultValueRegistry.defaultValue(for: (\(token.type)).self)")
@@ -298,15 +313,16 @@ public struct Generator {
         code += "}"
     }
     
-    private func generateNoImplStubMethod(for token: Method) {
+    private func generateNoImplStubMethod(for token: Method, withOuterAccessibility outerAccessibility: Accessibility) {
         guard token.accessibility != .Private else { return }
         guard !token.isInit else { return }
         
         let override = token is ClassMethod ? "override " : ""
         let parametersSignature = token.parameters.enumerated().map { "\($1.labelAndName): \($1.type)" }.joined(separator: ", ")
         
+        let accessibility = minAccessibility(token.accessibility, outerAccessibility)
         code += ""
-        code += "\(token.accessibility.sourceName)\(override)func \(token.rawName)(\(parametersSignature))\(token.returnSignature) {"
+        code += "\(accessibility.sourceName)\(override)func \(token.rawName)(\(parametersSignature))\(token.returnSignature) {"
         code.nest("return DefaultValueRegistry.defaultValue(for: (\(token.returnType)).self)")
         code += "}"
     }
