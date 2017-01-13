@@ -54,4 +54,22 @@ class TestedClass {
     // How to test that the expected output is generated??
     func withTwoDefaultConstructedValues(_ value3: Int = Int(10), value4: Int = Int(10)) {
     }
+
+    // How to test for the absence of all these?
+    private func thisFunctionShouldNotBeMocked1() {
+    }
+
+    fileprivate func thisFunctionShouldNotBeMocked2() {
+    }
+
+    private var notMocked1: Int?
+    fileprivate var notMocked2: Int?
+}
+
+private class ThisClassShouldNotBeMocked1 {
+    var property: Int?
+}
+
+fileprivate class ThisClassShouldNotBeMocked2 {
+    var property: Int?
 }
