@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.8.3
+
+* Added support for `fileprivate` (thanks to lvdstam for implementation).
+* Added support for default values (thanks to lvdstam for implementation).
+* Fixed wrongly generated code where public class had internal members.
+
 ## 0.8.2
 
 * Show error in generator in build log.
