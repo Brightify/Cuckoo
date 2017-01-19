@@ -118,6 +118,11 @@ public class MockManager {
     
     private func failAndCrash(_ message: String, file: StaticString = #file, line: UInt = #line) -> Never  {
         MockManager.fail(message, (file, line))
+
+        #if _runtime(_ObjC)
+            NSException(name: .internalInconsistencyException, reason:message, userInfo: nil).raise()
+        #endif
+
         fatalError(message)
     }
 }
