@@ -12,7 +12,7 @@
 
 Cuckoo was created due to lack of a proper Swift mocking framework. We built the DSL to be very similar to [Mockito](http://mockito.org/), so anyone using it in Java/Android can immediately pick it up and use it.
 
-To have a chat, [join our Slack team](http://swiftkit.tmspark.com)!
+To have a chat, [join our Slack team](http://swiftkit.brightify.org)!
 
 ## How does it work
 
