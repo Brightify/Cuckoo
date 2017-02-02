@@ -17,25 +17,29 @@ public struct Generator {
     
     public func generate() -> String {
         code.clear()
-        declarations.forEach { generate(for: $0, withOuterAccessibility: .Internal) }
+        declarations.forEach { generate(for: $0, withOuterAccessibility: .Internal, fromProtocolDefinition: false) }
         return code.code
     }
     
-    private func generate(for token: Token, withOuterAccessibility outerAccessibility: Accessibility) {
+    private func generate(for token: Token, withOuterAccessibility outerAccessibility: Accessibility, fromProtocolDefinition: Bool) {
         switch token {
-        case let containerToken as ContainerToken:
-            generateClass(for: containerToken)
-            generateNoImplStubClass(for: containerToken)
+        case let classToken as ClassDeclaration:
+            generateClass(for: classToken, fromProtocolDefinition: false)
+            generateNoImplStubClass(for: classToken)
+        case let protocolToken as ProtocolDeclaration:
+            generateClass(for: protocolToken, fromProtocolDefinition: true)
+            generateNoImplStubClass(for: protocolToken)
         case let property as InstanceVariable:
             generateProperty(for: property, withOuterAccessibility: outerAccessibility)
         case let method as Method:
-            generateMethod(for: method, withOuterAccessibility: outerAccessibility)
+            generateMethod(for: method, withOuterAccessibility: outerAccessibility, fromProtocolDefinition: fromProtocolDefinition)
         default:
+            print("\(token)\n")
             break
         }
     }
 
-    private func generateClass(for token: ContainerToken) {
+    private func generateClass(for token: ContainerToken, fromProtocolDefinition: Bool) {
         guard token.accessibility.isAccessible else { return }
         
         code += ""
@@ -54,7 +58,7 @@ public struct Generator {
                 code += "return self"
             }
             code += "}"
-            token.children.forEach { generate(for: $0, withOuterAccessibility: token.accessibility) }
+            token.children.forEach { generate(for: $0, withOuterAccessibility: token.accessibility, fromProtocolDefinition: fromProtocolDefinition) }
             code += ""
             generateStubbing(for: token)
             code += ""
@@ -94,10 +98,10 @@ public struct Generator {
         code += "}"
     }
     
-    private func generateMethod(for token: Method, withOuterAccessibility outerAccessibility: Accessibility) {
+    private func generateMethod(for token: Method, withOuterAccessibility outerAccessibility: Accessibility, fromProtocolDefinition: Bool) {
         guard token.accessibility.isAccessible else { return }
-        guard !token.isInit else { return }
-        
+        guard !token.isInit || fromProtocolDefinition else { return }
+
         let override = token is ClassMethod ? "override " : ""
         let parametersSignature = token.parameters.enumerated().map { "\($1.labelAndName): \($1.type)" }.joined(separator: ", ")
 
@@ -124,8 +128,10 @@ public struct Generator {
         
         let accessibility = minAccessibility(token.accessibility, outerAccessibility)
         code += ""
-        code += "\(accessibility.sourceName)\(override)\(token.isInit ? "" : "func " )\(token.rawName)(\(parametersSignature))\(token.returnSignature) {"
-        code.nest("return \(managerCall)")
+        code += "\(accessibility.sourceName)\(override)\(token.isInit ? (fromProtocolDefinition ? "required " : "") : "func " )\(token.rawName)(\(parametersSignature))\(token.returnSignature) {"
+        if !token.isInit {
+            code.nest("return \(managerCall)")
+        }
         code += "}"
     }
     
@@ -279,17 +285,17 @@ public struct Generator {
         code += ""
         code += "\(token.accessibility.sourceName)class \(stubClassName(of: token.name)): \(token.name) {"
         code.nest {
-            token.children.forEach { generateNoImplStub(for: $0, withOuterAccessibility: token.accessibility) }
+            token.children.forEach { generateNoImplStub(for: $0, withOuterAccessibility: token.accessibility, fromProtocolDefinition: token is ProtocolDeclaration) }
         }
         code += "}"
     }
     
-    private func generateNoImplStub(for token: Token, withOuterAccessibility outerAccessibility: Accessibility) {
+    private func generateNoImplStub(for token: Token, withOuterAccessibility outerAccessibility: Accessibility, fromProtocolDefinition: Bool) {
         switch token {
         case let property as InstanceVariable:
             generateNoImplStubProperty(for: property, withOuterAccessibility: outerAccessibility)
         case let method as Method:
-            generateNoImplStubMethod(for: method, withOuterAccessibility: outerAccessibility)
+            generateNoImplStubMethod(for: method, withOuterAccessibility: outerAccessibility, fromProtocolDefinition: fromProtocolDefinition)
         default:
             break
         }
@@ -313,17 +319,19 @@ public struct Generator {
         code += "}"
     }
     
-    private func generateNoImplStubMethod(for token: Method, withOuterAccessibility outerAccessibility: Accessibility) {
+    private func generateNoImplStubMethod(for token: Method, withOuterAccessibility outerAccessibility: Accessibility, fromProtocolDefinition: Bool) {
         guard token.accessibility.isAccessible else { return }
-        guard !token.isInit else { return }
+        guard !token.isInit || fromProtocolDefinition else { return }
         
         let override = token is ClassMethod ? "override " : ""
         let parametersSignature = token.parameters.enumerated().map { "\($1.labelAndName): \($1.type)" }.joined(separator: ", ")
         
         let accessibility = minAccessibility(token.accessibility, outerAccessibility)
         code += ""
-        code += "\(accessibility.sourceName)\(override)func \(token.rawName)(\(parametersSignature))\(token.returnSignature) {"
-        code.nest("return DefaultValueRegistry.defaultValue(for: (\(token.returnType)).self)")
+        code += "\(accessibility.sourceName)\(override)\(token.isInit ? (fromProtocolDefinition ? "required " : "") : "func " )\(token.rawName)(\(parametersSignature))\(token.returnSignature) {"
+        if !token.isInit {
+            code.nest("return DefaultValueRegistry.defaultValue(for: (\(token.returnType)).self)")
+        }
         code += "}"
     }
     
