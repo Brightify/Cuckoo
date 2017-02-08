@@ -62,6 +62,15 @@ private class ThisClassShouldNotBeMocked1 {
     var property: Int?
 }
 
+open class OpenTestedClass {
+
+    let constant = 1
+
+    open func printConstant() {
+        print(constant)
+    }
+}
+
 fileprivate class ThisClassShouldNotBeMocked2 {
     var property: Int?
     // How to test that the expected output is generated??
