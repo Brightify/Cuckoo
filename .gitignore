@@ -36,3 +36,6 @@ Carthage/Build
 default.profraw
 Tests/Generated/*.swift
 Generator/*.app
+
+# AppCode
+.idea/
