@@ -35,15 +35,13 @@ internal extension Token {
             return self
         }
         let inheritedRepresentations: [Token] = typeToken.inheritedTypes
-                .map { Self.findToken(forClassOrProtocol: $0.name, in: files) }
-                .flatMap { $0 }
+                .flatMap { Self.findToken(forClassOrProtocol: $0.name, in: files) }
                 .flatMap { $0.mergeInheritance(with: files) }
 
         // Merge super declarations
         let mergedTokens = inheritedRepresentations.filter { $0.isClassOrProtocolDefinition }
                 .map { $0 as! ContainerToken }
-                .map { $0.children }
-                .flatMap { $0 }
+                .flatMap { $0.children }
                 .reduce(typeToken.children) { tokens, inheritedToken in
                     if (tokens.contains { $0 == inheritedToken }) {
                         return tokens
@@ -61,8 +59,7 @@ internal extension Token {
     }
 
     internal static func findToken(forClassOrProtocol name: String, in files: [FileRepresentation]) -> Token? {
-        return files.map { $0.declarations }
-                .flatMap { $0 }
+        return files.flatMap { $0.declarations }
                 .filter { $0.isClassOrProtocolDefinition }
                 .map { $0 as! ContainerToken }
                 .first { $0.name == name }
