@@ -6,10 +6,11 @@
 //  Copyright © 2016 Brightify. All rights reserved.
 //
 
+import Foundation
 import FileKit
 
 public struct FileHeaderHandler {
-    
+
     public static func getHeader(of file: FileRepresentation, includeTimestamp: Bool) -> String {
         let path: String
         if let absolutePath = file.sourceFile.path {
@@ -21,7 +22,7 @@ public struct FileHeaderHandler {
         let header = getHeader(of: file)
         return generationInfo + "\n" + header + "\n"
     }
-    
+
     public static func getImports(of file: FileRepresentation, testableFrameworks: [String]) -> String {
         var imports = Array(Set(file.declarations.only(Import.self).map { "import " + $0.library + "\n" })).sorted().joined(separator: "")
         if imports.isEmpty == false {
@@ -29,7 +30,7 @@ public struct FileHeaderHandler {
         }
         return "import Cuckoo\n" + getTestableImports(testableFrameworks: testableFrameworks) + imports
     }
-    
+
     private static func getRelativePath(from absolutePath: String) -> String {
         let path = Path(absolutePath)
         let base = path.commonAncestor(Path.current)
@@ -38,7 +39,7 @@ public struct FileHeaderHandler {
         let difference = Path.current.components.endIndex - base.components.endIndex
         return (0..<difference).reduce(result) { acc, _ in ".." + Path.separator + acc }
     }
-    
+
     private static func getHeader(of file: FileRepresentation) -> String {
         let possibleHeaderEnd = getPossibleHeaderEnd(current: file.sourceFile.contents.unicodeScalars.count, declarations: file.declarations)
         let possibleHeader = String(file.sourceFile.contents.utf8.prefix(possibleHeaderEnd)) ?? ""
@@ -46,7 +47,7 @@ public struct FileHeaderHandler {
         let multiLine = getPrefixToLastMultiLineComment(text: possibleHeader)
         return singleLine.characters.count > multiLine.characters.count ? singleLine : multiLine
     }
-    
+
     private static func getPossibleHeaderEnd(current: Int, declarations: [Token]) -> Int {
         return declarations.reduce(current) { minimum, declaration in
             let declarationMinimum: Int
@@ -63,7 +64,7 @@ public struct FileHeaderHandler {
             return min(declarationMinimum, minimum)
         }
     }
-    
+
     private static func getPrefixToLastSingleLineComment(text: String) -> String {
         if let range = text.range(of: "//", options: .backwards) {
             let lastLine = text.lineRange(for: range)
@@ -72,7 +73,7 @@ public struct FileHeaderHandler {
             return ""
         }
     }
-    
+
     private static func getPrefixToLastMultiLineComment(text: String) -> String {
         if let range = text.range(of: "*/", options: .backwards) {
             return text.substring(to: range.upperBound) + "\n"
@@ -80,7 +81,7 @@ public struct FileHeaderHandler {
             return ""
         }
     }
-    
+
     private static func getTestableImports(testableFrameworks: [String]) -> String {
         func replaceIllegalCharacters(_ char: UnicodeScalar) -> Character {
             if CharacterSet.letters.contains(UnicodeScalar(char.value)!) || CharacterSet.decimalDigits.contains(UnicodeScalar(char.value)!) {

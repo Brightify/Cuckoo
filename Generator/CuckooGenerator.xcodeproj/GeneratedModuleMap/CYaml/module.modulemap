@@ -1,0 +1,5 @@
+module CYaml {
+    umbrella "/Users/TadeasKriz/Development/Cuckoo/Generator/Packages/Yams-0.1.4/Sources/CYaml/include"
+    link "CYaml"
+    export *
+}

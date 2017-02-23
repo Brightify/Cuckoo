@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0800"
+   LastUpgradeVersion = "9999"
    version = "1.3">
    <BuildAction
-      parallelizeBuildables = "NO"
-      buildImplicitDependencies = "NO">
+      parallelizeBuildables = "YES"
+      buildImplicitDependencies = "YES">
       <BuildActionEntries>
          <BuildActionEntry
             buildForTesting = "YES"
@@ -14,38 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5204B84A1B96B83800AA473F"
-               BuildableName = "FileKit.framework"
-               BlueprintName = "FileKit-OSX"
-               ReferencedContainer = "container:Dependencies/FileKit/FileKit.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CD9D052B1A757D8B003CCB21"
-               BuildableName = "SWXMLHash.framework"
-               BlueprintName = "SWXMLHash OSX"
-               ReferencedContainer = "container:Dependencies/SourceKitten/Carthage/Checkouts/SWXMLHash/SWXMLHash.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D45480561A9572F5009D7229"
+               BlueprintIdentifier = "OBJ_164"
                BuildableName = "Result.framework"
-               BlueprintName = "Result-Mac"
-               ReferencedContainer = "container:Dependencies/SourceKitten/Carthage/Checkouts/Commandant/Carthage/Checkouts/Result/Result.xcodeproj">
+               BlueprintName = "Result"
+               ReferencedContainer = "container:CuckooGenerator.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -56,10 +28,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D00CCDD81A20717400109F8C"
+               BlueprintIdentifier = "OBJ_172"
                BuildableName = "Commandant.framework"
                BlueprintName = "Commandant"
-               ReferencedContainer = "container:Dependencies/SourceKitten/Carthage/Checkouts/Commandant/Commandant.xcodeproj">
+               ReferencedContainer = "container:CuckooGenerator.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -70,10 +42,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8E1D76201B258FEE0022C013"
-               BuildableName = "Yaml.framework"
-               BlueprintName = "Yaml OSX"
-               ReferencedContainer = "container:Dependencies/SourceKitten/Carthage/Checkouts/YamlSwift/Yaml.xcodeproj">
+               BlueprintIdentifier = "OBJ_189"
+               BuildableName = "SWXMLHash.framework"
+               BlueprintName = "SWXMLHash"
+               ReferencedContainer = "container:CuckooGenerator.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -84,10 +56,52 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D0D1216C19E87B05005E4BAA"
+               BlueprintIdentifier = "OBJ_197"
+               BuildableName = "CYaml.framework"
+               BlueprintName = "CYaml"
+               ReferencedContainer = "container:CuckooGenerator.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "OBJ_212"
+               BuildableName = "Yams.framework"
+               BlueprintName = "Yams"
+               ReferencedContainer = "container:CuckooGenerator.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "OBJ_222"
+               BuildableName = "sourcekitten"
+               BlueprintName = "sourcekitten"
+               ReferencedContainer = "container:CuckooGenerator.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "OBJ_250"
                BuildableName = "SourceKittenFramework.framework"
                BlueprintName = "SourceKittenFramework"
-               ReferencedContainer = "container:Dependencies/SourceKitten/sourcekitten.xcodeproj">
+               ReferencedContainer = "container:CuckooGenerator.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -98,9 +112,37 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1808B15F1C4575AA0036E924"
-               BuildableName = "cuckoo_generator.app"
-               BlueprintName = "CuckooGenerator"
+               BlueprintIdentifier = "OBJ_299"
+               BuildableName = "FileKit.framework"
+               BlueprintName = "FileKit"
+               ReferencedContainer = "container:CuckooGenerator.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "OBJ_338"
+               BuildableName = "cuckoo_generator"
+               BlueprintName = "cuckoo_generator"
+               ReferencedContainer = "container:CuckooGenerator.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "OBJ_364"
+               BuildableName = "CuckooGeneratorFramework.framework"
+               BlueprintName = "CuckooGeneratorFramework"
                ReferencedContainer = "container:CuckooGenerator.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -113,15 +155,6 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1808B15F1C4575AA0036E924"
-            BuildableName = "cuckoo_generator.app"
-            BlueprintName = "CuckooGenerator"
-            ReferencedContainer = "container:CuckooGenerator.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -132,19 +165,18 @@
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
-      debugDocumentVersioning = "NO"
+      debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1808B15F1C4575AA0036E924"
-            BuildableName = "cuckoo_generator.app"
-            BlueprintName = "CuckooGenerator"
+            BlueprintIdentifier = "OBJ_164"
+            BuildableName = "Result.framework"
+            BlueprintName = "Result"
             ReferencedContainer = "container:CuckooGenerator.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -154,16 +186,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1808B15F1C4575AA0036E924"
-            BuildableName = "cuckoo_generator.app"
-            BlueprintName = "CuckooGenerator"
-            ReferencedContainer = "container:CuckooGenerator.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

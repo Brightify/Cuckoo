@@ -4,10 +4,12 @@
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
-    "E111B14063EC98ABE518A93E1C4498F4167C2DEE" : 0,
+    "D0725CAC6FF2D66F2C83C2C48DC12106D42DAA64" : 9223372036854775807,
     "956D2B21DD155C49504BB67697A67F7C5351A353" : 0,
+    "E111B14063EC98ABE518A93E1C4498F4167C2DEE" : 0,
     "D23C0CEAADB77074FDA4459000068A7940EB7AD0" : 0,
     "64ACE19A884E8C30BC53E2E0CE86010ECED70B5A" : 0,
+    "95438028B10BBB846574013D29F154A00556A9D1" : 9223372036854775807,
     "FD7DA18210A2C280E9107E37D7344F243FEE5F75" : 0,
     "EB2210CFD48672E403BED699D5D7F01B844069CF" : 0,
     "E084C86B03F81D63323C9E7510697EA528A758C7" : 0,
@@ -15,13 +17,15 @@
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "AA22B945-78BB-4BFD-8BCA-01658017BF31",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "D0725CAC6FF2D66F2C83C2C48DC12106D42DAA64" : "Cuckoo\/Generator\/Dependencies\/SourceKitten\/Carthage\/Checkouts\/Commandant\/Carthage\/Checkouts\/Quick\/",
+    "956D2B21DD155C49504BB67697A67F7C5351A353" : "Cuckoo\/Generator\/Dependencies\/SourceKitten\/Carthage\/Checkouts\/Result\/",
     "E111B14063EC98ABE518A93E1C4498F4167C2DEE" : "Cuckoo\/Generator\/Dependencies\/SourceKitten\/Carthage\/Checkouts\/YamlSwift\/",
-    "956D2B21DD155C49504BB67697A67F7C5351A353" : "Cuckoo\/Generator\/Dependencies\/SourceKitten\/Carthage\/Checkouts\/Commandant\/Carthage\/Checkouts\/Result\/",
     "D23C0CEAADB77074FDA4459000068A7940EB7AD0" : "Cuckoo\/Generator\/Dependencies\/SourceKitten\/Carthage\/Checkouts\/Commandant\/",
     "64ACE19A884E8C30BC53E2E0CE86010ECED70B5A" : "Cuckoo\/Generator\/Dependencies\/FileKit\/",
-    "FD7DA18210A2C280E9107E37D7344F243FEE5F75" : "Cuckoo\/Generator\/Dependencies\/SourceKitten\/",
+    "95438028B10BBB846574013D29F154A00556A9D1" : "Cuckoo\/Generator\/Dependencies\/SourceKitten\/Carthage\/Checkouts\/Commandant\/Carthage\/Checkouts\/Quick\/Externals\/Nimble\/",
+    "FD7DA18210A2C280E9107E37D7344F243FEE5F75" : "Cuckoo\/Generator\/Packages\/SourceKitten-0.17.0\/",
     "EB2210CFD48672E403BED699D5D7F01B844069CF" : "Cuckoo\/Generator\/Dependencies\/SourceKitten\/Carthage\/Checkouts\/SWXMLHash\/",
-    "E084C86B03F81D63323C9E7510697EA528A758C7" : "Cuckoo\/Generator\/Dependencies\/SourceKitten\/Carthage\/Checkouts\/xcconfigs\/",
+    "E084C86B03F81D63323C9E7510697EA528A758C7" : "Cuckoo\/Generator\/Dependencies\/SourceKitten\/Carthage\/Checkouts\/Commandant\/Carthage\/Checkouts\/xcconfigs\/",
     "509FD5E949BB67AB92770169324D45AB1917F796" : "Cuckoo\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "Cuckoo",
@@ -39,9 +43,19 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "64ACE19A884E8C30BC53E2E0CE86010ECED70B5A"
     },
     {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Quick\/Nimble.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "95438028B10BBB846574013D29F154A00556A9D1"
+    },
+    {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/antitypical\/Result.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "956D2B21DD155C49504BB67697A67F7C5351A353"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Quick\/Quick.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "D0725CAC6FF2D66F2C83C2C48DC12106D42DAA64"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Carthage\/Commandant.git",
