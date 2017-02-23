@@ -10,10 +10,13 @@
 		183D03FF1C4691C600EBAEF3 /* Cuckoo.h in Headers */ = {isa = PBXBuildFile; fileRef = 183D03FE1C4691C600EBAEF3 /* Cuckoo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		183D04061C4691C600EBAEF3 /* Cuckoo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 183D03FB1C4691C600EBAEF3 /* Cuckoo.framework */; };
 		183D04161C46926A00EBAEF3 /* CuckooFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183D04151C46926A00EBAEF3 /* CuckooFunctions.swift */; };
-		B5777B281E13DBB7005BBA8F /* ClassForStubTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD432D11D9277D80023AADA /* ClassForStubTesting.swift */; };
-		B5777B2B1E13DBBB005BBA8F /* ClassWithOptionals.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE2DE0F1E071389006E462C /* ClassWithOptionals.swift */; };
-		B5777B2C1E13DBBF005BBA8F /* TestedClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC70D0BB1D2AF40800014C5F /* TestedClass.swift */; };
-		B5777B2D1E13DBC3005BBA8F /* TestedProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC70D0BC1D2AF40800014C5F /* TestedProtocol.swift */; };
+		58C54ADE34CFF59ECB7C5EE2 /* TestedSubProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C549CFCF27949160520C92 /* TestedSubProtocol.swift */; };
+		58C54E7336161DFE7C1296FF /* GeneratedMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C5439B933469D27553A0B4 /* GeneratedMocks.swift */; };
+		D65C5BFA1E57379100D25697 /* ClassForStubTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD432D11D9277D80023AADA /* ClassForStubTesting.swift */; };
+		D65C5BFD1E57379400D25697 /* ClassWithOptionals.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE2DE0F1E071389006E462C /* ClassWithOptionals.swift */; };
+		D65C5BFE1E57379700D25697 /* TestedClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC70D0BB1D2AF40800014C5F /* TestedClass.swift */; };
+		D65C5BFF1E57379A00D25697 /* TestedProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC70D0BC1D2AF40800014C5F /* TestedProtocol.swift */; };
+		D65C5C031E573BCC00D25697 /* TestedSubclass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65C5C021E573BCC00D25697 /* TestedSubclass.swift */; };
 		DC1A82B51D2D6BD500A217F0 /* FailTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1A82B31D2D6A2100A217F0 /* FailTest.swift */; };
 		DC4094EE1D211563006FB137 /* StubFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4094EC1D211563006FB137 /* StubFunction.swift */; };
 		DC4094EF1D211563006FB137 /* StubThrowingFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4094ED1D211563006FB137 /* StubThrowingFunction.swift */; };
@@ -98,6 +101,8 @@
 		183D040C1C4691C600EBAEF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		183D04151C46926A00EBAEF3 /* CuckooFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CuckooFunctions.swift; sourceTree = "<group>"; };
 		18F03D881DE454F50006A71E /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
+		58C549CFCF27949160520C92 /* TestedSubProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestedSubProtocol.swift; sourceTree = "<group>"; };
+		D65C5C021E573BCC00D25697 /* TestedSubclass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestedSubclass.swift; sourceTree = "<group>"; };
 		DC1A82B31D2D6A2100A217F0 /* FailTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FailTest.swift; sourceTree = "<group>"; };
 		DC4094EC1D211563006FB137 /* StubFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StubFunction.swift; sourceTree = "<group>"; };
 		DC4094ED1D211563006FB137 /* StubThrowingFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StubThrowingFunction.swift; sourceTree = "<group>"; };
@@ -316,6 +321,8 @@
 				DCE2DE0F1E071389006E462C /* ClassWithOptionals.swift */,
 				DC70D0BB1D2AF40800014C5F /* TestedClass.swift */,
 				DC70D0BC1D2AF40800014C5F /* TestedProtocol.swift */,
+				D65C5C021E573BCC00D25697 /* TestedSubclass.swift */,
+				58C549CFCF27949160520C92 /* TestedSubProtocol.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -524,7 +531,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "OUTPUT=\"$PROJECT_DIR/Tests/Generated/GeneratedMocks.swift\"\n# Use seperate variables for each file.\nINPUT_STUB=\"$PROJECT_DIR/Tests/Source/ClassForStubTesting.swift\"\nINPUT_OPTIONAL=\"$PROJECT_DIR/Tests/Source/ClassWithOptionals.swift\"\nfor definition in $GCC_PREPROCESSOR_DEFINITIONS; do\n    if [ $definition = \"USE_RUN\" ]; then\n        use_run=1\n    fi\ndone\nif [ $use_run ]; then\n    \"$PROJECT_DIR/run\" --clean generate --testable Cuckoo --output \"$OUTPUT\" \"$INPUT_STUB\" \"$INPUT_OPTIONAL\"\nelse\n    \"$BUILD_DIR/$CONFIGURATION/cuckoo_generator.app/Contents/MacOS/cuckoo_generator\" generate --testable Cuckoo --output \"$OUTPUT\" \"$INPUT_STUB\" \"$INPUT_OPTIONAL\" \"$PROJECT_DIR/Tests/Source/TestedProtocol.swift\" \"$PROJECT_DIR/Tests/Source/TestedClass.swift\"\nfi";
+			shellScript = "OUTPUT=\"$PROJECT_DIR/Tests/Generated/GeneratedMocks.swift\"\n# Use seperate variables for each file.\nINPUT_STUB=\"$PROJECT_DIR/Tests/Source/ClassForStubTesting.swift\"\nINPUT_OPTIONAL=\"$PROJECT_DIR/Tests/Source/ClassWithOptionals.swift\"\nfor definition in $GCC_PREPROCESSOR_DEFINITIONS; do\n    if [ $definition = \"USE_RUN\" ]; then\n        use_run=1\n    fi\ndone\nif [ $use_run ]; then\n    \"$PROJECT_DIR/run\" --clean generate --testable Cuckoo --output \"$OUTPUT\" \"$INPUT_STUB\" \"$INPUT_OPTIONAL\"\nelse\n    \"$BUILD_DIR/$CONFIGURATION/cuckoo_generator.app/Contents/MacOS/cuckoo_generator\" generate --testable Cuckoo --output \"$OUTPUT\" \"$INPUT_STUB\" \"$INPUT_OPTIONAL\" \"$PROJECT_DIR/Tests/Source/TestedProtocol.swift\" \"$PROJECT_DIR/Tests/Source/TestedClass.swift\" \"$PROJECT_DIR/Tests/Source/TestedSubclass.swift\"\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -542,13 +549,10 @@
 				DC4095011D2120D0006FB137 /* StubFunctionThenDoNothingTrait.swift in Sources */,
 				DC4094EE1D211563006FB137 /* StubFunction.swift in Sources */,
 				183D04161C46926A00EBAEF3 /* CuckooFunctions.swift in Sources */,
-				B5777B2C1E13DBBF005BBA8F /* TestedClass.swift in Sources */,
-				B5777B2D1E13DBC3005BBA8F /* TestedProtocol.swift in Sources */,
 				DC4094F41D211598006FB137 /* ToBeStubbedReadOnlyProperty.swift in Sources */,
 				DC9EFA401CFC2FE20034DFE5 /* VerificationProxy.swift in Sources */,
 				DC9EFA001CFAD5660034DFE5 /* StubCall.swift in Sources */,
 				DC9EFA3E1CFC2FE20034DFE5 /* Mock.swift in Sources */,
-				B5777B281E13DBB7005BBA8F /* ClassForStubTesting.swift in Sources */,
 				DC4094FF1D2116DA006FB137 /* StubFunctionThenTrait.swift in Sources */,
 				DC9EFA421CFC31B10034DFE5 /* StubAction.swift in Sources */,
 				DC4094F31D211598006FB137 /* ToBeStubbedProperty.swift in Sources */,
@@ -564,7 +568,6 @@
 				DC9EFA2D1CFAE16C0034DFE5 /* MockManager.swift in Sources */,
 				DC4095261D2A50BE006FB137 /* ParameterMatcherFunctions.swift in Sources */,
 				DC4095281D2A50CC006FB137 /* CallMatcherFunctions.swift in Sources */,
-				B5777B2B1E13DBBB005BBA8F /* ClassWithOptionals.swift in Sources */,
 				DC4094F71D2116B1006FB137 /* BaseStubFunctionTrait.swift in Sources */,
 				DC4094FD1D2116DA006FB137 /* StubFunctionThenCallRealImplementationTrait.swift in Sources */,
 				DC4095091D2120E6006FB137 /* StubNoReturnThrowingFunction.swift in Sources */,
@@ -577,6 +580,7 @@
 			files = (
 				DC70D0C21D2AF4FF00014C5F /* ArgumentCaptorTest.swift in Sources */,
 				DC70D0C91D2AFAD200014C5F /* StubNoReturnFunctionTest.swift in Sources */,
+				D65C5C031E573BCC00D25697 /* TestedSubclass.swift in Sources */,
 				DC70D0CD1D2AFB1100014C5F /* StubThrowingFunctionTest.swift in Sources */,
 				DC70D0CB1D2AFAF200014C5F /* StubNoReturnThrowingFunctionTest.swift in Sources */,
 				DC70D0B81D2ABA3100014C5F /* TestUtils.swift in Sources */,
@@ -586,15 +590,20 @@
 				DC70D0CF1D2AFD0D00014C5F /* StubbingTest.swift in Sources */,
 				DC70D0AF1D2AB64A00014C5F /* ParameterMatcherFunctionsTest.swift in Sources */,
 				DC70D0D61D2B9FBE00014C5F /* ParameterMatcherTest.swift in Sources */,
+				D65C5BFA1E57379100D25697 /* ClassForStubTesting.swift in Sources */,
 				DC70D0AB1D2AB5F800014C5F /* ClassTest.swift in Sources */,
 				DC70D0B31D2AB6B900014C5F /* MatchableTest.swift in Sources */,
 				DC70D0D21D2B007300014C5F /* GeneratedMocks.swift in Sources */,
 				DC1A82B51D2D6BD500A217F0 /* FailTest.swift in Sources */,
 				DC70D0D41D2B026200014C5F /* VerificationTest.swift in Sources */,
 				DC70D0AD1D2AB62100014C5F /* ProtocolTest.swift in Sources */,
+				D65C5BFF1E57379A00D25697 /* TestedProtocol.swift in Sources */,
+				D65C5BFE1E57379700D25697 /* TestedClass.swift in Sources */,
+				D65C5BFD1E57379400D25697 /* ClassWithOptionals.swift in Sources */,
 				DC70D0C51D2AFA8E00014C5F /* StubFunctionTest.swift in Sources */,
 				DC70D0D81D2B9FD400014C5F /* CallMatcherTest.swift in Sources */,
 				DC70D0A81D2AB5B700014C5F /* CuckooFunctionsTest.swift in Sources */,
+				58C54ADE34CFF59ECB7C5EE2 /* TestedSubProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

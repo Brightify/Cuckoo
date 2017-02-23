@@ -55,6 +55,25 @@ class StubThrowingFunctionTest: XCTestCase {
         
         XCTAssertTrue(catched)
     }
+
+    func testOverrideThenThrowInSubClass() {
+        let mock = MockTestedSubclass()
+
+        XCTAssertNotNil(mock)
+
+        stub(mock) { mock in
+            when(mock.withThrows()).thenThrow(TestError.unknown)
+        }
+
+        var catched = false
+        do {
+            _ = try mock.withThrows()
+        } catch {
+            catched = true
+        }
+
+        XCTAssertTrue(catched)
+    }
     
     private enum TestError: Error {
         case unknown

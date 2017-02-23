@@ -14,6 +14,7 @@
 		18E16D871C45D8B30084EF54 /* FileHeaderHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E16D591C45A85E0084EF54 /* FileHeaderHandler.swift */; };
 		18E16D991C45DF7F0084EF54 /* Components.plist in Resources */ = {isa = PBXBuildFile; fileRef = 18E16D981C45DF7F0084EF54 /* Components.plist */; };
 		18F2BC1D1C46E8E30015A95F /* Generator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F2BC1B1C46E8760015A95F /* Generator.swift */; };
+		D61BD5C11E5DB55B00CF3C72 /* InheritanceDeclaration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C54682D45C5A3614A6FA6A /* InheritanceDeclaration.swift */; };
 		DC4094301D13F91F006FB137 /* Import.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC40942E1D13F8FA006FB137 /* Import.swift */; };
 		DC4094861D140184006FB137 /* ExtensionDeclaration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4094651D140180006FB137 /* ExtensionDeclaration.swift */; };
 		DC5176351D2EE8F700E922F2 /* CodeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5176331D2EE4D300E922F2 /* CodeBuilder.swift */; };
@@ -320,6 +321,7 @@
 		18E16D6A1C45D8280084EF54 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18E16D981C45DF7F0084EF54 /* Components.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Components.plist; sourceTree = "<group>"; };
 		18F2BC1B1C46E8760015A95F /* Generator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Generator.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		58C54682D45C5A3614A6FA6A /* InheritanceDeclaration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InheritanceDeclaration.swift; sourceTree = "<group>"; };
 		DC1AB5D21D0D9F0B00867895 /* FileKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FileKit.xcodeproj; path = Dependencies/FileKit/FileKit.xcodeproj; sourceTree = "<group>"; };
 		DC1AB5E41D0D9F1600867895 /* sourcekitten.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = sourcekitten.xcodeproj; path = Dependencies/SourceKitten/sourcekitten.xcodeproj; sourceTree = "<group>"; };
 		DC1AB60B1D0D9F8600867895 /* SWXMLHash.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SWXMLHash.xcodeproj; path = Dependencies/SourceKitten/Carthage/Checkouts/SWXMLHash/SWXMLHash.xcodeproj; sourceTree = "<group>"; };
@@ -519,6 +521,7 @@
 				DC9EFA5F1CFC4F420034DFE5 /* ProtocolDeclaration.swift */,
 				DC9EFA621CFC4F420034DFE5 /* ProtocolMethod.swift */,
 				DC9EFA5D1CFC4F420034DFE5 /* Token.swift */,
+				58C54682D45C5A3614A6FA6A /* InheritanceDeclaration.swift */,
 			);
 			path = Tokens;
 			sourceTree = "<group>";
@@ -932,6 +935,7 @@
 				DC9EFA901CFC50070034DFE5 /* ClassMethod.swift in Sources */,
 				DC9EFA7A1CFC4F4D0034DFE5 /* ClassDeclaration.swift in Sources */,
 				DC9EFA771CFC4F4D0034DFE5 /* Token.swift in Sources */,
+				D61BD5C11E5DB55B00CF3C72 /* InheritanceDeclaration.swift in Sources */,
 				DC4094301D13F91F006FB137 /* Import.swift in Sources */,
 				18E16D831C45D8B30084EF54 /* Utils.swift in Sources */,
 				DC9EFA7B1CFC4F4D0034DFE5 /* Method.swift in Sources */,

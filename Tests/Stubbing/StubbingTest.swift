@@ -59,4 +59,31 @@ class StubbingTest: XCTestCase {
         XCTAssertEqual(mock.readOnlyProperty, "a")
         XCTAssertEqual(mock.count(characters: "a"), 1)
     }
+    
+    func testSubClass() {
+        let mock = MockTestedSubclass()
+        
+        XCTAssertNotNil(mock)
+        
+        stub(mock) { mock in
+            when(mock.readOnlyProperty.get).thenReturn("a").thenReturn("b", "c")
+        }
+        
+        XCTAssertEqual(mock.readOnlyProperty, "a")
+        XCTAssertEqual(mock.readOnlyProperty, "b")
+        XCTAssertEqual(mock.readOnlyProperty, "c")
+        XCTAssertEqual(mock.readOnlyProperty, "c")
+    }
+
+    func testSubClassMethod() {
+        let mock = MockTestedSubclass()
+
+        XCTAssertNotNil(mock)
+
+        stub(mock) { mock in
+            when(mock.subclassMethod()).thenReturn(1)
+        }
+
+        XCTAssertEqual(mock.subclassMethod(), 1)
+    }
 }

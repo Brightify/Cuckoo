@@ -28,10 +28,11 @@ List of all changes and new features can be found [here](CHANGELOG.md).
 
 ## TODO
 
-We are still missing support for some important features like:
-* inheritance (grandparent methods)
-* generics
-* type inference for instance variables (you need to write it explicitly, otherwise it will be replaced with "__UnknownType")
+We are still missing support for some important features like:  
+
+* <del>inheritance (grandparent methods)</del>
+* generics  
+* type inference for instance variables (you need to write it explicitly, otherwise it will be replaced with "__UnknownType")  
 
 ## What will not be supported
 
@@ -87,7 +88,8 @@ ${PODS_ROOT}/Cuckoo/run generate --testable "$PROJECT_NAME" \
 
 Input files can be also specified directly in `Run script` in `Input Files` form. To force run script to rebuild generator even if it already exists, use `--clean` as first argument.
 
-Notes: All paths in the Run script must be absolute. Variable `PROJECT_DIR` automatically points to your project directory.
+Notes: All paths in the Run script must be absolute. Variable `PROJECT_DIR` automatically points to your project directory.  
+Also include paths to inherited Classes and Protocols for mocking/stubbing parent and grandparents.  
 
 #### Carthage
 To use Cuckoo with [Carthage](https://github.com/Carthage/Carthage) add in your Cartfile this line:
@@ -397,6 +399,10 @@ Do not generate file headers.
 
 Do not generate timestamp.
 
+##### `--no-inheritance`
+
+Do not mock/stub parents and grandparents.
+
 ##### `--file-prefix`
 
 Names of generated files in directory will start with this prefix. Only works when output path is directory.
@@ -419,6 +425,7 @@ After the `help` you can write name of another command for displaying a command-
 
 * Tadeas Kriz, [tadeas@brightify.org](mailto:tadeas@brightify.org)
 * Filip Dolník, [filip@brightify.org](mailto:filip@brightify.org)
+* Adriaan (Arjan) Duijzer [arjan@nxtstep.nl](mailto:arjan@nxtstep.nl)
 
 ## Inspiration
 

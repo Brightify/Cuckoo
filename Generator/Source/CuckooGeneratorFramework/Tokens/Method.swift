@@ -45,4 +45,9 @@ public extension Method {
             return "Void"
         }
     }
+
+    public func isEqual(to other: Token) -> Bool {
+        guard let other = other as? Method else { return false }
+        return self.name == other.name
+    }
 }
