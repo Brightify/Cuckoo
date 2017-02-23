@@ -100,7 +100,21 @@ public struct Tokenizer {
             return ExtensionDeclaration(range: range!)
             
         case Kinds.InstanceVariable.rawValue:
-            let setterAccessibility = (dictionary[Key.SetterAccessibility.rawValue] as? String).flatMap(Accessibility.init)
+            var isGetterByBody = false
+            if let bodyRange = bodyRange {
+                let body = source[bodyRange.startIndex..<bodyRange.endIndex]
+                    .components(separatedBy: .whitespacesAndNewlines).joined()
+                let containsPropertyObservers = body.contains("didSet{") || body.contains("didGet{")
+                
+                // var mark in protocol as getter (var variable: String { get } )
+                // or var in object have body and it is not observers
+                if body == "get" || (!containsPropertyObservers && body != "setget" && body != "getset") {
+                    isGetterByBody = true
+                }
+            }
+            let setterAccessibility = isGetterByBody ?
+                Accessibility.FilePrivate :
+                (dictionary[Key.SetterAccessibility.rawValue] as? String).flatMap(Accessibility.init)
             
             if String(describing: source.utf8.dropFirst(range!.startIndex)).takeUntil(occurence: name)?.trimmed.hasPrefix("let") == true {
                 return nil
