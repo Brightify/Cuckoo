@@ -54,10 +54,9 @@ public struct Tokenizer {
         let range = extractRange(from: dictionary, offset: .Offset, length: .Length)
         let nameRange = extractRange(from: dictionary, offset: .NameOffset, length: .NameLength)
         let bodyRange = extractRange(from: dictionary, offset: .BodyOffset, length: .BodyLength)
-        
+        let attributeOprional = (dictionary["key.attributes"] as? [Any])?.first(where: {($0 as? [String : String])?["key.attribute"] == "source.decl.attribute.optional"}) != nil
         let accessibility = (dictionary[Key.Accessibility.rawValue] as? String).flatMap { Accessibility(rawValue: $0) }
         let type = dictionary[Key.TypeName.rawValue] as? String
-        
         switch kind {
         case Kinds.ProtocolDeclaration.rawValue:
             let subtokens = tokenize(dictionary[Key.Substructure.rawValue] as? [SourceKitRepresentable] ?? [])
@@ -155,6 +154,7 @@ public struct Tokenizer {
                     name: name,
                     accessibility: accessibility!,
                     returnSignature: returnSignature,
+                    isOptional: attributeOprional,
                     range: range!,
                     nameRange: nameRange!,
                     parameters: parameters)

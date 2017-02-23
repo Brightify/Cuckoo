@@ -105,8 +105,7 @@ public struct Generator {
     
     private func generateMethod(for token: Method, withOuterAccessibility outerAccessibility: Accessibility, fromProtocolDefinition: Bool) {
         guard token.accessibility.isAccessible else { return }
-        guard !token.isInit || fromProtocolDefinition else { return }
-
+        guard (!token.isInit && !token.isDeinit) || fromProtocolDefinition else { return }
         let override = token is ClassMethod ? "override " : ""
         let parametersSignature = token.parameters.enumerated().map { "\($1.labelAndName): \($1.type)" }.joined(separator: ", ")
 
@@ -129,12 +128,18 @@ public struct Generator {
                     return $1.name
                 }
             }.joined(separator: ", ")
-        managerCall += ", original: observed.map { o in return { (\(parametersSignatureWithoutNames))\(token.returnSignature) in \(tryIfThrowing)o.\(token.rawName)(\(methodCall)) } })"
+        if let protocolMethod = token as? ProtocolMethod {
+            managerCall += ", original: observed.map { o in return { (\(parametersSignatureWithoutNames))\(token.returnSignature) in \(tryIfThrowing)o.\(token.rawName)" + (protocolMethod.isOptional ? "?" : "") + "(\(methodCall)) } })"
+        } else {
+                   managerCall += ", original: observed.map { o in return { (\(parametersSignatureWithoutNames))\(token.returnSignature) in \(tryIfThrowing)o.\(token.rawName)(\(methodCall)) } })"
+        }
         
         let accessibility = minAccessibility(token.accessibility, outerAccessibility)
         code += ""
-        code += "\(accessibility.sourceName)\(override)\(token.isInit ? (fromProtocolDefinition ? "required " : "") : "func " )\(token.rawName)(\(parametersSignature))\(token.returnSignature) {"
-        if !token.isInit {
+
+        code += "\(accessibility.sourceName)\(override)\(token.isInit || token.isDeinit ? (fromProtocolDefinition ? "required " : "") : "func " )\(token.rawName)(\(parametersSignature))\(token.returnSignature) {"
+        if !token.isInit && !token.isDeinit {
+
             code.nest("return \(managerCall)")
         }
         code += "}"
@@ -181,7 +186,7 @@ public struct Generator {
     
     private func generateStubbingMethod(for token: Method) {
         guard token.accessibility.isAccessible else { return }
-        guard !token.isInit else { return }
+        guard !token.isInit && !token.isDeinit else { return }
         
         let stubFunction: String
         if token.isThrowing {
@@ -267,7 +272,7 @@ public struct Generator {
     
     private func generateVerificationMethod(for token: Method) {
         guard token.accessibility.isAccessible else { return }
-        guard !token.isInit else { return }
+        guard !token.isInit && !token.isDeinit else { return }
         
         code += ""
         code += "@discardableResult"
@@ -326,7 +331,7 @@ public struct Generator {
     
     private func generateNoImplStubMethod(for token: Method, withOuterAccessibility outerAccessibility: Accessibility, fromProtocolDefinition: Bool) {
         guard token.accessibility.isAccessible else { return }
-        guard !token.isInit || fromProtocolDefinition else { return }
+        guard (!token.isInit && !token.isDeinit ) || fromProtocolDefinition else { return }
         
         let override = token is ClassMethod ? "override " : ""
         let parametersSignature = token.parameters.enumerated().map { "\($1.labelAndName): \($1.type)" }.joined(separator: ", ")
