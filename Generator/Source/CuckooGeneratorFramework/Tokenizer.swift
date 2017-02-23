@@ -30,14 +30,26 @@ public struct Tokenizer {
     private func tokenize(_ representables: [SourceKitRepresentable]) -> [Token] {
         return representables.flatMap(tokenize)
     }
-    
+
+    internal static let nameNotSet = "name not set"
+    internal static let unknownType = "unknown type"
     private func tokenize(_ representable: SourceKitRepresentable) -> Token? {
         guard let dictionary = representable as? [String: SourceKitRepresentable] else { return nil }
         
         // Common fields
-        let name = dictionary[Key.Name.rawValue] as? String ?? "name not set"
-        let kind = dictionary[Key.Kind.rawValue] as? String ?? "unknown type"
-        
+        let name = dictionary[Key.Name.rawValue] as? String ?? Tokenizer.nameNotSet
+        let kind = dictionary[Key.Kind.rawValue] as? String ?? Tokenizer.unknownType
+
+        // Inheritance
+        let inheritedTypes = dictionary[Key.InheritedTypes.rawValue] as? [SourceKitRepresentable] ?? []
+        let tokenizedInheritedTypes = inheritedTypes.flatMap { type -> Token in
+            guard let typeDict = type as? [String: SourceKitRepresentable] else {
+                return InheritanceDeclaration.empty
+            }
+            let name = typeDict[Key.Name.rawValue] as? String ?? Tokenizer.nameNotSet
+            return InheritanceDeclaration(name: name)
+        }
+
         // Optional fields
         let range = extractRange(from: dictionary, offset: .Offset, length: .Length)
         let nameRange = extractRange(from: dictionary, offset: .NameOffset, length: .NameLength)
@@ -59,8 +71,9 @@ public struct Tokenizer {
                 nameRange: nameRange!,
                 bodyRange: bodyRange!,
                 initializers: initializers,
-                children: children)
-            
+                children: children,
+                inheritedTypes: tokenizedInheritedTypes)
+
         case Kinds.ClassDeclaration.rawValue:
             let subtokens = tokenize(dictionary[Key.Substructure.rawValue] as? [SourceKitRepresentable] ?? [])
             let initializers = subtokens.only(Initializer.self)
@@ -80,8 +93,9 @@ public struct Tokenizer {
                 nameRange: nameRange!,
                 bodyRange: bodyRange!,
                 initializers: initializers,
-                children: children)
-            
+                children: children,
+                inheritedTypes: tokenizedInheritedTypes)
+
         case Kinds.ExtensionDeclaration.rawValue:
             return ExtensionDeclaration(range: range!)
             

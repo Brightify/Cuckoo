@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.8.4
+
+* Added support for inheritance mocking.  
+
 ## 0.8.3
 
 * Added support for `fileprivate` (thanks to lvdstam for implementation).

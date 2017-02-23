@@ -15,4 +15,21 @@ public struct ProtocolDeclaration: ContainerToken {
     public let initializers: [Initializer]
     public let children: [Token]
     public let implementation: Bool = false
+    public let inheritedTypes: [Token]
+
+    public func replace(children tokens: [Token]) -> ProtocolDeclaration {
+        return ProtocolDeclaration(name: self.name,
+                accessibility: self.accessibility,
+                range: self.range,
+                nameRange: self.nameRange,
+                bodyRange: self.bodyRange,
+                initializers: self.initializers,
+                children: tokens,
+                inheritedTypes: self.inheritedTypes)
+    }
+
+    public func isEqual(to other: Token) -> Bool {
+        guard let other = other as? ProtocolDeclaration else { return false }
+        return self.name == other.name
+    }
 }
