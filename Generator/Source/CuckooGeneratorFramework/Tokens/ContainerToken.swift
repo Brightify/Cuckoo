@@ -17,3 +17,29 @@ public protocol ContainerToken: Token {
     var implementation: Bool { get }
     var inheritedTypes: [InheritanceDeclaration] { get }
 }
+
+extension ContainerToken {
+    public func serialize() -> [String : Any] {
+        let properties = children.flatMap { $0 as? InstanceVariable }
+            .filter { $0.accessibility.isAccessible }
+            .map { $0.serializeWithType() }
+
+        let methods = children.flatMap { $0 as? Method }
+            .filter { $0.accessibility.isAccessible && !$0.isInit }
+            .map { $0.serializeWithType() }
+
+        let initializers = children.flatMap { $0 as? Method }
+            .filter { $0.accessibility.isAccessible && $0.isInit }
+            .map { $0.serializeWithType() }
+
+        return [
+            "name": name,
+            "accessibility": accessibility,
+            "isAccessible": accessibility.isAccessible,
+            "children": children.map { $0.serializeWithType() },
+            "properties": properties,
+            "methods": methods,
+            "initializers": implementation ? [] : initializers
+        ]
+    }
+}

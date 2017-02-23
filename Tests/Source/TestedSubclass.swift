@@ -7,6 +7,14 @@
 //
 
 class TestedSubclass: TestedClass, TestedProtocol {
+    required override init() {
+        super.init()
+    }
+
+    required init(labelA a: String, _ b: String) {
+        super.init()
+    }
+
     // Should not be conflicting in mocked class
     override func withThrows() throws -> Int {
         return 1

@@ -29,4 +29,14 @@ public struct MethodParameter: Token {
         guard let other = other as? MethodParameter else { return false }
         return self.name == other.name
     }
+
+    public func serialize() -> [String : Any] {
+        return [
+            "label": label,
+            "name": name,
+            "type": type,
+            "labelAndName": labelAndName,
+            "typeWithoutAttributes": typeWithoutAttributes
+        ]
+    }
 }

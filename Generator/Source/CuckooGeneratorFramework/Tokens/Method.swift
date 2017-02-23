@@ -54,4 +54,46 @@ public extension Method {
         guard let other = other as? Method else { return false }
         return self.name == other.name
     }
+
+    public func serialize() -> [String : Any] {
+        let call = parameters.map {
+            if let label = $0.label {
+                return "\(label): \($0.name)"
+            } else {
+                return $0.name
+            }
+        }.joined(separator: ", ")
+
+        let stubFunction: String
+        if isThrowing {
+            if returnType == "Void" {
+                stubFunction = "Cuckoo.StubNoReturnThrowingFunction"
+            } else {
+                stubFunction = "Cuckoo.StubThrowingFunction"
+            }
+        } else {
+            if returnType == "Void" {
+                stubFunction = "Cuckoo.StubNoReturnFunction"
+            } else {
+                stubFunction = "Cuckoo.StubFunction"
+            }
+        }
+
+        return [
+            "name": rawName,
+            "accessibility": accessibility.sourceName,
+            "returnSignature": returnSignature,
+            "parameters": parameters,
+            "parameterNames": parameters.map { $0.name }.joined(separator: ", "),
+            "isInit": isInit,
+            "returnType": returnType,
+            "isThrowing": isThrowing,
+            "fullyQualifiedName": fullyQualifiedName,
+            "call": call,
+            "parameterSignature": parameters.map { "\($0.labelAndName): \($0.type)" }.joined(separator: ", "),
+            "parameterSignatureWithoutNames": parameters.map { "\($0.name): \($0.type)" }.joined(separator: ", "),
+            "stubFunction": stubFunction,
+            "inputTypes": parameters.map { $0.typeWithoutAttributes }.joined(separator: ", "),
+        ]
+    }
 }

@@ -8,6 +8,8 @@
 
 public protocol Token {
     func isEqual(to other: Token) -> Bool
+
+    func serialize() -> [String: Any]
 }
 
 public func ==(rhs: Token, lhs: Token) -> Bool  {
@@ -15,6 +17,16 @@ public func ==(rhs: Token, lhs: Token) -> Bool  {
 }
 
 public extension Token {
+    func serialize() -> [String: Any] {
+        return [:]
+    }
+
+    func serializeWithType() -> [String: Any] {
+        var serialized = serialize()
+        serialized["@type"] = "\(type(of: self))"
+        return serialized
+    }
+
     public var isClassOrProtocolDefinition: Bool {
         switch self {
         case _ as ProtocolDeclaration:

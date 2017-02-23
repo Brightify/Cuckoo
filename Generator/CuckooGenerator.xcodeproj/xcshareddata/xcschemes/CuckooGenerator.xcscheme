@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_164"
+               BlueprintIdentifier = "OBJ_201"
                BuildableName = "Result.framework"
                BlueprintName = "Result"
                ReferencedContainer = "container:CuckooGenerator.xcodeproj">
@@ -28,7 +28,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_172"
+               BlueprintIdentifier = "OBJ_209"
                BuildableName = "Commandant.framework"
                BlueprintName = "Commandant"
                ReferencedContainer = "container:CuckooGenerator.xcodeproj">
@@ -42,7 +42,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_189"
+               BlueprintIdentifier = "OBJ_226"
                BuildableName = "SWXMLHash.framework"
                BlueprintName = "SWXMLHash"
                ReferencedContainer = "container:CuckooGenerator.xcodeproj">
@@ -56,7 +56,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_197"
+               BlueprintIdentifier = "OBJ_234"
                BuildableName = "CYaml.framework"
                BlueprintName = "CYaml"
                ReferencedContainer = "container:CuckooGenerator.xcodeproj">
@@ -70,7 +70,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_212"
+               BlueprintIdentifier = "OBJ_249"
                BuildableName = "Yams.framework"
                BlueprintName = "Yams"
                ReferencedContainer = "container:CuckooGenerator.xcodeproj">
@@ -84,7 +84,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_222"
+               BlueprintIdentifier = "OBJ_259"
                BuildableName = "sourcekitten"
                BlueprintName = "sourcekitten"
                ReferencedContainer = "container:CuckooGenerator.xcodeproj">
@@ -98,7 +98,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_250"
+               BlueprintIdentifier = "OBJ_287"
                BuildableName = "SourceKittenFramework.framework"
                BlueprintName = "SourceKittenFramework"
                ReferencedContainer = "container:CuckooGenerator.xcodeproj">
@@ -112,7 +112,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_299"
+               BlueprintIdentifier = "OBJ_336"
                BuildableName = "FileKit.framework"
                BlueprintName = "FileKit"
                ReferencedContainer = "container:CuckooGenerator.xcodeproj">
@@ -126,7 +126,49 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_338"
+               BlueprintIdentifier = "OBJ_375"
+               BuildableName = "Spectre.framework"
+               BlueprintName = "Spectre"
+               ReferencedContainer = "container:CuckooGenerator.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "OBJ_389"
+               BuildableName = "PathKit.framework"
+               BlueprintName = "PathKit"
+               ReferencedContainer = "container:CuckooGenerator.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "OBJ_398"
+               BuildableName = "Stencil.framework"
+               BlueprintName = "Stencil"
+               ReferencedContainer = "container:CuckooGenerator.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "OBJ_427"
                BuildableName = "cuckoo_generator"
                BlueprintName = "cuckoo_generator"
                ReferencedContainer = "container:CuckooGenerator.xcodeproj">
@@ -140,9 +182,23 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_364"
+               BlueprintIdentifier = "OBJ_461"
                BuildableName = "CuckooGeneratorFramework.framework"
                BlueprintName = "CuckooGeneratorFramework"
+               ReferencedContainer = "container:CuckooGenerator.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "OBJ_459"
+               BuildableName = "TemplateEncoder"
+               BlueprintName = "TemplateEncoder"
                ReferencedContainer = "container:CuckooGenerator.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -171,7 +227,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "OBJ_164"
+            BlueprintIdentifier = "OBJ_201"
             BuildableName = "Result.framework"
             BlueprintName = "Result"
             ReferencedContainer = "container:CuckooGenerator.xcodeproj">

@@ -1,0 +1,26 @@
+{{token.accessibility}} class {{ token.name }}Stub: {{ token.name }} {
+    {% for property in token.properties %}
+    {{ property.accessibility }}{% if token.@type == "ClassDeclaration" %} override{% endif %} var {{ property.name }}: {{ property.type }} {
+        get {
+            return DefaultValueRegistry.defaultValue(for: ({{property.type}}).self)
+        }
+        {% ifnot property.isReadOnly %}
+        set { }
+        {% endif %}
+    }
+    {% endfor %}
+
+    {% for initializer in token.initializers %}
+    {{ initializer.accessibility }}{% if token.@type == "ClassDeclaration" %} override{% endif %}{% if initializer.@type == "ProtocolMethod" %} required{%endif%} init({{initializer.parameterSignature}}) {
+        {% if token.@type == "ClassDeclaration" %}
+        super.init({{initializer.call}})
+        {% endif %}
+    }
+    {% endfor %}
+
+    {% for method in token.methods %}
+    {{ method.accessibility }}{% if token.@type == "ClassDeclaration" %} override{% endif %} func {{ method.name }}({{ method.parameterSignature }}) {{ method.returnSignature }} {
+        return DefaultValueRegistry.defaultValue(for: ({{method.returnType}}).self)
+    }
+    {% endfor %}
+}

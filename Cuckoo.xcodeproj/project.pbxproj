@@ -11,7 +11,6 @@
 		183D04061C4691C600EBAEF3 /* Cuckoo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 183D03FB1C4691C600EBAEF3 /* Cuckoo.framework */; };
 		183D04161C46926A00EBAEF3 /* CuckooFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183D04151C46926A00EBAEF3 /* CuckooFunctions.swift */; };
 		58C54ADE34CFF59ECB7C5EE2 /* TestedSubProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C549CFCF27949160520C92 /* TestedSubProtocol.swift */; };
-		58C54E7336161DFE7C1296FF /* GeneratedMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C5439B933469D27553A0B4 /* GeneratedMocks.swift */; };
 		D65C5BFA1E57379100D25697 /* ClassForStubTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD432D11D9277D80023AADA /* ClassForStubTesting.swift */; };
 		D65C5BFD1E57379400D25697 /* ClassWithOptionals.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE2DE0F1E071389006E462C /* ClassWithOptionals.swift */; };
 		D65C5BFE1E57379700D25697 /* TestedClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC70D0BB1D2AF40800014C5F /* TestedClass.swift */; };
@@ -77,12 +76,96 @@
 			remoteGlobalIDString = 183D03FA1C4691C600EBAEF3;
 			remoteInfo = Mockery;
 		};
-		DC9786B81D70418600C9E64E /* PBXContainerItemProxy */ = {
+		184B7B671E5F4F0C00294173 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DC9786B31D70418600C9E64E /* CuckooGenerator.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 1808B1601C4575AA0036E924;
-			remoteInfo = CuckooGenerator;
+			remoteGlobalIDString = OBJ_187;
+			remoteInfo = Yams;
+		};
+		184B7B691E5F4F0C00294173 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC9786B31D70418600C9E64E /* CuckooGenerator.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = OBJ_188;
+			remoteInfo = sourcekitten;
+		};
+		184B7B6B1E5F4F0C00294173 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC9786B31D70418600C9E64E /* CuckooGenerator.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = OBJ_189;
+			remoteInfo = SourceKittenFramework;
+		};
+		184B7B6D1E5F4F0C00294173 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC9786B31D70418600C9E64E /* CuckooGenerator.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = OBJ_190;
+			remoteInfo = FileKit;
+		};
+		184B7B6F1E5F4F0C00294173 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC9786B31D70418600C9E64E /* CuckooGenerator.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = OBJ_191;
+			remoteInfo = Spectre;
+		};
+		184B7B711E5F4F0C00294173 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC9786B31D70418600C9E64E /* CuckooGenerator.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = OBJ_192;
+			remoteInfo = PathKit;
+		};
+		184B7B731E5F4F0C00294173 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC9786B31D70418600C9E64E /* CuckooGenerator.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = OBJ_193;
+			remoteInfo = Stencil;
+		};
+		184B7B751E5F4F0C00294173 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC9786B31D70418600C9E64E /* CuckooGenerator.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = OBJ_194;
+			remoteInfo = cuckoo_generator;
+		};
+		184B7C0A1E5F588700294173 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC9786B31D70418600C9E64E /* CuckooGenerator.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = OBJ_195;
+			remoteInfo = Spectre;
+		};
+		184B7C0C1E5F588700294173 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC9786B31D70418600C9E64E /* CuckooGenerator.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = OBJ_196;
+			remoteInfo = PathKit;
+		};
+		184B7C0E1E5F588700294173 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC9786B31D70418600C9E64E /* CuckooGenerator.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = OBJ_197;
+			remoteInfo = Stencil;
+		};
+		184B7C101E5F588700294173 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC9786B31D70418600C9E64E /* CuckooGenerator.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = OBJ_198;
+			remoteInfo = cuckoo_generator;
+		};
+		184B7C121E5F588700294173 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC9786B31D70418600C9E64E /* CuckooGenerator.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = OBJ_200;
+			remoteInfo = TemplateEncoder;
 		};
 		DC9786BA1D70418600C9E64E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -359,8 +442,20 @@
 		DC9786B41D70418600C9E64E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DC9786B91D70418600C9E64E /* cuckoo_generator.app */,
+				184B7B681E5F4F0C00294173 /* Yams.framework */,
+				184B7B6A1E5F4F0C00294173 /* sourcekitten */,
+				184B7B6C1E5F4F0C00294173 /* SourceKittenFramework.framework */,
+				184B7B6E1E5F4F0C00294173 /* FileKit.framework */,
+				184B7B701E5F4F0C00294173 /* Spectre.framework */,
+				184B7B721E5F4F0C00294173 /* PathKit.framework */,
+				184B7B741E5F4F0C00294173 /* Stencil.framework */,
+				184B7B761E5F4F0C00294173 /* cuckoo_generator */,
+				184B7C0B1E5F588700294173 /* Spectre.framework */,
+				184B7C0D1E5F588700294173 /* PathKit.framework */,
+				184B7C0F1E5F588700294173 /* Stencil.framework */,
+				184B7C111E5F588700294173 /* cuckoo_generator */,
 				DC9786BB1D70418600C9E64E /* CuckooGeneratorFramework.framework */,
+				184B7C131E5F588700294173 /* TemplateEncoder */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -483,11 +578,95 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		DC9786B91D70418600C9E64E /* cuckoo_generator.app */ = {
+		184B7B681E5F4F0C00294173 /* Yams.framework */ = {
 			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = cuckoo_generator.app;
-			remoteRef = DC9786B81D70418600C9E64E /* PBXContainerItemProxy */;
+			fileType = wrapper.framework;
+			path = Yams.framework;
+			remoteRef = 184B7B671E5F4F0C00294173 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		184B7B6A1E5F4F0C00294173 /* sourcekitten */ = {
+			isa = PBXReferenceProxy;
+			fileType = text;
+			path = sourcekitten;
+			remoteRef = 184B7B691E5F4F0C00294173 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		184B7B6C1E5F4F0C00294173 /* SourceKittenFramework.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SourceKittenFramework.framework;
+			remoteRef = 184B7B6B1E5F4F0C00294173 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		184B7B6E1E5F4F0C00294173 /* FileKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FileKit.framework;
+			remoteRef = 184B7B6D1E5F4F0C00294173 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		184B7B701E5F4F0C00294173 /* Spectre.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Spectre.framework;
+			remoteRef = 184B7B6F1E5F4F0C00294173 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		184B7B721E5F4F0C00294173 /* PathKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = PathKit.framework;
+			remoteRef = 184B7B711E5F4F0C00294173 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		184B7B741E5F4F0C00294173 /* Stencil.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Stencil.framework;
+			remoteRef = 184B7B731E5F4F0C00294173 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		184B7B761E5F4F0C00294173 /* cuckoo_generator */ = {
+			isa = PBXReferenceProxy;
+			fileType = text;
+			path = cuckoo_generator;
+			remoteRef = 184B7B751E5F4F0C00294173 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		184B7C0B1E5F588700294173 /* Spectre.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Spectre.framework;
+			remoteRef = 184B7C0A1E5F588700294173 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		184B7C0D1E5F588700294173 /* PathKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = PathKit.framework;
+			remoteRef = 184B7C0C1E5F588700294173 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		184B7C0F1E5F588700294173 /* Stencil.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Stencil.framework;
+			remoteRef = 184B7C0E1E5F588700294173 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		184B7C111E5F588700294173 /* cuckoo_generator */ = {
+			isa = PBXReferenceProxy;
+			fileType = text;
+			path = cuckoo_generator;
+			remoteRef = 184B7C101E5F588700294173 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		184B7C131E5F588700294173 /* TemplateEncoder */ = {
+			isa = PBXReferenceProxy;
+			fileType = text;
+			path = TemplateEncoder;
+			remoteRef = 184B7C121E5F588700294173 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		DC9786BB1D70418600C9E64E /* CuckooGeneratorFramework.framework */ = {
@@ -532,7 +711,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "OUTPUT=\"$PROJECT_DIR/Tests/Generated/GeneratedMocks.swift\"\n# Use seperate variables for each file.\nINPUT_STUB=\"$PROJECT_DIR/Tests/Source/ClassForStubTesting.swift\"\nINPUT_OPTIONAL=\"$PROJECT_DIR/Tests/Source/ClassWithOptionals.swift\"\nfor definition in $GCC_PREPROCESSOR_DEFINITIONS; do\n    if [ $definition = \"USE_RUN\" ]; then\n        use_run=1\n    fi\ndone\nif [ $use_run ]; then\n    \"$PROJECT_DIR/run\" --clean generate --testable Cuckoo --output \"$OUTPUT\" \"$INPUT_STUB\" \"$INPUT_OPTIONAL\"\nelse\n    \"$BUILD_DIR/$CONFIGURATION/cuckoo_generator.app/Contents/MacOS/cuckoo_generator\" generate --testable Cuckoo --output \"$OUTPUT\" \"$INPUT_STUB\" \"$INPUT_OPTIONAL\" \"$PROJECT_DIR/Tests/Source/TestedProtocol.swift\" \"$PROJECT_DIR/Tests/Source/TestedClass.swift\" \"$PROJECT_DIR/Tests/Source/TestedSubclass.swift\"\nfi";
+			shellScript = "OUTPUT=\"$PROJECT_DIR/Tests/Generated/GeneratedMocks.swift\"\n# Use seperate variables for each file.\nINPUT_STUB=\"$PROJECT_DIR/Tests/Source/ClassForStubTesting.swift\"\nINPUT_OPTIONAL=\"$PROJECT_DIR/Tests/Source/ClassWithOptionals.swift\"\nfor definition in $GCC_PREPROCESSOR_DEFINITIONS; do\n    if [ $definition = \"USE_RUN\" ]; then\n        use_run=1\n    fi\ndone\nif [ $use_run ]; then\n    \"$PROJECT_DIR/run\" --clean generate --testable Cuckoo --output \"$OUTPUT\" \"$INPUT_STUB\" \"$INPUT_OPTIONAL\"\nelse\n    \"$BUILD_DIR/$CONFIGURATION/cuckoo_generator\" generate --testable Cuckoo --output \"$OUTPUT\" \"$INPUT_STUB\" \"$INPUT_OPTIONAL\" \"$PROJECT_DIR/Tests/Source/TestedProtocol.swift\" \"$PROJECT_DIR/Tests/Source/TestedClass.swift\" \"$PROJECT_DIR/Tests/Source/TestedSubclass.swift\"\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 

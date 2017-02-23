@@ -18,13 +18,13 @@ public enum Accessibility: String {
         case .Open:
             fallthrough
         case .Public:
-            return "public "
+            return "public"
         case .Internal:
             return ""
         case .Private:
-            return "private "
+            return "private"
         case .FilePrivate:
-            return "fileprivate "
+            return "fileprivate"
         }
     }
 

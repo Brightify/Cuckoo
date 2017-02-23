@@ -39,3 +39,4 @@ Generator/*.app
 
 # AppCode
 .idea/
+cuckoo_generator

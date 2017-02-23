@@ -14,9 +14,23 @@
             buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1808B15F1C4575AA0036E924"
-               BuildableName = "cuckoo_generator.app"
-               BlueprintName = "CuckooGenerator"
+               BlueprintIdentifier = "OBJ_459"
+               BuildableName = "TemplateEncoder"
+               BlueprintName = "TemplateEncoder"
+               ReferencedContainer = "container:Generator/CuckooGenerator.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "OBJ_427"
+               BuildableName = "cuckoo_generator"
+               BlueprintName = "cuckoo_generator"
                ReferencedContainer = "container:Generator/CuckooGenerator.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
