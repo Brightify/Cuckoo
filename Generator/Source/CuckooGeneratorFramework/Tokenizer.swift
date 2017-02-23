@@ -42,7 +42,7 @@ public struct Tokenizer {
 
         // Inheritance
         let inheritedTypes = dictionary[Key.InheritedTypes.rawValue] as? [SourceKitRepresentable] ?? []
-        let tokenizedInheritedTypes = inheritedTypes.flatMap { type -> Token in
+        let tokenizedInheritedTypes = inheritedTypes.flatMap { type -> InheritanceDeclaration in
             guard let typeDict = type as? [String: SourceKitRepresentable] else {
                 return InheritanceDeclaration.empty
             }

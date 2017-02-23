@@ -35,7 +35,6 @@ internal extension Token {
             return self
         }
         let inheritedRepresentations: [Token] = typeToken.inheritedTypes
-                .map { $0 as! InheritanceDeclaration }
                 .map { Self.findToken(forClassOrProtocol: $0.name, in: files) }
                 .flatMap { $0 }
                 .flatMap { $0.mergeInheritance(with: files) }
