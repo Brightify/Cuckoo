@@ -13,7 +13,8 @@ public enum Key: String {
     case SetterAccessibility = "key.setter_accessibility"
     case Name = "key.name"
     case TypeName = "key.typename"
-    
+    case InheritedTypes = "key.inheritedtypes"
+
     case Length = "key.length"
     case Offset = "key.offset"
     

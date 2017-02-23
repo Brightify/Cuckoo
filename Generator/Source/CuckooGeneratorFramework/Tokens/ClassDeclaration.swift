@@ -15,8 +15,25 @@ public struct ClassDeclaration: ContainerToken {
     public let initializers: [Initializer]
     public let children: [Token]
     public let implementation: Bool = true
+    public let inheritedTypes: [InheritanceDeclaration]
     
     public var hasNoArgInit: Bool {
         return initializers.filter { $0.parameters.isEmpty }.isEmpty
+    }
+
+    public func replace(children tokens: [Token]) -> ClassDeclaration {
+        return ClassDeclaration(name: self.name,
+                accessibility: self.accessibility,
+                range: self.range,
+                nameRange: self.nameRange,
+                bodyRange: self.bodyRange,
+                initializers: self.initializers,
+                children: tokens,
+                inheritedTypes: self.inheritedTypes)
+    }
+
+    public func isEqual(to other: Token) -> Bool {
+        guard let other = other as? ClassDeclaration else { return false }
+        return self.name == other.name
     }
 }

@@ -105,9 +105,7 @@ public struct Generator {
     
     private func generateMethod(for token: Method, withOuterAccessibility outerAccessibility: Accessibility, fromProtocolDefinition: Bool) {
         guard token.accessibility.isAccessible else { return }
-
         guard (!token.isInit && !token.isDeinit) || fromProtocolDefinition else { return }
-        
         let override = token is ClassMethod ? "override " : ""
         let parametersSignature = token.parameters.enumerated().map { "\($1.labelAndName): \($1.type)" }.joined(separator: ", ")
 
@@ -141,6 +139,7 @@ public struct Generator {
 
         code += "\(accessibility.sourceName)\(override)\(token.isInit || token.isDeinit ? (fromProtocolDefinition ? "required " : "") : "func " )\(token.rawName)(\(parametersSignature))\(token.returnSignature) {"
         if !token.isInit && !token.isDeinit {
+
             code.nest("return \(managerCall)")
         }
         code += "}"
@@ -332,7 +331,6 @@ public struct Generator {
     
     private func generateNoImplStubMethod(for token: Method, withOuterAccessibility outerAccessibility: Accessibility, fromProtocolDefinition: Bool) {
         guard token.accessibility.isAccessible else { return }
-
         guard (!token.isInit && !token.isDeinit ) || fromProtocolDefinition else { return }
         
         let override = token is ClassMethod ? "override " : ""

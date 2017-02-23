@@ -18,4 +18,9 @@ public struct InstanceVariable: Token {
     public var readOnly: Bool {
         return setterAccessibility == nil
     }
+
+    public func isEqual(to other: Token) -> Bool {
+        guard let other = other as? InstanceVariable else { return false }
+        return self.name == other.name
+    }
 }
