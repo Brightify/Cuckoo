@@ -29,4 +29,8 @@ protocol TestedProtocol {
     func withOptionalClosure(_ a: String, closure: ((String) -> Void)?)
 
     func withLabelAndUnderscore(labelA a: String, _ b: String)
+
+    init()
+
+    init(labelA a: String, _ b: String)
 }
