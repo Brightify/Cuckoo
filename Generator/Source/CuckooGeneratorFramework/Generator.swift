@@ -165,7 +165,6 @@ public struct Generator {
                     return $1.name
                 }
             }.joined(separator: ", ")
-<<<<<<< c24f2edd601ad339cc8191787e511e933d46c98b
 
         if let protocolMethod = token as? ProtocolMethod {
             managerCall += ", original: observed.map { o in return { (\(parametersSignatureWithoutNames))\(token.returnSignature) in \(tryIfThrowing)o.\(token.rawName)" + (protocolMethod.isOptional ? "?" : "") + "(\(methodCall)) } })"
@@ -173,10 +172,6 @@ public struct Generator {
             managerCall += ", original: observed.map { o in return { (\(parametersSignatureWithoutNames))\(token.returnSignature) in \(tryIfThrowing)o.\(token.rawName)(\(methodCall)) } })"
         }
         
-=======
-        managerCall += ", original: observed.map { o in return { (\(parametersSignatureWithoutNames))\(token.returnSignature) in \(tryIfThrowing)o.\(token.rawName)(\(methodCall)) } })"
-
->>>>>>> Add stencil templates to replace Generator.
         let accessibility = minAccessibility(token.accessibility, outerAccessibility)
         code += ""
 
@@ -228,13 +223,8 @@ public struct Generator {
 
     private func generateStubbingMethod(for token: Method) {
         guard token.accessibility.isAccessible else { return }
-<<<<<<< c24f2edd601ad339cc8191787e511e933d46c98b
         guard !token.isInit && !token.isDeinit else { return }
         
-=======
-        guard !token.isInit else { return }
-
->>>>>>> Add stencil templates to replace Generator.
         let stubFunction: String
         if token.isThrowing {
             if token.returnType == "Void" {
@@ -319,13 +309,8 @@ public struct Generator {
 
     private func generateVerificationMethod(for token: Method) {
         guard token.accessibility.isAccessible else { return }
-<<<<<<< c24f2edd601ad339cc8191787e511e933d46c98b
         guard !token.isInit && !token.isDeinit else { return }
         
-=======
-        guard !token.isInit else { return }
-
->>>>>>> Add stencil templates to replace Generator.
         code += ""
         code += "@discardableResult"
         code += ("\(token.accessibility.sourceName)func \(token.rawName)\(matchableGenerics(with: token.parameters))" +

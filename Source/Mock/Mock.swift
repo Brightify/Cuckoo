@@ -6,12 +6,14 @@
 //  Copyright © 2016 Brightify. All rights reserved.
 //
 
-public protocol Mock {
+public protocol HasMockManager {
+    var cuckoo_manager: MockManager { get }
+}
+
+public protocol Mock: HasMockManager {
     associatedtype MocksType
     associatedtype Stubbing: StubbingProxy
     associatedtype Verification: VerificationProxy
-    
-    var cuckoo_manager: MockManager { get }
     
     func spy(on victim: MocksType) -> Self
     
@@ -22,10 +24,10 @@ public protocol Mock {
 
 public extension Mock {
     func getStubbingProxy() -> Stubbing {
-        return Stubbing(cuckoo_manager: cuckoo_manager)
+        return Stubbing(manager: cuckoo_manager)
     }
     
     func getVerificationProxy(_ callMatcher: CallMatcher, sourceLocation: SourceLocation) -> Verification {
-        return Verification(cuckoo_manager: cuckoo_manager, callMatcher: callMatcher, sourceLocation: sourceLocation)
+        return Verification(manager: cuckoo_manager, callMatcher: callMatcher, sourceLocation: sourceLocation)
     }
 }

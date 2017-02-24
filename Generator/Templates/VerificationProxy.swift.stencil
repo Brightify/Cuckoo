@@ -1,17 +1,17 @@
 struct __VerificationProxy_{{ token.name }}: Cuckoo.VerificationProxy {
-    private let manager: Cuckoo.MockManager
+    private let cuckoo_manager: Cuckoo.MockManager
     private let callMatcher: Cuckoo.CallMatcher
     private let sourceLocation: Cuckoo.SourceLocation
 
     init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
-        self.manager = manager
+        self.cuckoo_manager = manager
         self.callMatcher = callMatcher
         self.sourceLocation = sourceLocation
     }
 
     {% for property in token.properties %}
     var {{property.name}}: Cuckoo.Verify{% if property.isReadOnly %}ReadOnly{%endif%}Property<{{property.type|genericSafe}}> {
-        return .init(manager: manager, name: "{{property.name}}", callMatcher: callMatcher, sourceLocation: sourceLocation)
+        return .init(manager: cuckoo_manager, name: "{{property.name}}", callMatcher: callMatcher, sourceLocation: sourceLocation)
     }
     {% endfor %}
 
@@ -19,7 +19,7 @@ struct __VerificationProxy_{{ token.name }}: Cuckoo.VerificationProxy {
     @discardableResult
     func {{method.name}}{{method.parameters|matchableGenericNames}}({{method.parameters|matchableParameterSignature}}) -> Cuckoo.__DoNotUse<{{method.returnType|genericSafe}}>{{method.parameters|matchableGenericWhere}} {
         {{method.parameters|parameterMatchers}}
-        return manager.verify("{{method.fullyQualifiedName}}", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+        return cuckoo_manager.verify("{{method.fullyQualifiedName}}", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
     }
     {% endfor %}
 }

@@ -6,7 +6,7 @@ class Mock{{ token.name }}: {{ token.name }}, Cuckoo.Mock {
     typealias MocksType = {{ token.name }}
     typealias Stubbing = __StubbingProxy_{{ token.name }}
     typealias Verification = __VerificationProxy_{{ token.name }}
-    let manager = Cuckoo.MockManager()
+    let cuckoo_manager = Cuckoo.MockManager()
 
     private var observed: {{ token.name }}?
 
@@ -19,11 +19,11 @@ class Mock{{ token.name }}: {{ token.name }}, Cuckoo.Mock {
     // {{property}}
     {{ property.accessibility }}{% if token.@type == "ClassDeclaration" %} override{% endif %} var {{ property.name }}: {{ property.type }} {
         get {
-            return manager.getter("{{ property.name }}", original: observed.map { o in return { () -> {{ property.type }} in o.{{ property.name }} }})
+            return cuckoo_manager.getter("{{ property.name }}", original: observed.map { o in return { () -> {{ property.type }} in o.{{ property.name }} }})
         }
         {% ifnot property.isReadOnly %}
         set {
-            manager.setter("{{ property.name }}", value: newValue, original: observed != nil ? { self.observed?.{{ property.name }} = $0 } : nil)
+            cuckoo_manager.setter("{{ property.name }}", value: newValue, original: observed != nil ? { self.observed?.{{ property.name }} = $0 } : nil)
         }
         {% endif %}
     }
@@ -40,11 +40,11 @@ class Mock{{ token.name }}: {{ token.name }}, Cuckoo.Mock {
     {% for method in token.methods %}
     {{ method.accessibility }}{% if token.@type == "ClassDeclaration" %} override{% endif %} func {{ method.name }}({{ method.parameterSignature }}) {{ method.returnSignature }} {
         {% if method.isThrowing %}
-        return try manager.callThrows("{{method.fullyQualifiedName}}",
+        return try cuckoo_manager.callThrows("{{method.fullyQualifiedName}}",
             parameters: ({{method.parameterNames}}),
             original: observed.map { o in return { ({{ method.parameterSignatureWithoutNames }}){{method.returnSignature}} in try o.{{method.name}}({{method.call}}) } })
         {% else %}
-        return manager.call("{{method.fullyQualifiedName}}",
+        return cuckoo_manager.call("{{method.fullyQualifiedName}}",
             parameters: ({{method.parameterNames}}),
             original: observed.map { o in return { ({{ method.parameterSignatureWithoutNames }}){{method.returnSignature}} in o.{{method.name}}({{method.call}}) } })
         {% endif %}
