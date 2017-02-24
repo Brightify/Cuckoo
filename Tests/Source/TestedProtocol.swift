@@ -7,7 +7,7 @@
 //
 
 protocol TestedProtocol {
-    
+
     var readOnlyProperty: String { get }
     
     var readWriteProperty: Int { get set }

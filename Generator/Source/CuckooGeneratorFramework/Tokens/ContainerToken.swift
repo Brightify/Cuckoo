@@ -25,11 +25,11 @@ extension ContainerToken {
             .map { $0.serializeWithType() }
 
         let methods = children.flatMap { $0 as? Method }
-            .filter { $0.accessibility.isAccessible && !$0.isInit }
+            .filter { $0.accessibility.isAccessible && !$0.isInit && !$0.isDeinit }
             .map { $0.serializeWithType() }
 
         let initializers = children.flatMap { $0 as? Method }
-            .filter { $0.accessibility.isAccessible && $0.isInit }
+            .filter { $0.accessibility.isAccessible && $0.isInit && !$0.isDeinit }
             .map { $0.serializeWithType() }
 
         return [

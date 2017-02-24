@@ -56,7 +56,9 @@ public struct Tokenizer {
         let nameRange = extractRange(from: dictionary, offset: .NameOffset, length: .NameLength)
         let bodyRange = extractRange(from: dictionary, offset: .BodyOffset, length: .BodyLength)
 
-        let attributeOptional = (dictionary["key.attributes"] as? [Any])?.first(where: {($0 as? [String : String])?["key.attribute"] == "source.decl.attribute.optional"}) != nil
+        let attributes = dictionary[Key.Attribute.rawValue]
+        print(attributes)
+        let attributeOptional = (dictionary[Key.Attributes.rawValue] as? [Any])?.first(where: {($0 as? [String : String])?[Key.Attribute.rawValue] == Kinds.Optional.rawValue}) != nil
 
         let accessibility = (dictionary[Key.Accessibility.rawValue] as? String).flatMap { Accessibility(rawValue: $0) }
         let type = dictionary[Key.TypeName.rawValue] as? String
@@ -129,6 +131,7 @@ public struct Tokenizer {
             if let bodyRange = bodyRange {
                 returnSignature = source[nameRange!.endIndex..<bodyRange.startIndex].takeUntil(occurence: "{")?.trimmed ?? ""
             } else {
+                print(source.characters.count, nameRange!.endIndex, range!.endIndex)
                 returnSignature = source[nameRange!.endIndex..<range!.endIndex].trimmed
                 if returnSignature.isEmpty {
                     let untilThrows = String(source.utf8.dropFirst(nameRange!.endIndex))?

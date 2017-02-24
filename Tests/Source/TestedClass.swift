@@ -9,7 +9,9 @@
 class TestedClass {
     
     let constant: Float = 0.0
-    
+
+    private(set) var privateSetProperty: Int = 0
+
     var readOnlyProperty: String {
         return "a"
     }
@@ -56,6 +58,10 @@ class TestedClass {
 
     private var notMocked1: Int?
     fileprivate var notMocked2: Int?
+
+    deinit {
+
+    }
 }
 
 private class ThisClassShouldNotBeMocked1 {

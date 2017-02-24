@@ -10,6 +10,7 @@
 		183D03FF1C4691C600EBAEF3 /* Cuckoo.h in Headers */ = {isa = PBXBuildFile; fileRef = 183D03FE1C4691C600EBAEF3 /* Cuckoo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		183D04061C4691C600EBAEF3 /* Cuckoo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 183D03FB1C4691C600EBAEF3 /* Cuckoo.framework */; };
 		183D04161C46926A00EBAEF3 /* CuckooFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183D04151C46926A00EBAEF3 /* CuckooFunctions.swift */; };
+		18502E5E1E60A7D900E5CF20 /* ObjcProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18502E5D1E60A7D900E5CF20 /* ObjcProtocol.swift */; };
 		58C54ADE34CFF59ECB7C5EE2 /* TestedSubProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C549CFCF27949160520C92 /* TestedSubProtocol.swift */; };
 		D65C5BFA1E57379100D25697 /* ClassForStubTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD432D11D9277D80023AADA /* ClassForStubTesting.swift */; };
 		D65C5BFD1E57379400D25697 /* ClassWithOptionals.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE2DE0F1E071389006E462C /* ClassWithOptionals.swift */; };
@@ -183,6 +184,7 @@
 		183D04051C4691C600EBAEF3 /* CuckooTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CuckooTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		183D040C1C4691C600EBAEF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		183D04151C46926A00EBAEF3 /* CuckooFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CuckooFunctions.swift; sourceTree = "<group>"; };
+		18502E5D1E60A7D900E5CF20 /* ObjcProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjcProtocol.swift; sourceTree = "<group>"; };
 		18F03D881DE454F50006A71E /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		58C549CFCF27949160520C92 /* TestedSubProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestedSubProtocol.swift; sourceTree = "<group>"; };
 		D65C5C021E573BCC00D25697 /* TestedSubclass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestedSubclass.swift; sourceTree = "<group>"; };
@@ -406,6 +408,7 @@
 				DC70D0BC1D2AF40800014C5F /* TestedProtocol.swift */,
 				D65C5C021E573BCC00D25697 /* TestedSubclass.swift */,
 				58C549CFCF27949160520C92 /* TestedSubProtocol.swift */,
+				18502E5D1E60A7D900E5CF20 /* ObjcProtocol.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -442,14 +445,14 @@
 		DC9786B41D70418600C9E64E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				184B7B681E5F4F0C00294173 /* Yams.framework */,
-				184B7B6A1E5F4F0C00294173 /* sourcekitten */,
-				184B7B6C1E5F4F0C00294173 /* SourceKittenFramework.framework */,
-				184B7B6E1E5F4F0C00294173 /* FileKit.framework */,
-				184B7B701E5F4F0C00294173 /* Spectre.framework */,
-				184B7B721E5F4F0C00294173 /* PathKit.framework */,
-				184B7B741E5F4F0C00294173 /* Stencil.framework */,
-				184B7B761E5F4F0C00294173 /* cuckoo_generator */,
+				184B7B681E5F4F0C00294173 /* Result.framework */,
+				184B7B6A1E5F4F0C00294173 /* Commandant.framework */,
+				184B7B6C1E5F4F0C00294173 /* SWXMLHash.framework */,
+				184B7B6E1E5F4F0C00294173 /* CYaml.framework */,
+				184B7B701E5F4F0C00294173 /* Yams.framework */,
+				184B7B721E5F4F0C00294173 /* sourcekitten */,
+				184B7B741E5F4F0C00294173 /* SourceKittenFramework.framework */,
+				184B7B761E5F4F0C00294173 /* FileKit.framework */,
 				184B7C0B1E5F588700294173 /* Spectre.framework */,
 				184B7C0D1E5F588700294173 /* PathKit.framework */,
 				184B7C0F1E5F588700294173 /* Stencil.framework */,
@@ -578,59 +581,59 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		184B7B681E5F4F0C00294173 /* Yams.framework */ = {
+		184B7B681E5F4F0C00294173 /* Result.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
-			path = Yams.framework;
+			path = Result.framework;
 			remoteRef = 184B7B671E5F4F0C00294173 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		184B7B6A1E5F4F0C00294173 /* sourcekitten */ = {
+		184B7B6A1E5F4F0C00294173 /* Commandant.framework */ = {
 			isa = PBXReferenceProxy;
-			fileType = text;
-			path = sourcekitten;
+			fileType = wrapper.framework;
+			path = Commandant.framework;
 			remoteRef = 184B7B691E5F4F0C00294173 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		184B7B6C1E5F4F0C00294173 /* SourceKittenFramework.framework */ = {
+		184B7B6C1E5F4F0C00294173 /* SWXMLHash.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
-			path = SourceKittenFramework.framework;
+			path = SWXMLHash.framework;
 			remoteRef = 184B7B6B1E5F4F0C00294173 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		184B7B6E1E5F4F0C00294173 /* FileKit.framework */ = {
+		184B7B6E1E5F4F0C00294173 /* CYaml.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
-			path = FileKit.framework;
+			path = CYaml.framework;
 			remoteRef = 184B7B6D1E5F4F0C00294173 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		184B7B701E5F4F0C00294173 /* Spectre.framework */ = {
+		184B7B701E5F4F0C00294173 /* Yams.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
-			path = Spectre.framework;
+			path = Yams.framework;
 			remoteRef = 184B7B6F1E5F4F0C00294173 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		184B7B721E5F4F0C00294173 /* PathKit.framework */ = {
+		184B7B721E5F4F0C00294173 /* sourcekitten */ = {
 			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = PathKit.framework;
+			fileType = text;
+			path = sourcekitten;
 			remoteRef = 184B7B711E5F4F0C00294173 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		184B7B741E5F4F0C00294173 /* Stencil.framework */ = {
+		184B7B741E5F4F0C00294173 /* SourceKittenFramework.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
-			path = Stencil.framework;
+			path = SourceKittenFramework.framework;
 			remoteRef = 184B7B731E5F4F0C00294173 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		184B7B761E5F4F0C00294173 /* cuckoo_generator */ = {
+		184B7B761E5F4F0C00294173 /* FileKit.framework */ = {
 			isa = PBXReferenceProxy;
-			fileType = text;
-			path = cuckoo_generator;
+			fileType = wrapper.framework;
+			path = FileKit.framework;
 			remoteRef = 184B7B751E5F4F0C00294173 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -711,7 +714,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "OUTPUT=\"$PROJECT_DIR/Tests/Generated/GeneratedMocks.swift\"\n# Use seperate variables for each file.\nINPUT_STUB=\"$PROJECT_DIR/Tests/Source/ClassForStubTesting.swift\"\nINPUT_OPTIONAL=\"$PROJECT_DIR/Tests/Source/ClassWithOptionals.swift\"\nfor definition in $GCC_PREPROCESSOR_DEFINITIONS; do\n    if [ $definition = \"USE_RUN\" ]; then\n        use_run=1\n    fi\ndone\nif [ $use_run ]; then\n    \"$PROJECT_DIR/run\" --clean generate --testable Cuckoo --output \"$OUTPUT\" \"$INPUT_STUB\" \"$INPUT_OPTIONAL\"\nelse\n    \"$BUILD_DIR/$CONFIGURATION/cuckoo_generator\" generate --testable Cuckoo --output \"$OUTPUT\" \"$INPUT_STUB\" \"$INPUT_OPTIONAL\" \"$PROJECT_DIR/Tests/Source/TestedProtocol.swift\" \"$PROJECT_DIR/Tests/Source/TestedClass.swift\" \"$PROJECT_DIR/Tests/Source/TestedSubclass.swift\"\nfi";
+			shellScript = "OUTPUT=\"$PROJECT_DIR/Tests/Generated/GeneratedMocks.swift\"\n# Use seperate variables for each file.\nINPUT_STUB=\"$PROJECT_DIR/Tests/Source/ClassForStubTesting.swift\"\nINPUT_OPTIONAL=\"$PROJECT_DIR/Tests/Source/ClassWithOptionals.swift\"\nINPUT_OBJC_PROTO=\"$PROJECT_DIR/Tests/Source/ObjcProtocol.swift\"\nfor definition in $GCC_PREPROCESSOR_DEFINITIONS; do\n    if [ $definition = \"USE_RUN\" ]; then\n        use_run=1\n    fi\ndone\nif [ $use_run ]; then\n    \"$PROJECT_DIR/run\" --clean generate --testable Cuckoo --output \"$OUTPUT\" \"$INPUT_STUB\" \"$INPUT_OPTIONAL\" \"$INPUT_OBJC_PROTO\"\nelse\n    \"$BUILD_DIR/$CONFIGURATION/cuckoo_generator\" generate --testable Cuckoo --output \"$OUTPUT\" \"$INPUT_STUB\" \"$INPUT_OPTIONAL\" \"$INPUT_OBJC_PROTO\" \"$PROJECT_DIR/Tests/Source/TestedProtocol.swift\" \"$PROJECT_DIR/Tests/Source/TestedClass.swift\" \"$PROJECT_DIR/Tests/Source/TestedSubclass.swift\"\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -749,6 +752,7 @@
 				DC4095261D2A50BE006FB137 /* ParameterMatcherFunctions.swift in Sources */,
 				DC4095281D2A50CC006FB137 /* CallMatcherFunctions.swift in Sources */,
 				DC4094F71D2116B1006FB137 /* BaseStubFunctionTrait.swift in Sources */,
+				18502E5E1E60A7D900E5CF20 /* ObjcProtocol.swift in Sources */,
 				DC4094FD1D2116DA006FB137 /* StubFunctionThenCallRealImplementationTrait.swift in Sources */,
 				DC4095091D2120E6006FB137 /* StubNoReturnThrowingFunction.swift in Sources */,
 			);
