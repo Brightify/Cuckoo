@@ -13,7 +13,7 @@ class MockA: A, Cuckoo.Mock {
     typealias MocksType = A
     typealias Stubbing = __StubbingProxy_A
     typealias Verification = __VerificationProxy_A
-    let manager = Cuckoo.MockManager()
+    let cuckoo_manager = Cuckoo.MockManager()
     
     private var observed: A?
     
@@ -23,20 +23,20 @@ class MockA: A, Cuckoo.Mock {
     }
     
     struct __StubbingProxy_A: Cuckoo.StubbingProxy {
-        private let manager: Cuckoo.MockManager
+        private let cuckoo_manager: Cuckoo.MockManager
         
         init(manager: Cuckoo.MockManager) {
-            self.manager = manager
+            self.manager = cuckoo_manager
         }
     }
     
     struct __VerificationProxy_A: Cuckoo.VerificationProxy {
-        private let manager: Cuckoo.MockManager
+        private let cuckoo_manager: Cuckoo.MockManager
         private let callMatcher: Cuckoo.CallMatcher
         private let sourceLocation: Cuckoo.SourceLocation
         
         init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
-            self.manager = manager
+            self.manager = cuckoo_manager
             self.callMatcher = callMatcher
             self.sourceLocation = sourceLocation
         }
@@ -50,7 +50,7 @@ class MockB: B, Cuckoo.Mock {
     typealias MocksType = B
     typealias Stubbing = __StubbingProxy_B
     typealias Verification = __VerificationProxy_B
-    let manager = Cuckoo.MockManager()
+    let cuckoo_manager = Cuckoo.MockManager()
     
     private var observed: B?
     
@@ -60,20 +60,20 @@ class MockB: B, Cuckoo.Mock {
     }
     
     struct __StubbingProxy_B: Cuckoo.StubbingProxy {
-        private let manager: Cuckoo.MockManager
+        private let cuckoo_manager: Cuckoo.MockManager
         
         init(manager: Cuckoo.MockManager) {
-            self.manager = manager
+            self.manager = cuckoo_manager
         }
     }
     
     struct __VerificationProxy_B: Cuckoo.VerificationProxy {
-        private let manager: Cuckoo.MockManager
+        private let cuckoo_manager: Cuckoo.MockManager
         private let callMatcher: Cuckoo.CallMatcher
         private let sourceLocation: Cuckoo.SourceLocation
         
         init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
-            self.manager = manager
+            self.manager = cuckoo_manager
             self.callMatcher = callMatcher
             self.sourceLocation = sourceLocation
         }

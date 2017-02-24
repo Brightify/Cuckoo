@@ -15,4 +15,12 @@ class TestedSubclass: TestedClass, TestedProtocol {
     func subclassMethod() -> Int {
         return 0
     }
+    
+    internal override required init() {
+        
+    }
+    
+    required init(labelA a: String, _ b: String) {
+        
+    }
 }

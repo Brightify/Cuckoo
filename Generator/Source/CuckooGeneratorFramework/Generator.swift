@@ -48,7 +48,7 @@ public struct Generator {
             code += "\(token.accessibility.sourceName)typealias MocksType = \(token.name)"
             code += "\(token.accessibility.sourceName)typealias Stubbing = \(stubbingProxyName(of: token.name))"
             code += "\(token.accessibility.sourceName)typealias Verification = \(verificationProxyName(of: token.name))"
-            code += "\(token.accessibility.sourceName)let manager = Cuckoo.MockManager()"
+            code += "\(token.accessibility.sourceName)let cuckoo_manager = Cuckoo.MockManager()"
             code += ""
             code += "private var observed: \(token.name)?"
             code += ""
@@ -92,11 +92,11 @@ public struct Generator {
         code += "\(accessibility.sourceName)\(token.overriding ? "override " : "")var \(token.name): \(token.type) {"
         code.nest {
             code += "get {"
-            code.nest("return manager.getter(\"\(token.name)\", original: observed.map { o in return { () -> \(token.type) in o.\(token.name) } })")
+            code.nest("return cuckoo_manager.getter(\"\(token.name)\", original: observed.map { o in return { () -> \(token.type) in o.\(token.name) } })")
             code += "}"
             if token.readOnly == false {
                 code += "set {"
-                code.nest("manager.setter(\"\(token.name)\", value: newValue, original: observed != nil ? { self.observed?.\(token.name) = $0 } : nil)")
+                code.nest("cuckoo_manager.setter(\"\(token.name)\", value: newValue, original: observed != nil ? { self.observed?.\(token.name) = $0 } : nil)")
                 code += "}"
             }
         }
@@ -116,10 +116,10 @@ public struct Generator {
         var managerCall: String
         let tryIfThrowing: String
         if token.isThrowing {
-            managerCall = "try manager.callThrows(\"\(token.fullyQualifiedName)\""
+            managerCall = "try cuckoo_manager.callThrows(\"\(token.fullyQualifiedName)\""
             tryIfThrowing = "try "
         } else {
-            managerCall = "manager.call(\"\(token.fullyQualifiedName)\""
+            managerCall = "cuckoo_manager.call(\"\(token.fullyQualifiedName)\""
             tryIfThrowing = ""
         }
         managerCall += ", parameters: (\(token.parameters.map { $0.name }.joined(separator: ", ")))"
@@ -130,8 +130,7 @@ public struct Generator {
                     return $1.name
                 }
             }.joined(separator: ", ")
-        
-        
+
         if let protocolMethod = token as? ProtocolMethod {
             managerCall += ", original: observed.map { o in return { (\(parametersSignatureWithoutNames))\(token.returnSignature) in \(tryIfThrowing)o.\(token.rawName)" + (protocolMethod.isOptional ? "?" : "") + "(\(methodCall)) } })"
         } else {
@@ -166,10 +165,10 @@ public struct Generator {
         
         code += "\(token.accessibility.sourceName)struct \(stubbingProxyName(of: token.name)): Cuckoo.StubbingProxy {"
         code.nest {
-            code += "private let manager: Cuckoo.MockManager"
+            code += "private let cuckoo_manager: Cuckoo.MockManager"
             code += ""
-            code += "\(token.accessibility.sourceName)init(manager: Cuckoo.MockManager) {"
-            code.nest("self.manager = manager")
+            code += "\(token.accessibility.sourceName)init(cuckoo_manager: Cuckoo.MockManager) {"
+            code.nest("self.cuckoo_manager = cuckoo_manager")
             code += "}"
             token.children.forEach { generateStubbing(for: $0) }
         }
@@ -183,7 +182,7 @@ public struct Generator {
         
         code += ""
         code += "var \(token.name): \(propertyType)<\(genericSafeType(from: token.type))> {"
-        code.nest("return \(propertyType)(manager: manager, name: \"\(token.name)\")")
+        code.nest("return \(propertyType)(cuckoo_manager: cuckoo_manager, name: \"\(token.name)\")")
         code += "}"
     }
     
@@ -224,7 +223,7 @@ public struct Generator {
             code.nest(parameterMatchers(for: token.parameters))
             matchers = "matchers"
         }
-        code.nest("return \(stubFunction)(stub: manager.createStub(\"\(token.fullyQualifiedName)\", parameterMatchers: \(matchers)))")
+        code.nest("return \(stubFunction)(stub: cuckoo_manager.createStub(\"\(token.fullyQualifiedName)\", parameterMatchers: \(matchers)))")
         code += "}"
     }
     
@@ -246,13 +245,13 @@ public struct Generator {
         
         code += "\(token.accessibility.sourceName)struct \(verificationProxyName(of: token.name)): Cuckoo.VerificationProxy {"
         code.nest {
-            code += "private let manager: Cuckoo.MockManager"
+            code += "private let cuckoo_manager: Cuckoo.MockManager"
             code += "private let callMatcher: Cuckoo.CallMatcher"
             code += "private let sourceLocation: Cuckoo.SourceLocation"
             code += ""
-            code += "\(token.accessibility.sourceName)init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {"
+            code += "\(token.accessibility.sourceName)init(cuckoo_manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {"
             code.nest {
-                code += "self.manager = manager"
+                code += "self.cuckoo_manager = cuckoo_manager"
                 code += "self.callMatcher = callMatcher"
                 code += "self.sourceLocation = sourceLocation"
             }
@@ -269,7 +268,7 @@ public struct Generator {
         
         code += ""
         code += "var \(token.name): \(propertyType)<\(genericSafeType(from: token.type))> {"
-        code.nest("return \(propertyType)(manager: manager, name: \"\(token.name)\", callMatcher: callMatcher, sourceLocation: sourceLocation)")
+        code.nest("return \(propertyType)(cuckoo_manager: cuckoo_manager, name: \"\(token.name)\", callMatcher: callMatcher, sourceLocation: sourceLocation)")
         code += "}"
     }
     
@@ -288,7 +287,7 @@ public struct Generator {
             code.nest(parameterMatchers(for: token.parameters))
             matchers = "matchers"
         }
-        code.nest("return manager.verify(\"\(token.fullyQualifiedName)\", callMatcher: callMatcher, parameterMatchers: \(matchers), sourceLocation: sourceLocation)")
+        code.nest("return cuckoo_manager.verify(\"\(token.fullyQualifiedName)\", callMatcher: callMatcher, parameterMatchers: \(matchers), sourceLocation: sourceLocation)")
         code += "}"
     }
     

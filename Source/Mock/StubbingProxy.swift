@@ -7,5 +7,5 @@
 //
 
 public protocol StubbingProxy {
-    init(manager: MockManager)
+    init(cuckoo_manager: MockManager)
 }
