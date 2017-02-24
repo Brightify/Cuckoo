@@ -525,6 +525,7 @@
 			inputPaths = (
 				"$(SRCROOT)/Tests/Source/TestedProtocol.swift",
 				"$(SRCROOT)/Tests/Source/TestedClass.swift",
+				"$(SRCROOT)/Tests/Source/TestedSubclass.swift",
 			);
 			name = "Generate mocks";
 			outputPaths = (

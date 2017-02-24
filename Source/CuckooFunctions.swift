@@ -24,27 +24,27 @@ public func verify<M: Mock>(_ mock: M, _ callMatcher: CallMatcher = times(1), fi
 /// Clears all invocations and stubs of mocks.
 public func reset<M: Mock>(_ mocks: M...) {
     mocks.forEach { mock in
-        mock.manager.reset()
+        mock.cuckoo_manager.reset()
     }
 }
 
 /// Clears all stubs of mocks.
 public func clearStubs<M: Mock>(_ mocks: M...) {
     mocks.forEach { mock in
-        mock.manager.clearStubs()
+        mock.cuckoo_manager.clearStubs()
     }
 }
 
 /// Clears all invocations of mocks.
 public func clearInvocations<M: Mock>(_ mocks: M...) {
     mocks.forEach { mock in
-        mock.manager.clearInvocations()
+        mock.cuckoo_manager.clearInvocations()
     }
 }
 
 /// Checks if there are no more uverified calls.
 public func verifyNoMoreInteractions<M: Mock>(_ mocks: M..., file: StaticString = #file, line: UInt = #line) {
     mocks.forEach { mock in
-        mock.manager.verifyNoMoreInteractions((file, line))
+        mock.cuckoo_manager.verifyNoMoreInteractions((file, line))
     }
 }
