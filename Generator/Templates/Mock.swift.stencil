@@ -1,23 +1,20 @@
-{% for token in tokens %}
-{# {{ token.type }} {{ token }} {{ token.name }} #}
-{% if token.isAccessible %}
-// {{ token }}
-class Mock{{ token.name }}: {{ token.name }}, Cuckoo.Mock {
-    typealias MocksType = {{ token.name }}
-    typealias Stubbing = __StubbingProxy_{{ token.name }}
-    typealias Verification = __VerificationProxy_{{ token.name }}
+{% for container in containers %}
+class Mock{{ container.name }}: {{ container.name }}, Cuckoo.Mock {
+    typealias MocksType = {{ container.name }}
+    typealias Stubbing = __StubbingProxy_{{ container.name }}
+    typealias Verification = __VerificationProxy_{{ container.name }}
     let cuckoo_manager = Cuckoo.MockManager()
 
-    private var observed: {{ token.name }}?
+    private var observed: {{ container.name }}?
 
-    func spy(on victim: {{ token.name }}) -> Self {
+    func spy(on victim: {{ container.name }}) -> Self {
         observed = victim
         return self
     }
 
-    {% for property in token.properties %}
+    {% for property in container.properties %}
     // {{property}}
-    {{ property.accessibility }}{% if token.@type == "ClassDeclaration" %} override{% endif %} var {{ property.name }}: {{ property.type }} {
+    {{ property.accessibility }}{% if container.@type == "ClassDeclaration" %} override{% endif %} var {{ property.name }}: {{ property.type }} {
         get {
             return cuckoo_manager.getter("{{ property.name }}", original: observed.map { o in return { () -> {{ property.type }} in o.{{ property.name }} }})
         }
@@ -29,16 +26,16 @@ class Mock{{ token.name }}: {{ token.name }}, Cuckoo.Mock {
     }
     {% endfor %}
 
-    {% for initializer in token.initializers %}
-    {{ initializer.accessibility }}{% if token.@type == "ClassDeclaration" %} override{% endif %}{% if initializer.@type == "ProtocolMethod" %} required{%endif%} init({{initializer.parameterSignature}}) {
-        {% if token.@type == "ClassDeclaration" %}
+    {% for initializer in container.initializers %}
+    {{ initializer.accessibility }}{% if container.@type == "ClassDeclaration" %} override{% endif %}{% if initializer.@type == "ProtocolMethod" %} required{%endif%} init({{initializer.parameterSignature}}) {
+        {% if container.@type == "ClassDeclaration" %}
         super.init({{initializer.call}})
         {% endif %}
     }
     {% endfor %}
 
-    {% for method in token.methods %}
-    {{ method.accessibility }}{% if token.@type == "ClassDeclaration" %} override{% endif %} func {{ method.name }}({{ method.parameterSignature }}) {{ method.returnSignature }} {
+    {% for method in container.methods %}
+    {{ method.accessibility }}{% if container.@type == "ClassDeclaration" %} override{% endif %} func {{ method.name }}({{ method.parameterSignature }}) {{ method.returnSignature }} {
         {% if method.isThrowing %}
         return try cuckoo_manager.callThrows("{{method.fullyQualifiedName}}",
             parameters: ({{method.parameterNames}}),
@@ -58,5 +55,5 @@ class Mock{{ token.name }}: {{ token.name }}, Cuckoo.Mock {
 }
 
 {% include "NopImplStub.swift.stencil" %}
-{% endif %}
+
 {% endfor %}

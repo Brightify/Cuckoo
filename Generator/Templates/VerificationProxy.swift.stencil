@@ -1,4 +1,4 @@
-struct __VerificationProxy_{{ token.name }}: Cuckoo.VerificationProxy {
+struct __VerificationProxy_{{ container.name }}: Cuckoo.VerificationProxy {
     private let cuckoo_manager: Cuckoo.MockManager
     private let callMatcher: Cuckoo.CallMatcher
     private let sourceLocation: Cuckoo.SourceLocation
@@ -9,13 +9,13 @@ struct __VerificationProxy_{{ token.name }}: Cuckoo.VerificationProxy {
         self.sourceLocation = sourceLocation
     }
 
-    {% for property in token.properties %}
+    {% for property in container.properties %}
     var {{property.name}}: Cuckoo.Verify{% if property.isReadOnly %}ReadOnly{%endif%}Property<{{property.type|genericSafe}}> {
         return .init(manager: cuckoo_manager, name: "{{property.name}}", callMatcher: callMatcher, sourceLocation: sourceLocation)
     }
     {% endfor %}
 
-    {% for method in token.methods %}
+    {% for method in container.methods %}
     @discardableResult
     func {{method.name}}{{method.parameters|matchableGenericNames}}({{method.parameters|matchableParameterSignature}}) -> Cuckoo.__DoNotUse<{{method.returnType|genericSafe}}>{{method.parameters|matchableGenericWhere}} {
         {{method.parameters|parameterMatchers}}
