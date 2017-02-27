@@ -155,13 +155,13 @@ class ProtocolTest: XCTestCase {
         verify(mock).withLabelAndUnderscore(labelA: anyString(), anyString())
     }
 
-    func testWithImpliclyUnwrappedOptional() {
+    func testWithImplicitlyUnwrappedOptional() {
         stub(mock) { mock in
-            when(mock.withImpliclyUnwrappedOptional(i: anyInt())).thenReturn("test")
+            when(mock.withImplicitlyUnwrappedOptional(i: anyInt())).thenReturn("test")
         }
 
-        XCTAssertEqual(mock.withImpliclyUnwrappedOptional(i: 5), "test")
-        verify(mock).withImpliclyUnwrappedOptional(i: equal(to: 5))
+        XCTAssertEqual(mock.withImplicitlyUnwrappedOptional(i: 5), "test")
+        verify(mock).withImplicitlyUnwrappedOptional(i: equal(to: 5))
     }
     
     private enum TestError: Error {

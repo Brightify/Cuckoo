@@ -49,7 +49,7 @@ class {{ container.mockName }}: {{ container.name }}, {% if container.isImplemen
 
     {% for method in container.methods %}
     // {{method}}
-    {{ method.accessibility }}{% if container.isImplementation %} override{% endif %} func {{ method.name }}({{ method.parameterSignature }}) {{ method.returnSignature }} {
+    {{ method.accessibility }}{% if container.isImplementation and method.isOverriding %} override{% endif %} func {{ method.name }}({{ method.parameterSignature }}) {{ method.returnSignature }} {
         {{ method.parameters|openNestedClosure:method.isThrowing }}
             return{% if method.isThrowing %} try{% endif %} cuckoo_manager.call{% if method.isThrowing %}Throws{% endif %}("{{method.fullyQualifiedName}}",
                 parameters: ({{method.parameterNames}}),

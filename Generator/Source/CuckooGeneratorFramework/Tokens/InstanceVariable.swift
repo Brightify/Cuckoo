@@ -32,7 +32,7 @@ public struct InstanceVariable: Token {
         return [
             "name": name,
             "type": type,
-            "accesibility": accessibility.sourceName,
+            "accessibility": accessibility.sourceName,
             "isReadOnly": readOnly,
             "stubType": readOnly ?
                 (overriding ? "ClassToBeStubbedReadOnlyProperty" : "ProtocolToBeStubbedReadOnlyProperty") :

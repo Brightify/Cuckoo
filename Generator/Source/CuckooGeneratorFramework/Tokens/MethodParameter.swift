@@ -6,7 +6,7 @@
 //  Copyright © 2016 Brightify. All rights reserved.
 //
 
-public struct MethodParameter: Token {
+public struct MethodParameter: Token, Equatable {
     public let label: String?
     public let name: String
     public let type: String
@@ -27,7 +27,7 @@ public struct MethodParameter: Token {
 
     public func isEqual(to other: Token) -> Bool {
         guard let other = other as? MethodParameter else { return false }
-        return self.name == other.name
+        return self.name == other.name && self.type == other.type && self.label == other.label
     }
     
     public var isClosure: Bool {        
@@ -49,4 +49,8 @@ public struct MethodParameter: Token {
             "isEscaping": isEscaping
         ]
     }
+}
+
+public func ==(lhs: MethodParameter, rhs: MethodParameter) -> Bool {
+    return lhs.isEqual(to: rhs)
 }

@@ -86,4 +86,41 @@ class StubbingTest: XCTestCase {
 
         XCTAssertEqual(mock.subclassMethod(), 1)
     }
+
+    func testSubclassMethodWithStringParameter() {
+        let mock = MockTestedSubclass()
+
+        XCTAssertNotNil(mock)
+
+        stub(mock) { mock in
+            when(mock.methodWithParameter(anyString())).thenReturn("t")
+        }
+
+        XCTAssertEqual(mock.methodWithParameter("a"), "t")
+    }
+
+    func testSubclassMethodWithIntParameter() {
+        let mock = MockTestedSubclass()
+
+        XCTAssertNotNil(mock)
+
+        stub(mock) { mock in
+            when(mock.methodWithParameter(anyInt())).thenReturn("t1")
+        }
+
+        XCTAssertEqual(mock.methodWithParameter(1), "t1")
+    }
+
+    func testSubclassProtocolExtensionMethod() {
+        /// Test dynamic dispatching
+        let mock = MockTestedSubclass()
+
+        XCTAssertNotNil(mock)
+
+        stub(mock) { mock in
+            when(mock.protocolMethod()).thenReturn("a1")
+        }
+
+        XCTAssertEqual(mock.protocolMethod(), "a1")
+    }
 }

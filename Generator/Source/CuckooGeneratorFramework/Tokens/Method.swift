@@ -63,7 +63,7 @@ public extension Method {
 
     public func isEqual(to other: Token) -> Bool {
         guard let other = other as? Method else { return false }
-        return self.name == other.name
+        return self.name == other.name && self.parameters == other.parameters
     }
 
     public func serialize() -> [String : Any] {
@@ -102,6 +102,7 @@ public extension Method {
             "isThrowing": isThrowing,
             "fullyQualifiedName": fullyQualifiedName,
             "call": call,
+            "isOverriding": isOverriding,
             "parameterSignature": parameters.map { "\($0.labelAndName): \($0.type)" }.joined(separator: ", "),
             "parameterSignatureWithoutNames": parameters.map { "\($0.name): \($0.type)" }.joined(separator: ", "),
             "stubFunction": stubFunction,

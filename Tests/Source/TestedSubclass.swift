@@ -27,7 +27,7 @@ class TestedSubclass: TestedClass, TestedProtocol {
         self.init(notRequired: convenient)
     }
 
-    func withImpliclyUnwrappedOptional(i: Int!) -> String {
+    func withImplicitlyUnwrappedOptional(i: Int!) -> String {
         return ""
     }
 
@@ -48,11 +48,11 @@ class TestedSubclass: TestedClass, TestedProtocol {
         return 1
     }
     
-    func withClosureAndParam(_ a: String, closure: ((String)) -> Int) -> Int {
+    func withClosureAndParam(_ a: String, closure: (String) -> Int) -> Int {
         return 0
     }
     
-    func withMultClosures(closure: ((String)) -> Int, closureB: ((String)) -> Int, closureC: ((String)) -> Int) -> Int {
+    func withMultClosures(closure: ((String)) -> Int, closureB: (String) -> Int, closureC: (String) -> Int) -> Int {
         return 0
     }
     
@@ -70,5 +70,13 @@ class TestedSubclass: TestedClass, TestedProtocol {
     
     func withThrowingOptionalClosureThrows(closure: (((String)) throws -> String?)?) throws -> String? {
         return nil
+    }
+
+    func methodWithParameter(_ param: String) -> String {
+        return "b"
+    }
+
+    func methodWithParameter(_ param: Int) -> String {
+        return "c"
     }
 }
