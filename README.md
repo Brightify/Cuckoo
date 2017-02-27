@@ -417,6 +417,10 @@ Default value is `GeneratedMocks.swift`.
 
 A comma separated list of frameworks that should be imported as @testable in the mock files.
 
+##### `--exclude` (string)
+
+A comma separated list of classes and protocols that should be skipped during mock generation.  
+
 ##### `--no-header`
 
 Do not generate file headers.
