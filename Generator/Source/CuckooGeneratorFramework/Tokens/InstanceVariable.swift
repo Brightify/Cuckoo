@@ -16,7 +16,10 @@ public struct InstanceVariable: Token {
     public var overriding: Bool
     
     public var readOnly: Bool {
-        return setterAccessibility == nil
+        guard let setterAccessibility = setterAccessibility else {
+            return false
+        }
+        return !setterAccessibility.isAccessible
     }
 
     public func isEqual(to other: Token) -> Bool {
