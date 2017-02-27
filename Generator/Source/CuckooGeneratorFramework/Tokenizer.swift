@@ -193,9 +193,9 @@ public struct Tokenizer {
 
     private func tokenize(parameterLabel: String?, parameter: SourceKitRepresentable) -> MethodParameter? {
         guard let dictionary = parameter as? [String: SourceKitRepresentable] else { return nil }
-
-        let name = dictionary[Key.Name.rawValue] as? String ?? "name not set"
-        let kind = dictionary[Key.Kind.rawValue] as? String ?? "unknown type"
+        
+        let name = dictionary[Key.Name.rawValue] as? String ?? Tokenizer.nameNotSet
+        let kind = dictionary[Key.Kind.rawValue] as? String ?? Tokenizer.unknownType
         let range = extractRange(from: dictionary, offset: .Offset, length: .Length)
         let nameRange = extractRange(from: dictionary, offset: .NameOffset, length: .NameLength)
         let type = dictionary[Key.TypeName.rawValue] as? String
