@@ -7,6 +7,7 @@
 //
 
 class TestedClass {
+    private(set) var privateSet: Int = 0
     
     let constant: Float = 0.0
     
