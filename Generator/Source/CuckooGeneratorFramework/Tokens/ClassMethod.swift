@@ -15,4 +15,8 @@ public struct ClassMethod: Method {
     public let parameters: [MethodParameter]
 
     public let bodyRange: CountableRange<Int>
+
+    public var isOptional: Bool {
+        return false
+    }
 }

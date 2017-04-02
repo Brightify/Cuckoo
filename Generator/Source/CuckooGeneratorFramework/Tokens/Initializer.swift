@@ -15,4 +15,8 @@ public struct Initializer: Method {
     public let parameters: [MethodParameter]
     
     public let required: Bool
+
+    public var isOptional: Bool {
+        return false
+    }
 }

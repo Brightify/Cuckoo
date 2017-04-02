@@ -13,6 +13,7 @@ public protocol Method: Token {
     var range: CountableRange<Int> { get }
     var nameRange: CountableRange<Int> { get }
     var parameters: [MethodParameter] { get }
+    var isOptional: Bool { get }
 }
 
 public extension Method {
@@ -94,6 +95,7 @@ public extension Method {
             "parameterSignatureWithoutNames": parameters.map { "\($0.name): \($0.type)" }.joined(separator: ", "),
             "stubFunction": stubFunction,
             "inputTypes": parameters.map { $0.typeWithoutAttributes }.joined(separator: ", "),
+            "isOptional": isOptional
         ]
     }
 }

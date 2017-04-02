@@ -16,6 +16,7 @@ public protocol ContainerToken: Token {
     var children: [Token] { get }
     var implementation: Bool { get }
     var inheritedTypes: [InheritanceDeclaration] { get }
+    var attributes: [Attribute] { get }
 }
 
 extension ContainerToken {

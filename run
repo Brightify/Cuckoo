@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 SCRIPT_PATH="$(dirname "$0")"
-FILE_NAME="cuckoo_generator.app"
+FILE_NAME="cuckoo_generator"
 FILE_PATH="$SCRIPT_PATH/Generator/$FILE_NAME"
 if [[ "$1" = "--clean" || ! -e "$FILE_PATH" ]]; then
     CURRENT_PWD="$PWD"
@@ -25,4 +25,4 @@ do
 	INPUT_FILES+=" $(printf '%q' "${!INPUT_FILE}")"
 done
 
-echo $INPUT_FILES | xargs "$FILE_PATH/Contents/MacOS/cuckoo_generator"
+echo $INPUT_FILES | xargs "$FILE_PATH"

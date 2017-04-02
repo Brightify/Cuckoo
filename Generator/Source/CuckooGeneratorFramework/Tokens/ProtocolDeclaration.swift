@@ -16,6 +16,7 @@ public struct ProtocolDeclaration: ContainerToken {
     public let children: [Token]
     public let implementation: Bool = false
     public let inheritedTypes: [InheritanceDeclaration]
+    public let attributes: [Attribute] = []
 
     public func replace(children tokens: [Token]) -> ProtocolDeclaration {
         return ProtocolDeclaration(name: self.name,

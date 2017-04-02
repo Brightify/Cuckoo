@@ -10,7 +10,7 @@ before_script:
 
 script:
     - cd Generator
-    - bash run_tests.sh
+    - make test
     - cd ..
     - xcodebuild -workspace 'Cuckoo.xcworkspace' -scheme 'Cuckoo+Run' clean test
     - pod lib lint
