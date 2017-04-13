@@ -20,15 +20,15 @@
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "AA22B945-78BB-4BFD-8BCA-01658017BF31",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
     "1B9E61546D4F9511D800AE955CDC56CD3D276E5C" : "Cuckoo\/Generator\/Packages\/Yams-0.1.4\/",
-    "D23C0CEAADB77074FDA4459000068A7940EB7AD0" : "Cuckoo\/Generator\/Packages\/Commandant-0.11.3\/",
+    "D23C0CEAADB77074FDA4459000068A7940EB7AD0" : "Cuckoo\/Generator\/Dependencies\/SourceKitten\/Carthage\/Checkouts\/Commandant\/",
     "E084C86B03F81D63323C9E7510697EA528A758C7" : "Cuckoo\/Generator\/Dependencies\/SourceKitten\/Carthage\/Checkouts\/xcconfigs\/",
     "E3472B155FC961329A2EA7BFAD3AFAE6EFBD63E5" : "Cuckoo\/Generator\/Packages\/PathKit-0.8.0\/",
     "E111B14063EC98ABE518A93E1C4498F4167C2DEE" : "Cuckoo\/Generator\/Dependencies\/SourceKitten\/Carthage\/Checkouts\/YamlSwift\/",
     "64ACE19A884E8C30BC53E2E0CE86010ECED70B5A" : "Cuckoo\/Generator\/Dependencies\/FileKit\/",
     "95438028B10BBB846574013D29F154A00556A9D1" : "Cuckoo\/Generator\/Dependencies\/SourceKitten\/Carthage\/Checkouts\/Commandant\/Carthage\/Checkouts\/Quick\/Externals\/Nimble\/",
-    "EB2210CFD48672E403BED699D5D7F01B844069CF" : "Cuckoo\/Generator\/Packages\/SWXMLHash-3.0.3\/",
+    "EB2210CFD48672E403BED699D5D7F01B844069CF" : "Cuckoo\/Generator\/Dependencies\/SourceKitten\/Carthage\/Checkouts\/SWXMLHash\/",
     "D0725CAC6FF2D66F2C83C2C48DC12106D42DAA64" : "Cuckoo\/Generator\/Dependencies\/SourceKitten\/Carthage\/Checkouts\/Commandant\/Carthage\/Checkouts\/Quick\/",
-    "FD7DA18210A2C280E9107E37D7344F243FEE5F75" : "Cuckoo\/Generator\/Packages\/SourceKitten-0.17.0\/",
+    "FD7DA18210A2C280E9107E37D7344F243FEE5F75" : "Cuckoo\/Generator\/Dependencies\/SourceKitten\/",
     "956D2B21DD155C49504BB67697A67F7C5351A353" : "Cuckoo\/Generator\/Dependencies\/SourceKitten\/Carthage\/Checkouts\/Commandant\/Carthage\/Checkouts\/Result\/",
     "509FD5E949BB67AB92770169324D45AB1917F796" : "Cuckoo\/"
   },
