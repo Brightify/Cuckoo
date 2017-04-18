@@ -37,6 +37,12 @@
 				<key>BundleOverwriteAction</key>
 				<string></string>
 				<key>RootRelativeBundlePath</key>
+				<string>/usr/local/Frameworks/CuckooGeneratorFramework.framework/Versions/A/Frameworks/Yams.framework</string>
+			</dict>
+			<dict>
+				<key>BundleOverwriteAction</key>
+				<string></string>
+				<key>RootRelativeBundlePath</key>
 				<string>/usr/local/Frameworks/CuckooGeneratorFramework.framework/Versions/A/Frameworks/SourceKittenFramework.framework</string>
 			</dict>
 		</array>
