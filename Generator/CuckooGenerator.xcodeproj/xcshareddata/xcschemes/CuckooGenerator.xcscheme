@@ -70,10 +70,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8E1D76201B258FEE0022C013"
-               BuildableName = "Yaml.framework"
-               BlueprintName = "Yaml OSX"
-               ReferencedContainer = "container:Dependencies/SourceKitten/Carthage/Checkouts/YamlSwift/Yaml.xcodeproj">
+               BlueprintIdentifier = "OBJ_45"
+               BuildableName = "Yams.framework"
+               BlueprintName = "Yams"
+               ReferencedContainer = "container:Dependencies/SourceKitten/Carthage/Checkouts/Yams/Yams.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
