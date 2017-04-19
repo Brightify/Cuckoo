@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.9.0
+
+* Rewritten Generator to use Stencil
+* Use Swift PM for generator binary (results in faster builds)
+* This release works with Swift 3.1
+
 ## 0.8.4
 
 * Added support for inheritance mocking.  
