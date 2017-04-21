@@ -86,4 +86,20 @@ class StubbingTest: XCTestCase {
 
         XCTAssertEqual(mock.subclassMethod(), 1)
     }
+
+    func testSubProtocolMethod() {
+        let mock = MockTestedSubProtocol()
+
+        XCTAssertNotNil(mock)
+
+        let invocationExpectation = expectation(description: "function is called")
+        stub(mock) { mock in
+            when(mock.noReturnSub()).then {
+                invocationExpectation.fulfill()
+            }
+        }
+
+        mock.noReturnSub()
+        waitForExpectations(timeout: 0.1, handler: nil)
+    }
 }
