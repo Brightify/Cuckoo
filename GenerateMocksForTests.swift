@@ -33,6 +33,7 @@ let generatorArguments = [
     "\(projectDir)/Tests/Source/TestedProtocol.swift",
     "\(projectDir)/Tests/Source/TestedClass.swift",
     "\(projectDir)/Tests/Source/TestedSubclass.swift",
+    "\(projectDir)/Tests/Source/TestedSubProtocol.swift",
     "\(projectDir)/Tests/Source/ExcludedTestClass.swift",
 ]
 
