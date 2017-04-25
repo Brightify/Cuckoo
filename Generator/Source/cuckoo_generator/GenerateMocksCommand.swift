@@ -91,15 +91,32 @@ public struct GenerateMocksCommand: CommandProtocol {
         }
         
         public static func evaluate(_ m: CommandMode) -> Result<Options, CommandantError<CuckooGeneratorError>> {
+            let output: Result<String, CommandantError<ClientError>> = m <| Option(key: "output", defaultValue: "GeneratedMocks.swift", usage: "Where to put the generated mocks.\nIf a path to a directory is supplied, each input file will have a respective output file with mocks.\nIf a path to a Swift file is supplied, all mocks will be in a single file.\nDefault value is `GeneratedMocks.swift`.")
+
+            let testable: Result<String, CommandantError<ClientError>> = m <| Option(key: "testable", defaultValue: "", usage: "A comma separated list of frameworks that should be imported as @testable in the mock files.")
+
+            let noHeader: Result<Bool, CommandantError<ClientError>> = m <| Option(key: "no-header", defaultValue: false, usage: "Do not generate file headers.")
+
+            let noTimestamp: Result<Bool, CommandantError<ClientError>> = m <| Option(key: "no-timestamp", defaultValue: false, usage: "Do not generate timestamp.")
+
+            let noInheritance: Result<Bool, CommandantError<ClientError>> = m <| Option(key: "no-inheritance", defaultValue: false, usage: "Do not generate stubs/mock for super class/protocol even if available.")
+
+            let filePrefix: Result<String, CommandantError<ClientError>> = m <| Option(key: "file-prefix", defaultValue: "", usage: "Names of generated files in directory will start with this prefix. Only works when output path is directory.")
+
+            let noClassMocking: Result<Bool, CommandantError<ClientError>> = m <| Option(key: "no-class-mocking", defaultValue: false, usage: "Do not generate mocks for classes.")
+
+            let input: Result<[String], CommandantError<ClientError>> = m <| Argument(usage: "Files to parse and generate mocks for.")
+
             return curry(Options.init)
-                <*> m <| Option(key: "output", defaultValue: "GeneratedMocks.swift", usage: "Where to put the generated mocks.\nIf a path to a directory is supplied, each input file will have a respective output file with mocks.\nIf a path to a Swift file is supplied, all mocks will be in a single file.\nDefault value is `GeneratedMocks.swift`.")
-                <*> m <| Option(key: "testable", defaultValue: "", usage: "A comma separated list of frameworks that should be imported as @testable in the mock files.")
-                <*> m <| Option(key: "no-header", defaultValue: false, usage: "Do not generate file headers.")
-                <*> m <| Option(key: "no-timestamp", defaultValue: false, usage: "Do not generate timestamp.")
-                <*> m <| Option(key: "no-inheritance", defaultValue: false, usage: "Do not generate stubs/mock for super class/protocol even if available.")
-                <*> m <| Option(key: "file-prefix", defaultValue: "", usage: "Names of generated files in directory will start with this prefix. Only works when output path is directory.")
-                <*> m <| Option(key: "no-class-mocking", defaultValue: false, usage: "Do not generate mocks for classes.")
-                <*> m <| Argument(usage: "Files to parse and generate mocks for.")
+                <*> output
+                <*> testable
+                <*> noHeader
+                <*> noTimestamp
+                <*> noInheritance
+                <*> filePrefix
+                <*> noClassMocking
+                <*> input
+
         }
     }
 }

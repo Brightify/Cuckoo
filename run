@@ -4,10 +4,9 @@ SCRIPT_PATH="$(dirname "$0")"
 FILE_NAME="cuckoo_generator"
 FILE_PATH="$SCRIPT_PATH/Generator/.build/debug/$FILE_NAME"
 if [[ "$1" = "--clean" || ! -e "$FILE_PATH" ]]; then
-    CURRENT_PWD="$PWD"
-	cd "$SCRIPT_PATH"
+    pushd "$SCRIPT_PATH"
 	./build_generator
-	cd "$CURRENT_PWD"
+	popd
 fi
 
 if [[ "$1" = "--clean" ]]; then
