@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.9.1
+
+* Fixed "too complex to resolve in reasonable time" error in generator
+* Fixed directory names for case sensitive file systems [PR #114](https://github.com/Brightify/Cuckoo/pull/115) - (thanks to sundance2000 for the fix)
+* Moved repository from `SwiftKit` to `Brightify` organization on GitHub.
+
 ## 0.9.0
 
 * Rewritten Generator to use Stencil

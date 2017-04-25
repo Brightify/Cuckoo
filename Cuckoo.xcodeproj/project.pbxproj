@@ -70,96 +70,96 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		182B68DC1EAFAB52007CC668 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC9786B31D70418600C9E64E /* CuckooGenerator.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = OBJ_202;
+			remoteInfo = Commandant;
+		};
+		182B68DE1EAFAB52007CC668 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC9786B31D70418600C9E64E /* CuckooGenerator.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = OBJ_203;
+			remoteInfo = SWXMLHash;
+		};
+		182B68E01EAFAB52007CC668 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC9786B31D70418600C9E64E /* CuckooGenerator.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = OBJ_204;
+			remoteInfo = CYaml;
+		};
+		182B68E21EAFAB52007CC668 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC9786B31D70418600C9E64E /* CuckooGenerator.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = OBJ_205;
+			remoteInfo = Yams;
+		};
+		182B68E41EAFAB52007CC668 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC9786B31D70418600C9E64E /* CuckooGenerator.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = OBJ_206;
+			remoteInfo = sourcekitten;
+		};
+		182B68E61EAFAB52007CC668 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC9786B31D70418600C9E64E /* CuckooGenerator.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = OBJ_207;
+			remoteInfo = SourceKittenFramework;
+		};
+		182B68E81EAFAB52007CC668 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC9786B31D70418600C9E64E /* CuckooGenerator.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = OBJ_208;
+			remoteInfo = FileKit;
+		};
+		182B68EA1EAFAB52007CC668 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC9786B31D70418600C9E64E /* CuckooGenerator.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = OBJ_209;
+			remoteInfo = Spectre;
+		};
+		182B68EC1EAFAB52007CC668 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC9786B31D70418600C9E64E /* CuckooGenerator.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = OBJ_210;
+			remoteInfo = PathKit;
+		};
+		182B68EE1EAFAB52007CC668 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC9786B31D70418600C9E64E /* CuckooGenerator.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = OBJ_211;
+			remoteInfo = Stencil;
+		};
+		182B68F01EAFAB52007CC668 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC9786B31D70418600C9E64E /* CuckooGenerator.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = OBJ_212;
+			remoteInfo = cuckoo_generator;
+		};
+		182B68F21EAFAB52007CC668 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC9786B31D70418600C9E64E /* CuckooGenerator.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = OBJ_214;
+			remoteInfo = TemplateEncoder;
+		};
 		183D04071C4691C600EBAEF3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 183D03F21C4691C600EBAEF3 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 183D03FA1C4691C600EBAEF3;
 			remoteInfo = Mockery;
-		};
-		184B7B691E5F4F0C00294173 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DC9786B31D70418600C9E64E /* CuckooGenerator.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = OBJ_188;
-			remoteInfo = sourcekitten;
-		};
-		184B7B6B1E5F4F0C00294173 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DC9786B31D70418600C9E64E /* CuckooGenerator.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = OBJ_189;
-			remoteInfo = SourceKittenFramework;
-		};
-		184B7B6D1E5F4F0C00294173 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DC9786B31D70418600C9E64E /* CuckooGenerator.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = OBJ_190;
-			remoteInfo = FileKit;
-		};
-		184B7B6F1E5F4F0C00294173 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DC9786B31D70418600C9E64E /* CuckooGenerator.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = OBJ_191;
-			remoteInfo = Spectre;
-		};
-		184B7B711E5F4F0C00294173 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DC9786B31D70418600C9E64E /* CuckooGenerator.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = OBJ_192;
-			remoteInfo = PathKit;
-		};
-		184B7B731E5F4F0C00294173 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DC9786B31D70418600C9E64E /* CuckooGenerator.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = OBJ_193;
-			remoteInfo = Stencil;
-		};
-		184B7B751E5F4F0C00294173 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DC9786B31D70418600C9E64E /* CuckooGenerator.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = OBJ_194;
-			remoteInfo = cuckoo_generator;
-		};
-		184B7C0A1E5F588700294173 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DC9786B31D70418600C9E64E /* CuckooGenerator.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = OBJ_195;
-			remoteInfo = Spectre;
-		};
-		184B7C0C1E5F588700294173 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DC9786B31D70418600C9E64E /* CuckooGenerator.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = OBJ_196;
-			remoteInfo = PathKit;
-		};
-		184B7C0E1E5F588700294173 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DC9786B31D70418600C9E64E /* CuckooGenerator.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = OBJ_197;
-			remoteInfo = Stencil;
-		};
-		184B7C101E5F588700294173 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DC9786B31D70418600C9E64E /* CuckooGenerator.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = OBJ_198;
-			remoteInfo = cuckoo_generator;
-		};
-		184E1CD71E914F2F001F6396 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DC9786B31D70418600C9E64E /* CuckooGenerator.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = OBJ_199;
-			remoteInfo = cuckoo_generator;
 		};
 		184E1CD91E914F2F001F6396 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -445,20 +445,20 @@
 		DC9786B41D70418600C9E64E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				184B7B6A1E5F4F0C00294173 /* Result.framework */,
-				184B7B6C1E5F4F0C00294173 /* Commandant.framework */,
-				184B7B6E1E5F4F0C00294173 /* SWXMLHash.framework */,
-				184B7B701E5F4F0C00294173 /* CYaml.framework */,
-				184B7B721E5F4F0C00294173 /* Yams.framework */,
-				184B7B741E5F4F0C00294173 /* sourcekitten */,
-				184B7B761E5F4F0C00294173 /* SourceKittenFramework.framework */,
-				184B7C0B1E5F588700294173 /* FileKit.framework */,
-				184B7C0D1E5F588700294173 /* Spectre.framework */,
-				184B7C0F1E5F588700294173 /* PathKit.framework */,
-				184B7C111E5F588700294173 /* Stencil.framework */,
-				184E1CD81E914F2F001F6396 /* cuckoo_generator */,
+				184E1CDA1E914F2F001F6396 /* Result.framework */,
+				182B68DD1EAFAB52007CC668 /* Commandant.framework */,
+				182B68DF1EAFAB52007CC668 /* SWXMLHash.framework */,
+				182B68E11EAFAB52007CC668 /* CYaml.framework */,
+				182B68E31EAFAB52007CC668 /* Yams.framework */,
+				182B68E51EAFAB52007CC668 /* sourcekitten */,
+				182B68E71EAFAB52007CC668 /* SourceKittenFramework.framework */,
+				182B68E91EAFAB52007CC668 /* FileKit.framework */,
+				182B68EB1EAFAB52007CC668 /* Spectre.framework */,
+				182B68ED1EAFAB52007CC668 /* PathKit.framework */,
+				182B68EF1EAFAB52007CC668 /* Stencil.framework */,
+				182B68F11EAFAB52007CC668 /* cuckoo_generator */,
 				DC9786BB1D70418600C9E64E /* CuckooGeneratorFramework.framework */,
-				184E1CDA1E914F2F001F6396 /* TemplateEncoder */,
+				182B68F31EAFAB52007CC668 /* TemplateEncoder */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -581,94 +581,94 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		184B7B6A1E5F4F0C00294173 /* Result.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Result.framework;
-			remoteRef = 184B7B691E5F4F0C00294173 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		184B7B6C1E5F4F0C00294173 /* Commandant.framework */ = {
+		182B68DD1EAFAB52007CC668 /* Commandant.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = Commandant.framework;
-			remoteRef = 184B7B6B1E5F4F0C00294173 /* PBXContainerItemProxy */;
+			remoteRef = 182B68DC1EAFAB52007CC668 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		184B7B6E1E5F4F0C00294173 /* SWXMLHash.framework */ = {
+		182B68DF1EAFAB52007CC668 /* SWXMLHash.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = SWXMLHash.framework;
-			remoteRef = 184B7B6D1E5F4F0C00294173 /* PBXContainerItemProxy */;
+			remoteRef = 182B68DE1EAFAB52007CC668 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		184B7B701E5F4F0C00294173 /* CYaml.framework */ = {
+		182B68E11EAFAB52007CC668 /* CYaml.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = CYaml.framework;
-			remoteRef = 184B7B6F1E5F4F0C00294173 /* PBXContainerItemProxy */;
+			remoteRef = 182B68E01EAFAB52007CC668 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		184B7B721E5F4F0C00294173 /* Yams.framework */ = {
+		182B68E31EAFAB52007CC668 /* Yams.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = Yams.framework;
-			remoteRef = 184B7B711E5F4F0C00294173 /* PBXContainerItemProxy */;
+			remoteRef = 182B68E21EAFAB52007CC668 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		184B7B741E5F4F0C00294173 /* sourcekitten */ = {
+		182B68E51EAFAB52007CC668 /* sourcekitten */ = {
 			isa = PBXReferenceProxy;
 			fileType = text;
 			path = sourcekitten;
-			remoteRef = 184B7B731E5F4F0C00294173 /* PBXContainerItemProxy */;
+			remoteRef = 182B68E41EAFAB52007CC668 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		184B7B761E5F4F0C00294173 /* SourceKittenFramework.framework */ = {
+		182B68E71EAFAB52007CC668 /* SourceKittenFramework.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = SourceKittenFramework.framework;
-			remoteRef = 184B7B751E5F4F0C00294173 /* PBXContainerItemProxy */;
+			remoteRef = 182B68E61EAFAB52007CC668 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		184B7C0B1E5F588700294173 /* FileKit.framework */ = {
+		182B68E91EAFAB52007CC668 /* FileKit.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = FileKit.framework;
-			remoteRef = 184B7C0A1E5F588700294173 /* PBXContainerItemProxy */;
+			remoteRef = 182B68E81EAFAB52007CC668 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		184B7C0D1E5F588700294173 /* Spectre.framework */ = {
+		182B68EB1EAFAB52007CC668 /* Spectre.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = Spectre.framework;
-			remoteRef = 184B7C0C1E5F588700294173 /* PBXContainerItemProxy */;
+			remoteRef = 182B68EA1EAFAB52007CC668 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		184B7C0F1E5F588700294173 /* PathKit.framework */ = {
+		182B68ED1EAFAB52007CC668 /* PathKit.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = PathKit.framework;
-			remoteRef = 184B7C0E1E5F588700294173 /* PBXContainerItemProxy */;
+			remoteRef = 182B68EC1EAFAB52007CC668 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		184B7C111E5F588700294173 /* Stencil.framework */ = {
+		182B68EF1EAFAB52007CC668 /* Stencil.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = Stencil.framework;
-			remoteRef = 184B7C101E5F588700294173 /* PBXContainerItemProxy */;
+			remoteRef = 182B68EE1EAFAB52007CC668 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		184E1CD81E914F2F001F6396 /* cuckoo_generator */ = {
+		182B68F11EAFAB52007CC668 /* cuckoo_generator */ = {
 			isa = PBXReferenceProxy;
 			fileType = text;
 			path = cuckoo_generator;
-			remoteRef = 184E1CD71E914F2F001F6396 /* PBXContainerItemProxy */;
+			remoteRef = 182B68F01EAFAB52007CC668 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		184E1CDA1E914F2F001F6396 /* TemplateEncoder */ = {
+		182B68F31EAFAB52007CC668 /* TemplateEncoder */ = {
 			isa = PBXReferenceProxy;
 			fileType = text;
 			path = TemplateEncoder;
+			remoteRef = 182B68F21EAFAB52007CC668 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		184E1CDA1E914F2F001F6396 /* Result.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Result.framework;
 			remoteRef = 184E1CD91E914F2F001F6396 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};

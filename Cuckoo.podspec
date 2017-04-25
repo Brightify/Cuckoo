@@ -1,17 +1,17 @@
 Pod::Spec.new do |s|
   s.name             = "Cuckoo"
-  s.version          = "0.9.0"
+  s.version          = "0.9.1"
   s.summary          = "Cuckoo - first boilerplate-free Swift mocking framework."
   s.description      = <<-DESC
                         Cuckoo is a mocking framework with an easy to use API (inspired by Mockito).
                         It generates mocks and some helper structures automatically to enable this functionality.
                        DESC
 
-  s.homepage         = "https://github.com/SwiftKit/Cuckoo"
+  s.homepage         = "https://github.com/Brightify/Cuckoo"
   s.license          = 'MIT'
   s.author           = { "Tadeas Kriz" => "tadeas@brightify.org", "Filip Dolnik" => "filip@brightify.org", "Adriaan (Arjan) Duijzer" => "arjan@nxtstep.nl" }
   s.source           = {
-      :git => "https://github.com/SwiftKit/Cuckoo.git",
+      :git => "https://github.com/Brightify/Cuckoo.git",
       :tag => s.version.to_s
   }
 
