@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.9.2
+
+* Fixed crash when source files were using non-ASCII characters [bug #126]
+* Added `--exclude` parameter to explicitly exclude some types from mocking [PR #112](https://github.com/Brightify/Cuckoo/pull/112) - (thanks to nxtstep for the feature)
+
 ## 0.9.1
 
 * Fixed "too complex to resolve in reasonable time" error in generator
