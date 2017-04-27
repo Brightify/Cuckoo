@@ -20,7 +20,7 @@
 
     {% for method in container.methods %}
     {{ method.accessibility }}{% if container.@type == "ClassDeclaration" %} override{% endif %} func {{ method.name }}({{ method.parameterSignature }}) {{ method.returnSignature }} {
-        return DefaultValueRegistry.defaultValue(for: ({{method.returnType}}).self)
+        return DefaultValueRegistry.defaultValue(for: {{method.returnType}}.self)
     }
     {% endfor %}
 }

@@ -45,7 +45,11 @@ public extension Method {
     
     var returnType: String {
         if let range = returnSignature.range(of: "->") {
-            return returnSignature.substring(from: range.upperBound).trimmed
+            var type = returnSignature.substring(from: range.upperBound).trimmed
+            while type.hasSuffix("?") {
+                type = "Optional<\(type.substring(to: type.index(before: type.endIndex)))>"
+            }
+            return type
         } else {
             return "Void"
         }

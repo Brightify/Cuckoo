@@ -170,3 +170,20 @@ public class PublicPublicTestedClass {
     public func withLabelAndUnderscore(labelA a: String, _ b: String) {
     }
 }
+
+class ClassWithInnerEnum {
+    enum InnerEnum {
+        case foo
+        case bar
+    }
+}
+
+class ClassUsingInnerEnum {
+    func doFoo() -> ClassWithInnerEnum.InnerEnum {
+        return .foo
+    }
+
+    func doFooOpt() -> ClassWithInnerEnum.InnerEnum? {
+        return .foo
+    }
+}
