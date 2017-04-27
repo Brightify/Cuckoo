@@ -708,13 +708,14 @@
 				"$(SRCROOT)/Tests/Source/TestedProtocol.swift",
 				"$(SRCROOT)/Tests/Source/TestedClass.swift",
 				"$(SRCROOT)/Tests/Source/TestedSubclass.swift",
+				"$(SRCROOT)/Tests/Source/TestedSubProtocol.swift",
 			);
 			name = "Generate mocks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "OUTPUT=\"$PROJECT_DIR/Tests/Generated/GeneratedMocks.swift\"\n# Use seperate variables for each file.\nINPUT_STUB=\"$PROJECT_DIR/Tests/Source/ClassForStubTesting.swift\"\nINPUT_OPTIONAL=\"$PROJECT_DIR/Tests/Source/ClassWithOptionals.swift\"\nINPUT_OBJC_PROTO=\"$PROJECT_DIR/Tests/Source/ObjcProtocol.swift\"\nfor definition in $GCC_PREPROCESSOR_DEFINITIONS; do\n    if [ $definition = \"USE_RUN\" ]; then\n        use_run=1\n    fi\ndone\nif [ $use_run ]; then\n    \"$PROJECT_DIR/run\" --clean generate --testable Cuckoo --output \"$OUTPUT\" \"$INPUT_STUB\" \"$INPUT_OPTIONAL\" #\"$INPUT_OBJC_PROTO\"\nelse\n    \"$BUILD_DIR/$CONFIGURATION/cuckoo_generator\" generate --testable Cuckoo --output \"$OUTPUT\" \\\n        \"$INPUT_STUB\" \\\n        \"$INPUT_OPTIONAL\" \\\n        \"$PROJECT_DIR/Tests/Source/TestedProtocol.swift\" \\\n        \"$PROJECT_DIR/Tests/Source/TestedClass.swift\" \\\n        \"$PROJECT_DIR/Tests/Source/TestedSubclass.swift\"\nfi";
+			shellScript = "OUTPUT=\"$PROJECT_DIR/Tests/Generated/GeneratedMocks.swift\"\n# Use seperate variables for each file.\nINPUT_STUB=\"$PROJECT_DIR/Tests/Source/ClassForStubTesting.swift\"\nINPUT_OPTIONAL=\"$PROJECT_DIR/Tests/Source/ClassWithOptionals.swift\"\nINPUT_OBJC_PROTO=\"$PROJECT_DIR/Tests/Source/ObjcProtocol.swift\"\nfor definition in $GCC_PREPROCESSOR_DEFINITIONS; do\n    if [ $definition = \"USE_RUN\" ]; then\n        use_run=1\n    fi\ndone\nif [ $use_run ]; then\n    \"$PROJECT_DIR/run\" --clean generate --testable Cuckoo --output \"$OUTPUT\" \"$INPUT_STUB\" \"$INPUT_OPTIONAL\" #\"$INPUT_OBJC_PROTO\"\nelse\n    \"$BUILD_DIR/$CONFIGURATION/cuckoo_generator\" generate --testable Cuckoo --output \"$OUTPUT\" \\\n        \"$INPUT_STUB\" \\\n        \"$INPUT_OPTIONAL\" \\\n        \"$PROJECT_DIR/Tests/Source/TestedProtocol.swift\" \\\n        \"$PROJECT_DIR/Tests/Source/TestedClass.swift\" \\\n        \"$PROJECT_DIR/Tests/Source/TestedSubclass.swift\" \\\n        \"$PROJECT_DIR/Tests/Source/TestedSubProtocol.swift\"\nfi";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
