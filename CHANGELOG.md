@@ -2,13 +2,14 @@
 
 ## 0.9.2
 
-* Fixed crash when source files were using non-ASCII characters [bug #126]
-* Added `--exclude` parameter to explicitly exclude some types from mocking [PR #112](https://github.com/Brightify/Cuckoo/pull/112) - (thanks to nxtstep for the feature)
+* Fixed crash when source files were using non-ASCII characters - [bug #126](https://github.com/Brightify/Cuckoo/issues/126)
+* Added `--exclude` parameter to explicitly exclude some types from mocking - [PR #112](https://github.com/Brightify/Cuckoo/pull/112) - (thanks to nxtstep for the feature)
+* Fixed compile errors when generating stubs where inner types were returned - [bug #118](https://github.com/Brightify/Cuckoo/issues/118)
 
 ## 0.9.1
 
 * Fixed "too complex to resolve in reasonable time" error in generator
-* Fixed directory names for case sensitive file systems [PR #114](https://github.com/Brightify/Cuckoo/pull/115) - (thanks to sundance2000 for the fix)
+* Fixed directory names for case sensitive file systems - [PR #114](https://github.com/Brightify/Cuckoo/pull/115) - (thanks to sundance2000 for the fix)
 * Moved repository from `SwiftKit` to `Brightify` organization on GitHub.
 
 ## 0.9.0
