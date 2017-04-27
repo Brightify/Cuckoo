@@ -39,11 +39,19 @@ class Mock{{ container.name }}: {{ container.name }}, Cuckoo.Mock {
         {% if method.isThrowing %}
         return try cuckoo_manager.callThrows("{{method.fullyQualifiedName}}",
             parameters: ({{method.parameterNames}}),
-            original: observed.map { o in return { ({{ method.parameterSignatureWithoutNames }}){{method.returnSignature}} in try o.{{method.name}}{%if method.isOptional %}?{%endif%}({{method.call}}) } })
+            original: observed.map { o in
+                return { ({{ method.parameterSignatureWithoutNames }}){{method.returnSignature}} in
+                    try o.{{method.name}}{%if method.isOptional %}?{%endif%}({{method.call}})
+                }
+            })
         {% else %}
         return cuckoo_manager.call("{{method.fullyQualifiedName}}",
             parameters: ({{method.parameterNames}}),
-            original: observed.map { o in return { ({{ method.parameterSignatureWithoutNames }}){{method.returnSignature}} in o.{{method.name}}{%if method.isOptional %}?{%endif%}({{method.call}}) } })
+            original: observed.map { o in
+                return { ({{ method.parameterSignatureWithoutNames }}){{method.returnSignature}} in
+                    o.{{method.name}}{%if method.isOptional %}?{%endif%}({{method.call}})
+                }
+            })
         {% endif %}
     }
     {% endfor %}
