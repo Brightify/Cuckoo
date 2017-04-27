@@ -9,9 +9,9 @@ before_script:
     - gem install aruba --no-rdoc --no-ri
 
 script:
-    - cd Generator
+    - pushd Generator
     - make test
-    - cd ..
+    - popd
     - xcodebuild -workspace 'Cuckoo.xcworkspace' -scheme 'Cuckoo+Run' clean test
     - pod lib lint
 

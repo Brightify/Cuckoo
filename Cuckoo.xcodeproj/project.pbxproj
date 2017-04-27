@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1834579E1EB2188100C972A4 /* UnicodeTestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1834578E1EB2187A00C972A4 /* UnicodeTestProtocol.swift */; };
 		183D03FF1C4691C600EBAEF3 /* Cuckoo.h in Headers */ = {isa = PBXBuildFile; fileRef = 183D03FE1C4691C600EBAEF3 /* Cuckoo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		183D04061C4691C600EBAEF3 /* Cuckoo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 183D03FB1C4691C600EBAEF3 /* Cuckoo.framework */; };
 		183D04161C46926A00EBAEF3 /* CuckooFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183D04151C46926A00EBAEF3 /* CuckooFunctions.swift */; };
@@ -178,6 +179,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1834578E1EB2187A00C972A4 /* UnicodeTestProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnicodeTestProtocol.swift; sourceTree = "<group>"; };
 		183D03FB1C4691C600EBAEF3 /* Cuckoo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cuckoo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		183D03FE1C4691C600EBAEF3 /* Cuckoo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Cuckoo.h; sourceTree = "<group>"; };
 		183D04001C4691C600EBAEF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -409,6 +411,7 @@
 				D65C5C021E573BCC00D25697 /* TestedSubclass.swift */,
 				58C549CFCF27949160520C92 /* TestedSubProtocol.swift */,
 				18502E5D1E60A7D900E5CF20 /* ObjcProtocol.swift */,
+				1834578E1EB2187A00C972A4 /* UnicodeTestProtocol.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -714,7 +717,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "OUTPUT=\"$PROJECT_DIR/Tests/Generated/GeneratedMocks.swift\"\n# Use seperate variables for each file.\nINPUT_STUB=\"$PROJECT_DIR/Tests/Source/ClassForStubTesting.swift\"\nINPUT_OPTIONAL=\"$PROJECT_DIR/Tests/Source/ClassWithOptionals.swift\"\nINPUT_OBJC_PROTO=\"$PROJECT_DIR/Tests/Source/ObjcProtocol.swift\"\nfor definition in $GCC_PREPROCESSOR_DEFINITIONS; do\n    if [ $definition = \"USE_RUN\" ]; then\n        use_run=1\n    fi\ndone\nif [ $use_run ]; then\n    \"$PROJECT_DIR/run\" --clean generate --testable Cuckoo --output \"$OUTPUT\" \"$INPUT_STUB\" \"$INPUT_OPTIONAL\" #\"$INPUT_OBJC_PROTO\"\nelse\n    \"$BUILD_DIR/$CONFIGURATION/cuckoo_generator\" generate --testable Cuckoo --output \"$OUTPUT\" \\\n        \"$INPUT_STUB\" \\\n        \"$INPUT_OPTIONAL\" \\\n        \"$PROJECT_DIR/Tests/Source/TestedProtocol.swift\" \\\n        \"$PROJECT_DIR/Tests/Source/TestedClass.swift\" \\\n        \"$PROJECT_DIR/Tests/Source/TestedSubclass.swift\"\nfi";
+			shellScript = "OUTPUT=\"$PROJECT_DIR/Tests/Generated/GeneratedMocks.swift\"\n# Use seperate variables for each file.\nINPUT_STUB=\"$PROJECT_DIR/Tests/Source/ClassForStubTesting.swift\"\nINPUT_OPTIONAL=\"$PROJECT_DIR/Tests/Source/ClassWithOptionals.swift\"\nINPUT_OBJC_PROTO=\"$PROJECT_DIR/Tests/Source/ObjcProtocol.swift\"\nINPUT_UNICODE=\"$PROJECT_DIR/Tests/Source/UnicodeTestProtocol.swift\"\nfor definition in $GCC_PREPROCESSOR_DEFINITIONS; do\n    if [ $definition = \"USE_RUN\" ]; then\n        use_run=1\n    fi\ndone\nif [ $use_run ]; then\n    \"$PROJECT_DIR/run\" --clean generate --testable Cuckoo --output \"$OUTPUT\" \"$INPUT_STUB\" \"$INPUT_OPTIONAL\" \"$INPUT_UNICODE\" #\"$INPUT_OBJC_PROTO\"\nelse\n    \"$BUILD_DIR/$CONFIGURATION/cuckoo_generator\" generate --testable Cuckoo --output \"$OUTPUT\" \\\n        \"$INPUT_STUB\" \\\n        \"$INPUT_OPTIONAL\" \\\n        \"$INPUT_UNICODE\" \\\n        \"$PROJECT_DIR/Tests/Source/TestedProtocol.swift\" \\\n        \"$PROJECT_DIR/Tests/Source/TestedClass.swift\" \\\n        \"$PROJECT_DIR/Tests/Source/TestedSubclass.swift\"\nfi";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -773,6 +776,7 @@
 				DCD432D81D929B2A0023AADA /* DefaultValueRegistryTest.swift in Sources */,
 				DCD432D51D9286D10023AADA /* StubTest.swift in Sources */,
 				DC70D0CF1D2AFD0D00014C5F /* StubbingTest.swift in Sources */,
+				1834579E1EB2188100C972A4 /* UnicodeTestProtocol.swift in Sources */,
 				DC70D0AF1D2AB64A00014C5F /* ParameterMatcherFunctionsTest.swift in Sources */,
 				DC70D0D61D2B9FBE00014C5F /* ParameterMatcherTest.swift in Sources */,
 				D65C5BFA1E57379100D25697 /* ClassForStubTesting.swift in Sources */,

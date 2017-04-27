@@ -14,7 +14,8 @@ build:
 	swift build
 
 test: build
-	cd Tests && cucumber
+	#cd Tests && cucumber
+        echo "No tests for Generator"
 
 record: -test
 	for file in .build/log/*/*.swift; do
