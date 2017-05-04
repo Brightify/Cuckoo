@@ -273,7 +273,7 @@ Note: Optional types (for example `Int?`) cannot be used directly. You need to w
 
 #### B) Custom matchers
 
-If Cuckoo doesn't know to type your try to compare, you have to write your own method `equal(to:)` using a `ParameterMatcher`. Add this this method to your test file:
+If Cuckoo doesn't know to type you are trying to compare, you have to write your own method `equal(to:)` using a `ParameterMatcher`. Add this method to your test file:
 
 ```swift
 func equal(to value: YourCustomType) -> ParameterMatcher<YourCustomType> {
@@ -284,7 +284,7 @@ func equal(to value: YourCustomType) -> ParameterMatcher<YourCustomType> {
 }
 ```
 
-⚠️ If you try to match an object with an unknown or non-`Matchable` type, this could lead to a:
+⚠️ If you try to match an object with an unknown or non-`Matchable` type, it could lead to:
 
 ```
 Command failed due to signal: Segmentation fault: 11
@@ -294,7 +294,7 @@ For details and implementation example (with Alamofire), see [this issue](https:
 
 #### Parameter matchers
 
-`ParameterMatcher` also conform to `Matchable`. You can create your own `ParameterMatcher` instances or if you want to directly use your custom types there is the `Matchable` protocol. Standard instances of `ParameterMatcher` can be obtain via these functions:
+`ParameterMatcher` also conforms to `Matchable`. You can create your own `ParameterMatcher` instances or if you want to directly use your custom types there is the `Matchable` protocol. Standard instances of `ParameterMatcher` can be obtained via these functions:
 
 ```Swift
 /// Returns an equality matcher.
