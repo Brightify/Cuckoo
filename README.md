@@ -54,7 +54,7 @@ We plan to add a **watchOS 2+** support soon.
 
 ## Cuckoo
 
-### Installation
+### 1. Installation
 
 #### CocoaPods
 Cuckoo runtime is available through [CocoaPods](http://cocoapods.org). To install
@@ -108,7 +108,7 @@ Carthage/Checkouts/Cuckoo/run
 
 Also don't forget to add the Framework into your project.
 
-### Usage
+### 2. Usage
 
 Usage of Cuckoo is similar to [Mockito](http://mockito.org/) and [Hamcrest](http://hamcrest.org/). But there are some differences and limitations caused by generating the mocks and Swift language itself. List of all supported features can be found below. You can find complete example in [tests](Tests).
 
@@ -235,10 +235,13 @@ argumentCaptor.allValues // Returns [10, 20, 30]
 
 As you can see, method `capture()` is used to create matcher for the call and then you can get the arguments via properties `value` and `allValues`. `value` returns last captured argument or nil if none. `allValues` returns array with all captured values.
 
-#### Parameter matchers
+### 3. Matchers
 
-As parameters of methods in stubbing and verification you can use objects which conform to `Matchable` protocol.
+Cuckoo make use of *matchers* to connect your mocks to your code under test.
 
+#### A) Automatic matchers for known types
+
+You can mock any object that conforms to the `Matchable` protocol.
 These basic values are extended to conform to `Matchable`:
 
 * `Bool`
@@ -257,9 +260,32 @@ These basic values are extended to conform to `Matchable`:
 * `UInt32`
 * `UInt64`
 
-Note: Optional types (for example `Int?`) cannot be used directly. You need to wrap them with `equal(to)` function.
+Note: Optional types (for example `Int?`) cannot be used directly. You need to wrap them with `equal(to)` function (see bellow).
 
-`ParameterMatcher` also conform to `Matchable`. You can create your own `ParameterMatcher` instances or if you want to directly use your custom types there is the `Matchable` protocol. Standard instances of `ParameterMatcher` can be obtain via these functions:
+#### B) Custom matchers
+
+If Cuckoo doesn't know to type you are trying to compare, you have to write your own method `equal(to:)` using a `ParameterMatcher`. Add this method to your test file:
+
+```swift
+func equal(to value: YourCustomType) -> ParameterMatcher<YourCustomType> {
+    return ParameterMatcher { tested in
+        // Implementation of your equality test.
+        // ie: (try? tested.method()) == (try? value.method())
+    }
+}
+```
+
+⚠️ If you try to match an object with an unknown or non-`Matchable` type, it could lead to:
+
+```
+Command failed due to signal: Segmentation fault: 11
+```
+
+For details and implementation example (with Alamofire), see [this issue](https://github.com/Brightify/Cuckoo/issues/124).
+
+#### Parameter matchers
+
+`ParameterMatcher` also conforms to `Matchable`. You can create your own `ParameterMatcher` instances or if you want to directly use your custom types there is the `Matchable` protocol. Standard instances of `ParameterMatcher` can be obtained via these functions:
 
 ```Swift
 /// Returns an equality matcher.
