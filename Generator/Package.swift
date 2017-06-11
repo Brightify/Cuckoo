@@ -12,7 +12,7 @@ let package = Package(
             .Target(name: "CuckooGeneratorFramework")]),
     ],
     dependencies: [
-        .Package(url: "https://github.com/jpsim/SourceKitten.git", versions: Version(0, 15, 0)..<Version(0, 17, .max)),
+        .Package(url: "https://github.com/jpsim/SourceKitten.git", versions: Version(0, 15, 0)..<Version(0, 16, .max)),
         .Package(url: "https://github.com/TadeasKriz/FileKit.git", Version(4, 0, 2)),
         .Package(url: "https://github.com/kylef/Stencil.git", majorVersion: 0, minor: 8),    
     ],
