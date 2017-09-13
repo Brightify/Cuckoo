@@ -106,11 +106,11 @@ public struct Tokenizer {
 
         case Kinds.InstanceVariable.rawValue:
             let setterAccessibility = (dictionary[Key.SetterAccessibility.rawValue] as? String).flatMap(Accessibility.init)
-
-            if String(describing: source.utf8.dropFirst(range!.startIndex)).takeUntil(occurence: name)?.trimmed.hasPrefix("let") == true {
-                return nil
+                        
+            if String.init(source.utf8.dropFirst(range!.startIndex))?.takeUntil(occurence: name)?.trimmed.hasPrefix("let") == true {
+                    return nil
             }
-
+            
             if type == nil {
                 stderrPrint("Type of instance variable \(name) could not be inferred. Please specify it explicitly. (\(file.path ?? ""))")
             }
@@ -227,7 +227,7 @@ public struct Tokenizer {
             return results.filter { result in
                     rangesToIgnore.filter { $0 ~= result.range.location }.isEmpty
                 }.map {
-                    let libraryRange = $0.rangeAt(1)
+                    let libraryRange = $0.range(at: 1)
                     let fromIndex = source.index(source.startIndex, offsetBy: libraryRange.location)
                     let toIndex = source.index(fromIndex, offsetBy: libraryRange.length)
                     let library = source.substring(with: fromIndex..<toIndex)
