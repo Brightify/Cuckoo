@@ -57,7 +57,7 @@ public struct GenerateMocksCommand: CommandProtocol {
         }
         
         let couldNotOpenFile = inputFiles.contains { $0 == nil }
-        return stderrUsed || couldNotOpenFile ? .failure(.stderrUsed) : .success()
+        return stderrUsed || couldNotOpenFile ? .failure(.stderrUsed) : .success(())
     }
 
     private func mergeInheritance(_ filesRepresentation: [FileRepresentation]) -> [FileRepresentation] {
