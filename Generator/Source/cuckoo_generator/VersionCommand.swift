@@ -21,7 +21,7 @@ public struct VersionCommand: CommandProtocol {
 
     public func run(_ options: Options) -> Result<Void, CuckooGeneratorError> {
         print(VersionCommand.appVersion)
-        return .success()
+        return .success(())
     }
 
     public struct Options: OptionsProtocol {

@@ -20,15 +20,15 @@ extension String {
 
     subscript(range: Range<Int>) -> String {
         let stringRange = characters.index(startIndex, offsetBy: range.lowerBound)..<characters.index(startIndex, offsetBy: range.upperBound)
-        return self[stringRange]
+        return String(self[stringRange])
     }
 }
 
 extension String.UTF8View {
     subscript(range: Range<Int>) -> String {
         let stringRange = index(startIndex, offsetBy: range.lowerBound)..<index(startIndex, offsetBy: range.upperBound)
-        let selected: String.UTF8View = self[stringRange]
-        return String(selected) ?? ""
+        let subsequence: String.UTF8View.SubSequence = self[stringRange]
+        return String(subsequence) ?? ""
     }
 }
 

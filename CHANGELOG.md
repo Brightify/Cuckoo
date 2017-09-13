@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.9.3
+
+* Updated for Swift 4 (Xcode 9 GM)
+
 ## 0.9.2
 
 * Fixed crash when source files were using non-ASCII characters - [bug #126](https://github.com/Brightify/Cuckoo/issues/126)

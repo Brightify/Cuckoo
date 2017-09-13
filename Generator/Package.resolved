@@ -1,0 +1,106 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Clang_C",
+        "repositoryURL": "https://github.com/norio-nomura/Clang_C.git",
+        "state": {
+          "branch": null,
+          "revision": "90a9574276f0fd17f02f58979423c3fd4d73b59e",
+          "version": "1.0.2"
+        }
+      },
+      {
+        "package": "Commandant",
+        "repositoryURL": "https://github.com/Carthage/Commandant.git",
+        "state": {
+          "branch": null,
+          "revision": "c281992c31c3f41c48b5036c5a38185eaec32626",
+          "version": "0.12.0"
+        }
+      },
+      {
+        "package": "FileKit",
+        "repositoryURL": "https://github.com/TadeasKriz/FileKit.git",
+        "state": {
+          "branch": "develop",
+          "revision": "0acc6e7c336bbd2336c2f9670564dac9ec9c03fe",
+          "version": null
+        }
+      },
+      {
+        "package": "PathKit",
+        "repositoryURL": "https://github.com/kylef/PathKit.git",
+        "state": {
+          "branch": null,
+          "revision": "891a3fec2699fc43aed18b7649950677c0152a22",
+          "version": "0.8.0"
+        }
+      },
+      {
+        "package": "Result",
+        "repositoryURL": "https://github.com/antitypical/Result.git",
+        "state": {
+          "branch": null,
+          "revision": "c8446185238659a2b27c0261f64ff1254291d07d",
+          "version": "3.2.3"
+        }
+      },
+      {
+        "package": "SWXMLHash",
+        "repositoryURL": "https://github.com/drmohundro/SWXMLHash.git",
+        "state": {
+          "branch": null,
+          "revision": "88095d2bb1d2deb9ea9d9963737871049b21e1b4",
+          "version": "4.2.1"
+        }
+      },
+      {
+        "package": "SourceKit",
+        "repositoryURL": "https://github.com/norio-nomura/SourceKit.git",
+        "state": {
+          "branch": null,
+          "revision": "18eaa67ca44443bbe39646916792b9f0c98dbaa1",
+          "version": "1.0.1"
+        }
+      },
+      {
+        "package": "SourceKitten",
+        "repositoryURL": "https://github.com/jpsim/SourceKitten.git",
+        "state": {
+          "branch": null,
+          "revision": "7c4c6d8194389493f841b75fafa8c29b274c7ea6",
+          "version": "0.18.1"
+        }
+      },
+      {
+        "package": "Spectre",
+        "repositoryURL": "https://github.com/kylef/Spectre.git",
+        "state": {
+          "branch": null,
+          "revision": "e46b75cf03ad5e563b4b0a5068d3d6f04d77d80b",
+          "version": "0.7.2"
+        }
+      },
+      {
+        "package": "Stencil",
+        "repositoryURL": "https://github.com/kylef/Stencil.git",
+        "state": {
+          "branch": null,
+          "revision": "65a461d0a103896c8ff7e3f17f7be1a5badadeb0",
+          "version": "0.9.0"
+        }
+      },
+      {
+        "package": "Yams",
+        "repositoryURL": "https://github.com/jpsim/Yams.git",
+        "state": {
+          "branch": null,
+          "revision": "5ac9248b378b5e12201c255ba74caf990d1e0f4b",
+          "version": "0.3.6"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
