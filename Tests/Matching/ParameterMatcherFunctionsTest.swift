@@ -96,8 +96,8 @@ class ParameterMatcherFunctionsTest: XCTestCase {
     }
     
     func testOptionalAnyClosure() {
-        XCTAssertTrue(anyClosure().matches({ 0 } as (() -> Int)?))
-        XCTAssertFalse(anyClosure().matches(nil as (() -> Int)?))
+        XCTAssertTrue(anyClosure().matches({ (arg) in let () = arg; return 0 } as ((()) -> Int)?))
+        XCTAssertFalse(anyClosure().matches(nil as ((()) -> Int)?))
     }
     
     func testNotNil() {

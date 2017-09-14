@@ -12,10 +12,14 @@ struct TestUtils {
     
     static func catchCuckooFail(inClosure closure: () -> ()) -> String? {
         let fail = MockManager.fail
-        var message: String?
-        MockManager.fail = { message = $0.0 }
+        var msg: String?
+        MockManager.fail = { (parameters) in
+            let (message, _) = parameters
+            msg = message
+            
+        }
         closure()
         MockManager.fail = fail
-        return message
+        return msg
     }
 }

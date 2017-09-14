@@ -23,4 +23,12 @@ class TestedSubclass: TestedClass, TestedProtocol {
     func subclassMethod() -> Int {
         return 0
     }
+    
+    func withOptionalClosureAndReturn(_ a: String, closure: ((String) -> Void)?) -> Int {
+        return 1
+    }
+    
+    func withClosureAndParam(_ a: String, closure: ((String)) -> Int) -> Int {
+        return 0
+    }
 }

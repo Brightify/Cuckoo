@@ -14,6 +14,7 @@ public protocol Method: Token {
     var nameRange: CountableRange<Int> { get }
     var parameters: [MethodParameter] { get }
     var isOptional: Bool { get }
+    var hasClosureParams: Bool { get }
 }
 
 public extension Method {
@@ -53,6 +54,10 @@ public extension Method {
         } else {
             return "Void"
         }
+    }
+    
+    var hasClosureParams: Bool {
+        return parameters.filter { $0.isClosure }.count > 0
     }
 
     public func isEqual(to other: Token) -> Bool {
@@ -99,7 +104,8 @@ public extension Method {
             "parameterSignatureWithoutNames": parameters.map { "\($0.name): \($0.type)" }.joined(separator: ", "),
             "stubFunction": stubFunction,
             "inputTypes": parameters.map { $0.typeWithoutAttributes }.joined(separator: ", "),
-            "isOptional": isOptional
+            "isOptional": isOptional,
+            "hasClosureParams": hasClosureParams
         ]
     }
 }

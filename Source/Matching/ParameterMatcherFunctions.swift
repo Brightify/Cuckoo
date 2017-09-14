@@ -77,7 +77,7 @@ public func anyString() -> ParameterMatcher<String?> {
 }
 
 /// Returns a matcher matching any closure.
-public func anyClosure<IN, OUT>() -> ParameterMatcher<((IN) -> OUT)?> {
+public func anyClosure<IN, OUT>() -> ParameterMatcher<(((IN)) -> OUT)?> {
     return notNil()
 }
 
