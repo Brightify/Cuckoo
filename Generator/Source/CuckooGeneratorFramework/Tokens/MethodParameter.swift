@@ -29,14 +29,24 @@ public struct MethodParameter: Token {
         guard let other = other as? MethodParameter else { return false }
         return self.name == other.name
     }
-
+    
+    var isClosure: Bool {
+        return typeWithoutAttributes.hasPrefix("(") && typeWithoutAttributes.range(of: "->") != nil
+    }
+    
+    var isEscaping: Bool {
+        return isClosure && type.hasPrefix("@escaping")
+    }
+    
     public func serialize() -> [String : Any] {
         return [
             "label": label,
             "name": name,
             "type": type,
             "labelAndName": labelAndName,
-            "typeWithoutAttributes": typeWithoutAttributes
+            "typeWithoutAttributes": typeWithoutAttributes,
+            "isClosure": isClosure,
+            "isEscaping": isEscaping
         ]
     }
 }

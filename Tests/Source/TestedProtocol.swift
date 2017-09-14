@@ -24,9 +24,13 @@ protocol TestedProtocol {
     
     func withClosure(_ closure: (String) -> Int) -> Int
     
+    func withClosureAndParam(_ a: String, closure:(String) -> Int) -> Int
+    
     func withEscape(_ a: String, action closure: @escaping (String) -> Void)
     
     func withOptionalClosure(_ a: String, closure: ((String) -> Void)?)
+    
+    func withOptionalClosureAndReturn(_ a: String, closure: ((String) -> Void)?) -> Int
 
     func withLabelAndUnderscore(labelA a: String, _ b: String)
 
