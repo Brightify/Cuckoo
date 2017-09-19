@@ -30,17 +30,17 @@ public struct MethodParameter: Token {
         return self.name == other.name
     }
     
-    var isClosure: Bool {
+    public var isClosure: Bool {        
         return typeWithoutAttributes.hasPrefix("(") && typeWithoutAttributes.range(of: "->") != nil
     }
     
-    var isEscaping: Bool {
-        return isClosure && type.hasPrefix("@escaping")
+    public var isEscaping: Bool {
+        return isClosure && (type.hasPrefix("@escaping") || type.hasSuffix("?"))
     }
     
     public func serialize() -> [String : Any] {
         return [
-            "label": label,
+            "label": label ?? "",
             "name": name,
             "type": type,
             "labelAndName": labelAndName,
