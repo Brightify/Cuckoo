@@ -100,7 +100,7 @@ public class MockManager {
         if unverifiedStubCallsIndexes.isEmpty == false {
             let unverifiedCalls = unverifiedStubCallsIndexes.map { stubCalls[$0] }.map { call in
                     if let bracketIndex = call.method.range(of: "(")?.lowerBound {
-                        let name = call.method.substring(to: bracketIndex)
+                        let name = call.method[..<bracketIndex]
                         return name + call.parametersAsString
                     } else {
                         if call.method.hasSuffix("#set") {
