@@ -31,4 +31,8 @@ class TestedSubclass: TestedClass, TestedProtocol {
     func withClosureAndParam(_ a: String, closure: ((String)) -> Int) -> Int {
         return 0
     }
+    
+    func withMultClosures(closure: ((String)) -> Int, closureB: ((String)) -> Int, closureC: ((String)) -> Int) -> Int {
+        return 0
+    }
 }
