@@ -13,7 +13,7 @@ public protocol StubCall {
 
 public struct ConcreteStubCall<IN>: StubCall {
     public let method: String
-    public let parameters: IN
+    public let parameters: (IN)
     
     public var parametersAsString: String {
         let string = String(describing: parameters)
@@ -21,12 +21,12 @@ public struct ConcreteStubCall<IN>: StubCall {
             return string
         } else {
             // If only one parameter add brackets and quotes
-            let wrappedParameter = String(describing: (parameters, 0))
-            return wrappedParameter.substring(to: wrappedParameter.characters.index(wrappedParameter.endIndex, offsetBy: -4)) + ")"
+            let wrappedParameter = String(describing: (parameters, 0))            
+            return wrappedParameter[..<wrappedParameter.characters.index(wrappedParameter.endIndex, offsetBy: -4)] + ")"
         }
     }
     
-    public init(method: String, parameters: IN) {
+    public init(method: String, parameters: (IN)) {
         self.method = method
         self.parameters = parameters
     }
