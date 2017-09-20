@@ -35,7 +35,7 @@ public struct MethodParameter: Token {
     }
     
     public var isEscaping: Bool {
-        return isClosure && (type.hasPrefix("@escaping") || type.hasSuffix("?"))
+        return isClosure && (type.hasPrefix("@escaping") || type.hasSuffix(")?"))
     }
     
     public func serialize() -> [String : Any] {

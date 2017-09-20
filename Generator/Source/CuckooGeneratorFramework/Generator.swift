@@ -47,10 +47,10 @@ public struct Generator {
             return self.parameterMatchers(for: parameters)
         }
         
-        ext.registerFilter("openNestedClosure") { (value: Any?) in
+        ext.registerFilter("openNestedClosure") { (value: Any?, arguments: [Any?]) in
             guard let parameters = value as? [MethodParameter] else { return value }
-            let s = self.openNestedClosure(for: parameters)
-            print(s)
+            
+            let s = self.openNestedClosure(for: parameters, throwing: arguments.first as? Bool)            
             return s
         }
         
@@ -61,8 +61,6 @@ public struct Generator {
             return s
         }
         
-        
-
         let environment = Environment(loader: InternalLoader(), extensions: [ext])
 
         let containers = declarations.flatMap { $0 as? ContainerToken }
@@ -104,12 +102,13 @@ public struct Generator {
         return type.replacingOccurrences(of: "!", with: "?")
     }
     
-    private func openNestedClosure(for parameters: [MethodParameter]) -> String {
+    private func openNestedClosure(for parameters: [MethodParameter], throwing: Bool? = false) -> String {
         var fullString = ""
         for (index, parameter) in parameters.enumerated() {
             if parameter.isClosure && !parameter.isEscaping {
                 let indents = String.init(repeating: "\t", count: index + 1)
-                fullString += "\(indents)return withoutActuallyEscaping(\(parameter.name), do: { (\(parameter.name)) in\n"
+                let tries = (throwing ?? false) ? " try " : " "
+                fullString += "\(indents)return\(tries)withoutActuallyEscaping(\(parameter.name), do: { (\(parameter.name)) in\n"
             }
         }
         return fullString
