@@ -35,4 +35,20 @@ class TestedSubclass: TestedClass, TestedProtocol {
     func withMultClosures(closure: ((String)) -> Int, closureB: ((String)) -> Int, closureC: ((String)) -> Int) -> Int {
         return 0
     }
+    
+    func withThrowingClosure(closure: ((String)) throws -> String?) -> String? {
+        return nil
+    }
+    
+    func withThrowingClosureThrows(closure: ((String)) throws -> String?) throws -> String? {
+        return nil
+    }
+    
+    func withThrowingEscapingClosure(closure: @escaping ((String)) throws -> String?) -> String? {
+        return nil
+    }
+    
+    func withThrowingOptionalClosureThrows(closure: (((String)) throws -> String?)?) throws -> String? {
+        return nil
+    }
 }
