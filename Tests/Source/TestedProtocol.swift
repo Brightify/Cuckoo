@@ -34,6 +34,8 @@ protocol TestedProtocol {
 
     func withLabelAndUnderscore(labelA a: String, _ b: String)
 
+    func withNamedTuple(tuple: (a: String, b: String)) -> Int
+    
     init()
 
     init(labelA a: String, _ b: String)

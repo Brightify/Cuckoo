@@ -1,6 +1,9 @@
 # Changelog
 
-## 0.9.3
+## 0.10.1
+* Fixed some errors with getters [bug #151](https://github.com/Brightify/Cuckoo/issues/151)
+
+## 0.10.0
 
 * Updated for Swift 4 (Xcode 9 GM)
 

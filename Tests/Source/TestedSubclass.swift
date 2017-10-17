@@ -20,6 +20,10 @@ class TestedSubclass: TestedClass, TestedProtocol {
         return 1
     }
 
+    func withNamedTuple(tuple: (a: String, b: String)) -> Int {
+        return 0
+    }
+
     func subclassMethod() -> Int {
         return 0
     }

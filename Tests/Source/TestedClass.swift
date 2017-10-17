@@ -6,6 +6,8 @@
 //  Copyright © 2016 Brightify. All rights reserved.
 //
 
+import Foundation
+
 class TestedClass {
     
     let constant: Float = 0.0
