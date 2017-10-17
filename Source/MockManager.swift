@@ -172,6 +172,38 @@ extension MockManager {
     public func call<IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, OUT>(_ method: String, parameters: (IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8), original: ((IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8) -> OUT)? = nil) -> OUT {
         return callInternal(method, parameters: parameters, original: original as (((IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8)) -> OUT)?)
     }
+
+    public func call<IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, OUT>(_ method: String, parameters: (IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9), original: ((IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9) -> OUT)? = nil) -> OUT {
+        return callInternal(method, parameters: parameters, original: original as (((IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9)) -> OUT)?)
+    }
+
+    public func call<IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10, OUT>(_ method: String, parameters: (IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10), original: ((IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10) -> OUT)? = nil) -> OUT {
+        return callInternal(method, parameters: parameters, original: original as (((IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10)) -> OUT)?)
+    }
+
+    public func call<IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10, IN11, OUT>(_ method: String, parameters: (IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10, IN11), original: ((IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10, IN11) -> OUT)? = nil) -> OUT {
+        return callInternal(method, parameters: parameters, original: original as (((IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10, IN11)) -> OUT)?)
+    }
+
+    public func call<IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10, IN11, IN12, OUT>(_ method: String, parameters: (IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10, IN11, IN12), original: ((IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10, IN11, IN12) -> OUT)? = nil) -> OUT {
+        return callInternal(method, parameters: parameters, original: original as (((IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10, IN11, IN12)) -> OUT)?)
+    }
+
+    public func call<IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10, IN11, IN12, IN13, OUT>(_ method: String, parameters: (IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10, IN11, IN12, IN13), original: ((IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10, IN11, IN12, IN13) -> OUT)? = nil) -> OUT {
+        return callInternal(method, parameters: parameters, original: original as (((IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10, IN11, IN12, IN13)) -> OUT)?)
+    }
+
+    public func call<IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10, IN11, IN12, IN13, IN14, OUT>(_ method: String, parameters: (IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10, IN11, IN12, IN13, IN14), original: ((IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10, IN11, IN12, IN13, IN14) -> OUT)? = nil) -> OUT {
+        return callInternal(method, parameters: parameters, original: original as (((IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10, IN11, IN12, IN13, IN14)) -> OUT)?)
+    }
+
+    public func call<IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10, IN11, IN12, IN13, IN14, IN15, OUT>(_ method: String, parameters: (IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10, IN11, IN12, IN13, IN14, IN15), original: ((IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10, IN11, IN12, IN13, IN14, IN15) -> OUT)? = nil) -> OUT {
+        return callInternal(method, parameters: parameters, original: original as (((IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10, IN11, IN12, IN13, IN14, IN15)) -> OUT)?)
+    }
+
+    public func call<IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10, IN11, IN12, IN13, IN14, IN15, IN16, OUT>(_ method: String, parameters: (IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10, IN11, IN12, IN13, IN14, IN15, IN16), original: ((IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10, IN11, IN12, IN13, IN14, IN15, IN16) -> OUT)? = nil) -> OUT {
+        return callInternal(method, parameters: parameters, original: original as (((IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10, IN11, IN12, IN13, IN14, IN15, IN16)) -> OUT)?)
+    }
 }
 
 extension MockManager {
@@ -206,22 +238,36 @@ extension MockManager {
     public func callThrows<IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, OUT>(_ method: String, parameters: (IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8), original: ((IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8) throws -> OUT)? = nil) throws -> OUT {
         return try callThrowsInternal(method, parameters: parameters, original: original as (((IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8)) throws -> OUT)?)
     }
+
+    public func callThrows<IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, OUT>(_ method: String, parameters: (IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9), original: ((IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9) throws -> OUT)? = nil) throws -> OUT {
+        return try callThrowsInternal(method, parameters: parameters, original: original as (((IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9)) throws -> OUT)?)
+    }
+
+    public func callThrows<IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10, OUT>(_ method: String, parameters: (IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10), original: ((IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10) throws -> OUT)? = nil) throws -> OUT {
+        return try callThrowsInternal(method, parameters: parameters, original: original as (((IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10)) throws -> OUT)?)
+    }
+
+    public func callThrows<IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10, IN11, OUT>(_ method: String, parameters: (IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10, IN11), original: ((IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10, IN11) throws -> OUT)? = nil) throws -> OUT {
+        return try callThrowsInternal(method, parameters: parameters, original: original as (((IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10, IN11)) throws -> OUT)?)
+    }
+
+    public func callThrows<IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10, IN11, IN12, OUT>(_ method: String, parameters: (IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10, IN11, IN12), original: ((IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10, IN11, IN12) throws -> OUT)? = nil) throws -> OUT {
+        return try callThrowsInternal(method, parameters: parameters, original: original as (((IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10, IN11, IN12)) throws -> OUT)?)
+    }
+
+    public func callThrows<IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10, IN11, IN12, IN13, OUT>(_ method: String, parameters: (IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10, IN11, IN12, IN13), original: ((IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10, IN11, IN12, IN13) throws -> OUT)? = nil) throws -> OUT {
+        return try callThrowsInternal(method, parameters: parameters, original: original as (((IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10, IN11, IN12, IN13)) throws -> OUT)?)
+    }
+
+    public func callThrows<IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10, IN11, IN12, IN13, IN14, OUT>(_ method: String, parameters: (IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10, IN11, IN12, IN13, IN14), original: ((IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10, IN11, IN12, IN13, IN14) throws -> OUT)? = nil) throws -> OUT {
+        return try callThrowsInternal(method, parameters: parameters, original: original as (((IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10, IN11, IN12, IN13, IN14)) throws -> OUT)?)
+    }
+
+    public func callThrows<IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10, IN11, IN12, IN13, IN14, IN15, OUT>(_ method: String, parameters: (IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10, IN11, IN12, IN13, IN14, IN15), original: ((IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10, IN11, IN12, IN13, IN14, IN15) throws -> OUT)? = nil) throws -> OUT {
+        return try callThrowsInternal(method, parameters: parameters, original: original as (((IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10, IN11, IN12, IN13, IN14, IN15)) throws -> OUT)?)
+    }
+
+    public func callThrows<IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10, IN11, IN12, IN13, IN14, IN15, IN16, OUT>(_ method: String, parameters: (IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10, IN11, IN12, IN13, IN14, IN15, IN16), original: ((IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10, IN11, IN12, IN13, IN14, IN15, IN16) throws -> OUT)? = nil) throws -> OUT {
+        return try callThrowsInternal(method, parameters: parameters, original: original as (((IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, IN9, IN10, IN11, IN12, IN13, IN14, IN15, IN16)) throws -> OUT)?)
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

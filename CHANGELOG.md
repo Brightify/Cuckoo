@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.10.2
+* Double the maximum parameters in `call` and `callThrows` methods. [bug #145](https://github.com/Brightify/Cuckoo/issues/145)
+
 ## 0.10.1
 * Fixed some errors with getters [bug #151](https://github.com/Brightify/Cuckoo/issues/151)
 

@@ -27,6 +27,7 @@ class Mock{{ container.name }}: {{ container.name }}, Cuckoo.Mock {
     {% endfor %}
 
     {% for initializer in container.initializers %}
+    // {{initializer}}
     {{ initializer.accessibility }}{% if container.@type == "ClassDeclaration" %} override{% endif %}{% if initializer.@type == "ProtocolMethod" %} required{%endif%} init({{initializer.parameterSignature}}) {
         {% if container.@type == "ClassDeclaration" %}
         super.init({{initializer.call}})
@@ -35,6 +36,7 @@ class Mock{{ container.name }}: {{ container.name }}, Cuckoo.Mock {
     {% endfor %}
 
     {% for method in container.methods %}
+    // {{method}}
     {{ method.accessibility }}{% if container.@type == "ClassDeclaration" %} override{% endif %} func {{ method.name }}({{ method.parameterSignature }}) {{ method.returnSignature }} {
         {{ method.parameters|openNestedClosure:method.isThrowing }}
             return{% if method.isThrowing %} try{% endif %} cuckoo_manager.call{% if method.isThrowing %}Throws{% endif %}("{{method.fullyQualifiedName}}",
