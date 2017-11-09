@@ -9,8 +9,7 @@
 import XCTest
 import Cuckoo
 
-class ParameterMatcherFunctionsTest: XCTestCase {  
-    
+class ParameterMatcherFunctionsTest: XCTestCase {
     func testEqualToEquatable() {
         XCTAssertTrue(equal(to: 1).matches(1))
         XCTAssertFalse(equal(to: 1).matches(2))
@@ -31,6 +30,17 @@ class ParameterMatcherFunctionsTest: XCTestCase {
         
         XCTAssertTrue(equal(to: tuple, equalWhen: function).matches((1, 1)))
         XCTAssertFalse(equal(to: tuple, equalWhen: function).matches((1, 2)))
+    }
+
+    func testEqualToArray() {
+        XCTAssertTrue(equal(to: [1, 2, 3]).matches([1, 2, 3]))
+        XCTAssertFalse(equal(to: [1, 2, 3]).matches([1, 3, 2]))
+    }
+
+    func testEqualToSet() {
+        XCTAssertTrue(equal(to: [1, 2, 3] as Set<Int>).matches([1, 2, 3] as Set<Int>))
+        XCTAssertTrue(equal(to: [1, 2, 3] as Set<Int>).matches([1, 3, 2] as Set<Int>))
+        XCTAssertFalse(equal(to: [1, 2, 3] as Set<Int>).matches([1, 2] as Set<Int>))
     }
     
     func testAnyInt() {

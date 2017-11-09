@@ -2,6 +2,10 @@
 
 ## 0.10.2
 * Double the maximum parameters in `call` and `callThrows` methods. [bug #145](https://github.com/Brightify/Cuckoo/issues/145)
+* Make the generator deterministic by sorting input files.
+    * [bug #157](https://github.com/Brightify/Cuckoo/issues/157)
+    * [PR #158 - kudos to IanKeen](https://github.com/Brightify/Cuckoo/pull/158)
+* Add `equalTo` for `Array` and `Set` where `Element` is `Equatable`.
 
 ## 0.10.1
 * Fixed some errors with getters [bug #151](https://github.com/Brightify/Cuckoo/issues/151)
