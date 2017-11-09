@@ -22,7 +22,7 @@ public struct ConcreteStubCall<IN>: StubCall {
         } else {
             // If only one parameter add brackets and quotes
             let wrappedParameter = String(describing: (parameters, 0))            
-            return wrappedParameter[..<wrappedParameter.characters.index(wrappedParameter.endIndex, offsetBy: -4)] + ")"
+            return wrappedParameter[..<wrappedParameter.index(wrappedParameter.endIndex, offsetBy: -4)] + ")"
         }
     }
     

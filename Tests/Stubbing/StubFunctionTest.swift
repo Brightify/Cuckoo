@@ -15,7 +15,7 @@ class StubFunctionTest: XCTestCase {
         let mock = MockTestedClass()
         stub(mock) { mock in
             when(mock.count(characters: "a")).then {
-                return $0.characters.count * 2
+                return $0.count * 2
             }
         }
         

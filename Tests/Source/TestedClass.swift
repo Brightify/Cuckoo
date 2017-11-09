@@ -26,7 +26,7 @@ class TestedClass {
     }
     
     func count(characters: String) -> Int {
-        return characters.characters.count
+        return characters.count
     }
     
     func withThrows() throws -> Int {
@@ -106,7 +106,7 @@ public class PublicTestedClass {
     }
 
     func count(characters: String) -> Int {
-        return characters.characters.count
+        return characters.count
     }
 
     func withThrows() throws -> Int {
@@ -147,7 +147,7 @@ public class PublicPublicTestedClass {
     }
 
     public func count(characters: String) -> Int {
-        return characters.characters.count
+        return characters.count
     }
 
     public func withThrows() throws -> Int {
