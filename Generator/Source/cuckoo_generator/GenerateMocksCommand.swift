@@ -24,8 +24,8 @@ public struct GenerateMocksCommand: CommandProtocol {
     
     public func run(_ options: Options) -> Result<Void, CuckooGeneratorError> {
         let inputPathValues = Array(Set(options.files.map { Path($0).standardRawValue }))
-        let inputFiles = inputPathValues.map { File(path: $0) }
-        let tokens = inputFiles.flatMap { $0 }.map { Tokenizer(sourceFile: $0).tokenize() }
+        let inputFiles = inputPathValues.map { File(path: $0) }.flatMap { $0 }.sorted(by: { $0.path ?? "" > $1.path ?? "" })
+        let tokens = inputFiles.map { Tokenizer(sourceFile: $0).tokenize() }
         let tokensWithInheritance = options.noInheritance ? tokens : mergeInheritance(tokens)
         let tokensWithoutClasses = options.noClassMocking ? removeClasses(tokensWithInheritance) : tokensWithInheritance
         // filter excluded classes/protocols
