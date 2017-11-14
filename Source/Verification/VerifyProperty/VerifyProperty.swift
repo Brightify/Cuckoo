@@ -11,11 +11,12 @@ public struct VerifyProperty<T> {
     private let name: String
     private let callMatcher: CallMatcher
     private let sourceLocation: SourceLocation
-    
-    public var get: __DoNotUse<T> {
+
+    @discardableResult
+    public func get() -> __DoNotUse<T> {
         return manager.verify(getterName(name), callMatcher: callMatcher, parameterMatchers: [] as [ParameterMatcher<Void>], sourceLocation: sourceLocation)
     }
-    
+
     @discardableResult
     public func set<M: Matchable>(_ matcher: M) -> __DoNotUse<Void> where M.MatchedType == T {
         return manager.verify(setterName(name), callMatcher: callMatcher, parameterMatchers: [matcher.matcher], sourceLocation: sourceLocation)

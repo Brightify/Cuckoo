@@ -11,8 +11,9 @@ public struct VerifyReadOnlyProperty<T> {
     private let name: String
     private let callMatcher: CallMatcher
     private let sourceLocation: SourceLocation
-    
-    public var get: __DoNotUse<T> {
+
+    @discardableResult
+    public func get() -> __DoNotUse<T> {
         return manager.verify(getterName(name), callMatcher: callMatcher, parameterMatchers: [] as [ParameterMatcher<Void>], sourceLocation: sourceLocation)
     }
     
