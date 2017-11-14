@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.10.3
+
+* Added contribution guide.
+
 ## 0.10.2
 * Double the maximum parameters in `call` and `callThrows` methods. [bug #145](https://github.com/Brightify/Cuckoo/issues/145)
 * Make the generator deterministic by sorting input files.

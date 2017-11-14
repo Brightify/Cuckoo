@@ -12,7 +12,8 @@ script:
     - pushd Generator
     - make test
     - popd
-    - xcodebuild -workspace 'Cuckoo.xcworkspace' -scheme 'Cuckoo+Run' clean test
+    - xcodebuild -project 'Cuckoo.xcodeproj' -scheme 'Cuckoo-macOS+Run' clean test | xcpretty
+    - xcodebuild -project 'Cuckoo.xcodeproj' -scheme 'Cuckoo-iOS+Run' clean test | xcpretty
     - pod lib lint
 
 after_script:
