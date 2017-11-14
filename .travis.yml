@@ -13,7 +13,6 @@ script:
     - make test
     - popd
     - xcodebuild -project 'Cuckoo.xcodeproj' -scheme 'Cuckoo-macOS+Run' clean test | xcpretty
-    - xcodebuild -project 'Cuckoo.xcodeproj' -scheme 'Cuckoo-iOS+Run' clean test | xcpretty
     - pod lib lint
 
 after_script:
