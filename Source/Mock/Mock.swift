@@ -14,9 +14,7 @@ public protocol Mock: HasMockManager {
     associatedtype MocksType
     associatedtype Stubbing: StubbingProxy
     associatedtype Verification: VerificationProxy
-    
-    func spy(on victim: MocksType) -> Self
-    
+
     func getStubbingProxy() -> Stubbing
     
     func getVerificationProxy(_ callMatcher: CallMatcher, sourceLocation: SourceLocation) -> Verification
@@ -29,5 +27,22 @@ public extension Mock {
     
     func getVerificationProxy(_ callMatcher: CallMatcher, sourceLocation: SourceLocation) -> Verification {
         return Verification(manager: cuckoo_manager, callMatcher: callMatcher, sourceLocation: sourceLocation)
+    }
+}
+
+public protocol ProtocolMock: Mock { }
+
+public protocol ClassMock: Mock {
+    func enableSuperclassSpy()
+}
+
+public extension ClassMock {
+    func enableSuperclassSpy() {
+        cuckoo_manager.enableSuperclassSpy()
+    }
+
+    func withEnabledSuperclassSpy() -> Self {
+        enableSuperclassSpy()
+        return self
     }
 }

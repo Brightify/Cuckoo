@@ -1,8 +1,9 @@
 # Changelog
 
-## 0.10.3
+## 0.11.0
 
 * Added contribution guide.
+* **BREAKING CHANGE**: Spies were reworked. They now use superclasses as their victims if enabled. Please see the Readme for more information.
 
 ## 0.10.2
 * Double the maximum parameters in `call` and `callThrows` methods. [bug #145](https://github.com/Brightify/Cuckoo/issues/145)

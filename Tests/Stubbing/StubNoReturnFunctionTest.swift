@@ -26,7 +26,7 @@ class StubNoReturnFunctionTest: XCTestCase {
     }
     
     func testThenCallRealImplementation() {
-        let mock = MockTestedClass().spy(on: TestedClass())
+        let mock = MockTestedClass().withEnabledSuperclassSpy()
         stub(mock) { mock in
             when(mock.noReturn()).thenCallRealImplementation()
         }

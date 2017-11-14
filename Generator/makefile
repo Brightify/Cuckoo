@@ -10,8 +10,6 @@ superclean:
 
 build:
 	swift build
-	.build/debug/TemplateEncoder > Source/CuckooGeneratorFramework/Templates.swift
-	swift build
 
 test: build
 	#cd Tests && cucumber

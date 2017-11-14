@@ -51,6 +51,10 @@ class TestedClass {
     func withLabelAndUnderscore(labelA a: String, _ b: String) {
     }
 
+    func callingCountCharactersMethodWithHello() -> Int {
+        return count(characters: "Hello")
+    }
+
     // How to test for the absence of all these?
     private func thisFunctionShouldNotBeMocked1() {
     }

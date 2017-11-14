@@ -40,7 +40,9 @@ extension ContainerToken {
             "children": children.map { $0.serializeWithType() },
             "properties": properties,
             "methods": methods,
-            "initializers": implementation ? [] : initializers
+            "initializers": implementation ? [] : initializers,
+            "isImplementation": implementation,
+            "mockName": "Mock\(name)"
         ]
     }
 }

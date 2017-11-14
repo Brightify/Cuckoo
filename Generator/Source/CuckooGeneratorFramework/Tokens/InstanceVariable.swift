@@ -34,6 +34,9 @@ public struct InstanceVariable: Token {
             "type": type,
             "accesibility": accessibility.sourceName,
             "isReadOnly": readOnly,
+            "stubType": readOnly ?
+                (overriding ? "ClassToBeStubbedReadOnlyProperty" : "ProtocolToBeStubbedReadOnlyProperty") :
+                (overriding ? "ClassToBeStubbedProperty" : "ProtocolToBeStubbedProperty")
         ]
     }
 }

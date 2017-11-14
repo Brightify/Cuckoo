@@ -228,13 +228,6 @@
 			remoteGlobalIDString = "FileKit::FileKit::Product";
 			remoteInfo = FileKit;
 		};
-		18E2A3721FBB3FDD0058FEC5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 18E2A3401FBB3FDD0058FEC5 /* CuckooGenerator.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = "CuckooGenerator::TemplateEncoder::Product";
-			remoteInfo = TemplateEncoder;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -597,7 +590,6 @@
 				18E2A36D1FBB3FDD0058FEC5 /* CYaml.framework */,
 				18E2A36F1FBB3FDD0058FEC5 /* SWXMLHash.framework */,
 				18E2A3711FBB3FDD0058FEC5 /* FileKit.framework */,
-				18E2A3731FBB3FDD0058FEC5 /* TemplateEncoder */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -832,13 +824,6 @@
 			fileType = wrapper.framework;
 			path = FileKit.framework;
 			remoteRef = 18E2A3701FBB3FDD0058FEC5 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		18E2A3731FBB3FDD0058FEC5 /* TemplateEncoder */ = {
-			isa = PBXReferenceProxy;
-			fileType = text;
-			path = TemplateEncoder;
-			remoteRef = 18E2A3721FBB3FDD0058FEC5 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

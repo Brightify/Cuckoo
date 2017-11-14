@@ -45,7 +45,7 @@ public struct FileHeaderHandler {
         let possibleHeader = String(file.sourceFile.contents.utf8.prefix(possibleHeaderEnd)) ?? ""
         let singleLine = getPrefixToLastSingleLineComment(text: possibleHeader)
         let multiLine = getPrefixToLastMultiLineComment(text: possibleHeader)
-        return singleLine.characters.count > multiLine.characters.count ? singleLine : multiLine
+        return singleLine.count > multiLine.count ? singleLine : multiLine
     }
 
     private static func getPossibleHeaderEnd(current: Int, declarations: [Token]) -> Int {
@@ -68,7 +68,7 @@ public struct FileHeaderHandler {
     private static func getPrefixToLastSingleLineComment(text: String) -> String {
         if let range = text.range(of: "//", options: .backwards) {
             let lastLine = text.lineRange(for: range)
-            return text.substring(to: lastLine.upperBound)
+            return String(text[..<lastLine.upperBound])
         } else {
             return ""
         }
@@ -76,7 +76,7 @@ public struct FileHeaderHandler {
 
     private static func getPrefixToLastMultiLineComment(text: String) -> String {
         if let range = text.range(of: "*/", options: .backwards) {
-            return text.substring(to: range.upperBound) + "\n"
+            return String(text[..<range.upperBound]) + "\n"
         } else {
             return ""
         }

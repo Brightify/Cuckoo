@@ -24,3 +24,5 @@ public class ConcreteStub<IN, OUT>: Stub {
         actions.append(action)
     }
 }
+
+public class ClassConcreteStub<IN, OUT>: ConcreteStub<IN, OUT> { }

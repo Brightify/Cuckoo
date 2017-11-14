@@ -19,4 +19,7 @@ public struct ClassMethod: Method {
     public var isOptional: Bool {
         return false
     }
+    public var isOverriding: Bool {
+        return true
+    }
 }

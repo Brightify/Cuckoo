@@ -154,6 +154,17 @@ class ClassTest: XCTestCase {
         XCTAssertTrue(called)
         verify(mock).withLabelAndUnderscore(labelA: anyString(), anyString())
     }
+
+    func testCallingCountCharactersMethodWithHello() {
+        stub(mock) { mock in
+            when(mock.callingCountCharactersMethodWithHello()).thenCallRealImplementation()
+            when(mock.count(characters: any())).thenReturn(0)
+        }
+
+        XCTAssertEqual(mock.callingCountCharactersMethodWithHello(), 0)
+        verify(mock).callingCountCharactersMethodWithHello()
+        verify(mock).count(characters: "Hello")
+    }
     
     private enum TestError: Error {
         case unknown

@@ -110,7 +110,7 @@ class FailTest: XCTestCase {
     
     func testVerifyNoMoreInteractionsFail() {
         let error = TestUtils.catchCuckooFail {
-            let mock = MockTestedClass().spy(on: TestedClass())
+            let mock = MockTestedClass().withEnabledSuperclassSpy()
             
             mock.withOptionalClosure("a", closure: nil)
             mock.noReturn()

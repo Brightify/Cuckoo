@@ -56,9 +56,9 @@ public struct Tokenizer {
         let nameRange = extractRange(from: dictionary, offset: .NameOffset, length: .NameLength)
         let bodyRange = extractRange(from: dictionary, offset: .BodyOffset, length: .BodyLength)
 
-        let attributes = dictionary[Key.Attributes.rawValue]
+        let attributes = dictionary[Key.Attributes.rawValue] as? [Any]
 
-        let attributeOptional = (dictionary[Key.Attributes.rawValue] as? [Any])?.first(where: {($0 as? [String : String])?[Key.Attribute.rawValue] == Kinds.Optional.rawValue}) != nil
+        let attributeOptional = attributes?.first(where: {($0 as? [String : String])?[Key.Attribute.rawValue] == Kinds.Optional.rawValue}) != nil
 
         let accessibility = (dictionary[Key.Accessibility.rawValue] as? String).flatMap { Accessibility(rawValue: $0) }
         let type = dictionary[Key.TypeName.rawValue] as? String
@@ -175,7 +175,7 @@ public struct Tokenizer {
 
     private func tokenize(methodName: String, parameters: [SourceKitRepresentable]) -> [MethodParameter] {
         // Takes the string between `(` and `)`
-        let parameterNames = methodName.components(separatedBy: "(").last?.characters.dropLast(1).map { "\($0)" }.joined(separator: "")
+        let parameterNames = methodName.components(separatedBy: "(").last?.dropLast(1).map { "\($0)" }.joined(separator: "")
         var parameterLabels: [String?] = parameterNames?.components(separatedBy: ":").map { $0 != "_" ? $0 : nil } ?? []
 
         // Last element is not type.
@@ -223,14 +223,14 @@ public struct Tokenizer {
         }
         do {
             let regex = try NSRegularExpression(pattern: "(?:\\b|;)import(?:\\s|(?:\\/\\/.*\\n)|(?:\\/\\*.*\\*\\/))+([^\\s;\\/]+)", options: [])
-            let results = regex.matches(in: source, options: [], range: NSMakeRange(0, source.characters.count))
+            let results = regex.matches(in: source, options: [], range: NSMakeRange(0, source.count))
             return results.filter { result in
                     rangesToIgnore.filter { $0 ~= result.range.location }.isEmpty
                 }.map {
                     let libraryRange = $0.range(at: 1)
                     let fromIndex = source.index(source.startIndex, offsetBy: libraryRange.location)
                     let toIndex = source.index(fromIndex, offsetBy: libraryRange.length)
-                    let library = source.substring(with: fromIndex..<toIndex)
+                    let library = String(source[fromIndex..<toIndex])
                     let range = $0.range.location..<($0.range.location + $0.range.length)
                     return Import(range: range, library: library)
                 }

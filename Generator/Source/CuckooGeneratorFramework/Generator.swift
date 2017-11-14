@@ -18,7 +18,7 @@ public struct Generator {
         declarations = file.declarations
     }
 
-    public func generate() -> String {
+    public func generate() throws -> String {
         code.clear()
 
         let ext = Extension()
@@ -56,18 +56,16 @@ public struct Generator {
         
         ext.registerFilter("closeNestedClosure") { (value: Any?) in
             guard let parameters = value as? [MethodParameter] else { return value }
-            let s = self.closeNestedClosure(for: parameters)
-            print(s)
-            return s
+            return self.closeNestedClosure(for: parameters)
         }
         
-        let environment = Environment(loader: InternalLoader(), extensions: [ext])
+        let environment = Environment(extensions: [ext])
 
         let containers = declarations.flatMap { $0 as? ContainerToken }
             .filter { $0.accessibility.isAccessible }
             .map { $0.serializeWithType() }
 
-        return try! environment.renderTemplate(name: "Mock.swift.stencil", context: ["containers": containers])
+        return try environment.renderTemplate(string: Templates.mock, context: ["containers": containers])
     }
 
     private func matchableGenerics(with parameters: [MethodParameter]) -> String {

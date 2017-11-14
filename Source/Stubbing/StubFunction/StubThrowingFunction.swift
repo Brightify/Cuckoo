@@ -6,10 +6,21 @@
 //  Copyright © 2016 Brightify. All rights reserved.
 //
 
-public struct StubThrowingFunction<IN, OUT>: StubFunctionThenTrait, StubFunctionThenReturnTrait, StubFunctionThenCallRealImplementationTrait, StubFunctionThenThrowTrait {
+public protocol StubThrowingFunction: StubFunctionThenTrait, StubFunctionThenReturnTrait, StubFunctionThenThrowTrait {
+}
+
+public struct ProtocolStubThrowingFunction<IN, OUT>: StubThrowingFunction {
     public let stub: ConcreteStub<IN, OUT>
 
     public init(stub: ConcreteStub<IN, OUT>) {
+        self.stub = stub
+    }
+}
+
+public struct ClassStubThrowingFunction<IN, OUT>: StubThrowingFunction, StubFunctionThenCallRealImplementationTrait {
+    public let stub: ConcreteStub<IN, OUT>
+
+    public init(stub: ClassConcreteStub<IN, OUT>) {
         self.stub = stub
     }
 }

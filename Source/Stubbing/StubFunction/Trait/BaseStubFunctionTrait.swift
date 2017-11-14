@@ -7,8 +7,8 @@
 //
 
 public protocol BaseStubFunctionTrait {
-    associatedtype IN
-    associatedtype OUT
-
-    var stub: ConcreteStub<IN, OUT> { get }
+    associatedtype InputType
+    associatedtype OutputType
+    
+    var stub: ConcreteStub<InputType, OutputType> { get }
 }

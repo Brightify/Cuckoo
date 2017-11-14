@@ -114,12 +114,21 @@ Usage of Cuckoo is similar to [Mockito](http://mockito.org/) and [Hamcrest](http
 
 #### Mock initialization
 
-Mocks can be created with the same constructors as the mocked type. If you want to spy on object you can call `spy(on: Type)` method. Name of mock class always corresponds to name of the mocked class/protocol with `Mock` prefix. For example mock of protocol `Greeter` has a name `MockGreeter`.  
+Mocks can be created with the same constructors as the mocked type. Name of mock class always corresponds to name of the mocked class/protocol with `Mock` prefix. For example mock of protocol `Greeter` has a name `MockGreeter`.
 
 ```Swift
 let mock = MockGreeter()
-let spy = MockGreeter().spy(on: aRealInstanceOfGreeter)
 ```
+
+#### Spy
+
+Spies are a special case of Mocks where each call is forwarded to the victim by default. From Cuckoo version `0.11.0` we changed the way spies work. When you need a spy, give Cuckoo a class to mock instead of a protocol. You'll then be able to call `enableSuperclassSpy()` (or `withEnabledSuperclassSpy()`) on a mock instance and it will behave like a spy for the parent class.
+
+```Swift
+let spy = MockGreeter().withEnabledSuperclassSpy()
+```
+
+NOTE: The behavior was changed due to a limitation of Swift. Since we can't create a real proxy for the spy, calls inside the spy were not catched by the Mock and it was confusing. If you rely on the old behavior (i.e. you use spies with final classes), let us know on Slack or in the issues.
 
 #### Stubbing
 

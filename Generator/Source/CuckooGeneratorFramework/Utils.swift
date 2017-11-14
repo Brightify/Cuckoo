@@ -19,7 +19,7 @@ extension String {
     }
 
     subscript(range: Range<Int>) -> String {
-        let stringRange = characters.index(startIndex, offsetBy: range.lowerBound)..<characters.index(startIndex, offsetBy: range.upperBound)
+        let stringRange = index(startIndex, offsetBy: range.lowerBound)..<index(startIndex, offsetBy: range.upperBound)
         return String(self[stringRange])
     }
 }
