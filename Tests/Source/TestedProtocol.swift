@@ -35,7 +35,9 @@ protocol TestedProtocol {
     func withLabelAndUnderscore(labelA a: String, _ b: String)
 
     func withNamedTuple(tuple: (a: String, b: String)) -> Int
-    
+
+    func withImpliclyUnwrappedOptional(i: Int!) -> String
+
     init()
 
     init(labelA a: String, _ b: String)

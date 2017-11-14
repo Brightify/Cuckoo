@@ -11,8 +11,24 @@ class TestedSubclass: TestedClass, TestedProtocol {
         super.init()
     }
 
+    required init(test: String) {
+        super.init()
+    }
+
     required init(labelA a: String, _ b: String) {
         super.init()
+    }
+
+    init(notRequired: Bool) {
+        super.init()
+    }
+
+    convenience init(convenient: Bool) {
+        self.init(notRequired: convenient)
+    }
+
+    func withImpliclyUnwrappedOptional(i: Int!) -> String {
+        return ""
     }
 
     // Should not be conflicting in mocked class

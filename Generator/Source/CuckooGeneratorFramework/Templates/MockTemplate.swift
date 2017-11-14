@@ -41,7 +41,7 @@ class {{ container.mockName }}: {{ container.name }}, {% if container.isImplemen
     {% for initializer in container.initializers %}
     // {{initializer}}
     {{ initializer.accessibility }}{% if container.isImplementation %} override{% endif %}{% if initializer.@type == "ProtocolMethod" %} required{%endif%} init({{initializer.parameterSignature}}) {
-        {% if container.@type == "ClassDeclaration" %}
+        {% if container.isImplementation %}
         super.init({{initializer.call}})
         {% endif %}
     }

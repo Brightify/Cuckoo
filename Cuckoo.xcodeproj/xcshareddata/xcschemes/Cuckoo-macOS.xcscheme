@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "18E2A29A1FBB1D400058FEC5"
-               BuildableName = "Cuckoo_macOS.framework"
+               BuildableName = "Cuckoo.framework"
                BlueprintName = "Cuckoo-macOS"
                ReferencedContainer = "container:Cuckoo.xcodeproj">
             </BuildableReference>
@@ -44,7 +44,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "18E2A29A1FBB1D400058FEC5"
-            BuildableName = "Cuckoo_macOS.framework"
+            BuildableName = "Cuckoo.framework"
             BlueprintName = "Cuckoo-macOS"
             ReferencedContainer = "container:Cuckoo.xcodeproj">
          </BuildableReference>
@@ -67,7 +67,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "18E2A29A1FBB1D400058FEC5"
-            BuildableName = "Cuckoo_macOS.framework"
+            BuildableName = "Cuckoo.framework"
             BlueprintName = "Cuckoo-macOS"
             ReferencedContainer = "container:Cuckoo.xcodeproj">
          </BuildableReference>
@@ -85,7 +85,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "18E2A29A1FBB1D400058FEC5"
-            BuildableName = "Cuckoo_macOS.framework"
+            BuildableName = "Cuckoo.framework"
             BlueprintName = "Cuckoo-macOS"
             ReferencedContainer = "container:Cuckoo.xcodeproj">
          </BuildableReference>

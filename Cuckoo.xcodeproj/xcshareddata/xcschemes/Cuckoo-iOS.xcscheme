@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "18E2A28C1FBB1CFC0058FEC5"
-               BuildableName = "Cuckoo_iOS.framework"
+               BuildableName = "Cuckoo.framework"
                BlueprintName = "Cuckoo-iOS"
                ReferencedContainer = "container:Cuckoo.xcodeproj">
             </BuildableReference>
@@ -44,7 +44,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "18E2A28C1FBB1CFC0058FEC5"
-            BuildableName = "Cuckoo_iOS.framework"
+            BuildableName = "Cuckoo.framework"
             BlueprintName = "Cuckoo-iOS"
             ReferencedContainer = "container:Cuckoo.xcodeproj">
          </BuildableReference>
@@ -67,7 +67,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "18E2A28C1FBB1CFC0058FEC5"
-            BuildableName = "Cuckoo_iOS.framework"
+            BuildableName = "Cuckoo.framework"
             BlueprintName = "Cuckoo-iOS"
             ReferencedContainer = "container:Cuckoo.xcodeproj">
          </BuildableReference>
@@ -85,7 +85,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "18E2A28C1FBB1CFC0058FEC5"
-            BuildableName = "Cuckoo_iOS.framework"
+            BuildableName = "Cuckoo.framework"
             BlueprintName = "Cuckoo-iOS"
             ReferencedContainer = "container:Cuckoo.xcodeproj">
          </BuildableReference>
