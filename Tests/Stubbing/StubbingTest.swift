@@ -218,7 +218,7 @@ class StubbingTest: XCTestCase {
         XCTAssertEqual(mock.privateSetProperty, 5)
         XCTAssertEqual(mock.readOnlyProperty, "b")
         XCTAssertEqual({
-            mock.readWriteProperty = 100;
+            mock.readWriteProperty = 100
             return setReadWriteProperty
         }(), 100)
         XCTAssertEqual(mock.readWriteProperty, 7)

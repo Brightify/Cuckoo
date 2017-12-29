@@ -127,6 +127,10 @@
 		18E2A3371FBB31290058FEC5 /* ArgumentCaptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E2A25B1FBB1C330058FEC5 /* ArgumentCaptor.swift */; };
 		18E2A33D1FBB3D7F0058FEC5 /* GeneratedMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E2A33B1FBB3D6E0058FEC5 /* GeneratedMocks.swift */; };
 		18E2A33E1FBB3D7F0058FEC5 /* GeneratedMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E2A33B1FBB3D6E0058FEC5 /* GeneratedMocks.swift */; };
+		58C540B5C5EF0037F77C90B5 /* ExcludedTestClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C54D12B64AF3169FC8A1A3 /* ExcludedTestClass.swift */; };
+		58C54612D0DB47A284F29AD5 /* ExcludedStubTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C54B2B810BC9284205CB16 /* ExcludedStubTest.swift */; };
+		58C54C0D4A65BCDC47704C0B /* ExcludedTestClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C54D12B64AF3169FC8A1A3 /* ExcludedTestClass.swift */; };
+		58C54E2CB6689135915CFC3E /* ExcludedStubTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C54B2B810BC9284205CB16 /* ExcludedStubTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -310,6 +314,8 @@
 		18E2A33B1FBB3D6E0058FEC5 /* GeneratedMocks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratedMocks.swift; sourceTree = "<group>"; };
 		18E2A3401FBB3FDD0058FEC5 /* CuckooGenerator.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CuckooGenerator.xcodeproj; path = Generator/CuckooGenerator.xcodeproj; sourceTree = "<group>"; };
 		18E2A3971FBB43E60058FEC5 /* .travis.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .travis.yml; sourceTree = "<group>"; };
+		58C54B2B810BC9284205CB16 /* ExcludedStubTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExcludedStubTest.swift; sourceTree = "<group>"; };
+		58C54D12B64AF3169FC8A1A3 /* ExcludedTestClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExcludedTestClass.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -478,6 +484,7 @@
 				18E2A27D1FBB1C330058FEC5 /* StubTest.swift */,
 				18E2A27E1FBB1C330058FEC5 /* TestUtils.swift */,
 				18E2A27F1FBB1C330058FEC5 /* Verification */,
+				58C54B2B810BC9284205CB16 /* ExcludedStubTest.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -514,6 +521,7 @@
 				18E2A2741FBB1C330058FEC5 /* TestedSubclass.swift */,
 				18E2A2751FBB1C330058FEC5 /* TestedSubProtocol.swift */,
 				18E2A2761FBB1C330058FEC5 /* UnicodeTestProtocol.swift */,
+				58C54D12B64AF3169FC8A1A3 /* ExcludedTestClass.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -999,6 +1007,8 @@
 				18E2A2C71FBB22B60058FEC5 /* DefaultValueRegistryTest.swift in Sources */,
 				18E2A2E01FBB22C40058FEC5 /* TestedClass.swift in Sources */,
 				18E2A2F51FBB22ED0058FEC5 /* ArgumentCaptorTest.swift in Sources */,
+				58C540B5C5EF0037F77C90B5 /* ExcludedTestClass.swift in Sources */,
+				58C54612D0DB47A284F29AD5 /* ExcludedStubTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1034,6 +1044,8 @@
 				18E2A2C31FBB22B50058FEC5 /* DefaultValueRegistryTest.swift in Sources */,
 				18E2A2D81FBB22C30058FEC5 /* TestedClass.swift in Sources */,
 				18E2A2F31FBB22EC0058FEC5 /* ArgumentCaptorTest.swift in Sources */,
+				58C54C0D4A65BCDC47704C0B /* ExcludedTestClass.swift in Sources */,
+				58C54E2CB6689135915CFC3E /* ExcludedStubTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

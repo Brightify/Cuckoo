@@ -22,6 +22,8 @@ let generatorArguments = [
     "generate",
     "--testable",
     "Cuckoo",
+    "--exclude",
+    "ExcludedTestClass,ExcludedProtocol",
     "--output",
     output,
     "\(projectDir)/Tests/Source/ClassForStubTesting.swift",
@@ -31,6 +33,7 @@ let generatorArguments = [
     "\(projectDir)/Tests/Source/TestedProtocol.swift",
     "\(projectDir)/Tests/Source/TestedClass.swift",
     "\(projectDir)/Tests/Source/TestedSubclass.swift",
+    "\(projectDir)/Tests/Source/ExcludedTestClass.swift",
 ]
 
 let useRun = Bool(ProcessInfo.processInfo.environment["USE_RUN", default: "false"]) ?? false
