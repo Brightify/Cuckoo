@@ -56,19 +56,19 @@ class TestedSubclass: TestedClass, TestedProtocol {
         return 0
     }
     
-    func withThrowingClosure(closure: ((String)) throws -> String?) -> String? {
+    func withThrowingClosure(closure: (String) throws -> String?) -> String? {
         return nil
     }
     
-    func withThrowingClosureThrows(closure: ((String)) throws -> String?) throws -> String? {
+    func withThrowingClosureThrows(closure: (String) throws -> String?) throws -> String? {
         return nil
     }
     
-    func withThrowingEscapingClosure(closure: @escaping ((String)) throws -> String?) -> String? {
+    func withThrowingEscapingClosure(closure: @escaping (String) throws -> String?) -> String? {
         return nil
     }
     
-    func withThrowingOptionalClosureThrows(closure: (((String)) throws -> String?)?) throws -> String? {
+    func withThrowingOptionalClosureThrows(closure: ((String) throws -> String?)?) throws -> String? {
         return nil
     }
 
@@ -79,4 +79,12 @@ class TestedSubclass: TestedClass, TestedProtocol {
     func methodWithParameter(_ param: Int) -> String {
         return "c"
     }
+}
+
+class TestedSubSubClass: TestedSubclass {
+
+    func subSubMethod() -> String? {
+        return nil
+    }
+    
 }

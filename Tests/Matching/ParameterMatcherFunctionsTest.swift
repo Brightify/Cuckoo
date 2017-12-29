@@ -54,11 +54,28 @@ class ParameterMatcherFunctionsTest: XCTestCase {
     func testAny() {
         XCTAssertTrue(any().matches(X()))
     }
+
+    func testIsNil() {
+        let optional: X? = nil
+        XCTAssertTrue(isNil().matches(nil as X?))
+        XCTAssertTrue(isNil().matches(optional))
+        XCTAssertFalse(isNil().matches(X()))
+    }
     
     func testAnyClosure() {
         XCTAssertTrue(anyClosure().matches({ 0 }))
     }
-    
+
+    func testAnyThrowingClosure() {
+        XCTAssertTrue(anyThrowingClosure().matches({ 0 }))
+        XCTAssertTrue(anyThrowingClosure().matches({ (p: Int) throws in 1 }))
+    }
+
+    func testAnyOptionalThrowingClosure() {
+        XCTAssertTrue(anyOptionalThrowingClosure().matches({ (i: String) in 0 }))
+        XCTAssertTrue(anyOptionalThrowingClosure().matches({ (p: Int) throws in 1 }))
+    }
+
     func testOptionalEqualToEquatable() {
         XCTAssertTrue(equal(to: nil as Int?).matches(nil))
         XCTAssertTrue(equal(to: 1 as Int?).matches(1))

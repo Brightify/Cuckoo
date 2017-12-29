@@ -45,6 +45,10 @@ public func anyString() -> ParameterMatcher<String> {
 }
 
 /// Returns a matcher matching any closure.
+public func anyThrowingClosure<IN, OUT>() -> ParameterMatcher<(IN) throws -> OUT> {
+    return ParameterMatcher()
+}
+
 public func anyClosure<IN, OUT>() -> ParameterMatcher<(IN) -> OUT> {
     return ParameterMatcher()
 }
@@ -97,9 +101,28 @@ public func anyClosure<IN, OUT>() -> ParameterMatcher<(((IN)) -> OUT)?> {
     return notNil()
 }
 
+public func anyOptionalThrowingClosure<IN, OUT>() -> ParameterMatcher<(((IN)) throws -> OUT)?> {
+    return notNil()
+}
+
 /// Returns a matcher matching any non nil value.
 public func notNil<T>() -> ParameterMatcher<T?> {
     return ParameterMatcher {
-        if case .none = $0 { return false } else { return true }
+        if case .none = $0 {
+            return false
+        } else {
+            return true
+        }
+    }
+}
+
+/// Returns a matcher matching any nil value
+public func isNil<T>() -> ParameterMatcher<T?> {
+    return ParameterMatcher {
+        if case .none = $0 {
+            return true
+        } else {
+            return false
+        }
     }
 }
