@@ -75,7 +75,7 @@ public func sameInstance<T: AnyObject>(as object: T?) -> ParameterMatcher<T?> {
 }
 
 /// Returns an identity matcher.
-public func sameInstance<T: AnyObject>(as object: T) -> ParameterMatcher<T?> {
+public func sameInstance<T: AnyObject>(as object: T) -> ParameterMatcher<T> {
     return equal(to: object, equalWhen: ===)
 }
 
