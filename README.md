@@ -76,7 +76,7 @@ INPUT_DIR="$PROJECT_DIR"
 echo "Mocks Input Directory = $INPUT_DIR"
 
 # Generate mock files, include as many input files as you'd like to create mocks for.
-${PODS_ROOT}/Cuckoo/run generate --testable "$PROJECT_NAME" \
+"${PODS_ROOT}/Cuckoo/run" generate --testable "$PROJECT_NAME" \
 --output "${OUTPUT_FILE}" \
 "$INPUT_DIR/FileName1.swift" \
 "$INPUT_DIR/FileName2.swift" \
