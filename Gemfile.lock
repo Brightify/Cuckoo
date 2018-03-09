@@ -93,7 +93,6 @@ GEM
     multi_xml (0.6.0)
     multipart-post (2.0.0)
     nanaimo (0.2.3)
-    netrc (0.11.0)
     os (0.9.6)
     plist (3.3.0)
     public_suffix (2.0.5)
@@ -101,10 +100,6 @@ GEM
       declarative (< 0.1.0)
       declarative-option (< 0.2.0)
       uber (< 0.2.0)
-    rest-client (2.0.2)
-      http-cookie (>= 1.0.2, < 2.0)
-      mime-types (>= 1.16, < 4.0)
-      netrc (~> 0.8)
     retriable (3.1.1)
     rouge (2.0.7)
     rubyzip (1.2.1)
@@ -144,7 +139,6 @@ PLATFORMS
 DEPENDENCIES
   fastlane
   json
-  rest-client
 
 BUNDLED WITH
    1.16.1
