@@ -30,6 +30,7 @@ platform :mac do
     api_url = "https://api.#{base_url}"
     auth_string = "MatyasKriz:#{access_token}"
     changelog = create_changelog(tag_name).gsub(/`/, '``').gsub(/'/, '&#39;').gsub(/"/, '&#34;').gsub(/\n/, '\\n')
+    add_git_tag(tag: new_tag, force: true)
 
     # https://developer.github.com/v3/repos/releases/#create-a-release
     creation_body = "'{\"tag_name\":\"#{tag_name}\",\"target_commitish\":\"master\", \"name\":\"New Release – #{tag_name}\", \"body\":\"#{changelog}\", \"draft\":true, \"prerelease\":false}'"
@@ -49,10 +50,9 @@ platform :mac do
   end
 
   def create_changelog new_tag
-    return changelog_from_git_commits(pretty: "- %s", merge_commit_filtering: "exclude_merges")
-    add_git_tag(tag: new_tag, force: true)
+    changelog = changelog_from_git_commits(pretty: "- %s", merge_commit_filtering: "exclude_merges")
     if changelog
-      changelog.gsub!(/(B|b)ump .*(internal|beta|release).* number.*\n?/, '')
+      changelog.gsub(/.(?<=[^|\n]).*[B|b]ump.*\n?/, '')
     else
       'No new changes, sorry!'
     end
