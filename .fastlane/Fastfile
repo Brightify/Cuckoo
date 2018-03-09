@@ -1,0 +1,64 @@
+fastlane_version '2.54.1'
+
+default_platform :mac
+
+fastlane_require 'json'
+
+platform :mac do
+  before_all do
+    ensure_git_status_clean
+    ensure_git_branch
+  end
+
+  desc "Releases build."
+  lane :release do |options| # fastlane release tag_name:TAG_NAME – tag_name is required
+    tag_name = options[:tag_name]
+    # we'll get the latest tag on the branch
+    raise 'Tag name is required to create the new tag.' unless tag_name
+
+    # Settings
+    cuckoo_gen_path = '../../Generator/.build/debug/cuckoo_generator'
+    binary_name = 'CuckooGenerator'
+
+    # Personal Access Token
+    access_token = ENV['RELEASE_ACCESS_TOKEN']
+    raise 'Please define enviroment variable "RELEASE_ACCESS_TOKEN" with the personal access token to use.' unless access_token
+
+    # URL variables
+    repo_path = 'MatyasKriz/ivs-calculator'
+    base_url = "github.com/repos/#{repo_path}/releases"
+    api_url = "https://api.#{base_url}"
+    auth_string = "MatyasKriz:#{access_token}"
+    changelog = create_changelog(tag_name).gsub(/`/, '``').gsub(/'/, '&#39;').gsub(/"/, '&#34;').gsub(/\n/, '\\n')
+
+    # https://developer.github.com/v3/repos/releases/#create-a-release
+    creation_body = "'{\"tag_name\":\"#{tag_name}\",\"target_commitish\":\"master\", \"name\":\"New Release – #{tag_name}\", \"body\":\"#{changelog}\", \"draft\":true, \"prerelease\":false}'"
+    creation_response = JSON.parse(`curl -X POST -d #{creation_body} -u #{auth_string} #{api_url} -v`)
+    raise 'Release draft creation failed!' unless creation_response
+    upload_url = (creation_response['upload_url']).sub(/{.*name.*}/, '')
+
+    # https://developer.github.com/v3/repos/releases/#upload-a-release-asset
+    upload_response = JSON.parse(`curl -X POST --data-binary "@#{cuckoo_gen_path}" -u "#{auth_string}" "#{upload_url}?name=#{binary_name}" -H "Content-Type:application/octet-stream"`)
+    raise 'Release draft upload failed!' unless upload_response
+
+    asset_url = upload_response['url']
+    browser_dl_url = upload_response['browser_download_url']
+    # do with these as you please
+
+    puts "All done!\nGo home now...\nI mean go to #{creation_response['url']} and release the thing."
+  end
+
+  def create_changelog new_tag
+    return changelog_from_git_commits(pretty: "- %s", merge_commit_filtering: "exclude_merges")
+    add_git_tag(tag: new_tag, force: true)
+    if changelog
+      changelog.gsub!(/(B|b)ump .*(internal|beta|release).* number.*\n?/, '')
+    else
+      'No new changes, sorry!'
+    end
+  end
+
+  error do |lane, exception|
+    puts "Release failed. This might help: #{exception}"
+  end
+end
