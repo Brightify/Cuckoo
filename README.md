@@ -76,12 +76,12 @@ INPUT_DIR="$PROJECT_DIR"
 echo "Mocks Input Directory = $INPUT_DIR"
 
 # Generate mock files, include as many input files as you'd like to create mocks for.
-${PODS_ROOT}/Cuckoo/run generate --testable "$PROJECT_NAME" \
+"${PODS_ROOT}/Cuckoo/run" generate --testable "$PROJECT_NAME" \
 --output "${OUTPUT_FILE}" \
 "$INPUT_DIR/FileName1.swift" \
 "$INPUT_DIR/FileName2.swift" \
 "$INPUT_DIR/FileName3.swift"
-# ... and so forth
+# ... and so forth, the last line should never end with a backslash
 
 # After running once, locate `GeneratedMocks.swift` and drag it into your Xcode test target group.
 ```
@@ -99,11 +99,11 @@ github "SwiftKit/Cuckoo"
 
 Then use the `Run script` from above and replace
 ```Bash
-${PODS_ROOT}/Cuckoo/run
+"${PODS_ROOT}/Cuckoo/run"
 ```
 with
 ```Bash
-Carthage/Checkouts/Cuckoo/run
+"Carthage/Checkouts/Cuckoo/run"
 ```
 
 Also don't forget to add the Framework into your project.
