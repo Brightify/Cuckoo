@@ -36,7 +36,7 @@ platform :mac do
     sh('../build_generator')
 
     # Settings
-    cuckoo_gen_path = '../Generator/.build/debug/cuckoo_generator'
+    cuckoo_gen_path = '../Generator/.build/release/cuckoo_generator'
     binary_name = 'cuckoo_generator'
 
     # GitHub username
@@ -75,7 +75,7 @@ platform :mac do
     upload_response = JSON.parse(`curl -X POST --data-binary "@#{cuckoo_gen_path}" -u "#{auth_string}" "#{upload_url}?name=#{binary_name}" -H "Content-Type:application/octet-stream"`)
     UI.crash! 'Release draft upload failed!' unless upload_response
 
-    $RELEASE_URL = creation_response['url']
+    UI.success "All done!\nYou can now visit #{creation_response['url']} (command+click) and release the thing."
   end
 
   def create_changelog
@@ -88,12 +88,10 @@ platform :mac do
   end
 
   after_all do
-    UI.success "All done!\nYou can now visit #{$RELEASE_URL} (command+click) and release the thing."
-    reset_git_repo # this resets git repo, do everything with git before this
+    reset_git_repo
   end
 
   error do |_, exception|
-    UI.failure "Release failed. This might help: #{exception}"
-    reset_git_repo
+    UI.error "Release failed. This might help: #{exception}"
   end
 end
