@@ -63,7 +63,6 @@ platform :mac do
     git_commit(path: './Cuckoo.podspec', message: "Bump version.")
     add_git_tag(tag: new_version)
     push_to_git_remote
-    pod_push(path: 'Cuckoo.podspec')
 
     # https://developer.github.com/v3/repos/releases/#create-a-release
     creation_body = "'{\"tag_name\":\"#{new_version}\",\"target_commitish\":\"master\", \"name\":\"New Release – #{new_version}\", \"body\":\"#{changelog}\", \"draft\":true, \"prerelease\":false}'"
@@ -74,6 +73,9 @@ platform :mac do
     # https://developer.github.com/v3/repos/releases/#upload-a-release-asset
     upload_response = JSON.parse(`curl -X POST --data-binary "@#{cuckoo_gen_path}" -u "#{auth_string}" "#{upload_url}?name=#{binary_name}" -H "Content-Type:application/octet-stream"`)
     UI.crash! 'Release draft upload failed!' unless upload_response
+
+    pod_lib_lint
+    pod_push(path: 'Cuckoo.podspec')
 
     UI.success "All done!\nYou can now visit #{creation_response['url']} (command+click) and release the thing."
   end
