@@ -8,28 +8,54 @@ platform :mac do
   before_all do
     ensure_git_status_clean
     ensure_git_branch
+    pod_lib_lint
   end
 
-  desc "Releases build."
-  lane :release do |options| # fastlane release tag_name:TAG_NAME – tag_name is required
-    tag_name = options[:tag_name]
-    # we'll get the latest tag on the branch
-    raise 'Tag name is required to create the new tag.' unless tag_name
+  desc 'Releases build specified by user.'
+  lane :release do |options|
+    release_type = UI.select('Select release type: ', %w[major minor patch])
+    upload_release release_type
+  end
 
+  desc 'Releases major build. (+1).0.0'
+  lane :major do |options| # fastlane major
+    upload_release 'major'
+  end
+
+  desc 'Releases minor build. X.(+1).0'
+  lane :minor do |options| # fastlane minor
+    upload_release 'minor'
+  end
+
+  desc 'Releases patch build. X.X.(+1)'
+  lane :patch do |options| # fastlane patch
+    upload_release 'patch'
+  end
+
+  def upload_release release_type
     # Settings
     cuckoo_gen_path = '../../Generator/.build/debug/cuckoo_generator'
     binary_name = 'CuckooGenerator'
 
+    # GitHub username
+    username_var_name = 'GITHUB_USERNAME'
+    username = ENV[username_var_name]
+
     # Personal Access Token
     token_var_name = 'RELEASE_ACCESS_TOKEN'
     access_token = ENV[token_var_name]
-    raise 'Please define enviroment variable "#{token_var_name}" with the personal access token to use.' unless access_token
+
+    # Error Raisins
+    UI.input "Please type in your GitHub username or cancel the release and define enviroment variable \"#{token_var_name}\" with the personal access token to use." unless access_token
+    UI.input "Please type in your GitHub access token or cancel the release and define enviroment variable \"#{username_var_name}\" with your GitHub username." unless username
+
+    version = version_bump_podspec(path: 'Cuckoo.podspec', bump_type: release_type)
 
     # URL variables
-    repo_path = 'MatyasKriz/ivs-calculator'
+    repo_path = 'Brightify/Cuckoo'
     base_url = "github.com/repos/#{repo_path}/releases"
     api_url = "https://api.#{base_url}"
-    auth_string = "MatyasKriz:#{access_token}"
+    auth_string = "#{username}:#{access_token}"
     changelog = create_changelog(tag_name).gsub(/`/, '``').gsub(/'/, '&#39;').gsub(/"/, '&#34;').gsub(/\n/, '\\n')
     add_git_tag(tag: new_tag, force: true)
 
@@ -43,11 +69,10 @@ platform :mac do
     upload_response = JSON.parse(`curl -X POST --data-binary "@#{cuckoo_gen_path}" -u "#{auth_string}" "#{upload_url}?name=#{binary_name}" -H "Content-Type:application/octet-stream"`)
     raise 'Release draft upload failed!' unless upload_response
 
-    asset_url = upload_response['url']
     browser_dl_url = upload_response['browser_download_url']
     # do with these as you please
 
-    puts "All done!\nGo home now...\nI mean go to #{creation_response['url']} and release the thing."
+    $RELEASE_URL = creation_response['url']
   end
 
   def create_changelog new_tag
@@ -57,6 +82,10 @@ platform :mac do
     else
       'No new changes, sorry!'
     end
+  end
+
+  after_all do |lane|
+    UI.success "All done!\nYou can now visit #{$RELEASE_URL} (command+click) and release the thing."
   end
 
   error do |lane, exception|
