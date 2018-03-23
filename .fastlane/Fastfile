@@ -57,15 +57,14 @@ platform :mac do
     base_url = "github.com/repos/#{repo_path}/releases"
     api_url = "https://api.#{base_url}"
     auth_string = "#{username}:#{access_token}"
-    version = version_get_podspec(path: 'Cuckoo.podspec')
-    changelog = create_changelog(version).gsub(/`/, '``').gsub(/'/, '&#39;').gsub(/"/, '&#34;').gsub(/\n/, '\\n')
-    new_version = version_bump_podspec(path: 'Cuckoo.podspec', bump_type: release_type)
+    changelog = create_changelog.gsub(/`/, '``').gsub(/'/, '&#39;').gsub(/"/, '&#34;').gsub(/\n/, '\\n')
+    version = version_bump_podspec(path: 'Cuckoo.podspec', bump_type: release_type)
     git_commit(path: './Cuckoo.podspec', message: "Bump version.")
-    add_git_tag(tag: new_version)
+    add_git_tag(tag: version)
     push_to_git_remote
 
     # https://developer.github.com/v3/repos/releases/#create-a-release
-    creation_body = "'{\"tag_name\":\"#{new_version}\",\"target_commitish\":\"master\", \"name\":\"New Release – #{new_version}\", \"body\":\"#{changelog}\", \"draft\":true, \"prerelease\":false}'"
+    creation_body = "'{\"tag_name\":\"#{version}\",\"target_commitish\":\"master\", \"name\":\"New Release – #{version}\", \"body\":\"#{changelog}\", \"draft\":true, \"prerelease\":false}'"
     creation_response = JSON.parse(`curl -X POST -d #{creation_body} -u #{auth_string} #{api_url} -v`)
     UI.crash! 'Release draft creation failed!' unless creation_response
     upload_url = (creation_response['upload_url']).sub(/{.*name.*}/, '')
