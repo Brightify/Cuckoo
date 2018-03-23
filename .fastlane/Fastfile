@@ -61,7 +61,6 @@ platform :mac do
     version = version_bump_podspec(path: 'Cuckoo.podspec', bump_type: release_type)
     git_commit(path: './Cuckoo.podspec', message: "Bump version.")
     add_git_tag(tag: version)
-    push_to_git_remote
 
     # https://developer.github.com/v3/repos/releases/#create-a-release
     creation_body = "'{\"tag_name\":\"#{version}\",\"target_commitish\":\"master\", \"name\":\"New Release – #{version}\", \"body\":\"#{changelog}\", \"draft\":true, \"prerelease\":false}'"
@@ -74,6 +73,7 @@ platform :mac do
     UI.crash! 'Release draft upload failed!' unless upload_response
 
     pod_lib_lint
+    push_to_git_remote
     pod_push(path: 'Cuckoo.podspec')
 
     UI.success "All done!\nYou can now visit #{creation_response['url']} (command+click) and release the thing."
