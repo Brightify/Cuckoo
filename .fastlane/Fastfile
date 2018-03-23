@@ -60,6 +60,7 @@ platform :mac do
     new_version = version_bump_podspec(path: 'Cuckoo.podspec', bump_type: release_type)
     git_commit(path: './Cuckoo.podspec', message: "Bump version.")
     add_git_tag(tag: new_version)
+    pod_push(path: 'Cuckoo.podspec')
 
     # https://developer.github.com/v3/repos/releases/#create-a-release
     creation_body = "'{\"tag_name\":\"#{new_version}\",\"target_commitish\":\"master\", \"name\":\"New Release – #{new_version}\", \"body\":\"#{changelog}\", \"draft\":true, \"prerelease\":false}'"
