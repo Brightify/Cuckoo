@@ -21,8 +21,9 @@ platform :mac do
     binary_name = 'CuckooGenerator'
 
     # Personal Access Token
-    access_token = ENV['RELEASE_ACCESS_TOKEN']
-    raise 'Please define enviroment variable "RELEASE_ACCESS_TOKEN" with the personal access token to use.' unless access_token
+    token_var_name = 'RELEASE_ACCESS_TOKEN'
+    access_token = ENV[token_var_name]
+    raise 'Please define enviroment variable "#{token_var_name}" with the personal access token to use.' unless access_token
 
     # URL variables
     repo_path = 'MatyasKriz/ivs-calculator'
