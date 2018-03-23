@@ -8,7 +8,6 @@ platform :mac do
   before_all do
     ensure_git_status_clean
     ensure_git_branch
-    pod_lib_lint
   end
 
   desc 'Releases build specified by user.'
@@ -33,9 +32,12 @@ platform :mac do
   end
 
   def upload_release release_type
+    # Building Cuckoo Generator
+    sh('../build_generator')
+
     # Settings
-    cuckoo_gen_path = '../../Generator/.build/debug/cuckoo_generator'
-    binary_name = 'CuckooGenerator'
+    cuckoo_gen_path = '../Generator/.build/debug/cuckoo_generator'
+    binary_name = 'cuckoo_generator'
 
     # GitHub username
     username_var_name = 'GITHUB_USERNAME'
@@ -60,6 +62,7 @@ platform :mac do
     new_version = version_bump_podspec(path: 'Cuckoo.podspec', bump_type: release_type)
     git_commit(path: './Cuckoo.podspec', message: "Bump version.")
     add_git_tag(tag: new_version)
+    push_to_git_remote
     pod_push(path: 'Cuckoo.podspec')
 
     # https://developer.github.com/v3/repos/releases/#create-a-release
@@ -71,9 +74,6 @@ platform :mac do
     # https://developer.github.com/v3/repos/releases/#upload-a-release-asset
     upload_response = JSON.parse(`curl -X POST --data-binary "@#{cuckoo_gen_path}" -u "#{auth_string}" "#{upload_url}?name=#{binary_name}" -H "Content-Type:application/octet-stream"`)
     UI.crash! 'Release draft upload failed!' unless upload_response
-
-    # browser_dl_url = upload_response['browser_download_url']
-    # do with these as you please
 
     $RELEASE_URL = creation_response['url']
   end
@@ -89,7 +89,6 @@ platform :mac do
 
   after_all do
     UI.success "All done!\nYou can now visit #{$RELEASE_URL} (command+click) and release the thing."
-    push_to_git_remote
     reset_git_repo # this resets git repo, do everything with git before this
   end
 
