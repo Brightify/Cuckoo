@@ -1,0 +1,94 @@
+fastlane_version '2.54.1'
+
+default_platform :mac
+
+fastlane_require 'json'
+
+platform :mac do
+  before_all do
+    ensure_git_status_clean
+    ensure_git_branch
+    pod_lib_lint
+  end
+
+  desc 'Releases build specified by user.'
+  lane :release do |options|
+    release_type = UI.select('Select release type: ', %w[major minor patch])
+    upload_release release_type
+  end
+
+  desc 'Releases major build. (+1).0.0'
+  lane :major do |options| # fastlane major
+    upload_release 'major'
+  end
+
+  desc 'Releases minor build. X.(+1).0'
+  lane :minor do |options| # fastlane minor
+    upload_release 'minor'
+  end
+
+  desc 'Releases patch build. X.X.(+1)'
+  lane :patch do |options| # fastlane patch
+    upload_release 'patch'
+  end
+
+  def upload_release release_type
+    # Settings
+    cuckoo_gen_path = '../../Generator/.build/debug/cuckoo_generator'
+    binary_name = 'CuckooGenerator'
+
+    # GitHub username
+    username_var_name = 'GITHUB_USERNAME'
+    username = ENV[username_var_name]
+
+    # Personal Access Token
+    token_var_name = 'RELEASE_ACCESS_TOKEN'
+    access_token = ENV[token_var_name]
+
+    # Error Raisins
+    UI.input "Please type in your GitHub username or cancel the release and define enviroment variable \"#{token_var_name}\" with the personal access token to use." unless access_token
+    UI.input "Please type in your GitHub access token or cancel the release and define enviroment variable \"#{username_var_name}\" with your GitHub username." unless username
+
+    version = version_bump_podspec(path: 'Cuckoo.podspec', bump_type: release_type)
+
+    # URL variables
+    repo_path = 'Brightify/Cuckoo'
+    base_url = "github.com/repos/#{repo_path}/releases"
+    api_url = "https://api.#{base_url}"
+    auth_string = "#{username}:#{access_token}"
+    changelog = create_changelog(tag_name).gsub(/`/, '``').gsub(/'/, '&#39;').gsub(/"/, '&#34;').gsub(/\n/, '\\n')
+    add_git_tag(tag: new_tag, force: true)
+
+    # https://developer.github.com/v3/repos/releases/#create-a-release
+    creation_body = "'{\"tag_name\":\"#{tag_name}\",\"target_commitish\":\"master\", \"name\":\"New Release – #{tag_name}\", \"body\":\"#{changelog}\", \"draft\":true, \"prerelease\":false}'"
+    creation_response = JSON.parse(`curl -X POST -d #{creation_body} -u #{auth_string} #{api_url} -v`)
+    raise 'Release draft creation failed!' unless creation_response
+    upload_url = (creation_response['upload_url']).sub(/{.*name.*}/, '')
+
+    # https://developer.github.com/v3/repos/releases/#upload-a-release-asset
+    upload_response = JSON.parse(`curl -X POST --data-binary "@#{cuckoo_gen_path}" -u "#{auth_string}" "#{upload_url}?name=#{binary_name}" -H "Content-Type:application/octet-stream"`)
+    raise 'Release draft upload failed!' unless upload_response
+
+    browser_dl_url = upload_response['browser_download_url']
+    # do with these as you please
+
+    $RELEASE_URL = creation_response['url']
+  end
+
+  def create_changelog new_tag
+    changelog = changelog_from_git_commits(pretty: "- %s", merge_commit_filtering: "exclude_merges")
+    if changelog
+      changelog.gsub(/.(?<=[^|\n]).*[B|b]ump.*\n?/, '')
+    else
+      'No new changes, sorry!'
+    end
+  end
+
+  after_all do |lane|
+    UI.success "All done!\nYou can now visit #{$RELEASE_URL} (command+click) and release the thing."
+  end
+
+  error do |lane, exception|
+    puts "Release failed. This might help: #{exception}"
+  end
+end

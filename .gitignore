@@ -41,3 +41,4 @@ Generator/*.app
 .idea/
 cuckoo_generator
 Generator/CuckooGenerator.xcodeproj
+.fastlane

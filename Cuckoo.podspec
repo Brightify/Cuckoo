@@ -21,9 +21,9 @@ Pod::Spec.new do |s|
   s.tvos.deployment_target      = '9.0'
   s.source_files                = ['Source/**/*.swift']
   s.preserve_paths              = ['Generator/**/*', 'run', 'build_generator']
+  generator_name                = 'cuckoo_generator'
   s.prepare_command             = <<-CMD
-                                    git submodule update --init --recursive
-                                    ./build_generator
+                                    curl -Lo #{generator_name} `curl "https://api.github.com/repos/Brightify/Cuckoo/releases/tags/#{s.version}" | grep -oe '"browser_download_url":\s*"[^" ]*"' | grep -oe 'http[^" ]*' | grep #{generator_name} | head -1`
                                 CMD
   s.frameworks                  = 'XCTest', 'Foundation'
   s.requires_arc                = true
