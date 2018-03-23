@@ -12,23 +12,23 @@ platform :mac do
   end
 
   desc 'Releases build specified by user.'
-  lane :release do |options|
+  lane :release do
     release_type = UI.select('Select release type: ', %w[major minor patch])
     upload_release release_type
   end
 
   desc 'Releases major build. (+1).0.0'
-  lane :major do |options| # fastlane major
+  lane :major do # fastlane major
     upload_release 'major'
   end
 
   desc 'Releases minor build. X.(+1).0'
-  lane :minor do |options| # fastlane minor
+  lane :minor do # fastlane minor
     upload_release 'minor'
   end
 
   desc 'Releases patch build. X.X.(+1)'
-  lane :patch do |options| # fastlane patch
+  lane :patch do # fastlane patch
     upload_release 'patch'
   end
 
@@ -49,33 +49,35 @@ platform :mac do
     UI.input "Please type in your GitHub username or cancel the release and define enviroment variable \"#{token_var_name}\" with the personal access token to use." unless access_token
     UI.input "Please type in your GitHub access token or cancel the release and define enviroment variable \"#{username_var_name}\" with your GitHub username." unless username
 
-    version = version_bump_podspec(path: 'Cuckoo.podspec', bump_type: release_type)
 
     # URL variables
     repo_path = 'Brightify/Cuckoo'
     base_url = "github.com/repos/#{repo_path}/releases"
     api_url = "https://api.#{base_url}"
     auth_string = "#{username}:#{access_token}"
-    changelog = create_changelog(tag_name).gsub(/`/, '``').gsub(/'/, '&#39;').gsub(/"/, '&#34;').gsub(/\n/, '\\n')
-    add_git_tag(tag: new_tag, force: true)
+    version = version_get_podspec(path: 'Cuckoo.podspec')
+    changelog = create_changelog(version).gsub(/`/, '``').gsub(/'/, '&#39;').gsub(/"/, '&#34;').gsub(/\n/, '\\n')
+    new_version = version_bump_podspec(path: 'Cuckoo.podspec', bump_type: release_type)
+    git_commit(path: './Cuckoo.podspec', message: "Bump version.")
+    add_git_tag(tag: new_version)
 
     # https://developer.github.com/v3/repos/releases/#create-a-release
-    creation_body = "'{\"tag_name\":\"#{tag_name}\",\"target_commitish\":\"master\", \"name\":\"New Release – #{tag_name}\", \"body\":\"#{changelog}\", \"draft\":true, \"prerelease\":false}'"
+    creation_body = "'{\"tag_name\":\"#{new_version}\",\"target_commitish\":\"master\", \"name\":\"New Release – #{new_version}\", \"body\":\"#{changelog}\", \"draft\":true, \"prerelease\":false}'"
     creation_response = JSON.parse(`curl -X POST -d #{creation_body} -u #{auth_string} #{api_url} -v`)
-    raise 'Release draft creation failed!' unless creation_response
+    UI.crash! 'Release draft creation failed!' unless creation_response
     upload_url = (creation_response['upload_url']).sub(/{.*name.*}/, '')
 
     # https://developer.github.com/v3/repos/releases/#upload-a-release-asset
     upload_response = JSON.parse(`curl -X POST --data-binary "@#{cuckoo_gen_path}" -u "#{auth_string}" "#{upload_url}?name=#{binary_name}" -H "Content-Type:application/octet-stream"`)
-    raise 'Release draft upload failed!' unless upload_response
+    UI.crash! 'Release draft upload failed!' unless upload_response
 
-    browser_dl_url = upload_response['browser_download_url']
+    # browser_dl_url = upload_response['browser_download_url']
     # do with these as you please
 
     $RELEASE_URL = creation_response['url']
   end
 
-  def create_changelog new_tag
+  def create_changelog
     changelog = changelog_from_git_commits(pretty: "- %s", merge_commit_filtering: "exclude_merges")
     if changelog
       changelog.gsub(/.(?<=[^|\n]).*[B|b]ump.*\n?/, '')
@@ -84,11 +86,14 @@ platform :mac do
     end
   end
 
-  after_all do |lane|
+  after_all do
     UI.success "All done!\nYou can now visit #{$RELEASE_URL} (command+click) and release the thing."
+    push_to_git_remote
+    reset_git_repo # this resets git repo, do everything with git before this
   end
 
-  error do |lane, exception|
-    puts "Release failed. This might help: #{exception}"
+  error do |_, exception|
+    UI.failure "Release failed. This might help: #{exception}"
+    reset_git_repo
   end
 end
