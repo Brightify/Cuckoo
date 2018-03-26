@@ -3,12 +3,13 @@
 SCRIPT_PATH="$(dirname "$0")"
 FILE_NAME="cuckoo_generator"
 FILE_PATH="$SCRIPT_PATH/$FILE_NAME"
-GREP_OPTIONS=
+GREP_OPTIONS=""
 if [[ ! -e "$FILE_PATH" ]]; then
   echo "No Cuckoo Generator found, downloading latest version..."
   pushd "$SCRIPT_PATH"
   curl -Lo ${FILE_NAME} `curl "https://api.github.com/repos/Brightify/Cuckoo/releases/latest" | grep -oe '"browser_download_url":\s*"[^" ]*"' | grep -oe 'http[^" ]*' | grep ${FILE_NAME} | head -1`
-	popd
+  chmod +x ${FILE_NAME}
+  popd
 fi
 
 INPUT_FILES=""
