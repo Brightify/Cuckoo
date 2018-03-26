@@ -23,6 +23,7 @@ Pod::Spec.new do |s|
   s.preserve_paths              = ['Generator/**/*', 'run', 'build_generator']
   generator_name                = 'cuckoo_generator'
   s.prepare_command             = <<-CMD
+                                    GREP_OPTIONS=
                                     curl -Lo #{generator_name} `curl "https://api.github.com/repos/Brightify/Cuckoo/releases/tags/#{s.version}" | grep -oe '"browser_download_url":\s*"[^" ]*"' | grep -oe 'http[^" ]*' | grep #{generator_name} | head -1`
                                 CMD
   s.frameworks                  = 'XCTest', 'Foundation'

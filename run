@@ -3,6 +3,7 @@
 SCRIPT_PATH="$(dirname "$0")"
 FILE_NAME="cuckoo_generator"
 FILE_PATH="$SCRIPT_PATH/$FILE_NAME"
+GREP_OPTIONS=
 if [[ ! -e "$FILE_PATH" ]]; then
   echo "No Cuckoo Generator found, downloading latest version..."
   pushd "$SCRIPT_PATH"
