@@ -33,7 +33,10 @@ platform :mac do
 
   def upload_release release_type
     # Building Cuckoo Generator
-    sh('../build_generator')
+    Dir.chdir('../Generator') do
+        sh('rm -rf .build')
+        sh('swift build --configuration release -Xswiftc -static-stdlib')
+    end
 
     # Settings
     cuckoo_gen_path = '../Generator/.build/release/cuckoo_generator'
