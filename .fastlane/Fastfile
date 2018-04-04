@@ -51,8 +51,12 @@ platform :mac do
     access_token = ENV[token_var_name]
 
     # Error Raisins
-    UI.input "Please type in your GitHub username or cancel the release and define enviroment variable \"#{token_var_name}\" with the personal access token to use." unless access_token
-    UI.input "Please type in your GitHub access token or cancel the release and define enviroment variable \"#{username_var_name}\" with your GitHub username." unless username
+    unless access_token
+        access_token = UI.input "Please type in your GitHub access token or cancel the release and define enviroment variable \"#{token_var_name}\" with the personal access token to use."
+    end
+    unless username
+        username = UI.input "Please type in your GitHub username or cancel the release and define enviroment variable \"#{username_var_name}\" with your GitHub username."
+    end
 
 
     # URL variables
