@@ -10,14 +10,16 @@ import Foundation
 extension Templates {
     static let mock = """
 {% for container in containers %}
-class {{ container.mockName }}: {{ container.name }}, {% if container.isImplementation %}Cuckoo.ClassMock{%else%}Cuckoo.ProtocolMock{% endif %} {
+class {{ container.mockName }}: {{ container.name }}, {% if container.isImplementation %}Cuckoo.ClassMock{% else %}Cuckoo.ProtocolMock{% endif %} {
     typealias MocksType = {{ container.name }}
     typealias Stubbing = __StubbingProxy_{{ container.name }}
     typealias Verification = __VerificationProxy_{{ container.name }}
     let cuckoo_manager = Cuckoo.MockManager(hasParent: {{ container.isImplementation }})
 
     {% for property in container.properties %}
+    {% if debug %}
     // {{property}}
+    {% endif %}
     {{ property.accessibility }}{% if container.isImplementation %} override{% endif %} var {{ property.name }}: {{ property.type }} {
         get {
             {% if container.isImplementation %}
@@ -40,7 +42,7 @@ class {{ container.mockName }}: {{ container.name }}, {% if container.isImplemen
 
     {% for initializer in container.initializers %}
     // {{initializer}}
-    {{ initializer.accessibility }}{% if container.isImplementation %} override{% endif %}{% if initializer.@type == "ProtocolMethod" %} required{%endif%} init({{initializer.parameterSignature}}) {
+    {{ initializer.accessibility }}{% if container.isImplementation %} override{% endif %}{% if initializer.@type == "ProtocolMethod" %} required{% endif %} init({{initializer.parameterSignature}}) {
         {% if container.isImplementation %}
         super.init({{initializer.call}})
         {% endif %}

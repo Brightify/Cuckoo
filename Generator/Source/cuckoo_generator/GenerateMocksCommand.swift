@@ -12,16 +12,16 @@ import SourceKittenFramework
 import FileKit
 import CuckooGeneratorFramework
 
-private func curry<P1, P2, P3, P4, P5, P6, P7, P8, P9, R>(_ f: @escaping (P1, P2, P3, P4, P5, P6, P7, P8, P9) -> R)
-    -> (P1) -> (P2) -> (P3) -> (P4) -> (P5) -> (P6) -> (P7) -> (P8) -> (P9) -> R {
-        return { p1 in { p2 in { p3 in { p4 in { p5 in { p6 in { p7 in { p8 in { p9 in f(p1, p2, p3, p4, p5, p6, p7, p8, p9) } } } } } } } } }
+private func curry<P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, R>(_ f: @escaping (P1, P2, P3, P4, P5, P6, P7, P8, P9, P10) -> R)
+    -> (P1) -> (P2) -> (P3) -> (P4) -> (P5) -> (P6) -> (P7) -> (P8) -> (P9) -> (P10) -> R {
+        return { p1 in { p2 in { p3 in { p4 in { p5 in { p6 in { p7 in { p8 in { p9 in { p10 in f(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10) } } } } } } } } } }
 }
 
 public struct GenerateMocksCommand: CommandProtocol {
-    
+
     public let verb = "generate"
     public let function = "Generates mock files"
-    
+
     public func run(_ options: Options) -> Result<Void, CuckooGeneratorError> {
         let inputPathValues = Array(Set(options.files.map { Path($0).standardRawValue })).sorted()
         let inputFiles = inputPathValues.map { File(path: $0) }.flatMap { $0 }
@@ -33,8 +33,8 @@ public struct GenerateMocksCommand: CommandProtocol {
 
         let headers = parsedFiles.map { options.noHeader ? "" : FileHeaderHandler.getHeader(of: $0, includeTimestamp: !options.noTimestamp) }
         let imports = parsedFiles.map { FileHeaderHandler.getImports(of: $0, testableFrameworks: options.testableFrameworks) }
-        let mocks = parsedFiles.map { try! Generator(file: $0).generate() }
-        
+        let mocks = parsedFiles.map { try! Generator(file: $0).generate(debug: options.debugMode) }
+
         let mergedFiles = zip(zip(headers, imports), mocks).map { $0.0 + $0.1 + $1 }
         let outputPath = Path(options.output)
 
@@ -55,7 +55,7 @@ public struct GenerateMocksCommand: CommandProtocol {
         } catch let error {
             return .failure(.unknownError(error))
         }
-        
+
         return stderrUsed ? .failure(.stderrUsed) : .success(())
     }
 
@@ -82,7 +82,7 @@ public struct GenerateMocksCommand: CommandProtocol {
             !$0.declarations.isEmpty
         }
     }
-    
+
     public struct Options: OptionsProtocol {
         let files: [String]
         let output: String
@@ -93,8 +93,9 @@ public struct GenerateMocksCommand: CommandProtocol {
         let exclude: [String]
         let filePrefix: String
         let noClassMocking: Bool
+        let debugMode: Bool
 
-        public init(output: String, testableFrameworks: String, exclude: String, noHeader: Bool, noTimestamp: Bool, noInheritance: Bool, filePrefix: String, noClassMocking: Bool, files: [String]) {
+        public init(output: String, testableFrameworks: String, exclude: String, noHeader: Bool, noTimestamp: Bool, noInheritance: Bool, filePrefix: String, noClassMocking: Bool, debugMode: Bool, files: [String]) {
             self.output = output
             self.testableFrameworks = testableFrameworks.components(separatedBy: ",").filter { !$0.isEmpty }
             self.exclude = exclude.components(separatedBy: ",").filter { !$0.isEmpty }.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
@@ -104,14 +105,15 @@ public struct GenerateMocksCommand: CommandProtocol {
             self.filePrefix = filePrefix
             self.files = files
             self.noClassMocking = noClassMocking
+            self.debugMode = debugMode
         }
-        
+
         public static func evaluate(_ m: CommandMode) -> Result<Options, CommandantError<CuckooGeneratorError>> {
             let output: Result<String, CommandantError<ClientError>> = m <| Option(key: "output", defaultValue: "GeneratedMocks.swift", usage: "Where to put the generated mocks.\nIf a path to a directory is supplied, each input file will have a respective output file with mocks.\nIf a path to a Swift file is supplied, all mocks will be in a single file.\nDefault value is `GeneratedMocks.swift`.")
 
             let testable: Result<String, CommandantError<ClientError>> = m <| Option(key: "testable", defaultValue: "", usage: "A comma separated list of frameworks that should be imported as @testable in the mock files.")
-			
-			let exclude: Result<String, CommandantError<ClientError>> = m <| Option(key: "exclude", defaultValue: "", usage: "A comma separated list of classes and protocols that should be skipped during mock generation.")
+
+            let exclude: Result<String, CommandantError<ClientError>> = m <| Option(key: "exclude", defaultValue: "", usage: "A comma separated list of classes and protocols that should be skipped during mock generation.")
 
             let noHeader: Result<Bool, CommandantError<ClientError>> = m <| Option(key: "no-header", defaultValue: false, usage: "Do not generate file headers.")
 
@@ -122,6 +124,8 @@ public struct GenerateMocksCommand: CommandProtocol {
             let filePrefix: Result<String, CommandantError<ClientError>> = m <| Option(key: "file-prefix", defaultValue: "", usage: "Names of generated files in directory will start with this prefix. Only works when output path is directory.")
 
             let noClassMocking: Result<Bool, CommandantError<ClientError>> = m <| Option(key: "no-class-mocking", defaultValue: false, usage: "Do not generate mocks for classes.")
+
+            let debugMode: Result<Bool, CommandantError<ClientError>> = m <| Option(key: "debug", defaultValue: false, usage: "Run generator in debug mode.")
 
             let input: Result<[String], CommandantError<ClientError>> = m <| Argument(usage: "Files to parse and generate mocks for.")
 
@@ -134,6 +138,7 @@ public struct GenerateMocksCommand: CommandProtocol {
                 <*> noInheritance
                 <*> filePrefix
                 <*> noClassMocking
+                <*> debugMode
                 <*> input
         }
     }
