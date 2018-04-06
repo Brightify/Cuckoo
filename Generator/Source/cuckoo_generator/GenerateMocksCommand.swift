@@ -125,7 +125,7 @@ public struct GenerateMocksCommand: CommandProtocol {
 
             let noClassMocking: Result<Bool, CommandantError<ClientError>> = m <| Option(key: "no-class-mocking", defaultValue: false, usage: "Do not generate mocks for classes.")
 
-            let debugMode: Result<Bool, CommandantError<ClientError>> = m <| Option(key: "debug", defaultValue: false, usage: "Run generator in debug mode.")
+            let debugMode: Result<Bool, CommandantError<ClientError>> = m <| Switch(flag: "d", key: "debug", usage: "Run generator in debug mode.")
 
             let input: Result<[String], CommandantError<ClientError>> = m <| Argument(usage: "Files to parse and generate mocks for.")
 
