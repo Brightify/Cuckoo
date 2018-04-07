@@ -12,9 +12,12 @@ import SourceKittenFramework
 import FileKit
 import CuckooGeneratorFramework
 
-private func curry<P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, R>(_ f: @escaping (P1, P2, P3, P4, P5, P6, P7, P8, P9, P10) -> R)
-    -> (P1) -> (P2) -> (P3) -> (P4) -> (P5) -> (P6) -> (P7) -> (P8) -> (P9) -> (P10) -> R {
-        return { p1 in { p2 in { p3 in { p4 in { p5 in { p6 in { p7 in { p8 in { p9 in { p10 in f(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10) } } } } } } } } } }
+private func curry<P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, R>
+    (_ f: @escaping (P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11) -> R)
+    -> (P1) -> (P2) -> (P3) -> (P4) -> (P5) -> (P6) -> (P7) -> (P8) -> (P9) -> (P10) -> (P11) -> R {
+        return { p1 in { p2 in { p3 in { p4 in { p5 in { p6 in { p7 in { p8 in { p9 in { p10 in { p11 in
+            f(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11)
+        } } } } } } } } } } }
 }
 
 public struct GenerateMocksCommand: CommandProtocol {
@@ -23,7 +26,15 @@ public struct GenerateMocksCommand: CommandProtocol {
     public let function = "Generates mock files"
 
     public func run(_ options: Options) -> Result<Void, CuckooGeneratorError> {
-        let inputPathValues = Array(Set(options.files.map { Path($0).standardRawValue })).sorted()
+        let getFullPathSortedArray: ([String]) -> [String] = { stringArray in
+            Array(Set(stringArray.map { Path($0).standardRawValue })).sorted()
+        }
+        let inputPathValues: [String]
+        if options.globEnabled {
+            inputPathValues = getFullPathSortedArray(options.files.flatMap { Glob(pattern: $0).paths })
+        } else {
+            inputPathValues = getFullPathSortedArray(options.files)
+        }
         let inputFiles = inputPathValues.map { File(path: $0) }.flatMap { $0 }
         let tokens = inputFiles.map { Tokenizer(sourceFile: $0).tokenize() }
         let tokensWithInheritance = options.noInheritance ? tokens : mergeInheritance(tokens)
@@ -94,8 +105,20 @@ public struct GenerateMocksCommand: CommandProtocol {
         let filePrefix: String
         let noClassMocking: Bool
         let debugMode: Bool
+        let globEnabled: Bool
 
-        public init(output: String, testableFrameworks: String, exclude: String, noHeader: Bool, noTimestamp: Bool, noInheritance: Bool, filePrefix: String, noClassMocking: Bool, debugMode: Bool, files: [String]) {
+        public init(output: String,
+                    testableFrameworks: String,
+                    exclude: String,
+                    noHeader: Bool,
+                    noTimestamp: Bool,
+                    noInheritance: Bool,
+                    filePrefix: String,
+                    noClassMocking: Bool,
+                    debugMode: Bool,
+                    globEnabled: Bool,
+                    files: [String]) {
+
             self.output = output
             self.testableFrameworks = testableFrameworks.components(separatedBy: ",").filter { !$0.isEmpty }
             self.exclude = exclude.components(separatedBy: ",").filter { !$0.isEmpty }.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
@@ -103,9 +126,10 @@ public struct GenerateMocksCommand: CommandProtocol {
             self.noTimestamp = noTimestamp
             self.noInheritance = noInheritance
             self.filePrefix = filePrefix
-            self.files = files
             self.noClassMocking = noClassMocking
             self.debugMode = debugMode
+            self.globEnabled = globEnabled
+            self.files = files
         }
 
         public static func evaluate(_ m: CommandMode) -> Result<Options, CommandantError<CuckooGeneratorError>> {
@@ -127,6 +151,8 @@ public struct GenerateMocksCommand: CommandProtocol {
 
             let debugMode: Result<Bool, CommandantError<ClientError>> = m <| Switch(flag: "d", key: "debug", usage: "Run generator in debug mode.")
 
+            let globEnabled: Result<Bool, CommandantError<ClientError>> = m <| Switch(flag: "g", key: "glob", usage: "Use glob for specifying input paths.")
+
             let input: Result<[String], CommandantError<ClientError>> = m <| Argument(usage: "Files to parse and generate mocks for.")
 
             return curry(Options.init)
@@ -139,6 +165,7 @@ public struct GenerateMocksCommand: CommandProtocol {
                 <*> filePrefix
                 <*> noClassMocking
                 <*> debugMode
+                <*> globEnabled
                 <*> input
         }
     }
