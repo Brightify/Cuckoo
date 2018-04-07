@@ -11,13 +11,14 @@ import Result
 import SourceKittenFramework
 import FileKit
 import CuckooGeneratorFramework
+import Foundation
 
-private func curry<P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, R>
-    (_ f: @escaping (P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11) -> R)
-    -> (P1) -> (P2) -> (P3) -> (P4) -> (P5) -> (P6) -> (P7) -> (P8) -> (P9) -> (P10) -> (P11) -> R {
-        return { p1 in { p2 in { p3 in { p4 in { p5 in { p6 in { p7 in { p8 in { p9 in { p10 in { p11 in
-            f(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11)
-        } } } } } } } } } } }
+private func curry<P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, P12, R>
+    (_ f: @escaping (P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, P12) -> R)
+    -> (P1) -> (P2) -> (P3) -> (P4) -> (P5) -> (P6) -> (P7) -> (P8) -> (P9) -> (P10) -> (P11) -> (P12) -> R {
+        return { p1 in { p2 in { p3 in { p4 in { p5 in { p6 in { p7 in { p8 in { p9 in { p10 in { p11 in { p12 in
+            f(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12)
+        } } } } } } } } } } } }
 }
 
 public struct GenerateMocksCommand: CommandProtocol {
@@ -40,7 +41,8 @@ public struct GenerateMocksCommand: CommandProtocol {
         let tokensWithInheritance = options.noInheritance ? tokens : mergeInheritance(tokens)
         let tokensWithoutClasses = options.noClassMocking ? removeClasses(tokensWithInheritance) : tokensWithInheritance
         // filter excluded classes/protocols
-        let parsedFiles = removeClassesAndProtocols(from: tokensWithoutClasses, in: options.exclude)
+        let matchedTokens = removeClassesAndProtocols(from: tokensWithoutClasses, using: options.regex)
+        let parsedFiles = removeClassesAndProtocols(from: matchedTokens, in: options.exclude)
 
         let headers = parsedFiles.map { options.noHeader ? "" : FileHeaderHandler.getHeader(of: $0, includeTimestamp: !options.noTimestamp) }
         let imports = parsedFiles.map { FileHeaderHandler.getImports(of: $0, testableFrameworks: options.testableFrameworks) }
@@ -82,17 +84,38 @@ public struct GenerateMocksCommand: CommandProtocol {
     }
 
     private func removeClassesAndProtocols(from files: [FileRepresentation], in excluded: [String]) -> [FileRepresentation] {
+        return removeClassesAndProtocols(from: files, filter: { token in
+            guard let token = token as? ContainerToken else {
+                return true
+            }
+            return !excluded.contains(token.name)
+        })
+    }
+
+    private func removeClassesAndProtocols(from files: [FileRepresentation], using pattern: String) -> [FileRepresentation] {
+        guard !pattern.isEmpty else { return files }
+
+        let regex: NSRegularExpression
+        do {
+            regex = try NSRegularExpression(pattern: pattern, options: [])
+        } catch let error as NSError {
+            fatalError("Invalid regular expression:" + error.description)
+        }
+
+        return removeClassesAndProtocols(from: files, filter: { token in
+            guard let token = token as? ContainerToken else {
+                return true
+            }
+            return regex.firstMatch(in: token.name, options: [], range: NSMakeRange(0, token.name.count)) != nil
+        })
+    }
+
+    private func removeClassesAndProtocols(from files: [FileRepresentation], filter: (Token) -> Bool) -> [FileRepresentation] {
         return files.map {
-            FileRepresentation(sourceFile: $0.sourceFile, declarations: $0.declarations.filter { token in
-                guard let token = token as? ContainerToken else {
-                    return true
-                }
-                return !excluded.contains(token.name)
-            })
-        }.filter {
-            !$0.declarations.isEmpty
+            FileRepresentation(sourceFile: $0.sourceFile, declarations: $0.declarations.filter(filter))
         }
     }
+
 
     public struct Options: OptionsProtocol {
         let files: [String]
@@ -106,6 +129,7 @@ public struct GenerateMocksCommand: CommandProtocol {
         let noClassMocking: Bool
         let debugMode: Bool
         let globEnabled: Bool
+        let regex: String
 
         public init(output: String,
                     testableFrameworks: String,
@@ -117,6 +141,7 @@ public struct GenerateMocksCommand: CommandProtocol {
                     noClassMocking: Bool,
                     debugMode: Bool,
                     globEnabled: Bool,
+                    regex: String,
                     files: [String]) {
 
             self.output = output
@@ -129,6 +154,7 @@ public struct GenerateMocksCommand: CommandProtocol {
             self.noClassMocking = noClassMocking
             self.debugMode = debugMode
             self.globEnabled = globEnabled
+            self.regex = regex
             self.files = files
         }
 
@@ -153,6 +179,8 @@ public struct GenerateMocksCommand: CommandProtocol {
 
             let globEnabled: Result<Bool, CommandantError<ClientError>> = m <| Switch(flag: "g", key: "glob", usage: "Use glob for specifying input paths.")
 
+            let regex: Result<String, CommandantError<ClientError>> = m <| Option(key: "regex", defaultValue: "", usage: "A regular expression pattern that is used to match Classes and Protocols.\nAll that do not match are excluded.\nCan be used alongside `--exclude`.")
+
             let input: Result<[String], CommandantError<ClientError>> = m <| Argument(usage: "Files to parse and generate mocks for.")
 
             return curry(Options.init)
@@ -166,6 +194,7 @@ public struct GenerateMocksCommand: CommandProtocol {
                 <*> noClassMocking
                 <*> debugMode
                 <*> globEnabled
+                <*> regex
                 <*> input
         }
     }
