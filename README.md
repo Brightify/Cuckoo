@@ -88,7 +88,7 @@ Note: All paths in the Run script must be absolute. Variable `PROJECT_DIR` autom
 **Remember to include paths to inherited Classes and Protocols for mocking/stubbing parent and grandparents.**
 
 #### Carthage
-To use Cuckoo with [Carthage](https://github.com/Carthage/Carthage) add in your Cartfile this line:
+To use Cuckoo with [Carthage](https://github.com/Carthage/Carthage) add this line to your Cartfile :
 ```
 github "Brightify/Cuckoo"
 ```
@@ -102,7 +102,55 @@ with
 "Carthage/Checkouts/Cuckoo/run"
 ```
 
-Also don't forget to add the Framework into your project's test target.
+Don't forget to add the Framework into your project.
+
+#### Swift Package Manager
+
+To use Cuckoo with Apple's Swift package manager, add the following as a dependency to your `Package.swift`:
+
+```swift
+.package(url: "https://github.com/Brightify/Cuckoo.git", .upToNextMajor(from: "0.11.0"))
+```
+
+after that add `"Cuckoo"` as a dependency of the test target.
+
+If you're unsure, take a look at this example `PackageDescription`:
+
+```swift
+// swift-tools-version:4.0
+import PackageDescription
+
+let package = Package(
+    name: "FriendBook",
+    products: [
+        .library(
+            name: "FriendBook",
+            targets: ["FriendBook"]),
+    ],
+    dependencies: [
+        .package(url: "https://github.com/Brightify/Cuckoo.git", .upToNextMajor(from: "0.11.0"))
+    ],
+    targets: [
+        .target(
+            name: "FriendBook",
+            dependencies: [],
+            path: "Source"),
+        .testTarget(
+            name: "FriendBookTests",
+            dependencies: ["Cuckoo"],
+            path: "Tests"),
+    ]
+)
+```
+
+When you're all set, use the same `Run script` as above and replace
+```Bash
+"${PODS_ROOT}/Cuckoo/run"
+```
+with
+```Bash
+"${PROJECT_DIR}/run"
+```
 
 ### 2. Usage
 Usage of Cuckoo is similar to [Mockito](http://mockito.org/) and [Hamcrest](http://hamcrest.org/). However, there are some differences and limitations caused by generating the mocks and Swift language itself. List of all the supported features can be found below. You can find complete examples in [tests](Tests).
