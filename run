@@ -5,11 +5,21 @@ FILE_NAME="cuckoo_generator"
 FILE_PATH="$SCRIPT_PATH/$FILE_NAME"
 GREP_OPTIONS=""
 if [[ ! -e "$FILE_PATH" ]]; then
-  echo "No Cuckoo Generator found, downloading latest version..."
   pushd "$SCRIPT_PATH"
-  curl -Lo ${FILE_NAME} `curl "https://api.github.com/repos/Brightify/Cuckoo/releases/latest" | grep -oe '"browser_download_url":\s*"[^" ]*"' | grep -oe 'http[^" ]*' | grep ${FILE_NAME} | head -1`
+  echo "No Cuckoo Generator found."
+  if [[ "$1" = "--build" ]]; then
+    echo "Building..."
+    ./build_generator
+  else
+    echo "Downloading latest version..."
+    curl -Lo ${FILE_NAME} `curl "https://api.github.com/repos/Brightify/Cuckoo/releases/latest" | grep -oe '"browser_download_url":\s*"[^" ]*"' | grep -oe 'http[^" ]*' | grep ${FILE_NAME} | head -1`
+  fi
   chmod +x ${FILE_NAME}
   popd
+fi
+
+if [[ "$1" = "--build" ]]; then
+	shift
 fi
 
 INPUT_FILES=""
