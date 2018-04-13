@@ -39,11 +39,21 @@ public struct GenerateMocksCommand: CommandProtocol {
         let inputFiles = inputPathValues.map { File(path: $0) }.flatMap { $0 }
         let tokens = inputFiles.map { Tokenizer(sourceFile: $0).tokenize() }
         let tokensWithInheritance = options.noInheritance ? tokens : mergeInheritance(tokens)
-        let tokensWithoutClasses = options.noClassMocking ? removeClasses(tokensWithInheritance) : tokensWithInheritance
-        // filter excluded classes/protocols
-        let matchedTokens = removeClassesAndProtocols(from: tokensWithoutClasses, using: options.regex)
-        let parsedFiles = removeClassesAndProtocols(from: matchedTokens, in: options.exclude)
 
+        // filter classes/protocols based on the settings passed to the generator
+        var typeFilters = [] as [(Token) -> Bool]
+        if options.noClassMocking {
+            typeFilters.append(ignoreClasses)
+        }
+        if !options.regex.isEmpty {
+            typeFilters.append(keepMatching(pattern: options.regex))
+        }
+        if !options.exclude.isEmpty {
+            typeFilters.append(ignoreIfExists(in: options.exclude))
+        }
+        let parsedFiles = removeTypes(from: tokensWithInheritance, using: typeFilters)
+
+        // generating headers and mocks
         let headers = parsedFiles.map { options.noHeader ? "" : FileHeaderHandler.getHeader(of: $0, includeTimestamp: !options.noTimestamp) }
         let imports = parsedFiles.map { FileHeaderHandler.getImports(of: $0, testableFrameworks: options.testableFrameworks) }
         let mocks = parsedFiles.map { try! Generator(file: $0).generate(debug: options.debugMode) }
@@ -76,43 +86,44 @@ public struct GenerateMocksCommand: CommandProtocol {
         return filesRepresentation.flatMap { $0.mergeInheritance(with: filesRepresentation) }
     }
 
-    private func removeClasses(_ filesRepresentation: [FileRepresentation]) -> [FileRepresentation] {
-        return filesRepresentation.map {
-                let declarations = $0.declarations.filter { !($0 is ClassDeclaration) }
-                return FileRepresentation(sourceFile: $0.sourceFile, declarations: declarations)
-            }.filter { !$0.declarations.isEmpty }
-    }
-
-    private func removeClassesAndProtocols(from files: [FileRepresentation], in excluded: [String]) -> [FileRepresentation] {
-        return removeClassesAndProtocols(from: files, filter: { token in
-            guard let token = token as? ContainerToken else {
-                return true
-            }
-            return !excluded.contains(token.name)
-        })
-    }
-
-    private func removeClassesAndProtocols(from files: [FileRepresentation], using pattern: String) -> [FileRepresentation] {
-        guard !pattern.isEmpty else { return files }
-
-        let regex: NSRegularExpression
-        do {
-            regex = try NSRegularExpression(pattern: pattern, options: [])
-        } catch let error as NSError {
-            fatalError("Invalid regular expression:" + error.description)
+    private func removeTypes(from files: [FileRepresentation], using filters: [(Token) -> Bool]) -> [FileRepresentation] {
+        // Only keep those that pass all filters
+        let filter: (Token) -> Bool = { token in
+            filters.first(where: { !$0(token) }) == nil
         }
 
-        return removeClassesAndProtocols(from: files, filter: { token in
-            guard let token = token as? ContainerToken else {
-                return true
-            }
-            return regex.firstMatch(in: token.name, options: [], range: NSMakeRange(0, token.name.count)) != nil
-        })
+        return files.flatMap { file in
+            let filteredDeclarations = file.declarations.filter(filter)
+            guard !filteredDeclarations.isEmpty else { return nil }
+            return FileRepresentation(sourceFile: file.sourceFile, declarations: filteredDeclarations)
+        }
     }
 
-    private func removeClassesAndProtocols(from files: [FileRepresentation], filter: (Token) -> Bool) -> [FileRepresentation] {
-        return files.map {
-            FileRepresentation(sourceFile: $0.sourceFile, declarations: $0.declarations.filter(filter))
+    // filter that keeps the protocols while removing all classes
+    private func ignoreClasses(token: Token) -> Bool {
+        return !(token is ClassDeclaration)
+    }
+
+    // filter that keeps the classes/protocols that match the passed regular expression
+    private func keepMatching(pattern: String) -> (Token) -> Bool {
+        do {
+            let regex = try NSRegularExpression(pattern: pattern, options: [])
+
+            return { token in
+                guard let containerToken = token as? ContainerToken else { return true }
+                return regex.firstMatch(in: containerToken.name, options: [], range: NSMakeRange(0, containerToken.name.count)) != nil
+            }
+        } catch {
+            fatalError("Invalid regular expression: " + (error as NSError).description)
+        }
+    }
+
+    // filter that keeps only the classes/protocols that are not supposed to be excluded
+    private func ignoreIfExists(in excluded: [String]) -> (Token) -> Bool {
+        let excludedSet = Set(excluded)
+        return { token in
+            guard let containerToken = token as? ContainerToken else { return true }
+            return !excludedSet.contains(containerToken.name)
         }
     }
 
@@ -158,6 +169,7 @@ public struct GenerateMocksCommand: CommandProtocol {
             self.files = files
         }
 
+        // all options are declared here and then parsed by Commandant
         public static func evaluate(_ m: CommandMode) -> Result<Options, CommandantError<CuckooGeneratorError>> {
             let output: Result<String, CommandantError<ClientError>> = m <| Option(key: "output", defaultValue: "GeneratedMocks.swift", usage: "Where to put the generated mocks.\nIf a path to a directory is supplied, each input file will have a respective output file with mocks.\nIf a path to a Swift file is supplied, all mocks will be in a single file.\nDefault value is `GeneratedMocks.swift`.")
 
