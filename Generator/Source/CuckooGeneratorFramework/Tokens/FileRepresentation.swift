@@ -10,22 +10,28 @@ import SourceKittenFramework
 
 public struct FileRepresentation {
     public let sourceFile: File
-    public let declarations: [Token]
+    public let declarations: [TokenizationResult]
     
-    public init(sourceFile: File, declarations: [Token]) {
+    public init(sourceFile: File, declarations: [TokenizationResult]) {
         self.sourceFile = sourceFile
         self.declarations = declarations
     }
 }
 
 public extension FileRepresentation {
+    public var tokens: [Token] {
+        return declarations.flatMap { $0.token }
+    }
+}
+
+public extension FileRepresentation {
     public func mergeInheritance(with files: [FileRepresentation]) -> FileRepresentation {
-        let tokens = self.declarations.reduce([Token]()) { list, token in
+        let tokens = self.tokens.reduce([Token]()) { list, token in
             let mergeToken = token.mergeInheritance(with: files)
             return list + [mergeToken]
         }
 
-        return FileRepresentation(sourceFile: self.sourceFile, declarations: tokens)
+        return FileRepresentation(sourceFile: self.sourceFile, declarations: tokens.map { TokenizationResult(token: $0) })
     }
 }
 
@@ -59,7 +65,7 @@ internal extension Token {
     }
 
     internal static func findToken(forClassOrProtocol name: String, in files: [FileRepresentation]) -> Token? {
-        return files.flatMap { $0.declarations }
+        return files.flatMap { $0.tokens }
                 .filter { $0.isClassOrProtocolDefinition }
                 .map { $0 as! ContainerToken }
                 .first { $0.name == name }

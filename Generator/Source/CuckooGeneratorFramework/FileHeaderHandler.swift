@@ -41,7 +41,7 @@ public struct FileHeaderHandler {
     }
 
     private static func getHeader(of file: FileRepresentation) -> String {
-        let possibleHeaderEnd = getPossibleHeaderEnd(current: file.sourceFile.contents.unicodeScalars.count, declarations: file.declarations)
+        let possibleHeaderEnd = getPossibleHeaderEnd(current: file.sourceFile.contents.unicodeScalars.count, declarations: file.tokens)
         let possibleHeader = String(file.sourceFile.contents.utf8.prefix(possibleHeaderEnd)) ?? ""
         let singleLine = getPrefixToLastSingleLineComment(text: possibleHeader)
         let multiLine = getPrefixToLastMultiLineComment(text: possibleHeader)

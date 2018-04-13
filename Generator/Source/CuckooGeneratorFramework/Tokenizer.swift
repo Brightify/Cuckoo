@@ -9,6 +9,29 @@
 import Foundation
 import SourceKittenFramework
 
+public struct TokenizationResult {
+    public let token: Token?
+    private(set) public var errors = [] as [TokenizationError]
+
+    public init(token: Token?, errors: [TokenizationError] = []) {
+        self.token = token
+        self.errors = errors
+    }
+}
+
+public enum TokenizationError: Error {
+    case warning(String)
+}
+
+extension TokenizationError: CustomStringConvertible {
+    public var description: String {
+        switch self {
+        case .warning(let message):
+            return message
+        }
+    }
+}
+
 public struct Tokenizer {
     private let file: File
     private let source: String
@@ -22,54 +45,58 @@ public struct Tokenizer {
     public func tokenize() -> FileRepresentation {
         let structure = Structure(file: file)
 
-        let declarations = tokenize(structure.dictionary[Key.Substructure.rawValue] as? [SourceKitRepresentable] ?? [])
-        let imports = tokenize(imports: declarations)
+        let representables: [SourceKitRepresentable] = structure.dictionary[Key.substructure.rawValue] as? [SourceKitRepresentable] ?? []
+        let declarations = tokenize(representables)
+        let imports = tokenize(imports: declarations.flatMap { $0.token })
 
         return FileRepresentation(sourceFile: file, declarations: declarations + imports)
     }
 
-    private func tokenize(_ representables: [SourceKitRepresentable]) -> [Token] {
-        return representables.flatMap(tokenize)
+    private func tokenize(_ representables: [SourceKitRepresentable]) -> [TokenizationResult] {
+        return representables.flatMap(tokenize(_:))
     }
 
     internal static let nameNotSet = "name not set"
     internal static let unknownType = "unknown type"
-    private func tokenize(_ representable: SourceKitRepresentable) -> Token? {
+    private func tokenize(_ representable: SourceKitRepresentable) -> TokenizationResult? {
         guard let dictionary = representable as? [String: SourceKitRepresentable] else { return nil }
 
         // Common fields
-        let name = dictionary[Key.Name.rawValue] as? String ?? Tokenizer.nameNotSet
-        let kind = dictionary[Key.Kind.rawValue] as? String ?? Tokenizer.unknownType
+        let name = dictionary[Key.name.rawValue] as? String ?? Tokenizer.nameNotSet
+        let kind = dictionary[Key.kind.rawValue] as? String ?? Tokenizer.unknownType
 
         // Inheritance
-        let inheritedTypes = dictionary[Key.InheritedTypes.rawValue] as? [SourceKitRepresentable] ?? []
+        let inheritedTypes = dictionary[Key.inheritedTypes.rawValue] as? [SourceKitRepresentable] ?? []
         let tokenizedInheritedTypes = inheritedTypes.flatMap { type -> InheritanceDeclaration in
             guard let typeDict = type as? [String: SourceKitRepresentable] else {
                 return InheritanceDeclaration.empty
             }
-            let name = typeDict[Key.Name.rawValue] as? String ?? Tokenizer.nameNotSet
+            let name = typeDict[Key.name.rawValue] as? String ?? Tokenizer.nameNotSet
             return InheritanceDeclaration(name: name)
         }
 
         // Optional fields
-        let range = extractRange(from: dictionary, offset: .Offset, length: .Length)
-        let nameRange = extractRange(from: dictionary, offset: .NameOffset, length: .NameLength)
-        let bodyRange = extractRange(from: dictionary, offset: .BodyOffset, length: .BodyLength)
+        let range = extractRange(from: dictionary, offset: .offset, length: .length)
+        let nameRange = extractRange(from: dictionary, offset: .nameOffset, length: .nameLength)
+        let bodyRange = extractRange(from: dictionary, offset: .bodyOffset, length: .bodyLength)
 
-        let attributes = dictionary[Key.Attributes.rawValue] as? [Any]
+        let attributes = dictionary[Key.attributes.rawValue] as? [Any]
 
-        let attributeOptional = attributes?.first(where: {($0 as? [String : String])?[Key.Attribute.rawValue] == Kinds.Optional.rawValue}) != nil
+        let attributeOptional = attributes?.first { ($0 as? [String : String])?[Key.attribute.rawValue] == Kinds.Optional.rawValue } != nil
 
-        let accessibility = (dictionary[Key.Accessibility.rawValue] as? String).flatMap { Accessibility(rawValue: $0) }
-        let type = dictionary[Key.TypeName.rawValue] as? String
+        let accessibility = (dictionary[Key.accessibility.rawValue] as? String).flatMap { Accessibility(rawValue: $0) }
+        let type = dictionary[Key.typeName.rawValue] as? String
 
+        var errors = [] as [TokenizationError]
+        let token: Token
         switch kind {
         case Kinds.ProtocolDeclaration.rawValue:
-            let subtokens = tokenize(dictionary[Key.Substructure.rawValue] as? [SourceKitRepresentable] ?? [])
+            let representables: [SourceKitRepresentable] = dictionary[Key.substructure.rawValue] as? [SourceKitRepresentable] ?? []
+            let subtokens = tokenize(representables).flatMap { $0.token }
             let initializers = subtokens.only(Initializer.self)
             let children = subtokens.noneOf(Initializer.self)
 
-            return ProtocolDeclaration(
+            token = ProtocolDeclaration(
                 name: name,
                 accessibility: accessibility!,
                 range: range!,
@@ -80,7 +107,8 @@ public struct Tokenizer {
                 inheritedTypes: tokenizedInheritedTypes)
 
         case Kinds.ClassDeclaration.rawValue:
-            let subtokens = tokenize(dictionary[Key.Substructure.rawValue] as? [SourceKitRepresentable] ?? [])
+            let representables: [SourceKitRepresentable] = dictionary[Key.substructure.rawValue] as? [SourceKitRepresentable] ?? []
+            let subtokens = tokenize(representables).flatMap { $0.token }
             let initializers = subtokens.only(Initializer.self)
             let children = subtokens.noneOf(Initializer.self).map { child -> Token in
                 if var property = child as? InstanceVariable {
@@ -91,7 +119,7 @@ public struct Tokenizer {
                 }
             }
 
-            return ClassDeclaration(
+            token = ClassDeclaration(
                 name: name,
                 accessibility: accessibility!,
                 range: range!,
@@ -102,20 +130,20 @@ public struct Tokenizer {
                 inheritedTypes: tokenizedInheritedTypes)
 
         case Kinds.ExtensionDeclaration.rawValue:
-            return ExtensionDeclaration(range: range!)
+            return TokenizationResult(token: ExtensionDeclaration(range: range!))
 
         case Kinds.InstanceVariable.rawValue:
-            let setterAccessibility = (dictionary[Key.SetterAccessibility.rawValue] as? String).flatMap(Accessibility.init)
+            let setterAccessibility = (dictionary[Key.setterAccessibility.rawValue] as? String).flatMap(Accessibility.init)
                         
             if String.init(source.utf8.dropFirst(range!.startIndex))?.takeUntil(occurence: name)?.trimmed.hasPrefix("let") == true {
-                    return nil
+                return nil
             }
             
             if type == nil {
-                stderrPrint("Type of instance variable \(name) could not be inferred. Please specify it explicitly. (\(file.path ?? ""))")
+                errors.append(.warning("Type of instance variable \(name) could not be inferred. Please specify it explicitly. (\(file.path ?? ""))"))
             }
 
-            return InstanceVariable(
+            token = InstanceVariable(
                 name: name,
                 type: type ?? "__UnknownType",
                 accessibility: accessibility!,
@@ -125,7 +153,7 @@ public struct Tokenizer {
                 overriding: false)
 
         case Kinds.InstanceMethod.rawValue:
-            let parameters = tokenize(methodName: name, parameters: dictionary[Key.Substructure.rawValue] as? [SourceKitRepresentable] ?? [])
+            let parameters = tokenize(methodName: name, parameters: dictionary[Key.substructure.rawValue] as? [SourceKitRepresentable] ?? [])
 
             var returnSignature: String
             if let bodyRange = bodyRange {
@@ -147,7 +175,7 @@ public struct Tokenizer {
 
             // When bodyRange != nil, we need to create .ClassMethod instead of .ProtocolMethod
             if let bodyRange = bodyRange {
-                return ClassMethod(
+                token = ClassMethod(
                     name: name,
                     accessibility: accessibility!,
                     returnSignature: returnSignature,
@@ -156,7 +184,7 @@ public struct Tokenizer {
                     parameters: parameters,
                     bodyRange: bodyRange)
             } else {
-                return ProtocolMethod(
+                token = ProtocolMethod(
                     name: name,
                     accessibility: accessibility!,
                     returnSignature: returnSignature,
@@ -171,6 +199,8 @@ public struct Tokenizer {
             // stderrPrint("Unknown kind. Dictionary: \(dictionary) \(file.path ?? "")")
             return nil
         }
+
+        return TokenizationResult(token: token, errors: errors)
     }
 
     private func tokenize(methodName: String, parameters: [SourceKitRepresentable]) -> [MethodParameter] {
@@ -182,23 +212,23 @@ public struct Tokenizer {
         parameterLabels = Array(parameterLabels.dropLast())
 
         // Substructure can contain some other informations after the parameters.
-        let filteredParameters = parameters.filter({
+        let filteredParameters = parameters.filter {
             let dictionary = $0 as? [String: SourceKitRepresentable]
-            let kind = dictionary?[Key.Kind.rawValue] as? String ?? ""
+            let kind = dictionary?[Key.kind.rawValue] as? String ?? ""
             return kind == Kinds.MethodParameter.rawValue
-        })
+        }
 
-        return zip(parameterLabels, filteredParameters).flatMap(tokenize)
+        return zip(parameterLabels, filteredParameters).flatMap(tokenize(parameterLabel:parameter:))
     }
 
     private func tokenize(parameterLabel: String?, parameter: SourceKitRepresentable) -> MethodParameter? {
         guard let dictionary = parameter as? [String: SourceKitRepresentable] else { return nil }
         
-        let name = dictionary[Key.Name.rawValue] as? String ?? Tokenizer.nameNotSet
-        let kind = dictionary[Key.Kind.rawValue] as? String ?? Tokenizer.unknownType
-        let range = extractRange(from: dictionary, offset: .Offset, length: .Length)
-        let nameRange = extractRange(from: dictionary, offset: .NameOffset, length: .NameLength)
-        let type = dictionary[Key.TypeName.rawValue] as? String
+        let name = dictionary[Key.name.rawValue] as? String ?? Tokenizer.nameNotSet
+        let kind = dictionary[Key.kind.rawValue] as? String ?? Tokenizer.unknownType
+        let range = extractRange(from: dictionary, offset: .offset, length: .length)
+        let nameRange = extractRange(from: dictionary, offset: .nameOffset, length: .nameLength)
+        let type = dictionary[Key.typeName.rawValue] as? String
 
         switch kind {
         case Kinds.MethodParameter.rawValue:
@@ -210,7 +240,7 @@ public struct Tokenizer {
         }
     }
 
-    private func tokenize(imports otherTokens: [Token]) -> [Token] {
+    private func tokenize(imports otherTokens: [Token]) -> [TokenizationResult] {
         let rangesToIgnore: [CountableRange<Int>] = otherTokens.flatMap { token in
             switch token {
             case let container as ContainerToken:
@@ -232,7 +262,7 @@ public struct Tokenizer {
                     let toIndex = source.index(fromIndex, offsetBy: libraryRange.length)
                     let library = String(source[fromIndex..<toIndex])
                     let range = $0.range.location..<($0.range.location + $0.range.length)
-                    return Import(range: range, library: library)
+                    return TokenizationResult(token: Import(range: range, library: library))
                 }
         } catch let error as NSError {
             fatalError("Invalid regex:" + error.description)

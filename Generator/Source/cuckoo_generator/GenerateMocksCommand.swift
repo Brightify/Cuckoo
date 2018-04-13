@@ -13,12 +13,12 @@ import FileKit
 import CuckooGeneratorFramework
 import Foundation
 
-private func curry<P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, P12, R>
-    (_ f: @escaping (P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, P12) -> R)
-    -> (P1) -> (P2) -> (P3) -> (P4) -> (P5) -> (P6) -> (P7) -> (P8) -> (P9) -> (P10) -> (P11) -> (P12) -> R {
-        return { p1 in { p2 in { p3 in { p4 in { p5 in { p6 in { p7 in { p8 in { p9 in { p10 in { p11 in { p12 in
-            f(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12)
-        } } } } } } } } } } } }
+private func curry<P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, P12, P13, R>
+    (_ f: @escaping (P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, P12, P13) -> R)
+    -> (P1) -> (P2) -> (P3) -> (P4) -> (P5) -> (P6) -> (P7) -> (P8) -> (P9) -> (P10) -> (P11) -> (P12) -> (P13) -> R {
+        return { p1 in { p2 in { p3 in { p4 in { p5 in { p6 in { p7 in { p8 in { p9 in { p10 in { p11 in { p12 in { p13 in
+            f(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13)
+        } } } } } } } } } } } } }
 }
 
 public struct GenerateMocksCommand: CommandProtocol {
@@ -39,6 +39,15 @@ public struct GenerateMocksCommand: CommandProtocol {
         let inputFiles = inputPathValues.map { File(path: $0) }.flatMap { $0 }
         let tokens = inputFiles.map { Tokenizer(sourceFile: $0).tokenize() }
         let tokensWithInheritance = options.noInheritance ? tokens : mergeInheritance(tokens)
+
+        // reporting found errors if warnings aren't turned off
+        if !options.noWarnings {
+            tokensWithInheritance
+                .flatMap { $0.declarations }
+                .flatMap { $0.errors }
+                .filter { !$0.isEmpty }
+                .forEach { print($0) }
+        }
 
         // filter classes/protocols based on the settings passed to the generator
         var typeFilters = [] as [(Token) -> Bool]
@@ -93,9 +102,9 @@ public struct GenerateMocksCommand: CommandProtocol {
         }
 
         return files.flatMap { file in
-            let filteredDeclarations = file.declarations.filter(filter)
+            let filteredDeclarations = file.tokens.filter(filter)
             guard !filteredDeclarations.isEmpty else { return nil }
-            return FileRepresentation(sourceFile: file.sourceFile, declarations: filteredDeclarations)
+            return FileRepresentation(sourceFile: file.sourceFile, declarations: filteredDeclarations.map { TokenizationResult(token: $0) })
         }
     }
 
@@ -196,7 +205,7 @@ public struct GenerateMocksCommand: CommandProtocol {
 
             let regex: Result<String, CommandantError<ClientError>> = m <| Option(key: "regex", defaultValue: "", usage: "A regular expression pattern that is used to match Classes and Protocols.\nAll that do not match are excluded.\nCan be used alongside `--exclude`.")
 
-            let noWarnings: Result<Bool, CommandantError<ClientError>> = m <| Switch(key: "no-warnings", usage: "Disable all warnings.")
+            let noWarnings: Result<Bool, CommandantError<ClientError>> = m <| Switch(flag: nil, key: "no-warnings", usage: "Disable all warnings.")
 
             let input: Result<[String], CommandantError<ClientError>> = m <| Argument(usage: "Files to parse and generate mocks for.")
 

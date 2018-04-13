@@ -7,22 +7,22 @@
 //
 
 public enum Key: String {
-    case Substructure = "key.substructure"
-    case Kind = "key.kind"
-    case Accessibility = "key.accessibility"
-    case SetterAccessibility = "key.setter_accessibility"
-    case Name = "key.name"
-    case TypeName = "key.typename"
-    case InheritedTypes = "key.inheritedtypes"
-    case Attributes = "key.attributes"
-    case Attribute = "key.attribute"
+    case substructure = "key.substructure"
+    case kind = "key.kind"
+    case accessibility = "key.accessibility"
+    case setterAccessibility = "key.setter_accessibility"
+    case name = "key.name"
+    case typeName = "key.typename"
+    case inheritedTypes = "key.inheritedtypes"
+    case attributes = "key.attributes"
+    case attribute = "key.attribute"
 
-    case Length = "key.length"
-    case Offset = "key.offset"
+    case length = "key.length"
+    case offset = "key.offset"
     
-    case NameLength = "key.namelength"
-    case NameOffset = "key.nameoffset"
+    case nameLength = "key.namelength"
+    case nameOffset = "key.nameoffset"
     
-    case BodyLength = "key.bodylength"
-    case BodyOffset = "key.bodyoffset"
+    case bodyLength = "key.bodylength"
+    case bodyOffset = "key.bodyoffset"
 }

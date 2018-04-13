@@ -15,7 +15,7 @@ public struct Generator {
     private let code = CodeBuilder()
 
     public init(file: FileRepresentation) {
-        declarations = file.declarations
+        declarations = file.tokens
     }
 
     public func generate(debug: Bool = false) throws -> String {
