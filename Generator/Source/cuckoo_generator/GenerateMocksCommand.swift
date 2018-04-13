@@ -141,6 +141,7 @@ public struct GenerateMocksCommand: CommandProtocol {
         let debugMode: Bool
         let globEnabled: Bool
         let regex: String
+        let noWarnings: Bool
 
         public init(output: String,
                     testableFrameworks: String,
@@ -153,6 +154,7 @@ public struct GenerateMocksCommand: CommandProtocol {
                     debugMode: Bool,
                     globEnabled: Bool,
                     regex: String,
+                    noWarnings: Bool,
                     files: [String]) {
 
             self.output = output
@@ -166,6 +168,7 @@ public struct GenerateMocksCommand: CommandProtocol {
             self.debugMode = debugMode
             self.globEnabled = globEnabled
             self.regex = regex
+            self.noWarnings = noWarnings
             self.files = files
         }
 
@@ -193,6 +196,8 @@ public struct GenerateMocksCommand: CommandProtocol {
 
             let regex: Result<String, CommandantError<ClientError>> = m <| Option(key: "regex", defaultValue: "", usage: "A regular expression pattern that is used to match Classes and Protocols.\nAll that do not match are excluded.\nCan be used alongside `--exclude`.")
 
+            let noWarnings: Result<Bool, CommandantError<ClientError>> = m <| Switch(key: "no-warnings", usage: "Disable all warnings.")
+
             let input: Result<[String], CommandantError<ClientError>> = m <| Argument(usage: "Files to parse and generate mocks for.")
 
             return curry(Options.init)
@@ -207,6 +212,7 @@ public struct GenerateMocksCommand: CommandProtocol {
                 <*> debugMode
                 <*> globEnabled
                 <*> regex
+                <*> noWarnings
                 <*> input
         }
     }
