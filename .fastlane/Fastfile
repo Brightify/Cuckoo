@@ -34,8 +34,7 @@ platform :mac do
   def upload_release release_type
     # Building Cuckoo Generator
     Dir.chdir('../Generator') do
-        sh('rm -rf .build')
-        sh('swift build --configuration release -Xswiftc -static-stdlib')
+        sh('../build_generator')
     end
 
     # Settings

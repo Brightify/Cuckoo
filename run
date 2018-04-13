@@ -4,21 +4,53 @@ SCRIPT_PATH="$(dirname "$0")"
 FILE_NAME="cuckoo_generator"
 FILE_PATH="$SCRIPT_PATH/$FILE_NAME"
 GREP_OPTIONS=""
+
+function perform_curl {
+  curl -Lo ${FILE_NAME} `curl "$1" | grep -oe '"browser_download_url":\s*"[^" ]*"' | grep -oe 'http[^" ]*' | grep ${FILE_NAME} | head -1`
+}
+
+function download_generator {
+  MATCH=$(echo "$1" | grep -e "\d\d*\.\d\d*\.\d\d*")
+  if [[ ! -z "$MATCH" ]]; then
+    VERSION="$MATCH"
+    DOWNLOAD_SPECIFIC_VER=1
+  fi
+  if [[ -z "$VERSION" ]]; then
+    echo "Downloading latest version..."
+    perform_curl "https://api.github.com/repos/Brightify/Cuckoo/releases/latest"
+  else
+    echo "Downloading version $VERSION..."
+    perform_curl "https://api.github.com/repos/Brightify/Cuckoo/releases/tags/$VERSION"
+  fi
+  chmod +x ${FILE_NAME}
+}
+
 if [[ ! -e "$FILE_PATH" ]]; then
   pushd "$SCRIPT_PATH"
   echo "No Cuckoo Generator found."
-  if [[ "$1" = "--build" ]]; then
-    echo "Building..."
-    ./build_generator
+  if [[ "$1" = "--download" ]]; then
+    download_generator "$2"
   else
-    echo "Downloading latest version..."
-    curl -Lo ${FILE_NAME} `curl "https://api.github.com/repos/Brightify/Cuckoo/releases/latest" | grep -oe '"browser_download_url":\s*"[^" ]*"' | grep -oe 'http[^" ]*' | grep ${FILE_NAME} | head -1`
+    if [[ -d "$SCRIPT_PATH/Generator" ]]; then
+      echo "Building..."
+      ./build_generator
+      if [[ "$?" -ne 0 ]]; then
+        echo "Build seems to have failed for some reason. Please file an issue on GitHub."
+        exit 1
+      fi
+      mv "$SCRIPT_PATH/Generator/.build/release/$FILE_NAME" "$FILE_PATH"
+    else
+      echo "Couldn't build. Generator not found. (expected in the `Generator` directory)"
+      download_generator "$2"
+    fi
   fi
-  chmod +x ${FILE_NAME}
   popd
 fi
 
-if [[ "$1" = "--build" ]]; then
+if [[ "$1" = "--download" ]]; then
+  if [[ ! -z "$DOWNLOAD_SPECIFIC_VER" ]]; then
+    shift
+  fi
 	shift
 fi
 
@@ -27,11 +59,11 @@ if [[ "$#" > 0 ]]; then
 	INPUT_FILES=$(printf '%q ' "$@")
 fi
 
-if [[ -z $SCRIPT_INPUT_FILE_COUNT ]]; then
+if [[ -z "$SCRIPT_INPUT_FILE_COUNT" ]]; then
   SCRIPT_INPUT_FILE_COUNT=0
 fi
 
-for (( i=0; i<$SCRIPT_INPUT_FILE_COUNT; i++ ))
+for (( i=0; i<"$SCRIPT_INPUT_FILE_COUNT"; i++ ))
 do
 	INPUT_FILE="SCRIPT_INPUT_FILE_$i"
 	INPUT_FILES+=" $(printf '%q' "${!INPUT_FILE}")"
