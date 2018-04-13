@@ -40,15 +40,6 @@ public struct GenerateMocksCommand: CommandProtocol {
         let tokens = inputFiles.map { Tokenizer(sourceFile: $0).tokenize() }
         let tokensWithInheritance = options.noInheritance ? tokens : mergeInheritance(tokens)
 
-        // reporting found errors if warnings aren't turned off
-        if !options.noWarnings {
-            tokensWithInheritance
-                .flatMap { $0.declarations }
-                .flatMap { $0.errors }
-                .filter { !$0.isEmpty }
-                .forEach { print($0) }
-        }
-
         // filter classes/protocols based on the settings passed to the generator
         var typeFilters = [] as [(Token) -> Bool]
         if options.noClassMocking {
@@ -61,6 +52,15 @@ public struct GenerateMocksCommand: CommandProtocol {
             typeFilters.append(ignoreIfExists(in: options.exclude))
         }
         let parsedFiles = removeTypes(from: tokensWithInheritance, using: typeFilters)
+
+        // reporting found errors if warnings aren't turned off
+        if !options.noWarnings {
+            parsedFiles
+                .flatMap { $0.declarations }
+                .flatMap { $0.errors }
+                .filter { !$0.isEmpty }
+                .forEach { print($0) }
+        }
 
         // generating headers and mocks
         let headers = parsedFiles.map { options.noHeader ? "" : FileHeaderHandler.getHeader(of: $0, includeTimestamp: !options.noTimestamp) }
