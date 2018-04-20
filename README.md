@@ -143,14 +143,24 @@ let package = Package(
 )
 ```
 
+Cuckoo relies on a script that is currently not downloadable using SwiftPM. However, for convenience, you can copy these lines into the terminal to download the latest `run` script.
+```Bash
+curl -Lo "Cuckoo.zip" `curl "https://api.github.com/repos/Brightify/Cuckoo/releases/latest" | grep -oe '"zipball_url":\s*"[^" ]*"' | grep -oe 'http[^" ]*'`
+unzip -p Cuckoo.zip "*Cuckoo*/run" > run
+chmod +x run
+rm "Cuckoo.zip"
+```
+
 When you're all set, use the same `Run script` as above and replace
 ```Bash
 "${PODS_ROOT}/Cuckoo/run"
 ```
 with
 ```Bash
-"${PROJECT_DIR}/run"
+"${PROJECT_DIR}/run --download"
 ```
+
+The `--download` option is necessary because you probably don't have the `Generator` in your project. You can add a version (e.g. 0.10.2) after it to get a specific version of the `cuckoo_generator`. The old `cuckoo_generator` needs to be deleted if it's already present in the project and you desire a different version.
 
 ### 2. Usage
 Usage of Cuckoo is similar to [Mockito](http://mockito.org/) and [Hamcrest](http://hamcrest.org/). However, there are some differences and limitations caused by generating the mocks and Swift language itself. List of all the supported features can be found below. You can find complete examples in [tests](Tests).

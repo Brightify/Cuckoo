@@ -11,7 +11,7 @@ function perform_curl {
   fi
 
   DOWNLOAD_URL=$(curl "${CURL_OPTIONS[@]}" "$1" | grep -oe '"browser_download_url":\s*"[^" ]*"' | grep -oe 'http[^" ]*' | grep "$FILE_NAME" | head -1)
-  
+
   if [[ -z "$DOWNLOAD_URL" ]]; then
     echo "Error: Failed to fetch download URL for the Cuckoo Generator."
     exit 1
@@ -74,13 +74,13 @@ case $1 in
     fi
     shift
   ;;
-  
+
   -c|--clean)
     CLEAN=1
     echo "Performing clean build."
     shift
   ;;
-  
+
   *)
     POSITIONAL+=("$1") # save it in an array for later
     shift
@@ -110,4 +110,3 @@ do
 done
 
 echo $INPUT_FILES | xargs "$FILE_PATH"
-
