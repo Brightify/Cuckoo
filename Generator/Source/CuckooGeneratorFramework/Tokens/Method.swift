@@ -12,7 +12,7 @@ public protocol Method: Token {
     var returnSignature: String { get }
     var range: CountableRange<Int> { get }
     var nameRange: CountableRange<Int> { get }
-    var parameters: [MethodParameter] { get }
+    var parameters: [TokenizationResult<MethodParameter>] { get }
     var isOptional: Bool { get }
     var isOverriding: Bool { get }
     var hasClosureParams: Bool { get }
@@ -32,7 +32,7 @@ public extension Method {
     }
     
     var fullyQualifiedName: String {
-        let parameterTypes = parameters.map { $0.type }
+        let parameterTypes = parameters.flatMap { $0.token?.type }
         let nameParts = name.components(separatedBy: ":")
         let lastNamePart = nameParts.last ?? ""
         
@@ -58,16 +58,16 @@ public extension Method {
     }
     
     var hasClosureParams: Bool {
-        return parameters.filter { $0.isClosure }.count > 0
+        return parameters.filter { $0.token?.isClosure == true }.count > 0
     }
 
     public func isEqual(to other: Token) -> Bool {
         guard let other = other as? Method else { return false }
-        return self.name == other.name && self.parameters == other.parameters
+        return self.name == other.name && self.parameters.tokens == other.parameters.tokens
     }
 
     public func serialize() -> [String : Any] {
-        let call = parameters.map {
+        let call = parameters.tokens.map {
             if let label = $0.label {
                 return "\(label): \($0.name)"
             } else {
@@ -96,17 +96,17 @@ public extension Method {
             "accessibility": accessibility.sourceName,
             "returnSignature": returnSignature,
             "parameters": parameters,
-            "parameterNames": parameters.map { $0.name }.joined(separator: ", "),
+            "parameterNames": parameters.tokens.map { $0.name }.joined(separator: ", "),
             "isInit": isInit,
             "returnType": returnType,
             "isThrowing": isThrowing,
             "fullyQualifiedName": fullyQualifiedName,
             "call": call,
             "isOverriding": isOverriding,
-            "parameterSignature": parameters.map { "\($0.labelAndName): \($0.type)" }.joined(separator: ", "),
-            "parameterSignatureWithoutNames": parameters.map { "\($0.name): \($0.type)" }.joined(separator: ", "),
+            "parameterSignature": parameters.tokens.map { "\($0.labelAndName): \($0.type)" }.joined(separator: ", "),
+            "parameterSignatureWithoutNames": parameters.tokens.map { "\($0.name): \($0.type)" }.joined(separator: ", "),
             "stubFunction": stubFunction,
-            "inputTypes": parameters.map { $0.typeWithoutAttributes }.joined(separator: ", "),
+            "inputTypes": parameters.tokens.map { $0.typeWithoutAttributes }.joined(separator: ", "),
             "isOptional": isOptional,
             "hasClosureParams": hasClosureParams
         ]

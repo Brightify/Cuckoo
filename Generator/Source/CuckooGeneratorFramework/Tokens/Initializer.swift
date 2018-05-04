@@ -12,7 +12,7 @@ public struct Initializer: Method {
     public let returnSignature: String
     public let range: CountableRange<Int>
     public let nameRange: CountableRange<Int>
-    public let parameters: [MethodParameter]
+    public let parameters: [TokenizationResult<MethodParameter>]
     public let isOverriding: Bool
     public let required: Bool
 

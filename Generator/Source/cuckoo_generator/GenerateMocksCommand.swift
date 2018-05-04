@@ -54,13 +54,7 @@ public struct GenerateMocksCommand: CommandProtocol {
         let parsedFiles = removeTypes(from: tokensWithInheritance, using: typeFilters)
 
         // reporting found errors if warnings aren't turned off
-        if !options.noWarnings {
-            parsedFiles
-                .flatMap { $0.declarations }
-                .flatMap { $0.errors }
-                .filter { !$0.isEmpty }
-                .forEach { print($0) }
-        }
+        printWarnings(results: parsedFiles.flatMap { $0.declarations }, warningIsError: options.warningIsError)
 
         // generating headers and mocks
         let headers = parsedFiles.map { options.noHeader ? "" : FileHeaderHandler.getHeader(of: $0, includeTimestamp: !options.noTimestamp) }
@@ -89,6 +83,25 @@ public struct GenerateMocksCommand: CommandProtocol {
         }
 
         return stderrUsed ? .failure(.stderrUsed) : .success(())
+    }
+
+    private func printWarnings(results: [TokenizationResult<Token>], warningIsError: Bool) {
+        results
+            .flatMap { $0.errors }
+            .filter { !$0.isEmpty }
+            .forEach { print($0) }
+
+        var hasWarnings = false
+        results
+            .flatMap { $0.token as? CuckooGeneratorFramework.Method }
+            .forEach {
+                hasWarnings = true
+                printWarnings(results: $0.parameters.flatMap { TokenizationResult(token: $0.token) }, warningIsError: warningIsError)
+            }
+
+        if(hasWarnings && warningIsError) {
+            fatalError("Warnings are set to crash the generator.")
+        }
     }
 
     private func mergeInheritance(_ filesRepresentation: [FileRepresentation]) -> [FileRepresentation] {
@@ -150,7 +163,7 @@ public struct GenerateMocksCommand: CommandProtocol {
         let debugMode: Bool
         let globEnabled: Bool
         let regex: String
-        let noWarnings: Bool
+        let warningIsError: Bool
 
         public init(output: String,
                     testableFrameworks: String,
@@ -163,7 +176,7 @@ public struct GenerateMocksCommand: CommandProtocol {
                     debugMode: Bool,
                     globEnabled: Bool,
                     regex: String,
-                    noWarnings: Bool,
+                    warningIsError: Bool,
                     files: [String]) {
 
             self.output = output
@@ -177,7 +190,7 @@ public struct GenerateMocksCommand: CommandProtocol {
             self.debugMode = debugMode
             self.globEnabled = globEnabled
             self.regex = regex
-            self.noWarnings = noWarnings
+            self.warningIsError = warningIsError
             self.files = files
         }
 
@@ -205,7 +218,7 @@ public struct GenerateMocksCommand: CommandProtocol {
 
             let regex: Result<String, CommandantError<ClientError>> = m <| Option(key: "regex", defaultValue: "", usage: "A regular expression pattern that is used to match Classes and Protocols.\nAll that do not match are excluded.\nCan be used alongside `--exclude`.")
 
-            let noWarnings: Result<Bool, CommandantError<ClientError>> = m <| Switch(flag: nil, key: "no-warnings", usage: "Disable all warnings.")
+            let warningIsError: Result<Bool, CommandantError<ClientError>> = m <| Switch(flag: "w", key: "w-error", usage: "Crash on warnings.")
 
             let input: Result<[String], CommandantError<ClientError>> = m <| Argument(usage: "Files to parse and generate mocks for.")
 
@@ -221,7 +234,7 @@ public struct GenerateMocksCommand: CommandProtocol {
                 <*> debugMode
                 <*> globEnabled
                 <*> regex
-                <*> noWarnings
+                <*> warningIsError
                 <*> input
         }
     }

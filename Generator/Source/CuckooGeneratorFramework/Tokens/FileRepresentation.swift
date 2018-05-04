@@ -10,9 +10,9 @@ import SourceKittenFramework
 
 public struct FileRepresentation {
     public let sourceFile: File
-    public let declarations: [TokenizationResult]
+    public let declarations: [TokenizationResult<Token>]
     
-    public init(sourceFile: File, declarations: [TokenizationResult]) {
+    public init(sourceFile: File, declarations: [TokenizationResult<Token>]) {
         self.sourceFile = sourceFile
         self.declarations = declarations
     }
@@ -31,7 +31,7 @@ public extension FileRepresentation {
             return list + [mergeToken]
         }
 
-        return FileRepresentation(sourceFile: self.sourceFile, declarations: tokens.map { TokenizationResult(token: $0) })
+        return FileRepresentation(sourceFile: sourceFile, declarations: tokens.map { TokenizationResult(token: $0) })
     }
 }
 

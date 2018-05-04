@@ -9,26 +9,41 @@
 import Foundation
 import SourceKittenFramework
 
-public struct TokenizationResult {
-    public let token: Token?
-    private(set) public var errors = [] as [TokenizationError]
+public struct TokenizationResult<TOKEN> {
+    public let token: TOKEN?
+    public let errors: [TokenizationError]
 
-    public init(token: Token?, errors: [TokenizationError] = []) {
+    public init(token: TOKEN?, errors: [TokenizationError] = []) {
         self.token = token
         self.errors = errors
     }
 }
 
-public enum TokenizationError: Error {
-    case warning(String)
+protocol TokenizationResultProtocol {
+    associatedtype TokenType
+
+    var token: TokenType? { get }
+}
+
+extension TokenizationResult: TokenizationResultProtocol {}
+
+extension Array where Element: TokenizationResultProtocol {
+    var tokens: [Element.TokenType] {
+        return self.flatMap { $0.token }
+    }
+}
+
+public struct TokenizationError: Error {
+    public let message: String
+
+    init(_ message: String) {
+        self.message = message
+    }
 }
 
 extension TokenizationError: CustomStringConvertible {
     public var description: String {
-        switch self {
-        case .warning(let message):
-            return message
-        }
+        return message
     }
 }
 
@@ -52,13 +67,13 @@ public struct Tokenizer {
         return FileRepresentation(sourceFile: file, declarations: declarations + imports)
     }
 
-    private func tokenize(_ representables: [SourceKitRepresentable]) -> [TokenizationResult] {
+    private func tokenize(_ representables: [SourceKitRepresentable]) -> [TokenizationResult<Token>] {
         return representables.flatMap(tokenize(_:))
     }
 
     internal static let nameNotSet = "name not set"
     internal static let unknownType = "unknown type"
-    private func tokenize(_ representable: SourceKitRepresentable) -> TokenizationResult? {
+    private func tokenize(_ representable: SourceKitRepresentable) -> TokenizationResult<Token>? {
         guard let dictionary = representable as? [String: SourceKitRepresentable] else { return nil }
 
         // Common fields
@@ -134,13 +149,13 @@ public struct Tokenizer {
 
         case Kinds.InstanceVariable.rawValue:
             let setterAccessibility = (dictionary[Key.setterAccessibility.rawValue] as? String).flatMap(Accessibility.init)
-                        
+
             if String.init(source.utf8.dropFirst(range!.startIndex))?.takeUntil(occurence: name)?.trimmed.hasPrefix("let") == true {
                 return nil
             }
-            
+
             if type == nil {
-                errors.append(.warning("Type of instance variable \(name) could not be inferred. Please specify it explicitly. (\(file.path ?? ""))"))
+                errors.append(TokenizationError("Type of instance variable \(name) could not be inferred. Please specify it explicitly. (\(file.path ?? ""))"))
             }
 
             token = InstanceVariable(
@@ -195,7 +210,7 @@ public struct Tokenizer {
             }
 
         default:
-            // Do not log anything, until the parser contains all known cases.
+            // Do not log anything until the parser contains all known cases.
             // stderrPrint("Unknown kind. Dictionary: \(dictionary) \(file.path ?? "")")
             return nil
         }
@@ -203,7 +218,7 @@ public struct Tokenizer {
         return TokenizationResult(token: token, errors: errors)
     }
 
-    private func tokenize(methodName: String, parameters: [SourceKitRepresentable]) -> [MethodParameter] {
+    private func tokenize(methodName: String, parameters: [SourceKitRepresentable]) -> [TokenizationResult<MethodParameter>] {
         // Takes the string between `(` and `)`
         let parameterNames = methodName.components(separatedBy: "(").last?.dropLast(1).map { "\($0)" }.joined(separator: "")
         var parameterLabels: [String?] = parameterNames?.components(separatedBy: ":").map { $0 != "_" ? $0 : nil } ?? []
@@ -221,9 +236,9 @@ public struct Tokenizer {
         return zip(parameterLabels, filteredParameters).flatMap(tokenize(parameterLabel:parameter:))
     }
 
-    private func tokenize(parameterLabel: String?, parameter: SourceKitRepresentable) -> MethodParameter? {
+    private func tokenize(parameterLabel: String?, parameter: SourceKitRepresentable) -> TokenizationResult<MethodParameter>? {
         guard let dictionary = parameter as? [String: SourceKitRepresentable] else { return nil }
-        
+
         let name = dictionary[Key.name.rawValue] as? String ?? Tokenizer.nameNotSet
         let kind = dictionary[Key.kind.rawValue] as? String ?? Tokenizer.unknownType
         let range = extractRange(from: dictionary, offset: .offset, length: .length)
@@ -232,15 +247,14 @@ public struct Tokenizer {
 
         switch kind {
         case Kinds.MethodParameter.rawValue:
-            return MethodParameter(label: parameterLabel, name: name, type: type!, range: range!, nameRange: nameRange!)
+            return TokenizationResult(token: MethodParameter(label: parameterLabel, name: name, type: type!, range: range!, nameRange: nameRange!))
 
         default:
-            stderrPrint("Unknown method parameter. Dictionary: \(dictionary) \(file.path ?? "")")
-            return nil
+            return TokenizationResult(token: nil, errors: [TokenizationError("Unknown method parameter. Dictionary: \(dictionary) \(file.path ?? "")")])
         }
     }
 
-    private func tokenize(imports otherTokens: [Token]) -> [TokenizationResult] {
+    private func tokenize(imports otherTokens: [Token]) -> [TokenizationResult<Token>] {
         let rangesToIgnore: [CountableRange<Int>] = otherTokens.flatMap { token in
             switch token {
             case let container as ContainerToken:

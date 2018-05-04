@@ -13,7 +13,7 @@ public struct ProtocolMethod: Method {
     public let isOptional: Bool
     public let range: CountableRange<Int>
     public let nameRange: CountableRange<Int>
-    public let parameters: [MethodParameter]
+    public let parameters: [TokenizationResult<MethodParameter>]
     public var isOverriding: Bool {
         return false
     }

@@ -12,7 +12,7 @@ public struct ClassMethod: Method {
     public let returnSignature: String
     public let range: CountableRange<Int>
     public let nameRange: CountableRange<Int>
-    public let parameters: [MethodParameter]
+    public let parameters: [TokenizationResult<MethodParameter>]
 
     public let bodyRange: CountableRange<Int>
 
