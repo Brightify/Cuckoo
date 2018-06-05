@@ -18,6 +18,8 @@ public protocol Mock: HasMockManager {
     func getStubbingProxy() -> Stubbing
     
     func getVerificationProxy(_ callMatcher: CallMatcher, sourceLocation: SourceLocation) -> Verification
+
+    func enableDefaultImplementation(_ stub: MocksType)
 }
 
 public extension Mock {
@@ -27,6 +29,11 @@ public extension Mock {
     
     func getVerificationProxy(_ callMatcher: CallMatcher, sourceLocation: SourceLocation) -> Verification {
         return Verification(manager: cuckoo_manager, callMatcher: callMatcher, sourceLocation: sourceLocation)
+    }
+
+    func withEnabledDefaultImplementation(_ stub: MocksType) -> Self {
+        enableDefaultImplementation(stub)
+        return self
     }
 }
 
