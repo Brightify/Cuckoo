@@ -47,15 +47,6 @@
         }
       },
       {
-        "package": "SWXMLHash",
-        "repositoryURL": "https://github.com/drmohundro/SWXMLHash.git",
-        "state": {
-          "branch": null,
-          "revision": "88095d2bb1d2deb9ea9d9963737871049b21e1b4",
-          "version": "4.2.1"
-        }
-      },
-      {
         "package": "SourceKit",
         "repositoryURL": "https://github.com/norio-nomura/SourceKit.git",
         "state": {
@@ -89,6 +80,15 @@
           "branch": null,
           "revision": "65a461d0a103896c8ff7e3f17f7be1a5badadeb0",
           "version": "0.9.0"
+        }
+      },
+      {
+        "package": "SWXMLHash",
+        "repositoryURL": "https://github.com/drmohundro/SWXMLHash.git",
+        "state": {
+          "branch": null,
+          "revision": "88095d2bb1d2deb9ea9d9963737871049b21e1b4",
+          "version": "4.2.1"
         }
       },
       {

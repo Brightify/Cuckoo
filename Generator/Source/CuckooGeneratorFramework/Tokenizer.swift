@@ -58,7 +58,9 @@ public struct Tokenizer {
 
         let attributes = dictionary[Key.Attributes.rawValue] as? [Any]
 
-        let attributeOptional = attributes?.first(where: {($0 as? [String : String])?[Key.Attribute.rawValue] == Kinds.Optional.rawValue}) != nil
+        let attributeOptional = attributes?.first(where: {
+            ($0 as? [String : SourceKitRepresentable])?[Key.Attribute.rawValue]?.isEqualTo(Kinds.Optional.rawValue) == true
+        }) != nil
 
         let accessibility = (dictionary[Key.Accessibility.rawValue] as? String).flatMap { Accessibility(rawValue: $0) }
         let type = dictionary[Key.TypeName.rawValue] as? String

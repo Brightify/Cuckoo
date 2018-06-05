@@ -165,6 +165,13 @@ class ClassTest: XCTestCase {
         verify(mock).callingCountCharactersMethodWithHello()
         verify(mock).count(characters: "Hello")
     }
+
+    func testDefaultImplCall() {
+        mock.enableDefaultImplementation(TestedClassStub())
+
+        XCTAssertEqual(mock.callingCountCharactersMethodWithHello(), 0)
+        verify(mock).callingCountCharactersMethodWithHello()
+    }
     
     private enum TestError: Error {
         case unknown
