@@ -9,6 +9,10 @@
 import XCTest
 import Cuckoo
 
+extension TestedClass: Mocked {
+    typealias MockType = MockTestedClass
+}
+
 class ClassTest: XCTestCase {
     
     private var mock: MockTestedClass!
@@ -19,11 +23,24 @@ class ClassTest: XCTestCase {
         mock = MockTestedClass()
     }
     
+    func testReadOnlyPropertyWithMockCreator() {
+        let mock = createMock(for: TestedClass.self) { builder, stub in
+            when(stub.readOnlyProperty.get).thenReturn("a")
+
+            return MockTestedClass()
+        }
+
+        XCTAssertEqual(mock.readOnlyProperty, "a")
+        _ = verify(mock).readOnlyProperty.get
+    }
+
     func testReadOnlyProperty() {
+        let mock = MockTestedClass()
+
         stub(mock) { mock in
             when(mock.readOnlyProperty.get).thenReturn("a")
         }
-        
+
         XCTAssertEqual(mock.readOnlyProperty, "a")
         _ = verify(mock).readOnlyProperty.get
     }

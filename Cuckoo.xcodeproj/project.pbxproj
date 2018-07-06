@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1851201020EF78BD000101DC /* CreateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1851200F20EF78BD000101DC /* CreateMock.swift */; };
+		1851201120EF78BD000101DC /* CreateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1851200F20EF78BD000101DC /* CreateMock.swift */; };
+		1851201320EF9A4C000101DC /* ThreadLocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1851201220EF9A4C000101DC /* ThreadLocal.swift */; };
+		1851201420EF9A4C000101DC /* ThreadLocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1851201220EF9A4C000101DC /* ThreadLocal.swift */; };
+		1851201620EF9A68000101DC /* MockManager+preconfigured.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1851201520EF9A68000101DC /* MockManager+preconfigured.swift */; };
+		1851201720EF9A68000101DC /* MockManager+preconfigured.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1851201520EF9A68000101DC /* MockManager+preconfigured.swift */; };
+		1851201920EF9B02000101DC /* Mocked.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1851201820EF9B02000101DC /* Mocked.swift */; };
+		1851201A20EF9B02000101DC /* Mocked.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1851201820EF9B02000101DC /* Mocked.swift */; };
+		1851201C20EFA57D000101DC /* MockBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1851201B20EFA57D000101DC /* MockBuilder.swift */; };
+		1851201D20EFA57D000101DC /* MockBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1851201B20EFA57D000101DC /* MockBuilder.swift */; };
 		18E2A2AC1FBB20830058FEC5 /* Cuckoo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18E2A29B1FBB1D400058FEC5 /* Cuckoo.framework */; };
 		18E2A2BB1FBB211F0058FEC5 /* Cuckoo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18E2A28D1FBB1CFC0058FEC5 /* Cuckoo.framework */; };
 		18E2A2C11FBB22B50058FEC5 /* ClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E2A2601FBB1C330058FEC5 /* ClassTest.swift */; };
@@ -235,6 +245,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1851200F20EF78BD000101DC /* CreateMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMock.swift; sourceTree = "<group>"; };
+		1851201220EF9A4C000101DC /* ThreadLocal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadLocal.swift; sourceTree = "<group>"; };
+		1851201520EF9A68000101DC /* MockManager+preconfigured.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MockManager+preconfigured.swift"; sourceTree = "<group>"; };
+		1851201820EF9B02000101DC /* Mocked.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocked.swift; sourceTree = "<group>"; };
+		1851201B20EFA57D000101DC /* MockBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockBuilder.swift; sourceTree = "<group>"; };
 		18E2A2331FBB1C330058FEC5 /* Cuckoo.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cuckoo.podspec; sourceTree = "<group>"; };
 		18E2A2341FBB1C330058FEC5 /* run */ = {isa = PBXFileReference; lastKnownFileType = text; path = run; sourceTree = "<group>"; };
 		18E2A2361FBB1C330058FEC5 /* Cuckoo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Cuckoo.h; sourceTree = "<group>"; };
@@ -364,6 +379,17 @@
 			);
 			sourceTree = "<group>";
 		};
+		18511FF820EF789A000101DC /* Initialization */ = {
+			isa = PBXGroup;
+			children = (
+				1851200F20EF78BD000101DC /* CreateMock.swift */,
+				1851201220EF9A4C000101DC /* ThreadLocal.swift */,
+				1851201520EF9A68000101DC /* MockManager+preconfigured.swift */,
+				1851201B20EFA57D000101DC /* MockBuilder.swift */,
+			);
+			path = Initialization;
+			sourceTree = "<group>";
+		};
 		18E2A2351FBB1C330058FEC5 /* Source */ = {
 			isa = PBXGroup;
 			children = (
@@ -374,6 +400,7 @@
 				18E2A23A1FBB1C330058FEC5 /* Matching */,
 				18E2A2401FBB1C330058FEC5 /* Mock */,
 				18E2A2441FBB1C330058FEC5 /* MockManager.swift */,
+				18511FF820EF789A000101DC /* Initialization */,
 				18E2A2451FBB1C330058FEC5 /* Stubbing */,
 				18E2A2581FBB1C330058FEC5 /* Utils.swift */,
 				18E2A2591FBB1C330058FEC5 /* Verification */,
@@ -399,6 +426,7 @@
 				18E2A2411FBB1C330058FEC5 /* Mock.swift */,
 				18E2A2421FBB1C330058FEC5 /* StubbingProxy.swift */,
 				18E2A2431FBB1C330058FEC5 /* VerificationProxy.swift */,
+				1851201820EF9B02000101DC /* Mocked.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -586,18 +614,18 @@
 		18E2A3411FBB3FDD0058FEC5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				18E2A35B1FBB3FDD0058FEC5 /* cuckoo_generator */,
-				18E2A35D1FBB3FDD0058FEC5 /* CuckooGeneratorFramework.framework */,
-				18E2A35F1FBB3FDD0058FEC5 /* Commandant.framework */,
-				18E2A3611FBB3FDD0058FEC5 /* Result.framework */,
-				18E2A3631FBB3FDD0058FEC5 /* Stencil.framework */,
-				18E2A3651FBB3FDD0058FEC5 /* PathKit.framework */,
-				18E2A3671FBB3FDD0058FEC5 /* Spectre.framework */,
-				18E2A3691FBB3FDD0058FEC5 /* SourceKittenFramework.framework */,
-				18E2A36B1FBB3FDD0058FEC5 /* Yams.framework */,
 				18E2A36D1FBB3FDD0058FEC5 /* CYaml.framework */,
-				18E2A36F1FBB3FDD0058FEC5 /* SWXMLHash.framework */,
+				18E2A35F1FBB3FDD0058FEC5 /* Commandant.framework */,
+				18E2A35D1FBB3FDD0058FEC5 /* CuckooGeneratorFramework.framework */,
 				18E2A3711FBB3FDD0058FEC5 /* FileKit.framework */,
+				18E2A3651FBB3FDD0058FEC5 /* PathKit.framework */,
+				18E2A3611FBB3FDD0058FEC5 /* Result.framework */,
+				18E2A36F1FBB3FDD0058FEC5 /* SWXMLHash.framework */,
+				18E2A3691FBB3FDD0058FEC5 /* SourceKittenFramework.framework */,
+				18E2A3671FBB3FDD0058FEC5 /* Spectre.framework */,
+				18E2A3631FBB3FDD0058FEC5 /* Stencil.framework */,
+				18E2A36B1FBB3FDD0058FEC5 /* Yams.framework */,
+				18E2A35B1FBB3FDD0058FEC5 /* cuckoo_generator */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -912,6 +940,8 @@
 				18E2A3331FBB31250058FEC5 /* VerifyReadOnlyProperty.swift in Sources */,
 				18E2A3371FBB31290058FEC5 /* ArgumentCaptor.swift in Sources */,
 				18E2A3031FBB23480058FEC5 /* BaseStubFunctionTrait.swift in Sources */,
+				1851201020EF78BD000101DC /* CreateMock.swift in Sources */,
+				1851201920EF9B02000101DC /* Mocked.swift in Sources */,
 				18E2A3241FBB235A0058FEC5 /* CallMatcher.swift in Sources */,
 				18E2A3161FBB234F0058FEC5 /* StubCall.swift in Sources */,
 				18E2A3051FBB23480058FEC5 /* StubFunctionThenDoNothingTrait.swift in Sources */,
@@ -925,10 +955,13 @@
 				18E2A31E1FBB23550058FEC5 /* MockManager.swift in Sources */,
 				18E2A3041FBB23480058FEC5 /* StubFunctionThenCallRealImplementationTrait.swift in Sources */,
 				18E2A3361FBB31290058FEC5 /* __DoNotUse.swift in Sources */,
+				1851201620EF9A68000101DC /* MockManager+preconfigured.swift in Sources */,
 				18E2A30F1FBB234B0058FEC5 /* StubNoReturnThrowingFunction.swift in Sources */,
 				18E2A3061FBB23480058FEC5 /* StubFunctionThenReturnTrait.swift in Sources */,
 				18E2A3251FBB235A0058FEC5 /* CallMatcherFunctions.swift in Sources */,
 				18E2A3081FBB23480058FEC5 /* StubFunctionThenTrait.swift in Sources */,
+				1851201C20EFA57D000101DC /* MockBuilder.swift in Sources */,
+				1851201320EF9A4C000101DC /* ThreadLocal.swift in Sources */,
 				18E2A30D1FBB234B0058FEC5 /* StubFunction.swift in Sources */,
 				18E2A3261FBB235A0058FEC5 /* Matchable.swift in Sources */,
 				18E2A3271FBB235A0058FEC5 /* ParameterMatcher.swift in Sources */,
@@ -950,6 +983,8 @@
 				18E2A3311FBB31240058FEC5 /* VerifyReadOnlyProperty.swift in Sources */,
 				18E2A3351FBB31280058FEC5 /* ArgumentCaptor.swift in Sources */,
 				18E2A2FD1FBB23470058FEC5 /* BaseStubFunctionTrait.swift in Sources */,
+				1851201120EF78BD000101DC /* CreateMock.swift in Sources */,
+				1851201A20EF9B02000101DC /* Mocked.swift in Sources */,
 				18E2A31F1FBB23590058FEC5 /* CallMatcher.swift in Sources */,
 				18E2A3131FBB234E0058FEC5 /* StubCall.swift in Sources */,
 				18E2A2FF1FBB23470058FEC5 /* StubFunctionThenDoNothingTrait.swift in Sources */,
@@ -963,10 +998,13 @@
 				18E2A31A1FBB23540058FEC5 /* MockManager.swift in Sources */,
 				18E2A2FE1FBB23470058FEC5 /* StubFunctionThenCallRealImplementationTrait.swift in Sources */,
 				18E2A3341FBB31280058FEC5 /* __DoNotUse.swift in Sources */,
+				1851201720EF9A68000101DC /* MockManager+preconfigured.swift in Sources */,
 				18E2A30B1FBB234B0058FEC5 /* StubNoReturnThrowingFunction.swift in Sources */,
 				18E2A3001FBB23470058FEC5 /* StubFunctionThenReturnTrait.swift in Sources */,
 				18E2A3201FBB23590058FEC5 /* CallMatcherFunctions.swift in Sources */,
 				18E2A3021FBB23470058FEC5 /* StubFunctionThenTrait.swift in Sources */,
+				1851201D20EFA57D000101DC /* MockBuilder.swift in Sources */,
+				1851201420EF9A4C000101DC /* ThreadLocal.swift in Sources */,
 				18E2A3091FBB234B0058FEC5 /* StubFunction.swift in Sources */,
 				18E2A3211FBB23590058FEC5 /* Matchable.swift in Sources */,
 				18E2A3221FBB23590058FEC5 /* ParameterMatcher.swift in Sources */,

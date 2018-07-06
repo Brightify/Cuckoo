@@ -10,7 +10,11 @@ public protocol HasMockManager {
     var cuckoo_manager: MockManager { get }
 }
 
-public protocol Mock: HasMockManager {
+public protocol HasSuperclass {
+    static var cuckoo_hasSuperclass: Bool { get }
+}
+
+public protocol Mock: HasMockManager, HasSuperclass {
     associatedtype MocksType
     associatedtype Stubbing: StubbingProxy
     associatedtype Verification: VerificationProxy
@@ -53,3 +57,16 @@ public extension ClassMock {
         return self
     }
 }
+
+public extension ClassMock {
+    static var cuckoo_hasSuperclass: Bool {
+        return true
+    }
+}
+
+public extension ProtocolMock {
+    static var cuckoo_hasSuperclass: Bool {
+        return false
+    }
+}
+

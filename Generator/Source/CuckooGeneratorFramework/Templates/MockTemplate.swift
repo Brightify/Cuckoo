@@ -17,7 +17,7 @@ class {{ container.mockName }}: {{ container.name }}, {% if container.isImplemen
 
     private var __defaultImplStub: {{ container.name }}?
 
-    let cuckoo_manager = Cuckoo.MockManager(hasParent: {{ container.isImplementation }})
+    let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: {{ container.isImplementation }})
 
     func enableDefaultImplementation(_ stub: {{ container.name }}) {
         __defaultImplStub = stub
