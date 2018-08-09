@@ -86,6 +86,46 @@ echo "Mocks Input Directory = $INPUT_DIR"
 # After running once, locate `GeneratedMocks.swift` and drag it into your Xcode test target group.
 ```
 
+If you want to add all file from subfolders, add the explore function as seen in this sample: 
+```Bash
+# Define output file. Change "$PROJECT_DIR/${PROJECT_NAME}Tests" to your test's root source folder, if it's not the default name.
+OUTPUT_FILE="$PROJECT_DIR/${PROJECT_NAME}Tests/GeneratedMocks.swift"
+echo "Generated Mocks File = $OUTPUT_FILE"
+
+# Define input directory. Change "${PROJECT_DIR}/${PROJECT_NAME}" to your project's root source folder, if it's not the default name.
+INPUT_DIR="${PROJECT_DIR}/${PROJECT_NAME}"
+echo "Mocks Input Directory = $INPUT_DIR"
+
+# explores a directory and subdirectories for swift files. To be used in generate method as follow :
+# $(explore "$INPUT_DIR/Directory/")
+explore()
+{
+    declare -a arr=()
+    for f in $1
+    do
+        if [ -d "$f" ]
+        then
+            for ff in $f//*
+            do
+                explore $ff
+            done
+        else
+            if [[ "$f" == *.swift ]]
+            then
+                echo $f
+                echo " "
+            fi
+        fi
+    done
+}
+
+# Generate mock files, include as many input files as you'd like to create mocks for.
+"${PODS_ROOT}/Cuckoo/run" generate --testable "$PROJECT_NAME" \
+--output "${OUTPUT_FILE}" \
+$(explore "$INPUT_DIR/Folder/Protocols") \
+$(explore "$INPUT_DIR/Folder/Delegates")
+```
+
 Input files can be also specified directly in `Run script` in `Input Files` form. To force run script to rebuild generator even if it already exists, use `--clean` as first argument.
 
 Notes: All paths in the Run script must be absolute. Variable `PROJECT_DIR` automatically points to your project directory.  
