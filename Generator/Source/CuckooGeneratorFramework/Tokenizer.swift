@@ -20,12 +20,18 @@ public struct Tokenizer {
     }
 
     public func tokenize() -> FileRepresentation {
-        let structure = Structure(file: file)
+        do {
+            let structure = try Structure(file: file)
 
-        let declarations = tokenize(structure.dictionary[Key.Substructure.rawValue] as? [SourceKitRepresentable] ?? [])
-        let imports = tokenize(imports: declarations)
+            let declarations = tokenize(structure.dictionary[Key.Substructure.rawValue] as? [SourceKitRepresentable] ?? [])
+            let imports = tokenize(imports: declarations)
 
-        return FileRepresentation(sourceFile: file, declarations: declarations + imports)
+            return FileRepresentation(sourceFile: file, declarations: declarations + imports)
+        } catch {
+            print("Error")
+        }
+
+        return FileRepresentation(sourceFile: file, declarations: [])
     }
 
     private func tokenize(_ representables: [SourceKitRepresentable]) -> [Token] {
