@@ -21,15 +21,15 @@ public protocol ContainerToken: Token {
 
 extension ContainerToken {
     public func serialize() -> [String : Any] {
-        let properties = children.flatMap { $0 as? InstanceVariable }
+        let properties = children.compactMap { $0 as? InstanceVariable }
             .filter { $0.accessibility.isAccessible }
             .map { $0.serializeWithType() }
 
-        let methods = children.flatMap { $0 as? Method }
+        let methods = children.compactMap { $0 as? Method }
             .filter { $0.accessibility.isAccessible && !$0.isInit && !$0.isDeinit }
             .map { $0.serializeWithType() }
 
-        let initializers = children.flatMap { $0 as? Method }
+        let initializers = children.compactMap { $0 as? Method }
             .filter { $0.accessibility.isAccessible && $0.isInit && !$0.isDeinit }
             .map { $0.serializeWithType() }
 

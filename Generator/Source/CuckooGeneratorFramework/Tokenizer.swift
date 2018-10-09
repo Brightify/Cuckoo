@@ -35,7 +35,7 @@ public struct Tokenizer {
     }
 
     private func tokenize(_ representables: [SourceKitRepresentable]) -> [Token] {
-        return representables.flatMap(tokenize)
+        return representables.compactMap(tokenize)
     }
 
     internal static let nameNotSet = "name not set"
@@ -49,7 +49,7 @@ public struct Tokenizer {
 
         // Inheritance
         let inheritedTypes = dictionary[Key.InheritedTypes.rawValue] as? [SourceKitRepresentable] ?? []
-        let tokenizedInheritedTypes = inheritedTypes.flatMap { type -> InheritanceDeclaration in
+        let tokenizedInheritedTypes = inheritedTypes.compactMap { type -> InheritanceDeclaration in
             guard let typeDict = type as? [String: SourceKitRepresentable] else {
                 return InheritanceDeclaration.empty
             }
@@ -196,7 +196,7 @@ public struct Tokenizer {
             return kind == Kinds.MethodParameter.rawValue
         })
 
-        return zip(parameterLabels, filteredParameters).flatMap(tokenize)
+        return zip(parameterLabels, filteredParameters).compactMap(tokenize)
     }
 
     private func tokenize(parameterLabel: String?, parameter: SourceKitRepresentable) -> MethodParameter? {
@@ -219,7 +219,7 @@ public struct Tokenizer {
     }
 
     private func tokenize(imports otherTokens: [Token]) -> [Token] {
-        let rangesToIgnore: [CountableRange<Int>] = otherTokens.flatMap { token in
+        let rangesToIgnore: [CountableRange<Int>] = otherTokens.compactMap { token in
             switch token {
             case let container as ContainerToken:
                 return container.range

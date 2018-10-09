@@ -33,9 +33,15 @@ extension String.UTF8View {
 }
 
 extension Sequence {
+    #if !swift(>=4.1)
+    public func compactMap<O>(_ transform: (Element) -> O?) -> [O] {
+        return self.flatMap(transform)
+    }
+    #endif
+
 
     func only<T>(_ type: T.Type) -> [T] {
-        return flatMap { $0 as? T }
+        return compactMap { $0 as? T }
     }
 
     func noneOf<T>(_ type: T.Type) -> [Iterator.Element] {

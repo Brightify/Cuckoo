@@ -61,7 +61,7 @@ public struct Generator {
 
         let environment = Environment(extensions: [ext])
 
-        let containers = declarations.flatMap { $0 as? ContainerToken }
+        let containers = declarations.compactMap { $0 as? ContainerToken }
             .filter { $0.accessibility.isAccessible }
             .map { $0.serializeWithType() }
 

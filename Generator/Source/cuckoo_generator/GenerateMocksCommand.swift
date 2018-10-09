@@ -36,7 +36,7 @@ public struct GenerateMocksCommand: CommandProtocol {
         } else {
             inputPathValues = getFullPathSortedArray(options.files)
         }
-        let inputFiles = inputPathValues.map { File(path: $0) }.flatMap { $0 }
+        let inputFiles = inputPathValues.map { File(path: $0) }.compactMap { $0 }
         let tokens = inputFiles.map { Tokenizer(sourceFile: $0).tokenize() }
         let tokensWithInheritance = options.noInheritance ? tokens : mergeInheritance(tokens)
 
@@ -83,7 +83,7 @@ public struct GenerateMocksCommand: CommandProtocol {
     }
 
     private func mergeInheritance(_ filesRepresentation: [FileRepresentation]) -> [FileRepresentation] {
-        return filesRepresentation.flatMap { $0.mergeInheritance(with: filesRepresentation) }
+        return filesRepresentation.compactMap { $0.mergeInheritance(with: filesRepresentation) }
     }
 
     private func removeTypes(from files: [FileRepresentation], using filters: [(Token) -> Bool]) -> [FileRepresentation] {
@@ -92,7 +92,7 @@ public struct GenerateMocksCommand: CommandProtocol {
             filters.first(where: { !$0(token) }) == nil
         }
 
-        return files.flatMap { file in
+        return files.compactMap { file in
             let filteredDeclarations = file.declarations.filter(filter)
             guard !filteredDeclarations.isEmpty else { return nil }
             return FileRepresentation(sourceFile: file.sourceFile, declarations: filteredDeclarations)

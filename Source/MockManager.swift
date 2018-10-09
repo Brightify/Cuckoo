@@ -8,6 +8,14 @@
 
 import XCTest
 
+#if !swift(>=4.1)
+private extension Array {
+    func compactMap<O>(_ transform: (Element) -> O?) -> [O] {
+        return self.flatMap(transform)
+    }
+}
+#endif
+
 public class MockManager {
     public static var fail: ((message: String, sourceLocation: SourceLocation)) -> () = { (arg) in let (message, sourceLocation) = arg; XCTFail(message, file: sourceLocation.file, line: sourceLocation.line) }
     private var stubs: [Stub] = []
@@ -32,7 +40,7 @@ public class MockManager {
         stubCalls.append(stubCall)
         unverifiedStubCallsIndexes.append(stubCalls.count - 1)
         
-        if let stub = (stubs.filter { $0.method == method }.flatMap { $0 as? ConcreteStub<IN, OUT> }.filter { $0.parameterMatchers.reduce(true) { $0 && $1.matches(parameters) } }.first) {
+        if let stub = (stubs.filter { $0.method == method }.compactMap { $0 as? ConcreteStub<IN, OUT> }.filter { $0.parameterMatchers.reduce(true) { $0 && $1.matches(parameters) } }.first) {
             if let action = stub.actions.first {
                 if stub.actions.count > 1 {
                     // Bug in Swift, this expression resolves as uncalled function
