@@ -91,12 +91,21 @@ public extension Method {
             }
         }
 
+        let escapingParameterNames = parameters.map { parameter in
+            if parameter.isClosure && !parameter.isEscaping {
+                return "escapingStub(for: \(parameter.name))"
+            } else {
+                return parameter.name
+            }
+        }.joined(separator: ", ")
+
         return [
             "name": rawName,
             "accessibility": accessibility.sourceName,
             "returnSignature": returnSignature,
             "parameters": parameters,
             "parameterNames": parameters.map { $0.name }.joined(separator: ", "),
+            "escapingParameterNames": escapingParameterNames,
             "isInit": isInit,
             "returnType": returnType,
             "isThrowing": isThrowing,

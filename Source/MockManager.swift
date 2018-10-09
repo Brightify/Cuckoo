@@ -31,12 +31,12 @@ public class MockManager {
         self.hasParent = hasParent
     }
 
-    private func callInternal<IN, OUT>(_ method: String, parameters: IN, superclassCall: () -> OUT, defaultCall: () -> OUT) -> OUT {
-        return try! callThrowsInternal(method, parameters: parameters, superclassCall: superclassCall, defaultCall: defaultCall)
+    private func callInternal<IN, OUT>(_ method: String, parameters: IN, escapingParameters: IN, superclassCall: () -> OUT, defaultCall: () -> OUT) -> OUT {
+        return try! callThrowsInternal(method, parameters: parameters, escapingParameters: escapingParameters, superclassCall: superclassCall, defaultCall: defaultCall)
     }
     
-    private func callThrowsInternal<IN, OUT>(_ method: String, parameters: IN, superclassCall: () throws -> OUT, defaultCall: () throws -> OUT) throws -> OUT {
-        let stubCall = ConcreteStubCall(method: method, parameters: parameters)
+    private func callThrowsInternal<IN, OUT>(_ method: String, parameters: IN, escapingParameters: IN, superclassCall: () throws -> OUT, defaultCall: () throws -> OUT) throws -> OUT {
+        let stubCall = ConcreteStubCall(method: method, parameters: escapingParameters)
         stubCalls.append(stubCall)
         unverifiedStubCallsIndexes.append(stubCalls.count - 1)
         
@@ -179,22 +179,22 @@ extension MockManager {
 
 extension MockManager {
     public func getter<T>(_ property: String, superclassCall: @autoclosure () -> T, defaultCall: @autoclosure () -> T) -> T {
-        return call(getterName(property), parameters: Void(), superclassCall: superclassCall, defaultCall: defaultCall())
+        return call(getterName(property), parameters: Void(), escapingParameters: Void(), superclassCall: superclassCall, defaultCall: defaultCall())
     }
 
     public func setter<T>(_ property: String, value: T, superclassCall: @autoclosure () -> Void, defaultCall: @autoclosure () -> Void) {
-        return call(setterName(property), parameters: value, superclassCall: superclassCall, defaultCall: defaultCall())
+        return call(setterName(property), parameters: value, escapingParameters: value, superclassCall: superclassCall, defaultCall: defaultCall())
     }
 }
 
 extension MockManager {
-    public func call<IN, OUT>(_ method: String, parameters: IN, superclassCall: @autoclosure () -> OUT, defaultCall: @autoclosure () -> OUT) -> OUT {
-        return callInternal(method, parameters: parameters, superclassCall: superclassCall, defaultCall: defaultCall)
+    public func call<IN, OUT>(_ method: String, parameters: IN, escapingParameters: IN, superclassCall: @autoclosure () -> OUT, defaultCall: @autoclosure () -> OUT) -> OUT {
+        return callInternal(method, parameters: parameters, escapingParameters: escapingParameters, superclassCall: superclassCall, defaultCall: defaultCall)
     }
 }
 
 extension MockManager {
-    public func callThrows<IN, OUT>(_ method: String, parameters: IN, superclassCall: @autoclosure () throws -> OUT, defaultCall: @autoclosure () throws -> OUT) throws -> OUT {
-        return try callThrowsInternal(method, parameters: parameters, superclassCall: superclassCall, defaultCall: defaultCall)
+    public func callThrows<IN, OUT>(_ method: String, parameters: IN, escapingParameters: IN, superclassCall: @autoclosure () throws -> OUT, defaultCall: @autoclosure () throws -> OUT) throws -> OUT {
+        return try callThrowsInternal(method, parameters: parameters, escapingParameters: escapingParameters, superclassCall: superclassCall, defaultCall: defaultCall)
     }
 }

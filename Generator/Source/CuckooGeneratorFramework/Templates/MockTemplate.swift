@@ -70,6 +70,7 @@ class {{ container.mockName }}: {{ container.name }}, {% if container.isImplemen
         {{ method.parameters|openNestedClosure:method.isThrowing }}
             return{% if method.isThrowing %} try{% endif %} cuckoo_manager.call{% if method.isThrowing %}Throws{% endif %}("{{method.fullyQualifiedName}}",
                 parameters: ({{method.parameterNames}}),
+                escapingParameters: ({{method.escapingParameterNames}}),
                 superclassCall:
                     {% if container.isImplementation %}
                     super.{{method.name}}({{method.call}})

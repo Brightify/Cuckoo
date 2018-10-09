@@ -21,3 +21,15 @@ public func wrap<M: Matchable, IN>(matchable: M, mapping: @escaping (IN) -> M.Ma
 }
 
 public typealias SourceLocation = (file: StaticString, line: UInt)
+
+public func escapingStub<IN, OUT>(for closure: (IN) -> OUT) -> (IN) -> OUT {
+    return { _ in
+        fatalError("This is a stub! It's not supposed to be called!")
+    }
+}
+
+public func escapingStub<IN, OUT>(for closure: (IN) throws -> OUT) -> (IN) throws -> OUT {
+    return { _ in
+        fatalError("This is a stub! It's not supposed to be called!")
+    }
+}
