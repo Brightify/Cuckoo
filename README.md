@@ -20,7 +20,7 @@ Cuckoo has two parts. One is the [runtime](https://github.com/SwiftKit/Cuckoo) a
 
 Unfortunately Swift does not have a proper reflection, so we decided to use a compile-time generator to go through files you specify and generate supporting structs/classes that will be used by the runtime in your test target.
 
-The generated files contain enough information to give you the right amount of power. They work based on inheritance and protocol adoption. This means that only overridable things can be mocked. We currently support all features which fulfill this rule except for things listed in TODO. Due to the complexity of Swift it is not easy to check for all edge cases so if you find some unexpected behavior please report it in issues.  
+The generated files contain enough information to give you the right amount of power. They work based on inheritance and protocol adoption. This means that only overridable things can be mocked. We currently support all features which fulfill this rule except for things listed in TODO. Due to the complexity of Swift it is not easy to check for all edge cases so if you find some unexpected behavior please report it in issues.
 
 ## Changelog
 
@@ -28,11 +28,11 @@ List of all changes and new features can be found [here](CHANGELOG.md).
 
 ## TODO
 
-We are still missing support for some important features like:  
+We are still missing support for some important features like:
 
 * <del>inheritance (grandparent methods)</del>
-* generics  
-* type inference for instance variables (you need to write it explicitly, otherwise it will be replaced with "__UnknownType")  
+* generics
+* type inference for instance variables (you need to write it explicitly, otherwise it will be replaced with "__UnknownType")
 
 ## What will not be supported
 
@@ -88,8 +88,10 @@ echo "Mocks Input Directory = $INPUT_DIR"
 
 Input files can be also specified directly in `Run script` in `Input Files` form. To force run script to rebuild generator even if it already exists, use `--clean` as first argument.
 
-Notes: All paths in the Run script must be absolute. Variable `PROJECT_DIR` automatically points to your project directory.  
-Also include paths to inherited Classes and Protocols for mocking/stubbing parent and grandparents.  
+Xcode 10: Due to parallelization of the new Xcode build system, you may see an error that the GeneratedMocks.swift file cannot be found. To force Xcode to wait for the file to be generated,, add the output file path, e.g. $(PROJECT_DIR)/${PROJECT_NAME}Tests/GeneratedMocks.swift, to the "Output Files" list below the Script box.
+
+Notes: All paths in the Run script must be absolute. Variable `PROJECT_DIR` automatically points to your project directory.
+Also include paths to inherited Classes and Protocols for mocking/stubbing parent and grandparents.
 
 #### Carthage
 To use Cuckoo with [Carthage](https://github.com/Carthage/Carthage) add in your Cartfile this line:
@@ -374,7 +376,7 @@ clearInvocations<M: Mock>(_ mocks: M...)
 
 #### Stub objects
 
-Stubs are used in case when you want to suppress real code. Stubs are different from Mocks in that they don't support stubbing and verification. They can be created with the same constructors as the mocked type. Name of stub class always corresponds to name of the mocked class/protocol with `Stub` suffix. For example stub of protocol `Greeter` has a name `GreeterStub`.  
+Stubs are used in case when you want to suppress real code. Stubs are different from Mocks in that they don't support stubbing and verification. They can be created with the same constructors as the mocked type. Name of stub class always corresponds to name of the mocked class/protocol with `Stub` suffix. For example stub of protocol `Greeter` has a name `GreeterStub`.
 
 ```Swift
 let stub = GreeterStub()
@@ -428,7 +430,7 @@ A comma separated list of frameworks that should be imported as @testable in the
 
 ##### `--exclude` (string)
 
-A comma separated list of classes and protocols that should be skipped during mock generation.  
+A comma separated list of classes and protocols that should be skipped during mock generation.
 
 ##### `--no-header`
 
