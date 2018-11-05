@@ -42,7 +42,9 @@ extension ContainerToken {
             "methods": methods,
             "initializers": implementation ? [] : initializers,
             "isImplementation": implementation,
-            "mockName": "Mock\(name)"
+            "mockName": "Mock\(name)",
+            "inheritedTypes": inheritedTypes,
+            "attributes": attributes
         ]
     }
 }

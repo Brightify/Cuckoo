@@ -10,6 +10,9 @@ import Foundation
 extension Templates {
     static let mock = """
 {% for container in containers %}
+{% for attribute in container.attributes %}
+{{ attribute }}
+{% endfor %}
 {{ container.accessibility }} class {{ container.mockName }}: {{ container.name }}, {% if container.isImplementation %}Cuckoo.ClassMock{% else %}Cuckoo.ProtocolMock{% endif %} {
     {{ container.accessibility }} typealias MocksType = {{ container.name }}
     {{ container.accessibility }} typealias Stubbing = __StubbingProxy_{{ container.name }}
