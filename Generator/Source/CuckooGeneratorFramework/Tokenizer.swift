@@ -251,9 +251,10 @@ public struct Tokenizer {
         }
 
         do {
-            let baseRegex = "(?:\\b|;)import(?:\\s|(?:\\/\\/.*\n)|(?:\\/\*.*\\*\\/))+"
-            let libraryImportRegex = baseRegex + "([^\\s;\\/]+)\\s+([^\\s;\\/]+)\\.([^\\s;\\/]+)"
-            let componentImportRegex = baseRegex + "([^\\s;\\/]+)"
+            let baseRegex = "(?:\\b|;)import(?:\\s|(?:\\/\\/.*\\n)|(?:\\/\*.*\\*\\/))+"
+            let identifierRegex = "[^\\s;\\/]+"
+            let libraryImportRegex = baseRegex + "(\(identifierRegex))\\s+(\(identifierRegex))\\.(\(identifierRegex))"
+            let componentImportRegex = baseRegex + "(\(identifierRegex))"
             let libraryRegex = try NSRegularExpression(libraryImportRegex)
             let componentRegex = try NSRegularExpression(libraryImportRegex)
             let libraries = libraryRegex.matches(in: source, range: NSMakeRange(0, source.count))
