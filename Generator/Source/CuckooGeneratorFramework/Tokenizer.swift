@@ -249,21 +249,48 @@ public struct Tokenizer {
                 return nil
             }
         }
+
         do {
-            let regex = try NSRegularExpression(pattern: "(?:\\b|;)import(?:\\s|(?:\\/\\/.*\\n)|(?:\\/\\*.*\\*\\/))+([^\\s;\\/]+)", options: [])
-            let results = regex.matches(in: source, options: [], range: NSMakeRange(0, source.count))
-            return results.filter { result in
+            let baseRegex = "(?:\\b|;)import(?:\\s|(?:\\/\\/.*\n)|(?:\\/\*.*\\*\\/))+"
+            let libraryImportRegex = baseRegex + "([^\\s;\\/]+)\\s+([^\\s;\\/]+)\\.([^\\s;\\/]+)"
+            let componentImportRegex = baseRegex + "([^\\s;\\/]+)"
+            let libraryRegex = try NSRegularExpression(libraryImportRegex)
+            let componentRegex = try NSRegularExpression(libraryImportRegex)
+            let libraries = libraryRegex.matches(in: source, range: NSMakeRange(0, source.count))
+                .filter { result in
                     rangesToIgnore.filter { $0 ~= result.range.location }.isEmpty
-                }.map {
+                }
+                .map {
                     let libraryRange = $0.range(at: 1)
                     let fromIndex = source.index(source.startIndex, offsetBy: libraryRange.location)
                     let toIndex = source.index(fromIndex, offsetBy: libraryRange.length)
                     let library = String(source[fromIndex..<toIndex])
                     let range = $0.range.location..<($0.range.location + $0.range.length)
-                    return Import(range: range, library: library)
+                    return Import(range: range, importee: .library(name: library))
                 }
+            let components = componentRegex.matches(in: source, range: NSMakeRange(0, source.count))
+                .filter { result in
+                    rangesToIgnore.filter { $0 ~= result.range.location }.isEmpty
+                }
+                .compactMap {
+                    let componentType = $0.range(at: 1).extract(from: source)
+                    let library = $0.range(at: 2).extract(from: source)
+                    let component = $0.range(at: 3).extract(from: source)
+                    let range = $0.range.location..<($0.range.location + $0.range.length)
+                    return Import(range: range, importee: .component(componentType: componentType, library: library, name: component))
+                }
+
+            return libraries + components
         } catch let error as NSError {
             fatalError("Invalid regex:" + error.description)
         }
+    }
+}
+
+extension NSRange {
+    private func extract(from string: String) -> String {
+        let fromIndex = string.index(string.startIndex, offsetBy: self.location)
+        let toIndex = string.index(fromIndex, offsetBy: self.length)
+        return String(string[fromIndex..<toIndex])
     }
 }
