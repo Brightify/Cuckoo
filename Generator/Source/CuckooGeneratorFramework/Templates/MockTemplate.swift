@@ -56,7 +56,9 @@ class {{ container.mockName }}: {{ container.name }}, {% if container.isImplemen
     {% endfor %}
 
     {% for initializer in container.initializers %}
+    {% if debug %}
     // {{initializer}}
+    {% endif %}
     {{ initializer.accessibility }}{% if container.isImplementation %} override{% endif %}{% if initializer.@type == "ProtocolMethod" %} required{% endif %} init({{initializer.parameterSignature}}) {
         {% if container.isImplementation %}
         super.init({{initializer.call}})
@@ -65,7 +67,9 @@ class {{ container.mockName }}: {{ container.name }}, {% if container.isImplemen
     {% endfor %}
 
     {% for method in container.methods %}
+    {% if debug %}
     // {{method}}
+    {% endif %}
     {{ method.accessibility }}{% if container.isImplementation and method.isOverriding %} override{% endif %} func {{ method.name }}({{ method.parameterSignature }}) {{ method.returnSignature }} {
         {{ method.parameters|openNestedClosure:method.isThrowing }}
             return{% if method.isThrowing %} try{% endif %} cuckoo_manager.call{% if method.isThrowing %}Throws{% endif %}("{{method.fullyQualifiedName}}",
