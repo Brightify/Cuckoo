@@ -29,8 +29,7 @@ public extension Token {
 
     public var isClassOrProtocolDefinition: Bool {
         switch self {
-        case _ as ProtocolDeclaration:
-            fallthrough
+        case _ as ProtocolDeclaration,
         case _ as ClassDeclaration:
             return true
         default:

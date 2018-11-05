@@ -17,4 +17,3 @@ public enum Attribute: String {
     case ibAction = "source.decl.attribute.ibaction"
     case ibOutlet = "source.decl.attribute.iboutlet"
 }
-

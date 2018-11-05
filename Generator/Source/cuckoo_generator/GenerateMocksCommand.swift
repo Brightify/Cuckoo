@@ -89,7 +89,7 @@ public struct GenerateMocksCommand: CommandProtocol {
     private func removeTypes(from files: [FileRepresentation], using filters: [(Token) -> Bool]) -> [FileRepresentation] {
         // Only keep those that pass all filters
         let filter: (Token) -> Bool = { token in
-            filters.first(where: { !$0(token) }) == nil
+            filters.contains { !$0(token) }
         }
 
         return files.compactMap { file in

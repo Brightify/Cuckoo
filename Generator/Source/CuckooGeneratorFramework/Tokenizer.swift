@@ -64,9 +64,9 @@ public struct Tokenizer {
 
         let attributes = dictionary[Key.Attributes.rawValue] as? [Any]
 
-        let attributeOptional = attributes?.first(where: {
+        let attributeOptional = attributes?.contains {
             ($0 as? [String : SourceKitRepresentable])?[Key.Attribute.rawValue]?.isEqualTo(Kinds.Optional.rawValue) == true
-        }) != nil
+        }
 
         let accessibility = (dictionary[Key.Accessibility.rawValue] as? String).flatMap { Accessibility(rawValue: $0) }
         let type = dictionary[Key.TypeName.rawValue] as? String
@@ -115,8 +115,8 @@ public struct Tokenizer {
         case Kinds.InstanceVariable.rawValue:
             let setterAccessibility = (dictionary[Key.SetterAccessibility.rawValue] as? String).flatMap(Accessibility.init)
                         
-            if String.init(source.utf8.dropFirst(range!.startIndex))?.takeUntil(occurence: name)?.trimmed.hasPrefix("let") == true {
-                    return nil
+            if String(source.utf8.dropFirst(range!.startIndex))?.takeUntil(occurence: name)?.trimmed.hasPrefix("let") == true {
+                return nil
             }
             
             if type == nil {
@@ -189,12 +189,12 @@ public struct Tokenizer {
         // Last element is not type.
         parameterLabels = Array(parameterLabels.dropLast())
 
-        // Substructure can contain some other informations after the parameters.
-        let filteredParameters = parameters.filter({
+        // Substructure can contain some other information after the parameters.
+        let filteredParameters = parameters.filter {
             let dictionary = $0 as? [String: SourceKitRepresentable]
             let kind = dictionary?[Key.Kind.rawValue] as? String ?? ""
             return kind == Kinds.MethodParameter.rawValue
-        })
+        }
 
         return zip(parameterLabels, filteredParameters).compactMap(tokenize)
     }

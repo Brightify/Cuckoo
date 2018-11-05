@@ -104,7 +104,7 @@ public struct Generator {
         var fullString = ""
         for (index, parameter) in parameters.enumerated() {
             if parameter.isClosure && !parameter.isEscaping {
-                let indents = String.init(repeating: "\t", count: index + 1)
+                let indents = String(repeating: "\t", count: index + 1)
                 let tries = (throwing ?? false) ? " try " : " "
                 fullString += "\(indents)return\(tries)withoutActuallyEscaping(\(parameter.name), do: { (\(parameter.name)) in\n"
             }
@@ -116,7 +116,7 @@ public struct Generator {
         var fullString = ""
         for (index, parameter) in parameters.enumerated() {
             if parameter.isClosure && !parameter.isEscaping {
-                let indents = String.init(repeating: "\t", count: index + 1)
+                let indents = String(repeating: "\t", count: index + 1)
                 fullString += "\(indents)})\n"
             }
         }
