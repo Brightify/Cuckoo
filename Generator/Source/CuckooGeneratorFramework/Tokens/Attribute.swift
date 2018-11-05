@@ -16,4 +16,5 @@ public enum Attribute: String {
     case weak = "source.decl.attribute.weak"
     case ibAction = "source.decl.attribute.ibaction"
     case ibOutlet = "source.decl.attribute.iboutlet"
+    case available = "source.decl.attribute.available"
 }

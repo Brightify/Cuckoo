@@ -23,14 +23,17 @@ public struct ClassDeclaration: ContainerToken {
     }
 
     public func replace(children tokens: [Token]) -> ClassDeclaration {
-        return ClassDeclaration(name: self.name,
-                accessibility: self.accessibility,
-                range: self.range,
-                nameRange: self.nameRange,
-                bodyRange: self.bodyRange,
-                initializers: self.initializers,
-                children: tokens,
-                inheritedTypes: self.inheritedTypes)
+        return ClassDeclaration(
+            name: self.name,
+            accessibility: self.accessibility,
+            range: self.range,
+            nameRange: self.nameRange,
+            bodyRange: self.bodyRange,
+            initializers: self.initializers,
+            children: tokens,
+            implementation: self.implementation,
+            inheritedTypes: self.inheritedTypes,
+            attributes: self.attributes)
     }
 
     public func isEqual(to other: Token) -> Bool {
