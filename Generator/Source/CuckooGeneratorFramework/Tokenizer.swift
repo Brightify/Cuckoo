@@ -63,12 +63,11 @@ public struct Tokenizer {
         let bodyRange = extractRange(from: dictionary, offset: .BodyOffset, length: .BodyLength)
 
         let attributes = dictionary[Key.Attributes.rawValue] as? [Any]
-
         let attributeOptional = attributes?.contains {
             ($0 as? [String : SourceKitRepresentable])?[Key.Attribute.rawValue]?.isEqualTo(Kinds.Optional.rawValue) == true
-        }
+        } ?? false
 
-        let accessibility = (dictionary[Key.Accessibility.rawValue] as? String).flatMap { Accessibility(rawValue: $0) }
+        let accessibility = (dictionary[Key.Accessibility.rawValue] as? String).compactMap { Accessibility(rawValue: $0) }
         let type = dictionary[Key.TypeName.rawValue] as? String
 
         switch kind {
