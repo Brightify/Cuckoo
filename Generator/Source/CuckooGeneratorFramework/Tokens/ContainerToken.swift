@@ -35,7 +35,7 @@ extension ContainerToken {
 
         return [
             "name": name,
-            "accessibility": accessibility,
+            "accessibility": accessibility.sourceName,
             "isAccessible": accessibility.isAccessible,
             "children": children.map { $0.serializeWithType() },
             "properties": properties,
