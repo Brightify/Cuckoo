@@ -62,10 +62,16 @@ public struct Tokenizer {
         let nameRange = extractRange(from: dictionary, offset: .NameOffset, length: .NameLength)
         let bodyRange = extractRange(from: dictionary, offset: .BodyOffset, length: .BodyLength)
 
-        let attributes = dictionary[Key.Attributes.rawValue] as? [Any]
-        let attributeOptional = attributes?.contains {
-            ($0 as? [String : SourceKitRepresentable])?[Key.Attribute.rawValue]?.isEqualTo(Kinds.Optional.rawValue) == true
-        } ?? false
+        // Attributes
+        let attributes = (dictionary[Key.Attributes.rawValue] as? [SourceKitRepresentable] ?? [])
+            .compactMap { attribute -> Attribute? in
+                guard let attribute = attribute as? [String: SourceKitRepresentable],
+                    let stringKind = attribute[Key.Attribute.rawValue] as? String,
+                    let kind = Attribute.Kind(rawValue: stringKind),
+                    let attributeRange = extractRange(from: attribute, offset: .Offset, length: .Length) else { return nil }
+                let text = String(source.utf8[attributeRange])
+                return Attribute(kind: kind, text: text)
+            }
 
         let accessibility = (dictionary[Key.Accessibility.rawValue] as? String).flatMap { Accessibility(rawValue: $0) }
         let type = dictionary[Key.TypeName.rawValue] as? String
@@ -84,7 +90,8 @@ public struct Tokenizer {
                 bodyRange: bodyRange!,
                 initializers: initializers,
                 children: children,
-                inheritedTypes: tokenizedInheritedTypes)
+                inheritedTypes: tokenizedInheritedTypes,
+                attributes: attributes)
 
         case Kinds.ClassDeclaration.rawValue:
             let subtokens = tokenize(dictionary[Key.Substructure.rawValue] as? [SourceKitRepresentable] ?? [])
@@ -106,7 +113,8 @@ public struct Tokenizer {
                 bodyRange: bodyRange!,
                 initializers: initializers,
                 children: children,
-                inheritedTypes: tokenizedInheritedTypes)
+                inheritedTypes: tokenizedInheritedTypes,
+                attributes: attributes)
 
         case Kinds.ExtensionDeclaration.rawValue:
             return ExtensionDeclaration(range: range!)
@@ -163,6 +171,8 @@ public struct Tokenizer {
                     parameters: parameters,
                     bodyRange: bodyRange)
             } else {
+                let attributeOptional = attributes.contains { $0.kind == Attribute.Kind.optional }
+
                 return ProtocolMethod(
                     name: name,
                     accessibility: accessibility!,

@@ -8,6 +8,7 @@
 
 import Foundation
 
+@available(swift 4.0)
 class TestedClass {
     
     let constant: Float = 0.0

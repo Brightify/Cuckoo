@@ -11,7 +11,7 @@ extension Templates {
     static let mock = """
 {% for container in containers %}
 {% for attribute in container.attributes %}
-{{ attribute }}
+{{ attribute.text }}
 {% endfor %}
 {{ container.accessibility }} class {{ container.mockName }}: {{ container.name }}, {% if container.isImplementation %}Cuckoo.ClassMock{% else %}Cuckoo.ProtocolMock{% endif %} {
     {{ container.accessibility }} typealias MocksType = {{ container.name }}

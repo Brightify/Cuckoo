@@ -16,7 +16,7 @@ public struct ClassDeclaration: ContainerToken {
     public let children: [Token]
     public let implementation: Bool = true
     public let inheritedTypes: [InheritanceDeclaration]
-    public let attributes: [Attribute] = []
+    public let attributes: [Attribute]
     
     public var hasNoArgInit: Bool {
         return initializers.filter { $0.parameters.isEmpty }.isEmpty
@@ -31,7 +31,6 @@ public struct ClassDeclaration: ContainerToken {
             bodyRange: self.bodyRange,
             initializers: self.initializers,
             children: tokens,
-            implementation: self.implementation,
             inheritedTypes: self.inheritedTypes,
             attributes: self.attributes)
     }
