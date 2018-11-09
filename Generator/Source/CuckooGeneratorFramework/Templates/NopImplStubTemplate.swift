@@ -29,7 +29,7 @@ extension Templates {
 
     {% for method in container.methods %}
     {{ method.accessibility }}{% if container.@type == "ClassDeclaration" and method.isOverriding %} override{% endif %} func {{ method.name }}({{ method.parameterSignature }}) {{ method.returnSignature }} {
-        return DefaultValueRegistry.defaultValue(for: {{method.returnType}}.self)
+        return DefaultValueRegistry.defaultValue(for: {{method.returnType|genericSafe}}.self)
     }
     {% endfor %}
 }
