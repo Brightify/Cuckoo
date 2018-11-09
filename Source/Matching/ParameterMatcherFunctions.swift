@@ -27,6 +27,11 @@ public func equal<T>(to set: Set<T>) -> ParameterMatcher<Set<T>> {
     return equal(to: set, equalWhen: ==)
 }
 
+/// Returns an equality matcher for Dictionary<Hashable, Equatable>
+public func equal<K: Hashable, V: Equatable>(to dictionary: [K: V]) -> ParameterMatcher<[K: V]> {
+    return equal(to: dictionary, equalWhen: ==)
+}
+
 /// Returns a matcher using the supplied function.
 public func equal<T>(to value: T, equalWhen equalityFunction: @escaping (T, T) -> Bool) -> ParameterMatcher<T> {
     return ParameterMatcher {

@@ -43,6 +43,12 @@ class ParameterMatcherFunctionsTest: XCTestCase {
         XCTAssertFalse(equal(to: [1, 2, 3] as Set<Int>).matches([1, 2] as Set<Int>))
     }
 
+    func testEqualToDictionary() {
+        XCTAssertTrue(equal(to: ["one": 1, "two": 2, "three": 3] as [String: Int]).matches(["one": 1, "two": 2, "three": 3] as [String: Int]))
+        XCTAssertTrue(equal(to: ["one": 1, "two": 2, "three": 3, "four": 4] as [String: Int]).matches(["four": 4, "one": 1, "three": 3, "two": 2] as [String: Int]))
+        XCTAssertFalse(equal(to: ["one": 1, "two": 2, "three": 3] as [String: Int]).matches(["one": 2, "two": 3, "three": 4] as [String: Int]))
+    }
+
     func testAnyInt() {
         XCTAssertTrue(anyInt().matches(1))
     }
