@@ -9,10 +9,10 @@ import Foundation
 
 extension Templates {
     static let stubbingProxy = """
-struct __StubbingProxy_{{ container.name }}: Cuckoo.StubbingProxy {
+{{ container.accessibility }} struct __StubbingProxy_{{ container.name }}: Cuckoo.StubbingProxy {
     private let cuckoo_manager: Cuckoo.MockManager
 
-    init(manager: Cuckoo.MockManager) {
+    {{ container.accessibility }} init(manager: Cuckoo.MockManager) {
         self.cuckoo_manager = manager
     }
     {% for property in container.properties %}

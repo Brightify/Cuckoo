@@ -11,15 +11,15 @@ extension Templates {
     static let mock = """
 {% for container in containers %}
 {{ container.accessibility }} class {{ container.mockName }}: {{ container.name }}, {% if container.isImplementation %}Cuckoo.ClassMock{% else %}Cuckoo.ProtocolMock{% endif %} {
-    typealias MocksType = {{ container.name }}
-    typealias Stubbing = __StubbingProxy_{{ container.name }}
-    typealias Verification = __VerificationProxy_{{ container.name }}
+    {{ container.accessibility }} typealias MocksType = {{ container.name }}
+    {{ container.accessibility }} typealias Stubbing = __StubbingProxy_{{ container.name }}
+    {{ container.accessibility }} typealias Verification = __VerificationProxy_{{ container.name }}
 
     private var __defaultImplStub: {{ container.name }}?
 
-    let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: {{ container.isImplementation }})
+    {{ container.accessibility }} let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: {{ container.isImplementation }})
 
-    func enableDefaultImplementation(_ stub: {{ container.name }}) {
+    {{ container.accessibility }} func enableDefaultImplementation(_ stub: {{ container.name }}) {
         __defaultImplStub = stub
         cuckoo_manager.enableDefaultStubImplementation()
     }
