@@ -29,14 +29,13 @@ public struct InstanceVariable: Token {
     }
 
     public func serialize() -> [String : Any] {
+        let readOnlyString = readOnly ? "ReadOnly" : ""
         return [
             "name": name,
             "type": type,
             "accessibility": accessibility.sourceName,
             "isReadOnly": readOnly,
-            "stubType": readOnly ?
-                (overriding ? "ClassToBeStubbedReadOnlyProperty" : "ProtocolToBeStubbedReadOnlyProperty") :
-                (overriding ? "ClassToBeStubbedProperty" : "ProtocolToBeStubbedProperty")
+            "stubType": overriding ? "ClassToBeStubbed\(readOnlyString)Property" : "ProtocolToBeStubbed\(readOnlyString)Property"
         ]
     }
 }
