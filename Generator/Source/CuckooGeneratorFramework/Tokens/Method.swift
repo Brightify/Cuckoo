@@ -64,7 +64,7 @@ public extension Method {
 
     public func isEqual(to other: Token) -> Bool {
         guard let other = other as? Method else { return false }
-        return self.name == other.name && self.parameters == other.parameters
+        return self.name == other.name && self.parameters == other.parameters && self.returnType == other.returnType
     }
 
     public func serialize() -> [String : Any] {
