@@ -44,7 +44,7 @@ extension ContainerToken {
             "isImplementation": implementation,
             "mockName": "Mock\(name)",
             "inheritedTypes": inheritedTypes,
-            "attributes": attributes
+            "attributes": attributes.filter { $0.isSupported },
         ]
     }
 }

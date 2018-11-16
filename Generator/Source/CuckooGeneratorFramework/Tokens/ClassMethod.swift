@@ -13,9 +13,8 @@ public struct ClassMethod: Method {
     public let range: CountableRange<Int>
     public let nameRange: CountableRange<Int>
     public let parameters: [MethodParameter]
-
     public let bodyRange: CountableRange<Int>
-
+    public let attributes: [Attribute]
     public var isOptional: Bool {
         return false
     }

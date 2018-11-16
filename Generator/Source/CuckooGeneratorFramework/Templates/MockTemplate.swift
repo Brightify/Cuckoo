@@ -31,6 +31,9 @@ extension Templates {
     {% if debug %}
     // {{property}}
     {% endif %}
+    {% for attribute in property.attributes %}
+    {{ attribute.text }}
+    {% endfor %}
     {{ property.accessibility }}{% if container.isImplementation %} override{% endif %} var {{ property.name }}: {{ property.type }} {
         get {
             return cuckoo_manager.getter("{{ property.name }}",
@@ -73,6 +76,9 @@ extension Templates {
     {% if debug %}
     // {{method}}
     {% endif %}
+    {% for attribute in method.attributes %}
+    {{ attribute.text }}
+    {% endfor %}
     {{ method.accessibility }}{% if container.isImplementation and method.isOverriding %} override{% endif %} func {{ method.name }}({{ method.parameterSignature }}) {{ method.returnSignature }} {
         {{ method.parameters|openNestedClosure:method.isThrowing }}
             return{% if method.isThrowing %} try{% endif %} cuckoo_manager.call{% if method.isThrowing %}Throws{% endif %}("{{method.fullyQualifiedName}}",

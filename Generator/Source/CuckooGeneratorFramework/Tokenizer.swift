@@ -137,7 +137,8 @@ public struct Tokenizer {
                 setterAccessibility: setterAccessibility,
                 range: range!,
                 nameRange: nameRange!,
-                overriding: false)
+                overriding: false,
+                attributes: attributes)
 
         case Kinds.InstanceMethod.rawValue:
             let parameters = tokenize(methodName: name, parameters: dictionary[Key.Substructure.rawValue] as? [SourceKitRepresentable] ?? [])
@@ -169,18 +170,17 @@ public struct Tokenizer {
                     range: range!,
                     nameRange: nameRange!,
                     parameters: parameters,
-                    bodyRange: bodyRange)
+                    bodyRange: bodyRange,
+                    attributes: attributes)
             } else {
-                let attributeOptional = attributes.contains { $0.kind == Attribute.Kind.optional }
-
                 return ProtocolMethod(
                     name: name,
                     accessibility: accessibility!,
                     returnSignature: returnSignature,
-                    isOptional: attributeOptional,
                     range: range!,
                     nameRange: nameRange!,
-                    parameters: parameters)
+                    parameters: parameters,
+                    attributes: attributes)
             }
 
         default:

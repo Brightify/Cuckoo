@@ -22,6 +22,15 @@ public struct Attribute {
 
     public var kind: Kind
     public var text: String
+
+    public var isSupported: Bool {
+        switch (kind) {
+        case .objc, .optional, .lazy, .required, .override, .convenience, .weak, .ibAction, .ibOutlet:
+            return false
+        case .available:
+            return true
+        }
+    }
 }
 
 extension Attribute: Token {

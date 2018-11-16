@@ -28,7 +28,7 @@ public struct ProtocolDeclaration: ContainerToken {
             initializers: self.initializers,
             children: tokens,
             inheritedTypes: self.inheritedTypes,
-            attributes: self.attributes.filter { $0.kind != Attribute.Kind.objc })
+            attributes: self.attributes)
     }
 
     public func isEqual(to other: Token) -> Bool {

@@ -1,5 +1,5 @@
 //
-//  .swift
+//  Method.swift
 //  CuckooGenerator
 //
 //  Created by Filip Dolnik on 30.05.16.
@@ -16,6 +16,7 @@ public protocol Method: Token {
     var isOptional: Bool { get }
     var isOverriding: Bool { get }
     var hasClosureParams: Bool { get }
+    var attributes: [Attribute] { get }
 }
 
 public extension Method {
@@ -117,7 +118,8 @@ public extension Method {
             "stubFunction": stubFunction,
             "inputTypes": parameters.map { $0.typeWithoutAttributes }.joined(separator: ", "),
             "isOptional": isOptional,
-            "hasClosureParams": hasClosureParams
+            "hasClosureParams": hasClosureParams,
+            "attributes": attributes.filter { $0.isSupported },
         ]
     }
 }

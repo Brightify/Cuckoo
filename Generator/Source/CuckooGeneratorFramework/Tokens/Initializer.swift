@@ -15,10 +15,9 @@ public struct Initializer: Method {
     public let parameters: [MethodParameter]
     public let isOverriding: Bool
     public let required: Bool
+    public let attributes: [Attribute]
 
     public var isOptional: Bool {
         return false
     }
-
-
 }
