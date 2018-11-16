@@ -194,3 +194,7 @@ class ClassUsingInnerEnum {
         return .foo
     }
 }
+
+final class FinalClass {
+    var shouldBeIgnoredByCuckoo = true
+}

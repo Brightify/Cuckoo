@@ -96,6 +96,11 @@ public struct Tokenizer {
                 attributes: attributes)
 
         case Kinds.ClassDeclaration.rawValue:
+            guard !attributes.map({ $0.kind }).contains(.final) else {
+                fputs("Cuckoo: Ignoring mocking of class \(name) because it's marked `final`.\n", stdout)
+                return nil
+            }
+
             let subtokens = tokenize(dictionary[Key.Substructure.rawValue] as? [SourceKitRepresentable] ?? [])
             let initializers = subtokens.only(Initializer.self)
             let children = subtokens.noneOf(Initializer.self).map { child -> Token in

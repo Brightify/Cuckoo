@@ -18,6 +18,7 @@ public struct Attribute {
         case ibAction = "source.decl.attribute.ibaction"
         case ibOutlet = "source.decl.attribute.iboutlet"
         case available = "source.decl.attribute.available"
+        case final = "source.decl.attribute.final"
     }
 
     public var kind: Kind
@@ -25,7 +26,7 @@ public struct Attribute {
 
     public var isSupported: Bool {
         switch (kind) {
-        case .objc, .optional, .lazy, .required, .override, .convenience, .weak, .ibAction, .ibOutlet:
+        case .objc, .optional, .lazy, .required, .override, .convenience, .weak, .ibAction, .ibOutlet, .final:
             return false
         case .available:
             return true
