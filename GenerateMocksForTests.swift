@@ -35,6 +35,7 @@ let generatorArguments = [
     "\(projectDir)/Tests/Source/TestedSubclass.swift",
     "\(projectDir)/Tests/Source/TestedSubProtocol.swift",
     "\(projectDir)/Tests/Source/ExcludedTestClass.swift",
+    "\(projectDir)/Tests/Source/GenericClass.swift",
 ]
 
 let useRun = Bool(ProcessInfo.processInfo.environment["USE_RUN", default: "false"]) ?? false

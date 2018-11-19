@@ -15,8 +15,6 @@ public struct ProtocolDeclaration: ContainerToken, HasAccessibility {
     public var bodyRange: CountableRange<Int>
     public var initializers: [Initializer]
     public var children: [Token]
-    public var inheritedTypes: [InheritanceDeclaration]
-    public var attributes: [Attribute]
 
     public func replace(children tokens: [Token]) -> ProtocolDeclaration {
         return ProtocolDeclaration(
@@ -28,7 +26,8 @@ public struct ProtocolDeclaration: ContainerToken, HasAccessibility {
             initializers: self.initializers,
             children: tokens,
             inheritedTypes: self.inheritedTypes,
-            attributes: self.attributes)
+            attributes: self.attributes,
+            genericParameters: self.genericParameters)
     }
 
     public func isEqual(to other: Token) -> Bool {

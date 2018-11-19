@@ -13,16 +13,16 @@ extension Templates {
 {% for attribute in container.attributes %}
 {{ attribute.text }}
 {% endfor %}
-{{ container.accessibility }} class {{ container.mockName }}: {{ container.name }}, {% if container.isImplementation %}Cuckoo.ClassMock{% else %}Cuckoo.ProtocolMock{% endif %} {
-    {{ container.accessibility }} typealias MocksType = {{ container.name }}
+{{ container.accessibility }} class {{ container.mockName }}{{ container.genericParameters }}: {{ container.name }}{{ container.genericArguments }}, {% if container.isImplementation %}Cuckoo.ClassMock{% else %}Cuckoo.ProtocolMock{% endif %} {
+    {{ container.accessibility }} typealias MocksType = {{ container.name }}{{ container.genericArguments }}
     {{ container.accessibility }} typealias Stubbing = __StubbingProxy_{{ container.name }}
     {{ container.accessibility }} typealias Verification = __VerificationProxy_{{ container.name }}
 
-    private var __defaultImplStub: {{ container.name }}?
+    private var __defaultImplStub: {{ container.name }}{{ container.genericArguments }}?
 
     {{ container.accessibility }} let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: {{ container.isImplementation }})
 
-    {{ container.accessibility }} func enableDefaultImplementation(_ stub: {{ container.name }}) {
+    {{ container.accessibility }} func enableDefaultImplementation(_ stub: {{ container.name }}{{ container.genericArguments }}) {
         __defaultImplStub = stub
         cuckoo_manager.enableDefaultStubImplementation()
     }
@@ -98,7 +98,6 @@ extension Templates {
 \(Templates.stubbingProxy.indented())
 
 \(Templates.verificationProxy.indented())
-
 }
 
 \(Templates.noImplStub)
