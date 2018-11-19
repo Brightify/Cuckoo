@@ -251,33 +251,37 @@ public struct Tokenizer {
         }
 
         do {
-            let baseRegex = "(?:\\b|;)import(?:\\s|(?:\\/\\/.*\\n)|(?:\\/\*.*\\*\\/))+"
+            let baseRegex = "(?:\\b|;)import(?:\\s|(?:\\/\\/.*\\n)|(?:\\/\\*.*\\*\\/))+"
             let identifierRegex = "[^\\s;\\/]+"
-            let libraryImportRegex = baseRegex + "(\(identifierRegex))\\s+(\(identifierRegex))\\.(\(identifierRegex))"
-            let componentImportRegex = baseRegex + "(\(identifierRegex))"
-            let libraryRegex = try NSRegularExpression(libraryImportRegex)
-            let componentRegex = try NSRegularExpression(libraryImportRegex)
-            let libraries = libraryRegex.matches(in: source, range: NSMakeRange(0, source.count))
+            let libraryImportRegex = baseRegex + "(\(identifierRegex))(?:\\n|(?:\\s)*;)"
+            let componentImportRegex = baseRegex + "(\(identifierRegex))\\s+(\(identifierRegex))\\.(\(identifierRegex))"
+            let libraryRegex = try NSRegularExpression(pattern: libraryImportRegex)
+            let componentRegex = try NSRegularExpression(pattern: componentImportRegex)
+            let librariesRange = NSRange(location: 0, length: source.count)
+            let libraries = libraryRegex.matches(in: source, range: librariesRange)
                 .filter { result in
                     rangesToIgnore.filter { $0 ~= result.range.location }.isEmpty
                 }
-                .map {
-                    let libraryRange = $0.range(at: 1)
+                .map { result -> Import in
+                    let libraryRange = result.range(at: 1)
                     let fromIndex = source.index(source.startIndex, offsetBy: libraryRange.location)
                     let toIndex = source.index(fromIndex, offsetBy: libraryRange.length)
                     let library = String(source[fromIndex..<toIndex])
-                    let range = $0.range.location..<($0.range.location + $0.range.length)
+                    let range = result.range.location..<(result.range.location + result.range.length)
+                    print(library)
                     return Import(range: range, importee: .library(name: library))
                 }
-            let components = componentRegex.matches(in: source, range: NSMakeRange(0, source.count))
+            let components = componentRegex.matches(in: source, range: NSRange(location: 0, length: source.count))
                 .filter { result in
                     rangesToIgnore.filter { $0 ~= result.range.location }.isEmpty
                 }
-                .compactMap {
-                    let componentType = $0.range(at: 1).extract(from: source)
-                    let library = $0.range(at: 2).extract(from: source)
-                    let component = $0.range(at: 3).extract(from: source)
-                    let range = $0.range.location..<($0.range.location + $0.range.length)
+                .map { result -> Import in
+                    let componentRange = result.range(at: 1)
+                    let componentType = componentRange.location == NSNotFound ? nil : source[componentRange]
+                    let library = source[result.range(at: 2)]
+                    let component = source[result.range(at: 3)]
+                    let range = result.range.location..<(result.range.location + result.range.length)
+                    print(library, component)
                     return Import(range: range, importee: .component(componentType: componentType, library: library, name: component))
                 }
 
@@ -288,10 +292,10 @@ public struct Tokenizer {
     }
 }
 
-extension NSRange {
-    private func extract(from string: String) -> String {
-        let fromIndex = string.index(string.startIndex, offsetBy: self.location)
-        let toIndex = string.index(fromIndex, offsetBy: self.length)
-        return String(string[fromIndex..<toIndex])
+extension String {
+    subscript(range: NSRange) -> String {
+        let fromIndex = self.index(self.startIndex, offsetBy: range.location)
+        let toIndex = self.index(fromIndex, offsetBy: range.length)
+        return String(self[fromIndex..<toIndex])
     }
 }

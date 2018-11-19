@@ -24,9 +24,9 @@ public struct FileHeaderHandler {
     }
 
     public static func getImports(of file: FileRepresentation, testableFrameworks: [String]) -> String {
-        var imports = Array(Set(file.declarations.only(Import.self).map { "import \($0.importee)" + "\n" })).sorted().joined(separator: "")
+        var imports = Array(Set(file.declarations.only(Import.self).map { "import \($0.importee)\n" })).sorted().joined(separator: "")
         if imports.isEmpty == false {
-            imports = "\n" + imports
+            imports = "\n\(imports)"
         }
         return "import Cuckoo\n" + getTestableImports(testableFrameworks: testableFrameworks) + imports
     }
