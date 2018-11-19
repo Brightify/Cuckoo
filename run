@@ -25,9 +25,8 @@ function download_generator {
   chmod +x ${FILE_NAME}
 }
 
-if [[ ! -e "$FILE_PATH" ]]; then
+function build_generator {
   pushd "$SCRIPT_PATH"
-  echo "No Cuckoo Generator found."
   if [[ "$1" = "--download" ]]; then
     download_generator "$2"
   else
@@ -40,23 +39,42 @@ if [[ ! -e "$FILE_PATH" ]]; then
       fi
       mv "$SCRIPT_PATH/Generator/.build/release/$FILE_NAME" "$FILE_PATH"
     else
-      echo "Couldn't build. Generator not found. (expected in the `Generator` directory)"
+      echo "Couldn't build. Generator source code not found. (expected in the `Generator` directory)"
       download_generator "$2"
     fi
   fi
   popd
+}
+
+if [[ ("$1" = "--clean" && "$2" = "--download") || ("$1" = "--download" && "$2" = "--clean") ]]; then
+  echo "Options --clean and --download are mutually exclusive. --clean builds the generator discarding the previous one while --download gets the generator binary from GitHub."
+  exit 1
+fi
+
+if [[ ! -e "$FILE_PATH" ]]; then
+  echo "No Cuckoo Generator found."
+  build_generator
+fi
+
+if [[ "$1" = "--clean" ]]; then
+  echo "Performing clean Cuckoo Generator build."
+  build_generator
 fi
 
 if [[ "$1" = "--download" ]]; then
   if [[ ! -z "$DOWNLOAD_SPECIFIC_VER" ]]; then
     shift
   fi
-	shift
+  shift
+fi
+
+if [[ "$1" = "--clean" ]]; then
+  shift
 fi
 
 INPUT_FILES=""
 if [[ "$#" > 0 ]]; then
-	INPUT_FILES=$(printf '%q ' "$@")
+  INPUT_FILES=$(printf '%q ' "$@")
 fi
 
 if [[ -z "$SCRIPT_INPUT_FILE_COUNT" ]]; then
@@ -65,8 +83,8 @@ fi
 
 for (( i=0; i<"$SCRIPT_INPUT_FILE_COUNT"; i++ ))
 do
-	INPUT_FILE="SCRIPT_INPUT_FILE_$i"
-	INPUT_FILES+=" $(printf '%q' "${!INPUT_FILE}")"
+  INPUT_FILE="SCRIPT_INPUT_FILE_$i"
+  INPUT_FILES+=" $(printf '%q' "${!INPUT_FILE}")"
 done
 
 echo $INPUT_FILES | xargs "$FILE_PATH"
