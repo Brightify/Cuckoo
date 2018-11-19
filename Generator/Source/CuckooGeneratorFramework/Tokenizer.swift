@@ -12,9 +12,11 @@ import SourceKittenFramework
 public struct Tokenizer {
     private let file: File
     private let source: String
+    private let debugMode: Bool
 
-    public init(sourceFile: File) {
+    public init(sourceFile: File, debugMode: Bool) {
         self.file = sourceFile
+        self.debugMode = debugMode
 
         source = sourceFile.contents
     }
@@ -97,7 +99,9 @@ public struct Tokenizer {
 
         case Kinds.ClassDeclaration.rawValue:
             guard !attributes.map({ $0.kind }).contains(.final) else {
-                fputs("Cuckoo: Ignoring mocking of class \(name) because it's marked `final`.\n", stdout)
+                if debugMode {
+                    fputs("Cuckoo: Ignoring mocking of class \(name) because it's marked `final`.\n", stdout)
+                }
                 return nil
             }
 
