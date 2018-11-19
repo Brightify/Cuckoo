@@ -69,7 +69,9 @@ public struct Tokenizer {
                     let stringKind = attribute[Key.Attribute.rawValue] as? String,
                     let kind = Attribute.Kind(rawValue: stringKind),
                     let attributeRange = extractRange(from: attribute, offset: .Offset, length: .Length) else { return nil }
-                let text = String(source.utf8[attributeRange])
+                let startIndex = source.utf8.index(source.utf8.startIndex, offsetBy: attributeRange.lowerBound)
+                let endIndex = source.utf8.index(source.utf8.startIndex, offsetBy: attributeRange.upperBound)
+                guard let text = String(source.utf8[startIndex..<endIndex]) else { return nil }
                 return Attribute(kind: kind, text: text)
             }
 
