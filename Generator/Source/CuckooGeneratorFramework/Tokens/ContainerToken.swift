@@ -34,9 +34,6 @@ extension ContainerToken {
             .filter { $0.accessibility.isAccessible && $0.isInit && !$0.isDeinit }
             .map { $0.serializeWithType() }
 
-//        let genericParameters = children.compactMap { $0 as? GenericParameter }
-//            .map { $0.serializeWithType() }
-
         let genericParametersString = genericParameters.map { $0.description }.joined(separator: ", ")
         let genericArgumentsString = genericParameters.map { $0.name }.joined(separator: ", ")
         let isGeneric = !genericParameters.isEmpty

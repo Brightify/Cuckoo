@@ -141,6 +141,10 @@
 		58C54612D0DB47A284F29AD5 /* ExcludedStubTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C54B2B810BC9284205CB16 /* ExcludedStubTest.swift */; };
 		58C54C0D4A65BCDC47704C0B /* ExcludedTestClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C54D12B64AF3169FC8A1A3 /* ExcludedTestClass.swift */; };
 		58C54E2CB6689135915CFC3E /* ExcludedStubTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C54B2B810BC9284205CB16 /* ExcludedStubTest.swift */; };
+		6861B32921A31DAC002EC2DA /* GenericClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6861B30B21A31DA2002EC2DA /* GenericClass.swift */; };
+		6861B32A21A31DAD002EC2DA /* GenericClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6861B30B21A31DA2002EC2DA /* GenericClass.swift */; };
+		6861B32C21A32279002EC2DA /* GenericProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6861B32B21A32279002EC2DA /* GenericProtocol.swift */; };
+		6861B32D21A32279002EC2DA /* GenericProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6861B32B21A32279002EC2DA /* GenericProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -256,14 +260,14 @@
 			remoteGlobalIDString = "FileKit::FileKit::Product";
 			remoteInfo = FileKit;
 		};
-		68E792CF223661030052DD43 /* PBXContainerItemProxy */ = {
+		6861B32521A31DA3002EC2DA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 18E2A3401FBB3FDD0058FEC5 /* CuckooGenerator.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = "SourceKitten::Clang_C::Product";
 			remoteInfo = Clang_C;
 		};
-		68E792D1223661030052DD43 /* PBXContainerItemProxy */ = {
+		6861B32721A31DA3002EC2DA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 18E2A3401FBB3FDD0058FEC5 /* CuckooGenerator.xcodeproj */;
 			proxyType = 2;
@@ -359,6 +363,8 @@
 		18E2A3971FBB43E60058FEC5 /* .travis.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .travis.yml; sourceTree = "<group>"; };
 		58C54B2B810BC9284205CB16 /* ExcludedStubTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExcludedStubTest.swift; sourceTree = "<group>"; };
 		58C54D12B64AF3169FC8A1A3 /* ExcludedTestClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExcludedTestClass.swift; sourceTree = "<group>"; };
+		6861B30B21A31DA2002EC2DA /* GenericClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericClass.swift; sourceTree = "<group>"; };
+		6861B32B21A32279002EC2DA /* GenericProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -578,6 +584,8 @@
 				18E2A2751FBB1C330058FEC5 /* TestedSubProtocol.swift */,
 				18E2A2761FBB1C330058FEC5 /* UnicodeTestProtocol.swift */,
 				58C54D12B64AF3169FC8A1A3 /* ExcludedTestClass.swift */,
+				6861B30B21A31DA2002EC2DA /* GenericClass.swift */,
+				6861B32B21A32279002EC2DA /* GenericProtocol.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -906,18 +914,18 @@
 			remoteRef = 18E2A3701FBB3FDD0058FEC5 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		68E792D0223661030052DD43 /* Clang_C.framework */ = {
+		6861B32621A31DA3002EC2DA /* Clang_C.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = Clang_C.framework;
-			remoteRef = 68E792CF223661030052DD43 /* PBXContainerItemProxy */;
+			remoteRef = 6861B32521A31DA3002EC2DA /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		68E792D2223661030052DD43 /* SourceKit.framework */ = {
+		6861B32821A31DA3002EC2DA /* SourceKit.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = SourceKit.framework;
-			remoteRef = 68E792D1223661030052DD43 /* PBXContainerItemProxy */;
+			remoteRef = 6861B32721A31DA3002EC2DA /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -1099,12 +1107,14 @@
 				18E2A2C61FBB22B60058FEC5 /* CuckooFunctionsTest.swift in Sources */,
 				18E2A2D21FBB22BC0058FEC5 /* ParameterMatcherFunctionsTest.swift in Sources */,
 				18E2A2D11FBB22BC0058FEC5 /* MatchableTest.swift in Sources */,
+				6861B32A21A31DAD002EC2DA /* GenericClass.swift in Sources */,
 				18E2A2CF1FBB22BC0058FEC5 /* CallMatcherFunctionsTest.swift in Sources */,
 				18E2A2C71FBB22B60058FEC5 /* DefaultValueRegistryTest.swift in Sources */,
 				18E2A2E01FBB22C40058FEC5 /* TestedClass.swift in Sources */,
 				18E2A2F51FBB22ED0058FEC5 /* ArgumentCaptorTest.swift in Sources */,
 				58C540B5C5EF0037F77C90B5 /* ExcludedTestClass.swift in Sources */,
 				58C54612D0DB47A284F29AD5 /* ExcludedStubTest.swift in Sources */,
+				6861B32D21A32279002EC2DA /* GenericProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1136,12 +1146,14 @@
 				18E2A2C21FBB22B50058FEC5 /* CuckooFunctionsTest.swift in Sources */,
 				18E2A2CC1FBB22BC0058FEC5 /* ParameterMatcherFunctionsTest.swift in Sources */,
 				18E2A2CB1FBB22BC0058FEC5 /* MatchableTest.swift in Sources */,
+				6861B32921A31DAC002EC2DA /* GenericClass.swift in Sources */,
 				18E2A2C91FBB22BC0058FEC5 /* CallMatcherFunctionsTest.swift in Sources */,
 				18E2A2C31FBB22B50058FEC5 /* DefaultValueRegistryTest.swift in Sources */,
 				18E2A2D81FBB22C30058FEC5 /* TestedClass.swift in Sources */,
 				18E2A2F31FBB22EC0058FEC5 /* ArgumentCaptorTest.swift in Sources */,
 				58C54C0D4A65BCDC47704C0B /* ExcludedTestClass.swift in Sources */,
 				58C54E2CB6689135915CFC3E /* ExcludedStubTest.swift in Sources */,
+				6861B32C21A32279002EC2DA /* GenericProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

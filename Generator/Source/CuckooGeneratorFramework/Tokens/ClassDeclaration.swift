@@ -17,7 +17,6 @@ public struct ClassDeclaration: ContainerToken, HasAccessibility {
     public var children: [Token]
     public var inheritedTypes: [InheritanceDeclaration]
     public var attributes: [Attribute]
-    
     public var hasNoArgInit: Bool {
         return initializers.filter { $0.parameters.isEmpty }.isEmpty
     }
@@ -32,7 +31,8 @@ public struct ClassDeclaration: ContainerToken, HasAccessibility {
             initializers: self.initializers,
             children: tokens,
             inheritedTypes: self.inheritedTypes,
-            attributes: self.attributes)
+            attributes: self.attributes,
+            genericParameters: self.genericParameters)
     }
 
     public func isEqual(to other: Token) -> Bool {
