@@ -221,7 +221,19 @@ public struct Tokenizer {
             return tokenize(parameterLabel: nil, parameter: representable)
 
         case Kinds.AssociatedType.rawValue:
-            return nil
+            let regex = try! NSRegularExpression(pattern: "\\s*:\\s*([^\\s;\\/]+)")
+            guard let nameRange = nameRange, let range = range else { return nil }
+            guard let inheritanceMatch = regex.firstMatch(
+                in: source,
+                range: NSMakeRange(range.startIndex, range.endIndex - range.startIndex)) else {
+                return GenericParameter(name: name, range: range, inheritedType: nil)
+            }
+            let inheritanceRange = inheritanceMatch.range(at: 1)
+            let fromIndex = source.index(source.startIndex, offsetBy: inheritanceRange.location)
+            let toIndex = source.index(fromIndex, offsetBy: inheritanceRange.length)
+            let inheritance = String(source[fromIndex..<toIndex])
+            let fullRange = range.lowerBound..<(range.upperBound + inheritanceMatch.range.length)
+            return GenericParameter(name: name, range: fullRange, inheritedType: InheritanceDeclaration(name: inheritance))
 
         default:
             // Do not log anything, until the parser contains all known cases.
