@@ -8,15 +8,19 @@
 import Foundation
 
 protocol GenericProtocol {
-    associatedtype C: TestedClass
-    associatedtype P: TestedProtocol
+    associatedtype C: AnyObject
+    associatedtype V
 
-    var readWritePropertyT: C { get }
-    var readWritePropertyU: P { get set }
+    var readOnlyPropertyC: C { get }
+    var readWritePropertyV: V { get set }
 
-    init(theC: C, theP: P)
+    var constant: Int { get }
+    var optionalProperty: V? { get set }
+
+    init(theC: C, theV: V)
 
     func callSomeC(theC: C) -> Int
-    func callSomeP(theP: P) -> Int
-    func compute(classy: C, proto: P) -> C
+    func callSomeV(theV: V) -> Int
+    func compute(classy: C, value: V) -> C
+    func noReturn()
 }

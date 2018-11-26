@@ -8,9 +8,13 @@
 import Foundation
 
 class GenericClass<T: CustomStringConvertible, U: Codable & CustomStringConvertible, V: Hashable & Equatable> {
+    let constant = 10.0
+
     var readWritePropertyT: T
     var readWritePropertyU: U
     var readWritePropertyV: V
+
+    var optionalProperty: U?
 
     init(theT: T, theU: U, theV: V) {
         readWritePropertyT = theT
@@ -32,10 +36,12 @@ class GenericClass<T: CustomStringConvertible, U: Codable & CustomStringConverti
 
     func encode(theU: U) -> Data {
         let encoder = JSONEncoder()
-        return try! encoder.encode(theU)
+        return try! encoder.encode(["root": theU])
     }
 
     func withClosure(_ closure: (T) -> Int) -> Int {
         return closure(readWritePropertyT)
     }
+
+    func noReturn() {}
 }
