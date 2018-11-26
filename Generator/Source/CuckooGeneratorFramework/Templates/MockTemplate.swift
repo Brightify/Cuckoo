@@ -8,13 +8,19 @@
 import Foundation
 
 extension Templates {
+    static let staticGenericParameter = "_CUCKOO$$GENERIC"
+    static let typeErasureClassName = "DefaultImplCaller"
     static let mock = """
 {% for container in containers %}
 {% for attribute in container.attributes %}
 {{ attribute.text }}
 {% endfor %}
-{{ container.accessibility }} class {{ container.mockName }}{{ container.genericParameters }}: {{ container.name }}{{ container.genericArguments }}, {% if container.isImplementation %}Cuckoo.ClassMock{% else %}Cuckoo.ProtocolMock{% endif %} {
-    {{ container.accessibility }} typealias MocksType = {{ container.name }}{{ container.genericArguments }}
+{{ container.accessibility }} class {{ container.mockName }}{{ container.genericParameters }}: {{ container.name }}{% if container.isImplementation %}{{ container.genericArguments }}{% endif %}, {% if container.isImplementation %}Cuckoo.ClassMock{% else %}Cuckoo.ProtocolMock{% endif %} {
+    {% if container.isGeneric and not container.isImplementation %}
+    typealias MocksType = \(typeErasureClassName){{ container.genericArguments }}
+    {% else %}
+    typealias MocksType = {{ container.name }}{{ container.genericArguments }}
+    {% endif %}
     {{ container.accessibility }} typealias Stubbing = __StubbingProxy_{{ container.name }}
     {{ container.accessibility }} typealias Verification = __VerificationProxy_{{ container.name }}
 
@@ -22,10 +28,29 @@ extension Templates {
 
     {{ container.accessibility }} let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: {{ container.isImplementation }})
 
+    {% if container.isGeneric and not container.isImplementation %}
+\(Templates.typeErasure.indented())
+
+    private var __defaultImplStub: \(typeErasureClassName){{ container.genericArguments }}?
+
+    {{ container.accessibility }} func enableDefaultImplementation<\(staticGenericParameter): {{ container.name }}>(_ stub: \(staticGenericParameter)) where {{ container.genericProtocolIdentity }} {
+        var mutableStub = stub
+        __defaultImplStub = \(typeErasureClassName)(from: &mutableStub, keeping: mutableStub)
+        cuckoo_manager.enableDefaultStubImplementation()
+    }
+
+    {{ container.accessibility }} func enableDefaultImplementation<\(staticGenericParameter): GenericProtocol>(mutating stub: UnsafeMutablePointer<\(staticGenericParameter)>) where {{ container.genericProtocolIdentity }} {
+        __defaultImplStub = \(typeErasureClassName)(from: stub, keeping: nil)
+        cuckoo_manager.enableDefaultStubImplementation()
+    }
+    {% else %}
+    private var __defaultImplStub: {{ container.name }}{{ container.genericArguments }}?
+
     {{ container.accessibility }} func enableDefaultImplementation(_ stub: {{ container.name }}{{ container.genericArguments }}) {
         __defaultImplStub = stub
         cuckoo_manager.enableDefaultStubImplementation()
     }
+    {% endif %}
 
     {% for property in container.properties %}
     {% if debug %}

@@ -110,6 +110,7 @@ public extension Method {
             "isOverriding": isOverriding,
             "parameterSignature": parameters.map { "\($0.labelAndName): \($0.isInout ? "inout " : "")\($0.type)" }.joined(separator: ", "),
             "parameterSignatureWithoutNames": parameters.map { "\($0.name): \($0.type)" }.joined(separator: ", "),
+            "argumentSignature": parameters.map { $0.type }.joined(separator: ", "),
             "stubFunction": stubFunction,
             "inputTypes": parameters.map { $0.typeWithoutAttributes }.joined(separator: ", "),
             "isOptional": isOptional,
