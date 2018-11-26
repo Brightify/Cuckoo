@@ -36,6 +36,7 @@ extension ContainerToken {
 
         let genericParametersString = genericParameters.map { $0.description }.joined(separator: ", ")
         let genericArgumentsString = genericParameters.map { $0.name }.joined(separator: ", ")
+        let genericProtocolIdentity = genericParameters.map { "\(Templates.staticGenericParameter).\($0.name) == \($0.name)" }.joined(separator: ", ")
         let isGeneric = !genericParameters.isEmpty
 
         return [
@@ -53,6 +54,7 @@ extension ContainerToken {
             "isGeneric": isGeneric,
             "genericParameters": isGeneric ? "<\(genericParametersString)>" : "",
             "genericArguments": isGeneric ? "<\(genericArgumentsString)>" : "",
+            "genericProtocolIdentity": genericProtocolIdentity,
         ]
     }
 }

@@ -7,7 +7,7 @@
 
 extension Templates {
     static let noImplStub = """
-{{container.accessibility}} class {{ container.name }}Stub{{ container.genericParameters }}: {{ container.name }}{{ container.genericArguments }} {
+{{container.accessibility}} class {{ container.name }}Stub{{ container.genericParameters }}: {{ container.name }}{% if container.isImplementation %}{{ container.genericArguments }}{% endif %} {
     {% for property in container.properties %}
     {{ property.accessibility }}{% if container.@type == "ClassDeclaration" %} override{% endif %} var {{ property.name }}: {{ property.type }} {
         get {
