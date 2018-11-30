@@ -51,14 +51,14 @@ private class GenericProtocolConformerClass<C: AnyObject, V>: GenericProtocol {
     func noReturn() {}
 }
 
-private class GenericProtocolConformerStruct<C: AnyObject, V>: GenericProtocol {
+private struct GenericProtocolConformerStruct<C: AnyObject, V>: GenericProtocol {
     let readOnlyPropertyC: C
     var readWritePropertyV: V
 
     let constant: Int = 0
     var optionalProperty: V?
 
-    required init(theC: C, theV: V) {
+    init(theC: C, theV: V) {
         readOnlyPropertyC = theC
         readWritePropertyV = theV
     }
@@ -139,6 +139,7 @@ class GenericProtocolTest: XCTestCase {
         let mock = createMock(value: ["EXTERMINATE!": "EXTERMINATE!!", "EXTERMINATE!!!": "EXTERMINATE!!!!"])
         let original = GenericProtocolConformerClass(theC: MockTestedClass(), theV: ["Sir, may I help you?": "Nope, just lookin' 👀"])
         mock.enableDefaultImplementation(original)
+        
         original.readWritePropertyV["Are you sure?"] = "Yeah, I'm just waiting for my wife."
         XCTAssertEqual(mock.readWritePropertyV, ["Sir, may I help you?": "Nope, just lookin' 👀", "Are you sure?": "Yeah, I'm just waiting for my wife."])
 
@@ -150,10 +151,14 @@ class GenericProtocolTest: XCTestCase {
         verify(mock, times(2)).readWritePropertyV.get
     }
 
+    // the next two test cases show using a struct as the default implementation and changing its state:
+    // - NOTE: This only applies for `struct`s, not `class`es.
+    // using: `enableDefaultImplementation(mutating:)` reflects the original's state at all times
     func testStructModification() {
         let mock = createMock(value: ["EXTERMINATE!": "EXTERMINATE!!", "EXTERMINATE!!!": "EXTERMINATE!!!!"])
         var original = GenericProtocolConformerStruct(theC: MockTestedClass(), theV: ["Sir, may I help you?": "Nope, just lookin' 👀"])
         mock.enableDefaultImplementation(mutating: &original)
+
         original.readWritePropertyV["Are you sure?"] = "Yeah, I'm just waiting for my wife."
         XCTAssertEqual(mock.readWritePropertyV, ["Sir, may I help you?": "Nope, just lookin' 👀", "Are you sure?": "Yeah, I'm just waiting for my wife."])
 
@@ -165,15 +170,22 @@ class GenericProtocolTest: XCTestCase {
         verify(mock, times(2)).readWritePropertyV.get
     }
 
+    // using: `enableDefaultImplementation(_:)` reflects the original's state at the time of enabling default implementation with the struct
+    //
     func testStructNonModification() {
         let mock = createMock(value: ["EXTERMINATE!": "EXTERMINATE!!", "EXTERMINATE!!!": "EXTERMINATE!!!!"])
-        let original = GenericProtocolConformerStruct(theC: MockTestedClass(), theV: ["Sir, may I help you?": "Nope, just lookin' 👀"])
+        var original = GenericProtocolConformerStruct(theC: MockTestedClass(), theV: ["Sir, may I help you?": "Nope, just lookin' 👀"])
         mock.enableDefaultImplementation(original)
+
         original.readWritePropertyV["Are you sure?"] = "Yeah, I'm just waiting for my wife."
-        XCTAssertEqual(mock.readWritePropertyV, ["Sir, may I help you?": "Nope, just lookin' 👀", "Are you sure?": "Yeah, I'm just waiting for my wife."])
+        XCTAssertEqual(mock.readWritePropertyV, ["Sir, may I help you?": "Nope, just lookin' 👀"])
+        XCTAssertEqual(original.readWritePropertyV, ["Sir, may I help you?": "Nope, just lookin' 👀", "Are you sure?": "Yeah, I'm just waiting for my wife."])
 
         original.readWritePropertyV["Alright, have a nice weekend!"] = "Thanks, you too."
         XCTAssertEqual(mock.readWritePropertyV, ["Sir, may I help you?": "Nope, just lookin' 👀"])
+        XCTAssertEqual(original.readWritePropertyV, ["Sir, may I help you?": "Nope, just lookin' 👀",
+                                                 "Are you sure?": "Yeah, I'm just waiting for my wife.",
+                                                 "Alright, have a nice weekend!": "Thanks, you too."])
 
         verify(mock, times(2)).readWritePropertyV.get
     }
