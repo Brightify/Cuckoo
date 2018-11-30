@@ -31,8 +31,8 @@ List of all changes and new features can be found [here](CHANGELOG.md).
 We are still missing support for some important features like:  
 
 * <del>inheritance (grandparent methods)</del>
-* generics  
-* type inference for instance variables (you need to write it explicitly, otherwise it will be replaced with "__UnknownType")  
+* <del>generics</del>
+* type inference for instance variables (you need to write it explicitly, otherwise it will be replaced with `__UnknownType`)  
 
 ## What will not be supported
 
@@ -179,6 +179,32 @@ stub(mock) { stub in
 ```
 
 Notice the `get` and `set` these will be used in verification later.
+
+##### Enabling default implementation
+
+In addition to stubbing, you can enable default implementation using an instance of the original class that's being mocked. Every method/variable that is not stubbed will behave according to original implementation.
+
+Enabling default implementation is achieved by simply calling the provided method:
+
+```Swift
+let original = OriginalClass<Int>(value: 12)
+mock.enableDefaultImplementation(original)
+```
+
+For passing classes into the method, nothing changes whether you're mocking a class or a protocol. There however is a difference if you're using a `struct` to conform to the original protocol we are mocking:
+
+```Swift
+let original = ConformingStruct<String>(value: "Hello, Cuckoo!")
+mock.enableDefaultImplementation(original)
+// or if you need to track changes:
+mock.enableDefaultImplementation(mutating: &original)
+```
+
+Note that this only concerns `struct`s. `enableDefaultImplementation(_:)` and `enableDefaultImplementation(mutating:)` are different in state tracking.
+
+The standard non-mutating method `enableDefaultImplementation(_:)` creates a copy of the `struct` for default implementation and works with that. However, the mutating method `enableDefaultImplementation(mutating:)` takes a reference to the struct and the changes of the `original` are reflected in the default implementation calls even after enabling default implementation.
+
+We recommend using the non-mutating method for enabling default implementation unless you need to track the changes for consistency within your code.
 
 ##### Chain stubbing
 
