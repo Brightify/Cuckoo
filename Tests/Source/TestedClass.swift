@@ -12,7 +12,7 @@ import UIKit
 
 @available(swift 4.0)
 class TestedClass {
-    
+
     let constant: Float = 0.0
 
     private(set) var privateSetProperty: Int = 0
@@ -20,33 +20,33 @@ class TestedClass {
     var readOnlyProperty: String {
         return "a"
     }
-    
+
     lazy var readWriteProperty: Int = 0
-    
+
     lazy var optionalProperty: Int? = 0
 
     func noReturn() {
     }
-    
+
     func count(characters: String) -> Int {
         return characters.count
     }
-    
+
     func withThrows() throws -> Int {
         return 0
     }
-    
+
     func withNoReturnThrows() throws {
     }
-    
+
     func withClosure(_ closure: (String) -> Int) -> Int {
         return closure("hello")
     }
-    
+
     func withEscape(_ a: String, action closure: @escaping (String) -> Void) {
         closure(a)
     }
-    
+
     func withOptionalClosure(_ a: String, closure: ((String) -> Void)?) {
         closure?(a)
     }
@@ -201,9 +201,6 @@ final class FinalClass {
     var shouldBeIgnoredByCuckoo = true
 }
 
-// should generate a compiler error if `FinalClass` isn't ignored and `MockFinalClass` is generated
-final class MockFinalClass {}
-final class FinalClassStub {}
 
 public class InternalFieldsInPublicClass {
     internal var field: Int? = nil

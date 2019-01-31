@@ -17,14 +17,12 @@ extension Templates {
 {% endfor %}
 {{ container.accessibility }} class {{ container.mockName }}{{ container.genericParameters }}: {{ container.name }}{% if container.isImplementation %}{{ container.genericArguments }}{% endif %}, {% if container.isImplementation %}Cuckoo.ClassMock{% else %}Cuckoo.ProtocolMock{% endif %} {
     {% if container.isGeneric and not container.isImplementation %}
-    typealias MocksType = \(typeErasureClassName){{ container.genericArguments }}
+    {{ container.accessibility }} typealias MocksType = \(typeErasureClassName){{ container.genericArguments }}
     {% else %}
-    typealias MocksType = {{ container.name }}{{ container.genericArguments }}
+    {{ container.accessibility }} typealias MocksType = {{ container.name }}{{ container.genericArguments }}
     {% endif %}
     {{ container.accessibility }} typealias Stubbing = __StubbingProxy_{{ container.name }}
     {{ container.accessibility }} typealias Verification = __VerificationProxy_{{ container.name }}
-
-    private var __defaultImplStub: {{ container.name }}{{ container.genericArguments }}?
 
     {{ container.accessibility }} let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: {{ container.isImplementation }})
 
