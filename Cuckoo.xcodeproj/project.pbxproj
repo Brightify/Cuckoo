@@ -143,6 +143,8 @@
 		58C54E2CB6689135915CFC3E /* ExcludedStubTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C54B2B810BC9284205CB16 /* ExcludedStubTest.swift */; };
 		680894BF21ABFDCB00C8D2EF /* GenericClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680894BE21ABFDCB00C8D2EF /* GenericClassTest.swift */; };
 		680894C021ABFDCB00C8D2EF /* GenericClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680894BE21ABFDCB00C8D2EF /* GenericClassTest.swift */; };
+		680F09C92202F46A005F5C1A /* CollisionClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680F09C82202F46A005F5C1A /* CollisionClasses.swift */; };
+		680F09CA2202F46A005F5C1A /* CollisionClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680F09C82202F46A005F5C1A /* CollisionClasses.swift */; };
 		6861B32921A31DAC002EC2DA /* GenericClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6861B30B21A31DA2002EC2DA /* GenericClass.swift */; };
 		6861B32A21A31DAD002EC2DA /* GenericClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6861B30B21A31DA2002EC2DA /* GenericClass.swift */; };
 		6861B32C21A32279002EC2DA /* GenericProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6861B32B21A32279002EC2DA /* GenericProtocol.swift */; };
@@ -354,6 +356,7 @@
 		58C54B2B810BC9284205CB16 /* ExcludedStubTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExcludedStubTest.swift; sourceTree = "<group>"; };
 		58C54D12B64AF3169FC8A1A3 /* ExcludedTestClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExcludedTestClass.swift; sourceTree = "<group>"; };
 		680894BE21ABFDCB00C8D2EF /* GenericClassTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericClassTest.swift; sourceTree = "<group>"; };
+		680F09C82202F46A005F5C1A /* CollisionClasses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionClasses.swift; sourceTree = "<group>"; };
 		6861B30B21A31DA2002EC2DA /* GenericClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericClass.swift; sourceTree = "<group>"; };
 		6861B32B21A32279002EC2DA /* GenericProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericProtocol.swift; sourceTree = "<group>"; };
 		6896352D21AC5A4700B25D47 /* GenericProtocolTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericProtocolTest.swift; sourceTree = "<group>"; };
@@ -580,6 +583,7 @@
 				58C54D12B64AF3169FC8A1A3 /* ExcludedTestClass.swift */,
 				6861B30B21A31DA2002EC2DA /* GenericClass.swift */,
 				6861B32B21A32279002EC2DA /* GenericProtocol.swift */,
+				680F09C82202F46A005F5C1A /* CollisionClasses.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -1082,6 +1086,7 @@
 				18E2A2C51FBB22B60058FEC5 /* ClassTest.swift in Sources */,
 				18E2A2C81FBB22B60058FEC5 /* FailTest.swift in Sources */,
 				18E2A2E21FBB22C40058FEC5 /* TestedSubclass.swift in Sources */,
+				680F09CA2202F46A005F5C1A /* CollisionClasses.swift in Sources */,
 				18E2A2F11FBB22CB0058FEC5 /* StubTest.swift in Sources */,
 				18E2A2D31FBB22BC0058FEC5 /* ParameterMatcherTest.swift in Sources */,
 				18E2A2EE1FBB22CB0058FEC5 /* StubNoReturnFunctionTest.swift in Sources */,
@@ -1123,6 +1128,7 @@
 				18E2A2C11FBB22B50058FEC5 /* ClassTest.swift in Sources */,
 				18E2A2C41FBB22B50058FEC5 /* FailTest.swift in Sources */,
 				18E2A2DA1FBB22C30058FEC5 /* TestedSubclass.swift in Sources */,
+				680F09C92202F46A005F5C1A /* CollisionClasses.swift in Sources */,
 				18E2A2EA1FBB22CA0058FEC5 /* StubTest.swift in Sources */,
 				18E2A2CD1FBB22BC0058FEC5 /* ParameterMatcherTest.swift in Sources */,
 				18E2A2E71FBB22CA0058FEC5 /* StubNoReturnFunctionTest.swift in Sources */,
