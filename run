@@ -7,8 +7,8 @@ GREP_OPTIONS=""
 
 function perform_curl {
   if [[ ! -z "$GITHUB_ACCESS_TOKEN" ]]; then
-		REQUEST_HEADER="-H 'Authorization: token ${GITHUB_ACCESS_TOKEN}'"
-	fi
+    REQUEST_HEADER="-H 'Authorization: token ${GITHUB_ACCESS_TOKEN}'"
+  fi
 
   eval curl ${REQUEST_HEADER} -Lo ${FILE_NAME} `eval curl $REQUEST_HEADER "$1" | grep -oe '"browser_download_url":\s*"[^" ]*"' | grep -oe 'http[^" ]*' | grep ${FILE_NAME} | head -1`
 }
