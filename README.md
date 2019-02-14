@@ -394,6 +394,13 @@ Method `DefaultValueRegistry.reset()` can be used to delete all value registered
 
 For normal use you can skip this because [run script](run) in Cuckoo downloads and builds correct version of the generator automatically.
 
+> If you encounter Github API rate limit.
+
+To avoid Github rate limit, [run script](run) refers to the environment variable `GITHUB_ACCESS_TOKEN`.
+```
+export GITHUB_ACCESS_TOKEN="XXXXXXX"
+```
+
 #### Custom
 
 This is more complicated path. You need to clone this repository and build it yourself. You can look in the [run script](run) for more inspiration.
