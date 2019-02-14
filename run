@@ -6,7 +6,11 @@ FILE_PATH="$SCRIPT_PATH/$FILE_NAME"
 GREP_OPTIONS=""
 
 function perform_curl {
-  curl -Lo ${FILE_NAME} `curl "$1" | grep -oe '"browser_download_url":\s*"[^" ]*"' | grep -oe 'http[^" ]*' | grep ${FILE_NAME} | head -1`
+  if [[ ! -z "$GITHUB_ACCESS_TOKEN" ]]; then
+		REQUEST_HEADER="-H 'Authorization: token ${GITHUB_ACCESS_TOKEN}'"
+	fi
+
+  eval curl ${REQUEST_HEADER} -Lo ${FILE_NAME} `eval curl $REQUEST_HEADER "$1" | grep -oe '"browser_download_url":\s*"[^" ]*"' | grep -oe 'http[^" ]*' | grep ${FILE_NAME} | head -1`
 }
 
 function download_generator {
