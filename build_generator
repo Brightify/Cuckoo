@@ -3,7 +3,7 @@
 # getting the script directory: https://stackoverflow.com/a/246128
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-pushd ${DIR}/Generator
+pushd "${DIR}/Generator"
 rm -rf .build
 env -i PATH="$PATH" HOME="$HOME" swift build --configuration release -Xswiftc -static-stdlib
 popd
