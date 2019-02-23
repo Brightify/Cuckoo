@@ -88,8 +88,6 @@ echo "Mocks Input Directory = ${INPUT_DIR}"
 
 Input files can be also specified directly in `Run script` in `Input Files` form.
 
-To download generator from GitHub instead of building it if it's not present, use the `--download [version]` option as the first argument (i.e. `run --download generate ...` or `run --download 0.12 generate ...` if you need a specific version). If you're having issues with rather long build time (especially in CI), this might be the way to fix it.
-
 Notes: All paths in the Run script must be absolute. Variable `PROJECT_DIR` automatically points to your project directory.  
 Keep in mind to include paths to inherited Classes and Protocols for mocking/stubbing parent and grandparents.
 
@@ -396,16 +394,17 @@ Method `DefaultValueRegistry.reset()` can be used to delete all value registered
 
 For normal use you can skip this because [run script](run) in Cuckoo downloads and builds correct version of the generator automatically.
 
-> If you encounter Github API rate limit.
+To download generator from GitHub instead of building it if it's not present, use the `--download [version]` option as the first argument (i.e. `run --download generate ...` or `run --download 0.12 generate ...` if you need a specific version). If you're having issues with rather long build time (especially in CI), this might be the way to fix it.
 
-To avoid Github rate limit, [run script](run) refers to the environment variable `GITHUB_ACCESS_TOKEN`.
+**NOTE**: If you encounter Github API rate limit using the `--download` option, the [run script](run) refers to the environment variable `GITHUB_ACCESS_TOKEN`.
+Add this line (replacing the Xs with your [GitHub token](https://github.com/settings/tokens)) to the script build phase before the `run` call:
 ```
 export GITHUB_ACCESS_TOKEN="XXXXXXX"
 ```
 
 #### Custom
 
-This is more complicated path. You need to clone this repository and build it yourself. You can look in the [run script](run) for more inspiration.
+This is a more complicated path. You can clone this repository and build it yourself. You can look at the [run script](run) for more inspiration.
 
 ### Usage
 

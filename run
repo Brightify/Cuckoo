@@ -8,31 +8,30 @@ GREP_OPTIONS=""
 function perform_curl {
   if [[ ! -z "$GITHUB_ACCESS_TOKEN" ]]; then
     REQUEST_HEADER="-H 'Authorization: token ${GITHUB_ACCESS_TOKEN}'"
+    echo "$REQUEST_HEADER"
   fi
+  echo "$1"
 
-  eval curl ${REQUEST_HEADER} -Lo ${FILE_NAME} `eval curl $REQUEST_HEADER "$1" | grep -oe '"browser_download_url":\s*"[^" ]*"' | grep -oe 'http[^" ]*' | grep ${FILE_NAME} | head -1`
+  DOWNLOAD_URL=$(curl "$REQUEST_HEADER" "$1" | grep -oe '"browser_download_url":\s*"[^" ]*"' | grep -oe 'http[^" ]*' | grep "$FILE_NAME" | head -1)
+  echo "$DOWNLOAD_URL"
+  curl "$REQUEST_HEADER" -Lo "$FILE_NAME" "$DOWNLOAD_URL"
 }
 
 function download_generator {
-  MATCH=$(echo "$1" | grep -e "\d\d*\.\d\d*\.\d\d*")
-  if [[ ! -z "$MATCH" ]]; then
-    VERSION="$MATCH"
-    DOWNLOAD_SPECIFIC_VER=1
-  fi
-  if [[ -z "$VERSION" ]]; then
+  if [[ "$1" = "latest" ]]; then
     echo "Downloading latest version..."
     perform_curl "https://api.github.com/repos/Brightify/Cuckoo/releases/latest"
   else
-    echo "Downloading version $VERSION..."
-    perform_curl "https://api.github.com/repos/Brightify/Cuckoo/releases/tags/$VERSION"
+    echo "Downloading version $1..."
+    perform_curl "https://api.github.com/repos/Brightify/Cuckoo/releases/tags/$1"
   fi
-  chmod +x ${FILE_NAME}
+  chmod +x "$FILE_NAME"
 }
 
 function build_generator {
   pushd "$SCRIPT_PATH"
-  if [[ "$1" = "--download" ]]; then
-    download_generator "$2"
+  if [[ ! -z "$1" ]]; then
+    download_generator "$1"
   else
     if [[ -d "$SCRIPT_PATH/Generator" ]]; then
       echo "Building..."
@@ -50,30 +49,41 @@ function build_generator {
   popd
 }
 
-if [[ ("$1" = "--clean" && "$2" = "--download") || ("$1" = "--download" && "$2" = "--clean") ]]; then
-  echo "Options --clean and --download are mutually exclusive. --clean builds the generator discarding the previous one while --download gets the generator binary from GitHub."
-  exit 1
-fi
-
-if [[ ! -e "$FILE_PATH" ]]; then
-  echo "No Cuckoo Generator found."
-  build_generator
-fi
-
-if [[ "$1" = "--clean" ]]; then
-  echo "Performing clean Cuckoo Generator build."
-  build_generator
-fi
-
-if [[ "$1" = "--download" ]]; then
-  if [[ ! -z "$DOWNLOAD_SPECIFIC_VER" ]]; then
+# parse arguments
+POSITIONAL=()
+while [[ $# -gt 0 ]]
+do
+case $1 in
+  -d|--download)
+    if [[ "$2" = --* ]]; then
+      DOWNLOAD="latest"
+    else
+      DOWNLOAD=$(echo "$2" | grep -e "\d\d*\.\d\d*\.\d\d*")
+      if [[ -z $DOWNLOAD ]]; then
+        echo "Invalid Cuckoo Generator version: $2; Please use the semantic versioning. (e.g. 0.12.0)"
+        exit 1
+      fi
+      shift
+    fi
     shift
-  fi
-  shift
-fi
+  ;;
+  
+  -c|--clean)
+    CLEAN=1
+    shift
+  ;;
+  
+  *)
+    POSITIONAL+=("$1") # save it in an array for later
+    shift
+  ;;
+esac
+done
+set -- "${POSITIONAL[@]}" # restore positional parameters
 
-if [[ "$1" = "--clean" ]]; then
-  shift
+if [[ ! -e "$FILE_PATH" ]] || [[ ! -z "$CLEAN" ]]; then
+  echo "No Cuckoo Generator found."
+  build_generator "$DOWNLOAD"
 fi
 
 INPUT_FILES=""
@@ -92,3 +102,4 @@ do
 done
 
 echo $INPUT_FILES | xargs "$FILE_PATH"
+
