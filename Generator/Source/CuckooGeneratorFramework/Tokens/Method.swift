@@ -6,7 +6,7 @@
 //  Copyright © 2016 Brightify. All rights reserved.
 //
 
-public protocol Method: Token {
+public protocol Method: Token, HasAccessibility {
     var name: String { get }
     var accessibility: Accessibility { get }
     var returnSignature: String { get }

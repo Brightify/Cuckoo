@@ -204,3 +204,13 @@ final class FinalClass {
 // should generate a compiler error if `FinalClass` isn't ignored and `MockFinalClass` is generated
 final class MockFinalClass {}
 final class FinalClassStub {}
+
+public class InternalFieldsInPublicClass {
+    internal var field: Int? = nil
+
+    private(set) var privateSetField: Int? = nil
+
+    internal func function() {
+
+    }
+}
