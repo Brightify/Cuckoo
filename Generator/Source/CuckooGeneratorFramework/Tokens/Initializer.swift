@@ -6,16 +6,16 @@
 //  Copyright © 2016 Brightify. All rights reserved.
 //
 
-public struct Initializer: Method {
-    public let name: String
-    public let accessibility: Accessibility
-    public let returnSignature: String
-    public let range: CountableRange<Int>
-    public let nameRange: CountableRange<Int>
-    public let parameters: [MethodParameter]
-    public let isOverriding: Bool
-    public let required: Bool
-    public let attributes: [Attribute]
+public struct Initializer: Method, HasAccessibility {
+    public var name: String
+    public var accessibility: Accessibility
+    public var returnSignature: String
+    public var range: CountableRange<Int>
+    public var nameRange: CountableRange<Int>
+    public var parameters: [MethodParameter]
+    public var isOverriding: Bool
+    public var required: Bool
+    public var attributes: [Attribute]
 
     public var isOptional: Bool {
         return false

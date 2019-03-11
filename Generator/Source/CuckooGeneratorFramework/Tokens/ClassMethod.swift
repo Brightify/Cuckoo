@@ -7,14 +7,14 @@
 //
 
 public struct ClassMethod: Method {
-    public let name: String
-    public let accessibility: Accessibility
-    public let returnSignature: String
-    public let range: CountableRange<Int>
-    public let nameRange: CountableRange<Int>
-    public let parameters: [MethodParameter]
-    public let bodyRange: CountableRange<Int>
-    public let attributes: [Attribute]
+    public var name: String
+    public var accessibility: Accessibility
+    public var returnSignature: String
+    public var range: CountableRange<Int>
+    public var nameRange: CountableRange<Int>
+    public var parameters: [MethodParameter]
+    public var bodyRange: CountableRange<Int>
+    public var attributes: [Attribute]
     public var isOptional: Bool {
         return false
     }

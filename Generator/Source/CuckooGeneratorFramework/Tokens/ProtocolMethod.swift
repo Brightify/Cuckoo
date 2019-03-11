@@ -7,13 +7,13 @@
 //
 
 public struct ProtocolMethod: Method {
-    public let name: String
-    public let accessibility: Accessibility
-    public let returnSignature: String
-    public let range: CountableRange<Int>
-    public let nameRange: CountableRange<Int>
-    public let parameters: [MethodParameter]
-    public let attributes: [Attribute]
+    public var name: String
+    public var accessibility: Accessibility
+    public var returnSignature: String
+    public var range: CountableRange<Int>
+    public var nameRange: CountableRange<Int>
+    public var parameters: [MethodParameter]
+    public var attributes: [Attribute]
     
     public var isOptional: Bool {
         return attributes.map { $0.kind }.contains(.optional)

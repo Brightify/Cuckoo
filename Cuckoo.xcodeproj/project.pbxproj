@@ -242,6 +242,20 @@
 			remoteGlobalIDString = "FileKit::FileKit::Product";
 			remoteInfo = FileKit;
 		};
+		68E792CF223661030052DD43 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 18E2A3401FBB3FDD0058FEC5 /* CuckooGenerator.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = "SourceKitten::Clang_C::Product";
+			remoteInfo = Clang_C;
+		};
+		68E792D1223661030052DD43 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 18E2A3401FBB3FDD0058FEC5 /* CuckooGenerator.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = "SourceKitten::SourceKit::Product";
+			remoteInfo = SourceKit;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -615,12 +629,14 @@
 			isa = PBXGroup;
 			children = (
 				18E2A36D1FBB3FDD0058FEC5 /* CYaml.framework */,
+				68E792D0223661030052DD43 /* Clang_C.framework */,
 				18E2A35F1FBB3FDD0058FEC5 /* Commandant.framework */,
 				18E2A35D1FBB3FDD0058FEC5 /* CuckooGeneratorFramework.framework */,
 				18E2A3711FBB3FDD0058FEC5 /* FileKit.framework */,
 				18E2A3651FBB3FDD0058FEC5 /* PathKit.framework */,
 				18E2A3611FBB3FDD0058FEC5 /* Result.framework */,
 				18E2A36F1FBB3FDD0058FEC5 /* SWXMLHash.framework */,
+				68E792D2223661030052DD43 /* SourceKit.framework */,
 				18E2A3691FBB3FDD0058FEC5 /* SourceKittenFramework.framework */,
 				18E2A3671FBB3FDD0058FEC5 /* Spectre.framework */,
 				18E2A3631FBB3FDD0058FEC5 /* Stencil.framework */,
@@ -862,6 +878,20 @@
 			remoteRef = 18E2A3701FBB3FDD0058FEC5 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		68E792D0223661030052DD43 /* Clang_C.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Clang_C.framework;
+			remoteRef = 68E792CF223661030052DD43 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		68E792D2223661030052DD43 /* SourceKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SourceKit.framework;
+			remoteRef = 68E792D1223661030052DD43 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -908,7 +938,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "env -i PATH=$PATH PROJECT_DIR=$PROJECT_DIR USE_RUN=$USE_RUN swift \"$PROJECT_DIR/GenerateMocksForTests.swift\"";
+			shellScript = "env -i PATH=$PATH PROJECT_DIR=$PROJECT_DIR USE_RUN=$USE_RUN swift \"$PROJECT_DIR/GenerateMocksForTests.swift\"\n";
 		};
 		18E2A33F1FBB3FA80058FEC5 /* Generate Mocks */ = {
 			isa = PBXShellScriptBuildPhase;

@@ -6,17 +6,17 @@
 //  Copyright © 2016 Brightify. All rights reserved.
 //
 
-public struct ProtocolDeclaration: ContainerToken {
-    public let name: String
-    public let accessibility: Accessibility
-    public let range: CountableRange<Int>
-    public let nameRange: CountableRange<Int>
-    public let bodyRange: CountableRange<Int>
-    public let initializers: [Initializer]
-    public let children: [Token]
+public struct ProtocolDeclaration: ContainerToken, HasAccessibility {
     public let implementation: Bool = false
-    public let inheritedTypes: [InheritanceDeclaration]
-    public let attributes: [Attribute]
+    public var name: String
+    public var accessibility: Accessibility
+    public var range: CountableRange<Int>
+    public var nameRange: CountableRange<Int>
+    public var bodyRange: CountableRange<Int>
+    public var initializers: [Initializer]
+    public var children: [Token]
+    public var inheritedTypes: [InheritanceDeclaration]
+    public var attributes: [Attribute]
 
     public func replace(children tokens: [Token]) -> ProtocolDeclaration {
         return ProtocolDeclaration(

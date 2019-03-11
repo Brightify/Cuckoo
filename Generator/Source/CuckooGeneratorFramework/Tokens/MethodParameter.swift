@@ -7,11 +7,11 @@
 //
 
 public struct MethodParameter: Token, Equatable {
-    public let label: String?
-    public let name: String
-    public let type: String
-    public let range: CountableRange<Int>
-    public let nameRange: CountableRange<Int>
+    public var label: String?
+    public var name: String
+    public var type: String
+    public var range: CountableRange<Int>
+    public var nameRange: CountableRange<Int>
     
     public var labelAndName: String {
         if let label = label {

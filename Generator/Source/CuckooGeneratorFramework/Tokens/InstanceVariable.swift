@@ -6,15 +6,15 @@
 //  Copyright © 2016 Brightify. All rights reserved.
 //
 
-public struct InstanceVariable: Token {
-    public let name: String
-    public let type: String
-    public let accessibility: Accessibility
-    public let setterAccessibility: Accessibility?
-    public let range: CountableRange<Int>
-    public let nameRange: CountableRange<Int>
+public struct InstanceVariable: Token, HasAccessibility {
+    public var name: String
+    public var type: String
+    public var accessibility: Accessibility
+    public var setterAccessibility: Accessibility?
+    public var range: CountableRange<Int>
+    public var nameRange: CountableRange<Int>
     public var overriding: Bool
-    public let attributes: [Attribute]
+    public var attributes: [Attribute]
 
     public var readOnly: Bool {
         if let setterAccessibility = setterAccessibility {

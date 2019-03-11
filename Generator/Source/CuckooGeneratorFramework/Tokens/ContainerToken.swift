@@ -6,7 +6,7 @@
 //  Copyright © 2016 Brightify. All rights reserved.
 //
 
-public protocol ContainerToken: Token {
+public protocol ContainerToken: Token, HasAccessibility {
     var name: String { get }
     var accessibility: Accessibility { get }
     var range: CountableRange<Int> { get }

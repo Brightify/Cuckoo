@@ -77,7 +77,7 @@ public struct Tokenizer {
                 return Attribute(kind: kind, text: text)
             }
 
-        let accessibility = (dictionary[Key.Accessibility.rawValue] as? String).flatMap { Accessibility(rawValue: $0) }
+        let accessibility = (dictionary[Key.Accessibility.rawValue] as? String).flatMap { Accessibility(rawValue: $0) } ?? .Internal
         let type = dictionary[Key.TypeName.rawValue] as? String
 
         switch kind {
@@ -88,7 +88,7 @@ public struct Tokenizer {
 
             return ProtocolDeclaration(
                 name: name,
-                accessibility: accessibility!,
+                accessibility: accessibility,
                 range: range!,
                 nameRange: nameRange!,
                 bodyRange: bodyRange!,
@@ -108,17 +108,21 @@ public struct Tokenizer {
             let subtokens = tokenize(dictionary[Key.Substructure.rawValue] as? [SourceKitRepresentable] ?? [])
             let initializers = subtokens.only(Initializer.self)
             let children = subtokens.noneOf(Initializer.self).map { child -> Token in
-                if var property = child as? InstanceVariable {
+                var accessibleChild = child as? HasAccessibility & Token
+                if accessibleChild?.accessibility == .Internal {
+                    accessibleChild?.accessibility = accessibility
+                }
+                if var property = accessibleChild as? InstanceVariable {
                     property.overriding = true
                     return property
                 } else {
-                    return child
+                    return accessibleChild ?? child
                 }
             }
 
             return ClassDeclaration(
                 name: name,
-                accessibility: accessibility!,
+                accessibility: accessibility,
                 range: range!,
                 nameRange: nameRange!,
                 bodyRange: bodyRange!,
@@ -144,7 +148,7 @@ public struct Tokenizer {
             return InstanceVariable(
                 name: name,
                 type: type ?? "__UnknownType",
-                accessibility: accessibility!,
+                accessibility: accessibility,
                 setterAccessibility: setterAccessibility,
                 range: range!,
                 nameRange: nameRange!,
@@ -168,7 +172,7 @@ public struct Tokenizer {
                     }
                 }
             }
-            if returnSignature.isEmpty == false {
+            if !returnSignature.isEmpty {
                 returnSignature = " " + returnSignature
             }
 
@@ -176,7 +180,7 @@ public struct Tokenizer {
             if let bodyRange = bodyRange {
                 return ClassMethod(
                     name: name,
-                    accessibility: accessibility!,
+                    accessibility: accessibility,
                     returnSignature: returnSignature,
                     range: range!,
                     nameRange: nameRange!,
@@ -186,7 +190,7 @@ public struct Tokenizer {
             } else {
                 return ProtocolMethod(
                     name: name,
-                    accessibility: accessibility!,
+                    accessibility: accessibility,
                     returnSignature: returnSignature,
                     range: range!,
                     nameRange: nameRange!,
