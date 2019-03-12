@@ -220,7 +220,7 @@ public struct Tokenizer {
             return kind == Kinds.MethodParameter.rawValue
         }
 
-        return zip(parameterLabels, filteredParameters).compactMap(tokenize)
+        return zip(parameterLabels, filteredParameters).compactMap(tokenize(parameterLabel:parameter:))
     }
 
     private func tokenize(parameterLabel: String?, parameter: SourceKitRepresentable) -> MethodParameter? {
@@ -234,7 +234,28 @@ public struct Tokenizer {
 
         switch kind {
         case Kinds.MethodParameter.rawValue:
-            return MethodParameter(label: parameterLabel, name: name, type: type!, range: range!, nameRange: nameRange!)
+            // separate `inout` from the type and remember that the parameter is inout
+            let type = type!
+
+            // we want to remove `inout` and remember it, but we don't want to affect a potential `inout` closure parameter
+            let inoutSeparatedType: String
+            let isInout: Bool
+            if let inoutRange = type.range(of: "inout ") {
+                if let closureParenIndex = type.firstIndex(of: "("), closureParenIndex < inoutRange.upperBound {
+                    inoutSeparatedType = type
+                    isInout = false
+                } else {
+                    var mutableString = type
+                    mutableString.removeSubrange(inoutRange)
+                    inoutSeparatedType = mutableString
+                    isInout = true
+                }
+            } else {
+                inoutSeparatedType = type
+                isInout = false
+            }
+
+            return MethodParameter(label: parameterLabel, name: name, type: inoutSeparatedType, range: range!, nameRange: nameRange!, isInout: isInout)
 
         default:
             stderrPrint("Unknown method parameter. Dictionary: \(dictionary) \(file.path ?? "")")
@@ -267,12 +288,8 @@ public struct Tokenizer {
                     rangesToIgnore.filter { $0 ~= result.range.location }.isEmpty
                 }
                 .map { result -> Import in
-                    let libraryRange = result.range(at: 1)
-                    let fromIndex = source.index(source.startIndex, offsetBy: libraryRange.location)
-                    let toIndex = source.index(fromIndex, offsetBy: libraryRange.length)
-                    let library = String(source[fromIndex..<toIndex])
                     let range = result.range.location..<(result.range.location + result.range.length)
-                    print(library)
+                    let library = source.stringMatch(from: result, at: 1)
                     return Import(range: range, importee: .library(name: library))
                 }
             let components = componentRegex.matches(in: source, range: NSRange(location: 0, length: source.count))
@@ -285,7 +302,6 @@ public struct Tokenizer {
                     let library = source[result.range(at: 2)]
                     let component = source[result.range(at: 3)]
                     let range = result.range.location..<(result.range.location + result.range.length)
-                    print(library, component)
                     return Import(range: range, importee: .component(componentType: componentType, library: library, name: component))
                 }
 
@@ -301,5 +317,24 @@ extension String {
         let fromIndex = self.index(self.startIndex, offsetBy: range.location)
         let toIndex = self.index(fromIndex, offsetBy: range.length)
         return String(self[fromIndex..<toIndex])
+    }
+}
+
+extension String {
+    func stringMatch(from match: NSTextCheckingResult, at range: Int = 0) -> String {
+        let matchRange = match.range(at: range)
+        let fromIndex = index(startIndex, offsetBy: matchRange.location)
+        let toIndex = index(fromIndex, offsetBy: matchRange.length)
+        return String(self[fromIndex..<toIndex])
+    }
+
+    func removing(match: NSTextCheckingResult, at range: Int = 0) -> String {
+        let matchRange = match.range(at: range)
+        let fromIndex = index(startIndex, offsetBy: matchRange.location)
+        let toIndex = index(fromIndex, offsetBy: matchRange.length)
+
+        var mutableString = self
+        mutableString.removeSubrange(fromIndex..<toIndex)
+        return mutableString
     }
 }

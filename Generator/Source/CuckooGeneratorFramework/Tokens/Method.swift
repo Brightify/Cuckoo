@@ -33,7 +33,7 @@ public extension Method {
     }
     
     var fullyQualifiedName: String {
-        let parameterTypes = parameters.map { $0.type }
+        let parameterTypes = parameters.map { ($0.isInout ? "inout " : "") + $0.type }
         let nameParts = name.components(separatedBy: ":")
         let lastNamePart = nameParts.last ?? ""
         
@@ -69,10 +69,11 @@ public extension Method {
 
     public func serialize() -> [String : Any] {
         let call = parameters.map {
+            let referencedName = "\($0.isInout ? "&" : "")\($0.name)"
             if let label = $0.label {
-                return "\(label): \($0.name)"
+                return "\(label): \(referencedName)"
             } else {
-                return $0.name
+                return referencedName
             }
         }.joined(separator: ", ")
 
@@ -113,7 +114,7 @@ public extension Method {
             "fullyQualifiedName": fullyQualifiedName,
             "call": call,
             "isOverriding": isOverriding,
-            "parameterSignature": parameters.map { "\($0.labelAndName): \($0.type)" }.joined(separator: ", "),
+            "parameterSignature": parameters.map { "\($0.labelAndName): \($0.isInout ? "inout " : "")\($0.type)" }.joined(separator: ", "),
             "parameterSignatureWithoutNames": parameters.map { "\($0.name): \($0.type)" }.joined(separator: ", "),
             "stubFunction": stubFunction,
             "inputTypes": parameters.map { $0.typeWithoutAttributes }.joined(separator: ", "),

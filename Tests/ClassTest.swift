@@ -189,6 +189,18 @@ class ClassTest: XCTestCase {
         XCTAssertEqual(mock.callingCountCharactersMethodWithHello(), 0)
         verify(mock).callingCountCharactersMethodWithHello()
     }
+
+    func testInout() {
+        let mock = MockInoutMethod()
+        stub(mock) { mock in
+            when(mock.inoutko(param: anyInt())).then { param in
+                print(param)
+            }
+        }
+
+        var integer = 12
+        mock.inoutko(param: &integer)
+    }
     
     private enum TestError: Error {
         case unknown
