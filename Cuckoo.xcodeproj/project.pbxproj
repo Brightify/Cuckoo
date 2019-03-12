@@ -966,7 +966,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "env -i PATH=$PATH PROJECT_DIR=$PROJECT_DIR USE_RUN=$USE_RUN swift \"$PROJECT_DIR/GenerateMocksForTests.swift\"\n";
+			shellScript = "GENERATE=1\n\nif [ $GENERATE -ne 0 ]; then\nenv -i PATH=$PATH PROJECT_DIR=$PROJECT_DIR USE_RUN=$USE_RUN swift \"$PROJECT_DIR/GenerateMocksForTests.swift\"\nfi\n";
 		};
 		18E2A33F1FBB3FA80058FEC5 /* Generate Mocks */ = {
 			isa = PBXShellScriptBuildPhase;

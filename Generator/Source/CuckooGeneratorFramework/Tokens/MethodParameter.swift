@@ -12,6 +12,7 @@ public struct MethodParameter: Token, Equatable {
     public var type: String
     public var range: CountableRange<Int>
     public var nameRange: CountableRange<Int>
+    public var isInout: Bool
     
     public var labelAndName: String {
         if let label = label {

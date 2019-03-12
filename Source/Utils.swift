@@ -28,6 +28,12 @@ public func escapingStub<IN, OUT>(for closure: (IN) -> OUT) -> (IN) -> OUT {
     }
 }
 
+public func escapingStub<IN, OUT>(for closure: (inout IN) -> OUT) -> (inout IN) -> OUT {
+    return { _ in
+        fatalError("This is a stub! It's not supposed to be called!")
+    }
+}
+
 public func escapingStub<IN, OUT>(for closure: (IN) throws -> OUT) -> (IN) throws -> OUT {
     return { _ in
         fatalError("This is a stub! It's not supposed to be called!")

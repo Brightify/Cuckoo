@@ -219,6 +219,20 @@ class FinalFields {
     final var field: Int? = nil
 
     final func function() {
-        
+
+    }
+}
+
+class InoutMethod {
+    func inoutko(param: inout Int) {
+
+    }
+
+    func inoutkoMultiple(param1: inout Int, param2: inout String, param3: Void) {
+
+    }
+
+    func inoutkoClosure(param: (inout Int) -> Void) {
+
     }
 }
