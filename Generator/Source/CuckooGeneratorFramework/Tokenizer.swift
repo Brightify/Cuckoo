@@ -77,6 +77,13 @@ public struct Tokenizer {
                 return Attribute(kind: kind, text: text)
             }
 
+        guard !attributes.map({ $0.kind }).contains(.final) else {
+            if debugMode {
+                fputs("Cuckoo: Ignoring mocking of '\(name)' because it's marked `final`.\n", stdout)
+            }
+            return nil
+        }
+
         let accessibility = (dictionary[Key.Accessibility.rawValue] as? String).flatMap { Accessibility(rawValue: $0) } ?? .Internal
         let type = dictionary[Key.TypeName.rawValue] as? String
 
@@ -98,13 +105,6 @@ public struct Tokenizer {
                 attributes: attributes)
 
         case Kinds.ClassDeclaration.rawValue:
-            guard !attributes.map({ $0.kind }).contains(.final) else {
-                if debugMode {
-                    fputs("Cuckoo: Ignoring mocking of class \(name) because it's marked `final`.\n", stdout)
-                }
-                return nil
-            }
-
             let subtokens = tokenize(dictionary[Key.Substructure.rawValue] as? [SourceKitRepresentable] ?? [])
             let initializers = subtokens.only(Initializer.self)
             let children = subtokens.noneOf(Initializer.self).map { child -> Token in
