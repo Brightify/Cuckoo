@@ -214,3 +214,11 @@ public class InternalFieldsInPublicClass {
 
     }
 }
+
+class FinalFields {
+    final var field: Int? = nil
+
+    final func function() {
+        
+    }
+}
