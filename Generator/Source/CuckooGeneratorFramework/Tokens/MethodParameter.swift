@@ -9,7 +9,7 @@
 public struct MethodParameter: Token, Equatable {
     public var label: String?
     public var name: String
-    public var type: String
+    public var type: WrappableType
     public var range: CountableRange<Int>
     public var nameRange: CountableRange<Int>
     public var isInout: Bool
@@ -23,7 +23,7 @@ public struct MethodParameter: Token, Equatable {
     }
     
     public var typeWithoutAttributes: String {
-        return type.replacingOccurrences(of: "@escaping", with: "").replacingOccurrences(of: "@autoclosure", with: "").trimmed
+        return type.withoutAttributes.sugarized.trimmed
     }
 
     public func isEqual(to other: Token) -> Bool {
@@ -34,9 +34,13 @@ public struct MethodParameter: Token, Equatable {
     public var isClosure: Bool {        
         return typeWithoutAttributes.hasPrefix("(") && typeWithoutAttributes.range(of: "->") != nil
     }
+
+    public var isOptional: Bool {
+        return type.isOptional
+    }
     
     public var isEscaping: Bool {
-        return isClosure && (type.hasPrefix("@escaping") || type.hasSuffix(")?"))
+        return isClosure && (type.containsAttribute(named: "@escaping") || type.isOptional)
     }
     
     public func serialize() -> [String : Any] {
@@ -47,6 +51,7 @@ public struct MethodParameter: Token, Equatable {
             "labelAndName": labelAndName,
             "typeWithoutAttributes": typeWithoutAttributes,
             "isClosure": isClosure,
+            "isOptional": isOptional,
             "isEscaping": isEscaping
         ]
     }

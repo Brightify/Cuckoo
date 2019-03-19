@@ -17,6 +17,12 @@ public struct ParameterMatcher<T>: Matchable {
     public var matcher: ParameterMatcher<T> {
         return self
     }
+
+    public var optionalMatcher: ParameterMatcher<Optional<T>> {
+        return ParameterMatcher<Optional<T>> { other in
+            other.map(self.matchesFunction) ?? false
+        }
+    }
     
     public func matches(_ input: T) -> Bool {
         return matchesFunction(input)

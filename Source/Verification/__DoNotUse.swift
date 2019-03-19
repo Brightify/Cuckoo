@@ -7,4 +7,4 @@
 //
 
 /// Marker struct for use as a return type in verification.
-public struct __DoNotUse<T> { }
+public struct __DoNotUse<IN, OUT> { }

@@ -78,7 +78,7 @@ public struct Generator {
     private func matchableGenerics(where parameters: [MethodParameter]) -> String {
         guard parameters.isEmpty == false else { return "" }
 
-        let whereClause = parameters.enumerated().map { "M\($0 + 1).MatchedType == \(genericSafeType(from: $1.typeWithoutAttributes))" }.joined(separator: ", ")
+        let whereClause = parameters.enumerated().map { "M\($0 + 1).MatchedType == \(genericSafeType(from: $1.type.withoutAttributes.unoptionaled.sugarized))" }.joined(separator: ", ")
         return " where \(whereClause)"
     }
 

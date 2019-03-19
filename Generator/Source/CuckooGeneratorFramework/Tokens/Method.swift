@@ -9,6 +9,7 @@
 public protocol Method: Token, HasAccessibility {
     var name: String { get }
     var accessibility: Accessibility { get }
+    var returnType: WrappableType { get }
     var returnSignature: String { get }
     var range: CountableRange<Int> { get }
     var nameRange: CountableRange<Int> { get }
@@ -16,6 +17,7 @@ public protocol Method: Token, HasAccessibility {
     var isOptional: Bool { get }
     var isOverriding: Bool { get }
     var hasClosureParams: Bool { get }
+    var hasOptionalParams: Bool { get }
     var attributes: [Attribute] { get }
 }
 
@@ -33,7 +35,7 @@ public extension Method {
     }
     
     var fullyQualifiedName: String {
-        let parameterTypes = parameters.map { ($0.isInout ? "inout " : "") + $0.type }
+        let parameterTypes = parameters.map { ($0.isInout ? "inout " : "") + $0.type.sugarized }
         let nameParts = name.components(separatedBy: ":")
         let lastNamePart = nameParts.last ?? ""
         
@@ -46,20 +48,12 @@ public extension Method {
         return returnSignature.trimmed.hasPrefix("throws")
     }
     
-    var returnType: String {
-        if let range = returnSignature.range(of: "->") {
-            var type = String(returnSignature[range.upperBound...]).trimmed
-            while type.hasSuffix("?") {
-                type = "Optional<\(type[..<type.index(before: type.endIndex)])>"
-            }
-            return type
-        } else {
-            return "Void"
-        }
-    }
-    
     var hasClosureParams: Bool {
-        return parameters.filter { $0.isClosure }.count > 0
+        return parameters.contains { $0.isClosure }
+    }
+
+    var hasOptionalParams: Bool {
+        return parameters.contains { $0.isOptional }
     }
 
     public func isEqual(to other: Token) -> Bool {
@@ -80,13 +74,13 @@ public extension Method {
         let stubFunctionPrefix = isOverriding ? "Class" : "Protocol"
         let stubFunction: String
         if isThrowing {
-            if returnType == "Void" {
+            if returnType.sugarized == "Void" {
                 stubFunction = "Cuckoo.\(stubFunctionPrefix)StubNoReturnThrowingFunction"
             } else {
                 stubFunction = "Cuckoo.\(stubFunctionPrefix)StubThrowingFunction"
             }
         } else {
-            if returnType == "Void" {
+            if returnType.sugarized == "Void" {
                 stubFunction = "Cuckoo.\(stubFunctionPrefix)StubNoReturnFunction"
             } else {
                 stubFunction = "Cuckoo.\(stubFunctionPrefix)StubFunction"
@@ -109,7 +103,7 @@ public extension Method {
             "parameterNames": parameters.map { $0.name }.joined(separator: ", "),
             "escapingParameterNames": escapingParameterNames,
             "isInit": isInit,
-            "returnType": returnType,
+            "returnType": returnType.sugarizedExplicitOnly,
             "isThrowing": isThrowing,
             "fullyQualifiedName": fullyQualifiedName,
             "call": call,
@@ -120,6 +114,7 @@ public extension Method {
             "inputTypes": parameters.map { $0.typeWithoutAttributes }.joined(separator: ", "),
             "isOptional": isOptional,
             "hasClosureParams": hasClosureParams,
+            "hasOptionalParams": hasOptionalParams,
             "attributes": attributes.filter { $0.isSupported },
         ]
     }

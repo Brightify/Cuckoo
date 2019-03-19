@@ -20,6 +20,12 @@ public func wrap<M: Matchable, IN>(matchable: M, mapping: @escaping (IN) -> M.Ma
     }
 }
 
+public func wrap<M: Matchable, IN, O>(matchable: M, mapping: @escaping (IN) -> M.MatchedType?) -> ParameterMatcher<IN> where M.MatchedType == O {
+    return ParameterMatcher {
+        return matchable.optionalMatcher.matches(mapping($0))
+    }
+}
+
 public typealias SourceLocation = (file: StaticString, line: UInt)
 
 public func escapingStub<IN, OUT>(for closure: (IN) -> OUT) -> (IN) -> OUT {
