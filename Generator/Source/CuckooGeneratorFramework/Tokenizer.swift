@@ -85,7 +85,12 @@ public struct Tokenizer {
         }
 
         let accessibility = (dictionary[Key.Accessibility.rawValue] as? String).flatMap { Accessibility(rawValue: $0) } ?? .Internal
-        let type = dictionary[Key.TypeName.rawValue] as? String
+        let type: WrappableType?
+        if let stringType = dictionary[Key.TypeName.rawValue] as? String {
+            type = WrappableType(parsing: stringType)
+        } else {
+            type = nil
+        }
 
         switch kind {
         case Kinds.ProtocolDeclaration.rawValue:
@@ -147,7 +152,7 @@ public struct Tokenizer {
 
             return InstanceVariable(
                 name: name,
-                type: type ?? "__UnknownType",
+                type: type ?? .type("__UnknownType"),
                 accessibility: accessibility,
                 setterAccessibility: setterAccessibility,
                 range: range!,
@@ -176,11 +181,20 @@ public struct Tokenizer {
                 returnSignature = " " + returnSignature
             }
 
+            let returnTypeString: String
+            if let range = returnSignature.range(of: "->") {
+                returnTypeString = String(returnSignature[range.upperBound...]).trimmed
+            } else {
+                returnTypeString = "Void"
+            }
+            let returnType = WrappableType(parsing: returnTypeString)
+
             // When bodyRange != nil, we need to create .ClassMethod instead of .ProtocolMethod
             if let bodyRange = bodyRange {
                 return ClassMethod(
                     name: name,
                     accessibility: accessibility,
+                    returnType: returnType,
                     returnSignature: returnSignature,
                     range: range!,
                     nameRange: nameRange!,
@@ -191,6 +205,7 @@ public struct Tokenizer {
                 return ProtocolMethod(
                     name: name,
                     accessibility: accessibility,
+                    returnType: returnType,
                     returnSignature: returnSignature,
                     range: range!,
                     nameRange: nameRange!,
@@ -255,7 +270,9 @@ public struct Tokenizer {
                 isInout = false
             }
 
-            return MethodParameter(label: parameterLabel, name: name, type: inoutSeparatedType, range: range!, nameRange: nameRange!, isInout: isInout)
+            let wrappableType = WrappableType(parsing: inoutSeparatedType)
+
+            return MethodParameter(label: parameterLabel, name: name, type: wrappableType, range: range!, nameRange: nameRange!, isInout: isInout)
 
         default:
             stderrPrint("Unknown method parameter. Dictionary: \(dictionary) \(file.path ?? "")")

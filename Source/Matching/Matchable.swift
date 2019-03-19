@@ -15,6 +15,8 @@ public protocol Matchable {
     
     /// Matcher for this instance. This should be an equalTo type of a matcher, but it is not required.
     var matcher: ParameterMatcher<MatchedType> { get }
+
+    var optionalMatcher: ParameterMatcher<MatchedType?> { get }
 }
 
 public extension Matchable {
@@ -31,92 +33,61 @@ public extension Matchable {
     }
 }
 
-extension Bool: Matchable {
-    public var matcher: ParameterMatcher<Bool> {
+extension Optional: Matchable where Wrapped: Matchable, Wrapped.MatchedType == Wrapped {
+    public typealias MatchedType = Wrapped?
+
+    public var matcher: ParameterMatcher<Wrapped?> {
+        return ParameterMatcher<Wrapped?> { other in
+            switch (self, other) {
+            case (.none, .none):
+                return true
+            case (.some(let lhs), .some(let rhs)):
+                return lhs.matcher.matches(rhs)
+            default:
+                return false
+            }
+        }
+    }
+}
+
+extension Matchable where Self == MatchedType {
+    public var optionalMatcher: ParameterMatcher<MatchedType?> {
+        return Optional(self).matcher
+    }
+}
+
+extension Matchable where Self: Equatable {
+    public var matcher: ParameterMatcher<Self> {
         return equal(to: self)
     }
 }
 
-extension String: Matchable {
-    public var matcher: ParameterMatcher<String> {
-        return equal(to: self)
-    }
-}
+extension Bool: Matchable {}
 
-extension Float: Matchable {
-    public var matcher: ParameterMatcher<Float> {
-        return equal(to: self)
-    }
-}
+extension String: Matchable {}
 
-extension Double: Matchable {
-    public var matcher: ParameterMatcher<Double> {
-        return equal(to: self)
-    }
-}
+extension Float: Matchable {}
 
-extension Character: Matchable {
-    public var matcher: ParameterMatcher<Character> {
-        return equal(to: self)
-    }
-}
+extension Double: Matchable {}
 
-extension Int: Matchable {
-    public var matcher: ParameterMatcher<Int> {
-        return equal(to: self)
-    }
-}
+extension Character: Matchable {}
 
-extension Int8: Matchable {
-    public var matcher: ParameterMatcher<Int8> {
-        return equal(to: self)
-    }
-}
+extension Int: Matchable {}
 
-extension Int16: Matchable {
-    public var matcher: ParameterMatcher<Int16> {
-        return equal(to: self)
-    }
-}
+extension Int8: Matchable {}
 
-extension Int32: Matchable {
-    public var matcher: ParameterMatcher<Int32> {
-        return equal(to: self)
-    }
-}
+extension Int16: Matchable {}
 
-extension Int64: Matchable {
-    public var matcher: ParameterMatcher<Int64> {
-        return equal(to: self)
-    }
-}
+extension Int32: Matchable {}
 
-extension UInt: Matchable {
-    public var matcher: ParameterMatcher<UInt> {
-        return equal(to: self)
-    }
-}
+extension Int64: Matchable {}
 
-extension UInt8: Matchable {
-    public var matcher: ParameterMatcher<UInt8> {
-        return equal(to: self)
-    }
-}
+extension UInt: Matchable {}
 
-extension UInt16: Matchable {
-    public var matcher: ParameterMatcher<UInt16> {
-        return equal(to: self)
-    }
-}
+extension UInt8: Matchable {}
 
-extension UInt32: Matchable {
-    public var matcher: ParameterMatcher<UInt32> {
-        return equal(to: self)
-    }
-}
+extension UInt16: Matchable {}
 
-extension UInt64: Matchable {
-    public var matcher: ParameterMatcher<UInt64> {
-        return equal(to: self)
-    }
-}
+extension UInt32: Matchable {}
+
+extension UInt64: Matchable {}

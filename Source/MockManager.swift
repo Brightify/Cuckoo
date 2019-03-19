@@ -82,7 +82,7 @@ public class MockManager {
         return stub
     }
     
-    public func verify<IN, OUT>(_ method: String, callMatcher: CallMatcher, parameterMatchers: [ParameterMatcher<IN>], sourceLocation: SourceLocation) -> __DoNotUse<OUT> {
+    public func verify<IN, OUT>(_ method: String, callMatcher: CallMatcher, parameterMatchers: [ParameterMatcher<IN>], sourceLocation: SourceLocation) -> __DoNotUse<IN, OUT> {
         var calls: [StubCall] = []
         var indexesToRemove: [Int] = []
         for (i, stubCall) in stubCalls.enumerated() {

@@ -223,7 +223,7 @@ class FinalFields {
     }
 }
 
-class InoutMethod {
+class InoutMethodClass {
     func inoutko(param: inout Int) {
 
     }
@@ -233,6 +233,26 @@ class InoutMethod {
     }
 
     func inoutkoClosure(param: (inout Int) -> Void) {
+
+    }
+}
+
+class OptionalParamsClass {
+    func function(param: String?) {
+
+    }
+
+    // the next two methods are exactly the same except for parameter types
+    // this is not ambiguous for Swift, however, mocking this in a way so
+    // that the stubbing and verifying calls wouldn't be ambiguous would require
+    // some serious amount of hacks, so we decided to postpone this feature for now
+    // see `clashingFunction` calls in tests to see how to disambiguate if you're ever
+    // in need of two almost identical methods
+    func clashingFunction(param1: Int?, param2: String) {
+
+    }
+
+    func clashingFunction(param1: Int, param2: String?) {
 
     }
 }

@@ -8,7 +8,7 @@
 
 public struct InstanceVariable: Token, HasAccessibility {
     public var name: String
-    public var type: String
+    public var type: WrappableType
     public var accessibility: Accessibility
     public var setterAccessibility: Accessibility?
     public var range: CountableRange<Int>
@@ -33,7 +33,7 @@ public struct InstanceVariable: Token, HasAccessibility {
         let readOnlyString = readOnly ? "ReadOnly" : ""
         return [
             "name": name,
-            "type": type,
+            "type": type.sugarized,
             "accessibility": accessibility.sourceName,
             "isReadOnly": readOnly,
             "stubType": overriding ? "ClassToBeStubbed\(readOnlyString)Property" : "ProtocolToBeStubbed\(readOnlyString)Property",

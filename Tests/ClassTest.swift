@@ -191,7 +191,7 @@ class ClassTest: XCTestCase {
     }
 
     func testInout() {
-        let mock = MockInoutMethod()
+        let mock = MockInoutMethodClass()
         stub(mock) { mock in
             when(mock.inoutko(param: anyInt())).then { param in
                 print(param)
@@ -200,6 +200,23 @@ class ClassTest: XCTestCase {
 
         var integer = 12
         mock.inoutko(param: &integer)
+    }
+
+    func testOptionals() {
+        let mock = MockOptionalParamsClass()
+
+        stub(mock) { mock in
+//            when(mock.clashingFunction(param1: anyInt(), param2: "Henlo Fren")).thenDoNothing()
+//            when(mock.clashingFunction(param1: anyInt(), param2: Optional("What's the question?"))).then { print("What's 6 times 9? \($0.0)") }
+//            mock.function(param: "string")
+            when(mock.function(param: "string")).thenDoNothing()
+        }
+
+//        mock.clashingFunction(param1: Optional(22), param2: "Henlo Fren")
+//        mock.clashingFunction(param1: 42, param2: Optional("What's the question?"))
+
+//        verify(mock).clashingFunction(param1: anyInt(), param2: "Henlo Fren")
+//        verify(mock).clashingFunction(param1: 42, param2: Optional("What's the question?"))
     }
     
     private enum TestError: Error {
