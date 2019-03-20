@@ -71,14 +71,20 @@ public struct Generator {
     private func matchableGenerics(with parameters: [MethodParameter]) -> String {
         guard parameters.isEmpty == false else { return "" }
 
-        let genericParameters = (1...parameters.count).map { "M\($0): Cuckoo.Matchable" }.joined(separator: ", ")
+        let genericParameters = parameters.enumerated().map { index, parameter -> String in
+            let type = parameter.isOptional ? "OptionalMatchable" : "Matchable"
+            return "M\(index + 1): Cuckoo.\(type)"
+        }.joined(separator: ", ")
         return "<\(genericParameters)>"
     }
 
     private func matchableGenerics(where parameters: [MethodParameter]) -> String {
         guard parameters.isEmpty == false else { return "" }
 
-        let whereClause = parameters.enumerated().map { "M\($0 + 1).MatchedType == \(genericSafeType(from: $1.type.withoutAttributes.unoptionaled.sugarized))" }.joined(separator: ", ")
+        let whereClause = parameters.enumerated().map { index, parameter in
+            let type = parameter.isOptional ? "OptionalMatchedType" : "MatchedType"
+            return "M\(index + 1).\(type) == \(genericSafeType(from: parameter.type.withoutAttributes.unoptionaled.sugarized))"
+        }.joined(separator: ", ")
         return " where \(whereClause)"
     }
 

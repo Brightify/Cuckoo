@@ -145,16 +145,16 @@ class StubbingTest: XCTestCase {
             when(stub.subSubMethod()).thenReturn("not nil")
 
             // sub-class
-//            when(stub.withImplicitlyUnwrappedOptional(i: anyInt())).thenReturn("implicit unwrapped return")
-//            when(stub.withThrows()).thenReturn(10)
-//            when(stub.withNamedTuple(tuple: any())).thenReturn(11)
-//            when(stub.subclassMethod()).thenReturn(12)
+            when(stub.withImplicitlyUnwrappedOptional(i: anyInt())).thenReturn("implicit unwrapped return")
+            when(stub.withThrows()).thenReturn(10)
+            when(stub.withNamedTuple(tuple: any())).thenReturn(11)
+            when(stub.subclassMethod()).thenReturn(12)
 //            when(stub.withOptionalClosureAndReturn(anyString(), closure: isNil())).thenReturn(2)
-//            when(stub.withClosureAndParam(anyString(), closure: anyClosure())).thenReturn(3)
-//            when(stub.withMultClosures(closure: anyClosure(), closureB: anyClosure(), closureC: anyClosure())).thenReturn(4)
-//            when(stub.withThrowingClosure(closure: anyThrowingClosure())).thenReturn("throwing closure")
-//            when(stub.withThrowingClosureThrows(closure: anyThrowingClosure())).thenReturn("closure throwing")
-//            when(stub.withThrowingEscapingClosure(closure: anyThrowingClosure())).thenReturn("escaping closure")
+            when(stub.withClosureAndParam(anyString(), closure: anyClosure())).thenReturn(3)
+            when(stub.withMultClosures(closure: anyClosure(), closureB: anyClosure(), closureC: anyClosure())).thenReturn(4)
+            when(stub.withThrowingClosure(closure: anyThrowingClosure())).thenReturn("throwing closure")
+            when(stub.withThrowingClosureThrows(closure: anyThrowingClosure())).thenReturn("closure throwing")
+            when(stub.withThrowingEscapingClosure(closure: anyThrowingClosure())).thenReturn("escaping closure")
 //            when(stub.withThrowingOptionalClosureThrows(closure: anyOptionalThrowingClosure())).thenReturn("optional closure throwing")
             when(stub.methodWithParameter(anyString())).thenReturn("parameter string")
             when(stub.methodWithParameter(anyInt())).thenReturn("parameter int")
@@ -181,9 +181,9 @@ class StubbingTest: XCTestCase {
             when(stub.withEscape(anyString(), action: anyClosure())).then { _ in
                 callWithEscape = true
             }
-//            when(stub.withOptionalClosure(anyString(), closure: anyClosure())).then { _ in
-//                callWithOptionalClosure = true
-//            }
+            when(stub.withOptionalClosure(anyString(), closure: anyClosure())).then { _ in
+                callWithOptionalClosure = true
+            }
             when(stub.withLabelAndUnderscore(labelA: anyString(), anyString())).then { _ in
                 callWithLabelAndUnderscore = true
             }

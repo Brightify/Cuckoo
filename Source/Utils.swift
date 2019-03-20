@@ -20,7 +20,7 @@ public func wrap<M: Matchable, IN>(matchable: M, mapping: @escaping (IN) -> M.Ma
     }
 }
 
-public func wrap<M: Matchable, IN, O>(matchable: M, mapping: @escaping (IN) -> M.MatchedType?) -> ParameterMatcher<IN> where M.MatchedType == O {
+public func wrap<M: OptionalMatchable, IN, O>(matchable: M, mapping: @escaping (IN) -> M.OptionalMatchedType?) -> ParameterMatcher<IN> where M.OptionalMatchedType == O {
     return ParameterMatcher {
         return matchable.optionalMatcher.matches(mapping($0))
     }
