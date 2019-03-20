@@ -17,6 +17,8 @@ public struct Initializer: Method, HasAccessibility {
     public var isOverriding: Bool
     public var required: Bool
     public var attributes: [Attribute]
+    public var genericParameters: [GenericParameter]
+    public var whereConstraints: [String]
 
     public var isOptional: Bool {
         return false
