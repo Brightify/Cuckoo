@@ -244,9 +244,7 @@ class InoutMethodClass {
 }
 
 class OptionalParamsClass {
-    func function(param: String?) {
-
-    }
+    func function(param: String?) { }
 
     // the next two methods are exactly the same except for parameter types
     // this is not ambiguous for Swift, however, mocking this in a way so
@@ -254,11 +252,37 @@ class OptionalParamsClass {
     // some serious amount of hacks, so we decided to postpone this feature for now
     // see `clashingFunction` calls in tests to see how to disambiguate if you're ever
     // in need of two almost identical methods
-    func clashingFunction(param1: Int?, param2: String) {
+    func clashingFunction(param1: Int?, param2: String) { }
+
+    func clashingFunction(param1: Int, param2: String?) { }
+}
+
+class ClosureNClass {
+    func f1(closure: (String) -> String) {
 
     }
 
-    func clashingFunction(param1: Int, param2: String?) {
+    func f2(closure: (String, Int) -> Int) {
+
+    }
+
+    func f3(closure: (String, Int, Bool) -> Bool) {
+
+    }
+
+    func f4(closure: (String, Int, Bool, [String]?) -> [String]?) {
+
+    }
+
+    func f5(closure: (String, Int, Bool, [String]?, Set<Int>) -> Set<Int>) {
+
+    }
+
+    func f6(closure: (String, Int, Bool, [String]?, Set<Int>, Void) -> Void) {
+
+    }
+
+    func f7(closure: (String, Int, Bool, [String]?, Set<Int>, Void, [String: String]) -> [String: String]) {
 
     }
 }

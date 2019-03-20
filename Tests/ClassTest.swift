@@ -14,15 +14,15 @@ extension TestedClass: Mocked {
 }
 
 class ClassTest: XCTestCase {
-    
+
     private var mock: MockTestedClass!
-    
+
     override func setUp() {
         super.setUp()
-        
+
         mock = MockTestedClass()
     }
-    
+
     func testReadOnlyPropertyWithMockCreator() {
         let mock = createMock(for: TestedClass.self) { builder, stub in
             when(stub.readOnlyProperty.get).thenReturn("a")
@@ -44,119 +44,119 @@ class ClassTest: XCTestCase {
         XCTAssertEqual(mock.readOnlyProperty, "a")
         _ = verify(mock).readOnlyProperty.get
     }
-    
+
     func testReadWriteProperty() {
         var called = false
         stub(mock) { mock in
             when(mock.readWriteProperty.get).thenReturn(1)
             when(mock.readWriteProperty.set(anyInt())).then { _ in called = true }
         }
-        
+
         mock.readWriteProperty = 0
-        
+
         XCTAssertEqual(mock.readWriteProperty, 1)
         XCTAssertTrue(called)
         _ = verify(mock).readWriteProperty.get
         verify(mock).readWriteProperty.set(0)
     }
-    
+
     func testOptionalProperty() {
         var called = false
         stub(mock) { mock in
             when(mock.optionalProperty.get).thenReturn(nil)
             when(mock.optionalProperty.set(anyInt())).then { _ in called = true }
         }
-        
+
         mock.optionalProperty = 0
-        
+
         XCTAssertNil(mock.optionalProperty)
         XCTAssertTrue(called)
         _ = verify(mock).optionalProperty.get
         verify(mock).optionalProperty.set(equal(to: 0))
     }
-    
+
     func testNoReturn() {
         var called = false
         stub(mock) { mock in
             when(mock.noReturn()).then { _ in called = true }
         }
-        
+
         mock.noReturn()
-        
+
         XCTAssertTrue(called)
         verify(mock).noReturn()
     }
-    
+
     func testCountCharacters() {
         stub(mock) { mock in
             when(mock.count(characters: "a")).thenReturn(1)
         }
-        
+
         XCTAssertEqual(mock.count(characters: "a"), 1)
         verify(mock).count(characters: "a")
     }
-    
+
     func testWithThrows() {
         stub(mock) { mock in
             when(mock.withThrows()).thenThrow(TestError.unknown)
         }
-        
+
         var catched = false
         do {
             _ = try mock.withThrows()
         } catch {
             catched = true
         }
-        
+
         XCTAssertTrue(catched)
         verify(mock).withThrows()
     }
-    
+
     func testWithNoReturnThrows() {
         stub(mock) { mock in
             when(mock.withNoReturnThrows()).thenThrow(TestError.unknown)
         }
-        
+
         var catched = false
         do {
             try mock.withNoReturnThrows()
         } catch {
             catched = true
         }
-        
+
         XCTAssertTrue(catched)
         verify(mock).withNoReturnThrows()
     }
-    
+
     func testWithClosure() {
         stub(mock) { mock in
             when(mock.withClosure(anyClosure())).then { $0("a") }
         }
-        
+
         XCTAssertEqual(mock.withClosure { _ in 1 }, 1)
         verify(mock).withClosure(anyClosure())
     }
-    
+
     func testWithEscape() {
         var called = false
         stub(mock) { mock in
             when(mock.withEscape(anyString(), action: anyClosure())).then { text, closure in closure(text) }
         }
-        
+
         mock.withEscape("a") { called = $0 == "a" }
-        
+
         XCTAssertTrue(called)
         verify(mock).withEscape(anyString(), action: anyClosure())
     }
-    
+
     func testWithOptionalClosure() {
         var called = false
         stub(mock) { mock in
             when(mock.withOptionalClosure(anyString(), closure: anyClosure())).then { text, closure in closure?(text)  }
         }
-        
+
         mock.withOptionalClosure("a") { called = $0 == "a" }
-        
+
         XCTAssertTrue(called)
         verify(mock).withOptionalClosure(anyString(), closure: anyClosure())
     }
@@ -223,7 +223,50 @@ class ClassTest: XCTestCase {
 //        _ = verify(mock).clashingFunction(param1: anyInt(), param2: "Henlo Fren") as Cuckoo.__DoNotUse<(Int?, String), Void>
 //        _ = verify(mock).clashingFunction(param1: 42, param2: "What's the question?") as Cuckoo.__DoNotUse<(Int, String?), Void>
     }
-    
+
+    func testClosureN() {
+        let mock = MockClosureNClass()
+        stub(mock) { mock in
+            when(mock.f1(closure: anyClosure())).then { closure in
+                print(closure("Hello"))
+            }
+            when(mock.f2(closure: anyClosure())).then { closure in
+                print(closure("Cuckoo", 7))
+            }
+            when(mock.f3(closure: anyClosure())).then { closure in
+                print(closure("World", 1, true))
+            }
+            when(mock.f4(closure: anyClosure())).then { closure in
+                print(closure("Dude", 0, false, Optional(["Hello", "World"])) ?? ["defaultko"])
+            }
+            when(mock.f5(closure: anyClosure())).then { closure in
+                print(closure("How", 2, true, nil, Set([1, 2, 3])))
+            }
+            when(mock.f6(closure: anyClosure())).then { closure in
+                print(closure("Are", 5, true, nil, Set([1, 2, 3]), ()))
+            }
+            when(mock.f7(closure: anyClosure())).then { closure in
+                print(closure("You", 13, false, nil, Set([1, 2]), (), ["hello": "world"]))
+            }
+        }
+
+        mock.f1(closure: { $0 })
+        mock.f2(closure: { $1 })
+        mock.f3(closure: { $2 })
+        mock.f4(closure: { $3 })
+        mock.f5(closure: { $4 })
+        mock.f6(closure: { $5 })
+        mock.f7(closure: { $6 })
+
+        verify(mock).f1(closure: anyClosure())
+        verify(mock).f2(closure: anyClosure())
+        verify(mock).f3(closure: anyClosure())
+        verify(mock).f4(closure: anyClosure())
+        verify(mock).f5(closure: anyClosure())
+        verify(mock).f6(closure: anyClosure())
+        verify(mock).f7(closure: anyClosure())
+    }
+
     private enum TestError: Error {
         case unknown
     }

@@ -96,7 +96,9 @@ public extension Method {
 
         let escapingParameterNames = parameters.map { parameter in
             if parameter.isClosure && !parameter.isEscaping {
-                return "escapingStub(for: \(parameter.name))"
+                let parameterCount = parameter.closureParamCount
+                let parameterCountString = parameterCount > 1 ? String(parameterCount) : ""
+                return "escapingStub\(parameterCountString)(for: \(parameter.name))"
             } else {
                 return parameter.name
             }

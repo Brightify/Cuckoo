@@ -49,7 +49,31 @@ public func anyThrowingClosure<IN, OUT>() -> ParameterMatcher<(IN) throws -> OUT
     return ParameterMatcher()
 }
 
-public func anyClosure<IN, OUT>() -> ParameterMatcher<(IN) -> OUT> {
+public func anyClosure<IN1, OUT>() -> ParameterMatcher<(IN1) -> OUT> {
+    return ParameterMatcher()
+}
+
+public func anyClosure<IN1, IN2, OUT>() -> ParameterMatcher<(IN1, IN2) -> OUT> {
+    return ParameterMatcher()
+}
+
+public func anyClosure<IN1, IN2, IN3, OUT>() -> ParameterMatcher<(IN1, IN2, IN3) -> OUT> {
+    return ParameterMatcher()
+}
+
+public func anyClosure<IN1, IN2, IN3, IN4, OUT>() -> ParameterMatcher<(IN1, IN2, IN3, IN4) -> OUT> {
+    return ParameterMatcher()
+}
+
+public func anyClosure<IN1, IN2, IN3, IN4, IN5, OUT>() -> ParameterMatcher<(IN1, IN2, IN3, IN4, IN5) -> OUT> {
+    return ParameterMatcher()
+}
+
+public func anyClosure<IN1, IN2, IN3, IN4, IN5, IN6, OUT>() -> ParameterMatcher<(IN1, IN2, IN3, IN4, IN5, IN6) -> OUT> {
+    return ParameterMatcher()
+}
+
+public func anyClosure<IN1, IN2, IN3, IN4, IN5, IN6, IN7, OUT>() -> ParameterMatcher<(IN1, IN2, IN3, IN4, IN5, IN6, IN7) -> OUT> {
     return ParameterMatcher()
 }
 
