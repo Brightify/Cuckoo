@@ -102,7 +102,7 @@ extension Templates {
     {% for attribute in method.attributes %}
     {{ attribute.text }}
     {% endfor %}
-    {{ method.accessibility }}{% if container.isImplementation and method.isOverriding %} override{% endif %} func {{ method.name }}({{ method.parameterSignature }}) {{ method.returnSignature }} {
+    {{ method.accessibility }}{% if container.isImplementation and method.isOverriding %} override{% endif %} func {{ method.name }}{{ method.genericParameters }}({{ method.parameterSignature }}) {{ method.returnSignature }} {{ method.whereClause }} {
         {{ method.parameters|openNestedClosure:method.isThrowing }}
             return{% if method.isThrowing %} try{% endif %} cuckoo_manager.call{% if method.isThrowing %}Throws{% endif %}("{{method.fullyQualifiedName}}",
                 parameters: ({{method.parameterNames}}),

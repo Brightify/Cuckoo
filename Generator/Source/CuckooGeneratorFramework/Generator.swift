@@ -28,13 +28,13 @@ public struct Generator {
         }
 
         ext.registerFilter("matchableGenericNames") { (value: Any?) in
-            guard let parameters = value as? [MethodParameter] else { return value }
-            return self.matchableGenerics(with: parameters)
+            guard let method = value as? Method else { return value }
+            return self.matchableGenericTypes(from: method)
         }
 
-        ext.registerFilter("matchableGenericWhere") { (value: Any?) in
-            guard let parameters = value as? [MethodParameter] else { return value }
-            return self.matchableGenerics(where: parameters)
+        ext.registerFilter("matchableGenericWhereClause") { (value: Any?) in
+            guard let method = value as? Method else { return value }
+            return self.matchableGenericsWhereClause(from: method)
         }
 
         ext.registerFilter("matchableParameterSignature") { (value: Any?) in
@@ -68,24 +68,20 @@ public struct Generator {
         return try environment.renderTemplate(string: Templates.mock, context: ["containers": containers, "debug": debug])
     }
 
-    private func matchableGenerics(with parameters: [MethodParameter]) -> String {
-        guard parameters.isEmpty == false else { return "" }
+    private func matchableGenericTypes(from method: Method) -> String {
+        guard method.parameters.isEmpty == false else { return "" }
 
-        let genericParameters = parameters.enumerated().map { index, parameter -> String in
-            let type = parameter.isOptional ? "OptionalMatchable" : "Matchable"
-            return "M\(index + 1): Cuckoo.\(type)"
-        }.joined(separator: ", ")
-        return "<\(genericParameters)>"
+        let matchableGenericParameters = (1...method.parameters.count).map { "M\($0): Cuckoo.Matchable" }
+        let methodGenericParameters = method.genericParameters.map { $0.description }
+        return "<\((matchableGenericParameters + methodGenericParameters).joined(separator: ", "))>"
     }
 
-    private func matchableGenerics(where parameters: [MethodParameter]) -> String {
-        guard parameters.isEmpty == false else { return "" }
+    private func matchableGenericsWhereClause(from method: Method) -> String {
+        guard method.parameters.isEmpty == false else { return "" }
 
-        let whereClause = parameters.enumerated().map { index, parameter in
-            let type = parameter.isOptional ? "OptionalMatchedType" : "MatchedType"
-            return "M\(index + 1).\(type) == \(genericSafeType(from: parameter.type.withoutAttributes.unoptionaled.sugarized))"
-        }.joined(separator: ", ")
-        return " where \(whereClause)"
+        let matchableWhereConstraints = method.parameters.enumerated().map { "M\($0 + 1).MatchedType == \(genericSafeType(from: $1.typeWithoutAttributes))" }
+        let methodWhereConstraints = method.whereConstraints
+        return " where \((matchableWhereConstraints + methodWhereConstraints).joined(separator: ", "))"
     }
 
     private func matchableParameterSignature(with parameters: [MethodParameter]) -> String {

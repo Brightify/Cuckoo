@@ -192,6 +192,23 @@ public struct Tokenizer {
                 returnTypeString = "Void"
             }
             let returnType = WrappableType(parsing: returnTypeString)
+            let genericParameters = tokenize(dictionary[Key.Substructure.rawValue] as? [SourceKitRepresentable] ?? []).only(GenericParameter.self)
+
+            // TODO: add support for where constraints
+            let whereConstraints: [String] = []
+//            if let bodyRange = bodyRange {
+//                returnSignature = source.utf8[nameRange!.endIndex..<bodyRange.startIndex].takeUntil(occurence: "{")?.trimmed ?? ""
+//            } else {
+//                returnSignature = source.utf8[nameRange!.endIndex..<range!.endIndex].trimmed
+//                if returnSignature.isEmpty {
+//                    let untilThrows = String(source.utf8.dropFirst(nameRange!.endIndex))?
+//                        .takeUntil(occurence: "throws").map { $0 + "throws" }?
+//                        .trimmed
+//                    if let untilThrows = untilThrows, untilThrows == "throws" || untilThrows == "rethrows" {
+//                        returnSignature = "\(untilThrows)"
+//                    }
+//                }
+//            }
 
             // When bodyRange != nil, we need to create .ClassMethod instead of .ProtocolMethod
             if let bodyRange = bodyRange {
@@ -204,7 +221,9 @@ public struct Tokenizer {
                     nameRange: nameRange!,
                     parameters: parameters,
                     bodyRange: bodyRange,
-                    attributes: attributes)
+                    attributes: attributes,
+                    genericParameters: genericParameters,
+                    whereConstraints: whereConstraints)
             } else {
                 return ProtocolMethod(
                     name: name,
@@ -214,7 +233,9 @@ public struct Tokenizer {
                     range: range!,
                     nameRange: nameRange!,
                     parameters: parameters,
-                    attributes: attributes)
+                    attributes: attributes,
+                    genericParameters: genericParameters,
+                    whereConstraints: whereConstraints)
             }
 
         case Kinds.GenericParameter.rawValue:
