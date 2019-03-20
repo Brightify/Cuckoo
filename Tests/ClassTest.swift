@@ -206,17 +206,23 @@ class ClassTest: XCTestCase {
         let mock = MockOptionalParamsClass()
 
         stub(mock) { mock in
-//            when(mock.clashingFunction(param1: anyInt(), param2: "Henlo Fren")).thenDoNothing()
-//            when(mock.clashingFunction(param1: anyInt(), param2: Optional("What's the question?"))).then { print("What's 6 times 9? \($0.0)") }
-//            mock.function(param: "string")
+            when(mock.clashingFunction(param1: Optional(1), param2: "Henlo Fren") as Cuckoo.ClassStubNoReturnFunction<(Int?, String)>).thenDoNothing()
+            when(mock.clashingFunction(param1: Optional.none, param2: "Henlo Fren") as Cuckoo.ClassStubNoReturnFunction<(Int?, String)>).thenDoNothing()
+            when(mock.clashingFunction(param1: anyInt(), param2: "What's the question?") as Cuckoo.ClassStubNoReturnFunction<(Int, String?)>).then {
+                print("What's 6 times 9? \($0.0)")
+            }
+            when(mock.clashingFunction(param1: anyInt(), param2: isNil()) as Cuckoo.ClassStubNoReturnFunction<(Int, String?)>).then {
+                print("What's 6 times 9? \($0.0)")
+            }
+            mock.function(param: "string")
             when(mock.function(param: "string")).thenDoNothing()
         }
 
-//        mock.clashingFunction(param1: Optional(22), param2: "Henlo Fren")
-//        mock.clashingFunction(param1: 42, param2: Optional("What's the question?"))
+        mock.clashingFunction(param1: Optional(22), param2: "Henlo Fren")
+        mock.clashingFunction(param1: 42, param2: Optional("What's the question?"))
 
-//        verify(mock).clashingFunction(param1: anyInt(), param2: "Henlo Fren")
-//        verify(mock).clashingFunction(param1: 42, param2: Optional("What's the question?"))
+        _ = verify(mock).clashingFunction(param1: anyInt(), param2: "Henlo Fren") as Cuckoo.__DoNotUse<(Int?, String), Void>
+        _ = verify(mock).clashingFunction(param1: 42, param2: "What's the question?") as Cuckoo.__DoNotUse<(Int, String?), Void>
     }
     
     private enum TestError: Error {
