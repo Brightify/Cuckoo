@@ -202,7 +202,7 @@ final class FinalClass {
 }
 
 protocol GenericFunctionProtocol {
-    func method<T>(param: T)
+    func method<T>(param: T) where T: CustomStringConvertible, T: StringProtocol
 }
 
 class GenericFunctionClass {

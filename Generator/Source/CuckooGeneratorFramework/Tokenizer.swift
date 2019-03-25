@@ -165,50 +165,15 @@ public struct Tokenizer {
                 attributes: attributes)
 
         case Kinds.InstanceMethod.rawValue:
+            let genericParameters = tokenize(dictionary[Key.Substructure.rawValue] as? [SourceKitRepresentable] ?? []).only(GenericParameter.self)
             let parameters = tokenize(methodName: name, parameters: dictionary[Key.Substructure.rawValue] as? [SourceKitRepresentable] ?? [])
 
-            var returnSignature: String
+            let returnSignature: ReturnSignature
             if let bodyRange = bodyRange {
-                returnSignature = source.utf8[nameRange!.endIndex..<bodyRange.startIndex].takeUntil(occurence: "{")?.trimmed ?? ""
+                returnSignature = parseReturnSignature(source: source.utf8[nameRange!.endIndex..<bodyRange.startIndex].takeUntil(occurence: "{")?.trimmed ?? "")
             } else {
-                returnSignature = source.utf8[nameRange!.endIndex..<range!.endIndex].trimmed
-                if returnSignature.isEmpty {
-                    let untilThrows = String(source.utf8.dropFirst(nameRange!.endIndex))?
-                        .takeUntil(occurence: "throws").map { $0 + "throws" }?
-                        .trimmed
-                    if let untilThrows = untilThrows, untilThrows == "throws" || untilThrows == "rethrows" {
-                        returnSignature = "\(untilThrows)"
-                    }
-                }
+                returnSignature = parseReturnSignature(source: source.utf8[nameRange!.endIndex..<range!.endIndex].trimmed)
             }
-            if !returnSignature.isEmpty {
-                returnSignature = " " + returnSignature
-            }
-
-            let returnTypeString: String
-            if let range = returnSignature.range(of: "->") {
-                returnTypeString = String(returnSignature[range.upperBound...]).trimmed
-            } else {
-                returnTypeString = "Void"
-            }
-            let returnType = WrappableType(parsing: returnTypeString)
-            let genericParameters = tokenize(dictionary[Key.Substructure.rawValue] as? [SourceKitRepresentable] ?? []).only(GenericParameter.self)
-
-            // TODO: add support for where constraints
-            let whereConstraints: [String] = []
-//            if let bodyRange = bodyRange {
-//                returnSignature = source.utf8[nameRange!.endIndex..<bodyRange.startIndex].takeUntil(occurence: "{")?.trimmed ?? ""
-//            } else {
-//                returnSignature = source.utf8[nameRange!.endIndex..<range!.endIndex].trimmed
-//                if returnSignature.isEmpty {
-//                    let untilThrows = String(source.utf8.dropFirst(nameRange!.endIndex))?
-//                        .takeUntil(occurence: "throws").map { $0 + "throws" }?
-//                        .trimmed
-//                    if let untilThrows = untilThrows, untilThrows == "throws" || untilThrows == "rethrows" {
-//                        returnSignature = "\(untilThrows)"
-//                    }
-//                }
-//            }
 
             // When bodyRange != nil, we need to create .ClassMethod instead of .ProtocolMethod
             if let bodyRange = bodyRange {
@@ -222,8 +187,7 @@ public struct Tokenizer {
                     parameters: parameters,
                     bodyRange: bodyRange,
                     attributes: attributes,
-                    genericParameters: genericParameters,
-                    whereConstraints: whereConstraints)
+                    genericParameters: genericParameters)
             } else {
                 return ProtocolMethod(
                     name: name,
@@ -234,8 +198,7 @@ public struct Tokenizer {
                     nameRange: nameRange!,
                     parameters: parameters,
                     attributes: attributes,
-                    genericParameters: genericParameters,
-                    whereConstraints: whereConstraints)
+                    genericParameters: genericParameters)
             }
 
         case Kinds.GenericParameter.rawValue:
@@ -380,6 +343,90 @@ public struct Tokenizer {
         } catch let error as NSError {
             fatalError("Invalid regex:" + error.description)
         }
+    }
+
+    /// - parameter source: A trimmed string containing only the method return signature excluding the trailing brace
+    /// - returns: tuple containing parsed throwString, returnType, and where constraints
+    private func parseReturnSignature(source: String) -> ReturnSignature {
+        var throwString = nil as String?
+        var returnType = ""
+        var whereConstraints = [] as [String]
+
+        var index = source.startIndex
+        var parenLevel = 0
+        var afterArrow = false
+        parseLoop: while index != source.endIndex {
+            let character = source[index]
+            switch character {
+            case "(", "<", "[":
+                parenLevel += 1
+                returnType.append(character)
+                afterArrow = false
+            case ")", ">", "]":
+                parenLevel -= 1
+                returnType.append(character)
+                afterArrow = false
+            case "r" where returnType.isEmpty:
+                throwString = "rethrows"
+                index = source.index(index, offsetBy: throwString!.count)
+                continue
+            case "t" where returnType.isEmpty:
+                throwString = "throws"
+                index = source.index(index, offsetBy: throwString!.count)
+                continue
+            case "w" where parenLevel == 0 && !afterArrow:
+                index = source.index(index, offsetBy: "where".count)
+                whereConstraints = parseWhereClause(source: source, index: &index)
+                // the where clause is the last thing in method signature, so we'll just return our parsings
+                break parseLoop
+            case "-" where parenLevel == 0:
+                index = source.index(after: index)
+                guard source[index] == ">" else { fatalError("Uhh, what.") }
+                // we will omit the first arrow, so that the generator doesn't have to remove it if it needs the type alone
+                if !returnType.trimmed.isEmpty {
+                    returnType.append("->")
+                }
+                afterArrow = true
+            default:
+                returnType.append(character)
+                afterArrow = false
+            }
+            index = source.index(after: index)
+        }
+
+        let trimmedType = returnType.trimmed
+        let typizedReturnType = trimmedType.isEmpty ? "Void" : trimmedType
+
+        return ReturnSignature(throwString: throwString, returnType: typizedReturnType, whereConstraints: whereConstraints)
+    }
+
+    /// - returns: the where constraints parsed from the where clause
+    private func parseWhereClause(source: String, index: inout String.Index) -> [String] {
+        var whereConstraints = [] as [String]
+        var currentConstraint = ""
+        var parenLevel = 0
+        while index != source.endIndex {
+            let character = source[index]
+            switch character {
+            case "(", "<", "[":
+                parenLevel += 1
+            case ")", ">", "]":
+                parenLevel -= 1
+            case "," where parenLevel == 0:
+                currentConstraint = currentConstraint.trimmed
+                whereConstraints.append(currentConstraint)
+                currentConstraint = ""
+            default:
+                currentConstraint.append(character)
+            }
+
+            index = source.index(after: index)
+        }
+        if !currentConstraint.isEmpty {
+            currentConstraint = currentConstraint.trimmed
+            whereConstraints.append(currentConstraint)
+        }
+        return whereConstraints
     }
 }
 

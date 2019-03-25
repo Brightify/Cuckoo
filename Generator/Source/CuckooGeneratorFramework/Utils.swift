@@ -51,8 +51,8 @@ extension Sequence {
 
 internal func extractRange(from dictionary: [String: SourceKitRepresentable], offset: Key, length: Key) -> CountableRange<Int>? {
     guard let
-        offset = (dictionary[offset.rawValue] as? Int64).map({ Int($0) }),
-        let length = (dictionary[length.rawValue] as? Int64).map({ Int($0) })
+        offset = (dictionary[offset.rawValue] as? Int64).map(Int.init),
+        let length = (dictionary[length.rawValue] as? Int64).map(Int.init)
         else { return nil }
 
     return offset..<offset.advanced(by: length)
