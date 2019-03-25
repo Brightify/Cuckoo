@@ -9,7 +9,6 @@
 public struct ClassMethod: Method {
     public var name: String
     public var accessibility: Accessibility
-    public var returnType: WrappableType
     public var returnSignature: ReturnSignature
     public var range: CountableRange<Int>
     public var nameRange: CountableRange<Int>

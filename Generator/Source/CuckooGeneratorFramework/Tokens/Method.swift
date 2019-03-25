@@ -9,7 +9,6 @@
 public protocol Method: Token, HasAccessibility {
     var name: String { get }
     var accessibility: Accessibility { get }
-    var returnType: WrappableType { get }
     var returnSignature: ReturnSignature { get }
     var range: CountableRange<Int> { get }
     var nameRange: CountableRange<Int> { get }
@@ -52,7 +51,7 @@ public extension Method {
         return returnSignature.isThrowing
     }
 
-    var returnType: String {
+    var returnType: WrappableType {
         return returnSignature.returnType
     }
 
@@ -122,7 +121,7 @@ public extension Method {
             "isOverriding": isOverriding,
             "parameterSignature": parameters.map { "\($0.labelAndName): \($0.isInout ? "inout " : "")\($0.type)" }.joined(separator: ", "),
             "parameterSignatureWithoutNames": parameters.map { "\($0.name): \($0.type)" }.joined(separator: ", "),
-            "argumentSignature": parameters.map { $0.type }.joined(separator: ", "),
+            "argumentSignature": parameters.map { $0.type.description }.joined(separator: ", "),
             "stubFunction": stubFunction,
             "inputTypes": parameters.map { $0.typeWithoutAttributes }.joined(separator: ", "),
             "isOptional": isOptional,

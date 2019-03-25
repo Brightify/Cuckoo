@@ -15,6 +15,9 @@ public struct ProtocolDeclaration: ContainerToken, HasAccessibility {
     public var bodyRange: CountableRange<Int>
     public var initializers: [Initializer]
     public var children: [Token]
+    public var inheritedTypes: [InheritanceDeclaration]
+    public var attributes: [Attribute]
+    public var genericParameters: [GenericParameter]
 
     public func replace(children tokens: [Token]) -> ProtocolDeclaration {
         return ProtocolDeclaration(

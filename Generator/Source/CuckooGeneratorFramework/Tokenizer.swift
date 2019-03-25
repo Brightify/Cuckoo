@@ -180,7 +180,6 @@ public struct Tokenizer {
                 return ClassMethod(
                     name: name,
                     accessibility: accessibility,
-                    returnType: returnType,
                     returnSignature: returnSignature,
                     range: range!,
                     nameRange: nameRange!,
@@ -192,7 +191,6 @@ public struct Tokenizer {
                 return ProtocolMethod(
                     name: name,
                     accessibility: accessibility,
-                    returnType: returnType,
                     returnSignature: returnSignature,
                     range: range!,
                     nameRange: nameRange!,
@@ -397,7 +395,7 @@ public struct Tokenizer {
         let trimmedType = returnType.trimmed
         let typizedReturnType = trimmedType.isEmpty ? "Void" : trimmedType
 
-        return ReturnSignature(throwString: throwString, returnType: typizedReturnType, whereConstraints: whereConstraints)
+        return ReturnSignature(throwString: throwString, returnType: WrappableType(parsing: typizedReturnType), whereConstraints: whereConstraints)
     }
 
     /// - returns: the where constraints parsed from the where clause
