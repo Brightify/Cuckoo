@@ -17,6 +17,7 @@ public struct ClassDeclaration: ContainerToken, HasAccessibility {
     public var children: [Token]
     public var inheritedTypes: [InheritanceDeclaration]
     public var attributes: [Attribute]
+    public var genericParameters: [GenericParameter]
     public var hasNoArgInit: Bool {
         return initializers.filter { $0.parameters.isEmpty }.isEmpty
     }
