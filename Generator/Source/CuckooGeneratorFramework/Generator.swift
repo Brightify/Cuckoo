@@ -80,7 +80,7 @@ public struct Generator {
         guard method.parameters.isEmpty == false else { return "" }
 
         let matchableWhereConstraints = method.parameters.enumerated().map { "M\($0 + 1).MatchedType == \(genericSafeType(from: $1.typeWithoutAttributes))" }
-        let methodWhereConstraints = method.whereConstraints
+        let methodWhereConstraints = method.returnSignature.whereConstraints
         return " where \((matchableWhereConstraints + methodWhereConstraints).joined(separator: ", "))"
     }
 
