@@ -18,13 +18,13 @@ public protocol Matchable {
 }
 
 public extension Matchable {
-    public func or<M>(_ otherMatchable: M) -> ParameterMatcher<MatchedType> where M: Matchable, M.MatchedType == MatchedType {
+    func or<M>(_ otherMatchable: M) -> ParameterMatcher<MatchedType> where M: Matchable, M.MatchedType == MatchedType {
         return ParameterMatcher {
             return self.matcher.matches($0) || otherMatchable.matcher.matches($0)
         }
     }
     
-    public func and<M>(_ otherMatchable: M) -> ParameterMatcher<MatchedType> where M: Matchable, M.MatchedType == MatchedType {
+    func and<M>(_ otherMatchable: M) -> ParameterMatcher<MatchedType> where M: Matchable, M.MatchedType == MatchedType {
         return ParameterMatcher {
             return self.matcher.matches($0) && otherMatchable.matcher.matches($0)
         }
