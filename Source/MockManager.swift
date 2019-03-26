@@ -179,11 +179,11 @@ extension MockManager {
 
 extension MockManager {
     public func getter<T>(_ property: String, superclassCall: @autoclosure () -> T, defaultCall: @autoclosure () -> T) -> T {
-        return call(getterName(property), parameters: Void(), escapingParameters: Void(), superclassCall: superclassCall, defaultCall: defaultCall())
+        return call(getterName(property), parameters: Void(), escapingParameters: Void(), superclassCall: superclassCall(), defaultCall: defaultCall())
     }
 
     public func setter<T>(_ property: String, value: T, superclassCall: @autoclosure () -> Void, defaultCall: @autoclosure () -> Void) {
-        return call(setterName(property), parameters: value, escapingParameters: value, superclassCall: superclassCall, defaultCall: defaultCall())
+        return call(setterName(property), parameters: value, escapingParameters: value, superclassCall: superclassCall(), defaultCall: defaultCall())
     }
 }
 
