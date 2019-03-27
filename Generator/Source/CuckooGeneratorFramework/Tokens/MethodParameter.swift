@@ -85,12 +85,3 @@ public struct MethodParameter: Token, Equatable {
 public func ==(lhs: MethodParameter, rhs: MethodParameter) -> Bool {
     return lhs.isEqual(to: rhs)
 }
-
-import Foundation
-
-extension String {
-    func regexMatches(_ source: String) -> Bool {
-        let regex = try! NSRegularExpression(pattern: self)
-        return regex.firstMatch(in: source, range: NSRange(location: 0, length: source.count)) != nil
-    }
-}

@@ -151,6 +151,7 @@
 		6861B32D21A32279002EC2DA /* GenericProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6861B32B21A32279002EC2DA /* GenericProtocol.swift */; };
 		6896352E21AC5A4700B25D47 /* GenericProtocolTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6896352D21AC5A4700B25D47 /* GenericProtocolTest.swift */; };
 		6896352F21AC5A4700B25D47 /* GenericProtocolTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6896352D21AC5A4700B25D47 /* GenericProtocolTest.swift */; };
+		68E9EAE6224B9F34000DBD29 /* StubFunctionThenThrowingTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68E9EAE5224B9F34000DBD29 /* StubFunctionThenThrowingTrait.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -360,6 +361,7 @@
 		6861B30B21A31DA2002EC2DA /* GenericClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericClass.swift; sourceTree = "<group>"; };
 		6861B32B21A32279002EC2DA /* GenericProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericProtocol.swift; sourceTree = "<group>"; };
 		6896352D21AC5A4700B25D47 /* GenericProtocolTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericProtocolTest.swift; sourceTree = "<group>"; };
+		68E9EAE5224B9F34000DBD29 /* StubFunctionThenThrowingTrait.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubFunctionThenThrowingTrait.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -493,6 +495,7 @@
 				18E2A2521FBB1C330058FEC5 /* StubFunctionThenReturnTrait.swift */,
 				18E2A2531FBB1C330058FEC5 /* StubFunctionThenThrowTrait.swift */,
 				18E2A2541FBB1C330058FEC5 /* StubFunctionThenTrait.swift */,
+				68E9EAE5224B9F34000DBD29 /* StubFunctionThenThrowingTrait.swift */,
 			);
 			path = Trait;
 			sourceTree = "<group>";
@@ -996,6 +999,7 @@
 				18E2A3161FBB234F0058FEC5 /* StubCall.swift in Sources */,
 				18E2A3051FBB23480058FEC5 /* StubFunctionThenDoNothingTrait.swift in Sources */,
 				18E2A2FA1FBB23420058FEC5 /* ToBeStubbedProperty.swift in Sources */,
+				68E9EAE6224B9F34000DBD29 /* StubFunctionThenThrowingTrait.swift in Sources */,
 				18E2A31B1FBB23550058FEC5 /* Mock.swift in Sources */,
 				18E2A3071FBB23480058FEC5 /* StubFunctionThenThrowTrait.swift in Sources */,
 				18E2A3101FBB234B0058FEC5 /* StubThrowingFunction.swift in Sources */,
