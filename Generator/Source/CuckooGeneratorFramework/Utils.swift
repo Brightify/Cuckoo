@@ -32,6 +32,13 @@ extension String.UTF8View {
     }
 }
 
+extension String {
+    func regexMatches(_ source: String) -> Bool {
+        let regex = try! NSRegularExpression(pattern: self)
+        return regex.firstMatch(in: source, range: NSRange(location: 0, length: source.count)) != nil
+    }
+}
+
 extension Sequence {
     #if !swift(>=4.1)
     public func compactMap<O>(_ transform: (Element) -> O?) -> [O] {
