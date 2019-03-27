@@ -227,6 +227,9 @@ class ClassTest: XCTestCase {
     func testClosureN() {
         let mock = MockClosureNClass()
         stub(mock) { mock in
+            when(mock.f0(closure: anyClosure())).then { closure in
+                print(closure())
+            }
             when(mock.f1(closure: anyClosure())).then { closure in
                 print(closure("Hello"))
             }
@@ -265,6 +268,53 @@ class ClassTest: XCTestCase {
         verify(mock).f5(closure: anyClosure())
         verify(mock).f6(closure: anyClosure())
         verify(mock).f7(closure: anyClosure())
+    }
+
+    func testClosureNThrowing() {
+        // TODO: for throwing closures
+//        let mock = MockClosureNClass()
+//        stub(mock) { mock in
+//            when(mock.f0(closure: anyClosure())).then { closure in
+//                print(closure())
+//            }
+//            when(mock.f1(closure: anyClosure())).then { closure in
+//                print(closure("Hello"))
+//            }
+//            when(mock.f2(closure: anyClosure())).then { closure in
+//                print(closure("Cuckoo", 7))
+//            }
+//            when(mock.f3(closure: anyClosure())).then { closure in
+//                print(closure("World", 1, true))
+//            }
+//            when(mock.f4(closure: anyClosure())).then { closure in
+//                print(closure("Dude", 0, false, Optional(["Hello", "World"])) ?? ["defaultko"])
+//            }
+//            when(mock.f5(closure: anyClosure())).then { closure in
+//                print(closure("How", 2, true, nil, Set([1, 2, 3])))
+//            }
+//            when(mock.f6(closure: anyClosure())).then { closure in
+//                print(closure("Are", 5, true, nil, Set([1, 2, 3]), ()))
+//            }
+//            when(mock.f7(closure: anyClosure())).then { closure in
+//                print(closure("You", 13, false, nil, Set([1, 2]), (), ["hello": "world"]))
+//            }
+//        }
+//
+//        mock.f1(closure: { $0 })
+//        mock.f2(closure: { $1 })
+//        mock.f3(closure: { $2 })
+//        mock.f4(closure: { $3 })
+//        mock.f5(closure: { $4 })
+//        mock.f6(closure: { $5 })
+//        mock.f7(closure: { $6 })
+//
+//        verify(mock).f1(closure: anyClosure())
+//        verify(mock).f2(closure: anyClosure())
+//        verify(mock).f3(closure: anyClosure())
+//        verify(mock).f4(closure: anyClosure())
+//        verify(mock).f5(closure: anyClosure())
+//        verify(mock).f6(closure: anyClosure())
+//        verify(mock).f7(closure: anyClosure())
     }
 
     private enum TestError: Error {
