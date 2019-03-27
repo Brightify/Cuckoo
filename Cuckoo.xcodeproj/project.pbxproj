@@ -987,6 +987,7 @@
 			);
 			name = "Generate Mocks";
 			outputPaths = (
+				"$(PROJECT_DIR)/Tests/Generated/GeneratedMocks.swift",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1001,10 +1002,11 @@
 			);
 			name = "Generate Mocks";
 			outputPaths = (
+				"$(PROJECT_DIR)/Tests/Generated/GeneratedMocks.swift",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "env -i PATH=$PATH PROJECT_DIR=$PROJECT_DIR USE_RUN=$USE_RUN swift \"$PROJECT_DIR/GenerateMocksForTests.swift\"";
+			shellScript = "env -i PATH=$PATH PROJECT_DIR=$PROJECT_DIR USE_RUN=$USE_RUN swift \"$PROJECT_DIR/GenerateMocksForTests.swift\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
