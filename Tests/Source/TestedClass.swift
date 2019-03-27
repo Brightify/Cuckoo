@@ -258,6 +258,10 @@ class OptionalParamsClass {
 }
 
 class ClosureNClass {
+    func f0(closure: () -> Void) {
+
+    }
+
     func f1(closure: (String) -> String) {
 
     }

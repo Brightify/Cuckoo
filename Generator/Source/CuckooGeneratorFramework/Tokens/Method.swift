@@ -97,8 +97,8 @@ public extension Method {
         let escapingParameterNames = parameters.map { parameter in
             if parameter.isClosure && !parameter.isEscaping {
                 let parameterCount = parameter.closureParamCount
-                let parameterCountString = parameterCount > 1 ? String(parameterCount) : ""
-                return "escapingStub\(parameterCountString)(for: \(parameter.name))"
+                let parameterSignature = parameterCount > 0 ? (1...parameterCount).map { _ in "_" }.joined(separator: ", ") : "()"
+                return "{ \(parameterSignature) in fatalError(\"This is a stub! It's not supposed to be called!\") }"
             } else {
                 return parameter.name
             }

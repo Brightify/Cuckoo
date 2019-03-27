@@ -63,12 +63,36 @@ class ParameterMatcherFunctionsTest: XCTestCase {
     }
 
     func testAnyClosure() {
-        XCTAssertTrue(anyClosure().matches({ 0 }))
+        XCTAssertTrue((anyClosure() as ParameterMatcher<() -> Int>).matches { 0 })
+        XCTAssertTrue((anyClosure() as ParameterMatcher<(Int) -> Int>).matches { _ in 0 })
+        XCTAssertTrue((anyClosure() as ParameterMatcher<(Int, Int) -> Int>).matches { _, _ in 0 })
+        XCTAssertTrue((anyClosure() as ParameterMatcher<(Int, Int, Int) -> Int>).matches { _, _, _ in 0 })
+        XCTAssertTrue((anyClosure() as ParameterMatcher<(Int, Int, Int, Int) -> Int>).matches { _, _, _, _ in 0 })
+        XCTAssertTrue((anyClosure() as ParameterMatcher<(Int, Int, Int, Int, Int) -> Int>).matches { _, _, _, _, _ in 0 })
+        XCTAssertTrue((anyClosure() as ParameterMatcher<(Int, Int, Int, Int, Int, Int) -> Int>).matches { _, _, _, _, _, _ in 0 })
+        XCTAssertTrue((anyClosure() as ParameterMatcher<(Int, Int, Int, Int, Int, Int, Int) -> Int>).matches { _, _, _, _, _, _, _ in 0 })
     }
 
     func testAnyThrowingClosure() {
-        XCTAssertTrue(anyThrowingClosure().matches { 0 })
-        XCTAssertTrue(anyThrowingClosure().matches { (p: Int) throws in 1 })
+        struct MockError: Error { }
+        
+        XCTAssertTrue((anyThrowingClosure() as ParameterMatcher<() throws -> Int>).matches { 0 })
+        XCTAssertTrue((anyThrowingClosure() as ParameterMatcher<(Int) throws -> Int>).matches { _ in 0 })
+        XCTAssertTrue((anyThrowingClosure() as ParameterMatcher<(Int, Int) throws -> Int>).matches { _, _ in 0 })
+        XCTAssertTrue((anyThrowingClosure() as ParameterMatcher<(Int, Int, Int) throws -> Int>).matches { _, _, _ in 0 })
+        XCTAssertTrue((anyThrowingClosure() as ParameterMatcher<(Int, Int, Int, Int) throws -> Int>).matches { _, _, _, _ in 0 })
+        XCTAssertTrue((anyThrowingClosure() as ParameterMatcher<(Int, Int, Int, Int, Int) throws -> Int>).matches { _, _, _, _, _ in 0 })
+        XCTAssertTrue((anyThrowingClosure() as ParameterMatcher<(Int, Int, Int, Int, Int, Int) throws -> Int>).matches { _, _, _, _, _, _ in 0 })
+        XCTAssertTrue((anyThrowingClosure() as ParameterMatcher<(Int, Int, Int, Int, Int, Int, Int) throws -> Int>).matches { _, _, _, _, _, _, _ in 0 })
+
+        XCTAssertTrue((anyThrowingClosure() as ParameterMatcher<() throws -> Int>).matches { throw MockError() })
+        XCTAssertTrue((anyThrowingClosure() as ParameterMatcher<(Int) throws -> Int>).matches { _ in throw MockError() })
+        XCTAssertTrue((anyThrowingClosure() as ParameterMatcher<(Int, Int) throws -> Int>).matches { _, _ in throw MockError() })
+        XCTAssertTrue((anyThrowingClosure() as ParameterMatcher<(Int, Int, Int) throws -> Int>).matches { _, _, _ in throw MockError() })
+        XCTAssertTrue((anyThrowingClosure() as ParameterMatcher<(Int, Int, Int, Int) throws -> Int>).matches { _, _, _, _ in throw MockError() })
+        XCTAssertTrue((anyThrowingClosure() as ParameterMatcher<(Int, Int, Int, Int, Int) throws -> Int>).matches { _, _, _, _, _ in throw MockError() })
+        XCTAssertTrue((anyThrowingClosure() as ParameterMatcher<(Int, Int, Int, Int, Int, Int) throws -> Int>).matches { _, _, _, _, _, _ in throw MockError() })
+        XCTAssertTrue((anyThrowingClosure() as ParameterMatcher<(Int, Int, Int, Int, Int, Int, Int) throws -> Int>).matches { _, _, _, _, _, _, _ in throw MockError() })
     }
 
     func testAnyOptionalThrowingClosure() {
