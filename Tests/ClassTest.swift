@@ -205,23 +205,25 @@ class ClassTest: XCTestCase {
     func testOptionals() {
         let mock = MockOptionalParamsClass()
 
-//        stub(mock) { mock in
-//            when(mock.clashingFunction(param1: Optional(1), param2: "Henlo Fren") as Cuckoo.ClassStubNoReturnFunction<(Int?, String)>).thenDoNothing()
-//            when(mock.clashingFunction(param1: Optional.none, param2: "Henlo Fren") as Cuckoo.ClassStubNoReturnFunction<(Int?, String)>).thenDoNothing()
-//            when(mock.clashingFunction(param1: anyInt(), param2: "What's the question?") as Cuckoo.ClassStubNoReturnFunction<(Int, String?)>).then {
-//                print("What's 6 times 9? \($0.0)")
-//            }
-//            when(mock.clashingFunction(param1: anyInt(), param2: isNil()) as Cuckoo.ClassStubNoReturnFunction<(Int, String?)>).then {
-//                print("What's 6 times 9? \($0.0)")
-//            }
-//            when(mock.function(param: "string")).thenDoNothing()
-//        }
-//
-//        mock.clashingFunction(param1: Optional(22), param2: "Henlo Fren")
-//        mock.clashingFunction(param1: 42, param2: Optional("What's the question?"))
-//
-//        _ = verify(mock).clashingFunction(param1: anyInt(), param2: "Henlo Fren") as Cuckoo.__DoNotUse<(Int?, String), Void>
-//        _ = verify(mock).clashingFunction(param1: 42, param2: "What's the question?") as Cuckoo.__DoNotUse<(Int, String?), Void>
+        stub(mock) { mock in
+            when(mock.clashingFunction(param1: Optional(1), param2: "Henlo Fren") as Cuckoo.ClassStubNoReturnFunction<(Int?, String)>).thenDoNothing()
+            when(mock.clashingFunction(param1: Optional.none, param2: "Henlo Fren") as Cuckoo.ClassStubNoReturnFunction<(Int?, String)>).thenDoNothing()
+            when(mock.clashingFunction(param1: anyInt(), param2: "What's the question?") as Cuckoo.ClassStubNoReturnFunction<(Int, String?)>).then {
+                print("What's 6 times 9? \($0.0)")
+            }
+            when(mock.clashingFunction(param1: anyInt(), param2: isNil()) as Cuckoo.ClassStubNoReturnFunction<(Int, String?)>).then {
+                print("What's 6 times 9? \($0.0)")
+            }
+            when(mock.function(param: "string")).thenDoNothing()
+        }
+
+        mock.clashingFunction(param1: Optional(1), param2: "Henlo Fren")
+        mock.clashingFunction(param1: nil, param2: "Henlo Fren")
+        mock.clashingFunction(param1: 42, param2: Optional("What's the question?"))
+
+        _ = verify(mock).clashingFunction(param1: anyInt(), param2: "Henlo Fren") as Cuckoo.__DoNotUse<(Int?, String), Void>
+        _ = verify(mock).clashingFunction(param1: isNil(), param2: "Henlo Fren") as Cuckoo.__DoNotUse<(Int?, String), Void>
+        _ = verify(mock).clashingFunction(param1: 42, param2: "What's the question?") as Cuckoo.__DoNotUse<(Int, String?), Void>
     }
 
     func testClosureN() {
