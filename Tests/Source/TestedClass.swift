@@ -211,38 +211,6 @@ class GenericFunctionClass {
     }
 }
 
-public class InternalFieldsInPublicClass {
-    internal var field: Int? = nil
-
-    private(set) var privateSetField: Int? = nil
-
-    internal func function() {
-
-    }
-}
-
-class FinalFields {
-    final var field: Int? = nil
-
-    final func function() {
-
-    }
-}
-
-class InoutMethodClass {
-    func inoutko(param: inout Int) {
-
-    }
-
-    func inoutkoMultiple(param1: inout Int, param2: inout String, param3: Void) {
-
-    }
-
-    func inoutkoClosure(param: (inout Int) -> Void) {
-
-    }
-}
-
 class OptionalParamsClass {
     func function(param: String?) { }
 
@@ -257,36 +225,96 @@ class OptionalParamsClass {
     func clashingFunction(param1: Int, param2: String?) { }
 }
 
+public class InternalFieldsInPublicClass {
+    internal var field: Int? = nil
+
+    private(set) var privateSetField: Int? = nil
+
+    internal func function() { }
+}
+
+class FinalFields {
+    final var field: Int? = nil
+
+    final func function() { }
+}
+
+class InoutMethodClass {
+    func inoutko(param: inout Int) { }
+
+    func inoutkoMultiple(param1: inout Int, param2: inout String, param3: Void) { }
+
+    func inoutkoClosure(param: (inout Int) -> Void) { }
+}
+
 class ClosureNClass {
-    func f0(closure: () -> Void) {
+    func f0(closure: () -> Void) { }
 
-    }
+    func f1(closure: (String) -> String) { }
 
-    func f1(closure: (String) -> String) {
+    func f2(closure: (String, Int) -> Int) { }
 
-    }
+    func f3(closure: (String, Int, Bool) -> Bool) { }
 
-    func f2(closure: (String, Int) -> Int) {
+    func f4(closure: (String, Int, Bool, [String]?) -> [String]?) { }
 
-    }
+    func f5(closure: (String, Int, Bool, [String]?, Set<Int>) -> Set<Int>) { }
 
-    func f3(closure: (String, Int, Bool) -> Bool) {
+    func f6(closure: (String, Int, Bool, [String]?, Set<Int>, Void) -> Void) { }
 
-    }
+    func f7(closure: (String, Int, Bool, [String]?, Set<Int>, Void, [String: String]) -> [String: String]) { }
+}
 
-    func f4(closure: (String, Int, Bool, [String]?) -> [String]?) {
+class ClosureNThrowingClass {
+    func f0(closure: () throws -> Void) { }
 
-    }
+    func f1(closure: (String) throws -> String) { }
 
-    func f5(closure: (String, Int, Bool, [String]?, Set<Int>) -> Set<Int>) {
+    func f2(closure: (String, Int) throws -> Int) { }
 
-    }
+    func f3(closure: (String, Int, Bool) throws -> Bool) { }
 
-    func f6(closure: (String, Int, Bool, [String]?, Set<Int>, Void) -> Void) {
+    func f4(closure: (String, Int, Bool, [String]?) throws -> [String]?) { }
 
-    }
+    func f5(closure: (String, Int, Bool, [String]?, Set<Int>) throws -> Set<Int>) { }
 
-    func f7(closure: (String, Int, Bool, [String]?, Set<Int>, Void, [String: String]) -> [String: String]) {
+    func f6(closure: (String, Int, Bool, [String]?, Set<Int>, Void) throws -> Void) { }
 
-    }
+    func f7(closure: (String, Int, Bool, [String]?, Set<Int>, Void, [String: String]) throws -> [String: String]) { }
+}
+
+class ClosureNThrowingThrowsClass {
+    func f0(closure: () throws -> Void) throws { }
+
+    func f1(closure: (String) throws -> String) throws { }
+
+    func f2(closure: (String, Int) throws -> Int) throws { }
+
+    func f3(closure: (String, Int, Bool) throws -> Bool) throws { }
+
+    func f4(closure: (String, Int, Bool, [String]?) throws -> [String]?) throws { }
+
+    func f5(closure: (String, Int, Bool, [String]?, Set<Int>) throws -> Set<Int>) throws { }
+
+    func f6(closure: (String, Int, Bool, [String]?, Set<Int>, Void) throws -> Void) throws { }
+
+    func f7(closure: (String, Int, Bool, [String]?, Set<Int>, Void, [String: String]) throws -> [String: String]) throws { }
+}
+
+class ClosureNRethrowingClass {
+    func f0(closure: () throws -> Void) rethrows { }
+
+    func f1(closure: (String) throws -> String) rethrows { }
+
+    func f2(closure: (String, Int) throws -> Int) rethrows { }
+
+    func f3(closure: (String, Int, Bool) throws -> Bool) rethrows { }
+
+    func f4(closure: (String, Int, Bool, [String]?) throws -> [String]?) rethrows { }
+
+    func f5(closure: (String, Int, Bool, [String]?, Set<Int>) throws -> Set<Int>) rethrows { }
+
+    func f6(closure: (String, Int, Bool, [String]?, Set<Int>, Void) throws -> Void) rethrows { }
+
+    func f7(closure: (String, Int, Bool, [String]?, Set<Int>, Void, [String: String]) throws -> [String: String]) rethrows { }
 }

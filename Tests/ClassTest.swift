@@ -228,31 +228,32 @@ class ClassTest: XCTestCase {
         let mock = MockClosureNClass()
         stub(mock) { mock in
             when(mock.f0(closure: anyClosure())).then { closure in
-                print(closure())
+                closure()
             }
             when(mock.f1(closure: anyClosure())).then { closure in
-                print(closure("Hello"))
+                _ = closure("Hello")
             }
             when(mock.f2(closure: anyClosure())).then { closure in
-                print(closure("Cuckoo", 7))
+                _ = closure("Cuckoo", 7)
             }
             when(mock.f3(closure: anyClosure())).then { closure in
-                print(closure("World", 1, true))
+                _ = closure("World", 1, true)
             }
             when(mock.f4(closure: anyClosure())).then { closure in
-                print(closure("Dude", 0, false, Optional(["Hello", "World"])) ?? ["defaultko"])
+                _ = closure("Dude", 0, false, Optional(["Hello", "World"])) ?? ["defaultko"]
             }
             when(mock.f5(closure: anyClosure())).then { closure in
-                print(closure("How", 2, true, nil, Set([1, 2, 3])))
+                _ = closure("How", 2, true, nil, Set([1, 2, 3]))
             }
             when(mock.f6(closure: anyClosure())).then { closure in
-                print(closure("Are", 5, true, nil, Set([1, 2, 3]), ()))
+                _ = closure("Are", 5, true, nil, Set([1, 2, 3]), ())
             }
             when(mock.f7(closure: anyClosure())).then { closure in
-                print(closure("You", 13, false, nil, Set([1, 2]), (), ["hello": "world"]))
+                _ = closure("You", 13, false, nil, Set([1, 2]), (), ["hello": "world"])
             }
         }
 
+        mock.f0(closure: { })
         mock.f1(closure: { $0 })
         mock.f2(closure: { $1 })
         mock.f3(closure: { $2 })
@@ -261,6 +262,7 @@ class ClassTest: XCTestCase {
         mock.f6(closure: { $5 })
         mock.f7(closure: { $6 })
 
+        verify(mock).f0(closure: anyClosure())
         verify(mock).f1(closure: anyClosure())
         verify(mock).f2(closure: anyClosure())
         verify(mock).f3(closure: anyClosure())
@@ -271,53 +273,170 @@ class ClassTest: XCTestCase {
     }
 
     func testClosureNThrowing() {
-        // TODO: for throwing closures
-//        let mock = MockClosureNClass()
-//        stub(mock) { mock in
-//            when(mock.f0(closure: anyClosure())).then { closure in
-//                print(closure())
-//            }
-//            when(mock.f1(closure: anyClosure())).then { closure in
-//                print(closure("Hello"))
-//            }
-//            when(mock.f2(closure: anyClosure())).then { closure in
-//                print(closure("Cuckoo", 7))
-//            }
-//            when(mock.f3(closure: anyClosure())).then { closure in
-//                print(closure("World", 1, true))
-//            }
-//            when(mock.f4(closure: anyClosure())).then { closure in
-//                print(closure("Dude", 0, false, Optional(["Hello", "World"])) ?? ["defaultko"])
-//            }
-//            when(mock.f5(closure: anyClosure())).then { closure in
-//                print(closure("How", 2, true, nil, Set([1, 2, 3])))
-//            }
-//            when(mock.f6(closure: anyClosure())).then { closure in
-//                print(closure("Are", 5, true, nil, Set([1, 2, 3]), ()))
-//            }
-//            when(mock.f7(closure: anyClosure())).then { closure in
-//                print(closure("You", 13, false, nil, Set([1, 2]), (), ["hello": "world"]))
-//            }
-//        }
-//
-//        mock.f1(closure: { $0 })
-//        mock.f2(closure: { $1 })
-//        mock.f3(closure: { $2 })
-//        mock.f4(closure: { $3 })
-//        mock.f5(closure: { $4 })
-//        mock.f6(closure: { $5 })
-//        mock.f7(closure: { $6 })
-//
-//        verify(mock).f1(closure: anyClosure())
-//        verify(mock).f2(closure: anyClosure())
-//        verify(mock).f3(closure: anyClosure())
-//        verify(mock).f4(closure: anyClosure())
-//        verify(mock).f5(closure: anyClosure())
-//        verify(mock).f6(closure: anyClosure())
-//        verify(mock).f7(closure: anyClosure())
+        let mock = MockClosureNThrowingClass()
+        stub(mock) { mock in
+            when(mock.f0(closure: anyThrowingClosure())).then { closure in
+                _ = try? closure()
+            }
+            when(mock.f1(closure: anyThrowingClosure())).then { closure in
+                _ = try? closure("Hello")
+            }
+            when(mock.f2(closure: anyThrowingClosure())).then { closure in
+                _ = try? closure("Cuckoo", 7)
+            }
+            when(mock.f3(closure: anyThrowingClosure())).then { closure in
+                _ = try? closure("World", 1, true)
+            }
+            when(mock.f4(closure: anyThrowingClosure())).then { closure in
+                _ = try? closure("Dude", 0, false, Optional(["Hello", "World"]))
+            }
+            when(mock.f5(closure: anyThrowingClosure())).then { closure in
+                _ = try? closure("How", 2, true, nil, Set([1, 2, 3]))
+            }
+            when(mock.f6(closure: anyThrowingClosure())).then { closure in
+                _ = try? closure("Are", 5, true, nil, Set([1, 2, 3]), ())
+            }
+            when(mock.f7(closure: anyThrowingClosure())).then { closure in
+                _ = try? closure("You", 13, false, nil, Set([1, 2]), (), ["hello": "world"])
+            }
+        }
+
+        mock.f0(closure: { })
+        mock.f1(closure: { $0 })
+        mock.f2(closure: { $1 })
+        mock.f3(closure: { $2 })
+        mock.f4(closure: { $3 })
+        mock.f5(closure: { $4 })
+        mock.f6(closure: { $5 })
+        mock.f7(closure: { $6 })
+
+        verify(mock).f0(closure: anyThrowingClosure())
+        verify(mock).f1(closure: anyThrowingClosure())
+        verify(mock).f2(closure: anyThrowingClosure())
+        verify(mock).f3(closure: anyThrowingClosure())
+        verify(mock).f4(closure: anyThrowingClosure())
+        verify(mock).f5(closure: anyThrowingClosure())
+        verify(mock).f6(closure: anyThrowingClosure())
+        verify(mock).f7(closure: anyThrowingClosure())
+    }
+
+    func testClosureNThrowingThrows() {
+        let mock = MockClosureNThrowingThrowsClass()
+        stub(mock) { mock in
+            when(mock.f0(closure: anyThrowingClosure())).then { closure in
+                try closure()
+            }
+            when(mock.f1(closure: anyThrowingClosure())).then { closure in
+                _ = try closure("Hello")
+            }
+            when(mock.f2(closure: anyThrowingClosure())).then { closure in
+                _ = try closure("Cuckoo", 7)
+            }
+            when(mock.f3(closure: anyThrowingClosure())).then { closure in
+                _ = try closure("World", 1, true)
+            }
+            when(mock.f4(closure: anyThrowingClosure())).then { closure in
+                _ = try closure("Dude", 0, false, Optional(["Hello", "World"])) ?? ["defaultko"]
+            }
+            when(mock.f5(closure: anyThrowingClosure())).then { closure in
+                _ = try closure("How", 2, true, nil, Set([1, 2, 3]))
+            }
+            when(mock.f6(closure: anyThrowingClosure())).then { closure in
+                _ = try closure("Are", 5, true, nil, Set([1, 2, 3]), ())
+            }
+            when(mock.f7(closure: anyThrowingClosure())).then { closure in
+                _ = try closure("You", 13, false, nil, Set([1, 2]), (), ["hello": "world"])
+            }
+        }
+
+        struct Erre: Error {
+
+        }
+
+        XCTAssertThrowsError(try mock.f0(closure: { throw TestError.unknown }), "Expected thrown TestError.", TestError.errorCheck())
+        XCTAssertThrowsError(try mock.f1(closure: { _ in throw TestError.unknown }), "Expected thrown TestError.", TestError.errorCheck())
+        XCTAssertThrowsError(try mock.f2(closure: { _, _ in throw TestError.unknown }), "Expected thrown TestError.", TestError.errorCheck())
+        XCTAssertThrowsError(try mock.f3(closure: { _, _, _ in throw TestError.unknown }), "Expected thrown TestError.", TestError.errorCheck())
+        XCTAssertThrowsError(try mock.f4(closure: { _, _, _, _ in throw TestError.unknown }), "Expected thrown TestError.", TestError.errorCheck())
+        XCTAssertThrowsError(try mock.f5(closure: { _, _, _, _, _ in throw TestError.unknown }), "Expected thrown TestError.", TestError.errorCheck())
+        XCTAssertThrowsError(try mock.f6(closure: { _, _, _, _, _, _ in throw TestError.unknown }), "Expected thrown TestError.", TestError.errorCheck())
+        XCTAssertThrowsError(try mock.f7(closure: { _, _, _, _, _, _, _ in throw TestError.unknown }), "Expected thrown TestError.", TestError.errorCheck())
+
+        verify(mock).f0(closure: anyThrowingClosure())
+        verify(mock).f1(closure: anyThrowingClosure())
+        verify(mock).f2(closure: anyThrowingClosure())
+        verify(mock).f3(closure: anyThrowingClosure())
+        verify(mock).f4(closure: anyThrowingClosure())
+        verify(mock).f5(closure: anyThrowingClosure())
+        verify(mock).f6(closure: anyThrowingClosure())
+        verify(mock).f7(closure: anyThrowingClosure())
+    }
+
+    func testClosureNRehrowing() {
+        let mock = MockClosureNRethrowingClass()
+        stub(mock) { mock in
+            when(mock.f0(closure: anyThrowingClosure())).then { closure in
+                _ = try closure()
+            }
+            when(mock.f1(closure: anyThrowingClosure())).then { closure in
+                _ = try? closure("Hello")
+            }
+            when(mock.f2(closure: anyThrowingClosure())).then { closure in
+                _ = try closure("Cuckoo", 7)
+            }
+            when(mock.f3(closure: anyThrowingClosure())).then { closure in
+                _ = try? closure("World", 1, true)
+            }
+            when(mock.f4(closure: anyThrowingClosure())).then { closure in
+                _ = try closure("Dude", 0, false, Optional(["Hello", "World"])) ?? ["defaultko"]
+            }
+            when(mock.f5(closure: anyThrowingClosure())).then { closure in
+                _ = try? closure("How", 2, true, nil, Set([1, 2, 3]))
+            }
+            when(mock.f6(closure: anyThrowingClosure())).then { closure in
+                _ = try closure("Are", 5, true, nil, Set([1, 2, 3]), ())
+            }
+            when(mock.f7(closure: anyThrowingClosure())).then { closure in
+                _ = try? closure("You", 13, false, nil, Set([1, 2]), (), ["hello": "world"])
+            }
+        }
+
+        // testing that when the closure is not throwing, no need to call it with `try`
+        mock.f0(closure: { })
+        mock.f1(closure: { $0 })
+        mock.f2(closure: { $1 })
+        mock.f3(closure: { $2 })
+        mock.f4(closure: { $3 })
+        mock.f5(closure: { $4 })
+        mock.f6(closure: { $5 })
+        mock.f7(closure: { $6 })
+
+        // testing the cases where stub calls closure with `try`
+        XCTAssertThrowsError(try mock.f0(closure: { throw TestError.unknown }), "Expected thrown TestError.", TestError.errorCheck())
+        XCTAssertThrowsError(try mock.f2(closure: { _, _ in throw TestError.unknown }), "Expected thrown TestError.", TestError.errorCheck())
+        XCTAssertThrowsError(try mock.f4(closure: { _, _, _, _ in throw TestError.unknown }), "Expected thrown TestError.", TestError.errorCheck())
+        XCTAssertThrowsError(try mock.f6(closure: { _, _, _, _, _, _ in throw TestError.unknown }), "Expected thrown TestError.", TestError.errorCheck())
+
+        verify(mock, times(2)).f0(closure: anyThrowingClosure())
+        verify(mock).f1(closure: anyThrowingClosure())
+        verify(mock, times(2)).f2(closure: anyThrowingClosure())
+        verify(mock).f3(closure: anyThrowingClosure())
+        verify(mock, times(2)).f4(closure: anyThrowingClosure())
+        verify(mock).f5(closure: anyThrowingClosure())
+        verify(mock, times(2)).f6(closure: anyThrowingClosure())
+        verify(mock).f7(closure: anyThrowingClosure())
     }
 
     private enum TestError: Error {
         case unknown
+
+        static func errorCheck(file: StaticString = #file, line: UInt = #line) -> (Error) -> Void {
+            return {
+                if $0 is TestError {
+                } else {
+                    XCTFail("Expected TestError, got: \(type(of: $0))(\($0.localizedDescription))", file: file, line: line)
+                }
+            }
+        }
     }
 }

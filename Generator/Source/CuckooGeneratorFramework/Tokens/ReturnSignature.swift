@@ -16,6 +16,11 @@ public struct ReturnSignature {
         guard let throwString = throwString else { return false }
         return throwString.trimmed.hasPrefix("throws")
     }
+
+    var isRethrowing: Bool {
+        guard let throwString = throwString else { return false }
+        return throwString.trimmed.hasPrefix("rethrows")
+    }
 }
 
 extension ReturnSignature: CustomStringConvertible {
