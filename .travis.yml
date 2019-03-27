@@ -5,8 +5,8 @@ xcode_scheme: Cuckoo
 xcode_sdk: macosx
 
 before_script:
-    - gem install cucumber --no-rdoc --no-ri
-    - gem install aruba --no-rdoc --no-ri
+    # - gem install cucumber --no-rdoc --no-ri
+    # - gem install aruba --no-rdoc --no-ri
 
 script:
     - pushd Generator
