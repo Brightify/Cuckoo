@@ -40,7 +40,7 @@ extension ParameterMatcher: OptionalMatchable where T: CuckooOptionalType {
 
     public var optionalMatcher: ParameterMatcher<T.Wrapped?> {
         return ParameterMatcher<T.Wrapped?> { other in
-            other.map { self.matchesFunction(T.from(optional: $0)) } ?? false
+            self.matchesFunction(T.from(optional: other))
         }
     }
 }
