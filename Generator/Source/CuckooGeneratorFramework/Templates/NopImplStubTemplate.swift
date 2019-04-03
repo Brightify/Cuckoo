@@ -9,6 +9,9 @@ extension Templates {
     static let noImplStub = """
 {{container.accessibility}} class {{ container.name }}Stub: {{ container.name }} {
     {% for property in container.properties %}
+    {% for attribute in property.attributes %}
+    {{ attribute.text }}
+    {% endfor %}
     {{ property.accessibility }}{% if container.@type == "ClassDeclaration" %} override{% endif %} var {{ property.name }}: {{ property.type }} {
         get {
             return DefaultValueRegistry.defaultValue(for: ({{property.type|genericSafe}}).self)
