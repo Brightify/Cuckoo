@@ -21,6 +21,9 @@ extension Templates {
     }
 
     {% for property in container.properties %}
+    {% for attribute in property.attributes %}
+    {{ attribute.text }}
+    {% endfor %}
     var {{property.name}}: Cuckoo.Verify{% if property.isReadOnly %}ReadOnly{%endif%}Property<{{property.type|genericSafe}}> {
         return .init(manager: cuckoo_manager, name: "{{property.name}}", callMatcher: callMatcher, sourceLocation: sourceLocation)
     }
