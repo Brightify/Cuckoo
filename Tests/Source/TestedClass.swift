@@ -10,6 +10,9 @@ import UIKit.DocumentManager  ; import Foundation
 import class UIKit.UIFont
 import UIKit
 
+@available(iOS 42.0, *)
+protocol UnavailableProtocol { }
+
 @available(swift 4.0)
 class TestedClass {
     
@@ -19,6 +22,11 @@ class TestedClass {
 
     var readOnlyProperty: String {
         return "a"
+    }
+    
+    @available(iOS 42.0, *)
+    var unavailableProperty: UnavailableProtocol? {
+        return nil
     }
     
     lazy var readWriteProperty: Int = 0
