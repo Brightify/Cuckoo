@@ -12,10 +12,10 @@
       },
       {
         "package": "FileKit",
-        "repositoryURL": "https://github.com/TadeasKriz/FileKit.git",
+        "repositoryURL": "https://github.com/nvzqz/FileKit.git",
         "state": {
           "branch": "develop",
-          "revision": "0acc6e7c336bbd2336c2f9670564dac9ec9c03fe",
+          "revision": "48b5ddb287f131a5c628badc819b880453f94449",
           "version": null
         }
       },
