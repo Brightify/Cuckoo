@@ -12,9 +12,9 @@ function perform_curl {
   fi
   echo "$1"
 
-  DOWNLOAD_URL=$(curl "$REQUEST_HEADER" "$1" | grep -oe '"browser_download_url":\s*"[^" ]*"' | grep -oe 'http[^" ]*' | grep "$FILE_NAME" | head -1)
+  DOWNLOAD_URL=$(curl ${REQUEST_HEADER+"$REQUEST_HEADER"} "$1" | grep -oe '"browser_download_url":\s*"[^" ]*"' | grep -oe 'http[^" ]*' | grep "$FILE_NAME" | head -1)
   echo "$DOWNLOAD_URL"
-  curl "$REQUEST_HEADER" -Lo "$FILE_NAME" "$DOWNLOAD_URL"
+  curl ${REQUEST_HEADER+"$REQUEST_HEADER"} -Lo "$FILE_NAME" "$DOWNLOAD_URL"
 }
 
 function download_generator {
