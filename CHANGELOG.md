@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.13.0
+
+* Updated for Xcode 10.2.
+
 ## 0.11.0
 
 * Added contribution guide.
