@@ -21,6 +21,7 @@ Pod::Spec.new do |s|
   s.tvos.deployment_target      = '9.0'
   s.source_files                = ['Source/**/*.swift']
   generator_name                = 'cuckoo_generator'
+  s.swift_version               = '4.2'
   s.preserve_paths              = ['Generator/**/*', 'run', 'build_generator', generator_name]
   s.prepare_command             = <<-CMD
                                     curl -Lo #{generator_name} https://github.com/Brightify/Cuckoo/releases/download/#{s.version}/#{generator_name}

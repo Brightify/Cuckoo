@@ -144,6 +144,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		188FCE6D2280171600B061DD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 18E2A3401FBB3FDD0058FEC5 /* CuckooGenerator.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = "SourceKitten::Clang_C::Product";
+			remoteInfo = Clang_C;
+		};
+		188FCE6F2280171600B061DD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 18E2A3401FBB3FDD0058FEC5 /* CuckooGenerator.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = "SourceKitten::SourceKit::Product";
+			remoteInfo = SourceKit;
+		};
 		18E2A2AD1FBB20830058FEC5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1815043D1FBB1B3E00345EDF /* Project object */;
@@ -615,12 +629,14 @@
 			isa = PBXGroup;
 			children = (
 				18E2A36D1FBB3FDD0058FEC5 /* CYaml.framework */,
+				188FCE6E2280171600B061DD /* Clang_C.framework */,
 				18E2A35F1FBB3FDD0058FEC5 /* Commandant.framework */,
 				18E2A35D1FBB3FDD0058FEC5 /* CuckooGeneratorFramework.framework */,
 				18E2A3711FBB3FDD0058FEC5 /* FileKit.framework */,
 				18E2A3651FBB3FDD0058FEC5 /* PathKit.framework */,
 				18E2A3611FBB3FDD0058FEC5 /* Result.framework */,
 				18E2A36F1FBB3FDD0058FEC5 /* SWXMLHash.framework */,
+				188FCE702280171600B061DD /* SourceKit.framework */,
 				18E2A3691FBB3FDD0058FEC5 /* SourceKittenFramework.framework */,
 				18E2A3671FBB3FDD0058FEC5 /* Spectre.framework */,
 				18E2A3631FBB3FDD0058FEC5 /* Stencil.framework */,
@@ -778,6 +794,20 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		188FCE6E2280171600B061DD /* Clang_C.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Clang_C.framework;
+			remoteRef = 188FCE6D2280171600B061DD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		188FCE702280171600B061DD /* SourceKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SourceKit.framework;
+			remoteRef = 188FCE6F2280171600B061DD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		18E2A35B1FBB3FDD0058FEC5 /* cuckoo_generator */ = {
 			isa = PBXReferenceProxy;
 			fileType = text;
@@ -908,7 +938,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "env -i PATH=$PATH PROJECT_DIR=$PROJECT_DIR USE_RUN=$USE_RUN swift \"$PROJECT_DIR/GenerateMocksForTests.swift\"";
+			shellScript = "env -i PATH=$PATH PROJECT_DIR=$PROJECT_DIR USE_RUN=$USE_RUN swift \"$PROJECT_DIR/GenerateMocksForTests.swift\"\n";
 		};
 		18E2A33F1FBB3FA80058FEC5 /* Generate Mocks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1106,12 +1136,14 @@
 		181504411FBB1B3E00345EDF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
 		181504421FBB1B3E00345EDF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -1192,7 +1224,6 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1268,7 +1299,6 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1354,7 +1384,6 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -1430,7 +1459,6 @@
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -1499,7 +1527,6 @@
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -1558,7 +1585,6 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -1624,7 +1650,6 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1683,7 +1708,6 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};

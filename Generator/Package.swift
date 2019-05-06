@@ -1,4 +1,4 @@
-// swift-tools-version:4.0
+// swift-tools-version:4.2
 import PackageDescription
 
 let package = Package(
@@ -11,7 +11,7 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/jpsim/SourceKitten.git", .upToNextMinor(from: "0.21.2")),
         .package(url: "https://github.com/nvzqz/FileKit.git", .branch("develop")),
-        .package(url: "https://github.com/kylef/Stencil.git", from: "0.9.0"),
+        .package(url: "https://github.com/kylef/Stencil.git", from: "0.13.1"),
         .package(url: "https://github.com/Carthage/Commandant.git", from: "0.12.0")
         ],
     targets: [
