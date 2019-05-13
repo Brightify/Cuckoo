@@ -1,12 +1,12 @@
 language: objective-c
-osx_image: xcode9
+osx_image: xcode10.2
 xcode_project: Cuckoo.xcodeproj
 xcode_scheme: Cuckoo
 xcode_sdk: macosx
 
 before_script:
-    - gem install cucumber --no-rdoc --no-ri
-    - gem install aruba --no-rdoc --no-ri
+    - gem install cucumber --no-document 
+    - gem install aruba --no-document 
 
 script:
     - pushd Generator
