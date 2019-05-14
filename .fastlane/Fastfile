@@ -65,6 +65,10 @@ platform :mac do
     auth_string = "#{username}:#{access_token}"
     changelog = create_changelog.gsub(/`/, '``').gsub(/'/, '&#39;').gsub(/"/, '&#34;').gsub(/\n/, '\\n')
     version = version_bump_podspec(path: 'Cuckoo.podspec', bump_type: release_type)
+
+    # Make sure the changed podspec is valid.
+    pod_lib_lint
+
     git_commit(path: './Cuckoo.podspec', message: "Bump version.")
     add_git_tag(tag: version)
     push_to_git_remote
@@ -79,7 +83,6 @@ platform :mac do
     upload_response = JSON.parse(`curl -X POST --data-binary "@#{cuckoo_gen_path}" -u "#{auth_string}" "#{upload_url}?name=#{binary_name}" -H "Content-Type:application/octet-stream"`)
     UI.crash! 'Release draft upload failed!' unless upload_response
 
-    pod_lib_lint
     pod_push(path: 'Cuckoo.podspec')
 
     UI.success "All done!\nYou can now visit #{creation_response['url']} (command+click) and release the thing."
@@ -99,6 +102,7 @@ platform :mac do
   end
 
   error do |_, exception|
+    reset_git_repo
     UI.error "Release failed. This might help: #{exception}"
   end
 end
