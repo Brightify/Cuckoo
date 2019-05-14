@@ -7,14 +7,11 @@ GREP_OPTIONS=""
 
 function perform_curl {
   if [[ ! -z "$GITHUB_ACCESS_TOKEN" ]]; then
-    REQUEST_HEADER="-H 'Authorization: token ${GITHUB_ACCESS_TOKEN}'"
-    echo "$REQUEST_HEADER"
+    CURL_OPTIONS=(-H "Authorization: token $GITHUB_ACCESS_TOKEN")
   fi
-  echo "$1"
 
-  DOWNLOAD_URL=$(curl "$REQUEST_HEADER" "$1" | grep -oe '"browser_download_url":\s*"[^" ]*"' | grep -oe 'http[^" ]*' | grep "$FILE_NAME" | head -1)
-  echo "$DOWNLOAD_URL"
-  curl "$REQUEST_HEADER" -Lo "$FILE_NAME" "$DOWNLOAD_URL"
+  DOWNLOAD_URL=$(curl "${CURL_OPTIONS[@]}" "$1" | grep -oe '"browser_download_url":\s*"[^" ]*"' | grep -oe 'http[^" ]*' | grep "$FILE_NAME" | head -1)
+  curl "${CURL_OPTIONS[@]}" -Lo "$FILE_NAME" "$DOWNLOAD_URL"
 }
 
 function download_generator {
