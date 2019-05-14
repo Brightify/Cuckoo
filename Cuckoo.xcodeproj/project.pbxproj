@@ -270,20 +270,6 @@
 			remoteGlobalIDString = "FileKit::FileKit::Product";
 			remoteInfo = FileKit;
 		};
-		6861B32521A31DA3002EC2DA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 18E2A3401FBB3FDD0058FEC5 /* CuckooGenerator.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = "SourceKitten::Clang_C::Product";
-			remoteInfo = Clang_C;
-		};
-		6861B32721A31DA3002EC2DA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 18E2A3401FBB3FDD0058FEC5 /* CuckooGenerator.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = "SourceKitten::SourceKit::Product";
-			remoteInfo = SourceKit;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -932,20 +918,6 @@
 			fileType = wrapper.framework;
 			path = FileKit.framework;
 			remoteRef = 18E2A3701FBB3FDD0058FEC5 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		6861B32621A31DA3002EC2DA /* Clang_C.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Clang_C.framework;
-			remoteRef = 6861B32521A31DA3002EC2DA /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		6861B32821A31DA3002EC2DA /* SourceKit.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SourceKit.framework;
-			remoteRef = 6861B32721A31DA3002EC2DA /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

@@ -30,4 +30,8 @@ class GenericMethodClass<T: CustomStringConvertible> {
     func normal<W>() throws -> (Optional<W>) -> W where W: CustomStringConvertible {
         return { $0! }
     }
+
+    func method<T>(param: T) where T: CustomStringConvertible {
+
+    }
 }

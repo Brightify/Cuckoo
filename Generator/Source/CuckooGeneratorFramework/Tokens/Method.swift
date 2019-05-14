@@ -8,7 +8,6 @@
 
 public protocol Method: Token, HasAccessibility {
     var name: String { get }
-    var accessibility: Accessibility { get }
     var returnSignature: ReturnSignature { get }
     var range: CountableRange<Int> { get }
     var nameRange: CountableRange<Int> { get }
@@ -48,7 +47,8 @@ public extension Method {
     }
 
     var isThrowing: Bool {
-        return returnSignature.throwType.isThrowing || returnSignature.throwType.isRethrowing
+        guard let throwType = returnSignature.throwType else { return false }
+        return throwType.isThrowing || throwType.isRethrowing
     }
 
     var returnType: WrappableType {

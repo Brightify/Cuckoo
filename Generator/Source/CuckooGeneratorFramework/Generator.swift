@@ -69,7 +69,7 @@ public struct Generator {
     }
 
     private func matchableGenericTypes(from method: Method) -> String {
-        guard method.parameters.isEmpty == false else { return "" }
+        guard !method.parameters.isEmpty || !method.genericParameters.isEmpty else { return "" }
 
         let matchableGenericParameters = method.parameters.enumerated().map { index, parameter -> String in
             let type = parameter.isOptional ? "OptionalMatchable" : "Matchable"

@@ -203,12 +203,6 @@ protocol GenericFunctionProtocol {
     func method<T>(param: T) where T: CustomStringConvertible, T: StringProtocol
 }
 
-class GenericFunctionClass {
-    func method<T>(param: T) where T: CustomStringConvertible {
-
-    }
-}
-
 class OptionalParamsClass {
     func function(param: String?) { }
 
