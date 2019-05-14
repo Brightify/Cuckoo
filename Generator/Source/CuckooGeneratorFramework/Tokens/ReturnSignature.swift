@@ -8,13 +8,18 @@
 import Foundation
 
 public struct ReturnSignature {
-    var throwString: String?
-    var returnType: WrappableType
-    var whereConstraints: [String]
+    public var throwType: ThrowType?
+    public var returnType: WrappableType
+    public var whereConstraints: [String]
 
-    var isThrowing: Bool {
-        guard let throwString = throwString else { return false }
-        return throwString.trimmed.hasPrefix("throws")
+    public init(throwString: String?, returnType: WrappableType, whereConstraints: [String]) {
+        if let throwString = throwString {
+            throwType = ThrowType(string: throwString)
+        } else {
+            throwType = nil
+        }
+        self.returnType = returnType
+        self.whereConstraints = whereConstraints
     }
 }
 
@@ -23,6 +28,6 @@ extension ReturnSignature: CustomStringConvertible {
         let trimmedReturnType = returnType.sugarizedExplicitOnly.trimmed
         let returnString = trimmedReturnType.isEmpty || trimmedReturnType == "Void" ? nil : "-> \(returnType)"
         let whereString = whereConstraints.isEmpty ? nil : "where \(whereConstraints.joined(separator: ", "))"
-        return [throwString, returnString, whereString].compactMap { $0 }.joined(separator: " ")
+        return [throwType?.description, returnString, whereString].compactMap { $0 }.joined(separator: " ")
     }
 }

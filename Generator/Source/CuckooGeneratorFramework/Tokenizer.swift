@@ -343,59 +343,50 @@ public struct Tokenizer {
         }
     }
 
-    /// - parameter source: A trimmed string containing only the method return signature excluding the trailing brace
-    /// - returns: tuple containing parsed throwString, returnType, and where constraints
-    private func parseReturnSignature(source: String) -> ReturnSignature {
-        var throwString = nil as String?
+    private func getReturnType(source: String, index: inout String.Index) -> String {
         var returnType = ""
-        var whereConstraints = [] as [String]
-
-        var index = source.startIndex
+        var afterArrow = true
         var parenLevel = 0
-        var afterArrow = false
-        parseLoop: while index != source.endIndex {
+
+        while index != source.endIndex {
             let character = source[index]
             switch character {
             case "(", "<", "[":
                 parenLevel += 1
                 returnType.append(character)
-                afterArrow = false
+                index = source.index(after: index)
             case ")", ">", "]":
                 parenLevel -= 1
                 returnType.append(character)
-                afterArrow = false
-            case "r" where returnType.isEmpty:
-                throwString = "rethrows"
-                index = source.index(index, offsetBy: throwString!.count)
-                continue
-            case "t" where returnType.isEmpty:
-                throwString = "throws"
-                index = source.index(index, offsetBy: throwString!.count)
-                continue
-            case "w" where parenLevel == 0 && !afterArrow:
-                index = source.index(index, offsetBy: "where".count)
-                whereConstraints = parseWhereClause(source: source, index: &index)
-                // the where clause is the last thing in method signature, so we'll just return our parsings
-                break parseLoop
-            case "-" where parenLevel == 0:
                 index = source.index(after: index)
+            case "-":
+                index = source.index(after: index)
+                // just a little sanity check
                 guard source[index] == ">" else { fatalError("Uhh, what.") }
-                // we will omit the first arrow, so that the generator doesn't have to remove it if it needs the type alone
-                if !returnType.trimmed.isEmpty {
-                    returnType.append("->")
-                }
+                index = source.index(after: index)
+                returnType.append(" -> ")
                 afterArrow = true
-            default:
+            case " ":
+                index = source.index(after: index)
                 returnType.append(character)
+            case "w":
+                let previousCharacter = source[source.index(before: index)]
+                guard parenLevel == 0 && !afterArrow && previousCharacter == " " else {
+                    returnType.append(character)
+                    index = source.index(after: index)
+                    continue
+                }
+
+                // we reached the "where" clause
+                return returnType
+            default:
                 afterArrow = false
+                returnType.append(character)
+                index = source.index(after: index)
             }
-            index = source.index(after: index)
         }
 
-        let trimmedType = returnType.trimmed
-        let typizedReturnType = trimmedType.isEmpty ? "Void" : trimmedType
-
-        return ReturnSignature(throwString: throwString, returnType: WrappableType(parsing: typizedReturnType), whereConstraints: whereConstraints)
+        return returnType
     }
 
     /// - returns: the where constraints parsed from the where clause
@@ -425,6 +416,45 @@ public struct Tokenizer {
             whereConstraints.append(currentConstraint)
         }
         return whereConstraints
+    }
+
+    /// - parameter source: A trimmed string containing only the method return signature excluding the trailing brace
+    /// - returns: ReturnSignature structure containing the parsed throwString, return type, and where constraints
+    private func parseReturnSignature(source: String) -> ReturnSignature {
+        var throwString = nil as String?
+        var returnType: WrappableType?
+        var whereConstraints = [] as [String]
+
+        var index = source.startIndex
+        parseLoop: while index != source.endIndex {
+            let character = source[index]
+            switch character {
+            case "r" where returnType == nil:
+                throwString = "rethrows"
+                index = source.index(index, offsetBy: throwString!.count)
+                continue
+            case "t" where returnType == nil:
+                throwString = "throws"
+                index = source.index(index, offsetBy: throwString!.count)
+                continue
+            case "w":
+                index = source.index(index, offsetBy: "where".count)
+                whereConstraints = parseWhereClause(source: source, index: &index)
+                // the where clause is the last thing in method signature, so we'll just stop the parsing
+                break parseLoop
+            case "-":
+                index = source.index(after: index)
+                guard source[index] == ">" else { fatalError("Uhh, what.") }
+                index = source.index(after: index)
+                returnType = WrappableType(parsing: getReturnType(source: source, index: &index).trimmed)
+                continue
+            default:
+                break
+            }
+            index = source.index(after: index)
+        }
+
+        return ReturnSignature(throwString: throwString, returnType: returnType ?? WrappableType.type("Void"), whereConstraints: whereConstraints)
     }
 }
 
