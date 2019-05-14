@@ -67,7 +67,7 @@ platform :mac do
     version = version_bump_podspec(path: 'Cuckoo.podspec', bump_type: release_type)
 
     # Make sure the changed podspec is valid.
-    pod_lib_lint
+    pod_lib_lint(allow_warnings: true)
 
     git_commit(path: './Cuckoo.podspec', message: "Bump version.")
     add_git_tag(tag: version)
@@ -83,7 +83,7 @@ platform :mac do
     upload_response = JSON.parse(`curl -X POST --data-binary "@#{cuckoo_gen_path}" -u "#{auth_string}" "#{upload_url}?name=#{binary_name}" -H "Content-Type:application/octet-stream"`)
     UI.crash! 'Release draft upload failed!' unless upload_response
 
-    pod_push(path: 'Cuckoo.podspec')
+    pod_push(path: 'Cuckoo.podspec', allow_warnings: true)
 
     UI.success "All done!\nYou can now visit #{creation_response['url']} (command+click) and release the thing."
   end
