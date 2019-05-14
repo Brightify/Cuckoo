@@ -147,6 +147,10 @@
 		680F09CA2202F46A005F5C1A /* CollisionClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680F09C82202F46A005F5C1A /* CollisionClasses.swift */; };
 		682D2837228AE0E10078DDCD /* GenericMethodClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682D2836228AE0E10078DDCD /* GenericMethodClass.swift */; };
 		682D2838228AE0E10078DDCD /* GenericMethodClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682D2836228AE0E10078DDCD /* GenericMethodClass.swift */; };
+		682D2890228B10970078DDCD /* GenericMethodClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682D288F228B10970078DDCD /* GenericMethodClassTest.swift */; };
+		682D2891228B10970078DDCD /* GenericMethodClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682D288F228B10970078DDCD /* GenericMethodClassTest.swift */; };
+		682D2893228B183E0078DDCD /* TestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682D2892228B183E0078DDCD /* TestError.swift */; };
+		682D2894228B183E0078DDCD /* TestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682D2892228B183E0078DDCD /* TestError.swift */; };
 		6861B32921A31DAC002EC2DA /* GenericClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6861B30B21A31DA2002EC2DA /* GenericClass.swift */; };
 		6861B32A21A31DAD002EC2DA /* GenericClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6861B30B21A31DA2002EC2DA /* GenericClass.swift */; };
 		6861B32C21A32279002EC2DA /* GenericProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6861B32B21A32279002EC2DA /* GenericProtocol.swift */; };
@@ -362,6 +366,8 @@
 		680894BE21ABFDCB00C8D2EF /* GenericClassTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericClassTest.swift; sourceTree = "<group>"; };
 		680F09C82202F46A005F5C1A /* CollisionClasses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionClasses.swift; sourceTree = "<group>"; };
 		682D2836228AE0E10078DDCD /* GenericMethodClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericMethodClass.swift; sourceTree = "<group>"; };
+		682D288F228B10970078DDCD /* GenericMethodClassTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericMethodClassTest.swift; sourceTree = "<group>"; };
+		682D2892228B183E0078DDCD /* TestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestError.swift; sourceTree = "<group>"; };
 		6861B30B21A31DA2002EC2DA /* GenericClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericClass.swift; sourceTree = "<group>"; };
 		6861B32B21A32279002EC2DA /* GenericProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericProtocol.swift; sourceTree = "<group>"; };
 		6896352D21AC5A4700B25D47 /* GenericProtocolTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericProtocolTest.swift; sourceTree = "<group>"; };
@@ -536,7 +542,9 @@
 			isa = PBXGroup;
 			children = (
 				18E2A2601FBB1C330058FEC5 /* ClassTest.swift */,
+				682D2892228B183E0078DDCD /* TestError.swift */,
 				680894BE21ABFDCB00C8D2EF /* GenericClassTest.swift */,
+				682D288F228B10970078DDCD /* GenericMethodClassTest.swift */,
 				18E2A2611FBB1C330058FEC5 /* CuckooFunctionsTest.swift */,
 				18E2A2621FBB1C330058FEC5 /* DefaultValueRegistryTest.swift */,
 				18E2A2631FBB1C330058FEC5 /* FailTest.swift */,
@@ -1089,6 +1097,7 @@
 				18E2A33E1FBB3D7F0058FEC5 /* GeneratedMocks.swift in Sources */,
 				18E2A2D01FBB22BC0058FEC5 /* CallMatcherTest.swift in Sources */,
 				18E2A2DF1FBB22C40058FEC5 /* ObjcProtocol.swift in Sources */,
+				682D2894228B183E0078DDCD /* TestError.swift in Sources */,
 				18E2A2EF1FBB22CB0058FEC5 /* StubNoReturnThrowingFunctionTest.swift in Sources */,
 				18E2A2E31FBB22C40058FEC5 /* TestedSubProtocol.swift in Sources */,
 				18E2A2DE1FBB22C40058FEC5 /* ClassWithOptionals.swift in Sources */,
@@ -1106,6 +1115,7 @@
 				18E2A2C61FBB22B60058FEC5 /* CuckooFunctionsTest.swift in Sources */,
 				18E2A2D21FBB22BC0058FEC5 /* ParameterMatcherFunctionsTest.swift in Sources */,
 				18E2A2D11FBB22BC0058FEC5 /* MatchableTest.swift in Sources */,
+				682D2891228B10970078DDCD /* GenericMethodClassTest.swift in Sources */,
 				6861B32A21A31DAD002EC2DA /* GenericClass.swift in Sources */,
 				18E2A2CF1FBB22BC0058FEC5 /* CallMatcherFunctionsTest.swift in Sources */,
 				18E2A2C71FBB22B60058FEC5 /* DefaultValueRegistryTest.swift in Sources */,
@@ -1132,6 +1142,7 @@
 				18E2A33D1FBB3D7F0058FEC5 /* GeneratedMocks.swift in Sources */,
 				18E2A2CA1FBB22BC0058FEC5 /* CallMatcherTest.swift in Sources */,
 				18E2A2D71FBB22C30058FEC5 /* ObjcProtocol.swift in Sources */,
+				682D2893228B183E0078DDCD /* TestError.swift in Sources */,
 				18E2A2E81FBB22CA0058FEC5 /* StubNoReturnThrowingFunctionTest.swift in Sources */,
 				18E2A2DB1FBB22C30058FEC5 /* TestedSubProtocol.swift in Sources */,
 				18E2A2D61FBB22C30058FEC5 /* ClassWithOptionals.swift in Sources */,
@@ -1149,6 +1160,7 @@
 				18E2A2C21FBB22B50058FEC5 /* CuckooFunctionsTest.swift in Sources */,
 				18E2A2CC1FBB22BC0058FEC5 /* ParameterMatcherFunctionsTest.swift in Sources */,
 				18E2A2CB1FBB22BC0058FEC5 /* MatchableTest.swift in Sources */,
+				682D2890228B10970078DDCD /* GenericMethodClassTest.swift in Sources */,
 				6861B32921A31DAC002EC2DA /* GenericClass.swift in Sources */,
 				18E2A2C91FBB22BC0058FEC5 /* CallMatcherFunctionsTest.swift in Sources */,
 				18E2A2C31FBB22B50058FEC5 /* DefaultValueRegistryTest.swift in Sources */,

@@ -18,7 +18,6 @@ class GenericMethodClass<T: CustomStringConvertible> {
     func noticeMe<UwU>(param: @escaping () throws -> UwU) rethrows -> (T) -> (UwU) {
         let result = try param()
         return { something in
-            print(something, "along with", result)
             return result
         }
     }
@@ -33,5 +32,13 @@ class GenericMethodClass<T: CustomStringConvertible> {
 
     func method<T>(param: T) where T: CustomStringConvertible {
 
+    }
+
+    func someRethrowing<UwU>(param: @escaping () throws -> UwU) rethrows {
+        _ = try param()
+    }
+
+    func moreRethrowing<UwU>(param: @escaping () throws -> UwU) rethrows -> UwU {
+        return try param()
     }
 }

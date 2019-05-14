@@ -428,17 +428,4 @@ class ClassTest: XCTestCase {
         verify(mock, times(2)).f6(closure: anyThrowingClosure())
         verify(mock).f7(closure: anyThrowingClosure())
     }
-
-    private enum TestError: Error {
-        case unknown
-
-        static func errorCheck(file: StaticString = #file, line: UInt = #line) -> (Error) -> Void {
-            return {
-                if $0 is TestError {
-                } else {
-                    XCTFail("Expected TestError, got: \(type(of: $0))(\($0.localizedDescription))", file: file, line: line)
-                }
-            }
-        }
-    }
 }

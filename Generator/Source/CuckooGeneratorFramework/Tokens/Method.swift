@@ -118,6 +118,7 @@ public extension Method {
             "isInit": isInit,
             "returnType": returnType.sugarizedExplicitOnly,
             "isThrowing": isThrowing,
+            "throwType": returnSignature.throwType?.description ?? "",
             "fullyQualifiedName": fullyQualifiedName,
             "call": call,
             "isOverriding": isOverriding,
