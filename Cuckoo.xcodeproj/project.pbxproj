@@ -145,6 +145,8 @@
 		680894C021ABFDCB00C8D2EF /* GenericClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680894BE21ABFDCB00C8D2EF /* GenericClassTest.swift */; };
 		680F09C92202F46A005F5C1A /* CollisionClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680F09C82202F46A005F5C1A /* CollisionClasses.swift */; };
 		680F09CA2202F46A005F5C1A /* CollisionClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680F09C82202F46A005F5C1A /* CollisionClasses.swift */; };
+		682D2837228AE0E10078DDCD /* GenericMethodClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682D2836228AE0E10078DDCD /* GenericMethodClass.swift */; };
+		682D2838228AE0E10078DDCD /* GenericMethodClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682D2836228AE0E10078DDCD /* GenericMethodClass.swift */; };
 		6861B32921A31DAC002EC2DA /* GenericClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6861B30B21A31DA2002EC2DA /* GenericClass.swift */; };
 		6861B32A21A31DAD002EC2DA /* GenericClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6861B30B21A31DA2002EC2DA /* GenericClass.swift */; };
 		6861B32C21A32279002EC2DA /* GenericProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6861B32B21A32279002EC2DA /* GenericProtocol.swift */; };
@@ -373,6 +375,7 @@
 		58C54D12B64AF3169FC8A1A3 /* ExcludedTestClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExcludedTestClass.swift; sourceTree = "<group>"; };
 		680894BE21ABFDCB00C8D2EF /* GenericClassTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericClassTest.swift; sourceTree = "<group>"; };
 		680F09C82202F46A005F5C1A /* CollisionClasses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionClasses.swift; sourceTree = "<group>"; };
+		682D2836228AE0E10078DDCD /* GenericMethodClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericMethodClass.swift; sourceTree = "<group>"; };
 		6861B30B21A31DA2002EC2DA /* GenericClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericClass.swift; sourceTree = "<group>"; };
 		6861B32B21A32279002EC2DA /* GenericProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericProtocol.swift; sourceTree = "<group>"; };
 		6896352D21AC5A4700B25D47 /* GenericProtocolTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericProtocolTest.swift; sourceTree = "<group>"; };
@@ -602,6 +605,7 @@
 				6861B30B21A31DA2002EC2DA /* GenericClass.swift */,
 				6861B32B21A32279002EC2DA /* GenericProtocol.swift */,
 				680F09C82202F46A005F5C1A /* CollisionClasses.swift */,
+				682D2836228AE0E10078DDCD /* GenericMethodClass.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -1118,6 +1122,7 @@
 				18E2A2DE1FBB22C40058FEC5 /* ClassWithOptionals.swift in Sources */,
 				6896352F21AC5A4700B25D47 /* GenericProtocolTest.swift in Sources */,
 				18E2A2D41FBB22BC0058FEC5 /* ProtocolTest.swift in Sources */,
+				682D2838228AE0E10078DDCD /* GenericMethodClass.swift in Sources */,
 				18E2A2ED1FBB22CB0058FEC5 /* StubFunctionTest.swift in Sources */,
 				18E2A2C51FBB22B60058FEC5 /* ClassTest.swift in Sources */,
 				18E2A2C81FBB22B60058FEC5 /* FailTest.swift in Sources */,
@@ -1160,6 +1165,7 @@
 				18E2A2D61FBB22C30058FEC5 /* ClassWithOptionals.swift in Sources */,
 				6896352E21AC5A4700B25D47 /* GenericProtocolTest.swift in Sources */,
 				18E2A2CE1FBB22BC0058FEC5 /* ProtocolTest.swift in Sources */,
+				682D2837228AE0E10078DDCD /* GenericMethodClass.swift in Sources */,
 				18E2A2E61FBB22CA0058FEC5 /* StubFunctionTest.swift in Sources */,
 				18E2A2C11FBB22B50058FEC5 /* ClassTest.swift in Sources */,
 				18E2A2C41FBB22B50058FEC5 /* FailTest.swift in Sources */,

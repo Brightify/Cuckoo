@@ -48,7 +48,7 @@ public extension Method {
     }
 
     var isThrowing: Bool {
-        return returnSignature.isThrowing || returnSignature.isRethrowing
+        return returnSignature.throwType.isThrowing || returnSignature.throwType.isRethrowing
     }
 
     var returnType: WrappableType {

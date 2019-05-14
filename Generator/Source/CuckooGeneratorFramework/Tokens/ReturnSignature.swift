@@ -21,11 +21,6 @@ public struct ReturnSignature {
         self.returnType = returnType
         self.whereConstraints = whereConstraints
     }
-
-    var isRethrowing: Bool {
-        guard let throwString = throwString else { return false }
-        return throwString.trimmed.hasPrefix("rethrows")
-    }
 }
 
 extension ReturnSignature: CustomStringConvertible {
