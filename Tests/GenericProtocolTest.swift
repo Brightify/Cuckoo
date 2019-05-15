@@ -90,6 +90,8 @@ class GenericProtocolTest: XCTestCase {
             when(mock.readOnlyPropertyC.get).thenReturn(MockTestedClass())
         }
 
+        _ = mock.readOnlyPropertyC
+
         verify(mock).readOnlyPropertyC.get()
     }
 

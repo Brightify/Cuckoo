@@ -31,7 +31,7 @@ public struct InstanceVariable: Token, HasAccessibility {
 
     public func serialize() -> [String : Any] {
         let readOnlyString = readOnly ? "ReadOnly" : ""
-        let optionalString = type.isOptional ? (readOnly ? "" : "Optional") : ""
+        let optionalString = type.isOptional && !readOnly ? "Optional" : ""
         return [
             "name": name,
             "type": type.sugarized,
