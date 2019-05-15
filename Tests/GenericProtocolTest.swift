@@ -90,7 +90,7 @@ class GenericProtocolTest: XCTestCase {
             when(mock.readOnlyPropertyC.get).thenReturn(MockTestedClass())
         }
 
-        _ = verify(mock).readOnlyPropertyC.get
+        verify(mock).readOnlyPropertyC.get()
     }
 
     func testReadWriteProperty() {
@@ -102,7 +102,7 @@ class GenericProtocolTest: XCTestCase {
 
         mock.readWritePropertyV = 42
         XCTAssertEqual(mock.readWritePropertyV, 11)
-        _ = verify(mock).readWritePropertyV.get
+        verify(mock).readWritePropertyV.get()
         verify(mock).readWritePropertyV.set(42)
     }
 
@@ -111,15 +111,20 @@ class GenericProtocolTest: XCTestCase {
         var called = false
         stub(mock) { mock in
             when(mock.optionalProperty.get).thenReturn(true)
-            when(mock.optionalProperty.set(any(Bool?.self))).then { _ in called = true }
+            when(mock.optionalProperty.set(any())).then { _ in called = true }
+            when(mock.optionalProperty.set(isNil())).then { _ in called = true }
         }
 
+        mock.optionalProperty = nil
         mock.optionalProperty = false
 
         XCTAssertTrue(mock.optionalProperty == true)
         XCTAssertTrue(called)
-        _ = verify(mock).optionalProperty.get
+        verify(mock).optionalProperty.get()
         verify(mock).optionalProperty.set(equal(to: false))
+        verify(mock, times(2)).optionalProperty.set(any())
+        verify(mock).optionalProperty.set(isNil())
+
     }
 
     func testNoReturn() {
@@ -167,7 +172,7 @@ class GenericProtocolTest: XCTestCase {
                                                  "Are you sure?": "Yeah, I'm just waiting for my wife.",
                                                  "Alright, have a nice weekend!": "Thanks, you too."])
 
-        verify(mock, times(2)).readWritePropertyV.get
+        verify(mock, times(2)).readWritePropertyV.get()
     }
 
     // using: `enableDefaultImplementation(_:)` reflects the original's state at the time of enabling default implementation with the struct
@@ -187,6 +192,6 @@ class GenericProtocolTest: XCTestCase {
                                                  "Are you sure?": "Yeah, I'm just waiting for my wife.",
                                                  "Alright, have a nice weekend!": "Thanks, you too."])
 
-        verify(mock, times(2)).readWritePropertyV.get
+        verify(mock, times(2)).readWritePropertyV.get()
     }
 }

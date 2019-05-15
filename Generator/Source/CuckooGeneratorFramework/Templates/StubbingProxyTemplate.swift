@@ -19,7 +19,7 @@ extension Templates {
     {% for attribute in property.attributes %}
     {{ attribute.text }}
     {% endfor %}
-    var {{property.name}}: Cuckoo.{{ property.stubType }}<{{ container.mockName }}, {{property.type|genericSafe}}> {
+    var {{property.name}}: Cuckoo.{{ property.stubType }}<{{ container.mockName }}, {{property.nonOptionalType|genericSafe}}> {
         return .init(manager: cuckoo_manager, name: "{{property.name}}")
     }
     {% endfor %}

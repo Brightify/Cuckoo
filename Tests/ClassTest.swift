@@ -31,7 +31,7 @@ class ClassTest: XCTestCase {
         }
 
         XCTAssertEqual(mock.readOnlyProperty, "a")
-        _ = verify(mock).readOnlyProperty.get
+        verify(mock).readOnlyProperty.get()
     }
 
     func testReadOnlyProperty() {
@@ -42,7 +42,7 @@ class ClassTest: XCTestCase {
         }
 
         XCTAssertEqual(mock.readOnlyProperty, "a")
-        _ = verify(mock).readOnlyProperty.get
+        verify(mock).readOnlyProperty.get()
     }
 
     func testReadWriteProperty() {
@@ -56,7 +56,7 @@ class ClassTest: XCTestCase {
 
         XCTAssertEqual(mock.readWriteProperty, 1)
         XCTAssertTrue(called)
-        _ = verify(mock).readWriteProperty.get
+        verify(mock).readWriteProperty.get()
         verify(mock).readWriteProperty.set(0)
     }
 
@@ -71,7 +71,7 @@ class ClassTest: XCTestCase {
 
         XCTAssertNil(mock.optionalProperty)
         XCTAssertTrue(called)
-        _ = verify(mock).optionalProperty.get
+        verify(mock).optionalProperty.get()
         verify(mock).optionalProperty.set(equal(to: 0))
     }
 
@@ -202,6 +202,11 @@ class ClassTest: XCTestCase {
         mock.inoutko(param: &integer)
     }
 
+    /// Returns a matcher matching any T value or nil.
+    public func anyOptional<T>(_ type: T.Type = T.self) -> ParameterMatcher<T?> {
+        return ParameterMatcher()
+    }
+
     func testOptionals() {
         let mock = MockOptionalParamsClass()
 
@@ -214,16 +219,30 @@ class ClassTest: XCTestCase {
             when(mock.clashingFunction(param1: anyInt(), param2: isNil()) as Cuckoo.ClassStubNoReturnFunction<(Int, String?)>).then {
                 print("What's 6 times 9? \($0.0)")
             }
+            when(mock.function(param: any())).thenDoNothing()
+            when(mock.function(param: any())).thenDoNothing()
             when(mock.function(param: "string")).thenDoNothing()
+            when(mock.functionClosure(param: any())).thenDoNothing()
+            when(mock.implicitOptionalProperty.set(any())).thenDoNothing()
+            when(mock.implicitOptionalProperty.get).thenReturn(nil)
+            when(mock.functionImplicit(param: any())).thenDoNothing()
         }
 
+        mock.function(param: nil)
         mock.clashingFunction(param1: Optional(1), param2: "Henlo Fren")
         mock.clashingFunction(param1: nil, param2: "Henlo Fren")
         mock.clashingFunction(param1: 42, param2: Optional("What's the question?"))
+        mock.implicitOptionalProperty = 10
+        _ = mock.implicitOptionalProperty
+        mock.functionImplicit(param: "Implicits are obsolete.")
 
+        verify(mock).function(param: any())
         _ = verify(mock).clashingFunction(param1: anyInt(), param2: "Henlo Fren") as Cuckoo.__DoNotUse<(Int?, String), Void>
         _ = verify(mock).clashingFunction(param1: isNil(), param2: "Henlo Fren") as Cuckoo.__DoNotUse<(Int?, String), Void>
         _ = verify(mock).clashingFunction(param1: 42, param2: "What's the question?") as Cuckoo.__DoNotUse<(Int, String?), Void>
+        verify(mock).implicitOptionalProperty.get()
+        verify(mock).implicitOptionalProperty.set(any())
+        verify(mock).functionImplicit(param: any())
     }
 
     func testClosureN() {

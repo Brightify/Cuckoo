@@ -6,7 +6,7 @@
 //  Copyright © 2016 Brightify. All rights reserved.
 //
 
-protocol ToBeStubbedReadOnlyProperty {
+public protocol ToBeStubbedReadOnlyProperty {
     associatedtype GetterType: StubFunction
 
     var get: GetterType { get }

@@ -148,8 +148,8 @@ class ParameterMatcherFunctionsTest: XCTestCase {
     }
 
     func testOptionalAny() {
-        XCTAssertTrue(any().matches(X() as X?))
-        XCTAssertTrue(any().matches(nil as X?))
+        XCTAssertTrue(any(X.self).matches(X() as X?))
+        XCTAssertTrue(any(X.self).matches(nil as X?))
     }
 
     func testOptionalAnyClosure() {

@@ -31,12 +31,15 @@ public struct InstanceVariable: Token, HasAccessibility {
 
     public func serialize() -> [String : Any] {
         let readOnlyString = readOnly ? "ReadOnly" : ""
+        let optionalString = type.isOptional ? (readOnly ? "" : "Optional") : ""
         return [
             "name": name,
             "type": type.sugarized,
+            "nonOptionalType": type.unoptionaled.sugarized,
             "accessibility": accessibility.sourceName,
             "isReadOnly": readOnly,
-            "stubType": overriding ? "ClassToBeStubbed\(readOnlyString)Property" : "ProtocolToBeStubbed\(readOnlyString)Property",
+            "stubType": (overriding ? "Class" : "Protocol") + "ToBeStubbed\(readOnlyString)\(optionalString)Property",
+            "verifyType": "Verify\(readOnlyString)\(optionalString)Property",
             "attributes": attributes.filter { $0.isSupported },
         ]
     }

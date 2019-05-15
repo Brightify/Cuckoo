@@ -232,13 +232,6 @@
 			remoteGlobalIDString = "PathKit::PathKit::Product";
 			remoteInfo = PathKit;
 		};
-		18E2A3661FBB3FDD0058FEC5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 18E2A3401FBB3FDD0058FEC5 /* CuckooGenerator.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = "Spectre::Spectre::Product";
-			remoteInfo = Spectre;
-		};
 		18E2A3681FBB3FDD0058FEC5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 18E2A3401FBB3FDD0058FEC5 /* CuckooGenerator.xcodeproj */;
@@ -674,7 +667,6 @@
 				18E2A36F1FBB3FDD0058FEC5 /* SWXMLHash.framework */,
 				188FCE702280171600B061DD /* SourceKit.framework */,
 				18E2A3691FBB3FDD0058FEC5 /* SourceKittenFramework.framework */,
-				18E2A3671FBB3FDD0058FEC5 /* Spectre.framework */,
 				18E2A3631FBB3FDD0058FEC5 /* Stencil.framework */,
 				18E2A36B1FBB3FDD0058FEC5 /* Yams.framework */,
 				18E2A35B1FBB3FDD0058FEC5 /* cuckoo_generator */,
@@ -884,13 +876,6 @@
 			fileType = wrapper.framework;
 			path = PathKit.framework;
 			remoteRef = 18E2A3641FBB3FDD0058FEC5 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		18E2A3671FBB3FDD0058FEC5 /* Spectre.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Spectre.framework;
-			remoteRef = 18E2A3661FBB3FDD0058FEC5 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		18E2A3691FBB3FDD0058FEC5 /* SourceKittenFramework.framework */ = {

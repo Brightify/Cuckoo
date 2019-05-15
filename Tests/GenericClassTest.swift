@@ -31,7 +31,7 @@ class GenericClassTest: XCTestCase {
         }
 
         XCTAssertEqual(mock.readWritePropertyU, "a")
-        _ = verify(mock).readWritePropertyU.get
+        verify(mock).readWritePropertyU.get()
     }
 
     func testReadWriteProperty() {
@@ -40,7 +40,7 @@ class GenericClassTest: XCTestCase {
         }
 
         XCTAssertEqual(mock.readWritePropertyV, true)
-        _ = verify(mock).readWritePropertyV.get
+        verify(mock).readWritePropertyV.get()
     }
 
     func testConstantProperty() {
@@ -56,7 +56,7 @@ class GenericClassTest: XCTestCase {
             XCTAssertEqual(mock.readWritePropertyT, number)
         }
 
-        verify(mock, times(numbers.count)).readWritePropertyT.get
+        verify(mock, times(numbers.count)).readWritePropertyT.get()
     }
 
     func testReadWriteProperties() {
@@ -71,25 +71,25 @@ class GenericClassTest: XCTestCase {
             when(mock.readWritePropertyU.set(anyString())).then { _ in calledU = true }
 
             when(mock.readWritePropertyV.get).thenReturn(false)
-            when(mock.readWritePropertyV.set(any(Bool.self))).then { _ in calledV = true }
+            when(mock.readWritePropertyV.set(any())).then { _ in calledV = true }
         }
 
         mock.readWritePropertyT = 0
         XCTAssertEqual(mock.readWritePropertyT, 1)
         XCTAssertTrue(calledT)
-        _ = verify(mock).readWritePropertyT.get
+        verify(mock).readWritePropertyT.get()
         verify(mock).readWritePropertyT.set(0)
 
         mock.readWritePropertyU = "NO MOCKING FOR YOU"
         XCTAssertEqual(mock.readWritePropertyU, "Hello, mocker!")
         XCTAssertTrue(calledU)
-        _ = verify(mock).readWritePropertyU.get
+        verify(mock).readWritePropertyU.get()
         verify(mock).readWritePropertyU.set("NO MOCKING FOR YOU")
 
         mock.readWritePropertyV = true
         XCTAssertEqual(mock.readWritePropertyV, false)
         XCTAssertTrue(calledV)
-        _ = verify(mock).readWritePropertyV.get
+        verify(mock).readWritePropertyV.get()
         verify(mock).readWritePropertyV.set(true)
     }
 
@@ -104,7 +104,7 @@ class GenericClassTest: XCTestCase {
 
         XCTAssertNil(mock.optionalProperty)
         XCTAssertTrue(called)
-        _ = verify(mock).optionalProperty.get
+        verify(mock).optionalProperty.get()
         verify(mock).optionalProperty.set(equal(to: "tukabel"))
     }
 
@@ -136,8 +136,8 @@ class GenericClassTest: XCTestCase {
 
     func testGetThird() {
         stub(mock) { mock in
-            when(mock.getThird(foo: anyInt(), bar: "gimme true", baz: any(Bool.self))).thenReturn(false)
-            when(mock.getThird(foo: anyInt(), bar: "gimme false", baz: any(Bool.self))).thenReturn(true)
+            when(mock.getThird(foo: anyInt(), bar: "gimme true", baz: any())).thenReturn(false)
+            when(mock.getThird(foo: anyInt(), bar: "gimme false", baz: any())).thenReturn(true)
         }
 
         XCTAssertFalse(mock.getThird(foo: 10, bar: "gimme true", baz: true))

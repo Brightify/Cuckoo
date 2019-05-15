@@ -119,6 +119,11 @@ public func any<T>(_ type: T.Type = T.self) -> ParameterMatcher<T> {
     return ParameterMatcher()
 }
 
+/// Returns a matcher matching any T value or nil.
+public func any<T>(_ type: T.Type = T.self) -> ParameterMatcher<T?> {
+    return ParameterMatcher()
+}
+
 /// Returns an equality matcher.
 public func equal<T: Equatable>(to value: T?) -> ParameterMatcher<T?> {
     return equal(to: value, equalWhen: ==)

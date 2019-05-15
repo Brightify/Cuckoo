@@ -212,7 +212,13 @@ protocol GenericFunctionProtocol {
 }
 
 class OptionalParamsClass {
+    var implicitOptionalProperty: Int!
+
     func function(param: String?) { }
+
+    func functionImplicit(param: String!) { }
+
+    func functionClosure(param: ((String?) -> Void)?) { }
 
     // the next two methods are exactly the same except for parameter types
     // this is not ambiguous for Swift, however, mocking this in a way so

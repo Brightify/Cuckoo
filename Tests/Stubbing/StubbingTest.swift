@@ -279,12 +279,12 @@ class StubbingTest: XCTestCase {
         verify(mock, times(1)).methodWithParameter(anyInt())
 
         // class
-        verify(mock, times(1)).privateSetProperty.get
-        verify(mock, times(1)).readOnlyProperty.get
+        verify(mock, times(1)).privateSetProperty.get()
+        verify(mock, times(1)).readOnlyProperty.get()
         verify(mock, times(1)).readWriteProperty.set(anyInt())
-        verify(mock, times(1)).readWriteProperty.get
+        verify(mock, times(1)).readWriteProperty.get()
         verify(mock, times(1)).optionalProperty.set(anyInt())
-        verify(mock, times(1)).optionalProperty.get
+        verify(mock, times(1)).optionalProperty.get()
         verify(mock, times(1)).noReturn()
         verify(mock, times(1)).count(characters: anyString())
         verify(mock, times(1)).withNoReturnThrows()
