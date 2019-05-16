@@ -45,26 +45,26 @@ class ClassTest: XCTestCase {
         verify(mock).readOnlyProperty.get()
     }
 
-    func testOptionalReadOnlyProperty() {
+    func testReadOnlyOptionalProperty() {
         let mock = MockTestedClass()
 
         stub(mock) { mock in
-            when(mock.optionalReadOnlyProperty.get).thenReturn("a")
+            when(mock.readOnlyOptionalProperty.get).thenReturn("a")
         }
 
-        XCTAssertEqual(mock.optionalReadOnlyProperty, "a")
-        verify(mock).optionalReadOnlyProperty.get()
+        XCTAssertEqual(mock.readOnlyOptionalProperty, "a")
+        verify(mock).readOnlyOptionalProperty.get()
     }
 
     func testOptionalReadOnlyPropertyIsNil() {
         let mock = MockTestedClass()
 
         stub(mock) { mock in
-            when(mock.optionalReadOnlyProperty.get).thenReturn(nil)
+            when(mock.readOnlyOptionalProperty.get).thenReturn(nil)
         }
 
-        XCTAssertNil(mock.optionalReadOnlyProperty)
-        verify(mock).optionalReadOnlyProperty.get()
+        XCTAssertNil(mock.readOnlyOptionalProperty)
+        verify(mock).readOnlyOptionalProperty.get()
     }
 
     func testReadWriteProperty() {
@@ -222,11 +222,6 @@ class ClassTest: XCTestCase {
 
         var integer = 12
         mock.inoutko(param: &integer)
-    }
-
-    /// Returns a matcher matching any T value or nil.
-    public func anyOptional<T>(_ type: T.Type = T.self) -> ParameterMatcher<T?> {
-        return ParameterMatcher()
     }
 
     func testOptionals() {

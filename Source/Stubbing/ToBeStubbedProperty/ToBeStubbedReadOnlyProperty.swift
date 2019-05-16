@@ -41,3 +41,33 @@ public struct ClassToBeStubbedReadOnlyProperty<MOCK: ClassMock, T>: ToBeStubbedR
         self.name = name
     }
 }
+
+public struct ProtocolToBeStubbedReadOnlyOptionalProperty<MOCK: ProtocolMock, T>: ToBeStubbedReadOnlyProperty {
+    private let manager: MockManager
+    private let name: String
+
+    public var get: ProtocolStubFunction<Void, T?> {
+        return ProtocolStubFunction(stub:
+            manager.createStub(for: MOCK.self, method: getterName(name), parameterMatchers: []))
+    }
+
+    public init(manager: MockManager, name: String) {
+        self.manager = manager
+        self.name = name
+    }
+}
+
+public struct ClassToBeStubbedReadOnlyOptionalProperty<MOCK: ClassMock, T>: ToBeStubbedReadOnlyProperty {
+    private let manager: MockManager
+    private let name: String
+
+    public var get: ClassStubFunction<Void, T?> {
+        return ClassStubFunction(stub:
+            manager.createStub(for: MOCK.self, method: getterName(name), parameterMatchers: []))
+    }
+
+    public init(manager: MockManager, name: String) {
+        self.manager = manager
+        self.name = name
+    }
+}

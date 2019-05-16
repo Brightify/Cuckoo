@@ -31,7 +31,7 @@ public struct InstanceVariable: Token, HasAccessibility {
 
     public func serialize() -> [String : Any] {
         let readOnlyString = readOnly ? "ReadOnly" : ""
-        let optionalString = type.isOptional && !readOnly ? "Optional" : ""
+        let optionalString = type.isOptional ? "Optional" : ""
         return [
             "name": name,
             "type": type.sugarized,
@@ -39,7 +39,7 @@ public struct InstanceVariable: Token, HasAccessibility {
             "accessibility": accessibility.sourceName,
             "isReadOnly": readOnly,
             "stubType": (overriding ? "Class" : "Protocol") + "ToBeStubbed\(readOnlyString)\(optionalString)Property",
-            "verifyType": "Verify\(readOnlyString)\(optionalString)Property",
+            "verifyType": "Verify\(readOnlyString)\(readOnly ? "" : optionalString)Property",
             "attributes": attributes.filter { $0.isSupported },
         ]
     }

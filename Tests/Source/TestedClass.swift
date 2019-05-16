@@ -22,7 +22,7 @@ class TestedClass {
         return "a"
     }
 
-    var optionalReadOnlyProperty: String? {
+    var readOnlyOptionalProperty: String? {
         return "a"
     }
 
