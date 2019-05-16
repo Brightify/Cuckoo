@@ -45,6 +45,28 @@ class ClassTest: XCTestCase {
         verify(mock).readOnlyProperty.get()
     }
 
+    func testOptionalReadOnlyProperty() {
+        let mock = MockTestedClass()
+
+        stub(mock) { mock in
+            when(mock.optionalReadOnlyProperty.get).thenReturn("a")
+        }
+
+        XCTAssertEqual(mock.optionalReadOnlyProperty, "a")
+        verify(mock).optionalReadOnlyProperty.get()
+    }
+
+    func testOptionalReadOnlyPropertyIsNil() {
+        let mock = MockTestedClass()
+
+        stub(mock) { mock in
+            when(mock.optionalReadOnlyProperty.get).thenReturn(nil)
+        }
+
+        XCTAssertNil(mock.optionalReadOnlyProperty)
+        verify(mock).optionalReadOnlyProperty.get()
+    }
+
     func testReadWriteProperty() {
         var called = false
         stub(mock) { mock in
