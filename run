@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-SCRIPT_PATH="$(dirname "$0")"
+SCRIPT_PATH="$(dirname `realpath $0`)"
 FILE_NAME="cuckoo_generator"
 FILE_PATH="$SCRIPT_PATH/$FILE_NAME"
 GREP_OPTIONS=""
@@ -11,6 +11,7 @@ function perform_curl {
   fi
 
   DOWNLOAD_URL=$(curl "${CURL_OPTIONS[@]}" "$1" | grep -oe '"browser_download_url":\s*"[^" ]*"' | grep -oe 'http[^" ]*' | grep "$FILE_NAME" | head -1)
+  echo "Downloading Cuckoo Generator from URL: $DOWNLOAD_URL"
   curl "${CURL_OPTIONS[@]}" -Lo "$FILE_NAME" "$DOWNLOAD_URL"
 }
 
@@ -39,7 +40,7 @@ function build_generator {
       fi
       mv "$SCRIPT_PATH/Generator/.build/release/$FILE_NAME" "$FILE_PATH"
     else
-      echo "Couldn't build. Generator source code not found. (expected in the `Generator` directory)"
+      echo "Couldn't build. Generator source code not found. (expected in the 'Generator' directory)"
       download_generator "$2"
     fi
   fi
@@ -52,21 +53,23 @@ while [[ $# -gt 0 ]]
 do
 case $1 in
   -d|--download)
-    if [[ "$2" = --* ]]; then
+    if [[ "$2" = "latest" ]]; then
       DOWNLOAD="latest"
+      shift
     else
       DOWNLOAD=$(echo "$2" | grep -e "\d\d*\.\d\d*\.\d\d*")
-      if [[ -z $DOWNLOAD ]]; then
-        echo "Invalid Cuckoo Generator version: $2; Please use the semantic versioning. (e.g. 0.12.0)"
-        exit 1
+      if [[ ! -z $DOWNLOAD ]]; then
+        shift
+      else
+        DOWNLOAD="latest"
       fi
-      shift
     fi
     shift
   ;;
   
   -c|--clean)
     CLEAN=1
+    echo "Performing clean build."
     shift
   ;;
   
