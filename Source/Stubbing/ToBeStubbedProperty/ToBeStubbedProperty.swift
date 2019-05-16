@@ -55,7 +55,7 @@ public struct ClassToBeStubbedProperty<MOCK: ClassMock, T>: ToBeStubbedProperty 
 public protocol ToBeStubbedOptionalProperty: ToBeStubbedReadOnlyProperty where GetterType.OutputType == SetterType.InputType {
     associatedtype SetterType: StubNoReturnFunction
 
-    func set<M: OptionalMatchable>(_ matcher: M) -> SetterType where M.OptionalMatchedType? == SetterType.InputType
+    func set<M: OptionalMatchable>(_ matcher: M) -> SetterType where Optional<M.OptionalMatchedType> == SetterType.InputType
 }
 
 public struct ProtocolToBeStubbedOptionalProperty<MOCK: ProtocolMock, T>: ToBeStubbedOptionalProperty {
