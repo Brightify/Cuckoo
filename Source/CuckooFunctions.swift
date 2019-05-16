@@ -12,7 +12,8 @@ public func stub<M: Mock>(_ mock: M, block: (M.Stubbing) -> Void) {
 }
 
 /// Used in stubbing. Currently only returns passed function but this may change in the future so it is not recommended to omit it.
-public func when<F>(_ function: F) -> F {
+// TODO: Uncomment the `: BaseStubFunctionTrait` before the next major release to improve API.
+public func when<F/*: BaseStubFunctionTrait*/>(_ function: F) -> F {
     return function
 }
 
