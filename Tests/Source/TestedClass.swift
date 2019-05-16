@@ -22,6 +22,10 @@ class TestedClass {
         return "a"
     }
 
+    var optionalReadOnlyProperty: String? {
+        return "a"
+    }
+
     @available(iOS 42.0, *)
     var unavailableProperty: UnavailableProtocol? {
         return nil
