@@ -24,7 +24,7 @@ extension Templates {
     {% for attribute in property.attributes %}
     {{ attribute.text }}
     {% endfor %}
-    var {{property.name}}: Cuckoo.{{property.verifyType}}<{{property.nonOptionalType|genericSafe}}> {
+    var {{property.name}}: Cuckoo.{{property.verifyType}}<{% if property.isReadOnly %}{{property.type|genericSafe}}{% else %}{{property.nonOptionalType|genericSafe}}{% endif %}> {
         return .init(manager: cuckoo_manager, name: "{{property.name}}", callMatcher: callMatcher, sourceLocation: sourceLocation)
     }
     {% endfor %}
