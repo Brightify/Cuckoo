@@ -12,7 +12,7 @@ function perform_curl {
 
   DOWNLOAD_URL=$(curl "${CURL_OPTIONS[@]}" "$1" | grep -oe '"browser_download_url":\s*"[^" ]*"' | grep -oe 'http[^" ]*' | grep "$FILE_NAME" | head -1)
   echo "Downloading Cuckoo Generator from URL: $DOWNLOAD_URL"
-  curl "${CURL_OPTIONS[@]}" -Lo "$FILE_NAME" "$DOWNLOAD_URL"
+  curl "${CURL_OPTIONS[@]}" -Lo "$FILE_PATH" "$DOWNLOAD_URL"
 }
 
 function download_generator {
