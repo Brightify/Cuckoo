@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-SCRIPT_PATH="$(dirname `realpath $0`)"
+SCRIPT_PATH="$(cd "$(dirname "$0")" && pwd)"
 FILE_NAME="cuckoo_generator"
 FILE_PATH="$SCRIPT_PATH/$FILE_NAME"
 GREP_OPTIONS=""
@@ -46,6 +46,8 @@ function build_generator {
   fi
   popd
 }
+
+echo "Script path: $SCRIPT_PATH"
 
 # parse arguments
 POSITIONAL=()
