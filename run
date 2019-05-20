@@ -11,8 +11,14 @@ function perform_curl {
   fi
 
   DOWNLOAD_URL=$(curl "${CURL_OPTIONS[@]}" "$1" | grep -oe '"browser_download_url":\s*"[^" ]*"' | grep -oe 'http[^" ]*' | grep "$FILE_NAME" | head -1)
-  echo "Downloading Cuckoo Generator from URL: $DOWNLOAD_URL"
-  curl "${CURL_OPTIONS[@]}" -Lo "$FILE_PATH" "$DOWNLOAD_URL"
+  
+  if [[ -z "$DOWNLOAD_URL" ]]; then
+    echo "Error: Failed to fetch download URL for the Cuckoo Generator."
+    exit 1
+  else
+    echo "Downloading Cuckoo Generator from URL: $DOWNLOAD_URL"
+    curl "${CURL_OPTIONS[@]}" -Lo "$FILE_PATH" "$DOWNLOAD_URL"
+  fi
 }
 
 function download_generator {
