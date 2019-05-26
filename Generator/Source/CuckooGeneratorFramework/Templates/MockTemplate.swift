@@ -37,7 +37,7 @@ extension Templates {
         cuckoo_manager.enableDefaultStubImplementation()
     }
 
-    {{ container.accessibility }} func enableDefaultImplementation<\(staticGenericParameter): GenericProtocol>(mutating stub: UnsafeMutablePointer<\(staticGenericParameter)>) where {{ container.genericProtocolIdentity }} {
+    {{ container.accessibility }} func enableDefaultImplementation<\(staticGenericParameter): {{ container.name }}>(mutating stub: UnsafeMutablePointer<\(staticGenericParameter)>) where {{ container.genericProtocolIdentity }} {
         __defaultImplStub = \(typeErasureClassName)(from: stub, keeping: nil)
         cuckoo_manager.enableDefaultStubImplementation()
     }

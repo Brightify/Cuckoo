@@ -28,7 +28,7 @@ extension Templates {
             {% for property in container.properties %}_getter_storage$${{ property.name }} = { defaultImpl.pointee.{{ property.name }} }
             {% if not property.isReadOnly %}_setter_storage$${{ property.name }} = { defaultImpl.pointee.{{ property.name }} = $0 }{% endif %}
             {% endfor %}
-            {% for method in container.methods %}_storage$${{ method.name }} = defaultImpl.pointee.{{ method.name }}
+            {% for method in container.methods %}_storage${{ forloop.counter }}${{ method.name }} = defaultImpl.pointee.{{ method.name }}
             {% endfor %}
         }
         {% if container.initializers %}
@@ -39,9 +39,9 @@ extension Templates {
         {% endfor %}
 
         {% for method in container.methods %}
-        private let _storage$${{ method.name }}: ({{ method.inputTypes }}) -> {{ method.returnType }}
+        private let _storage${{ forloop.counter }}${{ method.name }}: ({{ method.inputTypes }}) -> {{ method.returnType }}
         func {{ method.name }}({{ method.parameterSignature }}) {{ method.returnSignature }} {
-            return _storage$${{ method.name }}({{ method.parameterNames }})
+            return _storage${{ forloop.counter }}${{ method.name }}({{ method.parameterNames }})
         }
         {% endfor %}
     }
