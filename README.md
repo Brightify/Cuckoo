@@ -56,7 +56,7 @@ it, simply add the following line to your test target in your Podfile:
 pod "Cuckoo"
 ```
 
-And add the following `Run script` build phase to your test target's `Build Phases`:
+And add the following `Run script` build phase to your test target's `Build Phases` above the `Compile Sources` phase:
 
 ```Bash
 # Define output file. Change "${PROJECT_DIR}/${PROJECT_NAME}Tests" to your test's root source folder, if it's not the default name.
@@ -77,6 +77,8 @@ echo "Mocks Input Directory = ${INPUT_DIR}"
 
 # After running once, locate `GeneratedMocks.swift` and drag it into your Xcode test target group.
 ```
+
+**WARNING**: To make your mocking journey easier, make absolutely sure that the run script is above the `Compile Sources` phase.
 
 Input files can be also specified directly in `Run script` in `Input Files` form.
 
