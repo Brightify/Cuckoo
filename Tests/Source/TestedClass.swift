@@ -61,6 +61,10 @@ class TestedClass {
         closure?(a)
     }
 
+    func empty(_: String) {
+        // hello there
+    }
+
     func withLabelAndUnderscore(labelA a: String, _ b: String) {
     }
 

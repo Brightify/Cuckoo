@@ -54,3 +54,13 @@ extension TestedProtocol {
     }
 
 }
+
+protocol EmptyLabelProtocol {
+    associatedtype T
+
+    func empty(_: String)
+
+    func empty(_: String) -> Int
+
+    func empty(_: T) -> T
+}

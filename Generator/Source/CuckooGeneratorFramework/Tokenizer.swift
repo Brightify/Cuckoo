@@ -175,6 +175,17 @@ public struct Tokenizer {
                 returnSignature = parseReturnSignature(source: source.utf8[nameRange!.endIndex..<range!.endIndex].trimmed)
             }
 
+            // methods can specify an empty public name of a parameter without any private name - `fun(_: String)`
+            let namedParameters = parameters.enumerated().map { index, parameter -> MethodParameter in
+                if parameter.name == Tokenizer.nameNotSet {
+                    var mutableParameter = parameter
+                    mutableParameter.name = "parameter\(index)"
+                    return mutableParameter
+                } else {
+                    return parameter
+                }
+            }
+
             // When bodyRange != nil, we need to create .ClassMethod instead of .ProtocolMethod
             if let bodyRange = bodyRange {
                 return ClassMethod(
@@ -183,7 +194,7 @@ public struct Tokenizer {
                     returnSignature: returnSignature,
                     range: range!,
                     nameRange: nameRange!,
-                    parameters: parameters,
+                    parameters: namedParameters,
                     bodyRange: bodyRange,
                     attributes: attributes,
                     genericParameters: genericParameters)
@@ -194,7 +205,7 @@ public struct Tokenizer {
                     returnSignature: returnSignature,
                     range: range!,
                     nameRange: nameRange!,
-                    parameters: parameters,
+                    parameters: namedParameters,
                     attributes: attributes,
                     genericParameters: genericParameters)
             }

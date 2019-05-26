@@ -163,6 +163,24 @@ class ProtocolTest: XCTestCase {
         XCTAssertEqual(mock.withImplicitlyUnwrappedOptional(i: 5), "test")
         verify(mock).withImplicitlyUnwrappedOptional(i: equal(to: 5))
     }
+
+    func testEmptyLabels() {
+        let mock = MockEmptyLabelProtocol<Bool>()
+        stub(mock) { mock in
+            when(mock.empty(anyString())).thenReturn(420)
+            when(mock.empty(anyString())).then { print("OK: \($0)") }
+            when(mock.empty(any())).thenReturn(true)
+        }
+
+        XCTAssertEqual(mock.empty("hello there"), 420)
+        mock.empty("here") as Void
+        XCTAssertTrue(mock.empty(false))
+
+        // the calls are ambiguous if we do not specify the input and output types
+        _ = verify(mock).empty(anyString()) as __DoNotUse<String, Int>
+        _ = verify(mock).empty(anyString()) as __DoNotUse<String, Void>
+        _ = verify(mock).empty(any()) as __DoNotUse<Bool, Bool>
+    }
     
     private enum TestError: Error {
         case unknown
