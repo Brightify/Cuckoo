@@ -8,6 +8,8 @@
 
 import XCTest
 
+// This test case is intentionally ran only without `OCMock` because it depends on creating some very particular classes.
+// Other test cases are included in the `OCMock` target because they test general Cuckoo functionality.
 class ExcludedStubTest: XCTestCase {
 
     func testClassAvailability() {

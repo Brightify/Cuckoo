@@ -30,4 +30,9 @@ Pod::Spec.new do |s|
   s.frameworks                  = 'XCTest', 'Foundation'
   s.requires_arc                = true
   s.pod_target_xcconfig         = { 'ENABLE_BITCODE' => 'NO', 'SWIFT_REFLECTION_METADATA_LEVEL' => 'none' }
+
+  s.subspec 'OCMock' do |sub|
+    sub.source_files = 'OCMock/**/*.{h,m}'
+    sub.dependency 'OCMock', '3.4.3'
+  end
 end
