@@ -486,9 +486,7 @@
 		680D396B229D328E004A921E /* NSObject+TrustMe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+TrustMe.m"; sourceTree = "<group>"; };
 		680D3980229D3316004A921E /* Cuckoo-BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Cuckoo-BridgingHeader.h"; sourceTree = "<group>"; };
 		680D3A45229D3671004A921E /* Cuckoo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cuckoo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		680D3A46229D3671004A921E /* Cuckoo-iOS copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Cuckoo-iOS copy-Info.plist"; path = "/Users/matyas/iDev/Cuckoo/Cuckoo-iOS copy-Info.plist"; sourceTree = "<absolute>"; };
 		680D3A78229D3693004A921E /* Cuckoo+OCMock_iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cuckoo+OCMock_iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		680D3A79229D3693004A921E /* Cuckoo_iOSTests copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Cuckoo_iOSTests copy-Info.plist"; path = "/Users/matyas/iDev/Cuckoo/Cuckoo_iOSTests copy-Info.plist"; sourceTree = "<absolute>"; };
 		680D3A93229D3D5C004A921E /* OCMock.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = OCMock.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		680D3A96229D53C6004A921E /* ObjectiveMatchers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectiveMatchers.swift; sourceTree = "<group>"; };
 		680D3A99229D540F004A921E /* ObjectiveVerify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectiveVerify.swift; sourceTree = "<group>"; };
@@ -585,8 +583,6 @@
 				18E2A3401FBB3FDD0058FEC5 /* CuckooGenerator.xcodeproj */,
 				18E2A28E1FBB1CFC0058FEC5 /* Products */,
 				18E2A32D1FBB24390058FEC5 /* Frameworks */,
-				680D3A46229D3671004A921E /* Cuckoo-iOS copy-Info.plist */,
-				680D3A79229D3693004A921E /* Cuckoo_iOSTests copy-Info.plist */,
 				9732B89455BD0CE3F1C980EF /* Pods */,
 			);
 			sourceTree = "<group>";
