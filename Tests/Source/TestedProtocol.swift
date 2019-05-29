@@ -69,13 +69,17 @@ protocol OnlyLabelProtocol {
     func empty(_: String)
 
     func some(some: Int) -> [Int]
+
+    func double(here there: Bool)
 }
 
 class OnlyLabelClass: OnlyLabelProtocol {
     func empty(_ mine: String) {
     }
 
-    func some(some none: Int) -> [Int] {
-        return []
+    func some(some none: Int) {
+    }
+
+    func double(here notInHere: Bool) {
     }
 }

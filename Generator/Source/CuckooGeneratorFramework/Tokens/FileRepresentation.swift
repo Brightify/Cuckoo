@@ -19,7 +19,7 @@ public struct FileRepresentation {
 }
 
 public extension FileRepresentation {
-    public func mergeInheritance(with files: [FileRepresentation]) -> FileRepresentation {
+    func mergeInheritance(with files: [FileRepresentation]) -> FileRepresentation {
         let tokens = self.declarations.reduce([Token]()) { list, token in
             let mergeToken = token.mergeInheritance(with: files)
             return list + [mergeToken]
@@ -29,8 +29,8 @@ public extension FileRepresentation {
     }
 }
 
-internal extension Token {
-    internal func mergeInheritance(with files: [FileRepresentation]) -> Token {
+extension Token {
+    func mergeInheritance(with files: [FileRepresentation]) -> Token {
         guard let typeToken = self as? ContainerToken else {
             return self
         }
@@ -39,7 +39,7 @@ internal extension Token {
             .compactMap { $0.mergeInheritance(with: files) }
 
         // Merge super declarations
-        let mergedTokens = inheritedRepresentations.filter { $0.isClassOrProtocolDefinition }
+        let mergedTokens = inheritedRepresentations.filter { $0.isClassOrProtocolDeclaration }
             .map { $0 as! ContainerToken }
             .flatMap { $0.children }
             .reduce(typeToken.children) { tokens, inheritedToken in
@@ -59,9 +59,9 @@ internal extension Token {
         }
     }
 
-    internal static func findToken(forClassOrProtocol name: String, in files: [FileRepresentation]) -> Token? {
+    static func findToken(forClassOrProtocol name: String, in files: [FileRepresentation]) -> Token? {
         return files.flatMap { $0.declarations }
-            .filter { $0.isClassOrProtocolDefinition }
+            .filter { $0.isClassOrProtocolDeclaration }
             .map { $0 as! ContainerToken }
             .first { $0.name == name }
     }

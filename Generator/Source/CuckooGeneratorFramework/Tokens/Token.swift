@@ -27,11 +27,11 @@ public extension Token {
         return serialized
     }
 
-    var isClassOrProtocolDefinition: Bool {
+    var isClassOrProtocolDeclaration: Bool {
         return self is ProtocolDeclaration || self is ClassDeclaration
     }
 
-    var isInheritanceDefinition: Bool {
+    var isInheritanceDeclaration: Bool {
         return self is InheritanceDeclaration
     }
 }
