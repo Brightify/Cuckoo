@@ -68,7 +68,7 @@ protocol EmptyLabelProtocol {
 protocol OnlyLabelProtocol {
     func empty(_: String)
 
-    func some(some: Int) -> [Int]
+    func some(some: Int)
 
     func double(here there: Bool)
 }
