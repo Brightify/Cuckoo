@@ -186,7 +186,7 @@ public struct Tokenizer {
                 }
             }
 
-            // When bodyRange != nil, we need to create .ClassMethod instead of .ProtocolMethod
+            // When bodyRange != nil, we need to create `ClassMethod` instead of `ProtocolMethod`
             if let bodyRange = bodyRange {
                 return ClassMethod(
                     name: name,

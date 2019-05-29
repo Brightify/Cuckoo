@@ -28,7 +28,7 @@ public struct MethodParameter: Token, Equatable {
 
     public func isEqual(to other: Token) -> Bool {
         guard let other = other as? MethodParameter else { return false }
-        return self.name == other.name && self.type == other.type && self.label == other.label
+        return self.type == other.type && self.label == other.label
     }
 
     public var isClosure: Bool {

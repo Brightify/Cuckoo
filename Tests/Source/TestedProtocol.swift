@@ -64,3 +64,18 @@ protocol EmptyLabelProtocol {
 
     func empty(_: T) -> T
 }
+
+protocol OnlyLabelProtocol {
+    func empty(_: String)
+
+    func some(some: Int) -> [Int]
+}
+
+class OnlyLabelClass: OnlyLabelProtocol {
+    func empty(_ mine: String) {
+    }
+
+    func some(some none: Int) -> [Int] {
+        return []
+    }
+}

@@ -27,23 +27,11 @@ public extension Token {
         return serialized
     }
 
-    public var isClassOrProtocolDefinition: Bool {
-        switch self {
-        case _ as ProtocolDeclaration:
-            fallthrough
-        case _ as ClassDeclaration:
-            return true
-        default:
-            return false
-        }
+    var isClassOrProtocolDefinition: Bool {
+        return self is ProtocolDeclaration || self is ClassDeclaration
     }
 
-    public var isInheritanceDefinition: Bool {
-        switch self {
-        case _ as InheritanceDeclaration:
-            return true
-        default:
-            return false
-        }
+    var isInheritanceDefinition: Bool {
+        return self is InheritanceDeclaration
     }
 }
