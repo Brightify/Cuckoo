@@ -115,15 +115,11 @@ public struct Tokenizer {
             let subtokens = tokenize(dictionary[Key.Substructure.rawValue] as? [SourceKitRepresentable] ?? [])
             let initializers = subtokens.only(Initializer.self)
             let children = subtokens.noneOf(Initializer.self).map { child -> Token in
-                var accessibleChild = child as? HasAccessibility & Token
-                if accessibleChild?.accessibility == .Internal {
-                    accessibleChild?.accessibility = accessibility
-                }
-                if var property = accessibleChild as? InstanceVariable {
+                if var property = child as? InstanceVariable {
                     property.overriding = true
                     return property
                 } else {
-                    return accessibleChild ?? child
+                    return child
                 }
             }
             let genericParameters = subtokens.only(GenericParameter.self)

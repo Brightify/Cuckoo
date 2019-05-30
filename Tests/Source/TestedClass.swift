@@ -247,6 +247,24 @@ public class InternalFieldsInPublicClass {
     internal func function() { }
 }
 
+public class PublicClassWithInternalFieldsUsingPublicType {
+    internal var internalField: InternalType = InternalType()
+    var internalField2: InternalType = InternalType()
+    func internalFunc(internalType: InternalType) {
+    }
+
+    internal var internalField3: PublicType = PublicType()
+    var internalField4: PublicType = PublicType()
+    func internalFunc(publicType: PublicType) {
+    }
+}
+
+class InternalType {
+}
+
+public class PublicType {
+}
+
 class FinalFields {
     final var field: Int? = nil
 
