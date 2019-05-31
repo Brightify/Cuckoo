@@ -464,4 +464,25 @@ class ClassTest: XCTestCase {
         verify(mock, times(2)).f6(closure: anyThrowingClosure())
         verify(mock).f7(closure: anyThrowingClosure())
     }
+
+    func testTypeGuesser() {
+        let original = TypeIsRightClass()
+        let mock = MockTypeIsRightClass()
+        mock.enableDefaultImplementation(original)
+
+        XCTAssertEqual(String(describing: type(of: mock.stringo)), String(describing: type(of: original.stringo)))
+        XCTAssertEqual(String(describing: type(of: mock.stringyStringo)), String(describing: type(of: original.stringyStringo)))
+        XCTAssertEqual(String(describing: type(of: mock.optionallyStringo)), String(describing: type(of: original.optionallyStringo)))
+        XCTAssertEqual(String(describing: type(of: mock.floatyNoPointy)), String(describing: type(of: original.floatyNoPointy)))
+        XCTAssertEqual(String(describing: type(of: mock.doublySo)), String(describing: type(of: original.doublySo)))
+        XCTAssertEqual(String(describing: type(of: mock.negative)), String(describing: type(of: original.negative)))
+        XCTAssertEqual(String(describing: type(of: mock.zero)), String(describing: type(of: original.zero)))
+        XCTAssertEqual(String(describing: type(of: mock.genericClass)), String(describing: type(of: original.genericClass)))
+        XCTAssertEqual(String(describing: type(of: mock.genericClassAs)), String(describing: type(of: original.genericClassAs)))
+        XCTAssertEqual(String(describing: type(of: mock.array)), String(describing: type(of: original.array)))
+        XCTAssertEqual(String(describing: type(of: mock.boolNo)), String(describing: type(of: original.boolNo)))
+        XCTAssertEqual(String(describing: type(of: mock.boolYes)), String(describing: type(of: original.boolYes)))
+        XCTAssertEqual(String(describing: type(of: mock.boolMaybeYes)), String(describing: type(of: original.boolMaybeYes)))
+        XCTAssertEqual(String(describing: type(of: mock.largeInty)), String(describing: type(of: original.largeInty)))
+    }
 }
