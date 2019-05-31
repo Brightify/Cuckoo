@@ -28,7 +28,7 @@ We are still missing support for some important features like:
 
 - [x] inheritance (grandparent methods)
 - [x] generics
-- [ ] type inference for instance variables (you need to write it explicitly, otherwise it will be replaced with `__UnknownType`)  
+- [x] simple type inference for instance variables (you need to write it explicitly, otherwise it will be replaced with `__UnknownType`)  
 
 ## What will not be supported
 Due to the limitations mentioned above, none of the things that can't be overridden can't be supported. This includes:
