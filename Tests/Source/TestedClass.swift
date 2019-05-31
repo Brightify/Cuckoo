@@ -350,3 +350,20 @@ class ClosureNRethrowingClass {
 
     func f7(closure: (String, Int, Bool, [String]?, Set<Int>, Void, [String: String]) throws -> [String: String]) rethrows { }
 }
+
+class TypeIsRightClass {
+    var stringo = "my man"
+    var stringyStringo = String("my man")
+    var optionallyStringo = "my man" as String?
+    var floatyNoPointy = 0 as Float
+    var doublySo = 0.123
+    var negative = -1250
+    var zero = 0
+    var genericClass = GenericClass<Int, Int, Int>(theT: 1, theU: 2, theV: 3)
+    var genericClassAs = GenericClass(theT: 1, theU: 2, theV: 3) as GenericClass<Int, Int, Int>
+    var array = [] as [String]
+    var boolNo = false
+    var boolYes = true
+    var boolMaybeYes = true as Bool?
+    var largeInty = 1_234_567
+}

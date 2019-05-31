@@ -146,13 +146,16 @@ public struct Tokenizer {
                 return nil
             }
 
+            let guessedType: WrappableType?
             if type == nil {
-                stderrPrint("Type of instance variable \(name) could not be inferred. Please specify it explicitly. (\(file.path ?? ""))")
+                guessedType = TypeGuesser.guessType(from: String(source.utf8[range!.startIndex..<range!.endIndex].drop(while: { $0 != "=" }).dropFirst()).trimmed).map { .type($0) }
+            } else {
+                guessedType = type
             }
 
             return InstanceVariable(
                 name: name,
-                type: type ?? .type("__UnknownType"),
+                type: guessedType ?? .type("__UnknownType"),
                 accessibility: accessibility,
                 setterAccessibility: setterAccessibility,
                 range: range!,
