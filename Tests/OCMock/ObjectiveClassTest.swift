@@ -138,4 +138,24 @@ class ObjectiveClassTest: XCTestCase {
         objectiveVerify(mock.shouldChangeText(in: objectiveAny(), replacementText: "mamma mia"))
         objectiveVerify(mock.shouldChangeText(in: objectiveAny(), replacementText: "lalla lia"))
     }
+
+    func testSwiftClass() {
+        let mock = objectiveStub(for: SwiftClass.self) { stubber, mock in
+            stubber.when(mock.dudka(lelo: "heya")).thenReturn(false)
+            stubber.when(mock.dudka(lelo: "heyda")).thenReturn(true)
+        }
+
+        XCTAssertFalse(mock.dudka(lelo: "heya"))
+        XCTAssertTrue(mock.dudka(lelo: "heyda"))
+
+        objectiveVerify(mock.dudka(lelo: objectiveAny()))
+    }
+}
+
+class SwiftClass: NSObject {
+    @objc
+    // `dynamic` modifier is necessary
+    dynamic func dudka(lelo: String) -> Bool {
+        return false
+    }
 }

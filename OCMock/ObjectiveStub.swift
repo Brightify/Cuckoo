@@ -8,25 +8,15 @@
 import XCTest
 
 public func objectiveStub<T: NSObjectProtocol>(for type: T.Type, file: StaticString = #file, line: UInt = #line, stubbing: (Stubber<T>, T) -> Void) -> T {
-    if let mock = CuckooMockObject(mockObject: OCMockObject.mock(forWorkaroundProtocol: type)) as? T {
-        stubbing(Stubber<T>(), mock)
-        return mock
-    } else {
-        let errorMessage = "Failed to create an OCMock object for the type \(type). Make sure it's an Objective-C object."
-        XCTFail(errorMessage, file: file, line: line)
-        fatalError(errorMessage)
-    }
+    let mock = TrustMe<T>.onThis(CuckooMockObject(mockObject: OCMockObject.mock(forWorkaroundProtocol: type)))
+    stubbing(Stubber<T>(), mock)
+    return mock
 }
 
 public func objectiveStub<T: NSObject>(for type: T.Type, file: StaticString = #file, line: UInt = #line, stubbing: (Stubber<T>, T) -> Void) -> T {
-    if let mock = CuckooMockObject(mockObject: OCMockObject.mock(for: type)) as? T {
-        stubbing(Stubber<T>(), mock)
-        return mock
-    } else {
-        let errorMessage = "Failed to create an OCMock object for the type \(NSStringFromClass(type)). Make sure it's an Objective-C object."
-        XCTFail(errorMessage, file: file, line: line)
-        fatalError(errorMessage)
-    }
+    let mock = TrustMe<T>.onThis(CuckooMockObject(mockObject: OCMockObject.mock(for: type) as Any))
+    stubbing(Stubber<T>(), mock)
+    return mock
 }
 
 public class Stubber<MOCK> {
