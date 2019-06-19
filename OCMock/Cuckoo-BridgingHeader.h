@@ -14,5 +14,6 @@
 #import "OCMockObject+Workaround.h"
 #import "NSObject+TrustMe.h"
 #import "OCMockObject+CuckooMockObject.h"
+#import "StringProxy.h"
 
 #endif /* Cuckoo_BridgingHeader_h */

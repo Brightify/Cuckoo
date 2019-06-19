@@ -59,15 +59,18 @@ class ObjectiveProtocolTest: XCTestCase {
     func testThenWithReturn() {
         let range = NSRange()
         let mock = objectiveStub(for: UITextFieldDelegate.self) { stubber, mock in
-            stubber.when(mock.textField?(objectiveAny(), shouldChangeCharactersIn: range, replacementString: "Hello from the other side, ObjC!")).then { args in
+            stubber.when(mock.textField?(objectiveAny(), shouldChangeCharactersIn: range, replacementString: objectiveAny())).then { args in
                 let (textField, range, replacementString) = (args[0] as! UITextField, args[1] as! NSRange, args[2] as! String)
                 return replacementString.contains("Hello")
             }
         }
 
         XCTAssertTrue(mock.textField!(UITextField(), shouldChangeCharactersIn: range, replacementString: "Hello from the other side, ObjC!"))
+        XCTAssertFalse(mock.textField!(UITextField(), shouldChangeCharactersIn: range, replacementString: "TadeasKriz is a HaXoR."))
 
         objectiveVerify(mock.textField!(objectiveAny(), shouldChangeCharactersIn: range, replacementString: "Hello from the other side, ObjC!"))
+        objectiveVerify(mock.textField!(objectiveAny(), shouldChangeCharactersIn: range, replacementString: "TadeasKriz is a HaXoR."))
+        objectiveVerify(mock.textField!(objectiveAny(), shouldChangeCharactersIn: range, replacementString: objectiveAny()))
     }
 
     // NOTE: This is an example of a wrong way to test an optional method.

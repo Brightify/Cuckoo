@@ -93,7 +93,7 @@ class ObjectiveClassTest: XCTestCase {
         objectiveVerify(mock.resignFirstResponder())
     }
 
-    func testNetworkRequest() {
+    func testArgumentClosure() {
         var savedCompletionHandler: ((Data?, URLResponse?, Error?) -> Void)?
         let dataTaskMock = objectiveStub(for: URLSessionDataTask.self) { stubber, mock in
             stubber.when(mock.resume()).then { _ in
@@ -108,6 +108,7 @@ class ObjectiveClassTest: XCTestCase {
         let url = URL(string: "https://github.com/Brightify/Cuckoo")!
         let mock = objectiveStub(for: URLSession.self) { stubber, mock in
             stubber.when(mock.dataTask(with: url, completionHandler: objectiveAnyClosure())).then { args in
+                // NOTE: when you need to get a closure from an argument, this is the only way to do it
                 let completionHandler = objectiveArgumentClosure(from: args[1]) as (Data?, URLResponse?, Error?) -> Void
                 savedCompletionHandler = completionHandler
                 return dataTaskMock
@@ -119,5 +120,22 @@ class ObjectiveClassTest: XCTestCase {
             guard let data = data else { return }
             print(String(data: data, encoding: .utf8)!)
         }.resume()
+    }
+
+    func testStubPriority() {
+        let mock = objectiveStub(for: UITextField.self) { stubber, mock in
+            stubber.when(mock.shouldChangeText(in: objectiveAny(), replacementText: "pappa pia")).thenReturn(false)
+            stubber.when(mock.shouldChangeText(in: objectiveAny(), replacementText: "mamma mia")).thenReturn(true)
+            // NOTE: In ObjC mocking, the general `objectiveAny()` must be at the bottom, else it captures all the other stubs declared after it.
+            stubber.when(mock.shouldChangeText(in: objectiveAny(), replacementText: objectiveAny())).thenReturn(false)
+        }
+
+        XCTAssertFalse(mock.shouldChangeText(in: objectiveAny(), replacementText: "pappa pia"))
+        XCTAssertTrue(mock.shouldChangeText(in: objectiveAny(), replacementText: "mamma mia"))
+        XCTAssertFalse(mock.shouldChangeText(in: objectiveAny(), replacementText: "lalla lia"))
+
+        objectiveVerify(mock.shouldChangeText(in: objectiveAny(), replacementText: "pappa pia"))
+        objectiveVerify(mock.shouldChangeText(in: objectiveAny(), replacementText: "mamma mia"))
+        objectiveVerify(mock.shouldChangeText(in: objectiveAny(), replacementText: "lalla lia"))
     }
 }
