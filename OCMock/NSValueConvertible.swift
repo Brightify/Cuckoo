@@ -96,6 +96,7 @@ extension NSRange: NSValueConvertible {
     }
 }
 
+#if os(iOS)
 extension CGRect: NSValueConvertible {
     public func toNSValue() -> NSValue {
         return NSValue(cgRect: self)
@@ -117,7 +118,6 @@ extension CGVector: NSValueConvertible {
     }
 }
 
-#if os(iOS)
 extension UIEdgeInsets: NSValueConvertible {
     public func toNSValue() -> NSValue {
         return NSValue(uiEdgeInsets: self)
@@ -127,6 +127,22 @@ extension UIEdgeInsets: NSValueConvertible {
 extension UIOffset: NSValueConvertible {
     public func toNSValue() -> NSValue {
         return NSValue(uiOffset: self)
+    }
+}
+#elseif os(macOS)
+extension CGRect: NSValueConvertible {
+    public func toNSValue() -> NSValue {
+        return NSValue(rect: self)
+    }
+}
+extension CGPoint: NSValueConvertible {
+    public func toNSValue() -> NSValue {
+        return NSValue(point: self)
+    }
+}
+extension CGSize: NSValueConvertible {
+    public func toNSValue() -> NSValue {
+        return NSValue(size: self)
     }
 }
 #endif

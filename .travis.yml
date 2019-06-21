@@ -5,14 +5,10 @@ xcode_scheme: Cuckoo
 xcode_sdk: macosx
 
 before_script:
-    # - gem install cucumber --no-document
-    # - gem install aruba --no-document
+    - pod install --repo-update
 
 script:
-    - pushd Generator
-    - make test
-    - popd
-    - xcodebuild -project 'Cuckoo.xcodeproj' -scheme 'Cuckoo-macOS+Run' clean test | xcpretty
+    - xcodebuild -workspace 'Cuckoo.xcworkspace' -scheme 'Cuckoo+OCMock-macOS' clean test | xcpretty
     - pod lib lint
 
 after_script:
