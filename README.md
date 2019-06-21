@@ -145,10 +145,7 @@ let package = Package(
 
 Cuckoo relies on a script that is currently not downloadable using SwiftPM. However, for convenience, you can copy these lines into the terminal to download the latest `run` script.
 ```Bash
-curl -Lo "Cuckoo.zip" `curl "https://api.github.com/repos/Brightify/Cuckoo/releases/latest" | grep -oe '"zipball_url":\s*"[^" ]*"' | grep -oe 'http[^" ]*'`
-unzip -p Cuckoo.zip "*Cuckoo*/run" > run
-chmod +x run
-rm "Cuckoo.zip"
+curl https://raw.githubusercontent.com/Brightify/Cuckoo/master/run > run && chmod +x run
 ```
 
 When you're all set, use the same `Run script` as above and replace
