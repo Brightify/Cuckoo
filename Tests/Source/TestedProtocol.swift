@@ -83,3 +83,7 @@ class OnlyLabelClass: OnlyLabelProtocol {
     func double(here notInHere: Bool) {
     }
 }
+
+public protocol PublicoProtocolo {
+    associatedtype InternaloTypo
+}

@@ -9,7 +9,7 @@ import Foundation
 
 extension Templates {
     static let typeErasure = """
-    class \(typeErasureClassName){{ container.genericParameters }}: {{ container.name }} {
+    {{ container.accessibility }} class \(typeErasureClassName){{ container.genericParameters }}: {{ container.name }} {
         private let reference: Any
 
         {% for property in container.properties %}private let _getter_storage$${{ property.name }}: () -> {{ property.type }}{% if not property.isReadOnly %}
