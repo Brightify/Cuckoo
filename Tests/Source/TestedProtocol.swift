@@ -86,4 +86,10 @@ class OnlyLabelClass: OnlyLabelProtocol {
 
 public protocol PublicoProtocolo {
     associatedtype InternaloTypo
+
+    var stringoStar: String { get set }
+
+    init(hola: String)
+
+    func internalMethod()
 }

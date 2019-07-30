@@ -14,7 +14,7 @@ extension Templates {
 
         {% for property in container.properties %}private let _getter_storage$${{ property.name }}: () -> {{ property.type }}{% if not property.isReadOnly %}
         private let _setter_storage$${{ property.name }}: ({{ property.type }}) -> Void{% endif %}
-        var {{ property.name }}: {{ property.type }} {
+        {{ container.accessibility }} var {{ property.name }}: {{ property.type }} {
             get { return _getter_storage$${{ property.name }}() }{% if not property.isReadOnly %}
             set { _setter_storage$${{ property.name }}(newValue) }{% endif %}
         }
@@ -33,14 +33,14 @@ extension Templates {
         }
         {% if container.initializers %}
         /// MARK:- ignored required initializers{% endif %}
-        {% for initializer in container.initializers %}required init({{ initializer.parameterSignature }}) {
+        {% for initializer in container.initializers %}{{ container.accessibility }} required init({{ initializer.parameterSignature }}) {
             fatalError("`DefaultImplCaller` class is only used for calling default implementation and can't be initialized on its own.")
         }
         {% endfor %}
 
         {% for method in container.methods %}
         private let _storage${{ forloop.counter }}${{ method.name }}: ({{ method.inputTypes }}) -> {{ method.returnType }}
-        func {{ method.name }}({{ method.parameterSignature }}) {{ method.returnSignature }} {
+        {{ container.accessibility }} func {{ method.name }}({{ method.parameterSignature }}) {{ method.returnSignature }} {
             return _storage${{ forloop.counter }}${{ method.name }}({{ method.parameterNames }})
         }
         {% endfor %}
