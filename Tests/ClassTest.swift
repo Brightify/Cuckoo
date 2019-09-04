@@ -485,4 +485,28 @@ class ClassTest: XCTestCase {
         XCTAssertEqual(String(describing: type(of: mock.boolMaybeYes)), String(describing: type(of: original.boolMaybeYes)))
         XCTAssertEqual(String(describing: type(of: mock.largeInty)), String(describing: type(of: original.largeInty)))
     }
+
+    func testConvenienceMatcherAmbiguity() {
+        let mock = MockConvenienceMatchersAmbiguer()
+        stub(mock) { stub in
+            when(stub.a(a: [1])).thenReturn(false)
+            when(stub.a(a: ["gg"])).thenReturn(false)
+            when(stub.a(a: [false])).thenReturn(false)
+            when(stub.a(a: "gg")).thenReturn(false)
+
+            when(stub.a(a: [1: true])).then { $0[1] ?? false }
+            when(stub.a(a: [1: true, 2: false])).then { _ in true }
+            when(stub.a(a: Set([true, true, false]))).thenReturn(false)
+        }
+
+        XCTAssertFalse(mock.a(a: [1]))
+        XCTAssertFalse(mock.a(a: ["gg"]))
+        XCTAssertFalse(mock.a(a: [false]))
+
+        XCTAssertTrue(mock.a(a: [1: true]))
+        XCTAssertTrue(mock.a(a: [1: true, 2: false]))
+
+        XCTAssertFalse(mock.a(a: Set([true, true, false])))
+        XCTAssertFalse(mock.a(a: Set([false, true, true])))
+    }
 }

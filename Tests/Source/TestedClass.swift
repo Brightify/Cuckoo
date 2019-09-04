@@ -367,3 +367,17 @@ class TypeIsRightClass {
     var boolMaybeYes = true as Bool?
     var largeInty = 1_234_567
 }
+
+class ConvenienceMatchersAmbiguer {
+    func arrays(array a: [Int], array b: [String], array c: [Bool]) { }
+
+    // The methods' names are identical to find out ambiguity immediately if introduced.
+    func a(a: String) -> Bool { return true }
+    func a(a: [Int]) -> Bool { return true }
+    func a(a: [String]) -> Bool { return true }
+    func a(a: [Bool]) -> Bool { return true }
+    func a(a: [Int: Bool]) -> Bool { return true }
+    func a(a: [String: Bool]) -> Bool { return true }
+    func a(a: Set<String>) -> Bool { return true }
+    func a(a: Set<Bool>) -> Bool { return true }
+}

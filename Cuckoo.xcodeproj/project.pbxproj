@@ -151,6 +151,12 @@
 		682D2891228B10970078DDCD /* GenericMethodClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682D288F228B10970078DDCD /* GenericMethodClassTest.swift */; };
 		682D2893228B183E0078DDCD /* TestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682D2892228B183E0078DDCD /* TestError.swift */; };
 		682D2894228B183E0078DDCD /* TestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682D2892228B183E0078DDCD /* TestError.swift */; };
+		685D699D2320043200250BF2 /* Array+matchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685D699C2320043200250BF2 /* Array+matchers.swift */; };
+		685D699E2320043200250BF2 /* Array+matchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685D699C2320043200250BF2 /* Array+matchers.swift */; };
+		685D69A02320043C00250BF2 /* Dictionary+matchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685D699F2320043C00250BF2 /* Dictionary+matchers.swift */; };
+		685D69A12320043C00250BF2 /* Dictionary+matchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685D699F2320043C00250BF2 /* Dictionary+matchers.swift */; };
+		685D69A32320044400250BF2 /* Set+matchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685D69A22320044400250BF2 /* Set+matchers.swift */; };
+		685D69A42320044400250BF2 /* Set+matchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685D69A22320044400250BF2 /* Set+matchers.swift */; };
 		6861B32921A31DAC002EC2DA /* GenericClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6861B30B21A31DA2002EC2DA /* GenericClass.swift */; };
 		6861B32A21A31DAD002EC2DA /* GenericClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6861B30B21A31DA2002EC2DA /* GenericClass.swift */; };
 		6861B32C21A32279002EC2DA /* GenericProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6861B32B21A32279002EC2DA /* GenericProtocol.swift */; };
@@ -361,6 +367,9 @@
 		682D2836228AE0E10078DDCD /* GenericMethodClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericMethodClass.swift; sourceTree = "<group>"; };
 		682D288F228B10970078DDCD /* GenericMethodClassTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericMethodClassTest.swift; sourceTree = "<group>"; };
 		682D2892228B183E0078DDCD /* TestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestError.swift; sourceTree = "<group>"; };
+		685D699C2320043200250BF2 /* Array+matchers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+matchers.swift"; sourceTree = "<group>"; };
+		685D699F2320043C00250BF2 /* Dictionary+matchers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+matchers.swift"; sourceTree = "<group>"; };
+		685D69A22320044400250BF2 /* Set+matchers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Set+matchers.swift"; sourceTree = "<group>"; };
 		6861B30B21A31DA2002EC2DA /* GenericClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericClass.swift; sourceTree = "<group>"; };
 		6861B32B21A32279002EC2DA /* GenericProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericProtocol.swift; sourceTree = "<group>"; };
 		6896352D21AC5A4700B25D47 /* GenericProtocolTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericProtocolTest.swift; sourceTree = "<group>"; };
@@ -450,6 +459,9 @@
 				18E2A23D1FBB1C330058FEC5 /* Matchable.swift */,
 				18E2A23E1FBB1C330058FEC5 /* ParameterMatcher.swift */,
 				18E2A23F1FBB1C330058FEC5 /* ParameterMatcherFunctions.swift */,
+				685D699C2320043200250BF2 /* Array+matchers.swift */,
+				685D699F2320043C00250BF2 /* Dictionary+matchers.swift */,
+				685D69A22320044400250BF2 /* Set+matchers.swift */,
 			);
 			path = Matching;
 			sourceTree = "<group>";
@@ -986,10 +998,12 @@
 			files = (
 				18E2A31C1FBB23550058FEC5 /* StubbingProxy.swift in Sources */,
 				18E2A3321FBB31250058FEC5 /* VerifyProperty.swift in Sources */,
+				685D699D2320043200250BF2 /* Array+matchers.swift in Sources */,
 				18E2A2FB1FBB23420058FEC5 /* ToBeStubbedReadOnlyProperty.swift in Sources */,
 				18E2A31D1FBB23550058FEC5 /* VerificationProxy.swift in Sources */,
 				18E2A3281FBB235A0058FEC5 /* ParameterMatcherFunctions.swift in Sources */,
 				18E2A3151FBB234F0058FEC5 /* StubAction.swift in Sources */,
+				685D69A02320043C00250BF2 /* Dictionary+matchers.swift in Sources */,
 				18E2A3331FBB31250058FEC5 /* VerifyReadOnlyProperty.swift in Sources */,
 				18E2A3371FBB31290058FEC5 /* ArgumentCaptor.swift in Sources */,
 				18E2A3031FBB23480058FEC5 /* BaseStubFunctionTrait.swift in Sources */,
@@ -1001,6 +1015,7 @@
 				18E2A2FA1FBB23420058FEC5 /* ToBeStubbedProperty.swift in Sources */,
 				68E9EAE6224B9F34000DBD29 /* StubFunctionThenThrowingTrait.swift in Sources */,
 				18E2A31B1FBB23550058FEC5 /* Mock.swift in Sources */,
+				685D69A32320044400250BF2 /* Set+matchers.swift in Sources */,
 				18E2A3071FBB23480058FEC5 /* StubFunctionThenThrowTrait.swift in Sources */,
 				18E2A3101FBB234B0058FEC5 /* StubThrowingFunction.swift in Sources */,
 				18E2A30E1FBB234B0058FEC5 /* StubNoReturnFunction.swift in Sources */,
@@ -1030,10 +1045,12 @@
 			files = (
 				18E2A3181FBB23540058FEC5 /* StubbingProxy.swift in Sources */,
 				18E2A3301FBB31240058FEC5 /* VerifyProperty.swift in Sources */,
+				685D699E2320043200250BF2 /* Array+matchers.swift in Sources */,
 				18E2A2F81FBB23410058FEC5 /* ToBeStubbedReadOnlyProperty.swift in Sources */,
 				18E2A3191FBB23540058FEC5 /* VerificationProxy.swift in Sources */,
 				18E2A3231FBB23590058FEC5 /* ParameterMatcherFunctions.swift in Sources */,
 				18E2A3121FBB234E0058FEC5 /* StubAction.swift in Sources */,
+				685D69A12320043C00250BF2 /* Dictionary+matchers.swift in Sources */,
 				18E2A3311FBB31240058FEC5 /* VerifyReadOnlyProperty.swift in Sources */,
 				18E2A3351FBB31280058FEC5 /* ArgumentCaptor.swift in Sources */,
 				18E2A2FD1FBB23470058FEC5 /* BaseStubFunctionTrait.swift in Sources */,
@@ -1045,6 +1062,7 @@
 				18E2A2F71FBB23410058FEC5 /* ToBeStubbedProperty.swift in Sources */,
 				68E9EAFF224BA4B4000DBD29 /* StubFunctionThenThrowingTrait.swift in Sources */,
 				18E2A3171FBB23540058FEC5 /* Mock.swift in Sources */,
+				685D69A42320044400250BF2 /* Set+matchers.swift in Sources */,
 				18E2A3011FBB23470058FEC5 /* StubFunctionThenThrowTrait.swift in Sources */,
 				18E2A30C1FBB234B0058FEC5 /* StubThrowingFunction.swift in Sources */,
 				18E2A30A1FBB234B0058FEC5 /* StubNoReturnFunction.swift in Sources */,
