@@ -157,6 +157,10 @@
 		685D69A12320043C00250BF2 /* Dictionary+matchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685D699F2320043C00250BF2 /* Dictionary+matchers.swift */; };
 		685D69A32320044400250BF2 /* Set+matchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685D69A22320044400250BF2 /* Set+matchers.swift */; };
 		685D69A42320044400250BF2 /* Set+matchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685D69A22320044400250BF2 /* Set+matchers.swift */; };
+		685D69A62320FEC100250BF2 /* Array+matchersTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685D69A52320FEC100250BF2 /* Array+matchersTest.swift */; };
+		685D69A72320FEC100250BF2 /* Array+matchersTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685D69A52320FEC100250BF2 /* Array+matchersTest.swift */; };
+		685D69A92321498D00250BF2 /* Dictionary+matchersTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685D69A82321498D00250BF2 /* Dictionary+matchersTest.swift */; };
+		685D69AA2321498D00250BF2 /* Dictionary+matchersTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685D69A82321498D00250BF2 /* Dictionary+matchersTest.swift */; };
 		6861B32921A31DAC002EC2DA /* GenericClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6861B30B21A31DA2002EC2DA /* GenericClass.swift */; };
 		6861B32A21A31DAD002EC2DA /* GenericClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6861B30B21A31DA2002EC2DA /* GenericClass.swift */; };
 		6861B32C21A32279002EC2DA /* GenericProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6861B32B21A32279002EC2DA /* GenericProtocol.swift */; };
@@ -370,6 +374,8 @@
 		685D699C2320043200250BF2 /* Array+matchers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+matchers.swift"; sourceTree = "<group>"; };
 		685D699F2320043C00250BF2 /* Dictionary+matchers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+matchers.swift"; sourceTree = "<group>"; };
 		685D69A22320044400250BF2 /* Set+matchers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Set+matchers.swift"; sourceTree = "<group>"; };
+		685D69A52320FEC100250BF2 /* Array+matchersTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+matchersTest.swift"; sourceTree = "<group>"; };
+		685D69A82321498D00250BF2 /* Dictionary+matchersTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+matchersTest.swift"; sourceTree = "<group>"; };
 		6861B30B21A31DA2002EC2DA /* GenericClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericClass.swift; sourceTree = "<group>"; };
 		6861B32B21A32279002EC2DA /* GenericProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericProtocol.swift; sourceTree = "<group>"; };
 		6896352D21AC5A4700B25D47 /* GenericProtocolTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericProtocolTest.swift; sourceTree = "<group>"; };
@@ -585,6 +591,8 @@
 				18E2A26A1FBB1C330058FEC5 /* MatchableTest.swift */,
 				18E2A26B1FBB1C330058FEC5 /* ParameterMatcherFunctionsTest.swift */,
 				18E2A26C1FBB1C330058FEC5 /* ParameterMatcherTest.swift */,
+				685D69A52320FEC100250BF2 /* Array+matchersTest.swift */,
+				685D69A82321498D00250BF2 /* Dictionary+matchersTest.swift */,
 			);
 			path = Matching;
 			sourceTree = "<group>";
@@ -996,6 +1004,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				685D69A92321498D00250BF2 /* Dictionary+matchersTest.swift in Sources */,
 				18E2A31C1FBB23550058FEC5 /* StubbingProxy.swift in Sources */,
 				18E2A3321FBB31250058FEC5 /* VerifyProperty.swift in Sources */,
 				685D699D2320043200250BF2 /* Array+matchers.swift in Sources */,
@@ -1003,6 +1012,7 @@
 				18E2A31D1FBB23550058FEC5 /* VerificationProxy.swift in Sources */,
 				18E2A3281FBB235A0058FEC5 /* ParameterMatcherFunctions.swift in Sources */,
 				18E2A3151FBB234F0058FEC5 /* StubAction.swift in Sources */,
+				685D69A62320FEC100250BF2 /* Array+matchersTest.swift in Sources */,
 				685D69A02320043C00250BF2 /* Dictionary+matchers.swift in Sources */,
 				18E2A3331FBB31250058FEC5 /* VerifyReadOnlyProperty.swift in Sources */,
 				18E2A3371FBB31290058FEC5 /* ArgumentCaptor.swift in Sources */,
@@ -1043,6 +1053,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				685D69AA2321498D00250BF2 /* Dictionary+matchersTest.swift in Sources */,
 				18E2A3181FBB23540058FEC5 /* StubbingProxy.swift in Sources */,
 				18E2A3301FBB31240058FEC5 /* VerifyProperty.swift in Sources */,
 				685D699E2320043200250BF2 /* Array+matchers.swift in Sources */,
@@ -1050,6 +1061,7 @@
 				18E2A3191FBB23540058FEC5 /* VerificationProxy.swift in Sources */,
 				18E2A3231FBB23590058FEC5 /* ParameterMatcherFunctions.swift in Sources */,
 				18E2A3121FBB234E0058FEC5 /* StubAction.swift in Sources */,
+				685D69A72320FEC100250BF2 /* Array+matchersTest.swift in Sources */,
 				685D69A12320043C00250BF2 /* Dictionary+matchers.swift in Sources */,
 				18E2A3311FBB31240058FEC5 /* VerifyReadOnlyProperty.swift in Sources */,
 				18E2A3351FBB31280058FEC5 /* ArgumentCaptor.swift in Sources */,

@@ -10,7 +10,6 @@ import XCTest
 import Cuckoo
 
 class ParameterMatcherTest: XCTestCase {
-    
     func testMatches() {
         let matcher = ParameterMatcher { $0 == 5 }
         
@@ -31,5 +30,15 @@ class ParameterMatcherTest: XCTestCase {
         
         XCTAssertTrue(matcher.matches(4))
         XCTAssertFalse(matcher.matches(3))
+    }
+
+    func testNot() {
+        let matcher = not(ParameterMatcher { $0 > 3 })
+
+        XCTAssertTrue(matcher.matches(3))
+        XCTAssertTrue(matcher.matches(2))
+        XCTAssertTrue(matcher.matches(-1))
+        XCTAssertFalse(matcher.matches(4))
+        XCTAssertFalse(matcher.matches(10))
     }
 }

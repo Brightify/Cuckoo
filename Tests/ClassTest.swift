@@ -505,6 +505,7 @@ class ClassTest: XCTestCase {
 
         XCTAssertTrue(mock.a(a: [1: true]))
         XCTAssertTrue(mock.a(a: [1: true, 2: false]))
+        XCTAssertTrue(mock.a(a: [2: false, 1: true]))
 
         XCTAssertFalse(mock.a(a: Set([true, true, false])))
         XCTAssertFalse(mock.a(a: Set([false, true, true])))

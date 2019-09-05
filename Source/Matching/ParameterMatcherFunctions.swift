@@ -171,17 +171,6 @@ public func anyOptionalThrowingClosure<IN, OUT>() -> ParameterMatcher<(((IN)) th
     return notNil()
 }
 
-/// Returns a matcher matching any non nil value.
-public func notNil<T>() -> ParameterMatcher<T?> {
-    return ParameterMatcher {
-        if case .none = $0 {
-            return false
-        } else {
-            return true
-        }
-    }
-}
-
 /// Returns a matcher matching any nil value
 public func isNil<T>() -> ParameterMatcher<T?> {
     return ParameterMatcher {
@@ -190,5 +179,17 @@ public func isNil<T>() -> ParameterMatcher<T?> {
         } else {
             return false
         }
+    }
+}
+
+/// Returns a matcher matching any non nil value.
+public func notNil<T>() -> ParameterMatcher<T?> {
+    return not(isNil())
+}
+
+/// Returns a matcher negating any matcher it's applied to.
+public func not<T>(_ matcher: ParameterMatcher<T>) -> ParameterMatcher<T> {
+    return ParameterMatcher { value in
+        !matcher.matches(value)
     }
 }
