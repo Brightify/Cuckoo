@@ -1,5 +1,37 @@
 # Changelog
 
+## 1.1.1
+- Fix property, initializer, and function accessibility in public protocols.
+
+## 1.1.0
+#### Features:
+- Add a simple type guesser based on assigned value.
+
+#### Fixes:
+- Fix accessibility problems.
+
+## 1.0.6
+- Fix a bug where adding a private name to a function made it generate twice and fail the compilation.
+
+## 1.0.5
+- Fix generic protocol generation and type erasure with multiple methods of same name.
+- Fix a bug concerning empty public name methods with no private ones.
+- Exit `run` script with error if it fails to get generator download URL.
+
+## 1.0.4
+- The `run` script doesn't use `realpath` command anymore because it's not available by default on Mac OS.
+- Remove redundant stubbing of optional classes.
+
+## 1.0.3
+- Add support for optional read-only properties.
+
+## 1.0.2
+- Fix `where` clause that doesn't work in Swift 4.
+- Fix some `run` script bugs.
+
+## 1.0.1
+- Fix `any()` not working anymore by itself with optional parameters in functions.
+
 ## 1.0.0
 #### Features:
 - **Generics** is now fully supported! This includes generic classes, protocols and methods.

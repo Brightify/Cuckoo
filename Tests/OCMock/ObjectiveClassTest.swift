@@ -10,17 +10,17 @@ import Cuckoo
 
 class ObjectiveClassTest: XCTestCase {
     func testThenDoNothing() {
-        let mock = objectiveStub(for: UIView.self) { stubber, mock in
-            stubber.when(mock.addSubview(objectiveAny())).thenDoNothing()
+        let mock = objcStub(for: UIView.self) { stubber, mock in
+            stubber.when(mock.addSubview(objcAny())).thenDoNothing()
         }
 
         mock.addSubview(UIView())
 
-        objectiveVerify(mock.addSubview(objectiveAny()))
+        objcVerify(mock.addSubview(objcAny()))
     }
 
     func testThenReturn() {
-        let mock = objectiveStub(for: UIView.self) { stubber, mock in
+        let mock = objcStub(for: UIView.self) { stubber, mock in
             stubber.when(mock.endEditing(true)).thenReturn(true)
             stubber.when(mock.endEditing(false)).thenReturn(false)
         }
@@ -28,13 +28,13 @@ class ObjectiveClassTest: XCTestCase {
         XCTAssertTrue(mock.endEditing(true))
         XCTAssertFalse(mock.endEditing(false))
 
-        objectiveVerify(mock.endEditing(true))
-        objectiveVerify(mock.endEditing(false))
+        objcVerify(mock.endEditing(true))
+        objcVerify(mock.endEditing(false))
     }
 
     func testThen() {
         let tableView = UITableView()
-        let mock = objectiveStub(for: UITableViewController.self) { stubber, mock in
+        let mock = objcStub(for: UITableViewController.self) { stubber, mock in
             stubber.when(mock.numberOfSections(in: tableView)).thenReturn(1)
             stubber.when(mock.tableView(tableView, accessoryButtonTappedForRowWith: IndexPath(row: 420, section: 69))).then { args in
                 let (tableView, indexPath) = (args[0] as! UITableView, args[1] as! IndexPath)
@@ -46,14 +46,14 @@ class ObjectiveClassTest: XCTestCase {
         XCTAssertEqual(mock.numberOfSections(in: tableView), 1)
         mock.tableView(tableView, accessoryButtonTappedForRowWith: IndexPath(row: 420, section: 69))
 
-        objectiveVerify(mock.numberOfSections(in: tableView))
-        objectiveVerify(mock.tableView(tableView, accessoryButtonTappedForRowWith: IndexPath(row: 420, section: 69)))
+        objcVerify(mock.numberOfSections(in: tableView))
+        objcVerify(mock.tableView(tableView, accessoryButtonTappedForRowWith: IndexPath(row: 420, section: 69)))
     }
 
     func testThenWithReturn() {
         let event = UIEvent()
         let view = UIView()
-        let mock = objectiveStub(for: UIView.self) { stubber, mock in
+        let mock = objcStub(for: UIView.self) { stubber, mock in
             stubber.when(mock.endEditing(false)).then { args in
                 print("Hello, \(args).")
                 return true
@@ -77,25 +77,25 @@ class ObjectiveClassTest: XCTestCase {
         XCTAssertEqual(mock.hitTest(CGPoint(x: 145.5, y: 0.444), with: event), view)
         XCTAssertEqual(mock.userActivity?.activityType, "activity")
 
-        objectiveVerify(mock.endEditing(false))
-        objectiveVerify(mock.hitTest(.zero, with: event))
-        objectiveVerify(mock.hitTest(CGPoint(x: 145.5, y: 0.444), with: event))
-        objectiveVerify(mock.userActivity?.activityType)
+        objcVerify(mock.endEditing(false))
+        objcVerify(mock.hitTest(.zero, with: event))
+        objcVerify(mock.hitTest(CGPoint(x: 145.5, y: 0.444), with: event))
+        objcVerify(mock.userActivity?.activityType)
     }
 
     func testThenThrow() {
-        let mock = objectiveStub(for: UINavigationController.self) { stubber, mock in
+        let mock = objcStub(for: UINavigationController.self) { stubber, mock in
             stubber.when(mock.resignFirstResponder()).thenThrow(TestError.unknown)
         }
 
         objectiveAssertThrows(errorHandler: { print($0) }, mock.resignFirstResponder())
 
-        objectiveVerify(mock.resignFirstResponder())
+        objcVerify(mock.resignFirstResponder())
     }
 
     func testArgumentClosure() {
         var savedCompletionHandler: ((Data?, URLResponse?, Error?) -> Void)?
-        let dataTaskMock = objectiveStub(for: URLSessionDataTask.self) { stubber, mock in
+        let dataTaskMock = objcStub(for: URLSessionDataTask.self) { stubber, mock in
             stubber.when(mock.resume()).then { _ in
                 guard let data = "Hello, upgraded Cuckoo!".data(using: .utf8) else {
                     savedCompletionHandler?(nil, nil, TestError.unknown)
@@ -106,15 +106,14 @@ class ObjectiveClassTest: XCTestCase {
         }
 
         let url = URL(string: "https://github.com/Brightify/Cuckoo")!
-        let mock = objectiveStub(for: URLSession.self) { stubber, mock in
-            stubber.when(mock.dataTask(with: url, completionHandler: objectiveAnyClosure())).then { args in
+        let mock = objcStub(for: URLSession.self) { stubber, mock in
+            stubber.when(mock.dataTask(with: url, completionHandler: objcAnyClosure())).then { args in
                 // NOTE: when you need to get a closure from an argument, this is the only way to do it
                 let completionHandler = objectiveArgumentClosure(from: args[1]) as (Data?, URLResponse?, Error?) -> Void
                 savedCompletionHandler = completionHandler
                 return dataTaskMock
             }
         }
-        
 
         mock.dataTask(with: url) { data, response, error in
             guard let data = data else { return }
@@ -123,24 +122,24 @@ class ObjectiveClassTest: XCTestCase {
     }
 
     func testStubPriority() {
-        let mock = objectiveStub(for: UITextField.self) { stubber, mock in
-            stubber.when(mock.shouldChangeText(in: objectiveAny(), replacementText: "pappa pia")).thenReturn(false)
-            stubber.when(mock.shouldChangeText(in: objectiveAny(), replacementText: "mamma mia")).thenReturn(true)
-            // NOTE: In ObjC mocking, the general `objectiveAny()` must be at the bottom, else it captures all the other stubs declared after it.
-            stubber.when(mock.shouldChangeText(in: objectiveAny(), replacementText: objectiveAny())).thenReturn(false)
+        let mock = objcStub(for: UITextField.self) { stubber, mock in
+            stubber.when(mock.shouldChangeText(in: objcAny(), replacementText: "pappa pia")).thenReturn(false)
+            stubber.when(mock.shouldChangeText(in: objcAny(), replacementText: "mamma mia")).thenReturn(true)
+            // NOTE: In ObjC mocking, the general `objcAny()` must be at the bottom, else it captures all the other stubs declared after it.
+            stubber.when(mock.shouldChangeText(in: objcAny(), replacementText: objcAny())).thenReturn(false)
         }
 
-        XCTAssertFalse(mock.shouldChangeText(in: objectiveAny(), replacementText: "pappa pia"))
-        XCTAssertTrue(mock.shouldChangeText(in: objectiveAny(), replacementText: "mamma mia"))
-        XCTAssertFalse(mock.shouldChangeText(in: objectiveAny(), replacementText: "lalla lia"))
+        XCTAssertFalse(mock.shouldChangeText(in: objcAny(), replacementText: "pappa pia"))
+        XCTAssertTrue(mock.shouldChangeText(in: objcAny(), replacementText: "mamma mia"))
+        XCTAssertFalse(mock.shouldChangeText(in: objcAny(), replacementText: "lalla lia"))
 
-        objectiveVerify(mock.shouldChangeText(in: objectiveAny(), replacementText: "pappa pia"))
-        objectiveVerify(mock.shouldChangeText(in: objectiveAny(), replacementText: "mamma mia"))
-        objectiveVerify(mock.shouldChangeText(in: objectiveAny(), replacementText: "lalla lia"))
+        objcVerify(mock.shouldChangeText(in: objcAny(), replacementText: "pappa pia"))
+        objcVerify(mock.shouldChangeText(in: objcAny(), replacementText: "mamma mia"))
+        objcVerify(mock.shouldChangeText(in: objcAny(), replacementText: "lalla lia"))
     }
 
     func testSwiftClass() {
-        let mock = objectiveStub(for: SwiftClass.self) { stubber, mock in
+        let mock = objcStub(for: SwiftClass.self) { stubber, mock in
             stubber.when(mock.dudka(lelo: "heya")).thenReturn(false)
             stubber.when(mock.dudka(lelo: "heyda")).thenReturn(true)
         }
@@ -148,7 +147,7 @@ class ObjectiveClassTest: XCTestCase {
         XCTAssertFalse(mock.dudka(lelo: "heya"))
         XCTAssertTrue(mock.dudka(lelo: "heyda"))
 
-        objectiveVerify(mock.dudka(lelo: objectiveAny()))
+        objcVerify(mock.dudka(lelo: objcAny()))
     }
 }
 

@@ -8,7 +8,7 @@
 import XCTest
 
 extension XCTestCase {
-    public func objectiveVerify<OUT>(_ invocation: @autoclosure () -> OUT, file: StaticString = #file, line: UInt = #line) {
+    public func objcVerify<OUT>(_ invocation: @autoclosure () -> OUT, file: StaticString = #file, line: UInt = #line) {
         OCMMacroState.beginVerifyMacro(at: OCMLocation(testCase: self, file: String(file), line: line))
         _ = invocation()
         OCMMacroState.endVerifyMacro()
