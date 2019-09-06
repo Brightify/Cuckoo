@@ -509,5 +509,13 @@ class ClassTest: XCTestCase {
 
         XCTAssertFalse(mock.a(a: Set([true, true, false])))
         XCTAssertFalse(mock.a(a: Set([false, true, true])))
+
+        verify(mock).a(a: [1])
+        verify(mock).a(a: ["gg"])
+        verify(mock).a(a: [false])
+
+        verify(mock, times(3)).a(a: any(Dictionary<Int, Bool>.self))
+
+        verify(mock, times(2)).a(a: any(Set<Bool>.self))
     }
 }
