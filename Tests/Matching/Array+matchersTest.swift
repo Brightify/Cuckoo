@@ -108,6 +108,18 @@ class ArrayMatcherTest: XCTestCase {
         XCTAssertFalse(containsAllOf((1...3).map(TestStructs.H.init)).matches([3].map(TestStructs.H.init)))
     }
 
+    func testContainsAllOfMultiple() {
+        XCTAssertFalse(containsAllOf(values: 1, 3, 2, 2, 1).matches([2]))
+        XCTAssertFalse(containsAllOf(values: 1, 3, 2, 2, 1).matches([1, 2, 3]))
+        XCTAssertFalse(containsAllOf(values: 1, 3, 2, 2, 1).matches([1, 3, 2, 2]))
+        XCTAssertTrue(containsAllOf(values: 1, 3, 2, 2, 1).matches([1, 3, 2, 2, 1]))
+
+        XCTAssertFalse(containsAllOf([1, 3, 2, 2, 1]).matches([2]))
+        XCTAssertFalse(containsAllOf([1, 3, 2, 2, 1]).matches([1, 2, 3]))
+        XCTAssertFalse(containsAllOf([1, 3, 2, 2, 1]).matches([1, 3, 2, 2]))
+        XCTAssertTrue(containsAllOf([1, 3, 2, 2, 1]).matches([1, 3, 2, 2, 1]))
+    }
+
     // MARK: Contains NONE of the elements.
     func testContainsNoneOf() {
         // Variadic parameters.

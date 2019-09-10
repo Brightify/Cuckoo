@@ -277,6 +277,8 @@ These basic values are extended to conform to `Matchable`:
 - `UInt32`
 - `UInt64`
 
+Matchers for `Array`, `Dictionary`, and `Set` are automatically synthesised as long as the type of the element conforms to `Matchable`.
+
 #### B) Custom matchers
 If Cuckoo doesn't know the type you are trying to compare, you have to write your own method `equal(to:)` using a `ParameterMatcher`. Add this method to your test file:
 
@@ -328,6 +330,8 @@ anyThrowingClosure()
 /// Returns a matcher matching any non nil value.
 notNil()
 ```
+
+Cuckoo also provides plenty of convenience matchers for sequences and dictionaries, allowing you to check if a sequence is a superset of a certain sequence, contains at least one of its elements, or is completely disjunct from it.
 
 `Matchable` can be chained with methods `or` and `and` like so:
 
