@@ -278,7 +278,7 @@ These basic values are extended to conform to `Matchable`:
 - `UInt32`
 - `UInt64`
 
-Matchers for `Array`, `Dictionary`, and `Set` are automatically synthesised as long as the type of the element conforms to `Matchable`.
+Matchers for `Array`, `Dictionary`, and `Set` are automatically synthesized as long as the type of the element conforms to `Matchable`.
 
 #### B) Custom matchers
 If Cuckoo doesn't know the type you are trying to compare, you have to write your own method `equal(to:)` using a `ParameterMatcher`. Add this method to your test file:
