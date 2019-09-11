@@ -8,6 +8,10 @@
 import XCTest
 
 extension XCTestCase {
+    /**
+     * Objective-C equivalent to Cuckoo's own `verify`.
+     * - parameter invocation: Autoclosured invocation of the method/variable that is being verified.
+     */
     public func objcVerify<OUT>(_ invocation: @autoclosure () -> OUT, file: StaticString = #file, line: UInt = #line) {
         OCMMacroState.beginVerifyMacro(at: OCMLocation(testCase: self, file: String(file), line: line))
         _ = invocation()

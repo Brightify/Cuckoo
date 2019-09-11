@@ -360,8 +360,6 @@
 		68BBF92723226165005533AD /* Stubber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BBF92523226165005533AD /* Stubber.swift */; };
 		68BBF9482322623F005533AD /* StringProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 6862678222BA540300FD8A1A /* StringProxy.h */; };
 		68BBF95F23226240005533AD /* StringProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 6862678222BA540300FD8A1A /* StringProxy.h */; };
-		68BBF96023226249005533AD /* ObjectiveProtocolTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680D3AA4229D6551004A921E /* ObjectiveProtocolTest.swift */; };
-		68BBF9612322624C005533AD /* ObjectiveClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680D3AA2229D6543004A921E /* ObjectiveClassTest.swift */; };
 		68BBF9622322626A005533AD /* Cuckoo-BridgingHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 680D3980229D3316004A921E /* Cuckoo-BridgingHeader.h */; };
 		68BBF9632322626B005533AD /* Cuckoo-BridgingHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 680D3980229D3316004A921E /* Cuckoo-BridgingHeader.h */; };
 		68E9EAE6224B9F34000DBD29 /* StubFunctionThenThrowingTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68E9EAE5224B9F34000DBD29 /* StubFunctionThenThrowingTrait.swift */; };
@@ -2030,7 +2028,6 @@
 				6862680122BA8BAA00FD8A1A /* UnicodeTestProtocol.swift in Sources */,
 				6862680222BA8BAA00FD8A1A /* TestUtils.swift in Sources */,
 				6862680322BA8BAA00FD8A1A /* ClassForStubTesting.swift in Sources */,
-				68BBF9612322624C005533AD /* ObjectiveClassTest.swift in Sources */,
 				6862680422BA8BAA00FD8A1A /* StubThrowingFunctionTest.swift in Sources */,
 				6862680622BA8BAA00FD8A1A /* GeneratedMocks.swift in Sources */,
 				6862680722BA8BAA00FD8A1A /* CallMatcherTest.swift in Sources */,
@@ -2044,7 +2041,6 @@
 				6862681022BA8BAA00FD8A1A /* GenericMethodClass.swift in Sources */,
 				6862681122BA8BAA00FD8A1A /* StubFunctionTest.swift in Sources */,
 				6862681222BA8BAA00FD8A1A /* ClassTest.swift in Sources */,
-				68BBF96023226249005533AD /* ObjectiveProtocolTest.swift in Sources */,
 				6862681322BA8BAA00FD8A1A /* FailTest.swift in Sources */,
 				6862681422BA8BAA00FD8A1A /* TestedSubclass.swift in Sources */,
 				6862681522BA8BAA00FD8A1A /* CollisionClasses.swift in Sources */,

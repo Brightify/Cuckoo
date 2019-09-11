@@ -49,67 +49,82 @@ public func anyString() -> ParameterMatcher<String> {
     return ParameterMatcher()
 }
 
-/// Returns a matcher matching any closure.
+/// Returns a matcher matching any throwing closure.
 public func anyThrowingClosure<OUT>() -> ParameterMatcher<() throws -> OUT> {
     return ParameterMatcher()
 }
 
+/// Returns a matcher matching any throwing closure.
 public func anyThrowingClosure<IN1, OUT>() -> ParameterMatcher<(IN1) throws -> OUT> {
     return ParameterMatcher()
 }
 
+/// Returns a matcher matching any throwing closure.
 public func anyThrowingClosure<IN1, IN2, OUT>() -> ParameterMatcher<(IN1, IN2) throws -> OUT> {
     return ParameterMatcher()
 }
 
+/// Returns a matcher matching any throwing closure.
 public func anyThrowingClosure<IN1, IN2, IN3, OUT>() -> ParameterMatcher<(IN1, IN2, IN3) throws -> OUT> {
     return ParameterMatcher()
 }
 
+/// Returns a matcher matching any throwing closure.
 public func anyThrowingClosure<IN1, IN2, IN3, IN4, OUT>() -> ParameterMatcher<(IN1, IN2, IN3, IN4) throws -> OUT> {
     return ParameterMatcher()
 }
 
+/// Returns a matcher matching any throwing closure.
 public func anyThrowingClosure<IN1, IN2, IN3, IN4, IN5, OUT>() -> ParameterMatcher<(IN1, IN2, IN3, IN4, IN5) throws -> OUT> {
     return ParameterMatcher()
 }
 
+/// Returns a matcher matching any throwing closure.
 public func anyThrowingClosure<IN1, IN2, IN3, IN4, IN5, IN6, OUT>() -> ParameterMatcher<(IN1, IN2, IN3, IN4, IN5, IN6) throws -> OUT> {
     return ParameterMatcher()
 }
 
+/// Returns a matcher matching any throwing closure.
 public func anyThrowingClosure<IN1, IN2, IN3, IN4, IN5, IN6, IN7, OUT>() -> ParameterMatcher<(IN1, IN2, IN3, IN4, IN5, IN6, IN7) throws -> OUT> {
     return ParameterMatcher()
 }
 
+/// Returns a matcher matching any non-throwing closure.
 public func anyClosure<OUT>() -> ParameterMatcher<() -> OUT> {
     return ParameterMatcher()
 }
 
+/// Returns a matcher matching any non-throwing closure.
 public func anyClosure<IN1, OUT>() -> ParameterMatcher<(IN1) -> OUT> {
     return ParameterMatcher()
 }
 
+/// Returns a matcher matching any non-throwing closure.
 public func anyClosure<IN1, IN2, OUT>() -> ParameterMatcher<(IN1, IN2) -> OUT> {
     return ParameterMatcher()
 }
 
+/// Returns a matcher matching any non-throwing closure.
 public func anyClosure<IN1, IN2, IN3, OUT>() -> ParameterMatcher<(IN1, IN2, IN3) -> OUT> {
     return ParameterMatcher()
 }
 
+/// Returns a matcher matching any non-throwing closure.
 public func anyClosure<IN1, IN2, IN3, IN4, OUT>() -> ParameterMatcher<(IN1, IN2, IN3, IN4) -> OUT> {
     return ParameterMatcher()
 }
 
+/// Returns a matcher matching any non-throwing closure.
 public func anyClosure<IN1, IN2, IN3, IN4, IN5, OUT>() -> ParameterMatcher<(IN1, IN2, IN3, IN4, IN5) -> OUT> {
     return ParameterMatcher()
 }
 
+/// Returns a matcher matching any non-throwing closure.
 public func anyClosure<IN1, IN2, IN3, IN4, IN5, IN6, OUT>() -> ParameterMatcher<(IN1, IN2, IN3, IN4, IN5, IN6) -> OUT> {
     return ParameterMatcher()
 }
 
+/// Returns a matcher matching any non-throwing closure.
 public func anyClosure<IN1, IN2, IN3, IN4, IN5, IN6, IN7, OUT>() -> ParameterMatcher<(IN1, IN2, IN3, IN4, IN5, IN6, IN7) -> OUT> {
     return ParameterMatcher()
 }
@@ -171,7 +186,18 @@ public func anyOptionalThrowingClosure<IN, OUT>() -> ParameterMatcher<(((IN)) th
     return notNil()
 }
 
-/// Returns a matcher matching any nil value
+/// Returns a matcher matching any non-nil value.
+public func notNil<T>() -> ParameterMatcher<T?> {
+    return ParameterMatcher {
+        if case .none = $0 {
+            return false
+        } else {
+            return true
+        }
+    }
+}
+
+/// Returns a matcher matching any nil value.
 public func isNil<T>() -> ParameterMatcher<T?> {
     return ParameterMatcher {
         if case .none = $0 {
