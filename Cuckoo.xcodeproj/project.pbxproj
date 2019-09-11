@@ -362,6 +362,12 @@
 		68BBF95F23226240005533AD /* StringProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 6862678222BA540300FD8A1A /* StringProxy.h */; };
 		68BBF9622322626A005533AD /* Cuckoo-BridgingHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 680D3980229D3316004A921E /* Cuckoo-BridgingHeader.h */; };
 		68BBF9632322626B005533AD /* Cuckoo-BridgingHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 680D3980229D3316004A921E /* Cuckoo-BridgingHeader.h */; };
+		68BBFAF7232933D9005533AD /* Array+matchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685D699C2320043200250BF2 /* Array+matchers.swift */; };
+		68BBFAF8232933D9005533AD /* Array+matchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685D699C2320043200250BF2 /* Array+matchers.swift */; };
+		68BBFAF9232933DE005533AD /* Dictionary+matchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685D699F2320043C00250BF2 /* Dictionary+matchers.swift */; };
+		68BBFAFA232933DF005533AD /* Dictionary+matchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685D699F2320043C00250BF2 /* Dictionary+matchers.swift */; };
+		68BBFAFB232933EB005533AD /* Set+matchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685D69A22320044400250BF2 /* Set+matchers.swift */; };
+		68BBFAFC232933EC005533AD /* Set+matchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685D69A22320044400250BF2 /* Set+matchers.swift */; };
 		68E9EAE6224B9F34000DBD29 /* StubFunctionThenThrowingTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68E9EAE5224B9F34000DBD29 /* StubFunctionThenThrowingTrait.swift */; };
 		68E9EAFF224BA4B4000DBD29 /* StubFunctionThenThrowingTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68E9EAE5224B9F34000DBD29 /* StubFunctionThenThrowingTrait.swift */; };
 		6C79A9E5C192C97413AD9282 /* Pods_Cuckoo_OCMock_macOS_Cuckoo_OCMock_macOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2428FD13E9D60777FD50543 /* Pods_Cuckoo_OCMock_macOS_Cuckoo_OCMock_macOSTests.framework */; };
@@ -1868,6 +1874,7 @@
 				680D3A15229D3671004A921E /* VerificationProxy.swift in Sources */,
 				680D3A16229D3671004A921E /* ParameterMatcherFunctions.swift in Sources */,
 				680D3A17229D3671004A921E /* StubAction.swift in Sources */,
+				68BBFAF7232933D9005533AD /* Array+matchers.swift in Sources */,
 				680D3AA9229DA514004A921E /* OCMockObject+CuckooMockObject.m in Sources */,
 				6862679A22BA540400FD8A1A /* StringProxy.m in Sources */,
 				680D3A18229D3671004A921E /* VerifyReadOnlyProperty.swift in Sources */,
@@ -1892,9 +1899,11 @@
 				680D3A27229D3671004A921E /* OCMockObject+Workaround.m in Sources */,
 				680D3A28229D3671004A921E /* DefaultValueRegistry.swift in Sources */,
 				680D3A29229D3671004A921E /* NSObject+TrustMe.m in Sources */,
+				68BBFAFC232933EC005533AD /* Set+matchers.swift in Sources */,
 				680D3A2B229D3671004A921E /* Utils.swift in Sources */,
 				680D3A2C229D3671004A921E /* MockManager.swift in Sources */,
 				680D3A2D229D3671004A921E /* StubFunctionThenCallRealImplementationTrait.swift in Sources */,
+				68BBFAF9232933DE005533AD /* Dictionary+matchers.swift in Sources */,
 				680D3A98229D53E2004A921E /* ObjectiveMatchers.swift in Sources */,
 				680D3A2E229D3671004A921E /* __DoNotUse.swift in Sources */,
 				680D3A2F229D3671004A921E /* MockManager+preconfigured.swift in Sources */,
@@ -1972,6 +1981,7 @@
 				686267A822BA8BA700FD8A1A /* VerificationProxy.swift in Sources */,
 				686267A922BA8BA700FD8A1A /* ParameterMatcherFunctions.swift in Sources */,
 				686267AA22BA8BA700FD8A1A /* StubAction.swift in Sources */,
+				68BBFAF8232933D9005533AD /* Array+matchers.swift in Sources */,
 				686267AB22BA8BA700FD8A1A /* OCMockObject+CuckooMockObject.m in Sources */,
 				686267AC22BA8BA700FD8A1A /* StringProxy.m in Sources */,
 				686267AD22BA8BA700FD8A1A /* VerifyReadOnlyProperty.swift in Sources */,
@@ -1996,9 +2006,11 @@
 				686267BE22BA8BA700FD8A1A /* OCMockObject+Workaround.m in Sources */,
 				686267BF22BA8BA700FD8A1A /* DefaultValueRegistry.swift in Sources */,
 				686267C022BA8BA700FD8A1A /* NSObject+TrustMe.m in Sources */,
+				68BBFAFB232933EB005533AD /* Set+matchers.swift in Sources */,
 				686267C122BA8BA700FD8A1A /* Utils.swift in Sources */,
 				686267C222BA8BA700FD8A1A /* MockManager.swift in Sources */,
 				686267C322BA8BA700FD8A1A /* StubFunctionThenCallRealImplementationTrait.swift in Sources */,
+				68BBFAFA232933DF005533AD /* Dictionary+matchers.swift in Sources */,
 				686267C422BA8BA700FD8A1A /* ObjectiveMatchers.swift in Sources */,
 				686267C522BA8BA700FD8A1A /* __DoNotUse.swift in Sources */,
 				686267C622BA8BA700FD8A1A /* MockManager+preconfigured.swift in Sources */,

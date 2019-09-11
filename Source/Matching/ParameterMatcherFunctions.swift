@@ -208,11 +208,6 @@ public func isNil<T>() -> ParameterMatcher<T?> {
     }
 }
 
-/// Returns a matcher matching any non nil value.
-public func notNil<T>() -> ParameterMatcher<T?> {
-    return not(isNil())
-}
-
 /// Returns a matcher negating any matcher it's applied to.
 public func not<T>(_ matcher: ParameterMatcher<T>) -> ParameterMatcher<T> {
     return ParameterMatcher { value in
