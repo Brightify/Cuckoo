@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
   #s.watchos.deployment_target   = '2.0' # watchos does not include XCTest framework :(
   s.tvos.deployment_target      = '9.0'
   generator_name                = 'cuckoo_generator'
-  s.swift_version               = '4.2'
+  s.swift_version               = '5.0'
   s.preserve_paths              = ['Generator/**/*', 'run', 'build_generator', generator_name]
   s.prepare_command             = <<-CMD
                                     curl -Lo #{generator_name} https://github.com/Brightify/Cuckoo/releases/download/#{s.version}/#{generator_name}
@@ -30,6 +30,10 @@ Pod::Spec.new do |s|
   s.requires_arc                = true
   s.pod_target_xcconfig         = { 'ENABLE_BITCODE' => 'NO', 'SWIFT_REFLECTION_METADATA_LEVEL' => 'none' }
   s.default_subspec             = 'Swift'
+  
+  s.xcconfig = {
+    'LIBRARY_SEARCH_PATHS' => '$(TOOLCHAIN_DIR)/usr/lib/swift-$(SWIFT_VERSION)/$(PLATFORM_NAME) $(inherited)'
+  }
 
   s.subspec 'Swift' do |sub|
     sub.source_files = 'Source/**/*.swift'
