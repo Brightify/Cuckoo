@@ -98,7 +98,13 @@ public extension Method {
             if parameter.isClosure && !parameter.isEscaping {
                 let parameterCount = parameter.closureParamCount
                 let parameterSignature = parameterCount > 0 ? (1...parameterCount).map { _ in "_" }.joined(separator: ", ") : "()"
-                return "{ \(parameterSignature) in fatalError(\"This is a stub! It's not supposed to be called!\") }"
+                var returns: String?
+
+                if !parameter.type.sugarized.isEmpty {
+                  returns = parameter.type.sugarized.components(separatedBy: "->").last
+                }
+
+                return "{ \(parameterSignature) \(returns != nil && returns != "Void" ? " -> \(returns!) " : "") in fatalError(\"This is a stub! It's not supposed to be called!\") }"
             } else {
                 return parameter.name
             }
