@@ -153,10 +153,16 @@ class ClassTest: XCTestCase {
     func testWithClosure() {
         stub(mock) { mock in
             when(mock.withClosure(anyClosure())).then { $0("a") }
+            when(mock.withClosureReturnAVoidClosure(anyClosure())).then { $0("a")()}
+            when(mock.withClosureReturnAnIntClosure(anyClosure())).then { $0("a")(1)}
         }
 
         XCTAssertEqual(mock.withClosure { _ in 1 }, 1)
+        XCTAssertEqual(mock.withClosureReturnAVoidClosure {_ in { return 1 }}, 1)
+        XCTAssertEqual(mock.withClosureReturnAnIntClosure { _ in { _ in return 1} }, 1)
         verify(mock).withClosure(anyClosure())
+        verify(mock).withClosureReturnAVoidClosure(anyClosure())
+        verify(mock).withClosureReturnAnIntClosure(anyClosure())
     }
 
     func testWithEscape() {

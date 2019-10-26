@@ -53,6 +53,14 @@ class TestedClass {
         return closure("hello")
     }
 
+    func withClosureReturnAVoidClosure(_ closure: (String) -> () -> Int) -> Int {
+      return closure("hello")()
+    }
+
+    func withClosureReturnAnIntClosure(_ closure: (String) -> (Int) -> Int) -> Int {
+      return closure("hello")(3)
+    }
+
     func withEscape(_ a: String, action closure: @escaping (String) -> Void) {
         closure(a)
     }
