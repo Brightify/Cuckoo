@@ -98,13 +98,20 @@ public extension Method {
             if parameter.isClosure && !parameter.isEscaping {
                 let parameterCount = parameter.closureParamCount
                 let parameterSignature = parameterCount > 0 ? (1...parameterCount).map { _ in "_" }.joined(separator: ", ") : "()"
-                var returns: String?
+                var returnSignature = ""
 
                 if !parameter.type.sugarized.isEmpty {
-                  returns = parameter.type.sugarized.components(separatedBy: "->").last
+                    returnSignature = extractClosureReturnType(parameter: parameter.type.sugarized) ?? ""
+                    if !returnSignature.isEmpty {
+                      if returnSignature != "Void" {
+                        returnSignature = " -> " + returnSignature
+                      }
+                      else {
+                        returnSignature = ""
+                      }
+                    }
                 }
-
-                return "{ \(parameterSignature) \(returns != nil && returns != "Void" ? " -> \(returns!) " : "") in fatalError(\"This is a stub! It's not supposed to be called!\") }"
+                return "{ \(parameterSignature)\(returnSignature) in fatalError(\"This is a stub! It's not supposed to be called!\") }"
             } else {
                 return parameter.name
             }
@@ -140,4 +147,22 @@ public extension Method {
             "genericParameters": isGeneric ? "<\(genericParametersString)>" : "",
         ]
     }
+  private func extractClosureReturnType(parameter: String) -> String? {
+    var openBracketCount = 0
+    var closeBracketCount = 0
+    for i : Int in 0..<parameter.count {
+      let index = parameter.index(parameter.startIndex, offsetBy: i)
+      if parameter[index] == "(" {
+        openBracketCount += 1
+      }
+      else if (parameter[index] == ")") {
+        closeBracketCount += 1
+        if openBracketCount == closeBracketCount {
+         let afterClosure = String(parameter[parameter.index(after: index)..<parameter.endIndex])
+         return afterClosure.matches(for: "\\s*->\\s*(.*)\\s*").first
+        }
+      }
+    }
+    return nil
+  }
 }

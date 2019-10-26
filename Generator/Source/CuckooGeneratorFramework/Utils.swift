@@ -18,6 +18,17 @@ extension String {
         return components(separatedBy: occurence).first
     }
 
+    func matches(for regex: String) -> [String] {
+      do {
+        let regex = try NSRegularExpression(pattern: regex)
+        let nsString = self as NSString
+        let results = regex.matches(in: self, range: NSRange(location: 0, length: nsString.length))
+        return results.map { nsString.substring(with: $0.range(at: 1)) }
+      } catch {
+        return []
+      }
+    }
+
     subscript(range: Range<Int>) -> String {
         let stringRange = index(startIndex, offsetBy: range.lowerBound)..<index(startIndex, offsetBy: range.upperBound)
         return String(self[stringRange])
