@@ -42,3 +42,4 @@ Generator/*.app
 cuckoo_generator
 Generator/CuckooGenerator.xcodeproj
 .fastlane
+Cuckoo.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
