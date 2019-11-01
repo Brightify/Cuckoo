@@ -105,8 +105,7 @@ public extension Method {
                     if !returnSignature.isEmpty {
                       if returnSignature != "Void" {
                         returnSignature = " -> " + returnSignature
-                      }
-                      else {
+                      } else {
                         returnSignature = ""
                       }
                     }
@@ -147,22 +146,25 @@ public extension Method {
             "genericParameters": isGeneric ? "<\(genericParametersString)>" : "",
         ]
     }
-  private func extractClosureReturnType(parameter: String) -> String? {
-    var openBracketCount = 0
-    var closeBracketCount = 0
-    for i : Int in 0..<parameter.count {
-      let index = parameter.index(parameter.startIndex, offsetBy: i)
-      if parameter[index] == "(" {
-        openBracketCount += 1
-      }
-      else if (parameter[index] == ")") {
-        closeBracketCount += 1
-        if openBracketCount == closeBracketCount {
-         let afterClosure = String(parameter[parameter.index(after: index)..<parameter.endIndex])
-         return afterClosure.matches(for: "\\s*->\\s*(.*)\\s*").first
+    private func extractClosureReturnType(parameter: String) -> String? {
+        var parentLevel = 0
+        for i in 0..<parameter.count {
+            let index = parameter.index(parameter.startIndex, offsetBy: i)
+            if parameter[index] == "(" {
+                parentLevel += 1
+            }
+            else if (parameter[index] == ")") {
+                parentLevel -= 1
+              if parentLevel == 0 {
+                    let afterClosure = String(parameter[parameter.index(after: index)..<parameter.endIndex])
+                    do {
+                        return try afterClosure.matches(for: "\\s*->\\s*(.*)\\s*").first
+                    } catch let error {
+                        fatalError("Invalid regex:" + error.localizedDescription)
+                    }
+                }
+            }
         }
-      }
+        return nil
     }
-    return nil
-  }
 }
