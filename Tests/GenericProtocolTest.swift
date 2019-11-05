@@ -155,7 +155,7 @@ class GenericProtocolTest: XCTestCase {
                                                  "Are you sure?": "Yeah, I'm just waiting for my wife.",
                                                  "Alright, have a nice weekend!": "Thanks, you too."])
 
-        verify(mock, times(2)).readWritePropertyV.get
+        verify(mock, times(2)).readWritePropertyV.get()
     }
 
     // the next two test cases show using a struct as the default implementation and changing its state:

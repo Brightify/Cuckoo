@@ -103,7 +103,7 @@ extension Templates {
     {{ attribute.text }}
     {% endfor %}
     {{ method.accessibility }}{% if container.isImplementation and method.isOverriding %} override{% endif %} func {{ method.name }}{{ method.genericParameters }}({{ method.parameterSignature }}) {{ method.returnSignature }} {
-        {{ method.parameters|openNestedClosure:method.isThrowing, :method.returnType }}
+        {{ method.self|openNestedClosure }}
     return{% if method.isThrowing %} try{% endif %} cuckoo_manager.call{% if method.isThrowing %}{{ method.throwType|capitalize }}{% endif %}("{{method.fullyQualifiedName}}",
             parameters: ({{method.parameterNames}}),
             escapingParameters: ({{method.escapingParameterNames}}),

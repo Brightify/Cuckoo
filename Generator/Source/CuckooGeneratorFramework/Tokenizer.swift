@@ -214,7 +214,7 @@ public struct Tokenizer {
 
         case Kinds.AssociatedType.rawValue:
             let regex = try! NSRegularExpression(pattern: "\\s*:\\s*([^\\s;\\/]+)")
-            guard let nameRange = nameRange, let range = range else { return nil }
+            guard let range = range else { return nil }
             guard let inheritanceMatch = regex.firstMatch(
                 in: source,
                 range: NSMakeRange(range.startIndex, range.endIndex - range.startIndex)) else {

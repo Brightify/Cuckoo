@@ -63,12 +63,12 @@ public extension Method {
         return parameters.contains { $0.isOptional }
     }
 
-    public func isEqual(to other: Token) -> Bool {
+    func isEqual(to other: Token) -> Bool {
         guard let other = other as? Method else { return false }
         return self.name == other.name && self.parameters == other.parameters && self.returnType == other.returnType
     }
 
-    public func serialize() -> [String : Any] {
+    func serialize() -> [String : Any] {
         let call = parameters.map {
             let referencedName = "\($0.isInout ? "&" : "")\($0.name)"
             if let label = $0.label {

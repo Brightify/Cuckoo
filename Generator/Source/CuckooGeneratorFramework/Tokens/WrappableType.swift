@@ -74,7 +74,7 @@ public enum WrappableType {
             return .optional(wrapped.withoutAttributes)
         case .implicitlyUnwrappedOptional(let wrapped):
             return .implicitlyUnwrappedOptional(wrapped.withoutAttributes)
-        case .attributed(let wrapped, let attributes):
+        case .attributed(let wrapped, _):
             return wrapped
         case .type(let typeString):
             return .type(typeString)
@@ -85,7 +85,7 @@ public enum WrappableType {
         switch self {
         case .optional, .implicitlyUnwrappedOptional:
             return true
-        case .attributed(let wrapped, let attributes):
+        case .attributed(let wrapped, _):
             return wrapped.isOptional
         case .type:
             return false
@@ -124,9 +124,9 @@ public enum WrappableType {
         switch self {
         case .optional(let wrapped), .implicitlyUnwrappedOptional(let wrapped):
             return wrapped.containsAttribute(named: attribute)
-        case .attributed(let wrapped, let attributes):
+        case .attributed(_, let attributes):
             return attributes.contains(attribute.trimmed)
-        case .type(let typeString):
+        case .type:
             return false
         }
     }

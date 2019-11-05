@@ -47,13 +47,9 @@ public struct Generator {
             return self.parameterMatchers(for: parameters)
         }
 
-        ext.registerFilter("openNestedClosure") { (value: Any?, arguments: [Any?]) in
-            guard let parameters = value as? [MethodParameter] else { return value }
-            var returnType: WrappableType = WrappableType(parsing: "")
-            if arguments.count > 1, let unwrappedWrapableType = arguments[1] as? WrappableType {
-              returnType = unwrappedWrapableType
-            }
-            return self.openNestedClosure(for: parameters, throwing: arguments.first as? Bool, returnType: returnType)
+        ext.registerFilter("openNestedClosure") { (value: Any?) in
+            guard let method = value as? Method else { return value }
+            return self.openNestedClosure(for: method)
         }
 
         ext.registerFilter("closeNestedClosure") { (value: Any?) in
@@ -110,18 +106,21 @@ public struct Generator {
         return type.replacingOccurrences(of: "!", with: "?")
     }
 
-    private func openNestedClosure(for parameters: [MethodParameter], throwing: Bool? = false, returnType: WrappableType) -> String {
+    private func openNestedClosure(for method: Method) -> String {
         var fullString = ""
-        for (index, parameter) in parameters.enumerated() {
+        for (index, parameter) in method.parameters.enumerated() {
             if parameter.isClosure && !parameter.isEscaping {
                 let indents = String(repeating: "\t", count: index)
-                let tries = (throwing ?? false) ? " try " : " "
-                var returnSignature = returnType.sugarized
-                if !returnSignature.isEmpty {
-                  returnSignature = " -> \(returnSignature)"
+                let tries = method.isThrowing ? "try " : ""
+                let sugarizedReturnType = method.returnType.sugarized
+                let returnSignature: String
+                if sugarizedReturnType.isEmpty {
+                    returnSignature = sugarizedReturnType
+                } else {
+                    returnSignature = " -> \(sugarizedReturnType)"
                 }
 
-                fullString += "\(indents)return\(tries)withoutActuallyEscaping(\(parameter.name), do: { (\(parameter.name): @escaping \(parameter.type))\(returnSignature) in\n"
+                fullString += "\(indents)return \(tries)withoutActuallyEscaping(\(parameter.name), do: { (\(parameter.name): @escaping \(parameter.type))\(returnSignature) in\n"
             }
         }
         return fullString
