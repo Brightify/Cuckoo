@@ -11,7 +11,7 @@
 ## Introduction
 Cuckoo was created due to lack of a proper Swift mocking framework. We built the DSL to be very similar to [Mockito](http://mockito.org/), so anyone using it in Java/Android can immediately pick it up and use it.
 
-To have a chat, [join our Slack team](http://swiftkit.brightify.org)!
+To have a chat, [join our Slack workspace](http://swiftkit.brightify.org)!
 
 ## How does it work
 Cuckoo has two parts. One is the [runtime](https://github.com/Brightify/Cuckoo) and the other one is an OS X command-line tool simply called [CuckooGenerator](https://github.com/SwiftKit/CuckooGenerator).
@@ -45,13 +45,14 @@ Cuckoo works on the following platforms:
 - **Mac OSX 10.9+**
 - **tvOS 9+**
 
-We plan to add a **watchOS 2+** support soon.
+We plan to add **watchOS 2+** support soon.
+
+Note: Version `1.2.0` is the last one supporting **Swift 4.2**. Versions `1.3.0`+ support **Swift 5**.
 
 ## Cuckoo
 ### 1. Installation
 #### CocoaPods
-Cuckoo runtime is available through [CocoaPods](http://cocoapods.org). To install
-it, simply add the following line to your test target in your Podfile:
+Cuckoo runtime is available through [CocoaPods](http://cocoapods.org). To install it, simply add the following line to your test target in your Podfile:
 
 ```Ruby
 pod "Cuckoo"
@@ -83,8 +84,8 @@ echo "Mocks Input Directory = ${INPUT_DIR}"
 
 Input files can be also specified directly in `Run script` in `Input Files` form.
 
-Notes: All paths in the Run script must be absolute. Variable `PROJECT_DIR` automatically points to your project directory.  
-Keep in mind to include paths to inherited Classes and Protocols for mocking/stubbing parent and grandparents.
+Note: All paths in the Run script must be absolute. Variable `PROJECT_DIR` automatically points to your project directory.  
+**Remember to include paths to inherited Classes and Protocols for mocking/stubbing parent and grandparents.**
 
 #### Carthage
 To use Cuckoo with [Carthage](https://github.com/Carthage/Carthage) add in your Cartfile this line:
