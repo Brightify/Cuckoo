@@ -151,18 +151,32 @@ class ClassTest: XCTestCase {
     }
 
     func testWithClosure() {
+        func anyNestedClosure<IN1, IN2, OUT>() -> ParameterMatcher<((IN1) -> IN2) -> OUT> {
+            return ParameterMatcher()
+        }
+
         stub(mock) { mock in
             when(mock.withClosure(anyClosure())).then { $0("a") }
-            when(mock.withClosureReturnAVoidClosure(anyClosure())).then { $0("a")() }
-            when(mock.withClosureReturnAnIntClosure(anyClosure())).then { $0("a")(1) }
+            when(mock.withClosureReturningVoid(anyClosure())).then { $0("a")() }
+            when(mock.withClosureReturningInt(anyClosure())).then { $0("a")(1) }
+            when(mock.withOptionalClosureAlone(anyClosure())).then { $0?("a")(1) ?? 1 }
+            when(mock.withNestedClosure1(anyClosure())).then { $0("a")({ Int($0) ?? 1 }) }
+            when(mock.withNestedClosure2(anyNestedClosure())).then { $0({ Int($0) ?? 1 })({ Int($0) ?? 1 }) }
         }
 
         XCTAssertEqual(mock.withClosure { _ in 1 }, 1)
-        XCTAssertEqual(mock.withClosureReturnAVoidClosure {_ in { return 1 } }, 1)
-        XCTAssertEqual(mock.withClosureReturnAnIntClosure { _ in { _ in return 1} }, 1)
+        XCTAssertEqual(mock.withClosureReturningVoid {_ in { return 1 } }, 1)
+        XCTAssertEqual(mock.withClosureReturningInt { _ in { _ in return 1 } }, 1)
+        XCTAssertEqual(mock.withOptionalClosureAlone { _ in { _ in return 1 } }, 1)
+        XCTAssertEqual(mock.withNestedClosure1 { _ in { _ in return 1 } }, 1)
+        XCTAssertEqual(mock.withNestedClosure2 { _ in { _ in return 1 } }, 1)
+
         verify(mock).withClosure(anyClosure())
-        verify(mock).withClosureReturnAVoidClosure(anyClosure())
-        verify(mock).withClosureReturnAnIntClosure(anyClosure())
+        verify(mock).withClosureReturningVoid(anyClosure())
+        verify(mock).withClosureReturningInt(anyClosure())
+        verify(mock).withOptionalClosureAlone(anyClosure())
+        verify(mock).withNestedClosure1(anyClosure())
+        verify(mock).withNestedClosure2(anyNestedClosure())
     }
 
     func testWithEscape() {

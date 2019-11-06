@@ -53,12 +53,24 @@ class TestedClass {
         return closure("hello")
     }
 
-    func withClosureReturnAVoidClosure(_ closure: (String) -> () -> Int) -> Int {
+    func withClosureReturningVoid(_ closure: (String) -> () -> Int) -> Int {
         return closure("hello")()
     }
 
-    func withClosureReturnAnIntClosure(_ closure: (String) -> (Int) -> Int) -> Int {
+    func withClosureReturningInt(_ closure: (String) -> (Int) -> Int) -> Int {
         return closure("hello")(3)
+    }
+
+    func withOptionalClosureAlone(_ closure: ((String) -> (Int) -> Int)?) -> Int {
+        return (closure?("hello") ?? { $0 })(3)
+    }
+
+    func withNestedClosure1(_ closure: (String) -> ((String) -> Int) -> Int) -> Int {
+        return closure("hello")({ Int($0) ?? 0 })
+    }
+
+    func withNestedClosure2(_ closure: ((String) -> Int) -> ((String) -> Int) -> Int) -> Int {
+        return closure({ Int($0) ?? 0 })({ Int($0) ?? 0 })
     }
 
     func withEscape(_ a: String, action closure: @escaping (String) -> Void) {
