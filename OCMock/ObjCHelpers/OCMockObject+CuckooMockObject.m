@@ -33,7 +33,7 @@
 
                 // replace with `any` matcher, Cuckoo is a Swift library where comparing closures doesn't make sense
                 if ([(__bridge id)(value) isKindOfClass:objc_getClass("__NSMallocBlock__")]) {
-                    void* anyMatcher = CFBridgingRetain([OCMArg any]);
+                    const void* anyMatcher = CFBridgingRetain([OCMArg any]);
                     [invocation setArgument:&anyMatcher atIndex:i];
                 }
             }
