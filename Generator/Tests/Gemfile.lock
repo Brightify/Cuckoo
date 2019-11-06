@@ -24,7 +24,7 @@ GEM
       gherkin (~> 4.0)
     cucumber-wire (0.0.1)
     diff-lcs (1.2.5)
-    ffi (1.9.10)
+    ffi (1.9.25)
     gherkin (4.0.0)
     multi_json (1.12.1)
     multi_test (0.1.2)
