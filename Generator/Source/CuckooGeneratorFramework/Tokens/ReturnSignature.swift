@@ -25,7 +25,7 @@ public struct ReturnSignature {
 
 extension ReturnSignature: CustomStringConvertible {
     public var description: String {
-        let trimmedReturnType = returnType.sugarizedExplicitOnly.trimmed
+        let trimmedReturnType = returnType.explicitOptionalOnly.sugarized.trimmed
         let returnString = trimmedReturnType.isEmpty || trimmedReturnType == "Void" ? nil : "-> \(returnType)"
         let whereString = whereConstraints.isEmpty ? nil : "where \(whereConstraints.joined(separator: ", "))"
         return [throwType?.description, returnString, whereString].compactMap { $0 }.joined(separator: " ")

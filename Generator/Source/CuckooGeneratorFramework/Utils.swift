@@ -18,13 +18,6 @@ extension String {
         return components(separatedBy: occurence).first
     }
 
-    func matches(for regex: String) throws -> [String] {
-        let regex = try NSRegularExpression(pattern: regex)
-        let nsString = self as NSString
-        let results = regex.matches(in: self, range: NSRange(location: 0, length: nsString.length))
-        return results.map { nsString.substring(with: $0.range(at: 1)) }
-    }
-
     subscript(range: Range<Int>) -> String {
         let stringRange = index(startIndex, offsetBy: range.lowerBound)..<index(startIndex, offsetBy: range.upperBound)
         return String(self[stringRange])
@@ -64,10 +57,8 @@ extension Sequence {
 }
 
 internal func extractRange(from dictionary: [String: SourceKitRepresentable], offset: Key, length: Key) -> CountableRange<Int>? {
-    guard let
-        offset = (dictionary[offset.rawValue] as? Int64).map(Int.init),
-        let length = (dictionary[length.rawValue] as? Int64).map(Int.init)
-        else { return nil }
+    guard let offset = (dictionary[offset.rawValue] as? Int64).map(Int.init),
+        let length = (dictionary[length.rawValue] as? Int64).map(Int.init) else { return nil }
 
     return offset..<offset.advanced(by: length)
 }

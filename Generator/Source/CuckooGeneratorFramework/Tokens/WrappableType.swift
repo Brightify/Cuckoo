@@ -24,17 +24,6 @@ public enum WrappableType {
         }
     }
 
-    public var sugarizedExplicitOnly: String {
-        switch self {
-        case .optional(let wrapped), .implicitlyUnwrappedOptional(let wrapped):
-            return "\(wrapped.sugarizedExplicitOnly)?"
-        case .attributed(let wrapped, let attributes):
-            return "\(attributes.joined(separator: " ")) \(wrapped.sugarizedExplicitOnly)"
-        case .type(let type):
-            return type
-        }
-    }
-
     public var desugarized: String {
         switch self {
         case .optional(let wrapped), .implicitlyUnwrappedOptional(let wrapped):
@@ -43,6 +32,17 @@ public enum WrappableType {
             return "\(attributes.joined(separator: " ")) \(wrapped.desugarized)"
         case .type(let type):
             return type
+        }
+    }
+
+    public var explicitOptionalOnly: WrappableType {
+        switch self {
+        case .optional(let wrapped), .implicitlyUnwrappedOptional(let wrapped):
+            return .optional(wrapped.explicitOptionalOnly)
+        case .attributed(let wrapped, let attributes):
+            return .attributed(wrapped.explicitOptionalOnly, attributes: attributes)
+        case .type:
+            return self
         }
     }
 
@@ -76,8 +76,8 @@ public enum WrappableType {
             return .implicitlyUnwrappedOptional(wrapped.withoutAttributes)
         case .attributed(let wrapped, _):
             return wrapped
-        case .type(let typeString):
-            return .type(typeString)
+        case .type:
+            return self
         }
     }
 

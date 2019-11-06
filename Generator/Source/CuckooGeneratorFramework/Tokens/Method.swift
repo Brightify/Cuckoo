@@ -6,6 +6,8 @@
 //  Copyright © 2016 Brightify. All rights reserved.
 //
 
+import Foundation
+
 public protocol Method: Token, HasAccessibility {
     var name: String { get }
     var returnSignature: ReturnSignature { get }
@@ -79,36 +81,22 @@ public extension Method {
         }.joined(separator: ", ")
 
         let stubFunctionPrefix = isOverriding ? "Class" : "Protocol"
-        let stubFunction: String
-        if isThrowing {
-            if returnType.sugarized == "Void" {
-                stubFunction = "Cuckoo.\(stubFunctionPrefix)StubNoReturnThrowingFunction"
-            } else {
-                stubFunction = "Cuckoo.\(stubFunctionPrefix)StubThrowingFunction"
-            }
-        } else {
-            if returnType.sugarized == "Void" {
-                stubFunction = "Cuckoo.\(stubFunctionPrefix)StubNoReturnFunction"
-            } else {
-                stubFunction = "Cuckoo.\(stubFunctionPrefix)StubFunction"
-            }
-        }
+        let returnString = returnType.sugarized == "Void" ? "NoReturn" : ""
+        let throwingString = isThrowing ? "Throwing" : ""
+        let stubFunction = "Cuckoo.\(stubFunctionPrefix)Stub\(returnString)\(throwingString)Function"
 
         let escapingParameterNames = parameters.map { parameter in
             if parameter.isClosure && !parameter.isEscaping {
                 let parameterCount = parameter.closureParamCount
                 let parameterSignature = parameterCount > 0 ? (1...parameterCount).map { _ in "_" }.joined(separator: ", ") : "()"
-                var returnSignature = ""
 
-                if !parameter.type.sugarized.isEmpty {
-                    returnSignature = extractClosureReturnType(parameter: parameter.type.sugarized) ?? ""
-                    if !returnSignature.isEmpty {
-                      if returnSignature != "Void" {
-                        returnSignature = " -> " + returnSignature
-                      } else {
-                        returnSignature = ""
-                      }
-                    }
+                // FIXME: Instead of parsing the closure return type here, Tokenizer should do it and pass the information in a data structure
+                let returnSignature: String
+                let closureReturnType = extractClosureReturnType(parameter: parameter.type.sugarized)
+                if let closureReturnType = closureReturnType, !closureReturnType.isEmpty && closureReturnType != "Void" {
+                    returnSignature = " -> " + closureReturnType
+                } else {
+                    returnSignature = ""
                 }
                 return "{ \(parameterSignature)\(returnSignature) in fatalError(\"This is a stub! It's not supposed to be called!\") }"
             } else {
@@ -128,7 +116,7 @@ public extension Method {
             "parameterNames": parameters.map { $0.name }.joined(separator: ", "),
             "escapingParameterNames": escapingParameterNames,
             "isInit": isInit,
-            "returnType": returnType.sugarizedExplicitOnly,
+            "returnType": returnType.explicitOptionalOnly.sugarized,
             "isThrowing": isThrowing,
             "throwType": returnSignature.throwType?.description ?? "",
             "fullyQualifiedName": fullyQualifiedName,
@@ -146,25 +134,25 @@ public extension Method {
             "genericParameters": isGeneric ? "<\(genericParametersString)>" : "",
         ]
     }
+
     private func extractClosureReturnType(parameter: String) -> String? {
-        var parentLevel = 0
+        var parenLevel = 0
         for i in 0..<parameter.count {
             let index = parameter.index(parameter.startIndex, offsetBy: i)
-            if parameter[index] == "(" {
-                parentLevel += 1
-            }
-            else if (parameter[index] == ")") {
-                parentLevel -= 1
-              if parentLevel == 0 {
-                    let afterClosure = String(parameter[parameter.index(after: index)..<parameter.endIndex])
-                    do {
-                        return try afterClosure.matches(for: "\\s*->\\s*(.*)\\s*").first
-                    } catch let error {
-                        fatalError("Invalid regex:" + error.localizedDescription)
-                    }
+            let character = parameter[index]
+            if character == "(" {
+                parenLevel += 1
+            } else if character == ")" {
+                parenLevel -= 1
+                if parenLevel == 0 {
+                    let returnSignature = String(parameter[parameter.index(after: index)..<parameter.endIndex])
+                    let regex = try! NSRegularExpression(pattern: "\\s*->\\s*(.*)\\s*")
+                    guard let result = regex.matches(in: returnSignature, range: NSRange(location: 0, length: returnSignature.count)).first else { return nil }
+                    return returnSignature[result.range(at: 1)]
                 }
             }
         }
+
         return nil
     }
 }
