@@ -161,16 +161,16 @@ public class MockManager {
         isDefaultImplementationEnabled = true
     }
     
-    func reset() {
+    public func reset() {
         clearStubs()
         clearInvocations()
     }
     
-    func clearStubs() {
+    public func clearStubs() {
         stubs.removeAll()
     }
     
-    func clearInvocations() {
+    public func clearInvocations() {
         stubCalls.removeAll()
         unverifiedStubCallsIndexes.removeAll()
     }
