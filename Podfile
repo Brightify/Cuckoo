@@ -13,6 +13,18 @@ target 'Cuckoo+OCMock-iOS' do
   end
 end
 
+target 'Cuckoo+OCMock-tvOS' do
+  use_frameworks!
+
+  platform :tvos, '9.0'
+
+  pod 'OCMock'
+
+  target 'Cuckoo+OCMock_tvOSTests' do
+
+  end
+end
+
 target 'Cuckoo+OCMock-macOS' do
   use_frameworks!
 
