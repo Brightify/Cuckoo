@@ -18,6 +18,9 @@ class ExcludedStubTest: XCTestCase {
 #if os(iOS)
         XCTAssertNotNil(NSClassFromString("Cuckoo_iOSTests.ExcludedTestClass"))
         XCTAssertNil(NSClassFromString("Cuckoo_iOSTests.MockExcludedTestClass"))
+#elseif os(tvOS)
+        XCTAssertNotNil(NSClassFromString("Cuckoo_tvOSTests.ExcludedTestClass"))
+        XCTAssertNil(NSClassFromString("Cuckoo_tvOSTests.MockExcludedTestClass"))
 #else
         XCTAssertNotNil(NSClassFromString("Cuckoo_macOSTests.ExcludedTestClass"))
         XCTAssertNil(NSClassFromString("Cuckoo_macOSTests.MockExcludedTestClass"))
