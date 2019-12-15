@@ -8,6 +8,7 @@
 
 public protocol ContainerToken: Token, HasAccessibility {
     var name: String { get }
+    var prefix: String { get }
     var range: CountableRange<Int> { get }
     var nameRange: CountableRange<Int> { get }
     var bodyRange: CountableRange<Int> { get }
@@ -47,7 +48,8 @@ extension ContainerToken {
             "methods": methods,
             "initializers": implementation ? [] : initializers,
             "isImplementation": implementation,
-            "mockName": "Mock\(name)",
+            "mockName": "\(prefix)Mock\(name)",
+            "stubName": "\(prefix)\(name)Stub",
             "inheritedTypes": inheritedTypes,
             "attributes": attributes.filter { $0.isSupported },
             "isGeneric": isGeneric,

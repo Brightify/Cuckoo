@@ -13,11 +13,12 @@ public struct Tokenizer {
     private let file: File
     private let source: String
     private let debugMode: Bool
+    private let prefix: String
 
-    public init(sourceFile: File, debugMode: Bool) {
+    public init(sourceFile: File, debugMode: Bool, prefix: String) {
         self.file = sourceFile
         self.debugMode = debugMode
-
+        self.prefix = prefix
         source = sourceFile.contents
     }
 
@@ -101,6 +102,7 @@ public struct Tokenizer {
 
             return ProtocolDeclaration(
                 name: name,
+                prefix: prefix,
                 accessibility: accessibility,
                 range: range!,
                 nameRange: nameRange!,
@@ -126,6 +128,7 @@ public struct Tokenizer {
 
             return ClassDeclaration(
                 name: name,
+                prefix: prefix,
                 accessibility: accessibility,
                 range: range!,
                 nameRange: nameRange!,
