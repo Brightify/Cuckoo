@@ -33,7 +33,8 @@ public struct ClassDeclaration: ContainerToken, HasAccessibility {
             children: tokens,
             inheritedTypes: self.inheritedTypes,
             attributes: self.attributes,
-            genericParameters: self.genericParameters)
+            genericParameters: self.genericParameters
+        )
     }
 
     public func isEqual(to other: Token) -> Bool {

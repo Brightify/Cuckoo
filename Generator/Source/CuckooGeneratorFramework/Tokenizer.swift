@@ -17,7 +17,6 @@ public struct Tokenizer {
     public init(sourceFile: File, debugMode: Bool) {
         self.file = sourceFile
         self.debugMode = debugMode
-
         source = sourceFile.contents
     }
 

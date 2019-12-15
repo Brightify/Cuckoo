@@ -13,12 +13,12 @@ import FileKit
 import CuckooGeneratorFramework
 import Foundation
 
-private func curry<P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, P12, R>
-    (_ f: @escaping (P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, P12) -> R)
-    -> (P1) -> (P2) -> (P3) -> (P4) -> (P5) -> (P6) -> (P7) -> (P8) -> (P9) -> (P10) -> (P11) -> (P12) -> R {
-        return { p1 in { p2 in { p3 in { p4 in { p5 in { p6 in { p7 in { p8 in { p9 in { p10 in { p11 in { p12 in
-            f(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12)
-        } } } } } } } } } } } }
+private func curry<P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, P12, P13, R>
+    (_ f: @escaping (P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, P12, P13) -> R)
+    -> (P1) -> (P2) -> (P3) -> (P4) -> (P5) -> (P6) -> (P7) -> (P8) -> (P9) -> (P10) -> (P11) -> (P12) -> (P13) -> R {
+        return { p1 in { p2 in { p3 in { p4 in { p5 in { p6 in { p7 in { p8 in { p9 in { p10 in { p11 in { p12 in { p13 in
+            f(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13)
+        } } } } } } } } } } } } }
 }
 
 public struct GenerateMocksCommand: CommandProtocol {
@@ -53,10 +53,10 @@ public struct GenerateMocksCommand: CommandProtocol {
         }
         let parsedFiles = removeTypes(from: tokensWithInheritance, using: typeFilters)
 
-        // generating headers and mocks
+        // generate headers and mocks
         let headers = parsedFiles.map { options.noHeader ? "" : FileHeaderHandler.getHeader(of: $0, includeTimestamp: !options.noTimestamp) }
         let imports = parsedFiles.map { FileHeaderHandler.getImports(of: $0, testableFrameworks: options.testableFrameworks) }
-        let mocks = parsedFiles.map { try! Generator(file: $0).generate(debug: options.debugMode) }
+        let mocks = parsedFiles.map { try! Generator(file: $0).generate(debug: options.debugMode, prefix: options.classPrefix) }
 
         let mergedFiles = zip(zip(headers, imports), mocks).map { $0.0 + $0.1 + $1 }
         let outputPath = Path(options.output)
@@ -137,6 +137,7 @@ public struct GenerateMocksCommand: CommandProtocol {
         let testableFrameworks: [String]
         let exclude: [String]
         let filePrefix: String
+        let classPrefix: String
         let noClassMocking: Bool
         let debugMode: Bool
         let globEnabled: Bool
@@ -149,6 +150,7 @@ public struct GenerateMocksCommand: CommandProtocol {
                     noTimestamp: Bool,
                     noInheritance: Bool,
                     filePrefix: String,
+                    classPrefix: String,
                     noClassMocking: Bool,
                     debugMode: Bool,
                     globEnabled: Bool,
@@ -162,6 +164,7 @@ public struct GenerateMocksCommand: CommandProtocol {
             self.noTimestamp = noTimestamp
             self.noInheritance = noInheritance
             self.filePrefix = filePrefix
+            self.classPrefix = classPrefix
             self.noClassMocking = noClassMocking
             self.debugMode = debugMode
             self.globEnabled = globEnabled
@@ -185,6 +188,8 @@ public struct GenerateMocksCommand: CommandProtocol {
 
             let filePrefix: Result<String, CommandantError<ClientError>> = m <| Option(key: "file-prefix", defaultValue: "", usage: "Names of generated files in directory will start with this prefix. Only works when output path is directory.")
 
+            let classPrefix: Result<String, CommandantError<ClientError>> = m <| Option(key: "class-prefix", defaultValue: "", usage: "Names of generated mocks and stubs will start with this prefix.")
+
             let noClassMocking: Result<Bool, CommandantError<ClientError>> = m <| Option(key: "no-class-mocking", defaultValue: false, usage: "Do not generate mocks for classes.")
 
             let debugMode: Result<Bool, CommandantError<ClientError>> = m <| Switch(flag: "d", key: "debug", usage: "Run generator in debug mode.")
@@ -203,6 +208,7 @@ public struct GenerateMocksCommand: CommandProtocol {
                 <*> noTimestamp
                 <*> noInheritance
                 <*> filePrefix
+                <*> classPrefix
                 <*> noClassMocking
                 <*> debugMode
                 <*> globEnabled

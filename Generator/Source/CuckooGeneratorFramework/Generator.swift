@@ -18,7 +18,7 @@ public struct Generator {
         declarations = file.declarations
     }
 
-    public func generate(debug: Bool = false) throws -> String {
+    public func generate(debug: Bool = false, prefix: String) throws -> String {
         code.clear()
 
         let ext = Extension()
@@ -63,7 +63,7 @@ public struct Generator {
             .filter { $0.accessibility.isAccessible }
             .map { $0.serializeWithType() }
 
-        return try environment.renderTemplate(string: Templates.mock, context: ["containers": containers, "debug": debug])
+        return try environment.renderTemplate(string: Templates.mock, context: ["containers": containers, "debug": debug, "classPrefix": prefix])
     }
 
     private func matchableGenericTypes(from method: Method) -> String {

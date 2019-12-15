@@ -532,6 +532,9 @@ Do not mock/stub parents and grandparents.
 ###### `--file-prefix` (string)
 Names of generated files in directory will start with this prefix. Only works when output path is directory.
 
+###### `--class-prefix` (string)
+Names of generated classes (Mocks and Stubs) will start with this prefix.
+
 ###### `--no-class-mocking`
 Do not generate mocks for classes.
 
