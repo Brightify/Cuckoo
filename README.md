@@ -32,7 +32,7 @@ We are still missing support for some important features like:
 - [x] Objective-C support utilizing OCMock
 
 ## What will not be supported
-Due to the limitations mentioned above, none of the things that can't be overridden can't be supported. This includes:
+Due to the limitations mentioned above, unoverridable code structures are not supportable by Cuckoo. This includes:
 - `struct` - workaround is to use a common protocol
 - everything with `final` or `private` modifier
 - global constants and functions
