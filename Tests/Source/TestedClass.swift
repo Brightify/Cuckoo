@@ -6,6 +6,7 @@
 //  Copyright © 2016 Brightify. All rights reserved.
 //
 
+#warning("TODO: Create a new library and move this file to the library to ensure the use case is the same as our users'")
 import class Foundation.NSArray ;import Foundation
 
 @available(iOS 42.0, *)
@@ -267,23 +268,22 @@ public class InternalFieldsInPublicClass {
     internal func function() { }
 }
 
-public class PublicClassWithInternalFieldsUsingPublicType {
-    internal var internalField: InternalType = InternalType()
-    var internalField2: InternalType = InternalType()
-    func internalFunc(internalType: InternalType) {
-    }
-
-    internal var internalField3: PublicType = PublicType()
-    var internalField4: PublicType = PublicType()
-    func internalFunc(publicType: PublicType) {
-    }
-}
-
-class InternalType {
-}
-
-public class PublicType {
-}
+#warning("TODO: When this file is moved to a separate library, uncomment and test this code compiles.")
+//public class PublicClassWithInternalFieldsUsingPublicType {
+//    internal var internalField: InternalType = InternalType()
+//    var internalField2: InternalType = InternalType()
+//    func internalFunc(internalType: InternalType) {
+//    }
+//
+//    internal var internalField3: PublicType = PublicType()
+//    var internalField4: PublicType = PublicType()
+//    func internalFunc(publicType: PublicType) {
+//    }
+//}
+//class InternalType {
+//}
+//public class PublicType {
+//}
 
 class FinalFields {
     final var field: Int? = nil

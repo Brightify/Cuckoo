@@ -32,3 +32,25 @@ public enum Accessibility: String {
         return self != .Private && self != .FilePrivate
     }
 }
+
+extension Accessibility: Comparable {
+    /// How open is this accessibility. The higher number the more accessible.
+    private var openness: Int {
+        switch self {
+        case .Open:
+            return 4
+        case .Public:
+            return 3
+        case .Internal:
+            return 2
+        case .FilePrivate:
+            return 1
+        case .Private:
+            return 0
+        }
+    }
+
+    public static func < (lhs: Accessibility, rhs: Accessibility) -> Bool {
+        return lhs.openness < rhs.openness
+    }
+}
