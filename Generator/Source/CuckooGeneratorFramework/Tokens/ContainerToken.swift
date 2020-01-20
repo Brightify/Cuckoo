@@ -35,7 +35,6 @@ extension ContainerToken {
         }
 
         let properties = accessibilityAdjustedChildren.compactMap { $0 as? InstanceVariable }
-            InstanceVariable }
             .filter { $0.accessibility.isAccessible }
             .map { $0.serializeWithType() }
 
