@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 # getting the script directory: https://stackoverflow.com/a/246128
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
