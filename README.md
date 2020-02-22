@@ -87,6 +87,61 @@ Input files can be also specified directly in `Run script` in `Input Files` form
 Note: All paths in the Run script must be absolute. Variable `PROJECT_DIR` automatically points to your project directory.
 **Remember to include paths to inherited Classes and Protocols for mocking/stubbing parent and grandparents.**
 
+#### Swift Package Manager
+
+To use Cuckoo with Apple's Swift package manager, add the following as a dependency to your `Package.swift`:
+
+```swift
+.package(url: "https://github.com/Brightify/Cuckoo.git", .upToNextMajor(from: "1.3.0"))
+```
+
+after that add `"Cuckoo"` as a dependency of the test target.
+
+If you're unsure, take a look at this example `PackageDescription`:
+
+```swift
+// swift-tools-version:4.0
+import PackageDescription
+
+let package = Package(
+    name: "Friendlyst",
+    products: [
+        .library(
+            name: "Friendlyst",
+            targets: ["Friendlyst"]),
+    ],
+    dependencies: [
+        .package(url: "https://github.com/Brightify/Cuckoo.git", .upToNextMajor(from: "1.3.0"))
+    ],
+    targets: [
+        .target(
+            name: "Friendlyst",
+            dependencies: [],
+            path: "Source"),
+        .testTarget(
+            name: "FriendlystTests",
+            dependencies: ["Cuckoo"],
+            path: "Tests"),
+    ]
+)
+```
+
+Cuckoo relies on a script that is currently not downloadable using SwiftPM. However, for convenience, you can copy this line into the terminal to download the latest `run` script. Unfortunately if there are changes in the `run` script, you'll need to execute this line again.
+```Bash
+curl -Lo run https://raw.githubusercontent.com/Brightify/Cuckoo/master/run && chmod +x run
+```
+
+When you're all set, use the same `Run script` phase as above and replace
+```Bash
+"${PODS_ROOT}/Cuckoo/run"
+```
+with
+```Bash
+"${PROJECT_DIR}/run" --download
+```
+
+The `--download` option is necessary because the `Generator` sources are not cloned in your project (they're in DerivedData,  out of reach). You can add a version (e.g. 1.3.0) after it to get a specific version of the `cuckoo_generator`. Use `--clean` as well to replace the current `cuckoo_generator` if you're changing versions.
+
 #### Carthage
 To use Cuckoo with [Carthage](https://github.com/Carthage/Carthage) add this line to your Cartfile:
 ```
@@ -103,61 +158,6 @@ with
 ```
 
 Don't forget to add the Framework into your project.
-
-#### Swift Package Manager
-
-To use Cuckoo with Apple's Swift package manager, add the following as a dependency to your `Package.swift`:
-
-```swift
-.package(url: "https://github.com/Brightify/Cuckoo.git", .upToNextMajor(from: "0.11.0"))
-```
-
-after that add `"Cuckoo"` as a dependency of the test target.
-
-If you're unsure, take a look at this example `PackageDescription`:
-
-```swift
-// swift-tools-version:4.0
-import PackageDescription
-
-let package = Package(
-    name: "FriendBook",
-    products: [
-        .library(
-            name: "FriendBook",
-            targets: ["FriendBook"]),
-    ],
-    dependencies: [
-        .package(url: "https://github.com/Brightify/Cuckoo.git", .upToNextMajor(from: "0.11.0"))
-    ],
-    targets: [
-        .target(
-            name: "FriendBook",
-            dependencies: [],
-            path: "Source"),
-        .testTarget(
-            name: "FriendBookTests",
-            dependencies: ["Cuckoo"],
-            path: "Tests"),
-    ]
-)
-```
-
-Cuckoo relies on a script that is currently not downloadable using SwiftPM. However, for convenience, you can copy these lines into the terminal to download the latest `run` script.
-```Bash
-curl https://raw.githubusercontent.com/Brightify/Cuckoo/master/run > run && chmod +x run
-```
-
-When you're all set, use the same `Run script` as above and replace
-```Bash
-"${PODS_ROOT}/Cuckoo/run"
-```
-with
-```Bash
-"${PROJECT_DIR}/run --download"
-```
-
-The `--download` option is necessary because you probably don't have the `Generator` in your project. You can add a version (e.g. 0.10.2) after it to get a specific version of the `cuckoo_generator`. The old `cuckoo_generator` needs to be deleted if it's already present in the project and you desire a different version.
 
 ### 2. Usage
 Usage of Cuckoo is similar to [Mockito](http://mockito.org/) and [Hamcrest](http://hamcrest.org/). However, there are some differences and limitations caused by generating the mocks and Swift language itself. List of all the supported features can be found below. You can find complete examples in [tests](Tests).
