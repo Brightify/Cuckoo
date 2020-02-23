@@ -28,12 +28,19 @@ Pod::Spec.new do |s|
                                 CMD
   s.frameworks                  = 'XCTest', 'Foundation'
   s.requires_arc                = true
-  s.pod_target_xcconfig         = { 'ENABLE_BITCODE' => 'NO', 'SWIFT_REFLECTION_METADATA_LEVEL' => 'none' }
-  s.default_subspec             = 'Swift'
-  
-  s.xcconfig = {
-    'LIBRARY_SEARCH_PATHS' => '$(TOOLCHAIN_DIR)/usr/lib/swift-$(SWIFT_VERSION)/$(PLATFORM_NAME) $(inherited)'
+  s.pod_target_xcconfig         = {
+    'ENABLE_BITCODE' => 'NO',
+    'SWIFT_REFLECTION_METADATA_LEVEL' => 'none',
+    'OTHER_LDFLAGS' => '$(inherited) -weak-lswiftXCTest',
   }
+  s.default_subspec             = 'Swift'
+
+  # When building for iOS versions 12 and lower in Xcode 11, a wild `image not found` appears.
+  # This is a workaround for that annoying error.
+  s.xcconfig = (8..12).map { |major| (0..5).map { |minor| [major, minor] } }.flatten(1).inject(Hash.new) do |hash, (major, minor)|
+    hash["LIBRARY_SEARCH_PATHS[sdk=iphoneos#{major}.#{minor}]"] = '$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift-$(SWIFT_VERSION)/$(PLATFORM_NAME)'
+    hash
+  end
 
   s.subspec 'Swift' do |sub|
     sub.source_files = 'Source/**/*.swift'
