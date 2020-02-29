@@ -1,5 +1,23 @@
 # Changelog
 
+## 1.3.2
+- Fix `image not found` error for iOS 13 and beyond.
+
+## 1.3.1
+- **Swift Package Manager support**
+- Added tvOS target (thanks @rodrigoff).
+- Fixed accessibility to match enclosing container.
+- Restructured README.
+
+## 1.3.0
+- Fix closure generation where explicit return type is required in `withoutActuallyEscaping` since swift 5.1 (XCode 11)
+- Switch swift_version to 5.0 for Cocoapods
+
+## 1.2.0
+#### Features
+- Objective-C mocking! Mock system classes/protocols as well as dynamic Swift classes. This is an optional subspec `Cuckoo/OCMock`.
+- Convenience matchers for sequences and dictionaries. No need to use `equal(to:)` anymore, passing the `Array`/`Set`/`Dictionary` itself is enough from now on!
+
 ## 1.1.1
 - Fix property, initializer, and function accessibility in public protocols.
 
