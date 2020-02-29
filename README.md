@@ -19,7 +19,7 @@ Cuckoo has two parts. One is the [runtime](https://github.com/Brightify/Cuckoo) 
 
 Unfortunately Swift does not have a proper reflection, so we decided to use a compile-time generator to go through files you specify and generate supporting structs/classes that will be used by the runtime in your test target.
 
-The generated files contain enough information to give you the right amount of power. They work based on inheritance and protocol adoption. This means that only overridable things can be mocked. We currently support all features which fulfill this rule except for things listed in TODO. Due to the complexity of Swift it is not easy to check for all edge cases so if you find some unexpected behavior please file an issue.
+The generated files contain enough information to give you the right amount of power. They work based on inheritance and protocol adoption. This means that only overridable things can be mocked. Due to the complexity of Swift it is not easy to check for all edge cases so if you find some unexpected behavior, please file an issue.
 
 ## Changelog
 List of all changes and new features can be found [here](CHANGELOG.md).
