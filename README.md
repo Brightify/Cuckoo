@@ -1,9 +1,10 @@
 # Cuckoo
 ## Mock your Swift objects!
 
-[![CI Status](https://img.shields.io/travis/Brightify/Cuckoo)](https://travis-ci.org/Brightify/Cuckoo)
+[![CI Status](https://img.shields.io/travis/Brightify/Cuckoo?style=flat)](https://travis-ci.org/Brightify/Cuckoo)
 [![Version](https://img.shields.io/cocoapods/v/Cuckoo.svg?style=flat)](http://cocoapods.org/pods/Cuckoo)
-[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![SwiftPM compatible](https://img.shields.io/badge/SwiftPM-compatible-brightgreen?style=flat)](https://swift.org/package-manager)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-brightgreen?style=flat)](https://github.com/Carthage/Carthage)
 [![License](https://img.shields.io/cocoapods/l/Cuckoo.svg?style=flat)](http://cocoapods.org/pods/Cuckoo)
 [![Platform](https://img.shields.io/cocoapods/p/Cuckoo.svg?style=flat)](http://cocoapods.org/pods/Cuckoo)
 [![Slack Status](http://swiftkit.brightify.org/badge.svg)](http://swiftkit.brightify.org)
