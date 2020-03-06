@@ -23,11 +23,13 @@ class ObjectiveClassTest: XCTestCase {
         let mock = objcStub(for: UIView.self) { stubber, mock in
             stubber.when(mock.endEditing(true)).thenReturn(true)
             stubber.when(mock.endEditing(false)).thenReturn(false)
+            stubber.when(mock.subviews).thenReturn([UIView]())
         }
 
         XCTAssertTrue(mock.endEditing(true))
         XCTAssertFalse(mock.endEditing(false))
-
+        XCTAssertTrue(mock.subviews.isEmpty)
+        
         objcVerify(mock.endEditing(true))
         objcVerify(mock.endEditing(false))
     }
