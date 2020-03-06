@@ -20,18 +20,20 @@ class ObjectiveClassTest: XCTestCase {
     }
 
     func testThenReturn() {
+        let subViews = [UIView()]
         let mock = objcStub(for: UIView.self) { stubber, mock in
             stubber.when(mock.endEditing(true)).thenReturn(true)
             stubber.when(mock.endEditing(false)).thenReturn(false)
-            stubber.when(mock.subviews).thenReturn([UIView]())
+            stubber.when(mock.subviews).thenReturn(subViews)
         }
 
         XCTAssertTrue(mock.endEditing(true))
         XCTAssertFalse(mock.endEditing(false))
-        XCTAssertTrue(mock.subviews.isEmpty)
+        XCTAssertEqual(mock.subviews,subViews)
         
         objcVerify(mock.endEditing(true))
         objcVerify(mock.endEditing(false))
+        objcVerify(mock.subviews)
     }
 
     func testThen() {
