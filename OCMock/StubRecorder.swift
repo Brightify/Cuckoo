@@ -83,3 +83,19 @@ public extension StubRecorder where OUT: CuckooOptionalType, OUT.Wrapped: NSObje
         }
     }
 }
+
+public extension StubRecorder where OUT: Sequence, OUT.Element: NSObject {
+    func thenReturn(_ object: OUT) {
+        recorder.andReturn(object)
+    }
+
+    func then(do block: @escaping ([Any]) -> OUT) {
+        recorder.andDo { invocation in
+            guard let invocation = invocation else { return }
+
+            var result = block(invocation.arguments())
+            invocation.setReturnValue(&result)
+            invocation.retainArguments()
+        }
+    }
+}
