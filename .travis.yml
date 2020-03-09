@@ -9,7 +9,7 @@ before_script:
 
 script:
     - xcodebuild -workspace 'Cuckoo.xcworkspace' -scheme 'Cuckoo+OCMock-macOS' clean test | xcpretty
-    - pod lib lint
+    - pod lib lint --allow-warnings
 
 after_script:
     - sleep 5
