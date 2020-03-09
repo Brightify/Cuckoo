@@ -29,7 +29,7 @@ class ObjectiveClassTest: XCTestCase {
 
         XCTAssertTrue(mock.endEditing(true))
         XCTAssertFalse(mock.endEditing(false))
-        XCTAssertEqual(mock.subviews,subViews)
+        XCTAssertEqual(mock.subviews, subViews)
         
         objcVerify(mock.endEditing(true))
         objcVerify(mock.endEditing(false))
@@ -74,17 +74,23 @@ class ObjectiveClassTest: XCTestCase {
                 print("Hello, \(args).")
                 return NSUserActivity(activityType: "activity")
             }
+            stubber.when(mock.subviews).then { args in
+                print("Hello, \(args).")
+                return []
+            }
         }
 
         XCTAssertTrue(mock.endEditing(false))
         XCTAssertNil(mock.hitTest(.zero, with: event))
         XCTAssertEqual(mock.hitTest(CGPoint(x: 145.5, y: 0.444), with: event), view)
         XCTAssertEqual(mock.userActivity?.activityType, "activity")
+        XCTAssertEqual(mock.subviews, [])
 
         objcVerify(mock.endEditing(false))
         objcVerify(mock.hitTest(.zero, with: event))
         objcVerify(mock.hitTest(CGPoint(x: 145.5, y: 0.444), with: event))
         objcVerify(mock.userActivity?.activityType)
+        objcVerify(mock.subviews)
     }
 
     func testThenThrow() {
