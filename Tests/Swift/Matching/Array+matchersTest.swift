@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import Cuckoo
 
 struct TestStructs {
     struct N {

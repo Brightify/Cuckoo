@@ -34,7 +34,7 @@ Pods
 Carthage/Build
 .DS_Store
 default.profraw
-Tests/Generated/*.swift
+Tests/**/Generated/*.swift
 Generator/*.app
 
 # AppCode
@@ -43,3 +43,4 @@ cuckoo_generator
 Generator/CuckooGenerator.xcodeproj
 .fastlane
 Cuckoo.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+

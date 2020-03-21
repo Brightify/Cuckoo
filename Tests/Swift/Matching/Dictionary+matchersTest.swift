@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import Cuckoo
 
 class DictionaryParameterMatcherTest: XCTestCase {
     // MARK: Contains ANY of the elements as key-value pairs.

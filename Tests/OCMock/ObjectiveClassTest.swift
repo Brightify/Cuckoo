@@ -5,9 +5,10 @@
 //  Created by Matyáš Kříž on 28/05/2019.
 //
 
-import XCTest
 import Cuckoo
+import XCTest
 
+#if os(iOS)
 class ObjectiveClassTest: XCTestCase {
     func testThenDoNothing() {
         let mock = objcStub(for: UIView.self) { stubber, mock in
@@ -168,3 +169,6 @@ class SwiftClass: NSObject {
         return false
     }
 }
+#else
+#warning("macOS tests are missing.")
+#endif

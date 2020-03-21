@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1020"
+   LastUpgradeVersion = "1010"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "680D3A0F229D3671004A921E"
-               BuildableName = "Cuckoo.framework"
-               BlueprintName = "Cuckoo+OCMock-iOS"
+               BlueprintIdentifier = "DBDB2DD4E7BE487EEB257CC8"
+               BuildableName = "Cuckoo_macOSTests.xctest"
+               BlueprintName = "Cuckoo-macOSTests"
                ReferencedContainer = "container:Cuckoo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,24 +32,17 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "680D3A47229D3693004A921E"
-               BuildableName = "Cuckoo+OCMock_iOSTests.xctest"
-               BlueprintName = "Cuckoo+OCMock_iOSTests"
+               BlueprintIdentifier = "DBDB2DD4E7BE487EEB257CC8"
+               BuildableName = "Cuckoo_macOSTests.xctest"
+               BlueprintName = "Cuckoo-macOSTests"
                ReferencedContainer = "container:Cuckoo.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "680D3A0F229D3671004A921E"
-            BuildableName = "Cuckoo.framework"
-            BlueprintName = "Cuckoo+OCMock-iOS"
-            ReferencedContainer = "container:Cuckoo.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
+      <CodeCoverageTargets>
+      </CodeCoverageTargets>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -64,12 +57,16 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "680D3A0F229D3671004A921E"
-            BuildableName = "Cuckoo.framework"
-            BlueprintName = "Cuckoo+OCMock-iOS"
+            BlueprintIdentifier = "DBDB2DD4E7BE487EEB257CC8"
+            BuildableName = "Cuckoo_macOSTests.xctest"
+            BlueprintName = "Cuckoo-macOSTests"
             ReferencedContainer = "container:Cuckoo.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
+      <CommandLineArguments>
+      </CommandLineArguments>
+      <EnvironmentVariables>
+      </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -82,9 +79,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "680D3A0F229D3671004A921E"
-            BuildableName = "Cuckoo.framework"
-            BlueprintName = "Cuckoo+OCMock-iOS"
+            BlueprintIdentifier = "DBDB2DD4E7BE487EEB257CC8"
+            BuildableName = "Cuckoo_macOSTests.xctest"
+            BlueprintName = "Cuckoo-macOSTests"
             ReferencedContainer = "container:Cuckoo.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

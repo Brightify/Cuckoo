@@ -6,8 +6,10 @@
 //
 
 import XCTest
-import WebKit
 import Cuckoo
+
+#if os(iOS)
+import WebKit
 
 class ObjectiveProtocolTest: XCTestCase {
     func testThenDoNothing() {
@@ -86,3 +88,6 @@ class ObjectiveProtocolTest: XCTestCase {
         objcVerify(mock.tableView!(objcAny(), canFocusRowAt: IndexPath(row: 12, section: 22)))
     }
 }
+#else
+#warning("macOS tests are missing.")
+#endif

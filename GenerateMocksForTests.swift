@@ -15,7 +15,7 @@ func shell(_ args: [String], inDir dir: String? = nil) -> Int32 {
 
 let projectDir = ProcessInfo.processInfo.environment["PROJECT_DIR", default: "."]
 
-let output = "\(projectDir)/Tests/Generated/GeneratedMocks.swift"
+let output = "\(projectDir)/Tests/Swift/Generated/GeneratedMocks.swift"
 
 // Use seperate variables for each file.
 let generatorArguments = [
@@ -26,18 +26,18 @@ let generatorArguments = [
     "ExcludedTestClass,ExcludedProtocol",
     "--output",
     output,
-    "\(projectDir)/Tests/Source/ClassForStubTesting.swift",
-    "\(projectDir)/Tests/Source/ClassWithOptionals.swift",
-    "\(projectDir)/Tests/Source/ObjcProtocol.swift",
-    "\(projectDir)/Tests/Source/UnicodeTestProtocol.swift",
-    "\(projectDir)/Tests/Source/TestedProtocol.swift",
-    "\(projectDir)/Tests/Source/TestedClass.swift",
-    "\(projectDir)/Tests/Source/TestedSubclass.swift",
-    "\(projectDir)/Tests/Source/TestedSubProtocol.swift",
-    "\(projectDir)/Tests/Source/ExcludedTestClass.swift",
-    "\(projectDir)/Tests/Source/GenericClass.swift",
-    "\(projectDir)/Tests/Source/GenericProtocol.swift",
-    "\(projectDir)/Tests/Source/GenericMethodClass.swift",
+    "\(projectDir)/Tests/Swift/Source/ClassForStubTesting.swift",
+    "\(projectDir)/Tests/Swift/Source/ClassWithOptionals.swift",
+    "\(projectDir)/Tests/Swift/Source/ObjcProtocol.swift",
+    "\(projectDir)/Tests/Swift/Source/UnicodeTestProtocol.swift",
+    "\(projectDir)/Tests/Swift/Source/TestedProtocol.swift",
+    "\(projectDir)/Tests/Swift/Source/TestedClass.swift",
+    "\(projectDir)/Tests/Swift/Source/TestedSubclass.swift",
+    "\(projectDir)/Tests/Swift/Source/TestedSubProtocol.swift",
+    "\(projectDir)/Tests/Swift/Source/ExcludedTestClass.swift",
+    "\(projectDir)/Tests/Swift/Source/GenericClass.swift",
+    "\(projectDir)/Tests/Swift/Source/GenericProtocol.swift",
+    "\(projectDir)/Tests/Swift/Source/GenericMethodClass.swift",
 ]
 
 let useRun = Bool(ProcessInfo.processInfo.environment["USE_RUN", default: "false"]) ?? false

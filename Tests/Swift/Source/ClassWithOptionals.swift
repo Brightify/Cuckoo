@@ -16,8 +16,6 @@ class ClassWithOptionals {
     
     var closure: (Int?) -> Void = { _ in }
     
-    var uClosure: (Int!) -> Void = { _ in }
-    
     func returnValue() -> Int? {
         return value
     }

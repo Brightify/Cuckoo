@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0CB680F623A3B8890073F3B6"
+               BlueprintIdentifier = "68F418F82426402900D14333"
                BuildableName = "Cuckoo.framework"
                BlueprintName = "Cuckoo-tvOS"
                ReferencedContainer = "container:Cuckoo.xcodeproj">
@@ -32,15 +32,13 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0CB680FE23A3B8890073F3B6"
+               BlueprintIdentifier = "68F4191624264BA200D14333"
                BuildableName = "Cuckoo_tvOSTests.xctest"
-               BlueprintName = "Cuckoo_tvOSTests"
+               BlueprintName = "Cuckoo-tvOSTests"
                ReferencedContainer = "container:Cuckoo.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
-      <AdditionalOptions>
-      </AdditionalOptions>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -52,17 +50,6 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0CB680F623A3B8890073F3B6"
-            BuildableName = "Cuckoo.framework"
-            BlueprintName = "Cuckoo-tvOS"
-            ReferencedContainer = "container:Cuckoo.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
-      <AdditionalOptions>
-      </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -73,7 +60,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0CB680F623A3B8890073F3B6"
+            BlueprintIdentifier = "68F418F82426402900D14333"
             BuildableName = "Cuckoo.framework"
             BlueprintName = "Cuckoo-tvOS"
             ReferencedContainer = "container:Cuckoo.xcodeproj">
