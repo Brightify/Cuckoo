@@ -26,7 +26,7 @@ enum PlatformType: String {
     }
 }
 
-func platformSet(platform: PlatformType, deploymentTarget: DeploymentTarget) -> (targets: [Target], schemes: [Scheme]) {
+func platformSet(platform: PlatformType, deploymentTarget: DeploymentTarget?) -> (targets: [Target], schemes: [Scheme]) {
     var targets: [Target] = []
     var schemes: [Scheme] = []
 
@@ -202,13 +202,13 @@ func platformSet(platform: PlatformType, deploymentTarget: DeploymentTarget) -> 
 
 let (iOSTargets, iOSSchemes) = platformSet(platform: .iOS, deploymentTarget: .iOS(targetVersion: "8.0", devices: [.iphone, .ipad]))
 let (macOSTargets, macOSSchemes) = platformSet(platform: .macOS, deploymentTarget: .macOS(targetVersion: "10.9"))
-// let (tvOSTargets, tvOSSchemes) = platformSet(platform: .tvOS, deploymentTarget: .iOS(targetVersion: "9.0", devices: [.iphone, .ipad]))
+let (tvOSTargets, tvOSSchemes) = platformSet(platform: .tvOS, deploymentTarget: nil)
 
 // MARK: project definition
 let project = Project(
     name: "Cuckoo",
-    targets: iOSTargets + macOSTargets,
-    schemes: iOSSchemes + macOSSchemes,
+    targets: iOSTargets + macOSTargets + tvOSTargets,
+    schemes: iOSSchemes + macOSSchemes + tvOSSchemes,
     additionalFiles: [
         "Scripts/**",
         "Generator/CuckooGenerator.xcodeproj",

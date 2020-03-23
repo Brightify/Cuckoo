@@ -13,7 +13,6 @@ target 'Cuckoo_OCMock-iOS' do
   end
 end
 
-=begin
 target 'Cuckoo_OCMock-tvOS' do
   use_frameworks!
 
@@ -21,11 +20,10 @@ target 'Cuckoo_OCMock-tvOS' do
 
   pod 'OCMock'
 
-  target 'Cuckoo_OCMock_tvOSTests' do
+  target 'Cuckoo_OCMock-tvOSTests' do
 
   end
 end
-=end
 
 target 'Cuckoo_OCMock-macOS' do
   use_frameworks!
