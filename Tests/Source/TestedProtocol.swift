@@ -45,6 +45,10 @@ protocol TestedProtocol {
     func protocolMethod() -> String
 
     func methodWithParameter(_ param: String) -> String
+
+    // Don't fix the whitespace in the return type.
+    // It makes sure that inconsistent whitespace doesn't generate duplicate mock methods.
+    func genericReturn() -> Dictionary<Int,Void>
 }
 
 extension TestedProtocol {

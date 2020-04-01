@@ -147,7 +147,7 @@ extension WrappableType: Equatable {
         case (.attributed(let lhsWrapped, let lhsAttributes), .attributed(let rhsWrapped, let rhsAttributes)):
             return lhsWrapped == rhsWrapped && lhsAttributes == rhsAttributes
         case (.type(let lhsType), .type(let rhsType)):
-            return lhsType == rhsType
+            return lhsType.components(separatedBy: .whitespacesAndNewlines).joined() == rhsType.components(separatedBy: .whitespacesAndNewlines).joined()
         default:
             return false
         }

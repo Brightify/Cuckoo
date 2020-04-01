@@ -79,6 +79,10 @@ class TestedSubclass: TestedClass, TestedProtocol {
     func methodWithParameter(_ param: Int) -> String {
         return "c"
     }
+
+    func genericReturn() -> Dictionary<Int, Void> {
+        return [:]
+    }
 }
 
 class TestedSubSubClass: TestedSubclass {
