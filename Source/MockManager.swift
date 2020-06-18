@@ -43,8 +43,7 @@ public class MockManager {
         if let stub = (stubs.filter { $0.method == method }.compactMap { $0 as? ConcreteStub<IN, OUT> }.filter { $0.parameterMatchers.reduce(true) { $0 && $1.matches(parameters) } }.first) {
             if let action = stub.actions.first {
                 if stub.actions.count > 1 {
-                    // Bug in Swift, this expression resolves as uncalled function
-                    _ = stub.actions.removeFirst()
+                    stub.actions.removeFirst()
                 }
                 switch action {
                 case .callImplementation(let implementation):
@@ -60,7 +59,7 @@ public class MockManager {
                 case .callRealImplementation where hasParent:
                     return try superclassCall()
                 default:
-                    failAndCrash("No real implementation found for method `\(method)`. This is probably caused  by stubbed object being a mock of a protocol.")
+                    failAndCrash("No real implementation found for method `\(method)`. This is probably caused by stubbed object being a mock of a protocol.")
                 }
             } else {
                 failAndCrash("Stubbing of method `\(method)` using parameters \(parameters) wasn't finished (missing thenReturn()).")
@@ -82,8 +81,7 @@ public class MockManager {
         if let stub = (stubs.filter { $0.method == method }.compactMap { $0 as? ConcreteStub<IN, OUT> }.filter { $0.parameterMatchers.reduce(true) { $0 && $1.matches(parameters) } }.first) {
             if let action = stub.actions.first {
                 if stub.actions.count > 1 {
-                    // Bug in Swift, this expression resolves as uncalled function
-                    _ = stub.actions.removeFirst()
+                    stub.actions.removeFirst()
                 }
                 switch action {
                 case .callImplementation(let implementation):
