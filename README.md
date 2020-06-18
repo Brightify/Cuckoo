@@ -83,6 +83,8 @@ echo "Mocks Input Directory = ${INPUT_DIR}"
 
 **IMPORTANT**: To make your mocking journey easier, make absolutely sure that the run script is above the `Compile Sources` phase.
 
+**NOTE**: To avoid race condition errors when Xcode parallelizes build phases, add the path of the `OUTPUT_FILE` into the "Output Files" section of the build phase.
+
 Input files can be also specified directly in `Run script` in `Input Files` form.
 
 Note: All paths in the Run script must be absolute. Variable `PROJECT_DIR` automatically points to your project directory.
