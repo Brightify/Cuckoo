@@ -175,4 +175,13 @@ class GenericClassTest: XCTestCase {
         XCTAssertEqual(mock.withClosure { number in number * 2 + 5 }, 1337)
         verify(mock).withClosure(anyClosure())
     }
+
+    func testWithGenericClosure() {
+        stub(mock) { mock in
+            when(mock.genericClosure(gg: "gg", closure: anyClosure())).thenDoNothing()
+        }
+
+        mock.genericClosure(gg: "gg", closure: { print($0.readWritePropertyT) })
+        verify(mock).genericClosure(gg: "gg", closure: anyClosure())
+    }
 }

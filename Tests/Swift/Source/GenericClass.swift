@@ -44,4 +44,8 @@ class GenericClass<T: CustomStringConvertible, U: Codable & CustomStringConverti
     }
 
     func noReturn() {}
+
+    func genericClosure(gg: String, closure: (GenericClass<String, Int, Bool>) -> Void) {
+        closure(GenericClass<String, Int, Bool>(theT: "gg", theU: 0, theV: false))
+    }
 }
