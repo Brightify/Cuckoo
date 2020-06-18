@@ -450,6 +450,20 @@ When a method is called or a property accessed/set on a stub, nothing happens. I
 
 `DefaultValueRegistry.reset()` returns the registry to its clean slate before the `register` method made any changes.
 
+##### Type inference
+Cuckoo does a simple type inference on all variables which allows for much cleaner source code on your side. There are a total 3 ways the inference tries to extract the type name from a variable:
+
+```
+// From the explicitly declared type:
+let constant1: MyType
+
+// From the initial value:
+let constant2 = MyType(...)
+
+// From the explicitly specified type `as MyType`:
+let constant3 = anything as MyType
+```
+
 ## Cuckoo generator
 ### Installation
 For normal use you can skip this because the [run script](run) downloads or builds the correct version of the generator automatically.
