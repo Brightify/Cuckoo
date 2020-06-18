@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.4.0
+- Add tvOS targets and schemes.
+- Integrate `tuist`, fixing Carthage issues.
+- Fix type equality check to rule out whitespace inconsistencies.
+
 ## 1.3.2
 - Fix `image not found` error for iOS 13 and beyond.
 
