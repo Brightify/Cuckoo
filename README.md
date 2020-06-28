@@ -83,7 +83,7 @@ echo "Mocks Input Directory = ${INPUT_DIR}"
 
 **IMPORTANT**: To make your mocking journey easier, make absolutely sure that the run script is above the `Compile Sources` phase.
 
-**NOTE**: To avoid race condition errors when Xcode parallelizes build phases, add the path of the `OUTPUT_FILE` into the "Output Files" section of the build phase.
+**NOTE**: To avoid race condition errors when Xcode parallelizes build phases, add the path of the `OUTPUT_FILE` into the "Output Files" section of the build phase. If you find that `OUTPUT_FILE` still doesn't regenerate with new changes, adding mocked files to the "Input Files" section of the build phase might help.
 
 Input files can be also specified directly in `Run script` in `Input Files` form.
 
