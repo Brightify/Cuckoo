@@ -409,8 +409,10 @@ public struct Tokenizer {
             switch character {
             case "(", "<", "[":
                 parenLevel += 1
+                currentConstraint.append(character)
             case ")", ">", "]":
                 parenLevel -= 1
+                currentConstraint.append(character)
             case "," where parenLevel == 0:
                 currentConstraint = currentConstraint.trimmed
                 whereConstraints.append(currentConstraint)

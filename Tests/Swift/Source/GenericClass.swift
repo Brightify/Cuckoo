@@ -22,6 +22,10 @@ class GenericClass<T: CustomStringConvertible, U: Codable & CustomStringConverti
         readWritePropertyV = theV
     }
 
+    func genericWhereMethodParameter<G>(g: G) where G: GenericClass<T, [Int], V> {}
+
+    func genericWhereMethodParameterNested<G>(g: G) where G: GenericClass<T, U, Array<String>> {}
+
     func unequal(one: V, two: V) -> Bool {
         return one != two
     }
