@@ -22,6 +22,10 @@ class GenericClass<T: CustomStringConvertible, U: Codable & CustomStringConverti
         readWritePropertyV = theV
     }
 
+    func genericMethodParameter<G: GenericClass<T, U, V>>(g: G) {}
+
+    func genericMethodParameterNested<G: GenericClass<T, [Int], Array<String>>>(g: G) {}
+
     func genericWhereMethodParameter<G>(g: G) where G: GenericClass<T, [Int], V> {}
 
     func genericWhereMethodParameterNested<G>(g: G) where G: GenericClass<T, U, Array<String>> {}
