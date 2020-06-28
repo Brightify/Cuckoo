@@ -54,8 +54,19 @@ func platformSet(platform: PlatformType, deploymentTarget: DeploymentTarget?) ->
         ],
         actions: [
             .pre(
-                path: "Scripts/RunCuckooGen.sh",
-                name: "Generate Mocks"
+                path: "run",
+                arguments: [
+                    "generate",
+                    "--testable",
+                    "Cuckoo",
+                    "--exclude",
+                    "ExcludedTestClass,ExcludedProtocol",
+                    "--output",
+                    #""$PROJECT_DIR"/Tests/Swift/Generated/GeneratedMocks.swift"#,
+                    "--glob",
+                    #""$PROJECT_DIR"/Tests/Swift/Source/*.swift"#,
+                ],
+                name: "Generate Mockinos"
             )
         ],
         dependencies: [
@@ -119,86 +130,6 @@ func platformSet(platform: PlatformType, deploymentTarget: DeploymentTarget?) ->
 
     return (targets, schemes)
 }
-
-// MARK: iOS target and scheme definition
-// let iosTarget = Target(
-//     name: "Cuckoo-iOS",
-//     platform: .iOS,
-//     product: .framework,
-//     bundleId: "org.brightify.Cuckoo",
-//     deploymentTarget: .iOS(targetVersion: "9.0", devices: [.iphone, .ipad]),
-//     infoPlist: .extendingDefault(with: [:]),
-//     sources: "Source/**",
-//     settings: defaultBuildSettings
-// )
-//
-// let iosTestTarget = Target(
-//     name: "Cuckoo-iOSTests",
-//     platform: .iOS,
-//     product: .unitTests,
-//     bundleId: "org.brightify.Cuckoo",
-//     infoPlist: .extendingDefault(with: [:]),
-//     sources: [
-//         "Tests/Common/**",
-//         "Tests/Swift/**",
-//     ],
-//     actions: [
-//         .pre(
-//             path: "Scripts/RunCuckooGen.sh",
-//             name: "Generate Mocks"
-//         )
-//     ],
-//     dependencies: [
-//         .target(name: iosTarget.name)
-//     ]
-// )
-//
-// let iosObjCTarget = Target(
-//     name: "Cuckoo_OCMock-iOS",
-//     platform: .iOS,
-//     product: .framework,
-//     bundleId: "org.brightify.Cuckoo",
-//     deploymentTarget: .iOS(targetVersion: "9.0", devices: [.iphone, .ipad]),
-//     infoPlist: .extendingDefault(with: [:]),
-//     sources: [
-//         "Source/**",
-//         "OCMock/**",
-//     ],
-//     headers: .init(private: ["OCMock/**"]),
-//     dependencies: [
-//         .cocoapods(path: "."),
-//         .sdk(name: "OCMock.framework", status: .required),
-//     ],
-//     settings: objCBuildSettings
-// )
-//
-// let iosObjCTestTarget = Target(
-//     name: "Cuckoo_OCMock-iOSTests",
-//     platform: .iOS,
-//     product: .unitTests,
-//     bundleId: "org.brightify.Cuckoo",
-//     infoPlist: .extendingDefault(with: [:]),
-//     sources: [
-//         "Tests/Common/**",
-//         "Tests/OCMock/**",
-//     ],
-//     dependencies: [
-//         .target(name: iosObjCTarget.name)
-//     ]
-// )
-//
-// let iosScheme = Scheme(
-//     name: iosTarget.name,
-//     buildAction: .init(targets: [.init(stringLiteral: iosTarget.name)]),
-//     testAction: .init(targets: [.init(stringLiteral: iosTestTarget.name)])
-// )
-//
-// let iosObjCScheme = Scheme(
-//     name: iosObjCTarget.name,
-//     shared: false,
-//     buildAction: .init(targets: [.init(stringLiteral: iosObjCTarget.name)]),
-//     testAction: .init(targets: [.init(stringLiteral: iosObjCTestTarget.name)])
-// )
 
 let (iOSTargets, iOSSchemes) = platformSet(platform: .iOS, deploymentTarget: .iOS(targetVersion: "8.0", devices: [.iphone, .ipad]))
 let (macOSTargets, macOSSchemes) = platformSet(platform: .macOS, deploymentTarget: .macOS(targetVersion: "10.9"))

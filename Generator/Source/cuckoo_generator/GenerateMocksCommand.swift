@@ -153,8 +153,8 @@ public struct GenerateMocksCommand: CommandProtocol {
                     debugMode: Bool,
                     globEnabled: Bool,
                     regex: String,
-                    files: [String]) {
-
+                    files: [String]
+        ) {
             self.output = output
             self.testableFrameworks = testableFrameworks.components(separatedBy: ",").filter { !$0.isEmpty }
             self.exclude = exclude.components(separatedBy: ",").filter { !$0.isEmpty }.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
