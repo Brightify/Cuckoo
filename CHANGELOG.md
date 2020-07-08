@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.4.1
+- Sidestep `SourceKit`'s off-by-one bug when parsing generic parameter inheritance.
+- Fix incorrect `where` clause parsing.
+
 ## 1.4.0
 - Add tvOS targets and schemes.
 - Integrate `tuist`, fixing Carthage issues.
