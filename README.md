@@ -455,7 +455,7 @@ When a method is called or a property accessed/set on a stub, nothing happens. I
 ##### Type inference
 Cuckoo does a simple type inference on all variables which allows for much cleaner source code on your side. There are a total 3 ways the inference tries to extract the type name from a variable:
 
-```
+```Swift
 // From the explicitly declared type:
 let constant1: MyType
 
@@ -489,7 +489,7 @@ To download the generator from GitHub instead of building it, use the `--downloa
 
 **NOTE**: If you encounter Github API rate limit using the `--download` option, the [run script](run) refers to the environment variable `GITHUB_ACCESS_TOKEN`.
 Add this line (replacing the Xs with your [GitHub token](https://github.com/settings/tokens), no additional permissions are needed) to the script build phase above the `run` call:
-```
+```Bash
 export GITHUB_ACCESS_TOKEN="XXXXXXX"
 ```
 
@@ -580,7 +580,7 @@ objcVerify(mock.tableView(tableView, accessoryButtonTappedForRowWith: IndexPath(
 Detailed usage is available in Cuckoo tests along with DOs and DON'Ts of this Swift-ObjC bridge.
 
 So far, only CocoaPods is supported. To install, simply add this line to your `Podfile`:
-```
+```Ruby
 pod 'Cuckoo/OCMock'
 ```
 
