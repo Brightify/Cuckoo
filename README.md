@@ -556,7 +556,7 @@ After the `help` command you can specify the name of another command for display
 Cuckoo subspec `Cuckoo/OCMock` brings support for mocking Objective-C classes and protocols.
 
 Example usage:
-```
+```Swift
 let tableView = UITableView()
 // stubbing the class is very similar to stubbing with Cuckoo
 let mock = objcStub(for: UITableViewController.self) { stubber, mock in
