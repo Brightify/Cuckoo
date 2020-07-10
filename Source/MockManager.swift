@@ -25,8 +25,6 @@ public class MockManager {
     private var isSuperclassSpyEnabled = false
     private var isDefaultImplementationEnabled = false
     
-    private let dispatchQueue = DispatchQueue(label: "cuckoo-mock-manager", attributes: .concurrent)
-    
     private let hasParent: Bool
 
     public init(hasParent: Bool) {
