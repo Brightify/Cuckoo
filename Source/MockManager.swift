@@ -25,6 +25,8 @@ public class MockManager {
     private var isSuperclassSpyEnabled = false
     private var isDefaultImplementationEnabled = false
     
+    private let dispatchQueue = DispatchQueue(label: "cuckoo-mock-manager", attributes: .concurrent)
+    
     private let hasParent: Bool
 
     public init(hasParent: Bool) {
@@ -36,74 +38,78 @@ public class MockManager {
     }
 
     private func callRethrowsInternal<IN, OUT>(_ method: String, parameters: IN, escapingParameters: IN, superclassCall: () throws -> OUT, defaultCall: () throws -> OUT) rethrows -> OUT {
-        let stubCall = ConcreteStubCall(method: method, parameters: escapingParameters)
-        stubCalls.append(stubCall)
-        unverifiedStubCallsIndexes.append(stubCalls.count - 1)
+        try synchronized(self) {
+            let stubCall = ConcreteStubCall(method: method, parameters: escapingParameters)
+            stubCalls.append(stubCall)
+            unverifiedStubCallsIndexes.append(stubCalls.count - 1)
 
-        if let stub = (stubs.filter { $0.method == method }.compactMap { $0 as? ConcreteStub<IN, OUT> }.filter { $0.parameterMatchers.reduce(true) { $0 && $1.matches(parameters) } }.first) {
-            if let action = stub.actions.first {
-                if stub.actions.count > 1 {
-                    stub.actions.removeFirst()
+            if let stub = (stubs.filter { $0.method == method }.compactMap { $0 as? ConcreteStub<IN, OUT> }.filter { $0.parameterMatchers.reduce(true) { $0 && $1.matches(parameters) } }.first) {
+                if let action = stub.actions.first {
+                    if stub.actions.count > 1 {
+                        stub.actions.removeFirst()
+                    }
+                    switch action {
+                    case .callImplementation(let implementation):
+                        return try DispatchQueue(label: "No-care?").sync(execute: {
+                            return try implementation(parameters)
+                        })
+                    case .returnValue(let value):
+                        return value
+                    case .throwError(let error):
+                        return try DispatchQueue(label: "No-care?").sync(execute: {
+                            throw error
+                        })
+                    case .callRealImplementation where hasParent:
+                        return try superclassCall()
+                    default:
+                        failAndCrash("No real implementation found for method `\(method)`. This is probably caused by stubbed object being a mock of a protocol.")
+                    }
+                } else {
+                    failAndCrash("Stubbing of method `\(method)` using parameters \(parameters) wasn't finished (missing thenReturn()).")
                 }
-                switch action {
-                case .callImplementation(let implementation):
-                    return try DispatchQueue(label: "No-care?").sync(execute: {
-                        return try implementation(parameters)
-                    })
-                case .returnValue(let value):
-                    return value
-                case .throwError(let error):
-                    return try DispatchQueue(label: "No-care?").sync(execute: {
-                        throw error
-                    })
-                case .callRealImplementation where hasParent:
-                    return try superclassCall()
-                default:
-                    failAndCrash("No real implementation found for method `\(method)`. This is probably caused by stubbed object being a mock of a protocol.")
-                }
+            } else if isSuperclassSpyEnabled {
+                return try superclassCall()
+            } else if isDefaultImplementationEnabled {
+                return try defaultCall()
             } else {
-                failAndCrash("Stubbing of method `\(method)` using parameters \(parameters) wasn't finished (missing thenReturn()).")
+                failAndCrash("No stub for method `\(method)` using parameters \(parameters).")
             }
-        } else if isSuperclassSpyEnabled {
-            return try superclassCall()
-        } else if isDefaultImplementationEnabled {
-            return try defaultCall()
-        } else {
-            failAndCrash("No stub for method `\(method)` using parameters \(parameters).")
         }
     }
 
     private func callThrowsInternal<IN, OUT>(_ method: String, parameters: IN, escapingParameters: IN, superclassCall: () throws -> OUT, defaultCall: () throws -> OUT) throws -> OUT {
-        let stubCall = ConcreteStubCall(method: method, parameters: escapingParameters)
-        stubCalls.append(stubCall)
-        unverifiedStubCallsIndexes.append(stubCalls.count - 1)
-        
-        if let stub = (stubs.filter { $0.method == method }.compactMap { $0 as? ConcreteStub<IN, OUT> }.filter { $0.parameterMatchers.reduce(true) { $0 && $1.matches(parameters) } }.first) {
-            if let action = stub.actions.first {
-                if stub.actions.count > 1 {
-                    stub.actions.removeFirst()
+        try synchronized(self) {
+            let stubCall = ConcreteStubCall(method: method, parameters: escapingParameters)
+            stubCalls.append(stubCall)
+            unverifiedStubCallsIndexes.append(stubCalls.count - 1)
+            
+            if let stub = (stubs.filter { $0.method == method }.compactMap { $0 as? ConcreteStub<IN, OUT> }.filter { $0.parameterMatchers.reduce(true) { $0 && $1.matches(parameters) } }.first) {
+                if let action = stub.actions.first {
+                    if stub.actions.count > 1 {
+                        stub.actions.removeFirst()
+                    }
+                    switch action {
+                    case .callImplementation(let implementation):
+                        return try implementation(parameters)
+                    case .returnValue(let value):
+                        return value
+                    case .throwError(let error):
+                        throw error
+                    case .callRealImplementation where hasParent:
+                        return try superclassCall()
+                    default:
+                        failAndCrash("No real implementation found for method `\(method)`. This is probably caused  by stubbed object being a mock of a protocol.")
+                    }
+                } else {
+                    failAndCrash("Stubbing of method `\(method)` using parameters \(parameters) wasn't finished (missing thenReturn()).")
                 }
-                switch action {
-                case .callImplementation(let implementation):
-                    return try implementation(parameters)
-                case .returnValue(let value):
-                    return value
-                case .throwError(let error):
-                    throw error
-                case .callRealImplementation where hasParent:
-                    return try superclassCall()
-                default:
-                    failAndCrash("No real implementation found for method `\(method)`. This is probably caused  by stubbed object being a mock of a protocol.")
-                }
+            } else if isSuperclassSpyEnabled {
+                return try superclassCall()
+            } else if isDefaultImplementationEnabled {
+                return try defaultCall()
             } else {
-                failAndCrash("Stubbing of method `\(method)` using parameters \(parameters) wasn't finished (missing thenReturn()).")
+                failAndCrash("No stub for method `\(method)` using parameters \(parameters).")
             }
-        } else if isSuperclassSpyEnabled {
-            return try superclassCall()
-        } else if isDefaultImplementationEnabled {
-            return try defaultCall()
-        } else {
-            failAndCrash("No stub for method `\(method)` using parameters \(parameters).")
         }
     }
     
@@ -200,6 +206,12 @@ public class MockManager {
         #endif
 
         fatalError(message)
+    }
+    
+    private func synchronized<T>(_ lock: AnyObject, _ block: () throws -> T) rethrows -> T {
+        objc_sync_enter(lock)
+        defer { objc_sync_exit(lock) }
+        return try block()
     }
 }
 
