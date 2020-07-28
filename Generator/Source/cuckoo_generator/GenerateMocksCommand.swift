@@ -36,7 +36,10 @@ public struct GenerateMocksCommand: CommandProtocol {
         } else {
             inputPathValues = getFullPathSortedArray(options.files)
         }
-        let inputFiles = inputPathValues.map { File(path: $0) }.compactMap { $0 }
+        let inputFiles = inputPathValues.compactMap { File(path: $0) }
+        if inputPathValues.count != inputFiles.count {
+            exit(1)
+        }
         let tokens = inputFiles.map { Tokenizer(sourceFile: $0, debugMode: options.debugMode).tokenize() }
         let tokensWithInheritance = options.noInheritance ? tokens : mergeInheritance(tokens)
 
