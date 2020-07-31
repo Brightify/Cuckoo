@@ -41,4 +41,8 @@ class GenericMethodClass<T: CustomStringConvertible> {
     func moreRethrowing<UwU>(param: @escaping () throws -> UwU) rethrows -> UwU {
         return try param()
     }
+
+    func genericReturn<W: Codable>(_ string: String) -> W? {
+        return try? JSONDecoder().decode(W.self, from: string.data(using: .utf8)!)
+    }
 }
