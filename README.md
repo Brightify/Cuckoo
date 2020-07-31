@@ -298,7 +298,7 @@ Verification of properties is similar to their stubbing.
 
 You can check if there are no more interactions on mock with function `verifyNoMoreInteractions`.
 
-With Swift's generic types, it is possible to use a generic parameter as the returned type. To properly verify these methods, you need to be able to specify the return type.
+With Swift's generic types, it is possible to use a generic parameter as the return type. To properly verify these methods, you need to be able to specify the return type.
 
 ```Swift
 // Given:
