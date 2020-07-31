@@ -298,6 +298,16 @@ Verification of properties is similar to their stubbing.
 
 You can check if there are no more interactions on mock with function `verifyNoMoreInteractions`.
 
+With swift's generic types, it is possible to have a generic method who's type is determined by the type of its return value. To be able to verify these methods, you need to be able to specify the return type.
+
+```Swift
+// Given:
+func genericReturn<T: Codable>(for: String) -> T? { ... }
+
+// Verify
+verify(mock).genericReturn(for: any()).with(returnType: String?.self)
+```
+
 ##### Argument capture
 You can use `ArgumentCaptor` to capture arguments in verification of calls (doing that in stubbing is not recommended). Here is an example code:
 
