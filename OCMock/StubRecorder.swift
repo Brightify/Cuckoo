@@ -68,6 +68,18 @@ public extension StubRecorder where OUT: NSObject {
     }
 }
 
+public extension StubRecorder where OUT: NSObjectProtocol {
+    func thenReturn(_ object: OUT) {
+        recorder.andReturn(object)
+    }
+}
+
+public extension StubRecorder where OUT == Optional<NSObjectProtocol> {
+    func thenReturn(_ object: OUT) {
+        recorder.andReturn(object)
+    }
+}
+
 public extension StubRecorder where OUT: CuckooOptionalType, OUT.Wrapped: NSObject {
     func thenReturn(_ object: OUT) {
         recorder.andReturn(object)
