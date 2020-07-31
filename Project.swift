@@ -66,7 +66,7 @@ func platformSet(platform: PlatformType, deploymentTarget: DeploymentTarget?) ->
                     "--glob",
                     #""$PROJECT_DIR"/Tests/Swift/Source/*.swift"#,
                 ],
-                name: "Generate Mockinos"
+                name: "Generate Mocks"
             )
         ],
         dependencies: [
@@ -141,6 +141,5 @@ let project = Project(
     targets: iOSTargets + macOSTargets + tvOSTargets,
     schemes: iOSSchemes + macOSSchemes + tvOSSchemes,
     additionalFiles: [
-        "Scripts/**",
         "Generator/CuckooGenerator.xcodeproj",
     ])
