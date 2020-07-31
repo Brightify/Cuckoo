@@ -83,6 +83,8 @@
 		277266573087574C196FE840 /* CallMatcherFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC319F6F55C00CFD3D0AF96 /* CallMatcherFunctions.swift */; };
 		2794938C670EBC6DD5B724BE /* Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4758812545462B94DAB7A4 /* Stub.swift */; };
 		279670BCE126CBCD5FAFA463 /* StubThrowingFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808091A975F4E8BDDF0C80D9 /* StubThrowingFunction.swift */; };
+		27BCAB9824D4747E00EAAB55 /* GeneratedMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68472F9924D3ECA600E096C6 /* GeneratedMocks.swift */; };
+		27BCABAF24D474CD00EAAB55 /* GeneratedMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68472F9924D3ECA600E096C6 /* GeneratedMocks.swift */; };
 		2815413A02C4D193FB9296FC /* StubbingProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A9BEFC601EF66DF42D5022 /* StubbingProxy.swift */; };
 		283F668C4BDE15F7B7DA8D63 /* StringProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA242F7A830953CD5E4AC4A /* StringProxy.m */; };
 		28EEBD56103D2CC8CF7A9149 /* VerifyReadOnlyProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A08AF20C937EF4EB98795B /* VerifyReadOnlyProperty.swift */; };
@@ -2314,6 +2316,7 @@
 				A98B094AF56BE63E7E4D2164 /* ParameterMatcherTest.swift in Sources */,
 				85BB583C1F89B50DC88999F2 /* ProtocolTest.swift in Sources */,
 				BC428931E53499C0EFDC802F /* ClassForStubTesting.swift in Sources */,
+				27BCAB9824D4747E00EAAB55 /* GeneratedMocks.swift in Sources */,
 				39B67C20D2A61BF2376634F3 /* ClassWithOptionals.swift in Sources */,
 				4A91D2B262ED9EC2EAC65D85 /* ExcludedTestClass.swift in Sources */,
 				BA6739666F5DDC4ADA564E2C /* GenericClass.swift in Sources */,
@@ -2637,6 +2640,7 @@
 				453EA0CE5ABEA62595596C6F /* ParameterMatcherTest.swift in Sources */,
 				63E990EB0DEE6A4873F30538 /* ProtocolTest.swift in Sources */,
 				A977B902CD0127BCD5BD272F /* ClassForStubTesting.swift in Sources */,
+				27BCABAF24D474CD00EAAB55 /* GeneratedMocks.swift in Sources */,
 				F09C7E5B6AD4AEB0166F871F /* ClassWithOptionals.swift in Sources */,
 				8B704B099E1FEA7F97ECEAE0 /* ExcludedTestClass.swift in Sources */,
 				68666AF31756DE755BED16A0 /* GenericClass.swift in Sources */,
