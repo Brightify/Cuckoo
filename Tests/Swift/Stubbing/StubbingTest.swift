@@ -313,4 +313,21 @@ class StubbingTest: XCTestCase {
         mock.noReturnSub()
         waitForExpectations(timeout: 0.1, handler: nil)
     }
+    
+    func testThreadSafety() {
+        let mock = MockTestedClass()
+        stub(mock) { mock in
+            when(mock.count(characters: any())).thenReturn(1)
+        }
+        
+        // Verify that we can call a stub from multiple threads, 2 or more of which may hit the MockManager at the same time.
+        // MockManager should handle this without race conditions or EXC_BAD_INSTRUCTION errors.
+        let exp = expectation(description: "concurrent operation is done")
+        exp.expectedFulfillmentCount = 1000
+        DispatchQueue.concurrentPerform(iterations: 1000) { index in
+            _ = mock.count(characters: "")
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 0.1)
+    }
 }
