@@ -15,7 +15,7 @@ private class GenericProtocolConformerClass<C: AnyObject, V>: GenericProtocol {
     let constant: Int = 0
     var optionalProperty: V?
 
-    required init(theC: C, theV: V) {
+    required init<F>(theC: C, theV: V, f: F) {
         readOnlyPropertyC = theC
         readWritePropertyV = theV
     }
@@ -58,7 +58,7 @@ private struct GenericProtocolConformerStruct<C: AnyObject, V>: GenericProtocol 
     let constant: Int = 0
     var optionalProperty: V?
 
-    init(theC: C, theV: V) {
+    init<F>(theC: C, theV: V, f: F) {
         readOnlyPropertyC = theC
         readWritePropertyV = theV
     }
@@ -81,7 +81,7 @@ private struct GenericProtocolConformerStruct<C: AnyObject, V>: GenericProtocol 
 class GenericProtocolTest: XCTestCase {
     private func createMock<V>(value: V) -> MockGenericProtocol<MockTestedClass, V> {
         let classy = MockTestedClass()
-        return MockGenericProtocol(theC: classy, theV: value)
+        return MockGenericProtocol(theC: classy, theV: value, f: 0)
     }
 
     func testReadOnlyProperty() {
@@ -144,7 +144,7 @@ class GenericProtocolTest: XCTestCase {
 
     func testModification() {
         let mock = createMock(value: ["EXTERMINATE!": "EXTERMINATE!!", "EXTERMINATE!!!": "EXTERMINATE!!!!"])
-        let original = GenericProtocolConformerClass(theC: MockTestedClass(), theV: ["Sir, may I help you?": "Nope, just lookin' 👀"])
+        let original = GenericProtocolConformerClass(theC: MockTestedClass(), theV: ["Sir, may I help you?": "Nope, just lookin' 👀"], f: "F")
         mock.enableDefaultImplementation(original)
         
         original.readWritePropertyV["Are you sure?"] = "Yeah, I'm just waiting for my wife."
@@ -163,7 +163,7 @@ class GenericProtocolTest: XCTestCase {
     // using: `enableDefaultImplementation(mutating:)` reflects the original's state at all times
     func testStructModification() {
         let mock = createMock(value: ["EXTERMINATE!": "EXTERMINATE!!", "EXTERMINATE!!!": "EXTERMINATE!!!!"])
-        var original = GenericProtocolConformerStruct(theC: MockTestedClass(), theV: ["Sir, may I help you?": "Nope, just lookin' 👀"])
+        var original = GenericProtocolConformerStruct(theC: MockTestedClass(), theV: ["Sir, may I help you?": "Nope, just lookin' 👀"], f: "F")
         mock.enableDefaultImplementation(mutating: &original)
 
         original.readWritePropertyV["Are you sure?"] = "Yeah, I'm just waiting for my wife."
@@ -181,7 +181,7 @@ class GenericProtocolTest: XCTestCase {
     //
     func testStructNonModification() {
         let mock = createMock(value: ["EXTERMINATE!": "EXTERMINATE!!", "EXTERMINATE!!!": "EXTERMINATE!!!!"])
-        var original = GenericProtocolConformerStruct(theC: MockTestedClass(), theV: ["Sir, may I help you?": "Nope, just lookin' 👀"])
+        var original = GenericProtocolConformerStruct(theC: MockTestedClass(), theV: ["Sir, may I help you?": "Nope, just lookin' 👀"], f: "F")
         mock.enableDefaultImplementation(original)
 
         original.readWritePropertyV["Are you sure?"] = "Yeah, I'm just waiting for my wife."

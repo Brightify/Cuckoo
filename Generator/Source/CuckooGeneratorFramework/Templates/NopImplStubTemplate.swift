@@ -23,7 +23,7 @@ extension Templates {
     {% endfor %}
 
     {% for initializer in container.initializers %}
-    {{ initializer.accessibility }}{% if container.@type == "ClassDeclaration" %} override{% endif %}{% if initializer.@type == "ProtocolMethod" %} required{%endif%} init({{initializer.parameterSignature}}) {
+    {{ initializer.accessibility }}{% if container.@type == "ClassDeclaration" %} override{% endif %}{% if initializer.@type == "ProtocolMethod" %} required{%endif%} init{{ initializer.genericParameters }}({{ initializer.parameterSignature }}) {
         {% if container.@type == "ClassDeclaration" %}
         super.init({{initializer.call}})
         {% endif %}

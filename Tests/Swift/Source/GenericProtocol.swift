@@ -17,7 +17,7 @@ protocol GenericProtocol {
     var constant: Int { get }
     var optionalProperty: V? { get set }
 
-    init(theC: C, theV: V)
+    init<F>(theC: C, theV: V, f: F)
 
     func callSomeC(theC: C) -> Int
     func callSomeV(theV: V) -> Int

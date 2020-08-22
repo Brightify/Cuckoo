@@ -88,7 +88,7 @@ extension Templates {
     {% if debug %}
     // {{initializer}}
     {% endif %}
-    {{ initializer.accessibility }}{% if container.isImplementation %} override{% endif %}{% if initializer.@type == "ProtocolMethod" %} required{% endif %} init({{initializer.parameterSignature}}) {
+    {{ initializer.accessibility }}{% if container.isImplementation %} override{% endif %}{% if initializer.@type == "ProtocolMethod" %} required{% endif %} init{{ initializer.genericParameters }}({{ initializer.parameterSignature }}) {
         {% if container.isImplementation %}
         super.init({{initializer.call}})
         {% endif %}

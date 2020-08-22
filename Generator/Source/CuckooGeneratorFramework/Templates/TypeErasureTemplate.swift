@@ -33,7 +33,7 @@ extension Templates {
         }
         {% if container.initializers %}
         /// MARK:- ignored required initializers{% endif %}
-        {% for initializer in container.initializers %}{{ container.accessibility }} required init({{ initializer.parameterSignature }}) {
+        {% for initializer in container.initializers %}{{ container.accessibility }} required init{{ initializer.genericParameters }}({{ initializer.parameterSignature }}) {
             fatalError("`DefaultImplCaller` class is only used for calling default implementation and can't be initialized on its own.")
         }
         {% endfor %}
