@@ -526,6 +526,9 @@ The default value is `GeneratedMocks.swift`.
 ###### `--testable` (string)[,(string)...]
 A comma separated list of frameworks that should be imported as @testable in the mock files.
 
+###### `--import` (string)[,(string)...]
+A comma separated list of additonal frameworks that should be imported in the mock files.
+
 ###### `--exclude` (string)[,(string)...]
 A comma separated list of classes and protocols that should be skipped during mock generation.  
 

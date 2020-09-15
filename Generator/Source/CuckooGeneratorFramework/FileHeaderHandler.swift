@@ -23,12 +23,14 @@ public struct FileHeaderHandler {
         return generationInfo + "\n" + header + "\n"
     }
 
-    public static func getImports(of file: FileRepresentation, testableFrameworks: [String]) -> String {
+    public static func getImports(of file: FileRepresentation, testableFrameworks: [String], frameworkImports: [String]) -> String {
         var imports = Array(Set(file.declarations.only(Import.self).map { "import \($0.importee)\n" })).sorted().joined(separator: "")
         if imports.isEmpty == false {
             imports = "\n\(imports)"
         }
-        return "import Cuckoo\n" + getTestableImports(testableFrameworks: testableFrameworks) + imports
+        return "import Cuckoo\n" + getTestableImports(testableFrameworks: testableFrameworks)
+            + getFrameworkImports(frameworkImports: frameworkImports)
+            + imports
     }
 
     private static func getRelativePath(from absolutePath: String) -> String {
@@ -83,13 +85,20 @@ public struct FileHeaderHandler {
     }
 
     private static func getTestableImports(testableFrameworks: [String]) -> String {
-        func replaceIllegalCharacters(_ char: UnicodeScalar) -> Character {
-            if CharacterSet.letters.contains(UnicodeScalar(char.value)!) || CharacterSet.decimalDigits.contains(UnicodeScalar(char.value)!) {
-                return Character(char)
-            } else {
-                return "_"
-            }
-        }
         return testableFrameworks.map { String($0.unicodeScalars.map(replaceIllegalCharacters)) }.map { "@testable import \($0)\n" }.joined(separator: "")
     }
+    
+    private static func getFrameworkImports(frameworkImports: [String]) -> String {
+        return frameworkImports.map { String($0.unicodeScalars.map(replaceIllegalCharacters)) }.map { "import \($0)\n" }.joined(separator: "")
+    }
+
 }
+
+private func replaceIllegalCharacters(_ char: UnicodeScalar) -> Character {
+    if CharacterSet.letters.contains(UnicodeScalar(char.value)!) || CharacterSet.decimalDigits.contains(UnicodeScalar(char.value)!) {
+        return Character(char)
+    } else {
+        return "_"
+    }
+}
+
