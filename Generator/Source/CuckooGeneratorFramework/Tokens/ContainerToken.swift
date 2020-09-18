@@ -8,7 +8,7 @@
 
 public protocol ContainerToken: Token, HasAccessibility {
     var name: String { get }
-    var parent: ContainerToken? { get set }
+    var parent: Reference<ContainerToken>? { get set }
     var range: CountableRange<Int> { get }
     var nameRange: CountableRange<Int> { get }
     var bodyRange: CountableRange<Int> { get }

@@ -9,7 +9,7 @@
 public struct ClassDeclaration: ContainerToken, HasAccessibility {
     public let implementation: Bool = true
     public var name: String
-    public var parent: ContainerToken? = nil
+    public var parent: Reference<ContainerToken>? = nil
     public var accessibility: Accessibility
     public var range: CountableRange<Int>
     public var nameRange: CountableRange<Int>
@@ -26,6 +26,7 @@ public struct ClassDeclaration: ContainerToken, HasAccessibility {
     public func replace(children tokens: [Token]) -> ClassDeclaration {
         return ClassDeclaration(
             name: self.name,
+            parent: self.parent,
             accessibility: self.accessibility,
             range: self.range,
             nameRange: self.nameRange,

@@ -26,6 +26,20 @@ public struct Tokenizer {
             let structure = try Structure(file: file)
 
             let declarations = tokenize(structure.dictionary[Key.Substructure.rawValue] as? [SourceKitRepresentable] ?? [])
+                .flatMap { declaration -> [Token] in
+                    fputs("Declaration token: \(declaration).\n", stdout)
+                    guard let parent = declaration as? ContainerToken else { return [declaration] }
+                    fputs("PARENT token: \(parent).\n", stdout)
+                    return [parent] + parent.children.compactMap { child -> Token? in
+                        guard var c = child as? ContainerToken else { return nil }
+                        c.parent = Reference(value: parent)
+                        fputs("CHILD token: \(c).\n", stdout)
+                        return c
+                    }
+                }
+
+            fputs("ALL DECLARATION tokens: \(declarations).\n", stdout)
+
             let imports = tokenize(imports: declarations)
 
             return FileRepresentation(sourceFile: file, declarations: declarations + imports)
