@@ -76,7 +76,9 @@ public struct Generator {
         let environment = Environment(extensions: [ext])
 
         let containers = declarations.compactMap { $0 as? ContainerToken }
-            .filter { $0.accessibility.isAccessible }
+            .filter {
+                $0.parent?.areAllHierarchiesAccessible ?? true && $0.accessibility.isAccessible
+            }
             .map { $0.serializeWithType() }
 
         return try environment.renderTemplate(string: Templates.mock, context: ["containers": containers, "debug": debug])

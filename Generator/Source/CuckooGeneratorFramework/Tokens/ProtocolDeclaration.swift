@@ -9,6 +9,7 @@
 public struct ProtocolDeclaration: ContainerToken, HasAccessibility {
     public let implementation: Bool = false
     public var name: String
+    public var parent: Reference<ParentToken>?
     public var accessibility: Accessibility
     public var range: CountableRange<Int>
     public var nameRange: CountableRange<Int>
@@ -22,6 +23,7 @@ public struct ProtocolDeclaration: ContainerToken, HasAccessibility {
     public func replace(children tokens: [Token]) -> ProtocolDeclaration {
         return ProtocolDeclaration(
             name: self.name,
+            parent: self.parent,
             accessibility: self.accessibility,
             range: self.range,
             nameRange: self.nameRange,

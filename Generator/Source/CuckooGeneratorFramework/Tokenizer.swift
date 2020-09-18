@@ -18,6 +18,11 @@ public struct Tokenizer {
             let structure = try Structure(file: file)
 
             let declarations = tokenize(structure.dictionary[Key.Substructure.rawValue] as? [SourceKitRepresentable] ?? [])
+                .flatMap { declaration -> [Token] in
+                    guard let parent = declaration as? ParentToken else { return [declaration] }
+                    return [parent] + parent.adoptAllYoungerGenerations()
+                }
+
             let imports = tokenize(imports: declarations)
 
             return FileRepresentation(sourceFile: file, declarations: declarations + imports)
@@ -105,7 +110,8 @@ public struct Tokenizer {
                 children: children,
                 inheritedTypes: tokenizedInheritedTypes,
                 attributes: attributes,
-                genericParameters: fixedGenericParameters)
+                genericParameters: fixedGenericParameters
+            )
 
         case Kinds.ClassDeclaration.rawValue:
             let subtokens = tokenize(dictionary[Key.Substructure.rawValue] as? [SourceKitRepresentable] ?? [])
@@ -133,10 +139,36 @@ public struct Tokenizer {
                 children: children,
                 inheritedTypes: tokenizedInheritedTypes,
                 attributes: attributes,
-                genericParameters: fixedGenericParameters)
+                genericParameters: fixedGenericParameters
+            )
 
+        case Kinds.StructDeclaration.rawValue:
+            let subtokens = tokenize(dictionary[Key.Substructure.rawValue] as? [SourceKitRepresentable] ?? [])
+            let children = subtokens.only(ContainerToken.self)
+
+            return StructDeclaration(
+                name: name,
+                accessibility: accessibility,
+                range: range!,
+                nameRange: nameRange!,
+                bodyRange: bodyRange!,
+                attributes: attributes,
+                children: children
+            )
+            
         case Kinds.ExtensionDeclaration.rawValue:
-            return ExtensionDeclaration(range: range!)
+            let subtokens = tokenize(dictionary[Key.Substructure.rawValue] as? [SourceKitRepresentable] ?? [])
+            let children = subtokens.only(ContainerToken.self)
+
+            return ExtensionDeclaration(
+                name: name,
+                accessibility: accessibility,
+                range: range!,
+                nameRange: nameRange!,
+                bodyRange: bodyRange!,
+                attributes: attributes,
+                children: children
+            )
 
         case Kinds.InstanceVariable.rawValue:
             let setterAccessibility = (dictionary[Key.SetterAccessibility.rawValue] as? String).flatMap(Accessibility.init)
@@ -160,7 +192,8 @@ public struct Tokenizer {
                 range: range!,
                 nameRange: nameRange!,
                 overriding: false,
-                attributes: attributes)
+                attributes: attributes
+            )
 
         case Kinds.InstanceMethod.rawValue:
             let genericParameters = tokenize(dictionary[Key.Substructure.rawValue] as? [SourceKitRepresentable] ?? []).only(GenericParameter.self)
@@ -198,7 +231,8 @@ public struct Tokenizer {
                     parameters: namedParameters,
                     bodyRange: bodyRange,
                     attributes: attributes,
-                    genericParameters: fixedGenericParameters)
+                    genericParameters: fixedGenericParameters
+                )
             } else {
                 return ProtocolMethod(
                     name: name,
@@ -208,7 +242,8 @@ public struct Tokenizer {
                     nameRange: nameRange!,
                     parameters: namedParameters,
                     attributes: attributes,
-                    genericParameters: fixedGenericParameters)
+                    genericParameters: fixedGenericParameters
+                )
             }
 
         case Kinds.GenericParameter.rawValue:
@@ -227,7 +262,11 @@ public struct Tokenizer {
             let toIndex = source.index(fromIndex, offsetBy: inheritanceRange.length)
             let inheritance = String(source[fromIndex..<toIndex])
             let fullRange = range.lowerBound..<(range.upperBound + inheritanceMatch.range.length)
-            return GenericParameter(name: name, range: fullRange, inheritedType: InheritanceDeclaration(name: inheritance))
+            return GenericParameter(
+                name: name,
+                range: fullRange,
+                inheritedType: InheritanceDeclaration(name: inheritance)
+            )
 
         default:
             // Do not log anything, until the parser contains all known cases.

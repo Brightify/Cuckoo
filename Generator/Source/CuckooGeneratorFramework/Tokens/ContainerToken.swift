@@ -6,13 +6,8 @@
 //  Copyright © 2016 Brightify. All rights reserved.
 //
 
-public protocol ContainerToken: Token, HasAccessibility, HasAttributes {
-    var name: String { get }
-    var range: CountableRange<Int> { get }
-    var nameRange: CountableRange<Int> { get }
-    var bodyRange: CountableRange<Int> { get }
+public protocol ContainerToken: ParentToken, ChildToken {
     var initializers: [Initializer] { get }
-    var children: [Token] { get }
     var implementation: Bool { get }
     var inheritedTypes: [InheritanceDeclaration] { get }
     var genericParameters: [GenericParameter] { get }
@@ -54,6 +49,8 @@ extension ContainerToken {
             "name": name,
             "accessibility": accessibility.sourceName,
             "isAccessible": accessibility.isAccessible,
+            "hasParent": parent != nil,
+            "parentFullyQualifiedName": parent?.fullyQualifiedName ?? "",
             "children": accessibilityAdjustedChildren.map { $0.serializeWithType() },
             "properties": properties,
             "methods": methods,
