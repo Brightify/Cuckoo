@@ -382,6 +382,9 @@
 		CACDD7672515249E00980F58 /* NestedExtensionClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACDD7662515249E00980F58 /* NestedExtensionClassTest.swift */; };
 		CACDD7682515249E00980F58 /* NestedExtensionClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACDD7662515249E00980F58 /* NestedExtensionClassTest.swift */; };
 		CACDD7692515249E00980F58 /* NestedExtensionClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACDD7662515249E00980F58 /* NestedExtensionClassTest.swift */; };
+		CADD144525157A23008C5EBB /* NestedSubclassTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADD144425157A23008C5EBB /* NestedSubclassTests.swift */; };
+		CADD144625157A23008C5EBB /* NestedSubclassTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADD144425157A23008C5EBB /* NestedSubclassTests.swift */; };
+		CADD144725157A23008C5EBB /* NestedSubclassTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADD144425157A23008C5EBB /* NestedSubclassTests.swift */; };
 		CBB7017EE143A38098AD7287 /* GenericMethodClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B965102D09D6B0E94CDA8EA /* GenericMethodClassTest.swift */; };
 		CC2BA5A130CB61216E489D99 /* VerifyProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753FC6D19235B2C8F2DBAA7B /* VerifyProperty.swift */; };
 		CC60D01D5BD4771A8EC08F6A /* CreateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44692276AAFF9261EDD5D75 /* CreateMock.swift */; };
@@ -853,6 +856,7 @@
 		CACDD73A2515245B00980F58 /* NestedInNestedClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedInNestedClass.swift; sourceTree = "<group>"; };
 		CACDD7562515247100980F58 /* NestedInExtensionFromClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedInExtensionFromClass.swift; sourceTree = "<group>"; };
 		CACDD7662515249E00980F58 /* NestedExtensionClassTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedExtensionClassTest.swift; sourceTree = "<group>"; };
+		CADD144425157A23008C5EBB /* NestedSubclassTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedSubclassTests.swift; sourceTree = "<group>"; };
 		CB65661C2188A3E830EEBF72 /* ThreadLocal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadLocal.swift; sourceTree = "<group>"; };
 		CEBE505B4B98BE6289678CD1 /* MatchableTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchableTest.swift; sourceTree = "<group>"; };
 		D09B97C65DA87366B8605109 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
@@ -1181,6 +1185,7 @@
 				47EF4290E156765F0A05913E /* Stubbing */,
 				48CB4CA852B87D8D86C18DA5 /* Verification */,
 				CACDD70525151C7F00980F58 /* NestedClassTest.swift */,
+				CADD144425157A23008C5EBB /* NestedSubclassTests.swift */,
 				CACDD7662515249E00980F58 /* NestedExtensionClassTest.swift */,
 				6873C8013002AFEA7565BDAC /* ClassTest.swift */,
 				8CDB969240E4E2B12FF93284 /* CollisionClasses.swift */,
@@ -2328,6 +2333,7 @@
 				CACDD70725151C7F00980F58 /* NestedClassTest.swift in Sources */,
 				653C6B1B0884C6D58E624D2E /* GenericMethodClassTest.swift in Sources */,
 				9EAF1E992E94374BEC7E991F /* GenericProtocolTest.swift in Sources */,
+				CADD144625157A23008C5EBB /* NestedSubclassTests.swift in Sources */,
 				15464C72B2E02BE3B83BF860 /* Array+matchersTest.swift in Sources */,
 				AB3A869091F2C1705FCC5645 /* CallMatcherFunctionsTest.swift in Sources */,
 				890656235A725D4007EC7E6B /* CallMatcherTest.swift in Sources */,
@@ -2501,6 +2507,7 @@
 				CACDD70625151C7F00980F58 /* NestedClassTest.swift in Sources */,
 				6185ED8EF7CDC1EB4A859B6B /* GenericMethodClassTest.swift in Sources */,
 				B814D550E3464500F775C91A /* GenericProtocolTest.swift in Sources */,
+				CADD144525157A23008C5EBB /* NestedSubclassTests.swift in Sources */,
 				9B43D00AE620FC13BC6CDD3B /* Array+matchersTest.swift in Sources */,
 				6BAE868EB51D85115719DA33 /* CallMatcherFunctionsTest.swift in Sources */,
 				620292525840DE035421240A /* CallMatcherTest.swift in Sources */,
@@ -2660,6 +2667,7 @@
 				CACDD70825151C7F00980F58 /* NestedClassTest.swift in Sources */,
 				CBB7017EE143A38098AD7287 /* GenericMethodClassTest.swift in Sources */,
 				84E115FC5DA7BC43B2751E6E /* GenericProtocolTest.swift in Sources */,
+				CADD144725157A23008C5EBB /* NestedSubclassTests.swift in Sources */,
 				E43CC1CA72418C35F7FC5262 /* Array+matchersTest.swift in Sources */,
 				4C5633619E1E58D34CFEDF2A /* CallMatcherFunctionsTest.swift in Sources */,
 				F01B6FF9BCFEED923AFCE5FC /* CallMatcherTest.swift in Sources */,

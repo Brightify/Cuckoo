@@ -8,6 +8,8 @@
 import Foundation
 @available(swift 4.0)
 class Nested {
+    class NestedTestedSubclass: TestedClass { }
+    
     class NestedTestedClass {
 
         let constant: Float = 0.0
