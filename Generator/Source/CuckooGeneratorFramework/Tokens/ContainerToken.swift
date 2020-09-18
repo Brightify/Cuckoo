@@ -8,6 +8,7 @@
 
 public protocol ContainerToken: Token, HasAccessibility {
     var name: String { get }
+    var parent: ContainerToken? { get set }
     var range: CountableRange<Int> { get }
     var nameRange: CountableRange<Int> { get }
     var bodyRange: CountableRange<Int> { get }
@@ -55,6 +56,8 @@ extension ContainerToken {
             "name": name,
             "accessibility": accessibility.sourceName,
             "isAccessible": accessibility.isAccessible,
+            "hasParent": parent != nil,
+            "parent": parent?.name ?? "",
             "children": accessibilityAdjustedChildren.map { $0.serializeWithType() },
             "properties": properties,
             "methods": methods,

@@ -58,11 +58,26 @@ public struct Generator {
         }
 
         let environment = Environment(extensions: [ext])
-
-        let containers = declarations.compactMap { $0 as? ContainerToken }
+        fputs("DECLARATIONS IN MOCK: \(declarations)\n", stdout)
+        
+        let accessibleDeclarations = declarations.compactMap { $0 as? ContainerToken }
             .filter { $0.accessibility.isAccessible }
-            .map { $0.serializeWithType() }
 
+        let nestedContainers = accessibleDeclarations
+            .filter { $0.accessibility.isAccessible && $0.children.contains { $0 is ContainerToken } }
+            .map { (parent: $0, container:$0.children.compactMap { $0 as? ContainerToken }) }
+            .flatMap { (parent, children) in
+                children.map { child -> [String: Any] in
+                    var c = child
+                    c.parent = parent
+                    return c.serializeWithType()
+                }
+            }
+
+        let containers = nestedContainers + accessibleDeclarations.map { $0.serializeWithType() }
+
+        fputs("CONTAINERS IN MOCK: \(containers.map { $0["name"] })\n", stdout)
+    
         return try environment.renderTemplate(string: Templates.mock, context: ["containers": containers, "debug": debug])
     }
 

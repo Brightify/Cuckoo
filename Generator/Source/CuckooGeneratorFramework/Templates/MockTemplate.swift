@@ -15,6 +15,10 @@ extension Templates {
 {% for attribute in container.attributes %}
 {{ attribute.text }}
 {% endfor %}
+    {% if container.hasParent %}
+extension {{ container.parent }} {
+    {% endif %}
+
 {{ container.accessibility }} class {{ container.mockName }}{{ container.genericParameters }}: {{ container.name }}{% if container.isImplementation %}{{ container.genericArguments }}{% endif %}, {% if container.isImplementation %}Cuckoo.ClassMock{% else %}Cuckoo.ProtocolMock{% endif %} {
     {% if container.isGeneric and not container.isImplementation %}
     {{ container.accessibility }} typealias MocksType = \(typeErasureClassName){{ container.genericArguments }}
@@ -124,6 +128,10 @@ extension Templates {
 }
 
 \(Templates.noImplStub)
+
+    {% if container.hasParent %}
+}
+    {% endif %}
 
 {% endfor %}
 """
