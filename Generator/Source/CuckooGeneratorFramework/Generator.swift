@@ -58,7 +58,6 @@ public struct Generator {
         }
 
         let environment = Environment(extensions: [ext])
-        fputs("DECLARATIONS IN MOCK: \(declarations)\n", stdout)
 
         let containers = declarations.compactMap { $0 as? ContainerToken }
             .filter {
@@ -68,7 +67,6 @@ public struct Generator {
                 return $0.accessibility.isAccessible
             }.map { $0.serializeWithType() }
 
-        fputs("CONTAINERS IN MOCK: \(containers.map { $0["name"] })\n", stdout)
     
         return try environment.renderTemplate(string: Templates.mock, context: ["containers": containers, "debug": debug])
     }

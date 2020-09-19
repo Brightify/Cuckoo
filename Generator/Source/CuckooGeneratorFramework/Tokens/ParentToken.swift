@@ -42,7 +42,6 @@ extension ParentToken {
             .compactMap { child -> ParentToken? in
                 guard var c = child as? ContainerToken else { return nil }
                 c.parent = Reference(value: self)
-                fputs("CHILD token: \(c).\n", stdout)
                 return c
             }
             .flatMap { [$0] + $0.adoptAllYoungerGenerations() }

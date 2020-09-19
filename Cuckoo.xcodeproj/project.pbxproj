@@ -412,6 +412,12 @@
 		CADD151B2515937D008C5EBB /* MultiNestedClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADD151A2515937D008C5EBB /* MultiNestedClassTest.swift */; };
 		CADD151C2515937D008C5EBB /* MultiNestedClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADD151A2515937D008C5EBB /* MultiNestedClassTest.swift */; };
 		CADD151D2515937D008C5EBB /* MultiNestedClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADD151A2515937D008C5EBB /* MultiNestedClassTest.swift */; };
+		CADD152B2515A69E008C5EBB /* MultiLayeredNestedTestedSubclassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADD152A2515A69E008C5EBB /* MultiLayeredNestedTestedSubclassTest.swift */; };
+		CADD152C2515A69E008C5EBB /* MultiLayeredNestedTestedSubclassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADD152A2515A69E008C5EBB /* MultiLayeredNestedTestedSubclassTest.swift */; };
+		CADD152D2515A69E008C5EBB /* MultiLayeredNestedTestedSubclassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADD152A2515A69E008C5EBB /* MultiLayeredNestedTestedSubclassTest.swift */; };
+		CADD153B2515A858008C5EBB /* MultiNestedExtensionClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADD153A2515A858008C5EBB /* MultiNestedExtensionClassTest.swift */; };
+		CADD153C2515A858008C5EBB /* MultiNestedExtensionClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADD153A2515A858008C5EBB /* MultiNestedExtensionClassTest.swift */; };
+		CADD153D2515A858008C5EBB /* MultiNestedExtensionClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADD153A2515A858008C5EBB /* MultiNestedExtensionClassTest.swift */; };
 		CBB7017EE143A38098AD7287 /* GenericMethodClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B965102D09D6B0E94CDA8EA /* GenericMethodClassTest.swift */; };
 		CC2BA5A130CB61216E489D99 /* VerifyProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753FC6D19235B2C8F2DBAA7B /* VerifyProperty.swift */; };
 		CC60D01D5BD4771A8EC08F6A /* CreateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44692276AAFF9261EDD5D75 /* CreateMock.swift */; };
@@ -893,6 +899,8 @@
 		CADD14FA2515918B008C5EBB /* MultiNestedInPrivateNestedClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiNestedInPrivateNestedClass.swift; sourceTree = "<group>"; };
 		CADD150A251591D8008C5EBB /* MultiNestedInExtensionFromClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiNestedInExtensionFromClass.swift; sourceTree = "<group>"; };
 		CADD151A2515937D008C5EBB /* MultiNestedClassTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiNestedClassTest.swift; sourceTree = "<group>"; };
+		CADD152A2515A69E008C5EBB /* MultiLayeredNestedTestedSubclassTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiLayeredNestedTestedSubclassTest.swift; sourceTree = "<group>"; };
+		CADD153A2515A858008C5EBB /* MultiNestedExtensionClassTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiNestedExtensionClassTest.swift; sourceTree = "<group>"; };
 		CB65661C2188A3E830EEBF72 /* ThreadLocal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadLocal.swift; sourceTree = "<group>"; };
 		CEBE505B4B98BE6289678CD1 /* MatchableTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchableTest.swift; sourceTree = "<group>"; };
 		D09B97C65DA87366B8605109 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
@@ -1226,6 +1234,8 @@
 				CADD146A25158A34008C5EBB /* NestedPrivateExtensionClassTest.swift */,
 				CADD147A25158A44008C5EBB /* NestedPrivateClassTest.swift */,
 				CADD151A2515937D008C5EBB /* MultiNestedClassTest.swift */,
+				CADD152A2515A69E008C5EBB /* MultiLayeredNestedTestedSubclassTest.swift */,
+				CADD153A2515A858008C5EBB /* MultiNestedExtensionClassTest.swift */,
 				6873C8013002AFEA7565BDAC /* ClassTest.swift */,
 				8CDB969240E4E2B12FF93284 /* CollisionClasses.swift */,
 				0BEF42DC82FC0EF50E83E6CA /* CuckooFunctionsTest.swift */,
@@ -2393,6 +2403,7 @@
 				A98B094AF56BE63E7E4D2164 /* ParameterMatcherTest.swift in Sources */,
 				85BB583C1F89B50DC88999F2 /* ProtocolTest.swift in Sources */,
 				BC428931E53499C0EFDC802F /* ClassForStubTesting.swift in Sources */,
+				CADD152C2515A69E008C5EBB /* MultiLayeredNestedTestedSubclassTest.swift in Sources */,
 				CADD148C25158A62008C5EBB /* NestedPrivateExtensionClass.swift in Sources */,
 				27BCAB9824D4747E00EAAB55 /* GeneratedMocks.swift in Sources */,
 				CACDD7582515247100980F58 /* NestedInExtensionFromClass.swift in Sources */,
@@ -2405,6 +2416,7 @@
 				976C2EBAEC277E931B3AB769 /* ObjcProtocol.swift in Sources */,
 				39E8C61BBB09A4A27B1350AE /* TestedClass.swift in Sources */,
 				890B1518BDDFBE8FDFDCFA26 /* TestedProtocol.swift in Sources */,
+				CADD153C2515A858008C5EBB /* MultiNestedExtensionClassTest.swift in Sources */,
 				3F51FDF6C83FA2474D59710D /* TestedSubProtocol.swift in Sources */,
 				939F8351018A269238F58553 /* TestedSubclass.swift in Sources */,
 				DAD4C161978D36BCC64AB3C6 /* UnicodeTestProtocol.swift in Sources */,
@@ -2576,6 +2588,7 @@
 				7DEB7E694AD63B5C7B9B22E6 /* ParameterMatcherTest.swift in Sources */,
 				E22E749D0A0B44EC528CB38F /* ProtocolTest.swift in Sources */,
 				2D2631FF3DFEB17188A08073 /* ClassForStubTesting.swift in Sources */,
+				CADD152B2515A69E008C5EBB /* MultiLayeredNestedTestedSubclassTest.swift in Sources */,
 				CADD148B25158A62008C5EBB /* NestedPrivateExtensionClass.swift in Sources */,
 				68472F9A24D3ECA700E096C6 /* GeneratedMocks.swift in Sources */,
 				CACDD7572515247100980F58 /* NestedInExtensionFromClass.swift in Sources */,
@@ -2588,6 +2601,7 @@
 				7E628E0FB6B59C6B641AF6B1 /* ObjcProtocol.swift in Sources */,
 				944E8A4093693E48B3ACD938 /* TestedClass.swift in Sources */,
 				41F4150D95BC01E3AD5BC2B3 /* TestedProtocol.swift in Sources */,
+				CADD153B2515A858008C5EBB /* MultiNestedExtensionClassTest.swift in Sources */,
 				18A918338118AE7B7FDDDD8E /* TestedSubProtocol.swift in Sources */,
 				0405F62A3C80516B8B556DEE /* TestedSubclass.swift in Sources */,
 				0ED1CB69A10271E8108F20FE /* UnicodeTestProtocol.swift in Sources */,
@@ -2745,6 +2759,7 @@
 				453EA0CE5ABEA62595596C6F /* ParameterMatcherTest.swift in Sources */,
 				63E990EB0DEE6A4873F30538 /* ProtocolTest.swift in Sources */,
 				A977B902CD0127BCD5BD272F /* ClassForStubTesting.swift in Sources */,
+				CADD152D2515A69E008C5EBB /* MultiLayeredNestedTestedSubclassTest.swift in Sources */,
 				CADD148D25158A62008C5EBB /* NestedPrivateExtensionClass.swift in Sources */,
 				27BCABAF24D474CD00EAAB55 /* GeneratedMocks.swift in Sources */,
 				CACDD7592515247100980F58 /* NestedInExtensionFromClass.swift in Sources */,
@@ -2757,6 +2772,7 @@
 				610B9F6B3C52E7241A80FC27 /* ObjcProtocol.swift in Sources */,
 				3FA36E79C29711257E3AD899 /* TestedClass.swift in Sources */,
 				05CCD0B58CBF8AD378D407B1 /* TestedProtocol.swift in Sources */,
+				CADD153D2515A858008C5EBB /* MultiNestedExtensionClassTest.swift in Sources */,
 				86838C17C151FFE82DC5B616 /* TestedSubProtocol.swift in Sources */,
 				71325312F391F1ED64037ABB /* TestedSubclass.swift in Sources */,
 				9B54EA8552637FBD7476E0A7 /* UnicodeTestProtocol.swift in Sources */,
