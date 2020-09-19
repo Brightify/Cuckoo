@@ -27,6 +27,16 @@ extension ParentToken {
         return names.joined(separator: ".")
     }
     
+    var allHierarchiesAreAccessible:Bool {
+        guard accessibility.isAccessible else { return false }
+        var parent:ParentToken? = (self as? ChildToken)?.parent?.value
+        while let p = parent {
+            guard p.accessibility.isAccessible else { return false }
+            parent = (p as? ChildToken)?.parent?.value
+        }
+        return true
+    }
+    
     func adoptAllYoungerGenerations() -> [ParentToken] {
         return children
             .compactMap { child -> ParentToken? in
