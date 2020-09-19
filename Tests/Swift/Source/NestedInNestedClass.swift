@@ -10,6 +10,10 @@ import Foundation
 class Nested {
     class NestedTestedSubclass: TestedClass { }
     
+    private class ThisClassShouldNotBeMocked3 {
+        var property: Int?
+    }
+    
     class NestedTestedClass {
 
         let constant: Float = 0.0

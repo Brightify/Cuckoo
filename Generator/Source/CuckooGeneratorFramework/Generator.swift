@@ -61,7 +61,12 @@ public struct Generator {
         fputs("DECLARATIONS IN MOCK: \(declarations)\n", stdout)
 
         let containers = declarations.compactMap { $0 as? ContainerToken }
-            .filter { $0.accessibility.isAccessible }.map { $0.serializeWithType() }
+            .filter {
+                if let parent = $0.topMostParent {
+                    return parent.accessibility.isAccessible && $0.accessibility.isAccessible
+                }
+                return $0.accessibility.isAccessible
+            }.map { $0.serializeWithType() }
 
         fputs("CONTAINERS IN MOCK: \(containers.map { $0["name"] })\n", stdout)
     

@@ -385,6 +385,18 @@
 		CADD144525157A23008C5EBB /* NestedSubclassTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADD144425157A23008C5EBB /* NestedSubclassTests.swift */; };
 		CADD144625157A23008C5EBB /* NestedSubclassTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADD144425157A23008C5EBB /* NestedSubclassTests.swift */; };
 		CADD144725157A23008C5EBB /* NestedSubclassTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADD144425157A23008C5EBB /* NestedSubclassTests.swift */; };
+		CADD146B25158A34008C5EBB /* NestedPrivateExtensionClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADD146A25158A34008C5EBB /* NestedPrivateExtensionClassTest.swift */; };
+		CADD146C25158A34008C5EBB /* NestedPrivateExtensionClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADD146A25158A34008C5EBB /* NestedPrivateExtensionClassTest.swift */; };
+		CADD146D25158A34008C5EBB /* NestedPrivateExtensionClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADD146A25158A34008C5EBB /* NestedPrivateExtensionClassTest.swift */; };
+		CADD147B25158A44008C5EBB /* NestedPrivateClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADD147A25158A44008C5EBB /* NestedPrivateClassTest.swift */; };
+		CADD147C25158A44008C5EBB /* NestedPrivateClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADD147A25158A44008C5EBB /* NestedPrivateClassTest.swift */; };
+		CADD147D25158A44008C5EBB /* NestedPrivateClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADD147A25158A44008C5EBB /* NestedPrivateClassTest.swift */; };
+		CADD148B25158A62008C5EBB /* NestedPrivateExtensionClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADD148A25158A62008C5EBB /* NestedPrivateExtensionClass.swift */; };
+		CADD148C25158A62008C5EBB /* NestedPrivateExtensionClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADD148A25158A62008C5EBB /* NestedPrivateExtensionClass.swift */; };
+		CADD148D25158A62008C5EBB /* NestedPrivateExtensionClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADD148A25158A62008C5EBB /* NestedPrivateExtensionClass.swift */; };
+		CADD149B25158B60008C5EBB /* NestedInPrivateNestedClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADD149A25158B60008C5EBB /* NestedInPrivateNestedClass.swift */; };
+		CADD149C25158B60008C5EBB /* NestedInPrivateNestedClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADD149A25158B60008C5EBB /* NestedInPrivateNestedClass.swift */; };
+		CADD149D25158B60008C5EBB /* NestedInPrivateNestedClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADD149A25158B60008C5EBB /* NestedInPrivateNestedClass.swift */; };
 		CBB7017EE143A38098AD7287 /* GenericMethodClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B965102D09D6B0E94CDA8EA /* GenericMethodClassTest.swift */; };
 		CC2BA5A130CB61216E489D99 /* VerifyProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753FC6D19235B2C8F2DBAA7B /* VerifyProperty.swift */; };
 		CC60D01D5BD4771A8EC08F6A /* CreateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44692276AAFF9261EDD5D75 /* CreateMock.swift */; };
@@ -857,6 +869,10 @@
 		CACDD7562515247100980F58 /* NestedInExtensionFromClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedInExtensionFromClass.swift; sourceTree = "<group>"; };
 		CACDD7662515249E00980F58 /* NestedExtensionClassTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedExtensionClassTest.swift; sourceTree = "<group>"; };
 		CADD144425157A23008C5EBB /* NestedSubclassTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedSubclassTests.swift; sourceTree = "<group>"; };
+		CADD146A25158A34008C5EBB /* NestedPrivateExtensionClassTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedPrivateExtensionClassTest.swift; sourceTree = "<group>"; };
+		CADD147A25158A44008C5EBB /* NestedPrivateClassTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedPrivateClassTest.swift; sourceTree = "<group>"; };
+		CADD148A25158A62008C5EBB /* NestedPrivateExtensionClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedPrivateExtensionClass.swift; sourceTree = "<group>"; };
+		CADD149A25158B60008C5EBB /* NestedInPrivateNestedClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedInPrivateNestedClass.swift; sourceTree = "<group>"; };
 		CB65661C2188A3E830EEBF72 /* ThreadLocal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadLocal.swift; sourceTree = "<group>"; };
 		CEBE505B4B98BE6289678CD1 /* MatchableTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchableTest.swift; sourceTree = "<group>"; };
 		D09B97C65DA87366B8605109 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
@@ -1187,6 +1203,8 @@
 				CACDD70525151C7F00980F58 /* NestedClassTest.swift */,
 				CADD144425157A23008C5EBB /* NestedSubclassTests.swift */,
 				CACDD7662515249E00980F58 /* NestedExtensionClassTest.swift */,
+				CADD146A25158A34008C5EBB /* NestedPrivateExtensionClassTest.swift */,
+				CADD147A25158A44008C5EBB /* NestedPrivateClassTest.swift */,
 				6873C8013002AFEA7565BDAC /* ClassTest.swift */,
 				8CDB969240E4E2B12FF93284 /* CollisionClasses.swift */,
 				0BEF42DC82FC0EF50E83E6CA /* CuckooFunctionsTest.swift */,
@@ -1263,6 +1281,8 @@
 			isa = PBXGroup;
 			children = (
 				CACDD73A2515245B00980F58 /* NestedInNestedClass.swift */,
+				CADD148A25158A62008C5EBB /* NestedPrivateExtensionClass.swift */,
+				CADD149A25158B60008C5EBB /* NestedInPrivateNestedClass.swift */,
 				CACDD7562515247100980F58 /* NestedInExtensionFromClass.swift */,
 				55DE1954C1D6E94F2911830A /* ClassForStubTesting.swift */,
 				32A299482E4D2B7B774373A1 /* ClassWithOptionals.swift */,
@@ -2322,9 +2342,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CADD147C25158A44008C5EBB /* NestedPrivateClassTest.swift in Sources */,
 				E8CE88DD377BB4EE8233AAFB /* TestError.swift in Sources */,
 				4F490D8457B9919E2E6A05B0 /* ClassTest.swift in Sources */,
 				BBA5EEAD87D96D3B15C78757 /* CollisionClasses.swift in Sources */,
+				CADD149C25158B60008C5EBB /* NestedInPrivateNestedClass.swift in Sources */,
 				5290A06644BA9B7046E81643 /* CuckooFunctionsTest.swift in Sources */,
 				928FE5CCF9DEBC62FACF4C46 /* DefaultValueRegistryTest.swift in Sources */,
 				7C739BDCFE5EEC051A505646 /* ExcludedStubTest.swift in Sources */,
@@ -2344,6 +2366,7 @@
 				A98B094AF56BE63E7E4D2164 /* ParameterMatcherTest.swift in Sources */,
 				85BB583C1F89B50DC88999F2 /* ProtocolTest.swift in Sources */,
 				BC428931E53499C0EFDC802F /* ClassForStubTesting.swift in Sources */,
+				CADD148C25158A62008C5EBB /* NestedPrivateExtensionClass.swift in Sources */,
 				27BCAB9824D4747E00EAAB55 /* GeneratedMocks.swift in Sources */,
 				CACDD7582515247100980F58 /* NestedInExtensionFromClass.swift in Sources */,
 				39B67C20D2A61BF2376634F3 /* ClassWithOptionals.swift in Sources */,
@@ -2365,6 +2388,7 @@
 				9F315C759A53B4765706C631 /* StubbingTest.swift in Sources */,
 				C98DD2231948D6D9486E3C1C /* TestUtils.swift in Sources */,
 				83A5A8205205BF4D44F93CD0 /* ArgumentCaptorTest.swift in Sources */,
+				CADD146C25158A34008C5EBB /* NestedPrivateExtensionClassTest.swift in Sources */,
 				F191F17A741759B8031CB6D5 /* VerificationTest.swift in Sources */,
 				CACDD7682515249E00980F58 /* NestedExtensionClassTest.swift in Sources */,
 			);
@@ -2496,9 +2520,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CADD147B25158A44008C5EBB /* NestedPrivateClassTest.swift in Sources */,
 				827A670BF9391A7C01822AF1 /* TestError.swift in Sources */,
 				EAFA72896871E0A2629AC784 /* ClassTest.swift in Sources */,
 				E2D62D3393599003755F59F6 /* CollisionClasses.swift in Sources */,
+				CADD149B25158B60008C5EBB /* NestedInPrivateNestedClass.swift in Sources */,
 				F25919FEF1D3A359CA975AAE /* CuckooFunctionsTest.swift in Sources */,
 				F22196061D37E66590633818 /* DefaultValueRegistryTest.swift in Sources */,
 				114CF61041FB579920C5B7E0 /* ExcludedStubTest.swift in Sources */,
@@ -2518,6 +2544,7 @@
 				7DEB7E694AD63B5C7B9B22E6 /* ParameterMatcherTest.swift in Sources */,
 				E22E749D0A0B44EC528CB38F /* ProtocolTest.swift in Sources */,
 				2D2631FF3DFEB17188A08073 /* ClassForStubTesting.swift in Sources */,
+				CADD148B25158A62008C5EBB /* NestedPrivateExtensionClass.swift in Sources */,
 				68472F9A24D3ECA700E096C6 /* GeneratedMocks.swift in Sources */,
 				CACDD7572515247100980F58 /* NestedInExtensionFromClass.swift in Sources */,
 				F52EE531052666CFB50523E6 /* ClassWithOptionals.swift in Sources */,
@@ -2539,6 +2566,7 @@
 				061991F996D7C014B67647A9 /* StubbingTest.swift in Sources */,
 				AB4D73B2AF7C45B055A0909E /* TestUtils.swift in Sources */,
 				6D9C4E09B9E0AC6BD5AED4DA /* ArgumentCaptorTest.swift in Sources */,
+				CADD146B25158A34008C5EBB /* NestedPrivateExtensionClassTest.swift in Sources */,
 				E28273B64BC1C3C73331A168 /* VerificationTest.swift in Sources */,
 				CACDD7672515249E00980F58 /* NestedExtensionClassTest.swift in Sources */,
 			);
@@ -2656,9 +2684,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CADD147D25158A44008C5EBB /* NestedPrivateClassTest.swift in Sources */,
 				116D8FBB03787C2D7F7C99CC /* TestError.swift in Sources */,
 				D477FC12C92D54376DA507B5 /* ClassTest.swift in Sources */,
 				023F8564E2E6BDC0C3740D15 /* CollisionClasses.swift in Sources */,
+				CADD149D25158B60008C5EBB /* NestedInPrivateNestedClass.swift in Sources */,
 				1DB1CBFA2D7B012C81B1312B /* CuckooFunctionsTest.swift in Sources */,
 				2E54AB548933FF3D2F7E1384 /* DefaultValueRegistryTest.swift in Sources */,
 				2728634862DD41A1F558CE7F /* ExcludedStubTest.swift in Sources */,
@@ -2678,6 +2708,7 @@
 				453EA0CE5ABEA62595596C6F /* ParameterMatcherTest.swift in Sources */,
 				63E990EB0DEE6A4873F30538 /* ProtocolTest.swift in Sources */,
 				A977B902CD0127BCD5BD272F /* ClassForStubTesting.swift in Sources */,
+				CADD148D25158A62008C5EBB /* NestedPrivateExtensionClass.swift in Sources */,
 				27BCABAF24D474CD00EAAB55 /* GeneratedMocks.swift in Sources */,
 				CACDD7592515247100980F58 /* NestedInExtensionFromClass.swift in Sources */,
 				F09C7E5B6AD4AEB0166F871F /* ClassWithOptionals.swift in Sources */,
@@ -2699,6 +2730,7 @@
 				03393CDA9320B79B75A2DE1D /* StubbingTest.swift in Sources */,
 				B4CABEBF620374BC06D2823B /* TestUtils.swift in Sources */,
 				1B425DF3B416C5E4FA04532C /* ArgumentCaptorTest.swift in Sources */,
+				CADD146D25158A34008C5EBB /* NestedPrivateExtensionClassTest.swift in Sources */,
 				F713219CB9579070209F289B /* VerificationTest.swift in Sources */,
 				CACDD7692515249E00980F58 /* NestedExtensionClassTest.swift in Sources */,
 			);
