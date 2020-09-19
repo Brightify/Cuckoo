@@ -2,7 +2,7 @@
 //  NestedClassTest.swift
 //  Cuckoo
 //
-//  Created by thompsty on 9/17/20.
+//  Created by Tyler Thompson on 9/17/20.
 //
 
 import XCTest

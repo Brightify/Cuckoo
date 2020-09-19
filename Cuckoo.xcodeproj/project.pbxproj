@@ -385,12 +385,6 @@
 		CADD144525157A23008C5EBB /* NestedSubclassTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADD144425157A23008C5EBB /* NestedSubclassTests.swift */; };
 		CADD144625157A23008C5EBB /* NestedSubclassTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADD144425157A23008C5EBB /* NestedSubclassTests.swift */; };
 		CADD144725157A23008C5EBB /* NestedSubclassTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADD144425157A23008C5EBB /* NestedSubclassTests.swift */; };
-		CADD146B25158A34008C5EBB /* NestedPrivateExtensionClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADD146A25158A34008C5EBB /* NestedPrivateExtensionClassTest.swift */; };
-		CADD146C25158A34008C5EBB /* NestedPrivateExtensionClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADD146A25158A34008C5EBB /* NestedPrivateExtensionClassTest.swift */; };
-		CADD146D25158A34008C5EBB /* NestedPrivateExtensionClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADD146A25158A34008C5EBB /* NestedPrivateExtensionClassTest.swift */; };
-		CADD147B25158A44008C5EBB /* NestedPrivateClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADD147A25158A44008C5EBB /* NestedPrivateClassTest.swift */; };
-		CADD147C25158A44008C5EBB /* NestedPrivateClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADD147A25158A44008C5EBB /* NestedPrivateClassTest.swift */; };
-		CADD147D25158A44008C5EBB /* NestedPrivateClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADD147A25158A44008C5EBB /* NestedPrivateClassTest.swift */; };
 		CADD148B25158A62008C5EBB /* NestedPrivateExtensionClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADD148A25158A62008C5EBB /* NestedPrivateExtensionClass.swift */; };
 		CADD148C25158A62008C5EBB /* NestedPrivateExtensionClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADD148A25158A62008C5EBB /* NestedPrivateExtensionClass.swift */; };
 		CADD148D25158A62008C5EBB /* NestedPrivateExtensionClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADD148A25158A62008C5EBB /* NestedPrivateExtensionClass.swift */; };
@@ -899,8 +893,6 @@
 		CACDD7562515247100980F58 /* NestedInExtensionFromClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedInExtensionFromClass.swift; sourceTree = "<group>"; };
 		CACDD7662515249E00980F58 /* NestedExtensionClassTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedExtensionClassTest.swift; sourceTree = "<group>"; };
 		CADD144425157A23008C5EBB /* NestedSubclassTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedSubclassTests.swift; sourceTree = "<group>"; };
-		CADD146A25158A34008C5EBB /* NestedPrivateExtensionClassTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedPrivateExtensionClassTest.swift; sourceTree = "<group>"; };
-		CADD147A25158A44008C5EBB /* NestedPrivateClassTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedPrivateClassTest.swift; sourceTree = "<group>"; };
 		CADD148A25158A62008C5EBB /* NestedPrivateExtensionClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedPrivateExtensionClass.swift; sourceTree = "<group>"; };
 		CADD149A25158B60008C5EBB /* NestedInPrivateNestedClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedInPrivateNestedClass.swift; sourceTree = "<group>"; };
 		CADD14DA25159143008C5EBB /* MultiNestedInNestedClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiNestedInNestedClass.swift; sourceTree = "<group>"; };
@@ -1245,8 +1237,6 @@
 				CADD144425157A23008C5EBB /* NestedSubclassTests.swift */,
 				CACDD7662515249E00980F58 /* NestedExtensionClassTest.swift */,
 				CADD156A2515AA83008C5EBB /* NestedStructExtensionClassTest.swift */,
-				CADD146A25158A34008C5EBB /* NestedPrivateExtensionClassTest.swift */,
-				CADD147A25158A44008C5EBB /* NestedPrivateClassTest.swift */,
 				CADD151A2515937D008C5EBB /* MultiNestedClassTest.swift */,
 				CADD152A2515A69E008C5EBB /* MultiLayeredNestedTestedSubclassTest.swift */,
 				CADD153A2515A858008C5EBB /* MultiNestedExtensionClassTest.swift */,
@@ -2392,7 +2382,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CADD147C25158A44008C5EBB /* NestedPrivateClassTest.swift in Sources */,
 				E8CE88DD377BB4EE8233AAFB /* TestError.swift in Sources */,
 				4F490D8457B9919E2E6A05B0 /* ClassTest.swift in Sources */,
 				CADD151C2515937D008C5EBB /* MultiNestedClassTest.swift in Sources */,
@@ -2447,7 +2436,6 @@
 				9F315C759A53B4765706C631 /* StubbingTest.swift in Sources */,
 				C98DD2231948D6D9486E3C1C /* TestUtils.swift in Sources */,
 				83A5A8205205BF4D44F93CD0 /* ArgumentCaptorTest.swift in Sources */,
-				CADD146C25158A34008C5EBB /* NestedPrivateExtensionClassTest.swift in Sources */,
 				CADD14DC25159143008C5EBB /* MultiNestedInNestedClass.swift in Sources */,
 				F191F17A741759B8031CB6D5 /* VerificationTest.swift in Sources */,
 				CACDD7682515249E00980F58 /* NestedExtensionClassTest.swift in Sources */,
@@ -2580,7 +2568,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CADD147B25158A44008C5EBB /* NestedPrivateClassTest.swift in Sources */,
 				827A670BF9391A7C01822AF1 /* TestError.swift in Sources */,
 				EAFA72896871E0A2629AC784 /* ClassTest.swift in Sources */,
 				CADD151B2515937D008C5EBB /* MultiNestedClassTest.swift in Sources */,
@@ -2635,7 +2622,6 @@
 				061991F996D7C014B67647A9 /* StubbingTest.swift in Sources */,
 				AB4D73B2AF7C45B055A0909E /* TestUtils.swift in Sources */,
 				6D9C4E09B9E0AC6BD5AED4DA /* ArgumentCaptorTest.swift in Sources */,
-				CADD146B25158A34008C5EBB /* NestedPrivateExtensionClassTest.swift in Sources */,
 				CADD14DB25159143008C5EBB /* MultiNestedInNestedClass.swift in Sources */,
 				E28273B64BC1C3C73331A168 /* VerificationTest.swift in Sources */,
 				CACDD7672515249E00980F58 /* NestedExtensionClassTest.swift in Sources */,
@@ -2754,7 +2740,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CADD147D25158A44008C5EBB /* NestedPrivateClassTest.swift in Sources */,
 				116D8FBB03787C2D7F7C99CC /* TestError.swift in Sources */,
 				D477FC12C92D54376DA507B5 /* ClassTest.swift in Sources */,
 				CADD151D2515937D008C5EBB /* MultiNestedClassTest.swift in Sources */,
@@ -2809,7 +2794,6 @@
 				03393CDA9320B79B75A2DE1D /* StubbingTest.swift in Sources */,
 				B4CABEBF620374BC06D2823B /* TestUtils.swift in Sources */,
 				1B425DF3B416C5E4FA04532C /* ArgumentCaptorTest.swift in Sources */,
-				CADD146D25158A34008C5EBB /* NestedPrivateExtensionClassTest.swift in Sources */,
 				CADD14DD25159143008C5EBB /* MultiNestedInNestedClass.swift in Sources */,
 				F713219CB9579070209F289B /* VerificationTest.swift in Sources */,
 				CACDD7692515249E00980F58 /* NestedExtensionClassTest.swift in Sources */,

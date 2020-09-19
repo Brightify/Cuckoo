@@ -149,7 +149,7 @@ public struct Tokenizer {
 
         case Kinds.StructDeclaration.rawValue:
             let subtokens = tokenize(dictionary[Key.Substructure.rawValue] as? [SourceKitRepresentable] ?? [])
-            let children = subtokens.noneOf(Initializer.self)
+            let children = subtokens.only(ContainerToken.self)
 
             return StructDeclaration(name: name,
                                      accessibility: accessibility,
@@ -160,7 +160,7 @@ public struct Tokenizer {
             
         case Kinds.ExtensionDeclaration.rawValue:
             let subtokens = tokenize(dictionary[Key.Substructure.rawValue] as? [SourceKitRepresentable] ?? [])
-            let children = subtokens.noneOf(Initializer.self)
+            let children = subtokens.only(ContainerToken.self)
 
             return ExtensionDeclaration(name: name,
                                         accessibility: accessibility,

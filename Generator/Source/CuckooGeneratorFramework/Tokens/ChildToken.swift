@@ -2,7 +2,7 @@
 //  ChildToken.swift
 //  CuckooGeneratorFramework
 //
-//  Created by thompsty on 9/18/20.
+//  Created by Tyler Thompson on 9/18/20.
 //
 
 import Foundation
