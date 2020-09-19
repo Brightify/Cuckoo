@@ -28,7 +28,6 @@ public struct Tokenizer {
             let declarations = tokenize(structure.dictionary[Key.Substructure.rawValue] as? [SourceKitRepresentable] ?? [])
                 .flatMap { declaration -> [Token] in
                     guard let parent = declaration as? ParentToken else { return [declaration] }
-//                    fputs("PARENT token: \(parent).\n", stdout)
                     return [parent] + parent.adoptAllYoungerGenerations()
                 }
 
@@ -89,7 +88,7 @@ public struct Tokenizer {
             }
             return nil
         }
-
+        
         let accessibility = (dictionary[Key.Accessibility.rawValue] as? String).flatMap { Accessibility(rawValue: $0) } ?? .Internal
         let type: WrappableType?
         if let stringType = dictionary[Key.TypeName.rawValue] as? String {
@@ -148,6 +147,17 @@ public struct Tokenizer {
                 attributes: attributes,
                 genericParameters: fixedGenericParameters)
 
+        case Kinds.StructDeclaration.rawValue:
+            let subtokens = tokenize(dictionary[Key.Substructure.rawValue] as? [SourceKitRepresentable] ?? [])
+            let children = subtokens.noneOf(Initializer.self)
+
+            return StructDeclaration(name: name,
+                                     accessibility: accessibility,
+                                     range: range!,
+                                     nameRange: nameRange!,
+                                     bodyRange: bodyRange!,
+                                     children: children)
+            
         case Kinds.ExtensionDeclaration.rawValue:
             let subtokens = tokenize(dictionary[Key.Substructure.rawValue] as? [SourceKitRepresentable] ?? [])
             let children = subtokens.noneOf(Initializer.self)
