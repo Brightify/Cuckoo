@@ -51,7 +51,7 @@ extension ContainerToken {
             "accessibility": accessibility.sourceName,
             "isAccessible": accessibility.isAccessible,
             "hasParent": parent != nil,
-            "parent": parent?.name ?? "",
+            "parent": parent?.fullyQualifiedName ?? "",
             "children": accessibilityAdjustedChildren.map { $0.serializeWithType() },
             "properties": properties,
             "methods": methods,

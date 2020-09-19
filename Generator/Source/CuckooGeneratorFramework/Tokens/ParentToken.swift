@@ -14,3 +14,27 @@ public protocol ParentToken: Token, HasAccessibility {
     var bodyRange: CountableRange<Int> { get }
     var children: [Token] { get }
 }
+
+extension ParentToken {
+    
+    var fullyQualifiedName:String {
+        var names = [name]
+        var parent:ParentToken? = (self as? ChildToken)?.parent?.value
+        while let p = parent {
+            names.insert(p.name, at: 0)
+            parent = (p as? ChildToken)?.parent?.value
+        }
+        return names.joined(separator: ".")
+    }
+    
+    func adoptAllYoungerGenerations() -> [ParentToken] {
+        return children
+            .compactMap { child -> ParentToken? in
+                guard var c = child as? ContainerToken else { return nil }
+                c.parent = Reference(value: self)
+                fputs("CHILD token: \(c).\n", stdout)
+                return c
+            }
+            .flatMap { [$0] + $0.adoptAllYoungerGenerations() }
+    }
+}
