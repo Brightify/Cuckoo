@@ -6,14 +6,17 @@
 //  Copyright © 2016 Brightify. All rights reserved.
 //
 
-public protocol ContainerToken: Token, HasAccessibility {
+public protocol ParentToken: Token, HasAccessibility {
     var name: String { get }
-    var parent: Reference<ContainerToken>? { get set }
     var range: CountableRange<Int> { get }
     var nameRange: CountableRange<Int> { get }
     var bodyRange: CountableRange<Int> { get }
-    var initializers: [Initializer] { get }
     var children: [Token] { get }
+}
+
+public protocol ContainerToken: ParentToken {
+    var parent: Reference<ParentToken>? { get set }
+    var initializers: [Initializer] { get }
     var implementation: Bool { get }
     var inheritedTypes: [InheritanceDeclaration] { get }
     var attributes: [Attribute] { get }

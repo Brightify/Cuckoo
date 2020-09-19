@@ -27,9 +27,9 @@ public struct Tokenizer {
 
             let declarations = tokenize(structure.dictionary[Key.Substructure.rawValue] as? [SourceKitRepresentable] ?? [])
                 .flatMap { declaration -> [Token] in
-                    fputs("Declaration token: \(declaration).\n", stdout)
-                    guard let parent = declaration as? ContainerToken else { return [declaration] }
-                    fputs("PARENT token: \(parent).\n", stdout)
+//                    fputs("Declaration token: \(declaration).\n", stdout)
+                    guard let parent = declaration as? ParentToken else { return [declaration] }
+//                    fputs("PARENT token: \(parent).\n", stdout)
                     return [parent] + parent.children.compactMap { child -> Token? in
                         guard var c = child as? ContainerToken else { return nil }
                         c.parent = Reference(value: parent)
@@ -38,7 +38,7 @@ public struct Tokenizer {
                     }
                 }
 
-            fputs("ALL DECLARATION tokens: \(declarations).\n", stdout)
+//            fputs("ALL DECLARATION tokens: \(declarations).\n", stdout)
 
             let imports = tokenize(imports: declarations)
 
@@ -157,7 +157,15 @@ public struct Tokenizer {
                 genericParameters: fixedGenericParameters)
 
         case Kinds.ExtensionDeclaration.rawValue:
-            return ExtensionDeclaration(range: range!)
+            let subtokens = tokenize(dictionary[Key.Substructure.rawValue] as? [SourceKitRepresentable] ?? [])
+            let children = subtokens.noneOf(Initializer.self)
+
+            return ExtensionDeclaration(name: name,
+                                        accessibility: accessibility,
+                                        range: range!,
+                                        nameRange: nameRange!,
+                                        bodyRange: bodyRange!,
+                                        children: children)
 
         case Kinds.InstanceVariable.rawValue:
             let setterAccessibility = (dictionary[Key.SetterAccessibility.rawValue] as? String).flatMap(Accessibility.init)

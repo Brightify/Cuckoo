@@ -9,7 +9,7 @@
 public struct ProtocolDeclaration: ContainerToken, HasAccessibility {
     public let implementation: Bool = false
     public var name: String
-    public var parent: Reference<ContainerToken>? = nil
+    public var parent: Reference<ParentToken>? = nil
     public var accessibility: Accessibility
     public var range: CountableRange<Int>
     public var nameRange: CountableRange<Int>
