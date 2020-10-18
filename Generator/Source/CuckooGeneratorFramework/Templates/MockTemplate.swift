@@ -15,9 +15,9 @@ extension Templates {
 {% for attribute in container.attributes %}
 {{ attribute.text }}
 {% endfor %}
-    {% if container.hasParent %}
-extension {{ container.parent }} {
-    {% endif %}
+{% if container.hasParent %}
+extension {{ container.parentFullyQualifiedName }} {
+{% endif %}
 
 {{ container.accessibility }} class {{ container.mockName }}{{ container.genericParameters }}: {{ container.name }}{% if container.isImplementation %}{{ container.genericArguments }}{% endif %}, {% if container.isImplementation %}Cuckoo.ClassMock{% else %}Cuckoo.ProtocolMock{% endif %} {
     {% if container.isGeneric and not container.isImplementation %}
@@ -129,9 +129,9 @@ extension {{ container.parent }} {
 
 \(Templates.noImplStub)
 
-    {% if container.hasParent %}
+{% if container.hasParent %}
 }
-    {% endif %}
+{% endif %}
 
 {% endfor %}
 """

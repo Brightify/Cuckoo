@@ -61,10 +61,7 @@ public struct Generator {
 
         let containers = declarations.compactMap { $0 as? ContainerToken }
             .filter {
-                if let parent = $0.parent {
-                    return parent.areAllHierarchiesAccessible && $0.accessibility.isAccessible
-                }
-                return $0.accessibility.isAccessible
+                $0.parent?.areAllHierarchiesAccessible ?? true && $0.accessibility.isAccessible
             }
             .map { $0.serializeWithType() }
     

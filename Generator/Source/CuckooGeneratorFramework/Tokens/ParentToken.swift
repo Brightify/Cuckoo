@@ -38,10 +38,11 @@ extension ParentToken {
     }
     
     func adoptAllYoungerGenerations() -> [ParentToken] {
+        let parentReference:Reference<ParentToken> = Reference(value: self)
         return children
             .compactMap { child -> ParentToken? in
                 guard var c = child as? ContainerToken else { return nil }
-                c.parent = Reference(value: self)
+                c.parent = parentReference
                 return c
             }
             .flatMap { [$0] + $0.adoptAllYoungerGenerations() }
