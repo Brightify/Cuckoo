@@ -88,7 +88,7 @@ public struct Tokenizer {
             }
             return nil
         }
-        
+
         let accessibility = (dictionary[Key.Accessibility.rawValue] as? String).flatMap { Accessibility(rawValue: $0) } ?? .Internal
         let type: WrappableType?
         if let stringType = dictionary[Key.TypeName.rawValue] as? String {
@@ -151,23 +151,25 @@ public struct Tokenizer {
             let subtokens = tokenize(dictionary[Key.Substructure.rawValue] as? [SourceKitRepresentable] ?? [])
             let children = subtokens.only(ContainerToken.self)
 
-            return StructDeclaration(name: name,
-                                     accessibility: accessibility,
-                                     range: range!,
-                                     nameRange: nameRange!,
-                                     bodyRange: bodyRange!,
-                                     children: children)
+            return StructDeclaration(
+                name: name,
+                accessibility: accessibility,
+                range: range!,
+                nameRange: nameRange!,
+                bodyRange: bodyRange!,
+                children: children)
             
         case Kinds.ExtensionDeclaration.rawValue:
             let subtokens = tokenize(dictionary[Key.Substructure.rawValue] as? [SourceKitRepresentable] ?? [])
             let children = subtokens.only(ContainerToken.self)
 
-            return ExtensionDeclaration(name: name,
-                                        accessibility: accessibility,
-                                        range: range!,
-                                        nameRange: nameRange!,
-                                        bodyRange: bodyRange!,
-                                        children: children)
+            return ExtensionDeclaration(
+                name: name,
+                accessibility: accessibility,
+                range: range!,
+                nameRange: nameRange!,
+                bodyRange: bodyRange!,
+                children: children)
 
         case Kinds.InstanceVariable.rawValue:
             let setterAccessibility = (dictionary[Key.SetterAccessibility.rawValue] as? String).flatMap(Accessibility.init)

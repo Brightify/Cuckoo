@@ -62,11 +62,11 @@ public struct Generator {
         let containers = declarations.compactMap { $0 as? ContainerToken }
             .filter {
                 if let parent = $0.parent {
-                    return parent.allHierarchiesAreAccessible && $0.accessibility.isAccessible
+                    return parent.areAllHierarchiesAccessible && $0.accessibility.isAccessible
                 }
                 return $0.accessibility.isAccessible
-            }.map { $0.serializeWithType() }
-
+            }
+            .map { $0.serializeWithType() }
     
         return try environment.renderTemplate(string: Templates.mock, context: ["containers": containers, "debug": debug])
     }

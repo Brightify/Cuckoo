@@ -17,7 +17,7 @@ public protocol ParentToken: Token, HasAccessibility {
 
 extension ParentToken {
     
-    var fullyQualifiedName:String {
+    var fullyQualifiedName: String {
         var names = [name]
         var parent:ParentToken? = (self as? ChildToken)?.parent?.value
         while let p = parent {
@@ -27,7 +27,7 @@ extension ParentToken {
         return names.joined(separator: ".")
     }
     
-    var allHierarchiesAreAccessible:Bool {
+    var areAllHierarchiesAccessible: Bool {
         guard accessibility.isAccessible else { return false }
         var parent:ParentToken? = (self as? ChildToken)?.parent?.value
         while let p = parent {
