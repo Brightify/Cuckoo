@@ -19,7 +19,7 @@ extension ParentToken {
     
     var fullyQualifiedName: String {
         var names = [name]
-        var parent:ParentToken? = (self as? ChildToken)?.parent?.value
+        var parent: ParentToken? = (self as? ChildToken)?.parent?.value
         while let p = parent {
             names.insert(p.name, at: 0)
             parent = (p as? ChildToken)?.parent?.value
@@ -29,7 +29,7 @@ extension ParentToken {
     
     var areAllHierarchiesAccessible: Bool {
         guard accessibility.isAccessible else { return false }
-        var parent:ParentToken? = (self as? ChildToken)?.parent?.value
+        var parent: ParentToken? = (self as? ChildToken)?.parent?.value
         while let p = parent {
             guard p.accessibility.isAccessible else { return false }
             parent = (p as? ChildToken)?.parent?.value
