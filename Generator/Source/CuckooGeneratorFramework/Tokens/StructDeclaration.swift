@@ -17,7 +17,7 @@ public struct StructDeclaration: ParentToken {
     public let children: [Token]
     
     public func isEqual(to other: Token) -> Bool {
-        guard let other = other as? ExtensionDeclaration else { return false }
-        return self.range == other.range
+        guard let other = other as? StructDeclaration else { return false }
+        return self.name == other.name
     }
 }
