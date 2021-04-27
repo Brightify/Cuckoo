@@ -31,7 +31,7 @@ Pod::Spec.new do |s|
   s.pod_target_xcconfig         = {
     'ENABLE_BITCODE' => 'NO',
     'SWIFT_REFLECTION_METADATA_LEVEL' => 'none',
-    'OTHER_LDFLAGS' => '$(inherited) -weak-lswiftXCTest',
+    'OTHER_LDFLAGS' => '$(inherited) -weak-lXCTestSwiftSupport',
   }
   s.default_subspec             = 'Swift'
 
