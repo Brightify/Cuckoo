@@ -96,6 +96,9 @@
 		2E54AB548933FF3D2F7E1384 /* DefaultValueRegistryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80D1401CB6046B1AEDBE204 /* DefaultValueRegistryTest.swift */; };
 		2FA8B5B7D3DBD836A3FE9694 /* ObjectiveArgumentClosure.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D63F5E63DF9302E70BF764 /* ObjectiveArgumentClosure.swift */; };
 		2FB87BFE2FFBCF459D35DF5E /* MockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91992FE8D38A6900C005B0A4 /* MockManager.swift */; };
+		2FF5A94A263A0BB400CF0C8D /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FF5A933263A0BB400CF0C8D /* XCTest.framework */; };
+		2FF5A94C263A0BC600CF0C8D /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FF5A94B263A0BC600CF0C8D /* XCTest.framework */; };
+		2FF5A94E263A0BDF00CF0C8D /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FF5A94D263A0BDF00CF0C8D /* XCTest.framework */; };
 		3172B5B4F28F82A9393194EE /* StubCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA3EB970DE7CF1D83AC121F /* StubCall.swift */; };
 		31EC7665C1236E34B1B21642 /* OCMockObject+CuckooMockObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 9EE3E19406E96533EBBBD138 /* OCMockObject+CuckooMockObject.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		322F32E04F570CD3C8DB85DB /* Dictionary+matchersTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B79F4A07874A92D5E117ED8 /* Dictionary+matchersTest.swift */; };
@@ -744,6 +747,9 @@
 		29FD61E058B18D3F374AFC4D /* Pods-Cuckoo_OCMock-macOS-Cuckoo_OCMock-macOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cuckoo_OCMock-macOS-Cuckoo_OCMock-macOSTests.release.xcconfig"; path = "Target Support Files/Pods-Cuckoo_OCMock-macOS-Cuckoo_OCMock-macOSTests/Pods-Cuckoo_OCMock-macOS-Cuckoo_OCMock-macOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		2C68FC814ACBD3D5E1C7ED1B /* StubFunctionThenDoNothingTrait.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubFunctionThenDoNothingTrait.swift; sourceTree = "<group>"; };
 		2F445E0EFD2FD1FBC888DB72 /* CallMatcherTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallMatcherTest.swift; sourceTree = "<group>"; };
+		2FF5A933263A0BB400CF0C8D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		2FF5A94B263A0BC600CF0C8D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/MacOSX.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		2FF5A94D263A0BDF00CF0C8D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/AppleTVOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		3191519C8ED4DD5B3D439A93 /* StubFunctionThenReturnTrait.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubFunctionThenReturnTrait.swift; sourceTree = "<group>"; };
 		32A299482E4D2B7B774373A1 /* ClassWithOptionals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassWithOptionals.swift; sourceTree = "<group>"; };
 		33EBD5D113A20F38FCE13BDC /* Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mock.swift; sourceTree = "<group>"; };
@@ -874,6 +880,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FF5A94A263A0BB400CF0C8D /* XCTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -881,6 +888,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FF5A94E263A0BDF00CF0C8D /* XCTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -932,6 +940,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FF5A94C263A0BC600CF0C8D /* XCTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1351,6 +1360,9 @@
 		FEEC9B8DBF0FA8678CE815E0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2FF5A933263A0BB400CF0C8D /* XCTest.framework */,
+				2FF5A94B263A0BC600CF0C8D /* XCTest.framework */,
+				2FF5A94D263A0BDF00CF0C8D /* XCTest.framework */,
 				4BB268B6DF6B70E8D534B5B9 /* OCMock.framework */,
 				C8B9AF0995CE5604A511A17E /* OCMock.framework */,
 				19ABE472805A92F8B74F8FC9 /* OCMock.framework */,
