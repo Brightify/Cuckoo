@@ -26,6 +26,8 @@ public class MockManager {
     private var isDefaultImplementationEnabled = false
     
     private let hasParent: Bool
+    
+    private let queue = DispatchQueue(label: "cuckoo-mockmanager")
 
     public init(hasParent: Bool) {
         self.hasParent = hasParent
@@ -37,32 +39,38 @@ public class MockManager {
 
     private func callRethrowsInternal<IN, OUT>(_ method: String, parameters: IN, escapingParameters: IN, superclassCall: () throws -> OUT, defaultCall: () throws -> OUT) rethrows -> OUT {
         let stubCall = ConcreteStubCall(method: method, parameters: escapingParameters)
-        stubCalls.append(stubCall)
-        unverifiedStubCallsIndexes.append(stubCalls.count - 1)
+        queue.sync {
+            stubCalls.append(stubCall)
+            unverifiedStubCallsIndexes.append(stubCalls.count - 1)
+        }
 
         if let stub = (stubs.filter { $0.method == method }.compactMap { $0 as? ConcreteStub<IN, OUT> }.filter { $0.parameterMatchers.reduce(true) { $0 && $1.matches(parameters) } }.first) {
-            if let action = stub.actions.first {
+            var action: StubAction<IN, OUT>?
+            queue.sync {
+                action = stub.actions.first
                 if stub.actions.count > 1 {
                     stub.actions.removeFirst()
                 }
-                switch action {
-                case .callImplementation(let implementation):
-                    return try DispatchQueue(label: "No-care?").sync(execute: {
-                        return try implementation(parameters)
-                    })
-                case .returnValue(let value):
-                    return value
-                case .throwError(let error):
-                    return try DispatchQueue(label: "No-care?").sync(execute: {
-                        throw error
-                    })
-                case .callRealImplementation where hasParent:
-                    return try superclassCall()
-                default:
-                    failAndCrash("No real implementation found for method `\(method)`. This is probably caused by stubbed object being a mock of a protocol.")
-                }
-            } else {
+            }
+            guard let action = action else {
                 failAndCrash("Stubbing of method `\(method)` using parameters \(parameters) wasn't finished (missing thenReturn()).")
+            }
+            
+            switch action {
+            case .callImplementation(let implementation):
+                return try DispatchQueue(label: "No-care?").sync(execute: {
+                    return try implementation(parameters)
+                })
+            case .returnValue(let value):
+                return value
+            case .throwError(let error):
+                return try DispatchQueue(label: "No-care?").sync(execute: {
+                    throw error
+                })
+            case .callRealImplementation where hasParent:
+                return try superclassCall()
+            default:
+                failAndCrash("No real implementation found for method `\(method)`. This is probably caused by stubbed object being a mock of a protocol.")
             }
         } else if isSuperclassSpyEnabled {
             return try superclassCall()
@@ -75,28 +83,34 @@ public class MockManager {
 
     private func callThrowsInternal<IN, OUT>(_ method: String, parameters: IN, escapingParameters: IN, superclassCall: () throws -> OUT, defaultCall: () throws -> OUT) throws -> OUT {
         let stubCall = ConcreteStubCall(method: method, parameters: escapingParameters)
-        stubCalls.append(stubCall)
-        unverifiedStubCallsIndexes.append(stubCalls.count - 1)
+        queue.sync {
+            stubCalls.append(stubCall)
+            unverifiedStubCallsIndexes.append(stubCalls.count - 1)
+        }
         
         if let stub = (stubs.filter { $0.method == method }.compactMap { $0 as? ConcreteStub<IN, OUT> }.filter { $0.parameterMatchers.reduce(true) { $0 && $1.matches(parameters) } }.first) {
-            if let action = stub.actions.first {
+            var action: StubAction<IN, OUT>?
+            queue.sync {
+                action = stub.actions.first
                 if stub.actions.count > 1 {
-                    stub.actions.removeFirst()
+                    queue.sync { _ = stub.actions.removeFirst() }
                 }
-                switch action {
-                case .callImplementation(let implementation):
-                    return try implementation(parameters)
-                case .returnValue(let value):
-                    return value
-                case .throwError(let error):
-                    throw error
-                case .callRealImplementation where hasParent:
-                    return try superclassCall()
-                default:
-                    failAndCrash("No real implementation found for method `\(method)`. This is probably caused  by stubbed object being a mock of a protocol.")
-                }
-            } else {
+            }
+            guard let action = action else {
                 failAndCrash("Stubbing of method `\(method)` using parameters \(parameters) wasn't finished (missing thenReturn()).")
+            }
+            
+            switch action {
+            case .callImplementation(let implementation):
+                return try implementation(parameters)
+            case .returnValue(let value):
+                return value
+            case .throwError(let error):
+                throw error
+            case .callRealImplementation where hasParent:
+                return try superclassCall()
+            default:
+                failAndCrash("No real implementation found for method `\(method)`. This is probably caused  by stubbed object being a mock of a protocol.")
             }
         } else if isSuperclassSpyEnabled {
             return try superclassCall()
@@ -169,8 +183,10 @@ public class MockManager {
     }
     
     func clearInvocations() {
-        stubCalls.removeAll()
-        unverifiedStubCallsIndexes.removeAll()
+        queue.sync {
+            stubCalls.removeAll()
+            unverifiedStubCallsIndexes.removeAll()
+        }
     }
     
     func verifyNoMoreInteractions(_ sourceLocation: SourceLocation) {
