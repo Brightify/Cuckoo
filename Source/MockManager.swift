@@ -45,14 +45,10 @@ public class MockManager {
         }
 
         if let stub = (stubs.filter { $0.method == method }.compactMap { $0 as? ConcreteStub<IN, OUT> }.filter { $0.parameterMatchers.reduce(true) { $0 && $1.matches(parameters) } }.first) {
-            var action: StubAction<IN, OUT>?
-            queue.sync {
-                action = stub.actions.first
-                if stub.actions.count > 1 {
-                    stub.actions.removeFirst()
-                }
-            }
-            guard let action = action else {
+            
+            guard let action = queue.sync(execute: {
+                return stub.actions.count > 1 ? stub.actions.removeFirst() : stub.actions.first
+            }) else {
                 failAndCrash("Stubbing of method `\(method)` using parameters \(parameters) wasn't finished (missing thenReturn()).")
             }
             
@@ -89,14 +85,10 @@ public class MockManager {
         }
         
         if let stub = (stubs.filter { $0.method == method }.compactMap { $0 as? ConcreteStub<IN, OUT> }.filter { $0.parameterMatchers.reduce(true) { $0 && $1.matches(parameters) } }.first) {
-            var action: StubAction<IN, OUT>?
-            queue.sync {
-                action = stub.actions.first
-                if stub.actions.count > 1 {
-                    queue.sync { _ = stub.actions.removeFirst() }
-                }
-            }
-            guard let action = action else {
+            
+            guard let action = queue.sync(execute: {
+                return stub.actions.count > 1 ? stub.actions.removeFirst() : stub.actions.first
+            }) else {
                 failAndCrash("Stubbing of method `\(method)` using parameters \(parameters) wasn't finished (missing thenReturn()).")
             }
             
