@@ -31,6 +31,19 @@ public func objectiveArgumentClosure<IN1, IN2>(from: Any) -> (IN1, IN2) -> Void 
     }
 }
 
+// TODO add more variants
+public func objectiveOptionalArgumentClosure<IN1, IN2>(from: Any) -> (IN1?, IN2?) -> Void {
+    return { in1, in2 in
+        var arg = from
+        let block = UnsafeRawPointer(&arg).assumingMemoryBound(to: (@convention(block) (NSObject?, NSObject?) -> Void).self).pointee
+
+        let nsIn1 = in1 == nil ? nil : TrustMe<NSObject>.onThis(in1 as Any)
+        let nsIn2 = in2 == nil ? nil : TrustMe<NSObject>.onThis(in2 as Any)
+
+        block(nsIn1, nsIn2)
+    }
+}
+
 public func objectiveArgumentClosure<IN1, IN2, IN3>(from: Any) -> (IN1, IN2, IN3) -> Void {
     return { in1, in2, in3 in
         var arg = from

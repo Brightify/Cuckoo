@@ -160,6 +160,39 @@ class ObjectiveClassTest: XCTestCase {
 
         objcVerify(mock.dudka(lelo: objcAny()))
     }
+
+    func testSwiftClassWithNullableArgs() {
+        let expectCompleteWithNil = expectation(description: "Should call completion with nil")
+        let expectNilArg = expectation(description: "Should call with nil")
+
+        let mock = objcStub(for: SwiftClass.self) { stubber, mock in
+            stubber.when(mock.say("cheeze", completion: objcAnyClosure())).then { args in
+                let completionHandler = objectiveOptionalArgumentClosure(from: args[1]) as (String, [String]?) -> Void
+                completionHandler("meh", nil)
+            }
+            stubber.when(mock.say(nil, completion: objcAnyClosure())).then { args in
+                let completionHandler = objectiveArgumentClosure(from: args[1]) as (String, [String]?) -> Void
+                completionHandler("nil now behaves", [])
+            }
+        }
+
+        mock.say("cheeze") { result, messages in
+            XCTAssertEqual("meh", result)
+            XCTAssertNil(messages)
+            expectCompleteWithNil.fulfill()
+        }
+
+        mock.say(nil) { result, messages in
+            XCTAssertEqual("nil now behaves", result)
+            XCTAssertEqual([], messages)
+            expectNilArg.fulfill()
+        }
+
+        wait(for: [expectCompleteWithNil, expectNilArg], timeout: 1)
+
+        objcVerify(mock.say("cheeze", completion: objcAnyClosure()))
+        objcVerify(mock.say(nil, completion: objcAnyClosure()))
+    }
 }
 
 class SwiftClass: NSObject {
@@ -167,6 +200,11 @@ class SwiftClass: NSObject {
     // `dynamic` modifier is necessary
     dynamic func dudka(lelo: String) -> Bool {
         return false
+    }
+
+    @objc
+    dynamic func say(_ message: String?, completion: @escaping (String, [String]?) -> Void) -> Void {
+        // mock me
     }
 }
 #else

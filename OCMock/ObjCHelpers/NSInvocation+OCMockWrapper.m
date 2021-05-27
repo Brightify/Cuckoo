@@ -32,7 +32,7 @@ BOOL OCMEqualTypesAllowingOpaqueStructs(const char *type1, const char *type2);
         [self getArgument:&arg atIndex: i];
 
         NSValue* _Nonnull n = [NSValue value:&arg withObjCType: argType];
-        if (OCMIsObjectType(argType)) {
+        if (OCMIsObjectType(argType) && arg) {
             [arguments addObject:(__bridge id _Nonnull)(arg)];
         } else if (n) {
             [arguments addObject:n];
