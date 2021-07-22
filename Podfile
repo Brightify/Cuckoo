@@ -1,12 +1,16 @@
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
+def oc_mock
+  pod 'OCMock', '3.8.1'
+end
+
 target 'Cuckoo_OCMock-iOS' do
   use_frameworks!
 
   platform :ios, '9.0'
 
-  pod 'OCMock'
+  oc_mock
 
   target 'Cuckoo_OCMock-iOSTests' do
 
@@ -18,7 +22,7 @@ target 'Cuckoo_OCMock-tvOS' do
 
   platform :tvos, '9.0'
 
-  pod 'OCMock'
+  oc_mock
 
   target 'Cuckoo_OCMock-tvOSTests' do
 
@@ -30,7 +34,7 @@ target 'Cuckoo_OCMock-macOS' do
 
   platform :osx, '10.10'
 
-  pod 'OCMock'
+  oc_mock
 
   target 'Cuckoo_OCMock-macOSTests' do
 

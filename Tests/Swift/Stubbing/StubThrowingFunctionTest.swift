@@ -10,7 +10,6 @@ import XCTest
 @testable import Cuckoo
 
 class StubThrowingFunctionTest: XCTestCase {
-    
     func testThen() {
         let mock = MockTestedClass()
         stub(mock) { mock in
@@ -18,10 +17,10 @@ class StubThrowingFunctionTest: XCTestCase {
                 return 2
             }
         }
-        
+
         XCTAssertEqual(try! mock.withThrows(), 2)
     }
-    
+
     func testThenReturn() {
         let mock = MockTestedClass()
         stub(mock) { mock in
@@ -30,7 +29,7 @@ class StubThrowingFunctionTest: XCTestCase {
         
         XCTAssertEqual(try! mock.withThrows(), 2)
     }
-    
+
     func testThenCallRealImplementation() {
         let mock = MockTestedClass().withEnabledSuperclassSpy()
         stub(mock) { mock in
@@ -39,20 +38,20 @@ class StubThrowingFunctionTest: XCTestCase {
         
         XCTAssertEqual(try! mock.withThrows(), 0)
     }
-    
+
     func testThenThrow() {
         let mock = MockTestedClass()
         stub(mock) { mock in
             when(mock.withThrows()).thenThrow(TestError.unknown)
         }
-        
+
         var catched = false
         do {
             _ = try mock.withThrows()
         } catch {
             catched = true
         }
-        
+
         XCTAssertTrue(catched)
     }
 
@@ -74,7 +73,7 @@ class StubThrowingFunctionTest: XCTestCase {
 
         XCTAssertTrue(catched)
     }
-    
+
     private enum TestError: Error {
         case unknown
     }

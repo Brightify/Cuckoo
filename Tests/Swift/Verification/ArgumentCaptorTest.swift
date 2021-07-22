@@ -10,7 +10,6 @@ import XCTest
 import Cuckoo
 
 class ArgumentCaptorTest: XCTestCase {
-    
     func testMultipleCalls() {
         let mock = MockTestedClass()
         stub(mock) { mock in
@@ -26,7 +25,7 @@ class ArgumentCaptorTest: XCTestCase {
         XCTAssertEqual(captor.value, 30)
         XCTAssertEqual(captor.allValues, [10, 20, 30])
     }
-    
+
     func testNoCall() {
         let mock = MockTestedClass()
         let captor = ArgumentCaptor<Int>()

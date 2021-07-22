@@ -10,7 +10,6 @@ import XCTest
 @testable import Cuckoo
 
 class StubbingTest: XCTestCase {
-
     func testMultipleReturns() {
         let mock = MockTestedClass()
         stub(mock) { mock in
