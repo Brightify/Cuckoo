@@ -49,6 +49,6 @@ Pod::Spec.new do |s|
   s.subspec 'OCMock' do |sub|
     sub.source_files = 'OCMock/**/*.{h,m,swift}'
     sub.dependency 'Cuckoo/Swift'
-    sub.dependency 'OCMock', '3.4.3'
+    sub.dependency 'OCMock', '3.8.1'
   end
 end
