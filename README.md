@@ -11,8 +11,6 @@
 ## Introduction
 Cuckoo was created due to lack of a proper Swift mocking framework. We built the DSL to be very similar to [Mockito](http://mockito.org/), so anyone coming from Java/Android can immediately pick it up and use it.
 
-To have a chat, [join our Slack workspace](http://swiftkit.brightify.org)!
-
 ## How does it work
 Cuckoo has two parts. One is the [runtime](https://github.com/Brightify/Cuckoo) and the other one is an OS X command-line tool simply called [CuckooGenerator](https://github.com/SwiftKit/CuckooGenerator).
 
@@ -94,7 +92,7 @@ Note: All paths in the Run script must be absolute. Variable `PROJECT_DIR` autom
 To use Cuckoo with Apple's Swift package manager, add the following as a dependency to your `Package.swift`:
 
 ```swift
-.package(url: "https://github.com/Brightify/Cuckoo.git", .upToNextMajor(from: "1.3.0"))
+.package(url: "https://github.com/Brightify/Cuckoo.git", .upToNextMajor(from: "1.5.0"))
 ```
 
 after that add `"Cuckoo"` as a dependency of the test target.
@@ -113,7 +111,7 @@ let package = Package(
             targets: ["Friendlyst"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/Brightify/Cuckoo.git", .upToNextMajor(from: "1.3.0"))
+        .package(url: "https://github.com/Brightify/Cuckoo.git", .upToNextMajor(from: "1.5.0"))
     ],
     targets: [
         .target(
@@ -142,7 +140,7 @@ with
 "${PROJECT_DIR}/run" --download
 ```
 
-The `--download` option is necessary because the `Generator` sources are not cloned in your project (they're in DerivedData,  out of reach). You can add a version (e.g. 1.3.0) after it to get a specific version of the `cuckoo_generator`. Use `--clean` as well to replace the current `cuckoo_generator` if you're changing versions.
+The `--download` option is necessary because the `Generator` sources are not cloned in your project (they're in DerivedData,  out of reach). You can add a version (e.g. `1.5.0`) after it to get a specific version of the `cuckoo_generator`. Use `--clean` as well to replace the current `cuckoo_generator` if you're changing versions.
 
 #### Carthage
 To use Cuckoo with [Carthage](https://github.com/Carthage/Carthage) add this line to your Cartfile:
@@ -494,7 +492,7 @@ These options are only used for downloading or building the generator and don't 
 
 When the [run script](run) is executed without any build options (they are only valid when specified **BEFORE** the `command`), it simply searches for the `cuckoo_generator` file and builds it from source code if it's missing.
 
-To download the generator from GitHub instead of building it, use the `--download [version]` option as the first argument (i.e. `run --download generate ...` or `run --download 1.3.0 generate ...` to fetch a specific version). If you're having issues with rather long build time (especially in CI), this might be the way to fix it.
+To download the generator from GitHub instead of building it, use the `--download [version]` option as the first argument (i.e. `run --download generate ...` or `run --download 1.5.0 generate ...` to fetch a specific version). If you're having issues with rather long build time (especially in CI), this might be the way to fix it.
 
 **NOTE**: If you encounter Github API rate limit using the `--download` option, the [run script](run) refers to the environment variable `GITHUB_ACCESS_TOKEN`.
 Add this line (replacing the Xs with your [GitHub token](https://github.com/settings/tokens), no additional permissions are needed) to the script build phase above the `run` call:
@@ -527,7 +525,7 @@ The default value is `GeneratedMocks.swift`.
 A comma separated list of frameworks that should be imported as @testable in the mock files.
 
 ###### `--exclude` (string)[,(string)...]
-A comma separated list of classes and protocols that should be skipped during mock generation.  
+A comma separated list of classes and protocols that should be skipped during mock generation.
 
 ###### `--no-header`
 Do not generate file headers.
