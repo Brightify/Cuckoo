@@ -59,6 +59,11 @@ pod "Cuckoo"
 And add the following `Run script` build phase to your test target's `Build Phases` above the `Compile Sources` phase:
 
 ```Bash
+if [ $ACTION == "indexbuild" ]; then
+  echo "Not running Cuckoo generator during indexing."
+  exit 0 
+fi
+
 # Define output file. Change "${PROJECT_DIR}/${PROJECT_NAME}Tests" to your test's root source folder, if it's not the default name.
 OUTPUT_FILE="${PROJECT_DIR}/${PROJECT_NAME}Tests/GeneratedMocks.swift"
 echo "Generated Mocks File = ${OUTPUT_FILE}"
