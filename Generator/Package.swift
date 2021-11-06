@@ -11,7 +11,7 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/jpsim/SourceKitten.git", .upToNextMinor(from: "0.21.2")),
         .package(url: "https://github.com/nvzqz/FileKit.git", .branch("develop")),
-        .package(url: "https://github.com/kylef/Stencil.git", from: "0.13.1"),
+        .package(url: "https://github.com/kylef/Stencil.git", from: "0.14.2"),
         .package(url: "https://github.com/Carthage/Commandant.git", from: "0.12.0")
         ],
     targets: [
