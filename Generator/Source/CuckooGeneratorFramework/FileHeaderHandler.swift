@@ -24,11 +24,49 @@ public struct FileHeaderHandler {
     }
 
     public static func getImports(of file: FileRepresentation, testableFrameworks: [String]) -> String {
-        var imports = Array(Set(file.declarations.only(Import.self).map { "import \($0.importee)\n" })).sorted().joined(separator: "")
+        let uniqueImports = Set(
+            file.declarations
+                .only(Import.self)
+                .lazy
+                .map({ $0.importee })
+                .map(importCreator())
+        )
+
+        var imports = Array(uniqueImports)
+            .sorted()
+            .joined(separator: "\n\n")
+
         if imports.isEmpty == false {
             imports = "\n\(imports)"
         }
-        return "import Cuckoo\n" + getTestableImports(testableFrameworks: testableFrameworks) + imports
+
+        return "import Cuckoo\n"
+            + getTestableImports(testableFrameworks: testableFrameworks)
+            + imports
+    }
+
+    private static func importCreator() -> (Import.Importee) -> String {
+        return {
+            switch $0 {
+            case .library(let name):
+                return """
+                #if canImport(\(name))
+                import \(name)
+                #endif
+                """
+            case .component(let componentType, let library, let name):
+                guard let componentType = componentType else {
+                    let importee = Import.Importee.library(name: library)
+                    return importGenerator()(importee)
+                }
+
+                return """
+                #if canImport(\(library))
+                import \(componentType) \(library).\(name)
+                #endif
+                """
+            }
+        }
     }
 
     private static func getRelativePath(from absolutePath: String) -> String {
