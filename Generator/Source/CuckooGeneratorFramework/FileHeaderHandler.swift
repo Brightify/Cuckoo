@@ -57,7 +57,7 @@ public struct FileHeaderHandler {
             case .component(let componentType, let library, let name):
                 guard let componentType = componentType else {
                     let importee = Import.Importee.library(name: library)
-                    return importGenerator()(importee)
+                    return importCreator()(importee)
                 }
 
                 return """
