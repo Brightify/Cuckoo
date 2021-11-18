@@ -64,6 +64,12 @@ if [ $ACTION == "indexbuild" ]; then
   exit 0 
 fi
 
+# Skip for preview builds
+if [ "${ENABLE_PREVIEWS}" = "YES" ]; then
+  echo "Not running Cuckoo generator during preview builds."
+  exit 0
+fi
+
 # Define output file. Change "${PROJECT_DIR}/${PROJECT_NAME}Tests" to your test's root source folder, if it's not the default name.
 OUTPUT_FILE="${PROJECT_DIR}/${PROJECT_NAME}Tests/GeneratedMocks.swift"
 echo "Generated Mocks File = ${OUTPUT_FILE}"
