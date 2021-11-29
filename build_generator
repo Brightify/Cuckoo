@@ -7,5 +7,5 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 pushd "${DIR}/Generator"
 rm -rf .build
-env -i PATH="$PATH" HOME="$HOME" swift build --configuration release --static-swift-stdlib
+env -i PATH="$PATH" HOME="$HOME" xcrun swift build --configuration release "$@"
 popd
