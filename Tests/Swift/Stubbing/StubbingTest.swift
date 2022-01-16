@@ -124,6 +124,55 @@ class StubbingTest: XCTestCase {
 
         XCTAssertEqual(mock.protocolMethod(), "a1")
     }
+    
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+    func testAsyncMethods() async {
+        let mock = MockTestedSubSubClass()
+
+        XCTAssertNotNil(mock)
+        
+        var callNoReturnAsync = false
+        var callNoReturnAsyncThrows = false
+        
+        stub(mock) { stub in
+            when(stub.withAsync()).thenReturn(10)
+            when(stub.withAsyncThrows()).thenReturn(11)
+            when(stub.withNoReturnAsync()).then {
+                callNoReturnAsync = true
+            }
+            when(stub.withNoReturnAsyncThrows()).then {
+                callNoReturnAsyncThrows = true
+            }
+            when(stub.withAsyncClosure(closure: anyClosure())).thenReturn("async closure")
+            when(stub.withAsyncClosureAsync(closure: anyClosure())).thenReturn("closure async")
+            when(stub.withAsyncEscapingClosure(closure: anyClosure())).thenReturn("escaping async")
+            when(stub.withAsyncOptionalClosureAsync(closure: anyClosure())).thenReturn("optional async closure async")
+        }
+        
+        let resultAsync = await mock.withAsync()
+        XCTAssertEqual(resultAsync, 10)
+        let resultAsyncThrows = try! await mock.withAsyncThrows()
+        XCTAssertEqual(resultAsyncThrows, 11)
+        await mock.withNoReturnAsync()
+        XCTAssertTrue(callNoReturnAsync)
+        try! await mock.withNoReturnAsyncThrows()
+        XCTAssertTrue(callNoReturnAsyncThrows)
+        XCTAssertEqual(mock.withAsyncClosure { p async in
+            return nil
+        }, "async closure")
+        let resultAsyncClosure = await mock.withAsyncClosureAsync(closure: { _ in nil })
+        XCTAssertEqual(resultAsyncClosure, "closure async")
+        XCTAssertEqual(mock.withAsyncEscapingClosure(closure: { _ in nil }), "escaping async")
+        let resultAsyncClosureAsync = await mock.withAsyncOptionalClosureAsync(closure: { _ in nil })
+        XCTAssertEqual(resultAsyncClosureAsync, "optional async closure async")
+        
+        verify(mock, times(1)).withAsync()
+        verify(mock, times(1)).withNoReturnAsync()
+        verify(mock, times(1)).withAsyncClosure(closure: anyClosure())
+        verify(mock, times(1)).withAsyncClosureAsync(closure: anyClosure())
+        verify(mock, times(1)).withAsyncEscapingClosure(closure: anyClosure())
+        verify(mock, times(1)).withAsyncOptionalClosureAsync(closure: anyClosure())
+    }
 
     func testSubclassWithGrandparentsInheritanceAcceptanceTest() {
         let mock = MockTestedSubSubClass()

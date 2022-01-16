@@ -47,7 +47,11 @@ public extension Method {
             .map { $0 + ": " + $1 }
             .joined(separator: ", ") + lastNamePart + returnSignatureString
     }
-
+    
+    var isAsync: Bool {
+        return returnSignature.isAsync
+    }
+    
     var isThrowing: Bool {
         guard let throwType = returnSignature.throwType else { return false }
         return throwType.isThrowing || throwType.isRethrowing
@@ -117,6 +121,7 @@ public extension Method {
             "escapingParameterNames": escapingParameterNames,
             "isInit": isInit,
             "returnType": returnType.explicitOptionalOnly.sugarized,
+            "isAsync": isAsync,
             "isThrowing": isThrowing,
             "throwType": returnSignature.throwType?.description ?? "",
             "fullyQualifiedName": fullyQualifiedName,

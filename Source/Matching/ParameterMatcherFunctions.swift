@@ -129,6 +129,102 @@ public func anyClosure<IN1, IN2, IN3, IN4, IN5, IN6, IN7, OUT>() -> ParameterMat
     return ParameterMatcher()
 }
 
+/// Returns a matcher matching any throwing closure.
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+public func anyThrowingClosure<OUT>() -> ParameterMatcher<() async throws -> OUT> {
+    return ParameterMatcher()
+}
+
+/// Returns a matcher matching any throwing closure.
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+public func anyThrowingClosure<IN1, OUT>() -> ParameterMatcher<(IN1) async throws -> OUT> {
+    return ParameterMatcher()
+}
+
+/// Returns a matcher matching any throwing closure.
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+public func anyThrowingClosure<IN1, IN2, OUT>() -> ParameterMatcher<(IN1, IN2) async throws -> OUT> {
+    return ParameterMatcher()
+}
+
+/// Returns a matcher matching any throwing closure.
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+public func anyThrowingClosure<IN1, IN2, IN3, OUT>() -> ParameterMatcher<(IN1, IN2, IN3) async throws -> OUT> {
+    return ParameterMatcher()
+}
+
+/// Returns a matcher matching any throwing closure.
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+public func anyThrowingClosure<IN1, IN2, IN3, IN4, OUT>() -> ParameterMatcher<(IN1, IN2, IN3, IN4) async throws -> OUT> {
+    return ParameterMatcher()
+}
+
+/// Returns a matcher matching any throwing closure.
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+public func anyThrowingClosure<IN1, IN2, IN3, IN4, IN5, OUT>() -> ParameterMatcher<(IN1, IN2, IN3, IN4, IN5) async throws -> OUT> {
+    return ParameterMatcher()
+}
+
+/// Returns a matcher matching any throwing closure.
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+public func anyThrowingClosure<IN1, IN2, IN3, IN4, IN5, IN6, OUT>() -> ParameterMatcher<(IN1, IN2, IN3, IN4, IN5, IN6) async throws -> OUT> {
+    return ParameterMatcher()
+}
+
+/// Returns a matcher matching any throwing closure.
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+public func anyThrowingClosure<IN1, IN2, IN3, IN4, IN5, IN6, IN7, OUT>() -> ParameterMatcher<(IN1, IN2, IN3, IN4, IN5, IN6, IN7) async throws -> OUT> {
+    return ParameterMatcher()
+}
+
+/// Returns a matcher matching any non-throwing closure.
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+public func anyClosure<OUT>() -> ParameterMatcher<() async -> OUT> {
+    return ParameterMatcher()
+}
+
+/// Returns a matcher matching any non-throwing closure.
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+public func anyClosure<IN1, OUT>() -> ParameterMatcher<(IN1) async -> OUT> {
+    return ParameterMatcher()
+}
+
+/// Returns a matcher matching any non-throwing closure.
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+public func anyClosure<IN1, IN2, OUT>() -> ParameterMatcher<(IN1, IN2) async -> OUT> {
+    return ParameterMatcher()
+}
+
+/// Returns a matcher matching any non-throwing closure.
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+public func anyClosure<IN1, IN2, IN3, OUT>() -> ParameterMatcher<(IN1, IN2, IN3) async -> OUT> {
+    return ParameterMatcher()
+}
+
+/// Returns a matcher matching any non-throwing closure.
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+public func anyClosure<IN1, IN2, IN3, IN4, OUT>() -> ParameterMatcher<(IN1, IN2, IN3, IN4) async -> OUT> {
+    return ParameterMatcher()
+}
+
+/// Returns a matcher matching any non-throwing closure.
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+public func anyClosure<IN1, IN2, IN3, IN4, IN5, OUT>() -> ParameterMatcher<(IN1, IN2, IN3, IN4, IN5) async -> OUT> {
+    return ParameterMatcher()
+}
+
+/// Returns a matcher matching any non-throwing closure.
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+public func anyClosure<IN1, IN2, IN3, IN4, IN5, IN6, OUT>() -> ParameterMatcher<(IN1, IN2, IN3, IN4, IN5, IN6) async -> OUT> {
+    return ParameterMatcher()
+}
+
+/// Returns a matcher matching any non-throwing closure.
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+public func anyClosure<IN1, IN2, IN3, IN4, IN5, IN6, IN7, OUT>() -> ParameterMatcher<(IN1, IN2, IN3, IN4, IN5, IN6, IN7) async -> OUT> {
+    return ParameterMatcher()
+}
+
 /// Returns a matcher matching any T value or nil.
 public func any<T>(_ type: T.Type = T.self) -> ParameterMatcher<T> {
     return ParameterMatcher()
@@ -179,6 +275,12 @@ public func anyString() -> ParameterMatcher<String?> {
 
 /// Returns a matcher matching any closure.
 public func anyClosure<IN, OUT>() -> ParameterMatcher<(((IN)) -> OUT)?> {
+    return notNil()
+}
+
+/// Returns a matcher matching any closure.
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+public func anyClosure<IN, OUT>() -> ParameterMatcher<(((IN)) async -> OUT)?> {
     return notNil()
 }
 

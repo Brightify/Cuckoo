@@ -43,6 +43,44 @@ class TestedClass {
         return characters.count
     }
 
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+    func withAsync() async -> Int {
+        return 0
+    }
+    
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+    func withNoReturnAsync() async {
+    }
+    
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+    func withAsyncThrows() async throws -> Int {
+        return 0
+    }
+    
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+    func withNoReturnAsyncThrows() async throws {
+    }
+    
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+    func withAsyncClosure(closure: (String) async -> String?) -> String? {
+        return nil
+    }
+    
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+    func withAsyncClosureAsync(closure: (String) async -> String?) async -> String? {
+        return nil
+    }
+    
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+    func withAsyncEscapingClosure(closure: @escaping (String) async -> String?) -> String? {
+        return nil
+    }
+    
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+    func withAsyncOptionalClosureAsync(closure: ((String) async -> String?)?) async -> String? {
+        return nil
+    }
+
     func withThrows() throws -> Int {
         return 0
     }

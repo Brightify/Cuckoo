@@ -36,7 +36,12 @@ public class MockManager {
     private func callInternal<IN, OUT>(_ method: String, parameters: IN, escapingParameters: IN, superclassCall: () -> OUT, defaultCall: () -> OUT) -> OUT {
         return callRethrowsInternal(method, parameters: parameters, escapingParameters: escapingParameters, superclassCall: superclassCall, defaultCall: defaultCall)
     }
-
+    
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+    private func callInternal<IN, OUT>(_ method: String, parameters: IN, escapingParameters: IN, superclassCall: () async -> OUT, defaultCall: () async -> OUT) async -> OUT {
+        return await callRethrowsInternal(method, parameters: parameters, escapingParameters: escapingParameters, superclassCall: superclassCall, defaultCall: defaultCall)
+    }
+    
     private func callRethrowsInternal<IN, OUT>(_ method: String, parameters: IN, escapingParameters: IN, superclassCall: () throws -> OUT, defaultCall: () throws -> OUT) rethrows -> OUT {
         let stubCall = ConcreteStubCall(method: method, parameters: escapingParameters)
         queue.sync {
@@ -76,7 +81,48 @@ public class MockManager {
             failAndCrash("No stub for method `\(method)` using parameters \(parameters).")
         }
     }
+    
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+    private func callRethrowsInternal<IN, OUT>(_ method: String, parameters: IN, escapingParameters: IN, superclassCall: () async throws -> OUT, defaultCall: () async throws -> OUT) async rethrows -> OUT {
+        let stubCall = ConcreteStubCall(method: method, parameters: escapingParameters)
+        queue.sync {
+            stubCalls.append(stubCall)
+            unverifiedStubCallsIndexes.append(stubCalls.count - 1)
+        }
 
+        if let stub = (stubs.filter { $0.method == method }.compactMap { $0 as? ConcreteStub<IN, OUT> }.filter { $0.parameterMatchers.reduce(true) { $0 && $1.matches(parameters) } }.first) {
+            
+            guard let action = queue.sync(execute: {
+                return stub.actions.count > 1 ? stub.actions.removeFirst() : stub.actions.first
+            }) else {
+                failAndCrash("Stubbing of method `\(method)` using parameters \(parameters) wasn't finished (missing thenReturn()).")
+            }
+            
+            switch action {
+            case .callImplementation(let implementation):
+                return try DispatchQueue(label: "No-care?").sync(execute: {
+                    return try implementation(parameters)
+                })
+            case .returnValue(let value):
+                return value
+            case .throwError(let error):
+                return try DispatchQueue(label: "No-care?").sync(execute: {
+                    throw error
+                })
+            case .callRealImplementation where hasParent:
+                return try await superclassCall()
+            default:
+                failAndCrash("No real implementation found for method `\(method)`. This is probably caused by stubbed object being a mock of a protocol.")
+            }
+        } else if isSuperclassSpyEnabled {
+            return try await superclassCall()
+        } else if isDefaultImplementationEnabled {
+            return try await defaultCall()
+        } else {
+            failAndCrash("No stub for method `\(method)` using parameters \(parameters).")
+        }
+    }
+    
     private func callThrowsInternal<IN, OUT>(_ method: String, parameters: IN, escapingParameters: IN, superclassCall: () throws -> OUT, defaultCall: () throws -> OUT) throws -> OUT {
         let stubCall = ConcreteStubCall(method: method, parameters: escapingParameters)
         queue.sync {
@@ -108,6 +154,43 @@ public class MockManager {
             return try superclassCall()
         } else if isDefaultImplementationEnabled {
             return try defaultCall()
+        } else {
+            failAndCrash("No stub for method `\(method)` using parameters \(parameters).")
+        }
+    }
+    
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+    private func callThrowsInternal<IN, OUT>(_ method: String, parameters: IN, escapingParameters: IN, superclassCall: () async throws -> OUT, defaultCall: () async throws -> OUT) async throws -> OUT {
+        let stubCall = ConcreteStubCall(method: method, parameters: escapingParameters)
+        queue.sync {
+            stubCalls.append(stubCall)
+            unverifiedStubCallsIndexes.append(stubCalls.count - 1)
+        }
+        
+        if let stub = (stubs.filter { $0.method == method }.compactMap { $0 as? ConcreteStub<IN, OUT> }.filter { $0.parameterMatchers.reduce(true) { $0 && $1.matches(parameters) } }.first) {
+            
+            guard let action = queue.sync(execute: {
+                return stub.actions.count > 1 ? stub.actions.removeFirst() : stub.actions.first
+            }) else {
+                failAndCrash("Stubbing of method `\(method)` using parameters \(parameters) wasn't finished (missing thenReturn()).")
+            }
+            
+            switch action {
+            case .callImplementation(let implementation):
+                return try implementation(parameters)
+            case .returnValue(let value):
+                return value
+            case .throwError(let error):
+                throw error
+            case .callRealImplementation where hasParent:
+                return try await superclassCall()
+            default:
+                failAndCrash("No real implementation found for method `\(method)`. This is probably caused  by stubbed object being a mock of a protocol.")
+            }
+        } else if isSuperclassSpyEnabled {
+            return try await superclassCall()
+        } else if isDefaultImplementationEnabled {
+            return try await defaultCall()
         } else {
             failAndCrash("No stub for method `\(method)` using parameters \(parameters).")
         }
@@ -236,16 +319,31 @@ extension MockManager {
     public func call<IN, OUT>(_ method: String, parameters: IN, escapingParameters: IN, superclassCall: @autoclosure () -> OUT, defaultCall: @autoclosure () -> OUT) -> OUT {
         return callInternal(method, parameters: parameters, escapingParameters: escapingParameters, superclassCall: superclassCall, defaultCall: defaultCall)
     }
+    
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+    public func call<IN, OUT>(_ method: String, parameters: IN, escapingParameters: IN, superclassCall: @autoclosure () async -> OUT, defaultCall: @autoclosure () async -> OUT) async -> OUT {
+        return await callInternal(method, parameters: parameters, escapingParameters: escapingParameters, superclassCall: superclassCall, defaultCall: defaultCall)
+    }
 }
 
 extension MockManager {
     public func callThrows<IN, OUT>(_ method: String, parameters: IN, escapingParameters: IN, superclassCall: @autoclosure () throws -> OUT, defaultCall: @autoclosure () throws -> OUT) throws -> OUT {
         return try callThrowsInternal(method, parameters: parameters, escapingParameters: escapingParameters, superclassCall: superclassCall, defaultCall: defaultCall)
     }
+    
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+    public func callThrows<IN, OUT>(_ method: String, parameters: IN, escapingParameters: IN, superclassCall: @autoclosure () async throws -> OUT, defaultCall: @autoclosure () async throws -> OUT) async throws -> OUT {
+        return try await callThrowsInternal(method, parameters: parameters, escapingParameters: escapingParameters, superclassCall: superclassCall, defaultCall: defaultCall)
+    }
 }
 
 extension MockManager {
     public func callRethrows<IN, OUT>(_ method: String, parameters: IN, escapingParameters: IN, superclassCall: @autoclosure () throws -> OUT, defaultCall: @autoclosure () throws -> OUT) rethrows -> OUT {
         return try callRethrowsInternal(method, parameters: parameters, escapingParameters: escapingParameters, superclassCall: superclassCall, defaultCall: defaultCall)
+    }
+    
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+    public func callRethrows<IN, OUT>(_ method: String, parameters: IN, escapingParameters: IN, superclassCall: @autoclosure () async throws -> OUT, defaultCall: @autoclosure () async throws -> OUT) async rethrows -> OUT {
+        return try await callRethrowsInternal(method, parameters: parameters, escapingParameters: escapingParameters, superclassCall: superclassCall, defaultCall: defaultCall)
     }
 }
