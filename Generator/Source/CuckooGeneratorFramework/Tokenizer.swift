@@ -443,6 +443,7 @@ public struct Tokenizer {
     /// - parameter source: A trimmed string containing only the method return signature excluding the trailing brace
     /// - returns: ReturnSignature structure containing the parsed throwString, return type, and where constraints
     private func parseReturnSignature(source: String) -> ReturnSignature {
+        var isAsync = false
         var throwString = nil as String?
         var returnType: WrappableType?
         var whereConstraints = [] as [String]
@@ -451,6 +452,11 @@ public struct Tokenizer {
         parseLoop: while index != source.endIndex {
             let character = source[index]
             switch character {
+            case "a":
+                isAsync = true
+                let asyncString = "async"
+                index = source.index(index, offsetBy: asyncString.count)
+                continue
             case "r" where returnType == nil:
                 throwString = "rethrows"
                 index = source.index(index, offsetBy: throwString!.count)
@@ -476,7 +482,7 @@ public struct Tokenizer {
             index = source.index(after: index)
         }
 
-        return ReturnSignature(throwString: throwString, returnType: returnType ?? WrappableType.type("Void"), whereConstraints: whereConstraints)
+        return ReturnSignature(isAsync: isAsync, throwString: throwString, returnType: returnType ?? WrappableType.type("Void"), whereConstraints: whereConstraints)
     }
 
     // FIXME: Remove when SourceKitten fixes the off-by-one error that includes the ending `>` in the last inherited type.

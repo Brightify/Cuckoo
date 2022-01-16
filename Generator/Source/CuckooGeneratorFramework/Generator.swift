@@ -112,6 +112,7 @@ public struct Generator {
             if parameter.isClosure && !parameter.isEscaping {
                 let indents = String(repeating: "\t", count: index)
                 let tries = method.isThrowing ? "try " : ""
+                let awaits = method.isAsync ? "await " : ""
 
                 let sugarizedReturnType = method.returnType.sugarized
                 let returnSignature: String
@@ -121,7 +122,7 @@ public struct Generator {
                     returnSignature = " -> \(sugarizedReturnType)"
                 }
 
-                fullString += "\(indents)return \(tries)withoutActuallyEscaping(\(parameter.name), do: { (\(parameter.name): @escaping \(parameter.type))\(returnSignature) in\n"
+                fullString += "\(indents)return \(tries)\(awaits)withoutActuallyEscaping(\(parameter.name), do: { (\(parameter.name): @escaping \(parameter.type))\(returnSignature) in\n"
             }
         }
 

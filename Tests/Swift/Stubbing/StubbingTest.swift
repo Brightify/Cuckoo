@@ -124,6 +124,39 @@ class StubbingTest: XCTestCase {
 
         XCTAssertEqual(mock.protocolMethod(), "a1")
     }
+    
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+    func testAsyncMethods() async {
+        let mock = MockTestedSubSubClass()
+
+        XCTAssertNotNil(mock)
+        
+        var callNoReturnAsync = false
+        var callNoReturnAsyncThrows = false
+        
+        stub(mock) { stub in
+            when(stub.withAsync()).thenReturn(10)
+            when(stub.withAsyncThrows()).thenReturn(11)
+            when(stub.withNoReturnAsync()).then {
+                callNoReturnAsync = true
+            }
+            when(stub.withNoReturnAsyncThrows()).then {
+                callNoReturnAsyncThrows = true
+            }
+        }
+        
+        let resultAsync = await mock.withAsync()
+        let resultAsyncThrows = try! await mock.withAsyncThrows()
+        await mock.withNoReturnAsync()
+        try! await mock.withNoReturnAsyncThrows()
+        XCTAssertEqual(resultAsync, 10)
+        XCTAssertEqual(resultAsyncThrows, 11)
+        XCTAssertTrue(callNoReturnAsync)
+        XCTAssertTrue(callNoReturnAsyncThrows)
+        
+        verify(mock, times(1)).withAsync()
+        verify(mock, times(1)).withNoReturnAsync()
+    }
 
     func testSubclassWithGrandparentsInheritanceAcceptanceTest() {
         let mock = MockTestedSubSubClass()

@@ -30,7 +30,13 @@ class TestedSubclass: TestedClass, TestedProtocol {
     func withImplicitlyUnwrappedOptional(i: Int!) -> String {
         return ""
     }
-
+    
+    // Should not be conflicting in mocked class
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+    override func withAsync() async -> Int {
+        return 1
+    }
+    
     // Should not be conflicting in mocked class
     override func withThrows() throws -> Int {
         return 1

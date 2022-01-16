@@ -42,6 +42,25 @@ class TestedClass {
     func count(characters: String) -> Int {
         return characters.count
     }
+    
+    @available(iOS 42.0, *)
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+    func withAsync() async -> Int {
+        return 0
+    }
+    
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+    func withNoReturnAsync() async {
+    }
+    
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+    func withAsyncThrows() async throws -> Int {
+        return 0
+    }
+    
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+    func withNoReturnAsyncThrows() async throws {
+    }
 
     func withThrows() throws -> Int {
         return 0
