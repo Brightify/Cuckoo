@@ -17,7 +17,7 @@ protocol TestedProtocol {
     func noReturn()
 
     func count(characters: String) -> Int
-    
+
     func withThrows() throws -> Int
 
     func withNoReturnThrows() throws
