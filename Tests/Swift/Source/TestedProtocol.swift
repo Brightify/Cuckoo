@@ -18,18 +18,6 @@ protocol TestedProtocol {
 
     func count(characters: String) -> Int
     
-    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
-    func withAsync() async -> Int
-    
-    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
-    func withNoReturnAsync() async
-    
-    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
-    func withAsyncThrows() async throws -> Int
-    
-    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
-    func withNoReturnAsyncThrows() async throws
-    
     func withThrows() throws -> Int
 
     func withNoReturnThrows() throws
