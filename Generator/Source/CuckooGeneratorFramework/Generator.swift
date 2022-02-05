@@ -10,6 +10,17 @@ import Foundation
 import Stencil
 
 public struct Generator {
+    
+    private static let reservedKeywordsNotAllowedAsMethodName: Set = [
+        // Keywords used in declarations:
+        "associatedtype", "class", "deinit", "enum", "extension", "fileprivate", "func", "import", "init", "inout", "internal", "let", "operator", "private", "precedencegroup", "protocol", "public", "rethrows", "static", "struct", "subscript", "typealias", "var",
+        // Keywords used in statements:
+        "break", "case", "catch", "continue", "default", "defer", "do", "else", "fallthrough", "for", "guard", "if", "in", "repeat", "return", "throw", "switch", "where", "while",
+        // Keywords used in expressions and types:
+        "Any", "as", "catch", "false", "is", "nil", "rethrows", "self", "super", "throw", "throws", "true", "try",
+        // Keywords used in patterns:
+        "_",
+    ]
 
     private let declarations: [Token]
     private let code = CodeBuilder()
@@ -55,6 +66,11 @@ public struct Generator {
         ext.registerFilter("closeNestedClosure") { (value: Any?) in
             guard let parameters = value as? [MethodParameter] else { return value }
             return self.closeNestedClosure(for: parameters)
+        }
+        
+        ext.registerFilter("escapeReservedKeywords") { (value: Any?) in
+            guard let name = value as? String else { return value }
+            return self.escapeReservedKeywords(for: name)
         }
 
         let environment = Environment(extensions: [ext])
@@ -138,5 +154,9 @@ public struct Generator {
             }
         }
         return fullString
+    }
+    
+    private func escapeReservedKeywords(for name: String) -> String {
+        Self.reservedKeywordsNotAllowedAsMethodName.contains(name) ? "`\(name)`" : name
     }
 }
