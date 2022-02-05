@@ -40,7 +40,7 @@ extension Templates {
     {% for attribute in method.attributes %}
     {{ attribute.text }}
     {% endfor %}
-    {{ method.accessibility }}{% if container.@type == "ClassDeclaration" and method.isOverriding %} override{% endif %} func {{ method.name }}{{ method.genericParameters }}({{ method.parameterSignature }}) {{ method.returnSignature }} {{ method.whereClause }} {
+    {{ method.accessibility }}{% if container.@type == "ClassDeclaration" and method.isOverriding %} override{% endif %} func {{ method.name|escapeReservedKeywords }}{{ method.genericParameters }}({{ method.parameterSignature }}) {{ method.returnSignature }} {{ method.whereClause }} {
         return DefaultValueRegistry.defaultValue(for: ({{method.returnType|genericSafe}}).self)
     }
     {% endfor %}

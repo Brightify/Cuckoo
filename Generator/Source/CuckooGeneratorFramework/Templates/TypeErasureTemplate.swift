@@ -40,7 +40,7 @@ extension Templates {
 
         {% for method in container.methods %}
         private let _storage${{ forloop.counter }}${{ method.name }}: ({{ method.inputTypes }}) -> {{ method.returnType }}
-        {{ container.accessibility }} func {{ method.name }}({{ method.parameterSignature }}) {{ method.returnSignature }} {
+        {{ container.accessibility }} func {{ method.name|escapeReservedKeywords }}({{ method.parameterSignature }}) {{ method.returnSignature }} {
             return _storage${{ forloop.counter }}${{ method.name }}({{ method.parameterNames }})
         }
         {% endfor %}
