@@ -63,7 +63,7 @@ public struct GenerateMocksCommand: CommandProtocol {
 
         do {
             if outputPath.isDirectory {
-                let inputPaths = inputPathValues.map { Path($0) }
+                let inputPaths = inputFiles.compactMap { $0.path }.map { Path($0) }
                 for (inputPath, outputText) in zip(inputPaths, mergedFiles) {
                     let fileName = options.filePrefix + inputPath.fileName
                     let outputFile = TextFile(path: outputPath + fileName)
