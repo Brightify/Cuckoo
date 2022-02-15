@@ -5,6 +5,10 @@
 //  Created by Matyáš Kříž on 28/05/2019.
 //
 
+#if SWIFT_PACKAGE
+import Cuckoo_OCMock_Objc
+#endif
+
 /**
  * Objective-C equivalent to Cuckoo's own `stub` for protocols.
  * - parameter type: Type for which to create a mock. (e.g. `UITableViewDelegate.self`)

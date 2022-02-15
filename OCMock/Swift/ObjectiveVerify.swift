@@ -6,6 +6,9 @@
 //
 
 import XCTest
+#if SWIFT_PACKAGE
+import Cuckoo_OCMock_Objc
+#endif
 
 extension XCTestCase {
     /**

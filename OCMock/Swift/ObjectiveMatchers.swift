@@ -6,6 +6,9 @@
 //
 
 import Foundation
+#if SWIFT_PACKAGE
+import Cuckoo_OCMock_Objc
+#endif
 
 /// Used as an Objective-C matcher matching any Objective-C closure.
 public func objcAny<T: NSObject>() -> T {

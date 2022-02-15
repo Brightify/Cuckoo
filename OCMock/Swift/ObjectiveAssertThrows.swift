@@ -6,6 +6,9 @@
 //
 
 import XCTest
+#if SWIFT_PACKAGE
+import Cuckoo_OCMock_Objc
+#endif
 
 public func objectiveAssertThrows<OUT>(message: String = "Expected the method to throw.", file: StaticString = #file, line: UInt = #line, errorHandler: (Error) -> Void = { _ in }, _ invocation: @autoclosure @escaping () -> OUT) {
     do {
