@@ -1,10 +1,3 @@
-//
-//  ObjectiveArgumentClosure.swift
-//  Cuckoo+OCMock-iOS
-//
-//  Created by Matyáš Kříž on 28/05/2019.
-//
-
 import Foundation
 
 // MARK: Closures without any return value

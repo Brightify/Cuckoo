@@ -1,11 +1,3 @@
-//
-//  ArgumentCaptor.swift
-//  Cuckoo
-//
-//  Created by Filip Dolnik on 29.06.16.
-//  Copyright © 2016 Brightify. All rights reserved.
-//
-
 // Can be used to capture arguments. It is recommended to use it only in verification and not stubbing.
 public class ArgumentCaptor<T> {
     

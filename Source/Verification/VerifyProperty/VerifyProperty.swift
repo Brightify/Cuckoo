@@ -1,11 +1,3 @@
-//
-//  VerifyProperty.swift
-//  Cuckoo
-//
-//  Created by Filip Dolnik on 29.05.16.
-//  Copyright © 2016 Brightify. All rights reserved.
-//
-
 public struct VerifyProperty<T> {
     private let manager: MockManager
     private let name: String

@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/nvzqz/FileKit.git",
       "state" : {
-        "branch" : "develop",
-        "revision" : "6937ec38b0c383b0505caeea6603e62086bf5431"
+        "revision" : "9006d2888025fbe893c3c396327b2fe45a8c177b",
+        "version" : "6.1.0"
       }
     },
     {
@@ -55,15 +55,6 @@
       }
     },
     {
-      "identity" : "sourcekitten",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/jpsim/SourceKitten.git",
-      "state" : {
-        "revision" : "79ca340f609adee48defa966e6a3dd0e0acbeb08",
-        "version" : "0.21.3"
-      }
-    },
-    {
       "identity" : "spectre",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/kylef/Spectre.git",
@@ -77,26 +68,53 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/kylef/Stencil.git",
       "state" : {
-        "revision" : "ccd9402682f4c07dac9561befd207c8156e80e20",
-        "version" : "0.14.2"
+        "revision" : "4f222ac85d673f35df29962fc4c36ccfdaf9da5b",
+        "version" : "0.15.1"
       }
     },
     {
-      "identity" : "swxmlhash",
+      "identity" : "swift-argument-parser",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/drmohundro/SWXMLHash.git",
+      "location" : "https://github.com/apple/swift-argument-parser.git",
       "state" : {
-        "revision" : "f43166a8e18fdd0857f29e303b1bb79a5428bca0",
-        "version" : "4.9.0"
+        "revision" : "8f4d2753f0e4778c76d5f05ad16c74f707390531",
+        "version" : "1.2.3"
       }
     },
     {
-      "identity" : "yams",
+      "identity" : "swift-cmark",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/jpsim/Yams.git",
+      "location" : "https://github.com/apple/swift-cmark.git",
       "state" : {
-        "revision" : "b08dba4bcea978bf1ad37703a384097d3efce5af",
-        "version" : "1.0.2"
+        "revision" : "29d9c97e6310b87c4799268eaa2fc76164b2dbd8",
+        "version" : "0.2.0"
+      }
+    },
+    {
+      "identity" : "swift-format",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-format.git",
+      "state" : {
+        "revision" : "83248b4fa37919f78ffbd4650946759bcc54c2b5",
+        "version" : "509.0.0"
+      }
+    },
+    {
+      "identity" : "swift-markdown",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-markdown.git",
+      "state" : {
+        "revision" : "68b2fed9fb12fb71ac81e537f08bed430b189e35",
+        "version" : "0.2.0"
+      }
+    },
+    {
+      "identity" : "swift-syntax",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-syntax.git",
+      "state" : {
+        "revision" : "74203046135342e4a4a627476dd6caf8b28fe11b",
+        "version" : "509.0.0"
       }
     }
   ],

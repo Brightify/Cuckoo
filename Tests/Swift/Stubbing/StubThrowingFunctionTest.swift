@@ -1,15 +1,7 @@
-//
-//  StubThrowingFunctionTest.swift
-//  Cuckoo
-//
-//  Created by Filip Dolnik on 04.07.16.
-//  Copyright © 2016 Brightify. All rights reserved.
-//
-
 import XCTest
 @testable import Cuckoo
 
-class StubThrowingFunctionTest: XCTestCase {
+final class StubThrowingFunctionTest: XCTestCase {
     func testThen() {
         let mock = MockTestedClass()
         stub(mock) { mock in

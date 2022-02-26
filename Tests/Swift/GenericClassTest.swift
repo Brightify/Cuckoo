@@ -1,10 +1,3 @@
-//
-//  GenericClassTest.swift
-//  Cuckoo
-//
-//  Created by Matyáš Kříž on 26/11/2018.
-//
-
 import XCTest
 import Cuckoo
 
@@ -12,7 +5,7 @@ extension GenericClass: Mocked {
     typealias MockType = MockGenericClass<T, U, V>
 }
 
-class GenericClassTest: XCTestCase {
+final class GenericClassTest: XCTestCase {
     private var mock: MockGenericClass<Int, String, Bool>!
     private var original: GenericClass<Int, String, Bool>!
 

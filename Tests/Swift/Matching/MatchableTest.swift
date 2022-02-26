@@ -1,15 +1,7 @@
-//
-//  MatchableTest.swift
-//  Cuckoo
-//
-//  Created by Filip Dolnik on 04.07.16.
-//  Copyright © 2016 Brightify. All rights reserved.
-//
-
 import XCTest
 import Cuckoo
 
-class MatchableTest: XCTestCase {
+final class MatchableTest: XCTestCase {
     func testOr() {
         let matcher = 5.or(4)
         

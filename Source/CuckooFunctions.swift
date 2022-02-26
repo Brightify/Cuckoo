@@ -1,19 +1,10 @@
-//
-//  CuckooFunctions.swift
-//  Cuckoo
-//
-//  Created by Tadeas Kriz on 13/01/16.
-//  Copyright © 2016 Brightify. All rights reserved.
-//
-
 /// Starts the stubbing for the given mock. Can be used multiple times.
 public func stub<M: Mock>(_ mock: M, block: (M.Stubbing) -> Void) {
     block(mock.getStubbingProxy())
 }
 
 /// Used in stubbing. Currently only returns passed function but this may change in the future so it is not recommended to omit it.
-// TODO: Uncomment the `: BaseStubFunctionTrait` before the next major release to improve API.
-public func when<F/*: BaseStubFunctionTrait*/>(_ function: F) -> F {
+public func when<F: BaseStubFunctionTrait>(_ function: F) -> F {
     return function
 }
 
