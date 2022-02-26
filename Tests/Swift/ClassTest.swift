@@ -1,11 +1,3 @@
-//
-//  ClassTest.swift
-//  Cuckoo
-//
-//  Created by Filip Dolnik on 04.07.16.
-//  Copyright © 2016 Brightify. All rights reserved.
-//
-
 import XCTest
 import Cuckoo
 
@@ -13,7 +5,7 @@ extension TestedClass: Mocked {
     typealias MockType = MockTestedClass
 }
 
-class ClassTest: XCTestCase {
+final class ClassTest: XCTestCase {
 
     private var mock: MockTestedClass!
 

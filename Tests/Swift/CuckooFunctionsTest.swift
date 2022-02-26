@@ -1,15 +1,7 @@
-//
-//  CuckooFunctionsTest.swift
-//  Cuckoo
-//
-//  Created by Filip Dolnik on 04.07.16.
-//  Copyright © 2016 Brightify. All rights reserved.
-//
-
 import XCTest
 @testable import Cuckoo
 
-class CuckooFunctionsTest: XCTestCase {
+final class CuckooFunctionsTest: XCTestCase {
     func testReset() {
         let mock = MockTestedClass().withEnabledSuperclassSpy()
         stub(mock) { mock in

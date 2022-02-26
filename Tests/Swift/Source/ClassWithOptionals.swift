@@ -1,11 +1,3 @@
-//
-//  ClassWithOptionals.swift
-//  Cuckoo
-//
-//  Created by Filip Dolnik on 18.12.16.
-//  Copyright © 2016 Brightify. All rights reserved.
-//
-
 class ClassWithOptionals {
 
     var value: Int? = 0

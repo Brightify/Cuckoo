@@ -1,17 +1,10 @@
-//
-//  ObjectiveProtocolTest.swift
-//  Cuckoo+OCMock_iOSTests
-//
-//  Created by Matyáš Kříž on 28/05/2019.
-//
-
 import XCTest
 import Cuckoo
 
 #if os(iOS)
 import WebKit
 
-class ObjectiveProtocolTest: XCTestCase {
+final class ObjectiveProtocolTest: XCTestCase {
     func testThenDoNothing() {
         let mock = objcStub(for: UIScrollViewDelegate.self) { stubber, mock in
             stubber.when(mock.scrollViewDidScrollToTop!(objcAny())).thenDoNothing()

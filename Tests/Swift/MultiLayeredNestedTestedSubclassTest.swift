@@ -1,15 +1,8 @@
-//
-//  MultiLayeredNestedTestedSubclassTest.swift
-//  Cuckoo
-//
-//  Created by Tyler Thompson on 9/18/20.
-//
-
 import Foundation
 import XCTest
 import Cuckoo
 
-class MultiLayeredNestedTestedSubclassTest: XCTestCase {
+final class MultiLayeredNestedTestedSubclassTest: XCTestCase {
 
     private var mock: Multi.Layered.Nested.MockMultiLayeredNestedTestedSubclass!
 

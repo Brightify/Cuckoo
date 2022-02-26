@@ -15,5 +15,3 @@ FOUNDATION_EXPORT double CuckooVersionNumber;
 FOUNDATION_EXPORT const unsigned char CuckooVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <Cuckoo/PublicHeader.h>
-
-

@@ -1,15 +1,7 @@
-//
-//  StubTest.swift
-//  Cuckoo
-//
-//  Created by Filip Dolnik on 21.09.16.
-//  Copyright © 2016 Brightify. All rights reserved.
-//
-
 import XCTest
 import Cuckoo
 
-class StubTest: XCTestCase {
+final class StubTest: XCTestCase {
     private var stub: ClassForStubTestingStub!
 
     override func setUp() {

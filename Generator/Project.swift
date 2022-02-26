@@ -1,27 +1,52 @@
 import ProjectDescription
 import ProjectDescriptionHelpers
 
+let target = Target(
+    name: "CuckooGenerator",
+    platform: .macOS,
+    product: .commandLineTool,
+    productName: "cuckoo_generator",
+    bundleId: "CuckooGenerator",
+    deploymentTarget: .macOS(targetVersion: "10.15"),
+    sources: "Sources/**",
+    dependencies: [
+        "FileKit",
+        "Stencil",
+        "Commandant",
+        "SwiftFormat",
+        "SwiftSyntax",
+    ].map(TargetDependency.package(product:))
+)
+
+let testTarget = Target(
+    name: "GeneratorTests",
+    platform: .macOS,
+    product: .unitTests,
+    bundleId: "CuckooGeneratorTests",
+    deploymentTarget: target.deploymentTarget,
+    sources: SourceFilesList(globs: [
+        // TODO: This is wrong but testing CLI is not supported, must separate generator into CLI and internal targets.
+        target.sources?.globs,
+        ["Tests/**"],
+    ].compactMap { $0 }.flatMap { $0 }),
+    // TODO: This is wrong but testing CLI is not supported, must separate generator into CLI and internal targets.
+    dependencies: target.dependencies
+)
+
 // MARK: project definition
 let project = Project(
     name: "Generator",
     options: .options(automaticSchemesOptions: .disabled, disableSynthesizedResourceAccessors: true),
     packages: [
-        .package(url: "https://github.com/jpsim/SourceKitten.git", .upToNextMinor(from: "0.21.2")),
-        .package(url: "https://github.com/nvzqz/FileKit.git", .branch("develop")),
-        .package(url: "https://github.com/kylef/Stencil.git", .exact("0.14.2")),
+        .package(url: "https://github.com/nvzqz/FileKit.git", .exact("6.1.0")),
+        .package(url: "https://github.com/kylef/Stencil.git", .exact("0.15.1")),
         .package(url: "https://github.com/Carthage/Commandant.git", .exact("0.15.0")),
+        .package(url: "https://github.com/apple/swift-syntax.git", .exact("509.0.0")),
+        .package(url: "https://github.com/apple/swift-format.git", .exact("509.0.0")),
     ],
     targets: [
-        Target(
-            name: "CuckooGenerator",
-            platform: .macOS,
-            product: .commandLineTool,
-            productName: "cuckoo_generator",
-            bundleId: "CuckooGenerator",
-            deploymentTarget: DeploymentTarget.macOS(targetVersion: "10.13"),
-            sources: "Source/**",
-            dependencies: ["FileKit", "SourceKittenFramework", "Stencil", "Commandant"].map(TargetDependency.package(product:))
-        ),
+        target,
+        testTarget,
     ],
     schemes: [
         Scheme(
@@ -37,6 +62,7 @@ let project = Project(
                 ],
                 runPostActionsOnFailure: false
             ),
+            testAction: TestAction.targets([TestableTarget(target: testTarget.reference)]),
             runAction: RunAction.runAction(
                 executable: "CuckooGenerator",
                 arguments: Arguments(

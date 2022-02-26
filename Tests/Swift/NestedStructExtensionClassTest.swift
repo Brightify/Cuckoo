@@ -1,15 +1,8 @@
-//
-//  NestedStructExtensionClassTest.swift
-//  Cuckoo
-//
-//  Created by Tyler Thompson on 9/18/20.
-//
-
 import Foundation
 import XCTest
 import Cuckoo
 
-class NestedStructExtensionClassTests: XCTestCase {
+final class NestedStructExtensionClassTests: XCTestCase {
 
     private var mock: NestedStruct.MockNestedExtensionTestedClass!
 

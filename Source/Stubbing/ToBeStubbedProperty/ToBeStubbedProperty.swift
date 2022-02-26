@@ -1,11 +1,3 @@
-//
-//  ToBeStubbedProperty.swift
-//  Cuckoo
-//
-//  Created by Filip Dolnik on 29.05.16.
-//  Copyright © 2016 Brightify. All rights reserved.
-//
-
 public protocol ToBeStubbedProperty: ToBeStubbedReadOnlyProperty where GetterType.OutputType == SetterType.InputType {
     associatedtype SetterType: StubNoReturnFunction
 

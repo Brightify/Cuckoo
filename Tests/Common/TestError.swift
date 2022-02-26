@@ -1,10 +1,3 @@
-//
-//  TestError.swift
-//  Cuckoo
-//
-//  Created by Matyáš Kříž on 14/05/2019.
-//
-
 import XCTest
 
 enum TestError: Error {

@@ -1,10 +1,3 @@
-//
-//  CreateMock.swift
-//  Cuckoo
-//
-//  Created by Tadeas Kriz on 7/6/18.
-//
-
 import Foundation
 
 public func createMock<MOCKED: Mocked>(for mockedType: MOCKED.Type, configuration: (MockBuilder, MOCKED.MockType.Stubbing) -> MOCKED.MockType) -> MOCKED.MockType {

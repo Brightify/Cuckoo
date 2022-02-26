@@ -1,11 +1,3 @@
-//
-//  StubCall.swift
-//  Cuckoo
-//
-//  Created by Filip Dolnik on 29.05.16.
-//  Copyright © 2016 Brightify. All rights reserved.
-//
-
 public protocol StubCall {
     var method: String { get }
     var parametersAsString: String { get }

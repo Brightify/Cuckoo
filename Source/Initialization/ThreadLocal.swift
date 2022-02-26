@@ -1,10 +1,3 @@
-//
-//  ThreadLocal.swift
-//  Cuckoo
-//
-//  Created by Tadeas Kriz on 7/6/18.
-//
-
 import Foundation
 
 internal class ThreadLocal<T> {

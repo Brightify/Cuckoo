@@ -1,14 +1,7 @@
-//
-//  GenericMethodClassTest.swift
-//  Cuckoo
-//
-//  Created by Matyáš Kříž on 14/05/2019.
-//
-
 import XCTest
 import Cuckoo
 
-class GenericMethodClassTest: XCTestCase {
+final class GenericMethodClassTest: XCTestCase {
     private var kawaiiMock: MockGenericMethodClass<Int>!
     private var angeryMock: MockGenericMethodClass<Int>!
     private var original: GenericMethodClass<Int>!

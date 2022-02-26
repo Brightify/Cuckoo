@@ -1,15 +1,7 @@
-//
-//  FailTest.swift
-//  Cuckoo
-//
-//  Created by Filip Dolnik on 06.07.16.
-//  Copyright © 2016 Brightify. All rights reserved.
-//
-
 import XCTest
 @testable import Cuckoo
 
-class FailTest: XCTestCase {
+final class FailTest: XCTestCase {
     func testMissingInvocation() {
         let error = TestUtils.catchCuckooFail {
             let mock = MockTestedClass()
