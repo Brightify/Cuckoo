@@ -1,15 +1,7 @@
-//
-//  ParameterMatcherFunctionsTest.swift
-//  Cuckoo
-//
-//  Created by Filip Dolnik on 04.07.16.
-//  Copyright © 2016 Brightify. All rights reserved.
-//
-
 import XCTest
 import Cuckoo
 
-class ParameterMatcherFunctionsTest: XCTestCase {
+final class ParameterMatcherFunctionsTest: XCTestCase {
     func testEqualToEquatable() {
         XCTAssertTrue(equal(to: 1).matches(1))
         XCTAssertFalse(equal(to: 1).matches(2))

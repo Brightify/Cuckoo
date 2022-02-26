@@ -1,10 +1,3 @@
-//
-//  GenericClass.swift
-//  Cuckoo-iOS
-//
-//  Created by Matyáš Kříž on 19/11/2018.
-//
-
 import Foundation
 
 class GenericClass<T: CustomStringConvertible, U: Codable & CustomStringConvertible, V: Hashable & Equatable> {

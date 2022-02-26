@@ -1,15 +1,7 @@
-//
-//  ParameterMatcherTest.swift
-//  Cuckoo
-//
-//  Created by Filip Dolnik on 05.07.16.
-//  Copyright © 2016 Brightify. All rights reserved.
-//
-
 import XCTest
 import Cuckoo
 
-class ParameterMatcherTest: XCTestCase {
+final class ParameterMatcherTest: XCTestCase {
     func testMatches() {
         let matcher = ParameterMatcher { $0 == 5 }
         

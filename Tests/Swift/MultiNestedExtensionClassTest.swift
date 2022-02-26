@@ -1,15 +1,8 @@
-//
-//  MultiNestedExtensionClassTest.swift
-//  Cuckoo
-//
-//  Created by Tyler Thompson on 9/18/20.
-//
-
 import Foundation
 import XCTest
 import Cuckoo
 
-class MultiNestedExtensionClassTests: XCTestCase {
+final class MultiNestedExtensionClassTests: XCTestCase {
 
     private var mock: Multi.Nested.MockNestedExtensionTestedClass!
 

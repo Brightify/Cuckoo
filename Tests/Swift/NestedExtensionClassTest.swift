@@ -1,10 +1,3 @@
-//
-//  NestedExtensionClassTest.swift
-//  Cuckoo
-//
-//  Created by Tyler Thompson on 9/18/20.
-//
-
 import Foundation
 import XCTest
 import Cuckoo
@@ -13,7 +6,7 @@ extension Nested.NestedExtensionTestedClass: Mocked {
     typealias MockType = Nested.MockNestedExtensionTestedClass
 }
 
-class NestedExtensionClassTests: XCTestCase {
+final class NestedExtensionClassTests: XCTestCase {
 
     private var mock: Nested.MockNestedExtensionTestedClass!
 

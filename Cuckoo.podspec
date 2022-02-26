@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
 
   s.homepage         = "https://github.com/Brightify/Cuckoo"
   s.license          = 'MIT'
-  s.author           = { "Tadeas Kriz" => "tadeas@brightify.org", "Filip Dolnik" => "filip@brightify.org", "Adriaan (Arjan) Duijzer" => "arjan@nxtstep.nl" }
+  s.author           = { "Matyas Kriz" => "m@tyas.cz", "Tadeas Kriz" => "tadeas@brightify.org", "Filip Dolnik" => "filip@brightify.org", "Adriaan (Arjan) Duijzer" => "arjan@nxtstep.nl" }
   s.source           = {
       :git => "https://github.com/Brightify/Cuckoo.git",
       :tag => s.version.to_s

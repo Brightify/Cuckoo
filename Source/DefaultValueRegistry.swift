@@ -1,11 +1,3 @@
-//
-//  DefaultValueRegistry.swift
-//  Cuckoo
-//
-//  Created by Tadeáš Kříž on 20/09/16.
-//  Copyright © 2016 Brightify. All rights reserved.
-//
-
 public class DefaultValueRegistry {
     
     private static let defaultRegisteredTypes: [ObjectIdentifier: Any] = [

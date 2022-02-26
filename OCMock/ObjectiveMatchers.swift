@@ -1,10 +1,3 @@
-//
-//  ObjectiveMatchers.swift
-//  Cuckoo-iOS
-//
-//  Created by Matyáš Kříž on 28/05/2019.
-//
-
 import Foundation
 
 /// Used as an Objective-C matcher matching any Objective-C closure.

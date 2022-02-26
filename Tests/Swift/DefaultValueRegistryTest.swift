@@ -1,15 +1,7 @@
-//
-//  DefaultValueRegistryTest.swift
-//  Cuckoo
-//
-//  Created by Filip Dolnik on 21.09.16.
-//  Copyright © 2016 Brightify. All rights reserved.
-//
-
 import XCTest
 import Cuckoo
 
-class DefaultValueRegistryTest: XCTestCase {
+final class DefaultValueRegistryTest: XCTestCase {
     
     override func setUp() {
         super.setUp()

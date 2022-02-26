@@ -1,13 +1,6 @@
-//
-//  NSObjectProtocolInheritanceTest.swift
-//  Cuckoo
-//
-//  Created by Shoto Kobayashi on 04/09/2022.
-//
-
 import XCTest
 
-class NSObjectProtocolTest: XCTestCase {
+final class NSObjectProtocolTest: XCTestCase {
 
     private var mockProtocolNotInheritingFromNSObjectProtocol: MockProtocolNotInheritingFromNSObjectProtocol!
 

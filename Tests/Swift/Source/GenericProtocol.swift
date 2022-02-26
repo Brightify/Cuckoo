@@ -1,10 +1,3 @@
-//
-//  GenericProtocol.swift
-//  Cuckoo
-//
-//  Created by Matyáš Kříž on 19/11/2018.
-//
-
 import Foundation
 
 protocol GenericProtocol {
@@ -24,6 +17,14 @@ protocol GenericProtocol {
     func compute(classy: C, value: V) -> C
     func noReturn()
 
+    /**
+     Multiline documentation string test.
+     It can of course have multiple lines
+    */
     func computeAsync(classy: C, value: V) async -> (C, V)
     func noReturnAsync() async
+
+    /// Test for a bug that produces uncompilable code when associated types are used along with closures.
+    /// Requires change from WrappableType to ComplexType.
+    func closureParameter(closure: @escaping () -> Void)
 }

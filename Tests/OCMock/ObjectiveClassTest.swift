@@ -1,16 +1,9 @@
-//
-//  ObjectiveClassTest.swift
-//  Cuckoo+OCMock_iOSTests
-//
-//  Created by Matyáš Kříž on 28/05/2019.
-//
-
 import OCMock
 import Cuckoo
 import XCTest
 
 #if os(iOS)
-class ObjectiveClassTest: XCTestCase {
+final class ObjectiveClassTest: XCTestCase {
     func testThenDoNothing() {
         let mock = objcStub(for: UIView.self) { stubber, mock in
             stubber.when(mock.addSubview(objcAny())).thenDoNothing()

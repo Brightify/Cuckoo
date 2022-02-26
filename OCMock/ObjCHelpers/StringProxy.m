@@ -1,10 +1,3 @@
-//
-//  OCMockObject+CuckooMockObject.m
-//  Cuckoo+OCMock-iOS
-//
-//  Created by Matyáš Kříž on 28/05/2019.
-//
-
 #import "StringProxy.h"
 
 @implementation StringProxy

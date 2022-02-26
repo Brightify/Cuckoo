@@ -1,10 +1,3 @@
-//
-//  Dictionary+matchers.swift
-//  Cuckoo
-//
-//  Created by Matyáš Kříž on 04/09/2019.
-//
-
 extension Dictionary: Matchable where Value: Matchable, Value == Value.MatchedType {
     public typealias MatchedType = [Key: Value]
 

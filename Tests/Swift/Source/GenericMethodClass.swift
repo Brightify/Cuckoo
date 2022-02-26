@@ -1,21 +1,14 @@
-//
-//  GenericMethodClass.swift
-//  Cuckoo
-//
-//  Created by Matyáš Kříž on 14/05/2019.
-//
-
 import Foundation
 
 // there was a bug with "where" clauses incorrectly matching, this class is used to test it
 class wViewyContwollew {}
 
-class GenericMethodClass<T: CustomStringConvertible> {
+class GenericMethodClass<ClassyT: CustomStringConvertible> {
     func senpai<OwO>(param: OwO) throws -> OwO where OwO: CustomStringConvertible {
         return param
     }
 
-    func noticeMe<UwU>(param: @escaping () throws -> UwU) rethrows -> (T) -> (UwU) {
+    func noticeMe<UwU>(param: @escaping () throws -> UwU) rethrows -> (ClassyT) -> (UwU) {
         let result = try param()
         return { something in
             return result
