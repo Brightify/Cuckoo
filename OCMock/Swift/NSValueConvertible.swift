@@ -7,9 +7,6 @@
 
 import Foundation
 import CoreGraphics
-#if os(iOS)
-import UIKit
-#endif
 
 public protocol NSValueConvertible {
     func toNSValue() -> NSValue

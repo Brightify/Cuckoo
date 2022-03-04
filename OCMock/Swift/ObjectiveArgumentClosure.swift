@@ -7,10 +7,6 @@
 
 import Foundation
 
-#if SWIFT_PACKAGE
-import Cuckoo_OCMock_Objc
-#endif
-
 // MARK: Closures without any return value
 public func objectiveArgumentClosure<IN1>(from: Any) -> (IN1) -> Void {
     return { in1 in
