@@ -1,5 +1,4 @@
 # Xcode
-#
 .build/
 build/
 *.pbxuser
@@ -19,19 +18,11 @@ DerivedData
 *.xcuserstate
 
 # CocoaPods
-#
-# We recommend against adding the Pods directory to your .gitignore. However
-# you should judge for yourself, the pros and cons are mentioned at:
-# http://guides.cocoapods.org/using/using-cocoapods.html#should-i-ignore-the-pods-directory-in-source-control
-
 Pods
 
 # Carthage
-#
-# Add this line if you want to avoid checking in source code from Carthage dependencies.
-# Carthage/Checkouts
-
 Carthage/Build
+
 .DS_Store
 default.profraw
 Tests/**/Generated/*.swift
@@ -40,9 +31,20 @@ Generator/*.app
 # AppCode
 .idea/
 cuckoo_generator
-Generator/CuckooGenerator.xcodeproj
 .fastlane
-Cuckoo.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
 
+Generator/CuckooGenerator.xcodeproj
 Cuckoo.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
 Cuckoo.xcodeproj/project.xcworkspace/contents.xcworkspacedata
+
+Cuckoo.xcworkspace
+Cuckoo.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+
+Tuist/Dependencies/graph.json
+Tuist/Dependencies/Carthage
+Tuist/Dependencies/SwiftPackageManager
+Tuist/Dependencies/Cocoapods
+
+Generator/Generator.xcodeproj
+
+Generator/GeneratedMocks.swift

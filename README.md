@@ -12,7 +12,7 @@
 Cuckoo was created due to lack of a proper Swift mocking framework. We built the DSL to be very similar to [Mockito](http://mockito.org/), so anyone coming from Java/Android can immediately pick it up and use it.
 
 ## How does it work
-Cuckoo has two parts. One is the [runtime](https://github.com/Brightify/Cuckoo) and the other one is an OS X command-line tool simply called [CuckooGenerator](https://github.com/SwiftKit/CuckooGenerator).
+Cuckoo has two parts. One is the [runtime](https://github.com/Brightify/Cuckoo) and the other one is an OS X command-line tool simply called [CuckooGenerator](./Generator).
 
 Unfortunately Swift does not have a proper reflection, so we decided to use a compile-time generator to go through files you specify and generate supporting structs/classes that will be used by the runtime in your test target.
 
@@ -53,7 +53,7 @@ Note: Version `1.2.0` is the last one supporting **Swift 4.2**. Use versions `1.
 Cuckoo runtime is available through [CocoaPods](http://cocoapods.org). To install it, simply add the following line to your test target in your Podfile:
 
 ```Ruby
-pod "Cuckoo"
+pod 'Cuckoo'
 ```
 
 And add the following `Run script` build phase to your test target's `Build Phases` above the `Compile Sources` phase:
@@ -61,7 +61,7 @@ And add the following `Run script` build phase to your test target's `Build Phas
 ```Bash
 if [ $ACTION == "indexbuild" ]; then
   echo "Not running Cuckoo generator during indexing."
-  exit 0 
+  exit 0
 fi
 
 # Skip for preview builds
@@ -100,44 +100,11 @@ Note: All paths in the Run script must be absolute. Variable `PROJECT_DIR` autom
 
 #### Swift Package Manager
 
-To use Cuckoo with Apple's Swift package manager, add the following as a dependency to your `Package.swift`:
+1. In Xcode, navigate in menu: File > Swift Packages > Add Package Dependency
+2. Add `https://github.com/Brightify/Cuckoo.git`
+3. Select "Up to Next Major" with `1.9.1`
 
-```swift
-.package(url: "https://github.com/Brightify/Cuckoo.git", .upToNextMajor(from: "1.5.0"))
-```
-
-after that add `"Cuckoo"` as a dependency of the test target.
-
-If you're unsure, take a look at this example `PackageDescription`:
-
-```swift
-// swift-tools-version:4.0
-import PackageDescription
-
-let package = Package(
-    name: "Friendlyst",
-    products: [
-        .library(
-            name: "Friendlyst",
-            targets: ["Friendlyst"]),
-    ],
-    dependencies: [
-        .package(url: "https://github.com/Brightify/Cuckoo.git", .upToNextMajor(from: "1.5.0"))
-    ],
-    targets: [
-        .target(
-            name: "Friendlyst",
-            dependencies: [],
-            path: "Source"),
-        .testTarget(
-            name: "FriendlystTests",
-            dependencies: ["Cuckoo"],
-            path: "Tests"),
-    ]
-)
-```
-
-Cuckoo relies on a script that is currently not downloadable using SwiftPM. However, for convenience, you can copy this line into the terminal to download the latest `run` script. Unfortunately if there are changes in the `run` script, you'll need to execute this line again.
+Cuckoo relies on a script that is currently not downloadable using SPM. However, for convenience, you can copy this line into the terminal to download the latest `run` script. If the `run` script changes in the future, you'll need to execute this command again.
 ```Bash
 curl -Lo run https://raw.githubusercontent.com/Brightify/Cuckoo/master/run && chmod +x run
 ```
@@ -151,7 +118,7 @@ with
 "${PROJECT_DIR}/run" --download
 ```
 
-The `--download` option is necessary because the `Generator` sources are not cloned in your project (they're in DerivedData,  out of reach). You can add a version (e.g. `1.5.0`) after it to get a specific version of the `cuckoo_generator`. Use `--clean` as well to replace the current `cuckoo_generator` if you're changing versions.
+The `--download` option is necessary because the `Generator` sources are not cloned in your project (they're in `DerivedData`, out of reach). You can add a version (e.g. `1.9.1`) after it to get a specific version of the `cuckoo_generator`. Use `--clean` as well to replace the current `cuckoo_generator` if you're changing versions.
 
 #### Carthage
 To use Cuckoo with [Carthage](https://github.com/Carthage/Carthage) add this line to your Cartfile:
@@ -174,20 +141,18 @@ Don't forget to add the Framework into your project.
 Usage of Cuckoo is similar to [Mockito](http://mockito.org/) and [Hamcrest](http://hamcrest.org/). However, there are some differences and limitations caused by generating the mocks and Swift language itself. List of all the supported features can be found below. You can find complete examples in [tests](Tests).
 
 #### Mock initialization
-Mocks can be created with the same constructors as the mocked type. Name of mock class always corresponds to name of the mocked class/protocol with `Mock` prefix (e.g. mock of protocol `Greeter` is called `MockGreeter`).
+Mocks can be created with the same constructors as the mocked type. Name of mock class always corresponds to the name of the mocked class/protocol with `Mock` prefix (e.g. mock of protocol `Greeter` is called `MockGreeter`).
 
 ```Swift
 let mock = MockGreeter()
 ```
 
 #### Spy
-Spies are a special case of Mocks where each call is forwarded to the victim by default. Since Cuckoo version `0.11.0` we changed the way spies work. When you need a spy, give Cuckoo a class to mock instead of a protocol. You'll then be able to call `enableSuperclassSpy()` (or `withEnabledSuperclassSpy()`) on a mock instance and it will behave like a spy for the parent class.
+Spies are a special type of Mocks where each call is forwarded to the victim by default. When you need a spy, give Cuckoo a class, then you'll then be able to call `enableSuperclassSpy()` (or `withEnabledSuperclassSpy()`) on a mock instance and it will behave like a spy for the parent class.
 
 ```Swift
 let spy = MockGreeter().withEnabledSuperclassSpy()
 ```
-
-Note: The behavior was changed due to a limitation of Swift. Since we can't create a real proxy for the spy, calls inside the spy were not caught by the Mock and it was confusing. If you rely on the old behavior (i.e. you use spies with final classes), let us know on Slack or create an issue.
 
 #### Stubbing
 Stubbing can be done by calling methods as a parameter of the `when` function. The stub call must be done on special stubbing object. You can get a reference to it with the `stub` function. This function takes an instance of the mock that you want to stub and a closure in which you can do the stubbing. The parameter of this closure is the stubbing object.
@@ -213,7 +178,7 @@ thenCallRealImplementation()
 thenDoNothing()
 ```
 
-The available methods depend on the stubbed method characteristics. For example you cannot use the `thenThrow` method with a method that isn't throwing or rethrowing.
+The available methods depend on the stubbed method characteristics. For example, the `thenThrow` method isn't available for a method that isn't throwing or rethrowing.
 
 An example of stubbing a method looks like this:
 
@@ -604,17 +569,17 @@ pod 'Cuckoo/OCMock'
 
 ## Contribute
 Cuckoo is open for everyone and we'd like you to help us make the best Swift mocking library. For Cuckoo development, follow these steps:
-1. Make sure you have latest stable version of Xcode installed
-2. Clone the **Cuckoo** repository
-3. In Terminal, run: `make dev` from inside the **Cuckoo** directory
-4. Open `Cuckoo.xcodeproj`
-5. Select either `Cuckoo-iOS` or `Cuckoo-macOS` scheme and verify by running the tests (⌘+U)
-6. Peek around or file a pull request with your changes
+1. Make sure you have the latest stable version of Xcode installed.
+2. Clone the **Cuckoo** repository.
+3. In terminal, run `make` at the root of the cloned **Cuckoo** repository, this will generate the project, install dependencies, and open the project in Xcode.
+4. Select any scheme of `Cuckoo-iOS`, `Cuckoo-tvOS`, or `Cuckoo-macOS` ([OCMock](https://github.com/erikdoe/ocmock) schemes contain `Cuckoo_OCMock` instead) and verify by running the tests (⌘+U).
+5. Peek around or file a pull request with your changes.
+6. Make sure to run `make` again whenever you checkout another branch.
 
-The project consists of two parts - runtime and code generator. When you open the `Cuckoo.xcodeproj` in Xcode, you'll see these directories:
+The project consists of two parts - runtime and code generator. When you open the `Cuckoo.xcworkspace` in Xcode, you'll see these directories:
     - `Source` - runtime sources
     - `Tests` - tests for the runtime part
-    - `CuckoGenerator.xcodeproj` - project generated by `make dev` containing Generator source code
+    - `CuckoGenerator.xcodeproj` - project containing Generator source code (use the `cuckoo_generator` scheme)
 
 Thank you for your help!
 

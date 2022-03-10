@@ -1,6 +1,3 @@
-# Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
-
 def oc_mock
   pod 'OCMock', '3.8.1'
 end
@@ -40,4 +37,3 @@ target 'Cuckoo_OCMock-macOS' do
 
   end
 end
-

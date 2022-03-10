@@ -34,12 +34,12 @@ platform :mac do
   def upload_release release_type
     # Building Cuckoo Generator
     Dir.chdir '../Generator' do
-      sh '../build_generator', '--arch', 'arm64', '--arch', 'x86_64'
+      sh '../build_generator'
     end
 
     # Settings
     binary_name = 'cuckoo_generator'
-    cuckoo_gen_path = Dir.glob("../Generator/.build/**/Release/#{binary_name}").first
+    cuckoo_gen_path = "../Generator/bin/#{binary_name}"
 
     # GitHub username
     username_var_name = 'GITHUB_USERNAME'

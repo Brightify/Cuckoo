@@ -2,10 +2,8 @@
 
 set -e
 
-# getting the script directory: https://stackoverflow.com/a/246128
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-
-pushd "${DIR}/Generator"
-rm -rf .build
-env -i PATH="$PATH" HOME="$HOME" xcrun swift build --configuration release "$@"
-popd
+rm -rf "Generator/bin/cuckoo_generator"
+env -i PATH="$PATH" HOME="$HOME" xcodebuild build \
+    -project Generator/Generator.xcodeproj \
+    -scheme Generator \
+    -configuration Release

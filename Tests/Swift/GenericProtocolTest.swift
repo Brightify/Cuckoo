@@ -145,7 +145,6 @@ class GenericProtocolTest: XCTestCase {
         verify(mock).optionalProperty.set(equal(to: false))
         verify(mock, times(2)).optionalProperty.set(any())
         verify(mock).optionalProperty.set(isNil())
-
     }
 
     func testNoReturn() {
@@ -197,7 +196,6 @@ class GenericProtocolTest: XCTestCase {
     }
 
     // using: `enableDefaultImplementation(_:)` reflects the original's state at the time of enabling default implementation with the struct
-    //
     func testStructNonModification() {
         let mock = createMock(value: ["EXTERMINATE!": "EXTERMINATE!!", "EXTERMINATE!!!": "EXTERMINATE!!!!"])
         var original = GenericProtocolConformerStruct(theC: MockTestedClass(), theV: ["Sir, may I help you?": "Nope, just lookin' 👀"])
@@ -215,7 +213,7 @@ class GenericProtocolTest: XCTestCase {
 
         verify(mock, times(2)).readWritePropertyV.get()
     }
-    
+
     func testComputeAsync() async {
         let expectedReturn = (MockTestedClass(), 10)
         let mock = createMock(value: expectedReturn.1, classy: expectedReturn.0)
@@ -229,7 +227,7 @@ class GenericProtocolTest: XCTestCase {
         XCTAssertEqual(expectedReturn.1, actualReturn.1)
         verify(mock).computeAsync(classy: expectedReturn.0, value: expectedReturn.1)
     }
-    
+
     func testNoReturnAsync() async {
         let mock = createMock(value: 10)
         stub(mock) { mock in

@@ -80,6 +80,9 @@ protocol TestedProtocol {
         ) -> Void
     )
 
+    @available(iOS 13.0, *)
+    @available(tvOS 13.0, *)
+    @available(macOS 10.15, *)
     func asyncMethod() async
 }
 
