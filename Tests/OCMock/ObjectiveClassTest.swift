@@ -158,7 +158,7 @@ class ObjectiveClassTest: XCTestCase {
         XCTAssertFalse(mock.dudka(lelo: "heya"))
         XCTAssertTrue(mock.dudka(lelo: "heyda"))
 
-        objcVerify(mock.dudka(lelo: objcAny()))
+        objcVerify(mock.dudka(lelo: objcAny()), .atLeast(1))
     }
 }
 
