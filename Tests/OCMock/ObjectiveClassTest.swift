@@ -160,6 +160,51 @@ class ObjectiveClassTest: XCTestCase {
 
         objcVerify(mock.dudka(lelo: objcAny()))
     }
+    
+    func testVerifyAtLeast() {
+        let mock = objcStub(for: UIView.self) { stubber, mock in
+            stubber.when(mock.addSubview(objcAny())).thenDoNothing()
+        }
+
+        mock.addSubview(UIView())
+        mock.addSubview(UIView())
+        mock.addSubview(UIView())
+        mock.addSubview(UIView())
+
+        objcVerify(mock.addSubview(objcAny()), .atLeast(2))
+    }
+    
+    func testVerifyAtMost() {
+        let mock = objcStub(for: UIView.self) { stubber, mock in
+            stubber.when(mock.addSubview(objcAny())).thenDoNothing()
+        }
+
+        mock.addSubview(UIView())
+        mock.addSubview(UIView())
+
+        objcVerify(mock.addSubview(objcAny()), .atMost(3))
+    }
+    
+    func testVerifyExactly() {
+        let mock = objcStub(for: UIView.self) { stubber, mock in
+            stubber.when(mock.endEditing(true)).thenReturn(true)
+            stubber.when(mock.endEditing(false)).thenReturn(true)
+            stubber.when(mock.addSubview(objcAny())).thenDoNothing()
+        }
+
+        mock.endEditing(true)
+        mock.endEditing(false)
+        mock.endEditing(true)
+        mock.endEditing(true)
+        
+        mock.addSubview(UIView())
+        mock.addSubview(UIView())
+        
+        
+        objcVerify(mock.endEditing(true), .exactly(3))
+        objcVerify(mock.endEditing(false), .exactly(1))
+        objcVerify(mock.addSubview(objcAny()), .exactly(2))
+    }
 }
 
 class SwiftClass: NSObject {
