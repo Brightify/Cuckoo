@@ -295,7 +295,7 @@ public struct Tokenizer {
 
             let wrappableType = WrappableType(parsing: inoutSeparatedType)
 
-            return MethodParameter(label: parameterLabel, name: name, type: wrappableType, range: range!, nameRange: nameRange!, isInout: isInout)
+            return MethodParameter(label: parameterLabel, name: name, type: wrappableType, range: range!, nameRange: nameRange, isInout: isInout)
 
         case Kinds.GenericParameter.rawValue:
             let inheritedTypeElement = (dictionary[Key.InheritedTypes.rawValue] as? [SourceKitRepresentable] ?? []).first

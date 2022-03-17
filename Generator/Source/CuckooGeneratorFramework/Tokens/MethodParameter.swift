@@ -11,7 +11,7 @@ public struct MethodParameter: Token, Equatable {
     public var name: String
     public var type: WrappableType
     public var range: CountableRange<Int>
-    public var nameRange: CountableRange<Int>
+    public var nameRange: CountableRange<Int>?
     public var isInout: Bool
 
     public var labelAndName: String {
