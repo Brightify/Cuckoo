@@ -34,12 +34,12 @@ platform :mac do
   def upload_release release_type
     # Building Cuckoo Generator
     Dir.chdir '../Generator' do
-        sh '../build_generator', '--arch', 'arm64', '--arch', 'x86_64'
+      sh '../build_generator', '--arch', 'arm64', '--arch', 'x86_64'
     end
 
     # Settings
-    cuckoo_gen_path = '../Generator/.build/release/cuckoo_generator'
     binary_name = 'cuckoo_generator'
+    cuckoo_gen_path = Dir.glob("../Generator/.build/**/Release/#{binary_name}").first
 
     # GitHub username
     username_var_name = 'GITHUB_USERNAME'
@@ -51,10 +51,10 @@ platform :mac do
 
     # Error Raisins
     unless access_token
-        access_token = UI.input "Please type in your GitHub access token or cancel the release and define enviroment variable \"#{token_var_name}\" with the personal access token to use."
+      access_token = UI.input "Please type in your GitHub access token or cancel the release and define enviroment variable \"#{token_var_name}\" with the personal access token to use."
     end
     unless username
-        username = UI.input "Please type in your GitHub username or cancel the release and define enviroment variable \"#{username_var_name}\" with your GitHub username."
+      username = UI.input "Please type in your GitHub username or cancel the release and define enviroment variable \"#{username_var_name}\" with your GitHub username."
     end
 
 
@@ -74,7 +74,9 @@ platform :mac do
     push_to_git_remote
 
     # https://developer.github.com/v3/repos/releases/#create-a-release
-    creation_body = "'{\"tag_name\":\"#{version}\",\"target_commitish\":\"master\", \"name\":\"New Release – #{version}\", \"body\":\"#{changelog}\", \"draft\":false, \"prerelease\":false}'"
+    release_title = "#{version}"
+    release_body = "#{changelog}"
+    creation_body = "'{\"tag_name\":\"#{version}\",\"target_commitish\":\"master\", \"name\":\"#{release_title}\", \"body\":\"#{release_body}\", \"draft\":false, \"prerelease\":false}'"
     creation_response = JSON.parse(`curl -X POST -d #{creation_body} -u #{auth_string} #{api_url} -v`)
     UI.crash! 'Release draft creation failed!' unless creation_response
     upload_url = (creation_response['upload_url']).sub(/{.*name.*}/, '')
