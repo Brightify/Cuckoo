@@ -12,6 +12,9 @@ extension Templates {
     static let typeErasureClassName = "DefaultImplCaller"
     static let mock = """
 {% for container in containers %}
+{% if debug %}
+// {{ container }}
+{% endif %}
 {% for attribute in container.attributes %}
 {{ attribute.text }}
 {% endfor %}
