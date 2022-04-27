@@ -12,6 +12,10 @@ extension Templates {
     static let typeErasureClassName = "DefaultImplCaller"
     static let mock = """
 {% for container in containers %}
+{% if debug %}
+// {{ container }}
+{% endif %}
+{{ container.unavailablePlatformsCheck }}
 {% for attribute in container.attributes %}
 {{ attribute.text }}
 {% endfor %}
@@ -51,6 +55,7 @@ extension Templates {
     {% endif %}
 
     {% for property in container.properties %}
+    {{ property.unavailablePlatformsCheck }}
     {% if debug %}
     // {{property}}
     {% endif %}
@@ -82,9 +87,13 @@ extension Templates {
         }
         {% endif %}
     }
+    {% if property.hasUnavailablePlatforms %}
+    #endif
+    {% endif %}
     {% endfor %}
 
     {% for initializer in container.initializers %}
+    {{ initializer.unavailablePlatformsCheck }}
     {% if debug %}
     // {{initializer}}
     {% endif %}
@@ -93,9 +102,13 @@ extension Templates {
         super.init({{initializer.call}})
         {% endif %}
     }
+    {% if initializer.hasUnavailablePlatforms %}
+    #endif
+    {% endif %}
     {% endfor %}
 
     {% for method in container.methods %}
+    {{ method.unavailablePlatformsCheck }}
     {% if debug %}
     // {{method}}
     {% endif %}
@@ -116,6 +129,9 @@ extension Templates {
             defaultCall: {% if method.isAsync %}await {% endif %}__defaultImplStub!.{{method.name}}{%if method.isOptional %}!{%endif%}({{method.call}}))
         {{ method.parameters|closeNestedClosure }}
     }
+    {% if method.hasUnavailablePlatforms %}
+    #endif
+    {% endif %}
     {% endfor %}
 
 \(Templates.stubbingProxy.indented())
@@ -125,6 +141,9 @@ extension Templates {
 
 \(Templates.noImplStub)
 
+{% if container.hasUnavailablePlatforms %}
+#endif
+{% endif %}
 {% endfor %}
 """
 }

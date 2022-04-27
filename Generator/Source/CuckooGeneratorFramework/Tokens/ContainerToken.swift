@@ -6,7 +6,7 @@
 //  Copyright © 2016 Brightify. All rights reserved.
 //
 
-public protocol ContainerToken: Token, HasAccessibility {
+public protocol ContainerToken: Token, HasAccessibility, HasAttributes {
     var name: String { get }
     var range: CountableRange<Int> { get }
     var nameRange: CountableRange<Int> { get }
@@ -15,7 +15,6 @@ public protocol ContainerToken: Token, HasAccessibility {
     var children: [Token] { get }
     var implementation: Bool { get }
     var inheritedTypes: [InheritanceDeclaration] { get }
-    var attributes: [Attribute] { get }
     var genericParameters: [GenericParameter] { get }
 }
 
@@ -63,6 +62,8 @@ extension ContainerToken {
             "mockName": "Mock\(name)",
             "inheritedTypes": inheritedTypes,
             "attributes": attributes.filter { $0.isSupported },
+            "hasUnavailablePlatforms": hasUnavailablePlatforms,
+            "unavailablePlatformsCheck": unavailablePlatformsCheck,
             "isGeneric": isGeneric,
             "genericParameters": isGeneric ? "<\(genericParametersString)>" : "",
             "genericArguments": isGeneric ? "<\(genericArgumentsString)>" : "",

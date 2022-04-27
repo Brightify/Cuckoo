@@ -21,20 +21,31 @@ extension Templates {
     }
 
     {% for property in container.properties %}
+    {{ property.unavailablePlatformsCheck }}
     {% for attribute in property.attributes %}
     {{ attribute.text }}
     {% endfor %}
     var {{property.name}}: Cuckoo.{{property.verifyType}}<{% if property.isReadOnly %}{{property.type|genericSafe}}{% else %}{{property.nonOptionalType|genericSafe}}{% endif %}> {
         return .init(manager: cuckoo_manager, name: "{{property.name}}", callMatcher: callMatcher, sourceLocation: sourceLocation)
     }
+    {% if property.hasUnavailablePlatforms %}
+    #endif
+    {% endif %}
     {% endfor %}
 
     {% for method in container.methods %}
+    {{ method.unavailablePlatformsCheck }}
+    {% for attribute in method.attributes %}
+    {{ attribute.text }}
+    {% endfor %}
     @discardableResult
     func {{method.name|escapeReservedKeywords}}{{method.self|matchableGenericNames}}({{method.parameters|matchableParameterSignature}}) -> Cuckoo.__DoNotUse<({{method.inputTypes|genericSafe}}), {{method.returnType|genericSafe}}>{{method.self|matchableGenericWhereClause}} {
         {{method.parameters|parameterMatchers}}
         return cuckoo_manager.verify("{{method.fullyQualifiedName}}", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
     }
+    {% if method.hasUnavailablePlatforms %}
+    #endif
+    {% endif %}
     {% endfor %}
 }
 """

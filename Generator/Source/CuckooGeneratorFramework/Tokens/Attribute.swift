@@ -26,6 +26,26 @@ public struct Attribute: Hashable {
             return true
         }
     }
+
+    public var unavailablePlatform: String? {
+        guard kind == .available,
+              text.hasPrefix("@available(") else {
+            return nil
+        }
+
+        let parameters = text
+            .dropFirst("@available(".count)
+            .dropLast()
+            .split(separator: ",")
+            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+
+        guard parameters.count >= 2,
+              parameters[1] == "unavailable" else {
+            return nil
+        }
+
+        return String(parameters[0])
+    }
 }
 
 extension Attribute: Token {

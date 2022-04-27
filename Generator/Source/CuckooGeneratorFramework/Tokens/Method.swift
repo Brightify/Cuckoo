@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol Method: Token, HasAccessibility {
+public protocol Method: Token, HasAccessibility, HasAttributes {
     var name: String { get }
     var returnSignature: ReturnSignature { get }
     var range: CountableRange<Int> { get }
@@ -18,7 +18,6 @@ public protocol Method: Token, HasAccessibility {
     var isOverriding: Bool { get }
     var hasClosureParams: Bool { get }
     var hasOptionalParams: Bool { get }
-    var attributes: [Attribute] { get }
     var genericParameters: [GenericParameter] { get }
 }
 
@@ -136,6 +135,8 @@ public extension Method {
             "hasClosureParams": hasClosureParams,
             "hasOptionalParams": hasOptionalParams,
             "attributes": attributes.filter { $0.isSupported },
+            "hasUnavailablePlatforms": hasUnavailablePlatforms,
+            "unavailablePlatformsCheck": unavailablePlatformsCheck,
             "genericParameters": isGeneric ? "<\(genericParametersString)>" : "",
         ]
     }

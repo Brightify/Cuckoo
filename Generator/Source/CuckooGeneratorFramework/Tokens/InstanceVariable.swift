@@ -6,7 +6,7 @@
 //  Copyright © 2016 Brightify. All rights reserved.
 //
 
-public struct InstanceVariable: Token, HasAccessibility {
+public struct InstanceVariable: Token, HasAccessibility, HasAttributes {
     public var name: String
     public var type: WrappableType
     public var accessibility: Accessibility
@@ -32,6 +32,7 @@ public struct InstanceVariable: Token, HasAccessibility {
     public func serialize() -> [String : Any] {
         let readOnlyString = readOnly ? "ReadOnly" : ""
         let optionalString = type.isOptional && !readOnly ? "Optional" : ""
+
         return [
             "name": name,
             "type": type.sugarized,
@@ -41,6 +42,8 @@ public struct InstanceVariable: Token, HasAccessibility {
             "stubType": (overriding ? "Class" : "Protocol") + "ToBeStubbed\(readOnlyString)\(optionalString)Property",
             "verifyType": "Verify\(readOnlyString)\(optionalString)Property",
             "attributes": attributes.filter { $0.isSupported },
+            "hasUnavailablePlatforms": hasUnavailablePlatforms,
+            "unavailablePlatformsCheck": unavailablePlatformsCheck,
         ]
     }
 }
