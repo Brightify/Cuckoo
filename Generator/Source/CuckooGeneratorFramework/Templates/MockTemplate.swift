@@ -15,6 +15,9 @@ extension Templates {
 {% if debug %}
 // {{ container }}
 {% endif %}
+{% if container.unavailablePlatforms.count > 0 %}
+#if !os({{ container.unavailablePlatforms|join:") && !os(" }})
+{% endif %}
 {% for attribute in container.attributes %}
 {{ attribute.text }}
 {% endfor %}
@@ -54,6 +57,9 @@ extension Templates {
     {% endif %}
 
     {% for property in container.properties %}
+    {% if property.unavailablePlatforms.count > 0 %}
+    #if !os({{ property.unavailablePlatforms|join:") && !os(" }})
+    {% endif %}
     {% if debug %}
     // {{property}}
     {% endif %}
@@ -85,9 +91,15 @@ extension Templates {
         }
         {% endif %}
     }
+    {% if property.unavailablePlatforms.count > 0 %}
+    #endif
+    {% endif %}
     {% endfor %}
 
     {% for initializer in container.initializers %}
+    {% if initializer.unavailablePlatforms.count > 0 %}
+    #if !os({{ initializer.unavailablePlatforms|join:") && !os(" }})
+    {% endif %}
     {% if debug %}
     // {{initializer}}
     {% endif %}
@@ -96,9 +108,15 @@ extension Templates {
         super.init({{initializer.call}})
         {% endif %}
     }
+    {% if initializer.unavailablePlatforms.count > 0 %}
+    #endif
+    {% endif %}
     {% endfor %}
 
     {% for method in container.methods %}
+    {% if method.unavailablePlatforms.count > 0 %}
+    #if !os({{ method.unavailablePlatforms|join:") && !os(" }})
+    {% endif %}
     {% if debug %}
     // {{method}}
     {% endif %}
@@ -119,6 +137,9 @@ extension Templates {
             defaultCall: {% if method.isAsync %}await {% endif %}__defaultImplStub!.{{method.name}}{%if method.isOptional %}!{%endif%}({{method.call}}))
         {{ method.parameters|closeNestedClosure }}
     }
+    {% if method.unavailablePlatforms.count > 0 %}
+    #endif
+    {% endif %}
     {% endfor %}
 
 \(Templates.stubbingProxy.indented())
@@ -128,6 +149,9 @@ extension Templates {
 
 \(Templates.noImplStub)
 
+{% if container.unavailablePlatforms.count > 0 %}
+#endif
+{% endif %}
 {% endfor %}
 """
 }
