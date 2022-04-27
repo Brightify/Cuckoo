@@ -137,6 +137,7 @@ public extension Method {
             "hasOptionalParams": hasOptionalParams,
             "attributes": attributes.filter { $0.isSupported },
             "genericParameters": isGeneric ? "<\(genericParametersString)>" : "",
+            "unavailablePlatforms": attributes.compactMap { $0.unavailablePlatform },
         ]
     }
 

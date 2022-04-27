@@ -41,6 +41,7 @@ public struct InstanceVariable: Token, HasAccessibility {
             "stubType": (overriding ? "Class" : "Protocol") + "ToBeStubbed\(readOnlyString)\(optionalString)Property",
             "verifyType": "Verify\(readOnlyString)\(optionalString)Property",
             "attributes": attributes.filter { $0.isSupported },
+            "unavailablePlatforms": attributes.compactMap { $0.unavailablePlatform },
         ]
     }
 }

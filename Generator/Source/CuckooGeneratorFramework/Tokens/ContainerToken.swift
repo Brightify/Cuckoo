@@ -63,6 +63,7 @@ extension ContainerToken {
             "mockName": "Mock\(name)",
             "inheritedTypes": inheritedTypes,
             "attributes": attributes.filter { $0.isSupported },
+            "unavailablePlatforms": attributes.compactMap { $0.unavailablePlatform },
             "isGeneric": isGeneric,
             "genericParameters": isGeneric ? "<\(genericParametersString)>" : "",
             "genericArguments": isGeneric ? "<\(genericArgumentsString)>" : "",
