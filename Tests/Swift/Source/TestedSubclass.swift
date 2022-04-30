@@ -89,6 +89,17 @@ class TestedSubclass: TestedClass, TestedProtocol {
     func genericReturn() -> Dictionary<Int, Void> {
         return [:]
     }
+
+    // Don't fix method line breaks.
+    // This method is for testing multiline argument.
+    func multilineMethod(
+        completion: @escaping (
+            _ bar: Int,
+            _ baz: Int,
+            _ qux: Int
+        ) -> Void
+    ) {
+    }
 }
 
 class TestedSubSubClass: TestedSubclass {

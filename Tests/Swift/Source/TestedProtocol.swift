@@ -49,6 +49,16 @@ protocol TestedProtocol {
     // Don't fix the whitespace in the return type.
     // It makes sure that inconsistent whitespace doesn't generate duplicate mock methods.
     func genericReturn() -> Dictionary<Int,Void>
+
+    // Don't fix method line breaks.
+    // This method is for testing multiline argument.
+    func multilineMethod(
+        completion: @escaping (
+            _ bar: Int,
+            _ baz: Int,
+            _ qux: Int
+        ) -> Void
+    )
 }
 
 extension TestedProtocol {
