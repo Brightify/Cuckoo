@@ -50,11 +50,7 @@ public struct Attribute {
             return nil
         }
 
-        guard let unavailablePlatform = parameters.first else {
-            return nil
-        }
-
-        return String(unavailablePlatform)
+        return String(parameters[0])
     }
 }
 
