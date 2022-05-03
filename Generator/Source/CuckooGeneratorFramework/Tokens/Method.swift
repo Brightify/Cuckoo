@@ -108,6 +108,9 @@ public extension Method {
             }
         }.joined(separator: ", ")
 
+        let unavailablePlatforms = attributes.compactMap { $0.unavailablePlatform }
+        let hasUnavailablePlatforms = !unavailablePlatforms.isEmpty
+
         let genericParametersString = genericParameters.map { $0.description }.joined(separator: ", ")
         let isGeneric = !genericParameters.isEmpty
 
@@ -136,8 +139,9 @@ public extension Method {
             "hasClosureParams": hasClosureParams,
             "hasOptionalParams": hasOptionalParams,
             "attributes": attributes.filter { $0.isSupported },
+            "hasUnavailablePlatforms": hasUnavailablePlatforms,
+            "unavailablePlatformsCheck": hasUnavailablePlatforms ? "#if !os(\(unavailablePlatforms.joined(separator: ") && !os(")))" : "",
             "genericParameters": isGeneric ? "<\(genericParametersString)>" : "",
-            "unavailablePlatforms": attributes.compactMap { $0.unavailablePlatform },
         ]
     }
 

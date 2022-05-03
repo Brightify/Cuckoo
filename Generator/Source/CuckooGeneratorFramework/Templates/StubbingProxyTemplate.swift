@@ -16,23 +16,19 @@ extension Templates {
         self.cuckoo_manager = manager
     }
     {% for property in container.properties %}
-    {% if property.unavailablePlatforms.count > 0 %}
-    #if !os({{ property.unavailablePlatforms|join:") && !os(" }})
-    {% endif %}
+    {{ property.unavailablePlatformsCheck }}
     {% for attribute in property.attributes %}
     {{ attribute.text }}
     {% endfor %}
     var {{property.name}}: Cuckoo.{{ property.stubType }}<{{ container.mockName }}, {% if property.isReadOnly %}{{property.type|genericSafe}}{% else %}{{property.nonOptionalType|genericSafe}}{% endif %}> {
         return .init(manager: cuckoo_manager, name: "{{property.name}}")
     }
-    {% if property.unavailablePlatforms.count > 0 %}
+    {% if property.hasUnavailablePlatforms %}
     #endif
     {% endif %}
     {% endfor %}
     {% for method in container.methods %}
-    {% if method.unavailablePlatforms.count > 0 %}
-    #if !os({{ method.unavailablePlatforms|join:") && !os(" }})
-    {% endif %}
+    {{ method.unavailablePlatformsCheck }}
     {% for attribute in method.attributes %}
     {{ attribute.text }}
     {% endfor %}
@@ -40,7 +36,7 @@ extension Templates {
         {{method.parameters|parameterMatchers}}
         return .init(stub: cuckoo_manager.createStub(for: {{ container.mockName }}.self, method: "{{method.fullyQualifiedName}}", parameterMatchers: matchers))
     }
-    {% if method.unavailablePlatforms.count > 0 %}
+    {% if method.hasUnavailablePlatforms %}
     #endif
     {% endif %}
     {% endfor %}
