@@ -6,7 +6,7 @@
 //  Copyright © 2016 Brightify. All rights reserved.
 //
 
-public protocol ContainerToken: Token, HasAccessibility {
+public protocol ContainerToken: Token, HasAccessibility, HasAttributes {
     var name: String { get }
     var range: CountableRange<Int> { get }
     var nameRange: CountableRange<Int> { get }
@@ -15,7 +15,6 @@ public protocol ContainerToken: Token, HasAccessibility {
     var children: [Token] { get }
     var implementation: Bool { get }
     var inheritedTypes: [InheritanceDeclaration] { get }
-    var attributes: [Attribute] { get }
     var genericParameters: [GenericParameter] { get }
 }
 
@@ -46,9 +45,6 @@ extension ContainerToken {
             .filter { $0.accessibility.isAccessible && $0.isInit && !$0.isDeinit }
             .map { $0.serializeWithType() }
 
-        let unavailablePlatforms = attributes.compactMap { $0.unavailablePlatform }
-        let hasUnavailablePlatforms = !unavailablePlatforms.isEmpty
-
         let genericParametersString = genericParameters.map { $0.description }.joined(separator: ", ")
         let genericArgumentsString = genericParameters.map { $0.name }.joined(separator: ", ")
         let genericProtocolIdentity = genericParameters.map { "\(Templates.staticGenericParameter).\($0.name) == \($0.name)" }.joined(separator: ", ")
@@ -67,7 +63,7 @@ extension ContainerToken {
             "inheritedTypes": inheritedTypes,
             "attributes": attributes.filter { $0.isSupported },
             "hasUnavailablePlatforms": hasUnavailablePlatforms,
-            "unavailablePlatformsCheck": hasUnavailablePlatforms ? "#if !os(\(unavailablePlatforms.joined(separator: ") && !os(")))" : "",
+            "unavailablePlatformsCheck": unavailablePlatformsCheck,
             "isGeneric": isGeneric,
             "genericParameters": isGeneric ? "<\(genericParametersString)>" : "",
             "genericArguments": isGeneric ? "<\(genericArgumentsString)>" : "",

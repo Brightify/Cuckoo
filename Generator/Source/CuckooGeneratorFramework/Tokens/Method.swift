@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol Method: Token, HasAccessibility {
+public protocol Method: Token, HasAccessibility, HasAttributes {
     var name: String { get }
     var returnSignature: ReturnSignature { get }
     var range: CountableRange<Int> { get }
@@ -18,7 +18,6 @@ public protocol Method: Token, HasAccessibility {
     var isOverriding: Bool { get }
     var hasClosureParams: Bool { get }
     var hasOptionalParams: Bool { get }
-    var attributes: [Attribute] { get }
     var genericParameters: [GenericParameter] { get }
 }
 
@@ -108,9 +107,6 @@ public extension Method {
             }
         }.joined(separator: ", ")
 
-        let unavailablePlatforms = attributes.compactMap { $0.unavailablePlatform }
-        let hasUnavailablePlatforms = !unavailablePlatforms.isEmpty
-
         let genericParametersString = genericParameters.map { $0.description }.joined(separator: ", ")
         let isGeneric = !genericParameters.isEmpty
 
@@ -140,7 +136,7 @@ public extension Method {
             "hasOptionalParams": hasOptionalParams,
             "attributes": attributes.filter { $0.isSupported },
             "hasUnavailablePlatforms": hasUnavailablePlatforms,
-            "unavailablePlatformsCheck": hasUnavailablePlatforms ? "#if !os(\(unavailablePlatforms.joined(separator: ") && !os(")))" : "",
+            "unavailablePlatformsCheck": unavailablePlatformsCheck,
             "genericParameters": isGeneric ? "<\(genericParametersString)>" : "",
         ]
     }

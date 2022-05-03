@@ -6,7 +6,7 @@
 //  Copyright © 2016 Brightify. All rights reserved.
 //
 
-public struct InstanceVariable: Token, HasAccessibility {
+public struct InstanceVariable: Token, HasAccessibility, HasAttributes {
     public var name: String
     public var type: WrappableType
     public var accessibility: Accessibility
@@ -33,9 +33,6 @@ public struct InstanceVariable: Token, HasAccessibility {
         let readOnlyString = readOnly ? "ReadOnly" : ""
         let optionalString = type.isOptional && !readOnly ? "Optional" : ""
 
-        let unavailablePlatforms = attributes.compactMap { $0.unavailablePlatform }
-        let hasUnavailablePlatforms = !unavailablePlatforms.isEmpty
-
         return [
             "name": name,
             "type": type.sugarized,
@@ -46,7 +43,7 @@ public struct InstanceVariable: Token, HasAccessibility {
             "verifyType": "Verify\(readOnlyString)\(optionalString)Property",
             "attributes": attributes.filter { $0.isSupported },
             "hasUnavailablePlatforms": hasUnavailablePlatforms,
-            "unavailablePlatformsCheck": hasUnavailablePlatforms ? "#if !os(\(unavailablePlatforms.joined(separator: ") && !os(")))" : "",
+            "unavailablePlatformsCheck": unavailablePlatformsCheck,
         ]
     }
 }
