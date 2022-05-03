@@ -40,10 +40,10 @@ public struct Attribute {
         }
 
         let parameters = text
-                .dropFirst("@available(".count)
-                .dropLast()
-                .split(separator: ",")
-                .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+            .dropFirst("@available(".count)
+            .dropLast()
+            .split(separator: ",")
+            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
 
         guard parameters.count >= 2,
               parameters[1] == "unavailable" else {
