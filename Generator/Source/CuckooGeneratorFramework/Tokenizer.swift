@@ -1,11 +1,3 @@
-//
-//  Tokenizer.swift
-//  CuckooGenerator
-//
-//  Created by Tadeas Kriz on 12/01/16.
-//  Copyright © 2016 Brightify. All rights reserved.
-//
-
 import Foundation
 import SourceKittenFramework
 
@@ -65,7 +57,7 @@ public struct Tokenizer {
         let bodyRange = extractRange(from: dictionary, offset: .BodyOffset, length: .BodyLength)
 
         // Attributes
-        let attributes = (dictionary[Key.Attributes.rawValue] as? [SourceKitRepresentable] ?? [])
+        let attributes = (NSOrderedSet(array: (dictionary[Key.Attributes.rawValue] as? [SourceKitRepresentable] ?? [])
             .compactMap { attribute -> Attribute? in
                 guard let attribute = attribute as? [String: SourceKitRepresentable],
                     let stringKind = attribute[Key.Attribute.rawValue] as? String,
@@ -76,6 +68,7 @@ public struct Tokenizer {
                 guard let text = String(source.utf8[startIndex..<endIndex]) else { return nil }
                 return Attribute(kind: kind, text: text)
             }
+        ).array as? [Attribute]) ?? []
 
         guard !attributes.map({ $0.kind }).contains(.final) else {
             if debugMode {
@@ -191,7 +184,7 @@ public struct Tokenizer {
                 }
             }
 
-            // FIXME: Remove when SourceKitten fixes the off-by-one error that includes the ending `>` in the last inherited type.
+            // FIXME: Remove when SourceKit fixes the off-by-one error that includes the ending `>` in the last inherited type.
             let fixedGenericParameters = fixSourceKittenLastGenericParameterBug(genericParameters)
 
             // When bodyRange != nil, we need to create `ClassMethod` instead of `ProtocolMethod`

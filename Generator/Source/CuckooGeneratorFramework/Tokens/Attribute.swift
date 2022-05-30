@@ -1,13 +1,7 @@
-//
-//  Attribute.swift
-//  CuckooGenerator
-//
-//  Created by Tadeas Kriz on 2/25/17.
-//
-//
+import Foundation
 
-public struct Attribute {
-    public enum Kind: String {
+public struct Attribute: Hashable {
+    public enum Kind: String, Hashable {
         case objc = "source.decl.attribute.objc"
         case optional = "source.decl.attribute.optional"
         case lazy = "source.decl.attribute.lazy"
