@@ -2,11 +2,11 @@ import Foundation
 
 class ClassWithUnavailablePlatformMembers {
     @available(tvOS, unavailable)
-    var unavailableProperty: Int
+    var unavailableProperty: Int = 0
 
     @available(tvOS, unavailable)
     @available(macCatalyst, unavailable)
-    var multiUnavailableProperty: Int
+    var multiUnavailableProperty: Int = 1
 
     var availableProperty: Bool = false
 
@@ -24,10 +24,7 @@ class ClassWithUnavailablePlatformMembers {
     }
 
     @available(iOS, unavailable)
-    init() {
-        unavailableProperty = 0
-        multiUnavailableProperty = 1
-    }
+    init() {}
 
     @available(tvOS, unavailable)
     func unavailableMethod() -> Int {
