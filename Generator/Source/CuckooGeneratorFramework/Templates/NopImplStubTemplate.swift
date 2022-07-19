@@ -7,6 +7,9 @@
 
 extension Templates {
     static let noImplStub = """
+{% for attribute in container.attributes %}
+{{ attribute.text }}
+{% endfor %}
 {{container.accessibility}} class {{ container.name }}Stub{{ container.genericParameters }}: {{ container.name }}{% if container.isImplementation %}{{ container.genericArguments }}{% endif %} {
     {% for property in container.properties %}
     {{ property.unavailablePlatformsCheck }}
