@@ -131,7 +131,7 @@ extension {{ container.parentFullyQualifiedName }} {
                 {% if container.isImplementation %}
                 {% if method.isAsync %}await {% endif %}super.{{method.name}}({{method.call}})
                 {% else %}
-                {% if method.isAsync %}await {% endif %}Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                 {% endif %},
             defaultCall: {% if method.isAsync %}await {% endif %}__defaultImplStub!.{{method.name}}{%if method.isOptional %}!{%endif%}({{method.call}}))
         {{ method.parameters|closeNestedClosure }}

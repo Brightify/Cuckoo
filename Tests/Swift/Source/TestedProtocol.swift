@@ -59,6 +59,8 @@ protocol TestedProtocol {
             _ qux: Int
         ) -> Void
     )
+
+    func asyncMethod() async
 }
 
 extension TestedProtocol {

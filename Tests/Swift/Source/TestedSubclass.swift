@@ -100,6 +100,10 @@ class TestedSubclass: TestedClass, TestedProtocol {
         ) -> Void
     ) {
     }
+
+    func asyncMethod() async {
+        try? await Task.sleep(nanoseconds: 10)
+    }
 }
 
 class TestedSubSubClass: TestedSubclass {
