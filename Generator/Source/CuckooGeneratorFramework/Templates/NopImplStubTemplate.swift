@@ -21,7 +21,7 @@ extension Templates {
     {% endfor %}
     {{ property.accessibility }}{% if container.@type == "ClassDeclaration" %} override{% endif %} var {{ property.name }}: {{ property.type }} {
         get {
-            return DefaultValueRegistry.defaultValue(for: ({{property.type|genericSafe}}).self)
+            return DefaultValueRegistry.defaultValue(for: ({{property.type|genericSafe|removeClosureArgumentNames}}).self)
         }
         {% ifnot property.isReadOnly %}
         set { }

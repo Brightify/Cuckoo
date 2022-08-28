@@ -14,6 +14,26 @@ protocol TestedProtocol {
 
     var optionalProperty: Int? { get set }
 
+    var closureProperty: ((String) -> Int) -> () { get set }
+
+    var closureWithArgumentNameProperty: (_ i: (_ j: String) -> Int) -> () { get set }
+
+    var closureWithArgumentNameMultilineProperty: (
+        _ i   : (
+            _ j
+            : Int
+        ) -> String
+    ) -> () { get set }
+
+    var closureWithComplexArgumentNameProperty: (_ i_iI0: (_ j_jJ0: String) -> Int) -> () { get set }
+
+    var closureWithComplexArgumentNameMultilineProperty: (
+        _ i_iI0   : (
+            _ j_jJ0
+            : Int
+        ) -> String
+    ) -> () { get set }
+
     func noReturn()
 
     func count(characters: String) -> Int
