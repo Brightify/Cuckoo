@@ -36,6 +36,17 @@ class TestedClass {
 
     lazy var optionalProperty: Int? = 0
 
+    var closureProperty: ((String) -> Int) -> () = { i in }
+
+    var closureWithArgumentNameProperty:  (_ i_iI0: (_ j_jJ0: String) -> Int) -> () = { i in }
+
+    var closureWithArgumentNameMultilineProperty: (
+        _ i_iI0   : (
+            _ j_jJ0
+            : Int
+        ) -> String
+    ) -> () = { i in }
+
     func noReturn() {
     }
 
