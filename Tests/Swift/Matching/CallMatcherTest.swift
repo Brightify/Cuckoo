@@ -16,7 +16,7 @@ class CallMatcherTest: XCTestCase {
     }
 
     func testMatches() {
-        let matcher = CallMatcher(name: "") { ($0.first?.method ?? "") == "A"}
+        let matcher = CallMatcher(name: "", matchesFunction: { ($0.first?.method ?? "") == "A"}) { $0.first == nil }
         let nonMatchingCalls = [ConcreteStubCall(method: "B", parameters: Void()) as StubCall]
 
         XCTAssertTrue(matcher.matches(call))

@@ -208,18 +208,31 @@ public class MockManager {
         return stub
     }
     
-    public func verify<IN, OUT>(_ method: String, callMatcher: CallMatcher, parameterMatchers: [ParameterMatcher<IN>], sourceLocation: SourceLocation) -> __DoNotUse<IN, OUT> {
+    public func verify<IN, OUT>(_ method: String, callMatcher: CallMatcher, parameterMatchers: [ParameterMatcher<IN>], continuation: Continuation, sourceLocation: SourceLocation) -> __DoNotUse<IN, OUT> {
         var calls: [StubCall] = []
         var indexesToRemove: [Int] = []
-        for (i, stubCall) in stubCalls.enumerated() {
-            if let stubCall = stubCall as? ConcreteStubCall<IN> , (parameterMatchers.reduce(stubCall.method == method) { $0 && $1.matches(stubCall.parameters) }) {
-                calls.append(stubCall)
-                indexesToRemove.append(i)
+        var matches = false
+        while continuation.check() {
+            calls = []
+            indexesToRemove = []
+            for (i, stubCall) in stubCalls.enumerated() {
+                if let stubCall = stubCall as? ConcreteStubCall<IN> , (parameterMatchers.reduce(stubCall.method == method) { $0 && $1.matches(stubCall.parameters) }) {
+                    calls.append(stubCall)
+                    indexesToRemove.append(i)
+                }
             }
+            matches = callMatcher.matches(calls)
+            if !matches && !callMatcher.canRecoverFromFailure(calls) {
+                break
+            }
+            if matches && continuation.exitOnSuccess {
+                break
+            }
+            continuation.wait()
         }
         unverifiedStubCallsIndexes = unverifiedStubCallsIndexes.filter { !indexesToRemove.contains($0) }
         
-        if callMatcher.matches(calls) == false {
+        if matches == false {
             let message = "Wanted \(callMatcher.name) but \(calls.count == 0 ? "not invoked" : "invoked \(calls.count) times")."
             MockManager.fail((message, sourceLocation))
         }

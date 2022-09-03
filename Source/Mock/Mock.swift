@@ -23,6 +23,8 @@ public protocol Mock: HasMockManager, HasSuperclass {
     
     func getVerificationProxy(_ callMatcher: CallMatcher, sourceLocation: SourceLocation) -> Verification
 
+    func getVerificationProxy(_ callMatcher: CallMatcher, _ continuation: Continuation, sourceLocation: SourceLocation) -> Verification
+
     func enableDefaultImplementation(_ stub: MocksType)
 }
 
@@ -33,6 +35,10 @@ public extension Mock {
     
     func getVerificationProxy(_ callMatcher: CallMatcher, sourceLocation: SourceLocation) -> Verification {
         return Verification(manager: cuckoo_manager, callMatcher: callMatcher, sourceLocation: sourceLocation)
+    }
+
+    func getVerificationProxy(_ callMatcher: CallMatcher, _ continuation: Continuation, sourceLocation: SourceLocation) -> Verification {
+        return Verification(manager: cuckoo_manager, callMatcher: callMatcher, continuation: continuation, sourceLocation: sourceLocation)
     }
 
     func withEnabledDefaultImplementation(_ stub: MocksType) -> Self {

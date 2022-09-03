@@ -17,9 +17,21 @@ public func when<F/*: BaseStubFunctionTrait*/>(_ function: F) -> F {
     return function
 }
 
+public func verify<M: Mock>(_ mock: M, _ callMatcher: CallMatcher, _ continuation: Continuation, file: StaticString = #file, line: UInt = #line) -> M.Verification {
+    return mock.getVerificationProxy(callMatcher, continuation, sourceLocation: (file, line))
+}
+
 /// Creates object used for verification of calls.
 public func verify<M: Mock>(_ mock: M, _ callMatcher: CallMatcher = times(1), file: StaticString = #file, line: UInt = #line) -> M.Verification {
-    return mock.getVerificationProxy(callMatcher, sourceLocation: (file, line))
+    return verify(mock, callMatcher, ContinuationOnlyOnce(), file: file, line: line)
+}
+
+public func verify<M: Mock>(_ mock: M, _ continuation: Continuation, file: StaticString = #file, line: UInt = #line) -> M.Verification {
+    return verify(mock, times(1), continuation, file: file, line: line)
+}
+
+public func verify<M: Mock>(_ mock: M, _ verificationSpec: VerificationSpec, file: StaticString = #file, line: UInt = #line) -> M.Verification {
+    return verify(mock, verificationSpec.callMatcher, verificationSpec.continuation, file: file, line: line)
 }
 
 /// Clears all invocations and stubs of mocks.
