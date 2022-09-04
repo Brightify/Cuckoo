@@ -19,6 +19,7 @@ public struct ProtocolDeclaration: ContainerToken, HasAccessibility {
     public var inheritedTypes: [InheritanceDeclaration]
     public var attributes: [Attribute]
     public var genericParameters: [GenericParameter]
+    public var isNSObjectProtocol: Bool
 
     public func replace(children tokens: [Token]) -> ProtocolDeclaration {
         return ProtocolDeclaration(
@@ -32,7 +33,26 @@ public struct ProtocolDeclaration: ContainerToken, HasAccessibility {
             children: tokens,
             inheritedTypes: self.inheritedTypes,
             attributes: self.attributes,
-            genericParameters: self.genericParameters)
+            genericParameters: self.genericParameters,
+            isNSObjectProtocol: self.isNSObjectProtocol
+        )
+    }
+
+    public func replace(isNSObjectProtocol: Bool) -> ProtocolDeclaration {
+        ProtocolDeclaration(
+            name: self.name,
+            parent: self.parent,
+            accessibility: self.accessibility,
+            range: self.range,
+            nameRange: self.nameRange,
+            bodyRange: self.bodyRange,
+            initializers: self.initializers,
+            children: self.children,
+            inheritedTypes: self.inheritedTypes,
+            attributes: self.attributes,
+            genericParameters: self.genericParameters,
+            isNSObjectProtocol: isNSObjectProtocol
+        )
     }
 
     public func isEqual(to other: Token) -> Bool {

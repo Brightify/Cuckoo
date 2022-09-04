@@ -10,7 +10,7 @@ extension Templates {
 {% for attribute in container.attributes %}
 {{ attribute.text }}
 {% endfor %}
-{{container.accessibility}} class {{ container.name }}Stub{{ container.genericParameters }}: {{ container.name }}{% if container.isImplementation %}{{ container.genericArguments }}{% endif %} {
+{{container.accessibility}} class {{ container.name }}Stub{{ container.genericParameters }}: {% if container.isNSObjectProtocol %}NSObject, {% endif %}{{ container.name }}{% if container.isImplementation %}{{ container.genericArguments }}{% endif %} {
     {% for property in container.properties %}
     {{ property.unavailablePlatformsCheck }}
     {% if debug %}

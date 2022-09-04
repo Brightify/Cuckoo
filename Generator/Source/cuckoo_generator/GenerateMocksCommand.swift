@@ -38,7 +38,7 @@ public struct GenerateMocksCommand: CommandProtocol {
         }
         let inputFiles = inputPathValues.map { File(path: $0) }.compactMap { $0 }
         let tokens = inputFiles.map { Tokenizer(sourceFile: $0, debugMode: options.debugMode).tokenize() }
-        let tokensWithInheritance = options.noInheritance ? tokens : mergeInheritance(tokens)
+        let tokensWithInheritance = options.noInheritance ? tokens : inheritNSObject(mergeInheritance(tokens))
 
         // filter classes/protocols based on the settings passed to the generator
         var typeFilters = [] as [(Token) -> Bool]
@@ -84,6 +84,39 @@ public struct GenerateMocksCommand: CommandProtocol {
 
     private func mergeInheritance(_ filesRepresentation: [FileRepresentation]) -> [FileRepresentation] {
         return filesRepresentation.compactMap { $0.mergeInheritance(with: filesRepresentation) }
+    }
+
+    private func inheritNSObject(_ filesRepresentation: [FileRepresentation]) -> [FileRepresentation] {
+        func containsRecursively(name: String) -> Bool {
+            if let protocolDeclaration = protocolDeclarationDictionary[name] {
+                let collapsedInheritedTypesName = protocolDeclaration.inheritedTypes.map({ $0.name.components(separatedBy: "&") }).joined().map({ $0.trimmingCharacters(in: .whitespaces) })
+                if collapsedInheritedTypesName.contains(where: { $0 == "NSObjectProtocol" }) {
+                    return true
+                } else {
+                    return protocolDeclaration.inheritedTypes.contains(where: { inheritanceType in
+                        containsRecursively(name: inheritanceType.name)
+                    })
+                }
+            } else {
+                return false
+            }
+        }
+
+        let protocolDeclarationDictionary: [String: ProtocolDeclaration] = Dictionary(
+            uniqueKeysWithValues: filesRepresentation.flatMap { file in
+                file.declarations.compactMap { token -> (name: String, protocolDeclaration: ProtocolDeclaration)? in
+                    guard let protocolDeclaration = token as? ProtocolDeclaration else { return nil }
+                    return (name: protocolDeclaration.name, protocolDeclaration: protocolDeclaration)
+                }
+            }
+        )
+
+        let nsObjectProtocols: [ProtocolDeclaration] = protocolDeclarationDictionary.values.reduce(into: []) { accumulator, protocolDeclaration in
+            guard containsRecursively(name: protocolDeclaration.name) else { return }
+            accumulator.append(protocolDeclaration)
+        }
+
+        return filesRepresentation.map { $0.inheritNSObject(subjects: nsObjectProtocols) }
     }
 
     private func removeTypes(from files: [FileRepresentation], using filters: [(Token) -> Bool]) -> [FileRepresentation] {

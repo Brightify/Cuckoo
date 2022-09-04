@@ -27,6 +27,10 @@ public extension FileRepresentation {
 
         return FileRepresentation(sourceFile: self.sourceFile, declarations: tokens)
     }
+
+    func inheritNSObject(subjects: [ProtocolDeclaration]) -> FileRepresentation {
+        FileRepresentation(sourceFile: self.sourceFile, declarations: self.declarations.map { $0.inheritNSObject(subjects: subjects) })
+    }
 }
 
 extension Token {
@@ -57,6 +61,13 @@ extension Token {
         default:
             return typeToken
         }
+    }
+
+    func inheritNSObject(subjects: [ProtocolDeclaration]) -> Token {
+        guard let protocolToken = self as? ProtocolDeclaration else {
+            return self
+        }
+        return subjects.contains { $0.name == protocolToken.name } ? protocolToken.replace(isNSObjectProtocol: true) : self
     }
 
     static func findToken(forClassOrProtocol name: String, in files: [FileRepresentation]) -> Token? {
