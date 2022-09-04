@@ -110,7 +110,8 @@ public struct Tokenizer {
                 children: children,
                 inheritedTypes: tokenizedInheritedTypes,
                 attributes: attributes,
-                genericParameters: fixedGenericParameters
+                genericParameters: fixedGenericParameters,
+                isNSObjectProtocol: false
             )
 
         case Kinds.ClassDeclaration.rawValue:

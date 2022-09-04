@@ -65,6 +65,7 @@ extension ContainerToken {
             "genericParameters": isGeneric ? "<\(genericParametersString)>" : "",
             "genericArguments": isGeneric ? "<\(genericArgumentsString)>" : "",
             "genericProtocolIdentity": genericProtocolIdentity,
+            "isNSObjectProtocol": (self as? ProtocolDeclaration)?.isNSObjectProtocol ?? false
         ]
     }
 }
