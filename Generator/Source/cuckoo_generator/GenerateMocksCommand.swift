@@ -89,7 +89,11 @@ public struct GenerateMocksCommand: CommandProtocol {
     private func inheritNSObject(_ filesRepresentation: [FileRepresentation]) -> [FileRepresentation] {
         func containsRecursively(name: String) -> Bool {
             if let protocolDeclaration = protocolDeclarationDictionary[name] {
-                let collapsedInheritedTypesName = protocolDeclaration.inheritedTypes.map({ $0.name.components(separatedBy: "&") }).joined().map({ $0.trimmingCharacters(in: .whitespaces) })
+                let collapsedInheritedTypesName = protocolDeclaration
+                    .inheritedTypes
+                    .map({ $0.name.components(separatedBy: "&") })
+                    .joined()
+                    .map({ $0.trimmingCharacters(in: .whitespaces) })
                 if collapsedInheritedTypesName.contains(where: { $0 == "NSObjectProtocol" }) {
                     return true
                 } else {
