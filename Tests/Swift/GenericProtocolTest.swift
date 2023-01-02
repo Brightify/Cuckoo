@@ -40,7 +40,7 @@ private class GenericProtocolConformerClass<C: AnyObject, V>: GenericProtocol {
     
     func noReturnAsync() async {}
     
-    private func processV(_ theV: V) -> Int{
+    private func processV(_ theV: V) -> Int {
         switch theV {
         case let int as Int:
             return int
@@ -216,7 +216,7 @@ class GenericProtocolTest: XCTestCase {
         verify(mock, times(2)).readWritePropertyV.get()
     }
     
-    func testComputeAsync() async{
+    func testComputeAsync() async {
         let expectedReturn = (MockTestedClass(), 10)
         let mock = createMock(value: expectedReturn.1, classy: expectedReturn.0)
         stub(mock) { mock in
@@ -224,18 +224,20 @@ class GenericProtocolTest: XCTestCase {
         }
 
         let actualReturn = await mock.computeAsync(classy: expectedReturn.0, value: expectedReturn.1)
+        
         XCTAssertTrue(expectedReturn.0 === actualReturn.0)
         XCTAssertEqual(expectedReturn.1, actualReturn.1)
         verify(mock).computeAsync(classy: expectedReturn.0, value: expectedReturn.1)
     }
     
-    func testNoReturnAsync() async{
+    func testNoReturnAsync() async {
         let mock = createMock(value: 10)
         stub(mock) { mock in
             when(mock.noReturnAsync()).thenDoNothing()
         }
 
         await mock.noReturnAsync()
+        
         verify(mock).noReturnAsync()
     }
 }
