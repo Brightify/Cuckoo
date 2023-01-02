@@ -25,6 +25,22 @@ private class GenericProtocolConformerClass<C: AnyObject, V>: GenericProtocol {
     }
 
     func callSomeV(theV: V) -> Int {
+       return processV(theV)
+    }
+
+    func compute(classy: C, value: V) -> C {
+       return computeC(classy, value)
+    }
+
+    func noReturn() {}
+    
+    func computeAsync(classy: C, value: V) async -> (C, V) {
+        return (computeC(classy, value), value)
+    }
+    
+    func noReturnAsync() async {}
+    
+    private func processV(_ theV: V) -> Int {
         switch theV {
         case let int as Int:
             return int
@@ -35,7 +51,7 @@ private class GenericProtocolConformerClass<C: AnyObject, V>: GenericProtocol {
         }
     }
 
-    func compute(classy: C, value: V) -> C {
+    private func computeC(_ classy: C, _ value: V) -> C {
         guard let testyClassy = classy as? TestedClass else { return classy }
         switch value {
         case let int as Int:
@@ -47,8 +63,6 @@ private class GenericProtocolConformerClass<C: AnyObject, V>: GenericProtocol {
         }
         return testyClassy as! C
     }
-
-    func noReturn() {}
 }
 
 private struct GenericProtocolConformerStruct<C: AnyObject, V>: GenericProtocol {
@@ -76,11 +90,16 @@ private struct GenericProtocolConformerStruct<C: AnyObject, V>: GenericProtocol 
     }
 
     func noReturn() {}
+    
+    func computeAsync(classy: C, value: V) async -> (C, V) {
+        return (classy, value)
+    }
+    
+    func noReturnAsync() async {}
 }
 
 class GenericProtocolTest: XCTestCase {
-    private func createMock<V>(value: V) -> MockGenericProtocol<MockTestedClass, V> {
-        let classy = MockTestedClass()
+    private func createMock<V>(value: V, classy: MockTestedClass = MockTestedClass()) -> MockGenericProtocol<MockTestedClass, V> {
         return MockGenericProtocol(theC: classy, theV: value)
     }
 
@@ -195,5 +214,40 @@ class GenericProtocolTest: XCTestCase {
                                                  "Alright, have a nice weekend!": "Thanks, you too."])
 
         verify(mock, times(2)).readWritePropertyV.get()
+    }
+    
+    func testComputeAsync() async {
+        let expectedReturn = (MockTestedClass(), 10)
+        let mock = createMock(value: expectedReturn.1, classy: expectedReturn.0)
+        stub(mock) { mock in
+            when(mock.computeAsync(classy: any(), value: any())).thenReturn(expectedReturn)
+        }
+
+        let actualReturn = await mock.computeAsync(classy: expectedReturn.0, value: expectedReturn.1)
+        
+        XCTAssertTrue(expectedReturn.0 === actualReturn.0)
+        XCTAssertEqual(expectedReturn.1, actualReturn.1)
+        verify(mock).computeAsync(classy: expectedReturn.0, value: expectedReturn.1)
+    }
+    
+    func testNoReturnAsync() async {
+        let mock = createMock(value: 10)
+        stub(mock) { mock in
+            when(mock.noReturnAsync()).thenDoNothing()
+        }
+
+        await mock.noReturnAsync()
+        
+        verify(mock).noReturnAsync()
+    }
+}
+
+extension MockTestedClass: Matchable{
+    public typealias MatchedType = MockTestedClass
+    
+    public var matcher: ParameterMatcher<MockTestedClass> {
+        return ParameterMatcher<MockTestedClass> { other in
+            return self === other
+        }
     }
 }

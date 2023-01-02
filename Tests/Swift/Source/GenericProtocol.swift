@@ -23,4 +23,7 @@ protocol GenericProtocol {
     func callSomeV(theV: V) -> Int
     func compute(classy: C, value: V) -> C
     func noReturn()
+    
+    func computeAsync(classy: C, value: V) async -> (C, V)
+    func noReturnAsync() async
 }

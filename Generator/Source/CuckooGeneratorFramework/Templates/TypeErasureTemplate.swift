@@ -39,9 +39,9 @@ extension Templates {
         {% endfor %}
 
         {% for method in container.methods %}
-        private let _storage${{ forloop.counter }}${{ method.name }}: ({{ method.inputTypes }}) -> {{ method.returnType }}
+        private let _storage${{ forloop.counter }}${{ method.name }}: ({{ method.inputTypes }}) {% if method.isAsync %} async{% endif %} -> {{ method.returnType }}
         {{ container.accessibility }} func {{ method.name|escapeReservedKeywords }}({{ method.parameterSignature }}) {{ method.returnSignature }} {
-            return _storage${{ forloop.counter }}${{ method.name }}({{ method.parameterNames }})
+            return {% if method.isAsync %} await{% endif %} _storage${{ forloop.counter }}${{ method.name }}({{ method.parameterNames }})
         }
         {% endfor %}
     }
