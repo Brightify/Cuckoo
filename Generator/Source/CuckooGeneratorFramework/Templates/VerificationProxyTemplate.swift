@@ -12,12 +12,18 @@ extension Templates {
 {{ container.accessibility }} struct __VerificationProxy_{{ container.name }}: Cuckoo.VerificationProxy {
     private let cuckoo_manager: Cuckoo.MockManager
     private let callMatcher: Cuckoo.CallMatcher
+    private let continuation: Cuckoo.Continuation
     private let sourceLocation: Cuckoo.SourceLocation
 
-    {{ container.accessibility }} init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
+    {{ container.accessibility }} init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, continuation: Cuckoo.Continuation, sourceLocation: Cuckoo.SourceLocation) {
         self.cuckoo_manager = manager
         self.callMatcher = callMatcher
+        self.continuation = continuation
         self.sourceLocation = sourceLocation
+    }
+
+    {{ container.accessibility }} init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
+        self.init(manager: manager, callMatcher: callMatcher, continuation: Cuckoo.ContinuationOnlyOnce(), sourceLocation: sourceLocation)
     }
 
     {% for property in container.properties %}
@@ -26,7 +32,7 @@ extension Templates {
     {{ attribute.text }}
     {% endfor %}
     var {{property.name}}: Cuckoo.{{property.verifyType}}<{% if property.isReadOnly %}{{property.type|genericSafe}}{% else %}{{property.nonOptionalType|genericSafe}}{% endif %}> {
-        return .init(manager: cuckoo_manager, name: "{{property.name}}", callMatcher: callMatcher, sourceLocation: sourceLocation)
+        return .init(manager: cuckoo_manager, name: "{{property.name}}", callMatcher: callMatcher, continuation: continuation, sourceLocation: sourceLocation)
     }
     {% if property.hasUnavailablePlatforms %}
     #endif
@@ -44,7 +50,7 @@ extension Templates {
         return cuckoo_manager.verify(
 \"\"\"
 {{method.fullyQualifiedName}}
-\"\"\", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+\"\"\", callMatcher: callMatcher, parameterMatchers: matchers, continuation: continuation, sourceLocation: sourceLocation)
     }
     {% if method.hasUnavailablePlatforms %}
     #endif
