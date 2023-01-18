@@ -67,7 +67,7 @@ public extension Method {
 
     func serialize() -> [String : Any] {
         let call = parameters.map {
-            let referencedName = "\($0.isInout ? "&" : "")\($0.name)"
+            let referencedName = "\($0.isInout ? "&" : "")\($0.name)\($0.isAutoClosure ? "()" : "")"
             if let label = $0.label {
                 return "\(label): \(referencedName)"
             } else {
