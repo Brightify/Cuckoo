@@ -27,6 +27,10 @@ public struct MethodParameter: Token, Equatable {
         return typeWithoutAttributes.hasPrefix("(") && typeWithoutAttributes.range(of: "->") != nil
     }
 
+    public var isAutoClosure: Bool {
+        type.containsAttribute(named: "@autoclosure")
+    }
+
     public var isOptional: Bool {
         return type.isOptional
     }

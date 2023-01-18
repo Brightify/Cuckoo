@@ -157,6 +157,7 @@ class ClassTest: XCTestCase {
 
         stub(mock) { mock in
             when(mock.withClosure(anyClosure())).then { $0("a") }
+            when(mock.withAutoClosure(action: anyClosure())).then { $0() }
             when(mock.withClosureReturningVoid(anyClosure())).then { $0("a")() }
             when(mock.withClosureReturningInt(anyClosure())).then { $0("a")(1) }
             when(mock.withOptionalClosureAlone(anyClosure())).then { $0?("a")(1) ?? 1 }
@@ -165,6 +166,7 @@ class ClassTest: XCTestCase {
         }
 
         XCTAssertEqual(mock.withClosure { _ in 1 }, 1)
+        XCTAssertEqual(mock.withAutoClosure(action: 1), 1)
         XCTAssertEqual(mock.withClosureReturningVoid {_ in { return 1 } }, 1)
         XCTAssertEqual(mock.withClosureReturningInt { _ in { _ in return 1 } }, 1)
         XCTAssertEqual(mock.withOptionalClosureAlone { _ in { _ in return 1 } }, 1)
@@ -172,6 +174,7 @@ class ClassTest: XCTestCase {
         XCTAssertEqual(mock.withNestedClosure2 { _ in { _ in return 1 } }, 1)
 
         verify(mock).withClosure(anyClosure())
+        verify(mock).withAutoClosure(action: anyClosure())
         verify(mock).withClosureReturningVoid(anyClosure())
         verify(mock).withClosureReturningInt(anyClosure())
         verify(mock).withOptionalClosureAlone(anyClosure())

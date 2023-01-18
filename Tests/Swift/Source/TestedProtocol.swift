@@ -44,6 +44,8 @@ protocol TestedProtocol {
 
     func withClosure(_ closure: (String) -> Int) -> Int
 
+    func withAutoClosure(action closure: @autoclosure () -> Int) -> Int
+
     func withClosureAndParam(_ a: String, closure:(String) -> Int) -> Int
 
     func withEscape(_ a: String, action closure: @escaping (String) -> Void)
