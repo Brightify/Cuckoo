@@ -109,6 +109,10 @@ class TestedClass {
         return closure("hello")
     }
 
+    func withAutoClosure(action closure: @autoclosure () -> Int) -> Int {
+        return closure()
+    }
+
     func withClosureReturningVoid(_ closure: (String) -> () -> Int) -> Int {
         return closure("hello")()
     }

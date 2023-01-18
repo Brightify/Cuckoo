@@ -227,6 +227,7 @@ class StubbingTest: XCTestCase {
                 callNoReturnThrows = true
             }
             when(stub.withClosure(anyClosure())).thenReturn(14)
+            when(stub.withAutoClosure(action: anyClosure())).thenReturn(16)
             when(stub.withEscape(anyString(), action: anyClosure())).then { _ in
                 callWithEscape = true
             }
@@ -289,6 +290,7 @@ class StubbingTest: XCTestCase {
         XCTAssertEqual(mock.withClosure { _ in
             41
         }, 14)
+        XCTAssertEqual(mock.withAutoClosure(action: 42), 16)
         XCTAssertTrue({
             mock.withEscape("a") { _ in }
             return callWithEscape
@@ -337,6 +339,7 @@ class StubbingTest: XCTestCase {
         verify(mock, times(1)).count(characters: anyString())
         verify(mock, times(1)).withNoReturnThrows()
         verify(mock, times(1)).withClosure(anyClosure())
+        verify(mock, times(1)).withAutoClosure(action: anyClosure())
         verify(mock, times(1)).withEscape(anyString(), action: anyClosure())
         verify(mock, times(1)).withOptionalClosure(anyString(), closure: anyClosure())
         verify(mock, times(1)).withLabelAndUnderscore(labelA: anyString(), anyString())
