@@ -38,11 +38,11 @@ public extension Method {
             .map { $0 + ": " + $1 }
             .joined(separator: ", ") + lastNamePart + returnSignatureString
     }
-    
+
     var isAsync: Bool {
         return returnSignature.isAsync
     }
-    
+
     var isThrowing: Bool {
         guard let throwType = returnSignature.throwType else { return false }
         return throwType.isThrowing || throwType.isRethrowing
@@ -67,7 +67,9 @@ public extension Method {
 
     func serialize() -> [String : Any] {
         let call = parameters.map {
-            let referencedName = "\($0.isInout ? "&" : "")\($0.name)"
+            let name = escapeReservedKeywords(for: $0.name)
+            let referencedName = "\($0.isInout ? "&" : "")\(name)"
+
             if let label = $0.label {
                 return "\(label): \(referencedName)"
             } else {

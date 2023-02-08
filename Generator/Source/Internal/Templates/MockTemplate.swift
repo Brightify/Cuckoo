@@ -118,8 +118,8 @@ extension {{ container.parentFullyQualifiedName }} {
     \"\"\"
     {{method.fullyQualifiedName}}
     \"\"\",
-            parameters: ({{method.parameterNames}}),
-            escapingParameters: ({{method.escapingParameterNames}}),
+            parameters: ({{method.parameterNames|escapeReservedKeywords}}),
+            escapingParameters: ({{method.escapingParameterNames|escapeReservedKeywords}}),
             superclassCall:
                 {% if container.isImplementation %}
                 {% if method.isAsync %}await {% endif %}super.{{method.name}}({{method.call}})
