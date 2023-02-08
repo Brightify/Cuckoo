@@ -56,6 +56,14 @@ protocol TestedProtocol {
 
     func withLabelAndUnderscore(labelA a: String, _ b: String)
 
+    /// In this example `for` and `in` are not actually used in a way that conflicts with reserved keywords because
+    /// conforming types will typically use `for` and `in` as an argument label for parameter with a different name,
+    /// thus avoiding the usage of a reserved keyword in the body of the function.
+    ///
+    /// The problem was with the generated mock code, which was in turn using these in the body without escaping them,
+    /// causing the generated mock code to fail to compile.
+    func withReservedKeywords(for: String, in: String) -> String
+
     func withNamedTuple(tuple: (a: String, b: String)) -> Int
 
     func withImplicitlyUnwrappedOptional(i: Int!) -> String

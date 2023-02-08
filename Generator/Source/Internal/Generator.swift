@@ -2,18 +2,6 @@ import Foundation
 import Stencil
 
 public struct Generator {
-    
-    private static let reservedKeywordsNotAllowedAsMethodName: Set = [
-        // Keywords used in declarations:
-        "associatedtype", "class", "deinit", "enum", "extension", "fileprivate", "func", "import", "init", "inout", "internal", "let", "operator", "private", "precedencegroup", "protocol", "public", "rethrows", "static", "struct", "subscript", "typealias", "var",
-        // Keywords used in statements:
-        "break", "case", "catch", "continue", "default", "defer", "do", "else", "fallthrough", "for", "guard", "if", "in", "repeat", "return", "throw", "switch", "where", "while",
-        // Keywords used in expressions and types:
-        "Any", "as", "catch", "false", "is", "nil", "rethrows", "self", "super", "throw", "throws", "true", "try",
-        // Keywords used in patterns:
-        "_",
-    ]
-
     private let declarations: [Token]
 
     public init(file: FileRepresentation) {
@@ -56,10 +44,10 @@ public struct Generator {
             guard let parameters = value as? [MethodParameter] else { return value }
             return self.closeNestedClosure(for: parameters)
         }
-        
+
         ext.registerFilter("escapeReservedKeywords") { (value: Any?) in
             guard let name = value as? String else { return value }
-            return self.escapeReservedKeywords(for: name)
+            return escapeReservedKeywords(for: name)
         }
 
         ext.registerFilter("removeClosureArgumentNames") { (value: Any?) in
@@ -110,7 +98,13 @@ public struct Generator {
         guard parameters.isEmpty == false else { return "let matchers: [Cuckoo.ParameterMatcher<Void>] = []" }
 
         let tupleType = parameters.map { $0.typeWithoutAttributes }.joined(separator: ", ")
-        let matchers = parameters.enumerated().map { "wrap(matchable: \($1.name)) { $0\(parameters.count > 1 ? ".\($0)" : "") }" }.joined(separator: ", ")
+
+        let matchers = parameters.enumerated().map { index, parameter in
+            let name = escapeReservedKeywords(for: parameter.name)
+            return "wrap(matchable: \(name)) { $0\(parameters.count > 1 ? ".\(index)" : "") }"
+        }
+        .joined(separator: ", ")
+
         return "let matchers: [Cuckoo.ParameterMatcher<(\(genericSafeType(from: tupleType)))>] = [\(matchers)]"
     }
 
@@ -150,10 +144,6 @@ public struct Generator {
             }
         }
         return fullString
-    }
-    
-    private func escapeReservedKeywords(for name: String) -> String {
-        Self.reservedKeywordsNotAllowedAsMethodName.contains(name) ? "`\(name)`" : name
     }
 
     private func removeClosureArgumentNames(for type: String) -> String {

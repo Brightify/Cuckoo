@@ -148,6 +148,10 @@ class TestedClass {
     func withLabelAndUnderscore(labelA a: String, _ b: String) {
     }
 
+    func withReservedKeywords(for: String, in: String) -> String {
+        "hello"
+    }
+
     func callingCountCharactersMethodWithHello() -> Int {
         return count(characters: "Hello")
     }
