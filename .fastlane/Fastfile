@@ -98,11 +98,11 @@ platform :mac do
   end
 
   after_all do
-    reset_git_repo
+    reset_git_repo(disregard_gitignore: false)
   end
 
   error do |_, exception|
-    reset_git_repo
+    reset_git_repo(disregard_gitignore: false)
     UI.error "Release failed. This might help: #{exception}"
   end
 end

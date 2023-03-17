@@ -2,8 +2,10 @@
 
 set -e
 
-rm -rf "Generator/bin/cuckoo_generator"
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+rm -rf "$SCRIPT_DIR/Generator/bin/cuckoo_generator"
 env -i PATH="$PATH" HOME="$HOME" xcodebuild build \
-    -project Generator/Generator.xcodeproj \
+    -project "$SCRIPT_DIR/Generator/Generator.xcodeproj" \
     -scheme Generator \
     -configuration Release
