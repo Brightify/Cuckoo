@@ -3,6 +3,8 @@ import Foundation
 struct TypeGuesser {
     static func guessType(from value: String) -> String? {
         let value = value.trimmed
+        guard !value.isEmpty else { return nil }
+
         let casting = checkCasting(from: value)
         guard casting == nil else { return casting }
 
