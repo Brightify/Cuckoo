@@ -1,7 +1,11 @@
 import PackagePlugin
+import Foundation
 
 @main struct CuckooPlugin: BuildToolPlugin {
     func createBuildCommands(context: PluginContext, target: Target) async throws -> [PackagePlugin.Command] {
+        let configPath = context.package.directory.appending("cuckoo-config.json")
+        let config = try await ConfigFile.decode(from: configPath)
+
         let dependencies: [SourceModuleTarget] = target
             .dependencies
             .flatMap { dependency in
@@ -34,11 +38,40 @@ import PackagePlugin
             arguments: [
                 "generate",
                 "--output", output,
-                "--testable", testableModules,
-                "--regex", "Mockable.*"
-            ] + sources,
-            inputFiles: sources,
+                "--testable", testableModules
+            ] + config.options + sources,
+            inputFiles: [configPath] + sources,
             outputFiles: [output]
         )]
+    }
+}
+
+struct ConfigFile: Codable {
+    enum Version: Int, Codable {
+        case v1 = 1
+    }
+
+    var version: Version = .v1
+    var options: [String] = []
+
+    static func decode(from path: Path) async throws -> Self {
+        guard let data = try? await path.contents() else { return .init() }
+        return try JSONDecoder().decode(self, from: data)
+    }
+}
+
+extension Path {
+    func contents() async throws -> Data {
+        let url: URL
+        if #available(macOS 13, *) {
+            url = URL(filePath: string)
+        } else {
+            url = URL(fileURLWithPath: string)
+        }
+        if #available(macOS 12, *) {
+            return try await url.resourceBytes.reduce(into: Data()) { $0.append($1) }
+        } else {
+            return try Data(contentsOf: url)
+        }
     }
 }
