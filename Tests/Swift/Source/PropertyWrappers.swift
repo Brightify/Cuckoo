@@ -5,6 +5,9 @@
 //  Created by Kabir Oberai on 2023-03-28.
 //
 
+// wrappers without annotations aren't supported but their
+// existence shouldn't cause the generator to crash
+
 @propertyWrapper
 struct DoublingWrapper {
     private var backing: Int
@@ -21,9 +24,6 @@ struct DoublingWrapper {
         self.backing = 0
     }
 }
-
-// wrappers without annotations aren't supported but their
-// existence shouldn't cause the generator to crash
 
 struct Wrappers {
     @DoublingWrapper var base
