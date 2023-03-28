@@ -3,7 +3,7 @@ import Foundation
 
 @main struct CuckooPlugin: BuildToolPlugin {
     func createBuildCommands(context: PluginContext, target: Target) async throws -> [PackagePlugin.Command] {
-        let configPath = context.package.directory.appending("cuckoo-config.json")
+        let configPath = context.package.directory.appending("cuckoo.json")
         let config = try await ConfigFile.decode(from: configPath)
 
         let dependencies: [SourceModuleTarget] = target
