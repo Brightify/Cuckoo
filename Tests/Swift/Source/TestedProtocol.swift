@@ -34,6 +34,14 @@ protocol TestedProtocol {
         ) -> String
     ) -> () { get set }
 
+    var throwsProperty: Int { get throws }
+
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+    var asyncProperty: Int { get async }
+
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+    var asyncThrowsProperty: Int { get async throws }
+
     func noReturn()
 
     func count(characters: String) -> Int

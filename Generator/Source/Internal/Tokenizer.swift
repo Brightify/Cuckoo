@@ -185,11 +185,19 @@ public struct Tokenizer {
                 guessedType = type
             }
 
+            let effects: InstanceVariable.Effects
+            if let bodyRange = bodyRange {
+                effects = parseEffects(source: source[bodyRange])
+            } else {
+                effects = .init()
+            }
+
             return InstanceVariable(
                 name: name,
                 type: guessedType ?? .type("__UnknownType"),
                 accessibility: accessibility,
                 setterAccessibility: setterAccessibility,
+                effects: effects,
                 range: range!,
                 nameRange: nameRange!,
                 overriding: false,
@@ -516,6 +524,34 @@ public struct Tokenizer {
         }
 
         return ReturnSignature(isAsync: isAsync, throwString: throwString, returnType: returnType ?? WrappableType.type("Void"), whereConstraints: whereConstraints)
+    }
+
+    private func parseEffects(source: String) -> InstanceVariable.Effects {
+        var effects = InstanceVariable.Effects()
+
+        let trimmed = source.drop(while: { $0.isWhitespace })
+        guard trimmed.hasPrefix("get") else { return effects }
+
+        let afterGet = trimmed.dropFirst("get".count).drop(while: { $0.isWhitespace })
+        var index = afterGet.startIndex
+        parseLoop: while index != afterGet.endIndex {
+            let character = afterGet[index]
+            switch character {
+            case "a":
+                effects.isAsync = true
+                index = source.index(index, offsetBy: "async".count)
+            case "t":
+                effects.isThrowing = true
+                index = source.index(index, offsetBy: "throws".count)
+            case let c where c.isWhitespace:
+                break
+            default:
+                break parseLoop
+            }
+            index = source.index(after: index)
+        }
+
+        return effects
     }
 
     // FIXME: Remove when SourceKitten fixes the off-by-one error that includes the ending `>` in the last inherited type.

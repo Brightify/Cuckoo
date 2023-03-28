@@ -53,6 +53,18 @@ class TestedClass {
         ) -> String
     ) -> () = { i in }
 
+    var asyncProperty: Int {
+        get async { 0 }
+    }
+
+    var asyncThrowsProperty: Int {
+        get async throws { 0 }
+    }
+
+    var throwsProperty: Int {
+        get throws { 0 }
+    }
+
     func noReturn() {
     }
 

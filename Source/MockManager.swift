@@ -310,8 +310,24 @@ extension MockManager {
         return call(getterName(property), parameters: Void(), escapingParameters: Void(), superclassCall: superclassCall(), defaultCall: defaultCall())
     }
 
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+    public func getter<T>(_ property: String, superclassCall: @autoclosure () async -> T, defaultCall: @autoclosure () async -> T) async -> T {
+        return await call(getterName(property), parameters: Void(), escapingParameters: Void(), superclassCall: await superclassCall(), defaultCall: await defaultCall())
+    }
+
     public func setter<T>(_ property: String, value: T, superclassCall: @autoclosure () -> Void, defaultCall: @autoclosure () -> Void) {
         return call(setterName(property), parameters: value, escapingParameters: value, superclassCall: superclassCall(), defaultCall: defaultCall())
+    }
+}
+
+extension MockManager {
+    public func getterThrows<T>(_ property: String, superclassCall: @autoclosure () throws -> T, defaultCall: @autoclosure () throws -> T) throws -> T {
+        return try callThrows(getterName(property), parameters: Void(), escapingParameters: Void(), superclassCall: try superclassCall(), defaultCall: try defaultCall())
+    }
+
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+    public func getterThrows<T>(_ property: String, superclassCall: @autoclosure () async throws -> T, defaultCall: @autoclosure () async throws -> T) async throws -> T {
+        return try await callThrows(getterName(property), parameters: Void(), escapingParameters: Void(), superclassCall: try await superclassCall(), defaultCall: try await defaultCall())
     }
 }
 
