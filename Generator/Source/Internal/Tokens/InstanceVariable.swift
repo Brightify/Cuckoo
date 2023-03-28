@@ -1,8 +1,14 @@
 public struct InstanceVariable: Token, HasAccessibility, HasAttributes {
+    public struct Effects {
+        public var isThrowing = false
+        public var isAsync = false
+    }
+
     public var name: String
     public var type: WrappableType
     public var accessibility: Accessibility
     public var setterAccessibility: Accessibility?
+    public var effects: Effects
     public var range: CountableRange<Int>
     public var nameRange: CountableRange<Int>
     public var overriding: Bool
@@ -22,8 +28,10 @@ public struct InstanceVariable: Token, HasAccessibility, HasAttributes {
     }
 
     public func serialize() -> [String : Any] {
-        let readOnlyString = readOnly ? "ReadOnly" : ""
+        let readOnlyVerifyString = readOnly ? "ReadOnly" : ""
+        let readOnlyStubString = effects.isThrowing ? "" : readOnlyVerifyString
         let optionalString = type.isOptional && !readOnly ? "Optional" : ""
+        let throwingString = effects.isThrowing ? "Throwing" : ""
 
         return [
             "name": name,
@@ -31,8 +39,10 @@ public struct InstanceVariable: Token, HasAccessibility, HasAttributes {
             "nonOptionalType": type.unoptionaled.sugarized,
             "accessibility": accessibility.sourceName,
             "isReadOnly": readOnly,
-            "stubType": (overriding ? "Class" : "Protocol") + "ToBeStubbed\(readOnlyString)\(optionalString)Property",
-            "verifyType": "Verify\(readOnlyString)\(optionalString)Property",
+            "isAsync": effects.isAsync,
+            "isThrowing": effects.isThrowing,
+            "stubType": (overriding ? "Class" : "Protocol") + "ToBeStubbed\(readOnlyStubString)\(optionalString)\(throwingString)Property",
+            "verifyType": "Verify\(readOnlyVerifyString)\(optionalString)Property",
             "attributes": attributes.filter { $0.isSupported },
             "hasUnavailablePlatforms": hasUnavailablePlatforms,
             "unavailablePlatformsCheck": unavailablePlatformsCheck,

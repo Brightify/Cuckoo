@@ -60,15 +60,15 @@ extension {{ container.parentFullyQualifiedName }} {
     {{ attribute.text }}
     {% endfor %}
     {{ property.accessibility }}{% if container.isImplementation %} override{% endif %} var {{ property.name }}: {{ property.type }} {
-        get {
-            return cuckoo_manager.getter("{{ property.name }}",
+        get{% if property.isAsync %} async{% endif %}{% if property.isThrowing %} throws{% endif %} {
+            return {% if property.isThrowing %}try {% endif %}{% if property.isAsync %}await {% endif %}cuckoo_manager.getter{% if property.isThrowing %}Throws{% endif %}("{{ property.name }}",
                 superclassCall:
                     {% if container.isImplementation %}
-                    super.{{ property.name }}
+                                    {% if property.isThrowing %}try {% endif %}{% if property.isAsync %}await {% endif %}super.{{ property.name }}
                     {% else %}
                     Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                     {% endif %},
-                defaultCall: __defaultImplStub!.{{property.name}})
+                defaultCall: {% if property.isThrowing %}try {% endif %}{% if property.isAsync %}await {% endif %} __defaultImplStub!.{{property.name}})
         }
         {% ifnot property.isReadOnly %}
         set {

@@ -58,6 +58,61 @@ class ProtocolTest: XCTestCase {
         verify(mock).optionalProperty.set(equal(to: 0))
     }
 
+    func testThrowingProperty() {
+        stub(mock) { mock in
+            when(mock.throwsProperty.get).thenReturn(5)
+        }
+
+        XCTAssertEqual(try mock.throwsProperty, 5)
+        verify(mock).throwsProperty.get()
+
+        clearInvocations(mock)
+
+        stub(mock) { mock in
+            when(mock.throwsProperty.get).thenThrow(TestError.unknown)
+        }
+
+        XCTAssertThrowsError(try mock.throwsProperty)
+
+        verify(mock).throwsProperty.get()
+    }
+
+    func testAsyncProperty() async {
+        stub(mock) { mock in
+            when(mock.asyncProperty.get).thenReturn(5)
+        }
+
+        let result = await mock.asyncProperty
+        XCTAssertEqual(result, 5)
+        verify(mock).asyncProperty.get()
+    }
+
+    func testAsyncThrowingProperty() async {
+        stub(mock) { mock in
+            when(mock.asyncThrowsProperty.get).thenReturn(5)
+        }
+
+        let result = try! await mock.asyncThrowsProperty
+        XCTAssertEqual(result, 5)
+        verify(mock).asyncThrowsProperty.get()
+
+        clearInvocations(mock)
+
+        stub(mock) { mock in
+            when(mock.asyncThrowsProperty.get).thenThrow(TestError.unknown)
+        }
+
+        var threw = false
+        do {
+            _ = try await mock.asyncThrowsProperty
+        } catch {
+            threw = true
+        }
+
+        XCTAssertTrue(threw)
+        verify(mock).asyncThrowsProperty.get()
+    }
+
     func testNoReturn() {
         var called = false
         stub(mock) { mock in
