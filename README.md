@@ -39,9 +39,9 @@ Due to the limitations mentioned above, unoverridable code structures are not su
 ## Requirements
 Cuckoo works on the following platforms:
 
-- **iOS 8+**
-- **Mac OSX 10.9+**
-- **tvOS 9+**
+- **iOS 11+**
+- **Mac OSX 10.13+**
+- **tvOS 11+**
 
 **watchOS** support is not yet possible due to missing XCTest library.
 
