@@ -187,7 +187,7 @@ public struct Tokenizer {
 
             let effects: InstanceVariable.Effects
             if let bodyRange = bodyRange {
-                effects = parseEffects(source: source[bodyRange])
+                effects = parseEffects(source: source.utf8[bodyRange])
             } else {
                 effects = .init()
             }
