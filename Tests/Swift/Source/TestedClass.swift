@@ -27,6 +27,11 @@ class TestedClass {
         return "a"
     }
 
+    var readOnlyPropertyWithJapaneseComment: String {
+        // 日本語コメント
+        return "a"
+    }
+
     @available(iOS 42.0, *)
     var unavailableProperty: UnavailableProtocol? {
         return nil
