@@ -102,7 +102,9 @@ Note: All paths in the Run script must be absolute. Variable `PROJECT_DIR` autom
 
 1. In Xcode, navigate in menu: File > Swift Packages > Add Package Dependency
 2. Add `https://github.com/Brightify/Cuckoo.git`
-3. Select "Up to Next Major" with `1.9.1`
+3. For the Dependency Rule, Select "Up to Next Major" with `1.9.1`. Click Add Package.
+4. On the 'Choose Package Products for Cuckoo' dialog, under 'Add to Target', please ensure you select your Test target as it will not compile on the app target.
+5. Click Add Package.
 
 Cuckoo relies on a script that is currently not downloadable using SPM. However, for convenience, you can copy this line into the terminal to download the latest `run` script. If the `run` script changes in the future, you'll need to execute this command again.
 ```Bash
