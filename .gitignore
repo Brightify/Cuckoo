@@ -33,18 +33,15 @@ Generator/*.app
 cuckoo_generator
 .fastlane
 
-Generator/CuckooGenerator.xcodeproj
 Cuckoo.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
 Cuckoo.xcodeproj/project.xcworkspace/contents.xcworkspacedata
 
 Cuckoo.xcworkspace
-Cuckoo.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
 
 Tuist/Dependencies/graph.json
 Tuist/Dependencies/Carthage
 Tuist/Dependencies/SwiftPackageManager
 Tuist/Dependencies/Cocoapods
 
-Generator/Generator.xcodeproj
-
 Generator/GeneratedMocks.swift
+

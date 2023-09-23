@@ -44,7 +44,7 @@ function build_generator {
         echo "Build seems to have failed for some reason. Please file an issue on GitHub."
         exit 1
       fi
-      mv "$SCRIPT_PATH/Generator/.build/release/$FILE_NAME" "$FILE_PATH"
+      mv "$SCRIPT_PATH/Generator/bin/$FILE_NAME" "$FILE_PATH"
     else
       echo "Couldn't build. Generator source code not found. (expected in the 'Generator' directory)"
       download_generator "$2"
