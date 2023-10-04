@@ -12,9 +12,10 @@ extension Templates {
     {% for attribute in property.attributes %}
     {{ attribute.text }}
     {% endfor %}
+    private typealias {{ property.name }}$$CUCKOO_TYPE = {{property.type|genericSafe|removeClosureArgumentNames}}
     {{ property.accessibility }}{% if container.@type == "ClassDeclaration" %} override{% endif %} var {{ property.name }}: {{ property.type }} {
         get {
-            return DefaultValueRegistry.defaultValue(for: ({{property.type|genericSafe|removeClosureArgumentNames}}).self)
+            return DefaultValueRegistry.defaultValue(for: {{ property.name }}$$CUCKOO_TYPE.self)
         }
         {% ifnot property.isReadOnly %}
         set { }
