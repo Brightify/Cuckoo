@@ -106,21 +106,14 @@ Note: All paths in the Run script must be absolute. Variable `PROJECT_DIR` autom
 4. On the 'Choose Package Products for Cuckoo' dialog, under 'Add to Target', please ensure you select your Test target as it will not compile on the app target.
 5. Click Add Package.
 
-Cuckoo relies on a script that is currently not downloadable using SPM. However, for convenience, you can copy this line into the terminal to download the latest `run` script. If the `run` script changes in the future, you'll need to execute this command again.
-```Bash
-curl -Lo run https://raw.githubusercontent.com/Brightify/Cuckoo/master/run && chmod +x run
-```
-
 When you're all set, use the same `Run script` phase as above and replace
 ```Bash
 "${PODS_ROOT}/Cuckoo/run"
 ```
 with
 ```Bash
-"${PROJECT_DIR}/run" --download
+"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/Cuckoo/run"
 ```
-
-The `--download` option is necessary because the `Generator` sources are not cloned in your project (they're in `DerivedData`, out of reach). You can add a version (e.g. `1.9.1`) after it to get a specific version of the `cuckoo_generator`. Use `--clean` as well to replace the current `cuckoo_generator` if you're changing versions.
 
 #### Carthage
 To use Cuckoo with [Carthage](https://github.com/Carthage/Carthage) add this line to your Cartfile:
