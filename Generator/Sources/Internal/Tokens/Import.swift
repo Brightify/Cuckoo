@@ -11,13 +11,3 @@ enum Import: Hashable, CustomStringConvertible {
         }
     }
 }
-
-//extension Import: Hashable {
-//    func hash(into hasher: inout Hasher) {
-//        hasher.combine(kind)
-//    }
-//
-//    static func == (lhs: Import, rhs: Import) -> Bool {
-//        lhs.kind == rhs.kind
-//    }
-//}

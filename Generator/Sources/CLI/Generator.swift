@@ -1,0 +1,158 @@
+import Foundation
+import FileKit
+
+final class Generator {
+    typealias TokenFilter = (Token) -> Bool
+    
+    struct GeneratedFile {
+        let path: Path
+        let contents: String
+    }
+
+    static func generate(for module: Module, verbose: Bool) async throws -> [GeneratedFile] {
+        let inputPathValues: [Path]
+        if module.options.glob {
+            inputPathValues = module.sources.flatMap { Glob(pattern: $0.description).paths.map { Path($0) } }
+        } else {
+            inputPathValues = module.sources
+        }
+        let sortedInputPathValues = Set(inputPathValues.map { $0.standardRawValue }).sorted()
+
+        let inputFiles = sortedInputPathValues
+            .map { Path($0) }
+            .filter { $0.exists }
+            .map(TextFile.init(path:))
+
+        let files: [FileRepresentation] = inputFiles.compactMap { file in
+            do {
+                let crawler = try Crawler.crawl(url: file.path.url)
+                return FileRepresentation(file: file, imports: crawler.imports, tokens: crawler.tokens)
+            } catch {
+                log(.error, message: "Failed to crawl file at '\(file.path)':", error)
+                return nil
+            }
+        }
+        let flatMappedFiles = files.map { $0.flatMappingMemberContainers() }
+        let finalFiles = module.options.noInheritance ? flatMappedFiles : inheritNSObject(mergingInheritance(flatMappedFiles))
+
+        // filter classes/protocols based on the settings passed to the generator
+        var typeFilters: [TokenFilter] = []
+        if module.options.noClassMocking {
+            typeFilters.append(ignoreClasses)
+        }
+        if let regex = module.regex {
+            typeFilters.append(try keepMatching(pattern: regex))
+        }
+        if !module.exclude.isEmpty {
+            typeFilters.append(ignoreExcluded(in: module.exclude))
+        }
+        let parsedFiles = removeTypes(from: finalFiles, using: typeFilters)
+        let mockableFiles = parsedFiles.map { $0.replacing(tokens: $0.tokens.filter { $0.isMockable }) }
+
+        let timestamp = verbose ? Date().description : nil
+        return try await mockableFiles.concurrentMap { file in
+            GeneratedFile(
+                path: file.file.path,
+                contents: [
+                    module.options.noHeaders ? nil : FileHeaderHandler.header(for: file, timestamp: timestamp),
+                    FileHeaderHandler.imports(for: file, imports: module.imports, testableImports: module.testableImports),
+                    try GeneratorHelper.generate(tokens: file.tokens),
+                ]
+                .compactMap { $0 }
+                .joined(separator: "\n\n")
+            )
+        }
+    }
+
+    private static func mergingInheritance(_ filesRepresentation: [FileRepresentation]) -> [FileRepresentation] {
+        filesRepresentation.compactMap { $0.mergingInheritance(with: filesRepresentation) }
+    }
+
+    private static func inheritNSObject(_ filesRepresentation: [FileRepresentation]) -> [FileRepresentation] {
+        func containsRecursively(name: String) -> Bool {
+            guard let protocolDeclaration = protocolDeclarationDictionary[name] else { return false }
+            let collapsedInheritedTypesName = protocolDeclaration.inheritedTypes
+            if collapsedInheritedTypesName.contains(where: { $0 == "NSObjectProtocol" }) {
+                return true
+            } else {
+                return protocolDeclaration.inheritedTypes.contains { inheritanceType in
+                    containsRecursively(name: inheritanceType)
+                }
+            }
+        }
+
+        let protocolDeclarationDictionary: [String: ProtocolDeclaration] = Dictionary(
+            filesRepresentation.flatMap { file in
+                file.tokens.compactMap { token -> (name: String, protocolDeclaration: ProtocolDeclaration)? in
+                    guard let protocolDeclaration = token as? ProtocolDeclaration else { return nil }
+                    return (name: protocolDeclaration.name, protocolDeclaration: protocolDeclaration)
+                }
+            }
+        ) { former, latter in
+            log(.info, message: "Duplicate protocol '\(former.name)' in source set, behavior is undefined.")
+            return latter
+        }
+
+        let nsObjectProtocols: [ProtocolDeclaration] = protocolDeclarationDictionary.values.reduce(into: []) { protocols, protocolDeclaration in
+            guard containsRecursively(name: protocolDeclaration.name) else { return }
+            protocols.append(protocolDeclaration)
+        }
+
+        return filesRepresentation.map { $0.inheritNSObject(protocols: nsObjectProtocols) }
+    }
+
+    private static func removeTypes(from files: [FileRepresentation], using filters: [TokenFilter]) -> [FileRepresentation] {
+        // Only keep those that pass all filters
+        let filter: TokenFilter = { token in
+            guard token.isClass || token.isProtocol else { return true }
+            return !filters.contains { !$0(token) }
+        }
+
+        return files.compactMap { file in
+            let filteredTokens = file.tokens.filter(filter)
+            guard !filteredTokens.isEmpty else { return nil }
+            return file.replacing(tokens: filteredTokens)
+        }
+    }
+
+    // filter that keeps the protocols while removing all classes
+    private static func ignoreClasses(token: Token) -> Bool {
+        !token.isClass
+    }
+
+    // filter that keeps the classes/protocols that match the passed regular expression
+    private static func keepMatching(pattern: String) throws -> TokenFilter {
+        do {
+            let regex = try NSRegularExpression(pattern: pattern, options: [])
+
+            return { token in
+                guard let namedToken = token as? HasName else { return true }
+                return regex.firstMatch(in: namedToken.name, options: [], range: NSMakeRange(0, namedToken.name.count)) != nil
+            }
+        } catch {
+            throw GeneratorError.invalidRegex(pattern, error: error)
+        }
+    }
+
+    // filter that keeps only the classes/protocols that are not supposed to be excluded
+    private static func ignoreExcluded(in excluded: [String]) -> TokenFilter {
+        let excludedSet = Set(excluded)
+        return { token in
+            guard let containerToken = token as? ContainerToken else { return true }
+            return !excludedSet.contains(containerToken.name)
+        }
+    }
+
+    enum GeneratorError: Error, CustomStringConvertible {
+        case invalidRegex(String, error: Error)
+
+        var description: String {
+            switch self {
+            case .invalidRegex(let regex, let error):
+                return "Invalid regular expression \"\(regex)\" because \(error.localizedDescription)"
+            }
+        }
+    }
+}
+
+

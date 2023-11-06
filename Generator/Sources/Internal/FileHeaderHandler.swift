@@ -2,7 +2,6 @@ import Foundation
 import FileKit
 
 struct FileHeaderHandler {
-
     static func header(for file: FileRepresentation, timestamp: String?) -> String {
         let path = getRelativePath(to: file)
         return [
@@ -13,16 +12,13 @@ struct FileHeaderHandler {
         .joined(separator: " ")
     }
 
-    static func imports(for file: FileRepresentation, testableFrameworks: [String]) -> String {
-        let testableImports = testableFrameworks
-            .map { frameworkName in
-                String(frameworkName.map { $0.isLetter || $0.isWholeNumber ? $0 : "_" })
-            }
-            .map { "@testable import \($0)" }
-        return [
+    static func imports(for file: FileRepresentation, imports: [String], testableImports: [String]) -> String {
+        [
             ["import Cuckoo"],
-            OrderedSet(file.imports).values.map { "import \($0)" },
-            testableImports,
+            OrderedSet(file.imports.map { $0.description } + imports).values
+                .filter { !testableImports.contains($0) }
+                .map { "import \($0)" },
+            testableImports.map { "@testable import \($0)" },
         ]
         .flatMap { $0 }
         .joined(separator: "\n")

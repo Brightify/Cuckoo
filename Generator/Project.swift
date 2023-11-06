@@ -12,9 +12,10 @@ let target = Target(
     dependencies: [
         "FileKit",
         "Stencil",
-        "Commandant",
         "SwiftFormat",
         "SwiftSyntax",
+        "ArgumentParser",
+        "TOMLKit",
     ].map(TargetDependency.package(product:))
 )
 
@@ -40,9 +41,10 @@ let project = Project(
     packages: [
         .package(url: "https://github.com/nvzqz/FileKit.git", .exact("6.1.0")),
         .package(url: "https://github.com/kylef/Stencil.git", .exact("0.15.1")),
-        .package(url: "https://github.com/Carthage/Commandant.git", .exact("0.15.0")),
         .package(url: "https://github.com/apple/swift-syntax.git", .exact("509.0.0")),
         .package(url: "https://github.com/apple/swift-format.git", .exact("509.0.0")),
+        .package(url: "https://github.com/apple/swift-argument-parser", .exact("1.2.3")),
+        .package(url: "https://github.com/LebJe/TOMLKit.git", .exact("0.5.5")),
     ],
     targets: [
         target,

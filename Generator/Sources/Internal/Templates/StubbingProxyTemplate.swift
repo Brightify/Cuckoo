@@ -28,9 +28,7 @@ extension Templates {
     func {{method.name|escapeReservedKeywords}}{{method.self|matchableGenericNames}}({{method.parameters|matchableParameterSignature}}) -> {{method.stubFunction}}<({{method.genericInputTypes|genericSafe}}){%if method.returnType != "Void" %}, {{method.returnType|genericSafe}}{%endif%}>{{method.self|matchableGenericWhereClause}} {
         {{method.parameters|parameterMatchers}}
         return .init(stub: cuckoo_manager.createStub(for: {{ container.mockName }}.self,
-            method: \"\"\"
-            {{method.fullyQualifiedName}}
-            \"\"\",
+            method: "{{method.fullyQualifiedName}}",
             parameterMatchers: matchers
         ))
     }

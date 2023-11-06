@@ -4,7 +4,7 @@ import Foundation
 /**
  Finds files on the file system using pattern matching.
  */
-class Glob: Collection {
+final class Glob: Collection {
     /**
      * Different glob implementations have different behaviors, so the behavior of this
      * implementation is customizable.
