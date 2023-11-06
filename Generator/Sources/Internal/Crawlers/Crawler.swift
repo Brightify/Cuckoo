@@ -188,10 +188,6 @@ final class Crawler: SyntaxVisitor {
     }
 
     private func log(_ node: DeclSyntaxProtocol, additionalInfo: String? = nil) {
-        #if !DEBUG
-        return
-        #endif
-
         let description: String
         switch node {
         case let node as ClassDeclSyntax:
@@ -208,7 +204,10 @@ final class Crawler: SyntaxVisitor {
             description = "Unknown declaration \(node.trimmed.description)"
         }
 
-        print([description, additionalInfo].compactMap { $0 }.joined(separator: " "))
+        cuckoo_generator.log(
+            .verbose,
+            message: [description, additionalInfo].compactMap { $0 }.joined(separator: " ")
+        )
     }
 }
 

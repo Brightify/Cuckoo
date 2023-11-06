@@ -1,0 +1,20 @@
+# output = "Tests/Swift/Generated/GeneratedMocks.swift"
+
+
+[module.Cuckoo]
+imports = ["Foundation"]
+testableImports = ["Cuckoo"]
+sources = [
+    "Tests/Swift/Source/*.swift",
+]
+exclude = [
+    "ExcludedTestClass",
+    "ExcludedProtocol",
+]
+# regex = ""
+output = "Tests/Swift/Generated/GeneratedMocks.swift"
+
+[module.Cuckoo.options]
+glob = true
+keepDocumentation = false
+
