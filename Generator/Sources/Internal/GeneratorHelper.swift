@@ -1,7 +1,13 @@
 import Foundation
 import Stencil
 
-struct Generator {
+@globalActor
+actor StaticActor {
+    static let shared = StaticActor()
+}
+
+struct GeneratorHelper {
+    @StaticActor
     private static let extensions = createExtensions()
 
     static func generate(tokens: [Token], debug: Bool = false) throws -> String {
@@ -11,7 +17,10 @@ struct Generator {
             extensions: extensions,
             trimBehaviour: .smart
         )
-        return try environment.renderTemplate(string: Templates.mock, context: ["containers": containers, "debug": debug])
+        return try environment.renderTemplate(
+            string: Templates.mock,
+            context: ["containers": containers, "debug": debug]
+        )
     }
 
     private static func matchableGenericTypes(from method: Method) -> String {
@@ -105,73 +114,54 @@ struct Generator {
     }
 }
 
-extension Generator {
+extension GeneratorHelper {
     private static func createExtensions() -> [Extension] {
         let stencilExtension = Extension()
 
-        stencilExtension
-            .registeringFilter("genericSafe") { (value: Any?) in
-                guard let string = value as? String else { return value }
-                return genericSafeType(from: string)
+        stencilExtension.registerFilter("genericSafe") { (value: Any?) in
+            guard let string = value as? String else { return value }
+            return genericSafeType(from: string)
+        }
+        stencilExtension.registerFilter("matchableGenericNames") { (value: Any?) in
+            guard let method = value as? Method else { return value }
+            return matchableGenericTypes(from: method)
+        }
+        stencilExtension.registerFilter("matchableGenericWhereClause") { (value: Any?) in
+            guard let method = value as? Method else { return value }
+            return matchableGenericsWhereClause(from: method)
+        }
+        stencilExtension.registerFilter("matchableParameterSignature") { (value: Any?) in
+            guard let parameters = value as? [MethodParameter] else { return value }
+            return matchableParameterSignature(with: parameters)
+        }
+        stencilExtension.registerFilter("parameterMatchers") { (value: Any?) in
+            guard let parameters = value as? [MethodParameter] else { return value }
+            return parameterMatchers(for: parameters)
+        }
+        stencilExtension.registerFilter("openNestedClosure") { (value: Any?) in
+            guard let method = value as? Method else { return value }
+            return openNestedClosure(for: method)
+        }
+        stencilExtension.registerFilter("closeNestedClosure") { (value: Any?) in
+            guard let parameters = value as? [MethodParameter] else { return value }
+            return closeNestedClosure(for: parameters)
+        }
+        stencilExtension.registerFilter("escapeReservedKeywords") { (value: Any?) in
+            guard let name = value as? String else { return value }
+            return escapeReservedKeywords(for: name)
+        }
+        stencilExtension.registerFilter("removeClosureArgumentNames") { (value: Any?) in
+            guard let type = value as? String else { return value }
+            return removeClosureArgumentNames(for: type)
+        }
+        stencilExtension.registerFilter("withSpace") { (value: Any?) in
+            if let value = value as? String, !value.isEmpty {
+                return "\(value) "
+            } else {
+                return ""
             }
-            .registeringFilter("matchableGenericNames") { (value: Any?) in
-                guard let method = value as? Method else { return value }
-                return matchableGenericTypes(from: method)
-            }
-            .registeringFilter("matchableGenericWhereClause") { (value: Any?) in
-                guard let method = value as? Method else { return value }
-                return matchableGenericsWhereClause(from: method)
-            }
-            .registeringFilter("matchableParameterSignature") { (value: Any?) in
-                guard let parameters = value as? [MethodParameter] else { return value }
-                return matchableParameterSignature(with: parameters)
-            }
-            .registeringFilter("parameterMatchers") { (value: Any?) in
-                guard let parameters = value as? [MethodParameter] else { return value }
-                return parameterMatchers(for: parameters)
-            }
-            .registeringFilter("openNestedClosure") { (value: Any?) in
-                guard let method = value as? Method else { return value }
-                return openNestedClosure(for: method)
-            }
-            .registeringFilter("closeNestedClosure") { (value: Any?) in
-                guard let parameters = value as? [MethodParameter] else { return value }
-                return closeNestedClosure(for: parameters)
-            }
-            .registeringFilter("escapeReservedKeywords") { (value: Any?) in
-                guard let name = value as? String else { return value }
-                return escapeReservedKeywords(for: name)
-            }
-            .registeringFilter("removeClosureArgumentNames") { (value: Any?) in
-                guard let type = value as? String else { return value }
-                return removeClosureArgumentNames(for: type)
-            }
-            .registeringFilter("withSpace") { (value: Any?) in
-                if let value = value as? String, !value.isEmpty {
-                    return "\(value) "
-                } else {
-                    return ""
-                }
-            }
+        }
 
         return [stencilExtension]
-    }
-}
-
-extension Extension {
-    @discardableResult
-    fileprivate func registeringFilter(_ name: String, filter: @escaping (Any?) throws -> Any?) -> Self {
-        registerFilter(name, filter: filter)
-        return self
-    }
-
-    fileprivate func registeringFilter(_ name: String, filter: @escaping (Any?, [Any?]) throws -> Any?) -> Self {
-        registerFilter(name, filter: filter)
-        return self
-    }
-
-    fileprivate func registeringFilter(_ name: String, filter: @escaping (Any?, [Any?], Context) throws -> Any?) -> Self {
-        registerFilter(name, filter: filter)
-        return self
     }
 }
