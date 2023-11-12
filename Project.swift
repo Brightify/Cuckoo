@@ -55,11 +55,8 @@ func platformSet(platform: PlatformType) -> (targets: [Target], schemes: [Scheme
 
                 echo 'Generating mocks.'
                 \([
-                    #""$PROJECT_DIR"/Generator/bin/cuckoo_generator generate"#,
-                    "--testable Cuckoo",
-                    "--exclude ExcludedTestClass,ExcludedProtocol",
-                    #"--output "$PROJECT_DIR"/Tests/Swift/Generated/GeneratedMocks.swift"#,
-                    #"--glob "$PROJECT_DIR"/Tests/Swift/Source/*.swift"#,
+                    #""$PROJECT_DIR"/Generator/bin/cuckoonator"#,
+                    "--verbose",
                 ].joined(separator: " \\\n\t"))
                 """,
                 name: "Generate mocks",

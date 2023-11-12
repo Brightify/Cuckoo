@@ -30,7 +30,7 @@ Generator/*.app
 
 # AppCode
 .idea/
-cuckoo_generator
+cuckoonator
 .fastlane
 
 Cuckoo.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist

@@ -21,28 +21,32 @@ struct GenerateCommand: AsyncParsableCommand {
         help: "Set Cuckoofile path. By default the Cuckoonator looks for it in the project root.",
         completion: .file()
     )
-    var configuration: String?
+    var configurationPath: String?
 
     @Flag(help: "Include extra information during generation and in the generated code.")
     var verbose = false
 
     mutating func run() async throws {
+        Logger.shared.logLevel = verbose ? .verbose : .info
+
+        let projectDir = ProcessInfo.processInfo.environment["PROJECT_DIR"]
         let configurationToml = [
-            configuration,
-            ProcessInfo.processInfo.environment["PROJECT_DIR"].map { "\($0)/Cuckoofile" },
+            configurationPath.map { Path($0) }?.relative(to: projectDir)?.rawValue,
+            projectDir.map { "\($0)/Cuckoofile" },
             "\(FileManager.default.currentDirectoryPath)/Cuckoofile",
         ]
         .lazy
-        .compactMap { path -> (path: Path, contents: String)? in
-            guard let path, let contents = try? String(contentsOfFile: path, encoding: .utf8) else { return nil }
-            return (path: Path(path), contents: contents)
+        .compactMap { pathString -> (path: Path, contents: String)? in
+            guard let pathString else { return nil }
+            let path = Path(pathString, expandingTilde: true)
+            guard let contents = try? String(contentsOfFile: path.rawValue, encoding: .utf8) else { return nil }
+            return (path: path, contents: contents)
         }
         .first
 
         guard let configurationToml else { throw GenerateError.missingConfiguration }
        
         log(.info, message: "Using configuration file at path:", configurationToml.path)
-        log(.verbose, message: "Configuration contents:", configurationToml.contents)
 
         var errorMessages: [String] = []
         var globalOutput: String?
@@ -83,16 +87,15 @@ struct GenerateCommand: AsyncParsableCommand {
                         throw GenerateError.modulesMustBeTable
                     }
                     let dto = try decoder.decode(Module.DTO.self, from: moduleTable)
-                    log(.verbose, message: "Module \(moduleName):", dto)
                     do {
-                        modules.append(
-                            try Module(
-                                name: moduleName,
-                                output: globalOutput,
-                                configurationPath: configurationToml.path,
-                                dto: dto
-                            )
+                        let module = try Module(
+                            name: moduleName,
+                            output: globalOutput,
+                            configurationPath: configurationToml.path,
+                            dto: dto
                         )
+                        log(.verbose, message: "Module \(moduleName):", module)
+                        modules.append(module)
                     } catch {
                         errorMessages.append(String(describing: error))
                     }
@@ -119,13 +122,25 @@ struct GenerateCommand: AsyncParsableCommand {
                 } else {
                     absoluteOutputPath = configurationToml.path.parent + outputPath
                 }
-                let isOutputDirectory = absoluteOutputPath.isDirectory
+                let isOutputDirectory: Bool
+                if absoluteOutputPath.exists && absoluteOutputPath.isDirectory {
+                    isOutputDirectory = true
+                } else {
+                    isOutputDirectory = absoluteOutputPath.pathExtension.isEmpty
+                    // Create directory structure.
+                    if isOutputDirectory {
+                        try absoluteOutputPath.createDirectory(withIntermediateDirectories: true)
+                    } else {
+                        try absoluteOutputPath.parent.createDirectory(withIntermediateDirectories: true)
+                    }
+                }
                 if isOutputDirectory {
                     await generatedFiles.concurrentForEach { generatedFile in
+                        let originalFileName = generatedFile.path.fileNameWithoutExtension
                         let fileNameWithoutExtension = module.filenameFormat
-                            .map { $0.replacingOccurrences(of: "{}", with: generatedFile.path.fileNameWithoutExtension) }
-                            ?? generatedFile.path.fileNameWithoutExtension
-                        let outputFile = TextFile(path: absoluteOutputPath + fileNameWithoutExtension + ".swift")
+                            .map { $0.replacingOccurrences(of: "{}", with: originalFileName) }
+                            ?? originalFileName
+                        let outputFile = TextFile(path: absoluteOutputPath + "\(fileNameWithoutExtension).swift")
                         do {
                             try outputFile.write(generatedFile.contents)
                         } catch {
@@ -160,11 +175,11 @@ struct GenerateCommand: AsyncParsableCommand {
             case .missingConfiguration:
                 return """
                 Failed to find Cuckoofile configuration.
-                Expected in project folder through $PROJECT_DIR or in same directory where the Cuckoonator was called.
+                Expected in project folder through $PROJECT_DIR or in the same directory where the Cuckoonator was called.
                 """
             case .modulesMustBeTable:
                 return """
-                Modules must be TOML tables. Define them as [module.ModuleName] with properties beneath.
+                Modules must be TOML tables. Define them as \("[module.ModuleName]".bold) with properties beneath.
                 """
             case .configurationErrors(let details):
                 return """
