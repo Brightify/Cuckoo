@@ -1,6 +1,5 @@
 # output = "Tests/Swift/Generated/GeneratedMocks.swift"
 
-
 [module.Cuckoo]
 imports = ["Foundation"]
 testableImports = ["Cuckoo"]
@@ -18,3 +17,6 @@ output = "Tests/Swift/Generated/GeneratedMocks.swift"
 glob = true
 keepDocumentation = false
 
+[module.Cuckoo.xcodeproj]
+path = "Generator"
+target = "Cuckoonator"

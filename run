@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 SCRIPT_PATH="$(cd "$(dirname "$0")" && pwd)"
-FILE_NAME="cuckoo_generator"
+FILE_NAME="cuckoonator"
 FILE_PATH="$SCRIPT_PATH/$FILE_NAME"
 GREP_OPTIONS=""
 

@@ -2,12 +2,12 @@ import ProjectDescription
 import ProjectDescriptionHelpers
 
 let target = Target(
-    name: "CuckooGenerator",
+    name: "Cuckoonator",
     platform: .macOS,
     product: .commandLineTool,
-    productName: "cuckoo_generator",
-    bundleId: "CuckooGenerator",
-    deploymentTarget: .macOS(targetVersion: "10.15"),
+    productName: "cuckoonator",
+    bundleId: "Cuckoonator",
+    deploymentTarget: .macOS(targetVersion: "12.0"),
     sources: "Sources/**",
     dependencies: [
         "FileKit",
@@ -16,14 +16,16 @@ let target = Target(
         "SwiftSyntax",
         "ArgumentParser",
         "TOMLKit",
+        "XcodeProj",
+        "Rainbow",
     ].map(TargetDependency.package(product:))
 )
 
 let testTarget = Target(
-    name: "GeneratorTests",
+    name: "CuckoonatorTests",
     platform: .macOS,
     product: .unitTests,
-    bundleId: "CuckooGeneratorTests",
+    bundleId: "CuckoonatorTests",
     deploymentTarget: target.deploymentTarget,
     sources: SourceFilesList(globs: [
         // TODO: This is wrong but testing CLI is not supported, must separate generator into CLI and internal targets.
@@ -45,6 +47,8 @@ let project = Project(
         .package(url: "https://github.com/apple/swift-format.git", .exact("509.0.0")),
         .package(url: "https://github.com/apple/swift-argument-parser", .exact("1.2.3")),
         .package(url: "https://github.com/LebJe/TOMLKit.git", .exact("0.5.5")),
+        .package(url: "https://github.com/tuist/XcodeProj.git", .exact("8.15.0")),
+        .package(url: "https://github.com/onevcat/Rainbow", .exact("4.0.1")),
     ],
     targets: [
         target,
@@ -54,28 +58,24 @@ let project = Project(
         Scheme(
             name: "Generator",
             buildAction: BuildAction.buildAction(
-                targets: ["CuckooGenerator"],
+                targets: ["Cuckoonator"],
                 postActions: [
                     ExecutionAction(
                         title: "Copy executable",
-                        scriptText: #"\cp "$BUILT_PRODUCTS_DIR/$EXECUTABLE_NAME" "$PROJECT_DIR/bin/cuckoo_generator""#,
-                        target: "CuckooGenerator"
+                        scriptText: #"\cp "$BUILT_PRODUCTS_DIR/$EXECUTABLE_NAME" "$PROJECT_DIR/bin/cuckoonator""#,
+                        target: "Cuckoonator"
                     )
                 ],
                 runPostActionsOnFailure: false
             ),
             testAction: TestAction.targets([TestableTarget(target: testTarget.reference)]),
             runAction: RunAction.runAction(
-                executable: "CuckooGenerator",
+                executable: "Cuckoonator",
                 arguments: Arguments(
                     launchArguments: [
                         // Any changes here should be reflected in `../Project.swift` as well.
-                        LaunchArgument(name: "generate", isEnabled: true),
-                        LaunchArgument(name: "--testable Cuckoo", isEnabled: true),
-                        LaunchArgument(name: "--exclude ExcludedTestClass,ExcludedProtocol", isEnabled: true),
-                        LaunchArgument(name: #"--output "$PROJECT_DIR"/GeneratedMocks.swift"#, isEnabled: true),
-                        // This is the input file(s) glob.
-                        LaunchArgument(name: #"--glob "$PROJECT_DIR"/../Tests/Swift/Source/*.swift"#, isEnabled: true),
+                        LaunchArgument(name: "--configuration ../Cuckoofile", isEnabled: true),
+                        LaunchArgument(name: "--verbose", isEnabled: true),
                     ]
                 )
             )

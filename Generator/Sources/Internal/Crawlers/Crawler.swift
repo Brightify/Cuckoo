@@ -204,7 +204,7 @@ final class Crawler: SyntaxVisitor {
             description = "Unknown declaration \(node.trimmed.description)"
         }
 
-        cuckoo_generator.log(
+        cuckoonator.log(
             .verbose,
             message: [description, additionalInfo].compactMap { $0 }.joined(separator: " ")
         )

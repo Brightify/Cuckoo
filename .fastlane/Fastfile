@@ -36,7 +36,7 @@ platform :mac do
     sh('../build_generator')
 
     # Settings
-    binary_name = 'cuckoo_generator'
+    binary_name = 'cuckoonator'
     cuckoo_gen_path = "../Generator/bin/#{binary_name}"
 
     # GitHub username
