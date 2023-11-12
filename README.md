@@ -12,7 +12,7 @@
 Cuckoo was created due to lack of a proper Swift mocking framework. We built the DSL to be very similar to [Mockito](http://mockito.org/), so anyone coming from Java/Android can immediately pick it up and use it.
 
 ## How does it work
-Cuckoo has two parts. One is the [runtime](https://github.com/Brightify/Cuckoo) and the other one is an OS X command-line tool simply called [CuckooGenerator](./Generator).
+Cuckoo has two parts. One is the [runtime](https://github.com/Brightify/Cuckoo) and the other one is an OS X command-line tool simply called [Cuckoonator](./Generator).
 
 Unfortunately Swift does not have a proper reflection, so we decided to use a compile-time generator to go through files you specify and generate supporting structs/classes that will be used by the runtime in your test target.
 
@@ -109,12 +109,12 @@ Note: All paths in the Run script must be absolute. Variable `PROJECT_DIR` autom
 5. Click Add Package.
 
 When you're all set, use the same `Run script` phase as above and replace
-```Bash
+```bash
 "${PODS_ROOT}/Cuckoo/run"
 ```
 with
-```Bash
-"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/Cuckoo/run"
+```bash
+"${BUILD_DIR}/Build/SourcePackages/checkouts/Cuckoo/run"
 ```
 
 #### Carthage
@@ -124,11 +124,11 @@ github "Brightify/Cuckoo"
 ```
 
 Then use the `Run script` from above and replace
-```Bash
+```bash
 "${PODS_ROOT}/Cuckoo/run"
 ```
 with
-```Bash
+```bash
 "Carthage/Checkouts/Cuckoo/run"
 ```
 
@@ -463,7 +463,7 @@ cuckoo build_options command generator_options arguments
 #### Build Options
 These options are only used for downloading or building the generator and don't interfere with the result of the generated mocks.
 
-When the [run script](run) is executed without any build options (they are only valid when specified **BEFORE** the `command`), it simply searches for the `cuckoo_generator` file and builds it from source code if it's missing.
+When the [run script](run) is executed without any build options (they are only valid when specified **BEFORE** the `command`), it simply searches for the `cuckoonator` file and builds it from source code if it's missing.
 
 To download the generator from GitHub instead of building it, use the `--download [version]` option as the first argument (i.e. `run --download generate ...` or `run --download 1.5.0 generate ...` to fetch a specific version). If you're having issues with rather long build time (especially in CI), this might be the way to fix it.
 
@@ -576,7 +576,7 @@ Cuckoo is open for everyone and we'd like you to help us make the best Swift moc
 The project consists of two parts - runtime and code generator. When you open the `Cuckoo.xcworkspace` in Xcode, you'll see these directories:
     - `Source` - runtime sources
     - `Tests` - tests for the runtime part
-    - `CuckoGenerator.xcodeproj` - project containing Generator source code (use the `cuckoo_generator` scheme)
+    - `CuckoGenerator.xcodeproj` - project containing Generator source code (use the `cuckoonator` scheme)
 
 Thank you for your help!
 
