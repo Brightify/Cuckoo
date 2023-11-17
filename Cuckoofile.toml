@@ -1,6 +1,6 @@
 # output = "Tests/Swift/Generated/GeneratedMocks.swift"
 
-[module.Cuckoo]
+[modules.Cuckoo]
 imports = ["Foundation"]
 testableImports = ["Cuckoo"]
 sources = [
@@ -13,10 +13,10 @@ exclude = [
 # regex = ""
 output = "Tests/Swift/Generated/GeneratedMocks.swift"
 
-[module.Cuckoo.options]
+[modules.Cuckoo.options]
 glob = true
 keepDocumentation = false
 
-[module.Cuckoo.xcodeproj]
+[modules.Cuckoo.xcodeproj]
 path = "Generator"
 target = "Cuckoonator"

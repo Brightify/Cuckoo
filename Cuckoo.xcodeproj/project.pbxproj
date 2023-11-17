@@ -20,7 +20,6 @@
 		02875C2B85ADB62F8FC2A2F1 /* ThreadLocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB65661C2188A3E830EEBF72 /* ThreadLocal.swift */; };
 		03393CDA9320B79B75A2DE1D /* StubbingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D65D2B6FD44C2CC59D6C7F4 /* StubbingTest.swift */; };
 		03A4D5D6AD8F138F78FCD672 /* StubNoReturnThrowingFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D920573D13B938FEACFF82C6 /* StubNoReturnThrowingFunction.swift */; };
-		03D463BBF52ABB0B1C8EC2E4 /* Pods_Cuckoo_OCMock_iOS_Cuckoo_OCMock_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6952C8731A343DEB670C6048 /* Pods_Cuckoo_OCMock_iOS_Cuckoo_OCMock_iOSTests.framework */; };
 		0405F62A3C80516B8B556DEE /* TestedSubclass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0F20F08A3C63CB00D2E7E4 /* TestedSubclass.swift */; };
 		04E28EE2A8202CD0CED3586F /* MultiNestedExtensionClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F29DC9C5F5CCE01FEAE648D /* MultiNestedExtensionClassTest.swift */; };
 		050607A437245D62CE3FAAC4 /* OCMockObject+CuckooMockObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D732D63C18B4DE267CB365CF /* OCMockObject+CuckooMockObject.m */; };
@@ -42,7 +41,6 @@
 		0D789EF876584F271908B424 /* StubNoReturnFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700931036CB43C60AEFB7FEB /* StubNoReturnFunction.swift */; };
 		0D980FAA65171B3A385C3D98 /* NSInvocation+OCMockWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = C61C355CDFD7F0A7C0F32A25 /* NSInvocation+OCMockWrapper.m */; };
 		0E1FCB036532650DB5A01306 /* NSValueConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989EFADEC10AB6D627A5FAE6 /* NSValueConvertible.swift */; };
-		0E4BCBE1E3ADF76AFA51CEED /* Pods_Cuckoo_OCMock_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6997682D28B5C7A648E54452 /* Pods_Cuckoo_OCMock_macOS.framework */; };
 		0EC0C6D9332E60FC55CEC07A /* MultiNestedInPrivateNestedClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CF3EE4189F2010800E2511 /* MultiNestedInPrivateNestedClass.swift */; };
 		0ED1CB69A10271E8108F20FE /* UnicodeTestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492606B334C561F93ABBE0A3 /* UnicodeTestProtocol.swift */; };
 		0ED91F9FF12BDC78CF963829 /* StubFunctionThenDoNothingTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C68FC814ACBD3D5E1C7ED1B /* StubFunctionThenDoNothingTrait.swift */; };
@@ -61,6 +59,7 @@
 		1261E976B71C9A806A73DA9D /* CreateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44692276AAFF9261EDD5D75 /* CreateMock.swift */; };
 		138FB34F332E9076D2C30FDC /* NSObjectProtocolInheritanceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBE411D64C1D2B056E42C52 /* NSObjectProtocolInheritanceTest.swift */; };
 		13A6FF70A68C12E237C85B4C /* StubFunctionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBF18CC12259A96D05F579B /* StubFunctionTest.swift */; };
+		1456EC54BC4209B159A83CE3 /* Pods_Cuckoo_OCMock_tvOS_Cuckoo_OCMock_tvOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E0D2EDD126561E21E0B4FEB /* Pods_Cuckoo_OCMock_tvOS_Cuckoo_OCMock_tvOSTests.framework */; };
 		14A6A85FCC306AB5CB4D009E /* ObjectiveCatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C3E2B1C12FF95C6DCA418D5 /* ObjectiveCatcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		15464C72B2E02BE3B83BF860 /* Array+matchersTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D3EE02CEB715D5543ACFFC /* Array+matchersTest.swift */; };
 		154BD32BF798FBE545A1FD02 /* ObjectiveArgumentClosure.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D63F5E63DF9302E70BF764 /* ObjectiveArgumentClosure.swift */; };
@@ -117,7 +116,6 @@
 		29CF5B2BA743C0E892855550 /* CallMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C854CC76B478ED72B6D3A65 /* CallMatcher.swift */; };
 		29E44183751F6EA5D9D9A121 /* GeneratedMocks+vapor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F14EC845C34714ABCAB8198 /* GeneratedMocks+vapor.swift */; };
 		2B84F5F74D5B1FFA3EEF28FA /* GeneratedMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A99A2173E7F7743145B11B /* GeneratedMocks.swift */; };
-		2C2FA515CF8E0EADA4802719 /* Pods_Cuckoo_OCMock_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6ED8B9CB636FAC0446D9204 /* Pods_Cuckoo_OCMock_tvOS.framework */; };
 		2D0BF6CACF9C9D25586785D0 /* MultiNestedInNestedClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7054833FFF0D253B1E2379FA /* MultiNestedInNestedClass.swift */; };
 		2D2631FF3DFEB17188A08073 /* ClassForStubTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DE1954C1D6E94F2911830A /* ClassForStubTesting.swift */; };
 		2D657648CE8D73B96D8CAF63 /* ObjectiveClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFD10D2F5491D90D226ED78 /* ObjectiveClassTest.swift */; };
@@ -244,7 +242,6 @@
 		69558A49969AD82F30643F24 /* ObjectiveMatchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70C4FAE3318E21F0A87531A /* ObjectiveMatchers.swift */; };
 		69FA65887F767A4AB431E19A /* MultiNestedInExtensionFromClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB894FF725838C4DE9FFDC9A /* MultiNestedInExtensionFromClass.swift */; };
 		6A0909A8389463A30E8AF4D1 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09B97C65DA87366B8605109 /* Utils.swift */; };
-		6AC6A00BFA547DF19EF34B69 /* Pods_Cuckoo_OCMock_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AEBEC4BBD4C6EFD24E4CF7D /* Pods_Cuckoo_OCMock_iOS.framework */; };
 		6AE2BCD9B5DEE44A770ED5A3 /* CuckooFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938B3F655E8E20AB6D341A0D /* CuckooFunctions.swift */; };
 		6B6134AC1149C4BA6374DC5F /* Matchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C633EBD6E6E6568FE9B40567 /* Matchable.swift */; };
 		6BAE868EB51D85115719DA33 /* CallMatcherFunctionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5673B933A24CA65D15B3FD3A /* CallMatcherFunctionsTest.swift */; };
@@ -332,7 +329,6 @@
 		8F64666ABEA12593621A1E5B /* StubFunctionThenTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C749F49256DDA51A9C96C9 /* StubFunctionThenTrait.swift */; };
 		8F85DF2677BB24AB9ED4234E /* GeneratedMocks+Signal-iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4A5CD9484B982F6E89B2B6 /* GeneratedMocks+Signal-iOS.swift */; };
 		8FCE701ABF6436EA73A75767 /* CallMatcherFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC319F6F55C00CFD3D0AF96 /* CallMatcherFunctions.swift */; };
-		9023B45B7621EA0543C71660 /* Pods_Cuckoo_OCMock_macOS_Cuckoo_OCMock_macOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 061141B40E53586BB0720F64 /* Pods_Cuckoo_OCMock_macOS_Cuckoo_OCMock_macOSTests.framework */; };
 		904FF056FA67829ED0D05087 /* GeneratedMocks+SnapKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF35063CFBF34817123D1BA7 /* GeneratedMocks+SnapKit.swift */; };
 		915E0D355991BC4F6948270F /* MultiNestedClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002B2852C62F702127A3D24E /* MultiNestedClassTest.swift */; };
 		91A62655AA1840F2C43960A7 /* StubFunctionThenTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C749F49256DDA51A9C96C9 /* StubFunctionThenTrait.swift */; };
@@ -423,13 +419,13 @@
 		B89DC8BEF25D0A07FC7AB353 /* GenericClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83908D3F58736F1C6DA7B2CA /* GenericClassTest.swift */; };
 		B8D4C89A105E32099C8F6099 /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EBD5D113A20F38FCE13BDC /* Mock.swift */; };
 		BA14903547F97B83C49B708D /* Stubber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0DC4D2D6B0E6C61B27E90E /* Stubber.swift */; };
+		BA2F022A03F5C722516CA9A3 /* Pods_Cuckoo_OCMock_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC87C31AF9604C66718598D4 /* Pods_Cuckoo_OCMock_iOS.framework */; };
 		BA5FFE5076C1E8B3CD590D77 /* GenericMethodClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E584CAC626A3E38BC45E773 /* GenericMethodClass.swift */; };
 		BA6739666F5DDC4ADA564E2C /* GenericClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01C5ABA73DC1B0CCE088669 /* GenericClass.swift */; };
 		BAA6262023C7BBD7F945FA91 /* ObjectiveVerify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107C9243167200396831A18F /* ObjectiveVerify.swift */; };
 		BB2E89CC430EFA7009FFFD47 /* StubFunctionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBF18CC12259A96D05F579B /* StubFunctionTest.swift */; };
 		BBA5EEAD87D96D3B15C78757 /* CollisionClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDB969240E4E2B12FF93284 /* CollisionClasses.swift */; };
 		BBAC0B12C70D9B414A0E93E1 /* VerifyProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753FC6D19235B2C8F2DBAA7B /* VerifyProperty.swift */; };
-		BBEC4B4EE3B8C96034036F30 /* Pods_Cuckoo_OCMock_tvOS_Cuckoo_OCMock_tvOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A99424C9DE305813E820A21E /* Pods_Cuckoo_OCMock_tvOS_Cuckoo_OCMock_tvOSTests.framework */; };
 		BC428931E53499C0EFDC802F /* ClassForStubTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DE1954C1D6E94F2911830A /* ClassForStubTesting.swift */; };
 		BD1A024D8CFAF378B9D107A4 /* BaseStubFunctionTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B55AC80C790F69750B2F80 /* BaseStubFunctionTrait.swift */; };
 		BD1D677D1328C8469A1924BC /* Array+matchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1D814F035D5D39FC84D26C /* Array+matchers.swift */; };
@@ -495,6 +491,7 @@
 		DCCC78C7E31161EA0CCAA1FF /* Set+matchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D535CF4BAE6BA1CA7220CDB7 /* Set+matchers.swift */; };
 		DD0595709253A1058AAD17D7 /* MatchableTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBE505B4B98BE6289678CD1 /* MatchableTest.swift */; };
 		DDA3F74ECE9980BC0F403273 /* NSObject+TrustMe.m in Sources */ = {isa = PBXBuildFile; fileRef = E0656C5164A529DCCADBA8F1 /* NSObject+TrustMe.m */; };
+		DE4C3E0A8CFE93AE043B9B08 /* Pods_Cuckoo_OCMock_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 315AA320C8878F569D4E9818 /* Pods_Cuckoo_OCMock_tvOS.framework */; };
 		DEC57D478533E80AF83D2743 /* StubFunctionThenThrowingTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = F398C1D87D71EE8DED0C6EA3 /* StubFunctionThenThrowingTrait.swift */; };
 		DF80E10853093C087BC804D3 /* VerifyReadOnlyProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A08AF20C937EF4EB98795B /* VerifyReadOnlyProperty.swift */; };
 		DF9F9FD087FA73FBE23ED3CE /* GeneratedMocks+Signal-iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4A5CD9484B982F6E89B2B6 /* GeneratedMocks+Signal-iOS.swift */; };
@@ -513,6 +510,7 @@
 		E4EDCB7B18A50B2EDEBA4DB4 /* StubNoReturnThrowingFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D920573D13B938FEACFF82C6 /* StubNoReturnThrowingFunction.swift */; };
 		E54372352D4AF59507465244 /* StubFunctionThenThrowingTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = F398C1D87D71EE8DED0C6EA3 /* StubFunctionThenThrowingTrait.swift */; };
 		E5724382ECAA05E394B569CA /* ObjectiveCatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C3E2B1C12FF95C6DCA418D5 /* ObjectiveCatcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E5D3F43F1A3AD7A1923F5005 /* Pods_Cuckoo_OCMock_macOS_Cuckoo_OCMock_macOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1577FB116F295FB7EB6149B7 /* Pods_Cuckoo_OCMock_macOS_Cuckoo_OCMock_macOSTests.framework */; };
 		E5F74103A5924E45829670F6 /* ThreadLocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB65661C2188A3E830EEBF72 /* ThreadLocal.swift */; };
 		E61B1327BCAFC0E041FDD864 /* StubNoReturnFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700931036CB43C60AEFB7FEB /* StubNoReturnFunction.swift */; };
 		E742BE2A69A5807070E873D0 /* ToBeStubbedProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE705433C346CA3DF4E2AB96 /* ToBeStubbedProperty.swift */; };
@@ -559,10 +557,12 @@
 		F98A5E661D992AB274733FAF /* MockManager+preconfigured.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83C4A633699E5B88D9A9C1B /* MockManager+preconfigured.swift */; };
 		FA4E1EA6ED897418E81B360F /* StubFunctionThenThrowingTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = F398C1D87D71EE8DED0C6EA3 /* StubFunctionThenThrowingTrait.swift */; };
 		FA7B45FA1AD8F9CA07CC8506 /* NSObject+TrustMe.m in Sources */ = {isa = PBXBuildFile; fileRef = E0656C5164A529DCCADBA8F1 /* NSObject+TrustMe.m */; };
+		FA89D0B5B4936694299B3BEA /* Pods_Cuckoo_OCMock_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 439436DB30F6B51EBF386D8C /* Pods_Cuckoo_OCMock_macOS.framework */; };
 		FB2F76D95E7A236EFE2428D7 /* Mocked.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30A194A634E5972418D171E /* Mocked.swift */; };
 		FC3E563A8C25A5EBC6EDE1D1 /* TestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F1FB05574F9DB1A4CE7AB3 /* TestError.swift */; };
 		FE479A853297E45321FFF68D /* __DoNotUse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511DD0B1EA1EAF535C598A8C /* __DoNotUse.swift */; };
 		FEC386FA1E00B232E1C7E431 /* ParameterMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A843913B61AB11A80097F51 /* ParameterMatcher.swift */; };
+		FFA9D8AFE30ECD938A3C6D2A /* Pods_Cuckoo_OCMock_iOS_Cuckoo_OCMock_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23B4628B60DFE4AFCA2BCBCD /* Pods_Cuckoo_OCMock_iOS_Cuckoo_OCMock_iOSTests.framework */; };
 		FFBE58E5F81E9E7F173A96A2 /* StubNoReturnThrowingFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D920573D13B938FEACFF82C6 /* StubNoReturnThrowingFunction.swift */; };
 		FFCC5303B4F31B8CE8C14BA1 /* NestedStructTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F73FBA37EA0E055BA4EA2 /* NestedStructTest.swift */; };
 /* End PBXBuildFile section */
@@ -742,7 +742,6 @@
 		03AF60404FD2D5FD3198825E /* StubRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubRecorder.swift; sourceTree = "<group>"; };
 		03B55AC80C790F69750B2F80 /* BaseStubFunctionTrait.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseStubFunctionTrait.swift; sourceTree = "<group>"; };
 		0512EFCB8EDE906B3E54057B /* NestedStructExtensionClassTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedStructExtensionClassTest.swift; sourceTree = "<group>"; };
-		061141B40E53586BB0720F64 /* Pods_Cuckoo_OCMock_macOS_Cuckoo_OCMock_macOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cuckoo_OCMock_macOS_Cuckoo_OCMock_macOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		078A8096CCC31B331AA8D537 /* Cuckoo_iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Cuckoo_iOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		07D6520BB134155D690D0D0C /* Cuckoo_OCMock_macOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Cuckoo_OCMock_macOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		09F0DF66BC063943C91FB2C3 /* MultiLayeredNestedTestedSubclassTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiLayeredNestedTestedSubclassTest.swift; sourceTree = "<group>"; };
@@ -752,12 +751,14 @@
 		0F14EC845C34714ABCAB8198 /* GeneratedMocks+vapor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GeneratedMocks+vapor.swift"; sourceTree = "<group>"; };
 		107C9243167200396831A18F /* ObjectiveVerify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectiveVerify.swift; sourceTree = "<group>"; };
 		119D4E6C9798F70CEBDBB1F2 /* TestedClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestedClass.swift; sourceTree = "<group>"; };
+		1282BAB19F7122CB21F6EDCA /* Pods-Cuckoo_OCMock-macOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cuckoo_OCMock-macOS.release.xcconfig"; path = "Target Support Files/Pods-Cuckoo_OCMock-macOS/Pods-Cuckoo_OCMock-macOS.release.xcconfig"; sourceTree = "<group>"; };
+		1577FB116F295FB7EB6149B7 /* Pods_Cuckoo_OCMock_macOS_Cuckoo_OCMock_macOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cuckoo_OCMock_macOS_Cuckoo_OCMock_macOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		190FB7FABF7486D2963F4B44 /* DefaultValueRegistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultValueRegistry.swift; sourceTree = "<group>"; };
 		1A843913B61AB11A80097F51 /* ParameterMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterMatcher.swift; sourceTree = "<group>"; };
 		1B965102D09D6B0E94CDA8EA /* GenericMethodClassTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericMethodClassTest.swift; sourceTree = "<group>"; };
 		1E13C3DFFA9A3676F92404B7 /* Cuckoo_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cuckoo_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1F2738C4C70148AB51417E7C /* Pods-Cuckoo_OCMock-iOS-Cuckoo_OCMock-iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cuckoo_OCMock-iOS-Cuckoo_OCMock-iOSTests.release.xcconfig"; path = "Target Support Files/Pods-Cuckoo_OCMock-iOS-Cuckoo_OCMock-iOSTests/Pods-Cuckoo_OCMock-iOS-Cuckoo_OCMock-iOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		201DFAD306F0F1B18CE9EFBE /* StubFunctionThenThrowTrait.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubFunctionThenThrowTrait.swift; sourceTree = "<group>"; };
+		23B4628B60DFE4AFCA2BCBCD /* Pods_Cuckoo_OCMock_iOS_Cuckoo_OCMock_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cuckoo_OCMock_iOS_Cuckoo_OCMock_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		245F73FBA37EA0E055BA4EA2 /* NestedStructTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedStructTest.swift; sourceTree = "<group>"; };
 		26D3EE02CEB715D5543ACFFC /* Array+matchersTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+matchersTest.swift"; sourceTree = "<group>"; };
 		2776FBCC90C18A2F8C28CB85 /* Cuckoo_macOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Cuckoo_macOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -767,6 +768,7 @@
 		2EF265E30C5EAB6E3ABC0C69 /* GeneratedMocks+ShadowsocksX-NG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GeneratedMocks+ShadowsocksX-NG.swift"; sourceTree = "<group>"; };
 		2F445E0EFD2FD1FBC888DB72 /* CallMatcherTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallMatcherTest.swift; sourceTree = "<group>"; };
 		30EE51B1225328733D4F5DBA /* Cuckoo_OCMock-macOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Cuckoo_OCMock-macOS-Info.plist"; sourceTree = "<group>"; };
+		315AA320C8878F569D4E9818 /* Pods_Cuckoo_OCMock_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cuckoo_OCMock_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3191519C8ED4DD5B3D439A93 /* StubFunctionThenReturnTrait.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubFunctionThenReturnTrait.swift; sourceTree = "<group>"; };
 		32A299482E4D2B7B774373A1 /* ClassWithOptionals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassWithOptionals.swift; sourceTree = "<group>"; };
 		33EBD5D113A20F38FCE13BDC /* Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mock.swift; sourceTree = "<group>"; };
@@ -780,18 +782,19 @@
 		40FB9A410020B1B90952823C /* StubTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubTest.swift; sourceTree = "<group>"; };
 		411E675E3332CB3C8D02567A /* FailTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailTest.swift; sourceTree = "<group>"; };
 		413C820C0EB93F0E9C0DFCB7 /* Cuckoo-tvOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Cuckoo-tvOS-Info.plist"; sourceTree = "<group>"; };
+		439436DB30F6B51EBF386D8C /* Pods_Cuckoo_OCMock_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cuckoo_OCMock_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		475A5EAA15D41E418BE11146 /* GeneratedMocks+iina.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GeneratedMocks+iina.swift"; sourceTree = "<group>"; };
 		492606B334C561F93ABBE0A3 /* UnicodeTestProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnicodeTestProtocol.swift; sourceTree = "<group>"; };
 		511DD0B1EA1EAF535C598A8C /* __DoNotUse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = __DoNotUse.swift; sourceTree = "<group>"; };
 		5319F82EEAE3868CE8F23172 /* StubFunctionThenCallRealImplementationTrait.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubFunctionThenCallRealImplementationTrait.swift; sourceTree = "<group>"; };
-		554BFCF6CBEFC532CD6249BC /* Pods-Cuckoo_OCMock-macOS-Cuckoo_OCMock-macOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cuckoo_OCMock-macOS-Cuckoo_OCMock-macOSTests.release.xcconfig"; path = "Target Support Files/Pods-Cuckoo_OCMock-macOS-Cuckoo_OCMock-macOSTests/Pods-Cuckoo_OCMock-macOS-Cuckoo_OCMock-macOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		55DE1954C1D6E94F2911830A /* ClassForStubTesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassForStubTesting.swift; sourceTree = "<group>"; };
 		5673B933A24CA65D15B3FD3A /* CallMatcherFunctionsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallMatcherFunctionsTest.swift; sourceTree = "<group>"; };
+		581CA228CD17DC357B49FD82 /* Pods-Cuckoo_OCMock-macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cuckoo_OCMock-macOS.debug.xcconfig"; path = "Target Support Files/Pods-Cuckoo_OCMock-macOS/Pods-Cuckoo_OCMock-macOS.debug.xcconfig"; sourceTree = "<group>"; };
 		5A67E79E73B4710B3C846F96 /* StubNoReturnThrowingFunctionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubNoReturnThrowingFunctionTest.swift; sourceTree = "<group>"; };
+		5ACE14220E6E1553920E06A8 /* Pods-Cuckoo_OCMock-macOS-Cuckoo_OCMock-macOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cuckoo_OCMock-macOS-Cuckoo_OCMock-macOSTests.debug.xcconfig"; path = "Target Support Files/Pods-Cuckoo_OCMock-macOS-Cuckoo_OCMock-macOSTests/Pods-Cuckoo_OCMock-macOS-Cuckoo_OCMock-macOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5B98FAD3187753DB8CB7365F /* GeneratedMocks+Nextcloud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GeneratedMocks+Nextcloud.swift"; sourceTree = "<group>"; };
 		5BA3EB970DE7CF1D83AC121F /* StubCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubCall.swift; sourceTree = "<group>"; };
 		5CC319F6F55C00CFD3D0AF96 /* CallMatcherFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallMatcherFunctions.swift; sourceTree = "<group>"; };
-		5EF08931091932091FBCD06A /* Pods-Cuckoo_OCMock-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cuckoo_OCMock-iOS.release.xcconfig"; path = "Target Support Files/Pods-Cuckoo_OCMock-iOS/Pods-Cuckoo_OCMock-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		6003DBCF1B0CB5014D232663 /* NestedInNestedClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedInNestedClass.swift; sourceTree = "<group>"; };
 		648E1DCC3FA05944AC970663 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		64F2852ABE97CC059DD98D13 /* ExcludedStubTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcludedStubTest.swift; sourceTree = "<group>"; };
@@ -799,13 +802,13 @@
 		6665FD7C16558B821564AADB /* UnavailablePlatformClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnavailablePlatformClass.swift; sourceTree = "<group>"; };
 		6873C8013002AFEA7565BDAC /* ClassTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassTest.swift; sourceTree = "<group>"; };
 		6907AAE792A71E6883252CD6 /* ToBeStubbedThrowingProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToBeStubbedThrowingProperty.swift; sourceTree = "<group>"; };
-		6952C8731A343DEB670C6048 /* Pods_Cuckoo_OCMock_iOS_Cuckoo_OCMock_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cuckoo_OCMock_iOS_Cuckoo_OCMock_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6975D97C79395805A3BB3B04 /* Dictionary+matchers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+matchers.swift"; sourceTree = "<group>"; };
 		6978339A31BEDF22A4115E81 /* ProtocolTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolTest.swift; sourceTree = "<group>"; };
-		6997682D28B5C7A648E54452 /* Pods_Cuckoo_OCMock_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cuckoo_OCMock_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C0DC4D2D6B0E6C61B27E90E /* Stubber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stubber.swift; sourceTree = "<group>"; };
 		6D4A5CD9484B982F6E89B2B6 /* GeneratedMocks+Signal-iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GeneratedMocks+Signal-iOS.swift"; sourceTree = "<group>"; };
+		6D5748FF5110E65579058F10 /* Pods-Cuckoo_OCMock-tvOS-Cuckoo_OCMock-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cuckoo_OCMock-tvOS-Cuckoo_OCMock-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-Cuckoo_OCMock-tvOS-Cuckoo_OCMock-tvOSTests/Pods-Cuckoo_OCMock-tvOS-Cuckoo_OCMock-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6DBE7A13FEE1B8C7EE8DA363 /* Cuckoo-macOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Cuckoo-macOS-Info.plist"; sourceTree = "<group>"; };
+		6E0D2EDD126561E21E0B4FEB /* Pods_Cuckoo_OCMock_tvOS_Cuckoo_OCMock_tvOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cuckoo_OCMock_tvOS_Cuckoo_OCMock_tvOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		700931036CB43C60AEFB7FEB /* StubNoReturnFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubNoReturnFunction.swift; sourceTree = "<group>"; };
 		7054833FFF0D253B1E2379FA /* MultiNestedInNestedClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiNestedInNestedClass.swift; sourceTree = "<group>"; };
 		70AE18F5D3419D1025D081CA /* ParameterMatcherTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterMatcherTest.swift; sourceTree = "<group>"; };
@@ -820,17 +823,17 @@
 		7F29DC9C5F5CCE01FEAE648D /* MultiNestedExtensionClassTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiNestedExtensionClassTest.swift; sourceTree = "<group>"; };
 		808091A975F4E8BDDF0C80D9 /* StubThrowingFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubThrowingFunction.swift; sourceTree = "<group>"; };
 		82D83797450CB57EC3E0A693 /* StubFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubFunction.swift; sourceTree = "<group>"; };
-		82F12E41A4D7AC73E5DC7ACA /* Pods-Cuckoo_OCMock-tvOS-Cuckoo_OCMock-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cuckoo_OCMock-tvOS-Cuckoo_OCMock-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-Cuckoo_OCMock-tvOS-Cuckoo_OCMock-tvOSTests/Pods-Cuckoo_OCMock-tvOS-Cuckoo_OCMock-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		83908D3F58736F1C6DA7B2CA /* GenericClassTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericClassTest.swift; sourceTree = "<group>"; };
 		866CED1C72D1F35C10251CCC /* NSObjectProtocolInheritanceTesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSObjectProtocolInheritanceTesting.swift; sourceTree = "<group>"; };
 		86D638696C1458550D4524F1 /* Cuckoo_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cuckoo_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8AEBEC4BBD4C6EFD24E4CF7D /* Pods_Cuckoo_OCMock_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cuckoo_OCMock_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		88EEE9C66E94996612ACBB80 /* Pods-Cuckoo_OCMock-macOS-Cuckoo_OCMock-macOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cuckoo_OCMock-macOS-Cuckoo_OCMock-macOSTests.release.xcconfig"; path = "Target Support Files/Pods-Cuckoo_OCMock-macOS-Cuckoo_OCMock-macOSTests/Pods-Cuckoo_OCMock-macOS-Cuckoo_OCMock-macOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		8B40CC43D7A77DFD4702178A /* MultiNestedPrivateExtensionClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiNestedPrivateExtensionClass.swift; sourceTree = "<group>"; };
 		8C4A20137742161D649D3E3B /* NestedSubclassTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedSubclassTest.swift; sourceTree = "<group>"; };
 		8C854CC76B478ED72B6D3A65 /* CallMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallMatcher.swift; sourceTree = "<group>"; };
 		8CDB969240E4E2B12FF93284 /* CollisionClasses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionClasses.swift; sourceTree = "<group>"; };
 		8FAA0AEFE10E214A84C0E8EA /* Cuckoo_OCMock-iOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Cuckoo_OCMock-iOS-Info.plist"; sourceTree = "<group>"; };
 		8FBE411D64C1D2B056E42C52 /* NSObjectProtocolInheritanceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSObjectProtocolInheritanceTest.swift; sourceTree = "<group>"; };
+		8FE27EC365775AC73043E847 /* Pods-Cuckoo_OCMock-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cuckoo_OCMock-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-Cuckoo_OCMock-tvOS/Pods-Cuckoo_OCMock-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		905EC88A402004B01C6FE73E /* GenericProtocolTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericProtocolTest.swift; sourceTree = "<group>"; };
 		9096D4889491251E0B7D5393 /* GeneratedMocks+MonitorControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GeneratedMocks+MonitorControl.swift"; sourceTree = "<group>"; };
 		90CA6A2E0084041FD2CA4DD9 /* Cuckoo_tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Cuckoo_tvOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -843,23 +846,18 @@
 		9699C3284544FE817C78E474 /* NestedInExtensionFromClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedInExtensionFromClass.swift; sourceTree = "<group>"; };
 		96C749F49256DDA51A9C96C9 /* StubFunctionThenTrait.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubFunctionThenTrait.swift; sourceTree = "<group>"; };
 		989EFADEC10AB6D627A5FAE6 /* NSValueConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSValueConvertible.swift; sourceTree = "<group>"; };
-		9AB5A7BFC63F8EC7B7F98C5C /* Pods-Cuckoo_OCMock-iOS-Cuckoo_OCMock-iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cuckoo_OCMock-iOS-Cuckoo_OCMock-iOSTests.debug.xcconfig"; path = "Target Support Files/Pods-Cuckoo_OCMock-iOS-Cuckoo_OCMock-iOSTests/Pods-Cuckoo_OCMock-iOS-Cuckoo_OCMock-iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9C0889A597AF4CCA8841B471 /* MockBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockBuilder.swift; sourceTree = "<group>"; };
-		9D7820C43A4F5FFE7F4C9362 /* Pods-Cuckoo_OCMock-macOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cuckoo_OCMock-macOS.release.xcconfig"; path = "Target Support Files/Pods-Cuckoo_OCMock-macOS/Pods-Cuckoo_OCMock-macOS.release.xcconfig"; sourceTree = "<group>"; };
+		9C262195FADBEA945933FE98 /* Pods-Cuckoo_OCMock-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cuckoo_OCMock-tvOS.release.xcconfig"; path = "Target Support Files/Pods-Cuckoo_OCMock-tvOS/Pods-Cuckoo_OCMock-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		9DD5D3471880E656BEA0A210 /* Cuckoo_OCMock_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cuckoo_OCMock_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DE5DC1B6EC0BF686019517B /* UnavailablePlatformProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnavailablePlatformProtocol.swift; sourceTree = "<group>"; };
 		9E584CAC626A3E38BC45E773 /* GenericMethodClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericMethodClass.swift; sourceTree = "<group>"; };
 		9EE3E19406E96533EBBBD138 /* OCMockObject+CuckooMockObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OCMockObject+CuckooMockObject.h"; sourceTree = "<group>"; };
-		A0C090A44C83AF7E39E68074 /* Pods-Cuckoo_OCMock-tvOS-Cuckoo_OCMock-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cuckoo_OCMock-tvOS-Cuckoo_OCMock-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-Cuckoo_OCMock-tvOS-Cuckoo_OCMock-tvOSTests/Pods-Cuckoo_OCMock-tvOS-Cuckoo_OCMock-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A21CD7B8ADE5ABE0295581D4 /* VerificationProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationProxy.swift; sourceTree = "<group>"; };
-		A379BD3B14519A540FF5934D /* Pods-Cuckoo_OCMock-macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cuckoo_OCMock-macOS.debug.xcconfig"; path = "Target Support Files/Pods-Cuckoo_OCMock-macOS/Pods-Cuckoo_OCMock-macOS.debug.xcconfig"; sourceTree = "<group>"; };
 		A398D6337F320A5F78FA4A5A /* GenericProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericProtocol.swift; sourceTree = "<group>"; };
-		A65698C6F1A85B328960E00F /* Pods-Cuckoo_OCMock-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cuckoo_OCMock-iOS.debug.xcconfig"; path = "Target Support Files/Pods-Cuckoo_OCMock-iOS/Pods-Cuckoo_OCMock-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		A78767AF78A5705F914CB5F1 /* Cuckoo-BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Cuckoo-BridgingHeader.h"; sourceTree = "<group>"; };
-		A99424C9DE305813E820A21E /* Pods_Cuckoo_OCMock_tvOS_Cuckoo_OCMock_tvOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cuckoo_OCMock_tvOS_Cuckoo_OCMock_tvOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A8F9114EFD61D69713AFC056 /* Pods-Cuckoo_OCMock-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cuckoo_OCMock-iOS.release.xcconfig"; path = "Target Support Files/Pods-Cuckoo_OCMock-iOS/Pods-Cuckoo_OCMock-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		AC30579DC4B1D5D5CC959724 /* Cuckoo-iOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Cuckoo-iOS-Info.plist"; sourceTree = "<group>"; };
 		AD3E7F562DC17ECF3B32CBB3 /* TestedSubProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestedSubProtocol.swift; sourceTree = "<group>"; };
-		AE1139E6625FA86BE4EEEFA8 /* Pods-Cuckoo_OCMock-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cuckoo_OCMock-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-Cuckoo_OCMock-tvOS/Pods-Cuckoo_OCMock-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		AE4758812545462B94DAB7A4 /* Stub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stub.swift; sourceTree = "<group>"; };
 		B30A194A634E5972418D171E /* Mocked.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocked.swift; sourceTree = "<group>"; };
 		B54ADB550DB56855B73F854A /* GeneratedMocks+openhaystack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GeneratedMocks+openhaystack.swift"; sourceTree = "<group>"; };
@@ -882,20 +880,22 @@
 		C8EEC51ACDE645FA676CB016 /* Cuckoo-macOSTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Cuckoo-macOSTests-Info.plist"; sourceTree = "<group>"; };
 		C90E9A4C6A1716C6D219D26E /* NestedInNestedStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedInNestedStruct.swift; sourceTree = "<group>"; };
 		C9525C20EA498D59BFCE3F7B /* ObjectiveAssertThrows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectiveAssertThrows.swift; sourceTree = "<group>"; };
-		CA95FFBE8BE54433F4E71DE3 /* Pods-Cuckoo_OCMock-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cuckoo_OCMock-tvOS.release.xcconfig"; path = "Target Support Files/Pods-Cuckoo_OCMock-tvOS/Pods-Cuckoo_OCMock-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		CB65661C2188A3E830EEBF72 /* ThreadLocal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadLocal.swift; sourceTree = "<group>"; };
+		CC87C31AF9604C66718598D4 /* Pods_Cuckoo_OCMock_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cuckoo_OCMock_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEBE505B4B98BE6289678CD1 /* MatchableTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchableTest.swift; sourceTree = "<group>"; };
 		D09B97C65DA87366B8605109 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
-		D0EA7A1C0A2405B7D649F73B /* Pods-Cuckoo_OCMock-macOS-Cuckoo_OCMock-macOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cuckoo_OCMock-macOS-Cuckoo_OCMock-macOSTests.debug.xcconfig"; path = "Target Support Files/Pods-Cuckoo_OCMock-macOS-Cuckoo_OCMock-macOSTests/Pods-Cuckoo_OCMock-macOS-Cuckoo_OCMock-macOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		D258A7CA85EC209CD723E98E /* Pods-Cuckoo_OCMock-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cuckoo_OCMock-iOS.debug.xcconfig"; path = "Target Support Files/Pods-Cuckoo_OCMock-iOS/Pods-Cuckoo_OCMock-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		D44692276AAFF9261EDD5D75 /* CreateMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMock.swift; sourceTree = "<group>"; };
 		D535CF4BAE6BA1CA7220CDB7 /* Set+matchers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Set+matchers.swift"; sourceTree = "<group>"; };
 		D732D63C18B4DE267CB365CF /* OCMockObject+CuckooMockObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "OCMockObject+CuckooMockObject.m"; sourceTree = "<group>"; };
 		D7635A46FDE48804E6E21EC0 /* StubNoReturnFunctionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubNoReturnFunctionTest.swift; sourceTree = "<group>"; };
 		D7A08AF20C937EF4EB98795B /* VerifyReadOnlyProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyReadOnlyProperty.swift; sourceTree = "<group>"; };
 		D855D7BE03DE7D8BADEBF33D /* GeneratedMocks+swift-nio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GeneratedMocks+swift-nio.swift"; sourceTree = "<group>"; };
+		D8D1A9C069AD1D4EDCC67319 /* Pods-Cuckoo_OCMock-tvOS-Cuckoo_OCMock-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cuckoo_OCMock-tvOS-Cuckoo_OCMock-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-Cuckoo_OCMock-tvOS-Cuckoo_OCMock-tvOSTests/Pods-Cuckoo_OCMock-tvOS-Cuckoo_OCMock-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		D920573D13B938FEACFF82C6 /* StubNoReturnThrowingFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubNoReturnThrowingFunction.swift; sourceTree = "<group>"; };
 		DA0F20F08A3C63CB00D2E7E4 /* TestedSubclass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestedSubclass.swift; sourceTree = "<group>"; };
 		DAFDD79179243CBB217358C7 /* TestedProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestedProtocol.swift; sourceTree = "<group>"; };
+		DD602003CA8435C13BED8902 /* Pods-Cuckoo_OCMock-iOS-Cuckoo_OCMock-iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cuckoo_OCMock-iOS-Cuckoo_OCMock-iOSTests.release.xcconfig"; path = "Target Support Files/Pods-Cuckoo_OCMock-iOS-Cuckoo_OCMock-iOSTests/Pods-Cuckoo_OCMock-iOS-Cuckoo_OCMock-iOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		DD83449ACABE73EE786CA3E3 /* Cuckoo_OCMock_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cuckoo_OCMock_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0656C5164A529DCCADBA8F1 /* NSObject+TrustMe.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+TrustMe.m"; sourceTree = "<group>"; };
 		E216B22B63CECBFA5F681510 /* Cuckoo-tvOSTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Cuckoo-tvOSTests-Info.plist"; sourceTree = "<group>"; };
@@ -903,6 +903,7 @@
 		E4A99A2173E7F7743145B11B /* GeneratedMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratedMocks.swift; sourceTree = "<group>"; };
 		E5D1F1DDD3B24CEC8D8495BC /* NSObject+TrustMe.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+TrustMe.h"; sourceTree = "<group>"; };
 		E80D1401CB6046B1AEDBE204 /* DefaultValueRegistryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultValueRegistryTest.swift; sourceTree = "<group>"; };
+		E8119F7A29EE4BDFD5D68A22 /* Pods-Cuckoo_OCMock-iOS-Cuckoo_OCMock-iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cuckoo_OCMock-iOS-Cuckoo_OCMock-iOSTests.debug.xcconfig"; path = "Target Support Files/Pods-Cuckoo_OCMock-iOS-Cuckoo_OCMock-iOSTests/Pods-Cuckoo_OCMock-iOS-Cuckoo_OCMock-iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E83C4A633699E5B88D9A9C1B /* MockManager+preconfigured.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MockManager+preconfigured.swift"; sourceTree = "<group>"; };
 		E8F1FB05574F9DB1A4CE7AB3 /* TestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestError.swift; sourceTree = "<group>"; };
 		EAFD10D2F5491D90D226ED78 /* ObjectiveClassTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectiveClassTest.swift; sourceTree = "<group>"; };
@@ -913,7 +914,6 @@
 		F3C87227E4CAE60FD9202D6F /* NSInvocation+OCMockWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSInvocation+OCMockWrapper.h"; sourceTree = "<group>"; };
 		F58BD6FC4FE31313954AF218 /* GeneratedMocks+Alamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GeneratedMocks+Alamofire.swift"; sourceTree = "<group>"; };
 		F6CA2236A30B54754F335DC3 /* ParameterMatcherFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterMatcherFunctions.swift; sourceTree = "<group>"; };
-		F6ED8B9CB636FAC0446D9204 /* Pods_Cuckoo_OCMock_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cuckoo_OCMock_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F70C4FAE3318E21F0A87531A /* ObjectiveMatchers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectiveMatchers.swift; sourceTree = "<group>"; };
 		F81B5143E65D60134B59CFA4 /* Cuckoo_OCMock-tvOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Cuckoo_OCMock-tvOS-Info.plist"; sourceTree = "<group>"; };
 		F981A41C0D53F5AF59BD7202 /* Cuckoo_OCMock_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cuckoo_OCMock_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -951,7 +951,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C61162C8AFDB8D153798DBC /* XCTest.framework in Frameworks */,
-				0E4BCBE1E3ADF76AFA51CEED /* Pods_Cuckoo_OCMock_macOS.framework in Frameworks */,
+				FA89D0B5B4936694299B3BEA /* Pods_Cuckoo_OCMock_macOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -960,7 +960,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				11700496E1D2DF02E9CD49BE /* XCTest.framework in Frameworks */,
-				6AC6A00BFA547DF19EF34B69 /* Pods_Cuckoo_OCMock_iOS.framework in Frameworks */,
+				BA2F022A03F5C722516CA9A3 /* Pods_Cuckoo_OCMock_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -969,7 +969,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3CFAA76E52C3382D06DDDB7A /* Cuckoo_OCMock_tvOS.framework in Frameworks */,
-				BBEC4B4EE3B8C96034036F30 /* Pods_Cuckoo_OCMock_tvOS_Cuckoo_OCMock_tvOSTests.framework in Frameworks */,
+				1456EC54BC4209B159A83CE3 /* Pods_Cuckoo_OCMock_tvOS_Cuckoo_OCMock_tvOSTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -978,7 +978,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8443421090DA81C2C68570A1 /* Cuckoo_OCMock_macOS.framework in Frameworks */,
-				9023B45B7621EA0543C71660 /* Pods_Cuckoo_OCMock_macOS_Cuckoo_OCMock_macOSTests.framework in Frameworks */,
+				E5D3F43F1A3AD7A1923F5005 /* Pods_Cuckoo_OCMock_macOS_Cuckoo_OCMock_macOSTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1003,7 +1003,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				996F90892116045116104676 /* Cuckoo_OCMock_iOS.framework in Frameworks */,
-				03D463BBF52ABB0B1C8EC2E4 /* Pods_Cuckoo_OCMock_iOS_Cuckoo_OCMock_iOSTests.framework in Frameworks */,
+				FFA9D8AFE30ECD938A3C6D2A /* Pods_Cuckoo_OCMock_iOS_Cuckoo_OCMock_iOSTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1012,7 +1012,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				48C1BD8F4E0BA4C6CA1D76D3 /* XCTest.framework in Frameworks */,
-				2C2FA515CF8E0EADA4802719 /* Pods_Cuckoo_OCMock_tvOS.framework in Frameworks */,
+				DE4C3E0A8CFE93AE043B9B08 /* Pods_Cuckoo_OCMock_tvOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1070,7 +1070,7 @@
 				B9E2517ABB4C90F2E8FA4696 /* Project */,
 				FEEC9B8DBF0FA8678CE815E0 /* Frameworks */,
 				512C697A5D123B937FE97812 /* Products */,
-				8B97A3E8870091FEDC3BA41A /* Pods */,
+				422DEB5A529D7F3179CB578E /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1108,6 +1108,26 @@
 				03AF60404FD2D5FD3198825E /* StubRecorder.swift */,
 			);
 			path = OCMock;
+			sourceTree = "<group>";
+		};
+		422DEB5A529D7F3179CB578E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D258A7CA85EC209CD723E98E /* Pods-Cuckoo_OCMock-iOS.debug.xcconfig */,
+				A8F9114EFD61D69713AFC056 /* Pods-Cuckoo_OCMock-iOS.release.xcconfig */,
+				E8119F7A29EE4BDFD5D68A22 /* Pods-Cuckoo_OCMock-iOS-Cuckoo_OCMock-iOSTests.debug.xcconfig */,
+				DD602003CA8435C13BED8902 /* Pods-Cuckoo_OCMock-iOS-Cuckoo_OCMock-iOSTests.release.xcconfig */,
+				581CA228CD17DC357B49FD82 /* Pods-Cuckoo_OCMock-macOS.debug.xcconfig */,
+				1282BAB19F7122CB21F6EDCA /* Pods-Cuckoo_OCMock-macOS.release.xcconfig */,
+				5ACE14220E6E1553920E06A8 /* Pods-Cuckoo_OCMock-macOS-Cuckoo_OCMock-macOSTests.debug.xcconfig */,
+				88EEE9C66E94996612ACBB80 /* Pods-Cuckoo_OCMock-macOS-Cuckoo_OCMock-macOSTests.release.xcconfig */,
+				8FE27EC365775AC73043E847 /* Pods-Cuckoo_OCMock-tvOS.debug.xcconfig */,
+				9C262195FADBEA945933FE98 /* Pods-Cuckoo_OCMock-tvOS.release.xcconfig */,
+				6D5748FF5110E65579058F10 /* Pods-Cuckoo_OCMock-tvOS-Cuckoo_OCMock-tvOSTests.debug.xcconfig */,
+				D8D1A9C069AD1D4EDCC67319 /* Pods-Cuckoo_OCMock-tvOS-Cuckoo_OCMock-tvOSTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		422FE57E963E63B12F0FE722 /* Source */ = {
@@ -1233,26 +1253,6 @@
 				C55014A1A85497F2153371D7 /* TestUtils.swift */,
 			);
 			path = Swift;
-			sourceTree = "<group>";
-		};
-		8B97A3E8870091FEDC3BA41A /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				A65698C6F1A85B328960E00F /* Pods-Cuckoo_OCMock-iOS.debug.xcconfig */,
-				5EF08931091932091FBCD06A /* Pods-Cuckoo_OCMock-iOS.release.xcconfig */,
-				9AB5A7BFC63F8EC7B7F98C5C /* Pods-Cuckoo_OCMock-iOS-Cuckoo_OCMock-iOSTests.debug.xcconfig */,
-				1F2738C4C70148AB51417E7C /* Pods-Cuckoo_OCMock-iOS-Cuckoo_OCMock-iOSTests.release.xcconfig */,
-				A379BD3B14519A540FF5934D /* Pods-Cuckoo_OCMock-macOS.debug.xcconfig */,
-				9D7820C43A4F5FFE7F4C9362 /* Pods-Cuckoo_OCMock-macOS.release.xcconfig */,
-				D0EA7A1C0A2405B7D649F73B /* Pods-Cuckoo_OCMock-macOS-Cuckoo_OCMock-macOSTests.debug.xcconfig */,
-				554BFCF6CBEFC532CD6249BC /* Pods-Cuckoo_OCMock-macOS-Cuckoo_OCMock-macOSTests.release.xcconfig */,
-				AE1139E6625FA86BE4EEEFA8 /* Pods-Cuckoo_OCMock-tvOS.debug.xcconfig */,
-				CA95FFBE8BE54433F4E71DE3 /* Pods-Cuckoo_OCMock-tvOS.release.xcconfig */,
-				A0C090A44C83AF7E39E68074 /* Pods-Cuckoo_OCMock-tvOS-Cuckoo_OCMock-tvOSTests.debug.xcconfig */,
-				82F12E41A4D7AC73E5DC7ACA /* Pods-Cuckoo_OCMock-tvOS-Cuckoo_OCMock-tvOSTests.release.xcconfig */,
-			);
-			name = Pods;
-			path = Pods;
 			sourceTree = "<group>";
 		};
 		8BE96ECFE48DA07D6FC730BF /* VerifyProperty */ = {
@@ -1423,12 +1423,12 @@
 				7AEF1D77E05D83F84ADE7A87 /* XCTest.framework */,
 				B81133817083F2B8122BE188 /* XCTest.framework */,
 				648E1DCC3FA05944AC970663 /* XCTest.framework */,
-				8AEBEC4BBD4C6EFD24E4CF7D /* Pods_Cuckoo_OCMock_iOS.framework */,
-				6952C8731A343DEB670C6048 /* Pods_Cuckoo_OCMock_iOS_Cuckoo_OCMock_iOSTests.framework */,
-				6997682D28B5C7A648E54452 /* Pods_Cuckoo_OCMock_macOS.framework */,
-				061141B40E53586BB0720F64 /* Pods_Cuckoo_OCMock_macOS_Cuckoo_OCMock_macOSTests.framework */,
-				F6ED8B9CB636FAC0446D9204 /* Pods_Cuckoo_OCMock_tvOS.framework */,
-				A99424C9DE305813E820A21E /* Pods_Cuckoo_OCMock_tvOS_Cuckoo_OCMock_tvOSTests.framework */,
+				CC87C31AF9604C66718598D4 /* Pods_Cuckoo_OCMock_iOS.framework */,
+				23B4628B60DFE4AFCA2BCBCD /* Pods_Cuckoo_OCMock_iOS_Cuckoo_OCMock_iOSTests.framework */,
+				439436DB30F6B51EBF386D8C /* Pods_Cuckoo_OCMock_macOS.framework */,
+				1577FB116F295FB7EB6149B7 /* Pods_Cuckoo_OCMock_macOS_Cuckoo_OCMock_macOSTests.framework */,
+				315AA320C8878F569D4E9818 /* Pods_Cuckoo_OCMock_tvOS.framework */,
+				6E0D2EDD126561E21E0B4FEB /* Pods_Cuckoo_OCMock_tvOS_Cuckoo_OCMock_tvOSTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1485,12 +1485,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D8D9738C622AC77A0AD3C99C /* Build configuration list for PBXNativeTarget "Cuckoo_OCMock-tvOSTests" */;
 			buildPhases = (
-				FD8C7C3A088BF2C68220E42E /* [CP] Check Pods Manifest.lock */,
+				9DB9508516886341E462CB10 /* [CP] Check Pods Manifest.lock */,
 				DCFCE738380747FA90A17E02 /* Sources */,
 				44A58B8F3B45191E95CE2650 /* Resources */,
 				EE7B717FA1BFB5D77F7E37E0 /* Embed Frameworks */,
 				52AD199FB7C4B081CEB16EB7 /* Frameworks */,
-				0C11D74C9DD887229F7351C6 /* [CP] Embed Pods Frameworks */,
+				495B53AE23D3D900C066641F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1524,12 +1524,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4975D1A314DF2F3B03921C05 /* Build configuration list for PBXNativeTarget "Cuckoo_OCMock-iOSTests" */;
 			buildPhases = (
-				88BC0FAF08413A957EF07440 /* [CP] Check Pods Manifest.lock */,
+				60E8892108626C7FE3B9B43C /* [CP] Check Pods Manifest.lock */,
 				DA8CF62D0B45947696C7CA57 /* Sources */,
 				9F5A861AA4A648E0AA8CBAF3 /* Resources */,
 				95F067D7C8E3858D9C7B1ACA /* Embed Frameworks */,
 				C5252DF514145309C583BC1C /* Frameworks */,
-				4C9B42224DC480073D5709EF /* [CP] Embed Pods Frameworks */,
+				97020C27F73397A2761B5840 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1545,7 +1545,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BAD574EA9F7BD25327F418C8 /* Build configuration list for PBXNativeTarget "Cuckoo_OCMock-macOS" */;
 			buildPhases = (
-				0F79154132794A0E92182A91 /* [CP] Check Pods Manifest.lock */,
+				4352EA547AAE24CD18831FD0 /* [CP] Check Pods Manifest.lock */,
 				289CD55941F8375304A0FA40 /* Headers */,
 				97824D7A6F12CE3AE9E4C89E /* Sources */,
 				E5B19CA15C7230C7DB4DEAE8 /* Resources */,
@@ -1623,7 +1623,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 431006DE18EB78C97D35651A /* Build configuration list for PBXNativeTarget "Cuckoo_OCMock-iOS" */;
 			buildPhases = (
-				6374DD885159B528C0D8D09C /* [CP] Check Pods Manifest.lock */,
+				50E5C13687AF5C02BA1C9B82 /* [CP] Check Pods Manifest.lock */,
 				36034BCF09BB5C60775B1390 /* Headers */,
 				54DBCB29E77138C0A8DA5AE9 /* Sources */,
 				3A87627B88A1B3B0BACF31A3 /* Resources */,
@@ -1643,7 +1643,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D5AB84ECE1C48279A3174C2F /* Build configuration list for PBXNativeTarget "Cuckoo_OCMock-tvOS" */;
 			buildPhases = (
-				56EED83F4C2F3E961DEEF255 /* [CP] Check Pods Manifest.lock */,
+				3B80C9C22C65245E38F14C88 /* [CP] Check Pods Manifest.lock */,
 				66785690DDA051B8D848078C /* Headers */,
 				57C722FCE701A7CB8373AF82 /* Sources */,
 				91DE98464C1F3EC6B841B817 /* Resources */,
@@ -1681,12 +1681,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 419AB8BB7268955611576ABC /* Build configuration list for PBXNativeTarget "Cuckoo_OCMock-macOSTests" */;
 			buildPhases = (
-				BE1C2AFA7434B0851CB266D1 /* [CP] Check Pods Manifest.lock */,
+				AF2659D207E0322E0C512369 /* [CP] Check Pods Manifest.lock */,
 				CABDB0580E21EEBE1C06CB8E /* Sources */,
 				DD60C0DD6531B3CCE27D430B /* Resources */,
 				EBE25D5DF2CC2AF1AACF74DF /* Embed Frameworks */,
 				5345EBC8A03A18A6BD0A24AE /* Frameworks */,
-				D65C1E9708969C8FE6948CCE /* [CP] Embed Pods Frameworks */,
+				04AABED92441A4995954C764 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1844,24 +1844,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0C11D74C9DD887229F7351C6 /* [CP] Embed Pods Frameworks */ = {
+		04AABED92441A4995954C764 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Cuckoo_OCMock-tvOS-Cuckoo_OCMock-tvOSTests/Pods-Cuckoo_OCMock-tvOS-Cuckoo_OCMock-tvOSTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Cuckoo_OCMock-macOS-Cuckoo_OCMock-macOSTests/Pods-Cuckoo_OCMock-macOS-Cuckoo_OCMock-macOSTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Cuckoo_OCMock-tvOS-Cuckoo_OCMock-tvOSTests/Pods-Cuckoo_OCMock-tvOS-Cuckoo_OCMock-tvOSTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Cuckoo_OCMock-macOS-Cuckoo_OCMock-macOSTests/Pods-Cuckoo_OCMock-macOS-Cuckoo_OCMock-macOSTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cuckoo_OCMock-tvOS-Cuckoo_OCMock-tvOSTests/Pods-Cuckoo_OCMock-tvOS-Cuckoo_OCMock-tvOSTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cuckoo_OCMock-macOS-Cuckoo_OCMock-macOSTests/Pods-Cuckoo_OCMock-macOS-Cuckoo_OCMock-macOSTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		0F79154132794A0E92182A91 /* [CP] Check Pods Manifest.lock */ = {
+		3B80C9C22C65245E38F14C88 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1876,7 +1876,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Cuckoo_OCMock-macOS-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Cuckoo_OCMock-tvOS-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1902,21 +1902,43 @@
 			shellPath = /bin/sh;
 			shellScript = "if [ \"$GENERATE_TEST_MOCKS\" = \"NO\" ] ; then exit; fi\n\n# Make sure the generator is up-to-date.\necho 'Building generator.'\n\"$PROJECT_DIR\"/build_generator\n\necho 'Generating mocks.'\n\"$PROJECT_DIR\"/Generator/bin/cuckoonator \\\n\t--verbose";
 		};
-		4C9B42224DC480073D5709EF /* [CP] Embed Pods Frameworks */ = {
+		4352EA547AAE24CD18831FD0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Cuckoo_OCMock-iOS-Cuckoo_OCMock-iOSTests/Pods-Cuckoo_OCMock-iOS-Cuckoo_OCMock-iOSTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Cuckoo_OCMock-iOS-Cuckoo_OCMock-iOSTests/Pods-Cuckoo_OCMock-iOS-Cuckoo_OCMock-iOSTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Cuckoo_OCMock-macOS-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cuckoo_OCMock-iOS-Cuckoo_OCMock-iOSTests/Pods-Cuckoo_OCMock-iOS-Cuckoo_OCMock-iOSTests-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		495B53AE23D3D900C066641F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Cuckoo_OCMock-tvOS-Cuckoo_OCMock-tvOSTests/Pods-Cuckoo_OCMock-tvOS-Cuckoo_OCMock-tvOSTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Cuckoo_OCMock-tvOS-Cuckoo_OCMock-tvOSTests/Pods-Cuckoo_OCMock-tvOS-Cuckoo_OCMock-tvOSTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cuckoo_OCMock-tvOS-Cuckoo_OCMock-tvOSTests/Pods-Cuckoo_OCMock-tvOS-Cuckoo_OCMock-tvOSTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		4D36DA407A6B4E6EFDC6DA5F /* Generate mocks */ = {
@@ -1938,29 +1960,7 @@
 			shellPath = /bin/sh;
 			shellScript = "if [ \"$GENERATE_TEST_MOCKS\" = \"NO\" ] ; then exit; fi\n\n# Make sure the generator is up-to-date.\necho 'Building generator.'\n\"$PROJECT_DIR\"/build_generator\n\necho 'Generating mocks.'\n\"$PROJECT_DIR\"/Generator/bin/cuckoonator \\\n\t--verbose";
 		};
-		56EED83F4C2F3E961DEEF255 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Cuckoo_OCMock-tvOS-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		6374DD885159B528C0D8D09C /* [CP] Check Pods Manifest.lock */ = {
+		50E5C13687AF5C02BA1C9B82 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1982,7 +1982,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		88BC0FAF08413A957EF07440 /* [CP] Check Pods Manifest.lock */ = {
+		60E8892108626C7FE3B9B43C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2023,46 +2023,24 @@
 			shellPath = /bin/sh;
 			shellScript = "if [ \"$GENERATE_TEST_MOCKS\" = \"NO\" ] ; then exit; fi\n\n# Make sure the generator is up-to-date.\necho 'Building generator.'\n\"$PROJECT_DIR\"/build_generator\n\necho 'Generating mocks.'\n\"$PROJECT_DIR\"/Generator/bin/cuckoonator \\\n\t--verbose";
 		};
-		BE1C2AFA7434B0851CB266D1 /* [CP] Check Pods Manifest.lock */ = {
+		97020C27F73397A2761B5840 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Cuckoo_OCMock-macOS-Cuckoo_OCMock-macOSTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D65C1E9708969C8FE6948CCE /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Cuckoo_OCMock-macOS-Cuckoo_OCMock-macOSTests/Pods-Cuckoo_OCMock-macOS-Cuckoo_OCMock-macOSTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Cuckoo_OCMock-iOS-Cuckoo_OCMock-iOSTests/Pods-Cuckoo_OCMock-iOS-Cuckoo_OCMock-iOSTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Cuckoo_OCMock-macOS-Cuckoo_OCMock-macOSTests/Pods-Cuckoo_OCMock-macOS-Cuckoo_OCMock-macOSTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Cuckoo_OCMock-iOS-Cuckoo_OCMock-iOSTests/Pods-Cuckoo_OCMock-iOS-Cuckoo_OCMock-iOSTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cuckoo_OCMock-macOS-Cuckoo_OCMock-macOSTests/Pods-Cuckoo_OCMock-macOS-Cuckoo_OCMock-macOSTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cuckoo_OCMock-iOS-Cuckoo_OCMock-iOSTests/Pods-Cuckoo_OCMock-iOS-Cuckoo_OCMock-iOSTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		FD8C7C3A088BF2C68220E42E /* [CP] Check Pods Manifest.lock */ = {
+		9DB9508516886341E462CB10 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2078,6 +2056,28 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-Cuckoo_OCMock-tvOS-Cuckoo_OCMock-tvOSTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AF2659D207E0322E0C512369 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Cuckoo_OCMock-macOS-Cuckoo_OCMock-macOSTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2734,7 +2734,7 @@
 /* Begin XCBuildConfiguration section */
 		09A17ABB9CE8D5E803DBC7E5 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 82F12E41A4D7AC73E5DC7ACA /* Pods-Cuckoo_OCMock-tvOS-Cuckoo_OCMock-tvOSTests.release.xcconfig */;
+			baseConfigurationReference = D8D1A9C069AD1D4EDCC67319 /* Pods-Cuckoo_OCMock-tvOS-Cuckoo_OCMock-tvOSTests.release.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = "Derived/InfoPlists/Cuckoo_OCMock-tvOSTests-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2755,7 +2755,7 @@
 		};
 		0F8DD70D0BDBF0F32D3A5D2A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A379BD3B14519A540FF5934D /* Pods-Cuckoo_OCMock-macOS.debug.xcconfig */;
+			baseConfigurationReference = 581CA228CD17DC357B49FD82 /* Pods-Cuckoo_OCMock-macOS.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
@@ -2864,7 +2864,7 @@
 		};
 		6788BA84E4C3F2DF4D49FDD1 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1F2738C4C70148AB51417E7C /* Pods-Cuckoo_OCMock-iOS-Cuckoo_OCMock-iOSTests.release.xcconfig */;
+			baseConfigurationReference = DD602003CA8435C13BED8902 /* Pods-Cuckoo_OCMock-iOS-Cuckoo_OCMock-iOSTests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Derived/InfoPlists/Cuckoo_OCMock-iOSTests-Info.plist";
@@ -2887,7 +2887,7 @@
 		};
 		68C3608166DB6A5DCC142D0A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A0C090A44C83AF7E39E68074 /* Pods-Cuckoo_OCMock-tvOS-Cuckoo_OCMock-tvOSTests.debug.xcconfig */;
+			baseConfigurationReference = 6D5748FF5110E65579058F10 /* Pods-Cuckoo_OCMock-tvOS-Cuckoo_OCMock-tvOSTests.debug.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = "Derived/InfoPlists/Cuckoo_OCMock-tvOSTests-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2941,7 +2941,7 @@
 		};
 		73511D4869AFB48ADC79B8C1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9AB5A7BFC63F8EC7B7F98C5C /* Pods-Cuckoo_OCMock-iOS-Cuckoo_OCMock-iOSTests.debug.xcconfig */;
+			baseConfigurationReference = E8119F7A29EE4BDFD5D68A22 /* Pods-Cuckoo_OCMock-iOS-Cuckoo_OCMock-iOSTests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Derived/InfoPlists/Cuckoo_OCMock-iOSTests-Info.plist";
@@ -2996,7 +2996,7 @@
 		};
 		88C896DF3C7EA2C24B2A7B9E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A65698C6F1A85B328960E00F /* Pods-Cuckoo_OCMock-iOS.debug.xcconfig */;
+			baseConfigurationReference = D258A7CA85EC209CD723E98E /* Pods-Cuckoo_OCMock-iOS.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
@@ -3031,7 +3031,7 @@
 		};
 		8FC167D6E355658B5903183F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9D7820C43A4F5FFE7F4C9362 /* Pods-Cuckoo_OCMock-macOS.release.xcconfig */;
+			baseConfigurationReference = 1282BAB19F7122CB21F6EDCA /* Pods-Cuckoo_OCMock-macOS.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
@@ -3297,7 +3297,7 @@
 		};
 		C7DB288DC16F2BA0020CA917 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5EF08931091932091FBCD06A /* Pods-Cuckoo_OCMock-iOS.release.xcconfig */;
+			baseConfigurationReference = A8F9114EFD61D69713AFC056 /* Pods-Cuckoo_OCMock-iOS.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
@@ -3354,7 +3354,7 @@
 		};
 		D9C80FCB45BF96859CF72662 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D0EA7A1C0A2405B7D649F73B /* Pods-Cuckoo_OCMock-macOS-Cuckoo_OCMock-macOSTests.debug.xcconfig */;
+			baseConfigurationReference = 5ACE14220E6E1553920E06A8 /* Pods-Cuckoo_OCMock-macOS-Cuckoo_OCMock-macOSTests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "-";
 				INFOPLIST_FILE = "Derived/InfoPlists/Cuckoo_OCMock-macOSTests-Info.plist";
@@ -3396,7 +3396,7 @@
 		};
 		DC200B677208FA5563B50AD7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AE1139E6625FA86BE4EEEFA8 /* Pods-Cuckoo_OCMock-tvOS.debug.xcconfig */;
+			baseConfigurationReference = 8FE27EC365775AC73043E847 /* Pods-Cuckoo_OCMock-tvOS.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
@@ -3452,7 +3452,7 @@
 		};
 		F46AC1AF8E41D78201C5BDE9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CA95FFBE8BE54433F4E71DE3 /* Pods-Cuckoo_OCMock-tvOS.release.xcconfig */;
+			baseConfigurationReference = 9C262195FADBEA945933FE98 /* Pods-Cuckoo_OCMock-tvOS.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
@@ -3485,7 +3485,7 @@
 		};
 		F4E1D3C8F565E2D98246CF67 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 554BFCF6CBEFC532CD6249BC /* Pods-Cuckoo_OCMock-macOS-Cuckoo_OCMock-macOSTests.release.xcconfig */;
+			baseConfigurationReference = 88EEE9C66E94996612ACBB80 /* Pods-Cuckoo_OCMock-macOS-Cuckoo_OCMock-macOSTests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "-";
 				INFOPLIST_FILE = "Derived/InfoPlists/Cuckoo_OCMock-macOSTests-Info.plist";

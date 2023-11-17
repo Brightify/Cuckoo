@@ -2,6 +2,8 @@ import Foundation
 import FileKit
 
 final class Module {
+    static var overriddenOutput: String?
+
     let name: String
     let imports: [String]
     let testableImports: [String]
@@ -14,7 +16,7 @@ final class Module {
     let xcodeproj: Xcodeproj?
 
     init(name: String, output: String?, configurationPath: Path, dto: DTO) throws {
-        guard output != nil || dto.output != nil else {
+        guard Module.overriddenOutput != nil || output != nil || dto.output != nil else {
             throw ModuleInitError.missingOutput(name: name)
         }
 
@@ -26,7 +28,7 @@ final class Module {
         }
         self.exclude = dto.exclude?.map(\.trimmed) ?? []
         self.regex = dto.regex
-        self.output = (output ?? dto.output)!
+        self.output = (Module.overriddenOutput ?? dto.output ?? output)!
         self.filenameFormat = dto.filenameFormat
         self.options = Options(
             glob: dto.options?.glob ?? true,
