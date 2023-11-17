@@ -43,7 +43,7 @@ final class Crawler: SyntaxVisitor {
     }
 
     override func visit(_ node: ClassDeclSyntax) -> SyntaxVisitorContinueKind {
-        log(node)
+        debug(node)
 
         // Skip `final` classes.
         guard !node.modifiers.isFinal else { return .skipChildren }
@@ -69,7 +69,7 @@ final class Crawler: SyntaxVisitor {
     }
 
     override func visit(_ node: ProtocolDeclSyntax) -> SyntaxVisitorContinueKind {
-        log(node)
+        debug(node)
         let inheritedTypes = inheritedTypes(from: node.inheritanceClause?.inheritedTypes)
         var token = ProtocolDeclaration(
             parent: container,
@@ -93,7 +93,7 @@ final class Crawler: SyntaxVisitor {
 
     // Enum mocking is not supported, this is used to parse nested classes.
     override func visit(_ node: EnumDeclSyntax) -> SyntaxVisitorContinueKind {
-        log(node)
+        debug(node)
         var token = NamespaceDeclaration(
             parent: container,
             attributes: attributes(from: node.attributes),
@@ -113,7 +113,7 @@ final class Crawler: SyntaxVisitor {
 
     // Extension mocking is not supported, this is used to parse nested classes.
     override func visit(_ node: ExtensionDeclSyntax) -> SyntaxVisitorContinueKind {
-        log(node)
+        debug(node)
         var token = NamespaceDeclaration(
             parent: container,
             attributes: attributes(from: node.attributes),
@@ -133,7 +133,7 @@ final class Crawler: SyntaxVisitor {
 
     // Struct mocking is not supported, this is used to parse nested classes.
     override func visit(_ node: StructDeclSyntax) -> SyntaxVisitorContinueKind {
-        log(node)
+        debug(node)
         var token = NamespaceDeclaration(
             parent: container,
             attributes: attributes(from: node.attributes),
@@ -187,7 +187,7 @@ final class Crawler: SyntaxVisitor {
         }
     }
 
-    private func log(_ node: DeclSyntaxProtocol, additionalInfo: String? = nil) {
+    private func debug(_ node: DeclSyntaxProtocol, additionalInfo: String? = nil) {
         let description: String
         switch node {
         case let node as ClassDeclSyntax:
@@ -204,7 +204,7 @@ final class Crawler: SyntaxVisitor {
             description = "Unknown declaration \(node.trimmed.description)"
         }
 
-        cuckoonator.log(
+        log(
             .verbose,
             message: [description, additionalInfo].compactMap { $0 }.joined(separator: " ")
         )
