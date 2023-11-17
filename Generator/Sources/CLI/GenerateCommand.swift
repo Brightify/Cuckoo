@@ -8,7 +8,7 @@ import FileKit
 struct GenerateCommand: AsyncParsableCommand {
     static var configuration = CommandConfiguration(
         commandName: "Generate",
-        abstract: "The Cuckoo mock generator.",
+        abstract: "The Cuckoonator.",
         usage: """
         cuckoonator usage TODO
         """,
@@ -26,14 +26,16 @@ struct GenerateCommand: AsyncParsableCommand {
     @Flag(help: "Include extra information during generation and in the generated code.")
     var verbose = false
 
+    private var overriddenOutput: String?
+
     mutating func run() async throws {
         Logger.shared.logLevel = verbose ? .verbose : .info
 
         let projectDir = ProcessInfo.processInfo.environment["PROJECT_DIR"]
-        let configurationToml = [
+        let configurationFile = [
             configurationPath.map { Path($0) }?.relative(to: projectDir)?.rawValue,
-            projectDir.map { "\($0)/Cuckoofile" },
-            "\(FileManager.default.currentDirectoryPath)/Cuckoofile",
+            projectDir.map { "\($0)/Cuckoofile.toml" },
+            "\(FileManager.default.currentDirectoryPath)/Cuckoofile.toml",
         ]
         .lazy
         .compactMap { pathString -> (path: Path, contents: String)? in
@@ -44,70 +46,17 @@ struct GenerateCommand: AsyncParsableCommand {
         }
         .first
 
-        guard let configurationToml else { throw GenerateError.missingConfiguration }
-       
-        log(.info, message: "Using configuration file at path:", configurationToml.path)
+        guard let configurationFile else { throw GenerateError.missingConfiguration }
 
-        var errorMessages: [String] = []
-        var globalOutput: String?
-        var modules: [Module] = []
-        let table = try TOMLTable(string: configurationToml.contents)
+        log(.info, message: "Using configuration file at path:", configurationFile.path)
 
-        // Sorting to make sure global properties are evaluated first to be available as fallbacks.
-        let sortedTable = table.sorted { lhs, rhs in
-            let (_, lhsValue) = lhs
-            let (_, rhsValue) = rhs
-            switch (lhsValue.type, rhsValue.type) {
-            case (.table, .table):
-                return true
-            case (.table, _):
-                return false
-            case (_, .table):
-                return true
-            default:
-                return true
-            }
-        }
+        overriddenOutput = ProcessInfo.processInfo.environment["CUCKOO_OVERRIDE_OUTPUT"]
+        Module.overriddenOutput = overriddenOutput
 
-        let decoder = TOMLDecoder()
-        for (key, value) in sortedTable {
-            switch key {
-            case "output":
-                if globalOutput != nil {
-                    errorMessages.append("Multiple global `output` parameters.")
-                }
-                globalOutput = value.string
-                log(.verbose, message: "Global output:", globalOutput as Any)
-            case "module":
-                guard let modulesTable = value.table else {
-                    throw GenerateError.modulesMustBeTable
-                }
-                for (moduleName, innards) in modulesTable {
-                    guard let moduleTable = innards.table else {
-                        throw GenerateError.modulesMustBeTable
-                    }
-                    let dto = try decoder.decode(Module.DTO.self, from: moduleTable)
-                    do {
-                        let module = try Module(
-                            name: moduleName,
-                            output: globalOutput,
-                            configurationPath: configurationToml.path,
-                            dto: dto
-                        )
-                        log(.verbose, message: "Module \(moduleName):", module)
-                        modules.append(module)
-                    } catch {
-                        errorMessages.append(String(describing: error))
-                    }
-                }
-            default:
-                continue
-            }
-        }
-
-        guard errorMessages.isEmpty else {
-            throw GenerateError.configurationErrors(details: errorMessages)
-        }
+        let modules = try modules(
+            configurationPath: configurationFile.path,
+            contents: configurationFile.contents
+        )
 
         // To not capture mutating self.
         let verbose = self.verbose
@@ -120,7 +69,7 @@ struct GenerateCommand: AsyncParsableCommand {
                 if outputPath.isAbsolute {
                     absoluteOutputPath = outputPath
                 } else {
-                    absoluteOutputPath = configurationToml.path.parent + outputPath
+                    absoluteOutputPath = configurationFile.path.parent + outputPath
                 }
                 let isOutputDirectory: Bool
                 if absoluteOutputPath.exists && absoluteOutputPath.isDirectory {
@@ -161,6 +110,72 @@ struct GenerateCommand: AsyncParsableCommand {
         }
     }
 
+    func modules(configurationPath: Path, contents: String) throws -> [Module] {
+        var errorMessages: [String] = []
+        var globalOutput: String? = overriddenOutput
+        var modules: [Module] = []
+        let table = try TOMLTable(string: contents)
+
+        // Sorting to make sure global properties are evaluated first to be available as fallbacks.
+        let sortedTable = table.sorted { lhs, rhs in
+            let (_, lhsValue) = lhs
+            let (_, rhsValue) = rhs
+            switch (lhsValue.type, rhsValue.type) {
+            case (.table, .table):
+                return true
+            case (.table, _):
+                return false
+            case (_, .table):
+                return true
+            default:
+                return true
+            }
+        }
+
+        let decoder = TOMLDecoder()
+        for (key, value) in sortedTable {
+            switch key {
+            case "output":
+                if globalOutput == nil {
+                    log(.verbose, message: "Global output:", globalOutput as Any)
+                    globalOutput = value.string
+                } else {
+                    errorMessages.append("Multiple global `output` parameters. Behavior is undefined.")
+                }
+            case "modules":
+                guard let modulesTable = value.table else {
+                    throw GenerateError.modulesMustBeTable
+                }
+                for (moduleName, innards) in modulesTable {
+                    guard let moduleTable = innards.table else {
+                        throw GenerateError.modulesMustBeTable
+                    }
+                    let dto = try decoder.decode(Module.DTO.self, from: moduleTable)
+                    do {
+                        let module = try Module(
+                            name: moduleName,
+                            output: globalOutput,
+                            configurationPath: configurationPath,
+                            dto: dto
+                        )
+                        log(.verbose, message: "Module \(moduleName):", module)
+                        modules.append(module)
+                    } catch {
+                        errorMessages.append(String(describing: error))
+                    }
+                }
+            default:
+                continue
+            }
+        }
+
+        guard errorMessages.isEmpty else {
+            throw GenerateError.configurationErrors(details: errorMessages)
+        }
+
+        return modules
+    }
+
     private enum GenerateError: Error, CustomStringConvertible {
         case missingConfiguration
         case modulesMustBeTable
@@ -179,7 +194,7 @@ struct GenerateCommand: AsyncParsableCommand {
                 """
             case .modulesMustBeTable:
                 return """
-                Modules must be TOML tables. Define them as \("[module.ModuleName]".bold) with properties beneath.
+                Modules must be TOML tables. Define them as \("[modules.ModuleName]".bold) with properties beneath.
                 """
             case .configurationErrors(let details):
                 return """

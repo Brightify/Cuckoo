@@ -41,6 +41,7 @@ let project = Project(
     name: "Generator",
     options: .options(automaticSchemesOptions: .disabled, disableSynthesizedResourceAccessors: true),
     packages: [
+        // Any dependency changes must also be reflected in ../Package.swift.
         .package(url: "https://github.com/nvzqz/FileKit.git", .exact("6.1.0")),
         .package(url: "https://github.com/kylef/Stencil.git", .exact("0.15.1")),
         .package(url: "https://github.com/apple/swift-syntax.git", .exact("509.0.0")),

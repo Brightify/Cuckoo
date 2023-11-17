@@ -196,7 +196,7 @@ final class Generator {
             case .noXcodeproj(let path):
                 return "Couldn't find any project in directory \(path.rawValue.bold)."
             case .multipleXcodeprojs(let xcodeprojNames):
-                return "Couldn't automatically select project among \(xcodeprojNames.map { $0.bold }.formatted())."
+                return "Couldn't automatically select project among \(xcodeprojNames.map { $0.bold }.joined(separator: ", "))."
             case .noXcodeprojTarget(let path, let targetName):
                 return "Couldn't find any target named \(targetName.bold) in project \(path.rawValue.bold)."
             case .multipleXcodeprojTargets(let path, let targetName, let count):
