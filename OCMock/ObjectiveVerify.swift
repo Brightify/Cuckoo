@@ -1,3 +1,4 @@
+#if canImport(XCTest)
 import XCTest
 import OCMock
 
@@ -21,3 +22,4 @@ private extension String {
         }
     }
 }
+#endif
