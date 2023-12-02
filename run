@@ -5,12 +5,14 @@ FILE_NAME="cuckoonator"
 FILE_PATH="$SCRIPT_PATH/$FILE_NAME"
 GREP_OPTIONS=""
 
-function perform_curl {
+function download_generator {
+  echo "Downloading generator version $1..."
   if [[ ! -z "$GITHUB_ACCESS_TOKEN" ]]; then
     CURL_OPTIONS=(-H "Authorization: token $GITHUB_ACCESS_TOKEN")
   fi
 
-  DOWNLOAD_URL=$(curl "${CURL_OPTIONS[@]}" "$1" | grep -oe '"browser_download_url":\s*"[^" ]*"' | grep -oe 'http[^" ]*' | grep "$FILE_NAME" | head -1)
+  URL="https://api.github.com/repos/Brightify/Cuckoo/releases/tags/$1"
+  DOWNLOAD_URL=$(curl "${CURL_OPTIONS[@]}" "$URL" | grep -oe '"browser_download_url":\s*"[^" ]*"' | grep -oe 'http[^" ]*' | grep "$FILE_NAME" | head -1)
 
   if [[ -z "$DOWNLOAD_URL" ]]; then
     echo "Error: Failed to fetch download URL for the Cuckoo Generator."
@@ -19,26 +21,16 @@ function perform_curl {
     echo "Downloading Cuckoo Generator from URL: $DOWNLOAD_URL"
     curl "${CURL_OPTIONS[@]}" -Lo "$FILE_PATH" "$DOWNLOAD_URL"
   fi
-}
-
-function download_generator {
-  if [[ "$1" = "latest" ]]; then
-    echo "Downloading latest version..."
-    perform_curl "https://api.github.com/repos/Brightify/Cuckoo/releases/latest"
-  else
-    echo "Downloading version $1..."
-    perform_curl "https://api.github.com/repos/Brightify/Cuckoo/releases/tags/$1"
-  fi
   chmod +x "$FILE_NAME"
 }
 
-function build_generator {
+function get_generator {
   pushd "$SCRIPT_PATH"
-  if [[ ! -z "$1" ]]; then
-    download_generator "$1"
+  if [[ ! -z "$DOWNLOAD" ]]; then
+    download_generator "$LIB_VERSION"
   else
     if [[ -d "$SCRIPT_PATH/Generator" ]]; then
-      echo "Building..."
+      echo "Building generator..."
       ./build_generator
       if [[ "$?" -ne 0 ]]; then
         echo "Build seems to have failed for some reason. Please file an issue on GitHub."
@@ -46,38 +38,43 @@ function build_generator {
       fi
       mv "$SCRIPT_PATH/Generator/bin/$FILE_NAME" "$FILE_PATH"
     else
-      echo "Couldn't build. Generator source code not found. (expected in the 'Generator' directory)"
-      download_generator "$2"
+      echo "Couldn't build generator – source code not found. (expected in the 'Generator' directory)"
+      echo "Pass the --download option to fetch the binary from GitHub."
+      exit 1
     fi
   fi
   popd
+}
+
+# Source: https://stackoverflow.com/a/58333404/11558478
+function ver_cmp {
+  local IFS=.
+  local V1=($1) V2=($2) I
+  for ((I=0 ; I<${#V1[*]} || I<${#V2[*]} ; I++)) ; do
+      [[ ${V1[$I]:-0} -lt ${V2[$I]:-0} ]] && echo -1 && return
+      [[ ${V1[$I]:-0} -gt ${V2[$I]:-0} ]] && echo 1 && return
+  done
+  echo 0
+}
+
+function ver_lt {
+  [[ $(ver_cmp "$1" "$2") -eq -1 ]]
 }
 
 echo "Script path: $SCRIPT_PATH"
 
 # parse arguments
 POSITIONAL=()
-while [[ $# -gt 0 ]]
-do
+while [[ $# -gt 0 ]]; do
 case $1 in
   -d|--download)
-    if [[ "$2" = "latest" ]]; then
-      DOWNLOAD="latest"
-      shift
-    else
-      DOWNLOAD=$(echo "$2" | grep -e "\d\d*\.\d\d*\.\d\d*")
-      if [[ ! -z $DOWNLOAD ]]; then
-        shift
-      else
-        DOWNLOAD="latest"
-      fi
-    fi
+    DOWNLOAD=1
     shift
   ;;
 
   -c|--clean)
     CLEAN=1
-    echo "Performing clean build."
+    echo 'Performing clean generator build.'
     shift
   ;;
 
@@ -85,15 +82,19 @@ case $1 in
     POSITIONAL+=("$1") # save it in an array for later
     shift
   ;;
-esac
-done
+esac; done
 set -- "${POSITIONAL[@]}" # restore positional parameters
 
-if [[ ! -e "$FILE_PATH" ]] || [[ ! -z "$CLEAN" ]]; then
-  echo "No Cuckoo Generator found."
-  build_generator "$DOWNLOAD"
+LIB_VERSION=$(<version)
+LIB_VERSION="1.10.3"
+GEN_VERSION=$("$FILE_PATH" --version)
+
+# Procure a generator if there's none available, clean build is requested, or the generator version is older than library version.
+if [[ ! -e "$FILE_PATH" ]] || [[ ! -z "$CLEAN" ]] || ver_lt "$GEN_VERSION" "$LIB_VERSION"; then
+  get_generator
 fi
 
+# Run the generator and pass in the rest of the arguments.
 INPUT_FILES=""
 if [[ "$#" > 0 ]]; then
   INPUT_FILES=$(printf '%q ' "$@")
@@ -103,8 +104,7 @@ if [[ -z "$SCRIPT_INPUT_FILE_COUNT" ]]; then
   SCRIPT_INPUT_FILE_COUNT=0
 fi
 
-for (( i=0; i<"$SCRIPT_INPUT_FILE_COUNT"; i++ ))
-do
+for (( i=0; i<"$SCRIPT_INPUT_FILE_COUNT"; i++ )); do
   INPUT_FILE="SCRIPT_INPUT_FILE_$i"
   INPUT_FILES+=" $(printf '%q' "${!INPUT_FILE}")"
 done

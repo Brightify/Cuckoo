@@ -32,8 +32,7 @@ platform :mac do
   end
 
   def upload_release release_type
-    # Building Cuckoo Generator
-    sh('../build_generator')
+    version = version_bump_podspec(path: 'Cuckoo.podspec', bump_type: release_type)
 
     # Settings
     binary_name = 'cuckoonator'
@@ -55,6 +54,12 @@ platform :mac do
       username = UI.input "Please type in your GitHub username or cancel the release and define enviroment variable \"#{username_var_name}\" with your GitHub username."
     end
 
+    # Build Cuckoonator
+    version_file = '../Generator/Sources/CLI/Version.swift'
+    text = File.read(version_file)
+    content = text.gsub(/^\w*let\w*version\w*=\w*".*"\w*$/, "let version = \"#{version}\"")
+    File.open(version_file, 'w') { |file| file << content }
+    sh('../build_generator')
 
     # URL variables
     repo_path = 'Brightify/Cuckoo'
@@ -62,12 +67,14 @@ platform :mac do
     api_url = "https://api.#{base_url}"
     auth_string = "#{username}:#{access_token}"
     changelog = create_changelog.gsub(/`/, '``').gsub(/'/, '&#39;').gsub(/"/, '&#34;').gsub(/\n/, '\\n')
-    version = version_bump_podspec(path: 'Cuckoo.podspec', bump_type: release_type)
+
+    # Create a version file to sync generator version by.
+    File.open('../version', 'w') { |file| file << version }
 
     # Make sure the changed podspec is valid.
     pod_lib_lint(allow_warnings: true)
 
-    git_commit(path: './Cuckoo.podspec', message: "Bump version.")
+    git_commit(path: ['./Cuckoo.podspec', 'version'], message: "Bump version.")
     add_git_tag(tag: version)
     push_to_git_remote
 
@@ -76,12 +83,12 @@ platform :mac do
     release_body = "#{changelog}"
     creation_body = "'{\"tag_name\":\"#{version}\",\"target_commitish\":\"master\", \"name\":\"#{release_title}\", \"body\":\"#{release_body}\", \"draft\":false, \"prerelease\":false}'"
     creation_response = JSON.parse(`curl -X POST -d #{creation_body} -u #{auth_string} #{api_url} -v`)
-    UI.crash! 'Release draft creation failed!' unless creation_response
+    UI.crash! 'Release creation failed!' unless creation_response
     upload_url = (creation_response['upload_url']).sub(/{.*name.*}/, '')
 
     # https://developer.github.com/v3/repos/releases/#upload-a-release-asset
     upload_response = JSON.parse(`curl -X POST --data-binary "@#{cuckoo_gen_path}" -u "#{auth_string}" "#{upload_url}?name=#{binary_name}" -H "Content-Type:application/octet-stream"`)
-    UI.crash! 'Release draft upload failed!' unless upload_response
+    UI.crash! 'Release upload failed!' unless upload_response
 
     pod_push(
       path: 'Cuckoo.podspec',
@@ -89,7 +96,7 @@ platform :mac do
       use_bundle_exec: true,
     )
 
-    UI.success "All done!\nYou can now visit #{creation_response['url']} (command+click) and release the thing."
+    UI.success "All done!\nYou can now visit #{creation_response['url']} (command+click) to verify the release."
   end
 
   def create_changelog
