@@ -8,11 +8,8 @@ import FileKit
 struct GenerateCommand: AsyncParsableCommand {
     static var configuration = CommandConfiguration(
         commandName: "Generate",
-        abstract: "The Cuckoonator.",
-        usage: """
-        cuckoonator usage TODO
-        """,
-        version: "2.0.0",
+        abstract: "Cuckoo CLI tool for generating mocks according to the specified configuration.",
+        version: version,
         helpNames: .shortAndLong
     )
 
