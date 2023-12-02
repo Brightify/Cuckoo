@@ -30,18 +30,8 @@ extension String {
     }
 }
 
-extension Sequence where Element: Token {
-    func only<T: Token>(_ type: T.Type) -> [T] {
-        return compactMap { $0 as? T }
-    }
-
-    func noneOf<T: Token>(_ type: T.Type) -> [Iterator.Element] {
-        return filter { !($0 is T) }
-    }
-}
-
 /// Reserved keywords that are not allowed as function names, function parameters, or local variables, etc.
-fileprivate let reservedKeywordsNotAllowed: Set = [
+fileprivate let reservedKeywords: Set = [
     // Keywords used in declarations:
     "associatedtype", "class", "deinit", "enum", "extension", "fileprivate", "func", "import", "init", "inout",
     "internal", "let", "operator", "private", "precedencegroup", "protocol", "public", "rethrows", "static",
@@ -50,12 +40,12 @@ fileprivate let reservedKeywordsNotAllowed: Set = [
     "break", "case", "catch", "continue", "default", "defer", "do", "else", "fallthrough", "for", "guard", "if", "in",
     "repeat", "return", "throw", "switch", "where", "while",
     // Keywords used in expressions and types:
-    "Any", "as", "catch", "false", "is", "nil", "rethrows", "self", "super", "throw", "throws", "true", "try",
+    "Any", "as", "catch", "false", "is", "nil", "rethrows", "self", "super", "throw", "throws", "true", "try", "async",
     // Keywords used in patterns:
     "_",
 ]
 
 /// Utility function for escaping reserved keywords for a symbol name.
 internal func escapeReservedKeywords(for name: String) -> String {
-    reservedKeywordsNotAllowed.contains(name) ? "`\(name)`" : name
+    reservedKeywords.contains(name) ? "`\(name)`" : name
 }
