@@ -59,7 +59,7 @@ extension {{ container.parentFullyQualifiedName }} {
     {% for attribute in property.attributes %}
     {{ attribute }}
     {% endfor %}
-    {{ property.accessibility|withSpace }}{% if property.isOverriding %}override {% endif %} var {{ property.name }}: {{ property.type }} {
+    {{ property.accessibility|withSpace }}{% if property.isOverriding %}override {% endif %} var {{ property.name|escapeReservedKeywords }}: {{ property.type }} {
         get {%+ if property.isAsync %}async {%+ endif %}{% if property.isThrowing %}throws {%+ endif %}{
             return {%+ if property.isThrowing %}try {%+ endif %}{% if property.isAsync %}await {%+ endif %}cuckoo_manager.getter{% if property.isThrowing %}Throws{% endif %}(
                 "{{ property.name }}",
