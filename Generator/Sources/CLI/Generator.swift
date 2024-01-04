@@ -42,11 +42,15 @@ final class Generator {
             }
         }
         let flatMappedFiles = files.map { $0.flatMappingMemberContainers() }
-        let finalFiles = module.options.noInheritance ? flatMappedFiles : inheritNSObject(mergingInheritance(flatMappedFiles))
+        let finalFiles = if module.options.enableInheritance {
+            inheritNSObject(mergingInheritance(flatMappedFiles))
+        } else {
+            flatMappedFiles
+        }
 
         // filter classes/protocols based on the settings passed to the generator
         var typeFilters: [TokenFilter] = []
-        if module.options.noClassMocking {
+        if module.options.protocolsOnly {
             typeFilters.append(ignoreClasses)
         }
         if let regex = module.regex {
@@ -63,7 +67,7 @@ final class Generator {
             GeneratedFile(
                 path: file.file.path,
                 contents: [
-                    module.options.noHeaders ? nil : FileHeaderHandler.header(for: file, timestamp: timestamp),
+                    module.options.omitHeaders ? nil : FileHeaderHandler.header(for: file, timestamp: timestamp),
                     FileHeaderHandler.imports(for: file, imports: module.imports, testableImports: module.testableImports),
                     try GeneratorHelper.generate(tokens: file.tokens),
                 ]

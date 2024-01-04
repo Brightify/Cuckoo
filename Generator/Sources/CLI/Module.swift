@@ -33,9 +33,9 @@ final class Module {
         self.options = Options(
             glob: dto.options?.glob ?? true,
             keepDocumentation: dto.options?.keepDocumentation ?? true,
-            noInheritance: dto.options?.noInheritance ?? false,
-            noClassMocking: dto.options?.noClassMocking ?? false,
-            noHeaders: dto.options?.noHeaders ?? false
+            enableInheritance: dto.options?.enableInheritance ?? true,
+            protocolsOnly: dto.options?.protocolsOnly ?? false,
+            omitHeaders: dto.options?.omitHeaders ?? false
         )
 
         if let xcodeproj = dto.xcodeproj {
@@ -61,9 +61,9 @@ final class Module {
     struct Options {
         let glob: Bool
         let keepDocumentation: Bool
-        let noInheritance: Bool
-        let noClassMocking: Bool
-        let noHeaders: Bool
+        let enableInheritance: Bool
+        let protocolsOnly: Bool
+        let omitHeaders: Bool
     }
 
     struct Xcodeproj {
@@ -104,9 +104,9 @@ extension Module {
         struct Options: Decodable {
             let glob: Bool?
             let keepDocumentation: Bool?
-            let noInheritance: Bool?
-            let noClassMocking: Bool?
-            let noHeaders: Bool?
+            let enableInheritance: Bool?
+            let protocolsOnly: Bool?
+            let omitHeaders: Bool?
         }
 
         struct Xcodeproj: Decodable {
@@ -139,9 +139,9 @@ extension Module.Options: CustomDebugStringConvertible {
         [
             "glob: \(String(glob).bold)",
             "keep documentation: \(String(keepDocumentation).bold)",
-            "disabled inheritance: \(String(noInheritance).bold)",
-            "disabled class mocking: \(String(noClassMocking).bold)",
-            "disabled headers: \(String(noHeaders).bold)",
+            "enable inheritance: \(String(enableInheritance).bold)",
+            "protocols only: \(String(protocolsOnly).bold)",
+            "omit headers: \(String(omitHeaders).bold)",
         ]
         .compactMap { $0 }
         .joined(separator: "\n")

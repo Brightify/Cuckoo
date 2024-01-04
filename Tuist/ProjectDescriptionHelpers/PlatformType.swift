@@ -19,11 +19,11 @@ public enum PlatformType: String {
     public var libraryDeploymentTarget: DeploymentTarget {
         switch self {
         case .iOS:
-            return .iOS(targetVersion: "11.0", devices: [.iphone, .ipad])
+            return .iOS(targetVersion: "13.0", devices: [.iphone, .ipad])
         case .macOS:
             return .macOS(targetVersion: "10.15")
         case .tvOS:
-            return .tvOS(targetVersion: "11.0")
+            return .tvOS(targetVersion: "13.0")
         }
     }
 

@@ -10,13 +10,13 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Copy executable"
-               scriptText = "\cp &quot;$BUILT_PRODUCTS_DIR/$EXECUTABLE_NAME&quot; &quot;$PROJECT_DIR/bin/cuckoo_generator&quot;">
+               scriptText = "\cp &quot;$BUILT_PRODUCTS_DIR/$EXECUTABLE_NAME&quot; &quot;$PROJECT_DIR/bin/cuckoonator&quot;">
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
-                     BlueprintIdentifier = "BFA35E87D881C5E54340E27C"
-                     BuildableName = "cuckoo_generator"
-                     BlueprintName = "CuckooGenerator"
+                     BlueprintIdentifier = "B015B928C38A178E17010830"
+                     BuildableName = "cuckoonator"
+                     BlueprintName = "Cuckoonator"
                      ReferencedContainer = "container:Generator.xcodeproj">
                   </BuildableReference>
                </EnvironmentBuildable>
@@ -32,9 +32,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BFA35E87D881C5E54340E27C"
-               BuildableName = "cuckoo_generator"
-               BlueprintName = "CuckooGenerator"
+               BlueprintIdentifier = "B015B928C38A178E17010830"
+               BuildableName = "cuckoonator"
+               BlueprintName = "Cuckoonator"
                ReferencedContainer = "container:Generator.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -44,9 +44,18 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      disableMainThreadChecker = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "210A2D4A8CA610B2DBD38F07"
+               BuildableName = "CuckoonatorTests.xctest"
+               BlueprintName = "CuckoonatorTests"
+               ReferencedContainer = "container:Generator.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
@@ -64,31 +73,19 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "BFA35E87D881C5E54340E27C"
-            BuildableName = "cuckoo_generator"
-            BlueprintName = "CuckooGenerator"
+            BlueprintIdentifier = "B015B928C38A178E17010830"
+            BuildableName = "cuckoonator"
+            BlueprintName = "Cuckoonator"
             ReferencedContainer = "container:Generator.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "generate"
+            argument = "--configuration ../Cuckoofile"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "--testable Cuckoo"
-            isEnabled = "YES">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "--exclude ExcludedTestClass,ExcludedProtocol"
-            isEnabled = "YES">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "--output &quot;$PROJECT_DIR&quot;/GeneratedMocks.swift"
-            isEnabled = "YES">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "--glob &quot;$PROJECT_DIR&quot;/../Tests/Swift/Source/*.swift"
+            argument = "--verbose"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
@@ -105,9 +102,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "BFA35E87D881C5E54340E27C"
-            BuildableName = "cuckoo_generator"
-            BlueprintName = "CuckooGenerator"
+            BlueprintIdentifier = "B015B928C38A178E17010830"
+            BuildableName = "cuckoonator"
+            BlueprintName = "Cuckoonator"
             ReferencedContainer = "container:Generator.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
