@@ -1,7 +1,6 @@
 # Cuckoo
 ## Mock your Swift objects!
 
-[![CI Status](https://img.shields.io/travis/Brightify/Cuckoo?style=flat)](https://travis-ci.org/Brightify/Cuckoo)
 [![Version](https://img.shields.io/cocoapods/v/Cuckoo.svg?style=flat)](http://cocoapods.org/pods/Cuckoo)
 [![SwiftPM compatible](https://img.shields.io/badge/SwiftPM-compatible-brightgreen?style=flat)](https://swift.org/package-manager)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-brightgreen?style=flat)](https://github.com/Carthage/Carthage)
@@ -12,7 +11,7 @@
 Cuckoo was created due to lack of a proper Swift mocking framework. We built the DSL to be very similar to [Mockito](http://mockito.org/), so anyone coming from Java/Android can immediately pick it up and use it.
 
 ## How does it work
-Cuckoo has two parts. One is the [runtime](https://github.com/Brightify/Cuckoo) and the other one is an OS X command-line tool simply called [Cuckoonator](./Generator).
+Cuckoo has two parts. One is the **runtime** and the other one is an OS X command-line tool simply called **Cuckoonator**.
 
 Unfortunately Swift does not have a proper reflection, so we decided to use a compile-time generator to go through files you specify and generate supporting structs/classes that will be used by the runtime in your test target.
 
@@ -39,55 +38,38 @@ Due to the limitations mentioned above, unoverridable code structures are not su
 ## Requirements
 Cuckoo works on the following platforms:
 
-- **iOS 11+**
-- **Mac OSX 10.15+**
-- **tvOS 11+**
+- **iOS 13+**
+- **Mac OSX 11+**
+- **tvOS 13+**
 
 **watchOS** support is not yet possible due to missing XCTest library.
-
-Note: Version `1.2.0` is the last one supporting **Swift 4.2**. Use versions `1.3.0`+ for **Swift 5** and up.
 
 ## Cuckoo
 ### 1. Installation
 #### CocoaPods
-Cuckoo runtime is available through [CocoaPods](http://cocoapods.org). To install it, simply add the following line to your test target in your Podfile:
+Cuckoo runtime is available through [CocoaPods](http://cocoapods.org). To install it, simply add the following line to your **test target** in your Podfile:
 
-```Ruby
-pod 'Cuckoo'
+```ruby
+pod 'Cuckoo', '~> 2.0'
 ```
 
 And add the following `Run script` build phase to your test target's `Build Phases` above the `Compile Sources` phase:
 
-```Bash
+```bash
+# Skip for indexing
 if [ $ACTION == "indexbuild" ]; then
-  echo "Not running Cuckoo generator during indexing."
   exit 0
 fi
 
 # Skip for preview builds
 if [ "${ENABLE_PREVIEWS}" = "YES" ]; then
-  echo "Not running Cuckoo generator during preview builds."
   exit 0
 fi
 
-# Define output file. Change "${PROJECT_DIR}/${PROJECT_NAME}Tests" to your test's root source folder, if it's not the default name.
-OUTPUT_FILE="${PROJECT_DIR}/${PROJECT_NAME}Tests/GeneratedMocks.swift"
-echo "Generated Mocks File = ${OUTPUT_FILE}"
-
-# Define input directory. Change "${PROJECT_DIR}/${PROJECT_NAME}" to your project's root source folder, if it's not the default name.
-INPUT_DIR="${PROJECT_DIR}/${PROJECT_NAME}"
-echo "Mocks Input Directory = ${INPUT_DIR}"
-
-# Generate mock files, include as many input files as you'd like to create mocks for.
-"${PODS_ROOT}/Cuckoo/run" generate --testable "${PROJECT_NAME}" \
---output "${OUTPUT_FILE}" \
-"${INPUT_DIR}/FileName1.swift" \
-"${INPUT_DIR}/FileName2.swift" \
-"${INPUT_DIR}/FileName3.swift"
-# ... and so forth, the last line should never end with a backslash
-
-# After running once, locate `GeneratedMocks.swift` and drag it into your Xcode test target group.
+"${PODS_ROOT}/Cuckoo/run"
 ```
+
+After running once, locate `GeneratedMocks.swift` and drag it into your Xcode test target group.
 
 **IMPORTANT**: To make your mocking journey easier, make absolutely sure that the run script is above the `Compile Sources` phase.
 
@@ -104,18 +86,11 @@ Note: All paths in the Run script must be absolute. Variable `PROJECT_DIR` autom
 
 1. In Xcode, navigate in menu: File > Swift Packages > Add Package Dependency
 2. Add `https://github.com/Brightify/Cuckoo.git`
-3. For the Dependency Rule, Select "Up to Next Major" with `1.10.3`. Click Add Package.
+3. For the Dependency Rule, Select "Up to Next Major" with `2.0.0`. Click Add Package.
 4. On the 'Choose Package Products for Cuckoo' dialog, under 'Add to Target', please ensure you select your Test target as it will not compile on the app target.
 5. Click Add Package.
 
-When you're all set, use the same `Run script` phase as above and replace
-```bash
-"${PODS_ROOT}/Cuckoo/run"
-```
-with
-```bash
-"${BUILD_DIR}/Build/SourcePackages/checkouts/Cuckoo/run"
-```
+When you're all set, go to your test target's Build Phases and add `CuckooPluginSingleFile` to the **Run Build Tool Plug-ins**.
 
 #### Carthage
 To use Cuckoo with [Carthage](https://github.com/Carthage/Carthage) add this line to your Cartfile:
@@ -134,20 +109,52 @@ with
 
 Don't forget to add the Framework into your project.
 
-### 2. Usage
+### 2. Cuckoofile customization
+At the root of your project, create `Cuckoofile.toml` configuration file:
+
+```toml
+# You can define a fallback output for all modules that don't define their own.
+output = "Tests/Swift/Generated/GeneratedMocks.swift"
+
+[modules.MyProject]
+output = "Tests/Swift/Generated/GeneratedMocks+MyProject.swift"
+imports = ["Foundation"]
+testableImports = ["RxSwift"]
+sources = [
+    "Tests/Swift/Source/*.swift",
+]
+exclude = ["ExcludedTestClass"]
+# Optionally you can use a regular expression to filter only specific classes/protocols.
+regex = ""
+
+[modules.MyProject.options]
+# glob = false
+# Docstrings are preserved by default, comments are omitted.
+keepDocumentation = false
+# enableInheritance = false
+# protocolsOnly = true
+# omitHeaders = true
+
+# If specified, Cuckoo can also get sources for the module from an Xcode target.
+[modules.MyProject.xcodeproj]
+path = "Generator"
+target = "Cuckoonator"
+```
+
+### 3. Usage
 Usage of Cuckoo is similar to [Mockito](http://mockito.org/) and [Hamcrest](http://hamcrest.org/). However, there are some differences and limitations caused by generating the mocks and Swift language itself. List of all the supported features can be found below. You can find complete examples in [tests](Tests).
 
 #### Mock initialization
 Mocks can be created with the same constructors as the mocked type. Name of mock class always corresponds to the name of the mocked class/protocol with `Mock` prefix (e.g. mock of protocol `Greeter` is called `MockGreeter`).
 
-```Swift
+```swift
 let mock = MockGreeter()
 ```
 
 #### Spy
 Spies are a special type of Mocks where each call is forwarded to the victim by default. When you need a spy, give Cuckoo a class, then you'll then be able to call `enableSuperclassSpy()` (or `withEnabledSuperclassSpy()`) on a mock instance and it will behave like a spy for the parent class.
 
-```Swift
+```swift
 let spy = MockGreeter().withEnabledSuperclassSpy()
 ```
 
@@ -158,7 +165,7 @@ Note: It is currently possible for the subbing object to escape from the closure
 
 After calling the `when` function you can specify what to do next with following methods:
 
-```Swift
+```swift
 /// Invokes `implementation` when invoked.
 then(_ implementation: IN throws -> OUT)
 
@@ -179,7 +186,7 @@ The available methods depend on the stubbed method characteristics. For example,
 
 An example of stubbing a method looks like this:
 
-```Swift
+```swift
 stub(mock) { stub in
   when(stub.greetWithMessage("Hello world")).then { message in
     print(message)
@@ -189,7 +196,7 @@ stub(mock) { stub in
 
 As for a property:
 
-```Swift
+```swift
 stub(mock) { stub in
   when(stub.readWriteProperty.get).thenReturn(10)
   when(stub.readWriteProperty.set(anyInt())).then {
@@ -205,14 +212,14 @@ In addition to stubbing, you can enable default implementation using an instance
 
 Enabling the default implementation is achieved by simply calling the provided method:
 
-```Swift
+```swift
 let original = OriginalClass<Int>(value: 12)
 mock.enableDefaultImplementation(original)
 ```
 
 For passing classes into the method, nothing changes whether you're mocking a class or a protocol. However, there is a difference if you're using a `struct` to conform to the original protocol we are mocking:
 
-```Swift
+```swift
 let original = ConformingStruct<String>(value: "Hello, Cuckoo!")
 mock.enableDefaultImplementation(original)
 // or if you need to track changes:
@@ -228,13 +235,13 @@ We recommend using the non-mutating method for enabling default implementation u
 ##### Chain stubbing
 It is possible to chain stubbing. This is useful for when you need to define different behavior for multiple calls in order. The last behavior will be used for all calls after that. The syntax goes like this:
 
-```Swift
+```swift
 when(stub.readWriteProperty.get).thenReturn(10).thenReturn(20)
 ```
 
 which is equivalent to:
 
-```Swift
+```swift
 when(stub.readWriteProperty.get).thenReturn(10, 20)
 ```
 
@@ -245,7 +252,7 @@ You can combine the stubbing methods as you like.
 ##### Overriding of stubbing
 When looking for stub match Cuckoo gives the highest priority to the last call of `when`. This means that calling `when` multiple times with the same function and matchers effectively overrides the previous call. Also more general parameter matchers have to be used before specific ones.
 
-```Swift
+```swift
 when(stub.countCharacters(anyString())).thenReturn(10)
 when(stub.countCharacters("a")).thenReturn(1)
 ```
@@ -260,7 +267,7 @@ Note: Call on mock which wasn't stubbed will cause an error. In case of a spy, t
 #### Verification
 For verifying calls there is function `verify`. Its first parameter is the mocked object, optional second parameter is the call matcher. Then the call with its parameters follows.
 
-```Swift
+```swift
 verify(mock).greetWithMessage("Hello world")
 ```
 
@@ -270,7 +277,7 @@ You can check if there are no more interactions on mock with function `verifyNoM
 
 With Swift's generic types, it is possible to use a generic parameter as the return type. To properly verify these methods, you need to be able to specify the return type.
 
-```Swift
+```swift
 // Given:
 func genericReturn<T: Codable>(for: String) -> T? { ... }
 
@@ -281,7 +288,7 @@ verify(mock).genericReturn(for: any()).with(returnType: String?.self)
 ##### Argument capture
 You can use `ArgumentCaptor` to capture arguments in verification of calls (doing that in stubbing is not recommended). Here is an example code:
 
-```Swift
+```swift
 mock.readWriteProperty = 10
 mock.readWriteProperty = 20
 mock.readWriteProperty = 30
@@ -341,7 +348,7 @@ For details or an example (with Alamofire), see [this issue](https://github.com/
 #### Parameter matchers
 `ParameterMatcher` itself also conforms to `Matchable`. You can create your own `ParameterMatcher` instances or if you want to directly use your custom types there is the `Matchable` protocol. Standard instances of `ParameterMatcher` can be obtained via these functions:
 
-```Swift
+```swift
 /// Returns an equality matcher.
 equal<T: Equatable>(to value: T)
 
@@ -374,7 +381,7 @@ Cuckoo also provides plenty of convenience matchers for sequences and dictionari
 
 `Matchable` can be chained with methods `or` and `and` like so:
 
-```Swift
+```swift
 verify(mock).greetWithMessage("Hello world".or("Hallo Welt"))
 ```
 
@@ -385,7 +392,7 @@ Note: Call matchers are applied after the parameter matchers. So you get only st
 
 Standard call matchers are:
 
-```Swift
+```swift
 /// Returns a matcher ensuring a call was made `count` times.
 times(_ count: Int)
 
@@ -407,7 +414,7 @@ As with `Matchable` you can chain `CallMatcher` with methods `or` and `and`. How
 #### Resetting mocks
 Following functions are used to reset stubbing and/or invocations on mocks.
 
-```Swift
+```swift
 /// Clears all invocations and stubs of given mocks.
 reset<M: Mock>(_ mocks: M...)
 
@@ -421,7 +428,7 @@ clearInvocations<M: Mock>(_ mocks: M...)
 #### Stub objects
 Stubs are used for suppressing real code. Stubs are different from Mocks in that they don't support stubbing nor verification. They can be created with the same constructors as the mocked type. Name of stub class always corresponds to name of the mocked class/protocol with `Stub` suffix (e.g. stub of protocol `Greeter` is called `GreeterStub`).
 
-```Swift
+```swift
 let stub = GreeterStub()
 ```
 
@@ -435,7 +442,7 @@ When a method is called or a property accessed/set on a stub, nothing happens. I
 ##### Type inference
 Cuckoo does a simple type inference on all variables which allows for much cleaner source code on your side. There are a total 3 ways the inference tries to extract the type name from a variable:
 
-```Swift
+```swift
 // From the explicitly declared type:
 let constant1: MyType
 
@@ -446,97 +453,30 @@ let constant2 = MyType(...)
 let constant3 = anything as MyType
 ```
 
-## Cuckoo generator
-### Installation
-For normal use you can skip this because the [run script](run) downloads or builds the correct version of the generator automatically.
-
-#### Custom
-So you have chosen a more complicated path. You can clone this repository and build it yourself. Take a look at the [run script](run) for more inspiration.
-
-### Usage
-Generator can be executed manually through the terminal. Each call consists of build options, a command, generator options, and arguments. Options and arguments depend on the command used. Options can have additional parameters. Names of all of them are case sensitive. The order goes like this:
-
-```
-cuckoo build_options command generator_options arguments
-```
-
+## Cuckoo run script
 #### Build Options
 These options are only used for downloading or building the generator and don't interfere with the result of the generated mocks.
 
-When the [run script](run) is executed without any build options (they are only valid when specified **BEFORE** the `command`), it simply searches for the `cuckoonator` file and builds it from source code if it's missing.
+When the [run script](run) is executed without any parameters, it simply searches for the `cuckoonator` file and builds it from source code if it's missing, running the generator afterwards.
 
-To download the generator from GitHub instead of building it, use the `--download [version]` option as the first argument (i.e. `run --download generate ...` or `run --download 1.5.0 generate ...` to fetch a specific version). If you're having issues with rather long build time (especially in CI), this might be the way to fix it.
+To download the generator from GitHub instead of building it, use the `--download` option as the first argument (i.e. `run --download`). If you're having issues with rather long build time (especially in CI), this might be the way to fix it.
 
 **NOTE**: If you encounter Github API rate limit using the `--download` option, the [run script](run) refers to the environment variable `GITHUB_ACCESS_TOKEN`.
 Add this line (replacing the Xs with your [GitHub token](https://github.com/settings/tokens), no additional permissions are needed) to the script build phase above the `run` call:
-```Bash
+```bash
 export GITHUB_ACCESS_TOKEN="XXXXXXX"
 ```
 
-The build option `--clean` forces either build or download of the version specified even if the generator is present. At the moment the [run script](run) doesn't enforce the generator version to be the same as the Cuckoo version. We recommend using this option after updating Cuckoo as well as if you're having mysterious compile errors in the generated mocks. Please try to use this option first to verify that your generator isn't outdated before filing an issue about incorrectly generated mocks.
+The build option `--clean` forces either build or download of the version specified even if the generator is present.
+The run script also syncs the generator to the correct version (either by building from source or downloading with `--download`) if needed.
 
 We recommend only using `--clean` when you're trying to fix a compile problem as it forces the build (or download) every time which makes the testing way longer than it needs to be.
-
-#### Generator commands
-##### `generate` command
-Generates mock files.
-
-This command accepts options that can be used to adjust the behavior of the generator, these are listed below.
-
-After the options come arguments, in this case a list (separated by spaces) of files for which you want to generate mocks or that are required for correct inheritance mocking.
-
-###### `--output` (string)
-Absolute path to where the generated mocks will be stored.
-
-If a path to a directory is supplied, each input file will be mapped to its own output file with mocks.
-
-If a path to a file is supplied, all mocks will be generated into this single file.
-
-The default value is `GeneratedMocks.swift`.
-
-###### `--testable` (string)[,(string)...]
-A comma separated list of frameworks that should be imported as @testable in the mock files.
-
-###### `--exclude` (string)[,(string)...]
-A comma separated list of classes and protocols that should be skipped during mock generation.
-
-###### `--no-header`
-Do not generate file headers.
-
-###### `--no-timestamp`
-Do not generate timestamp.
-
-###### `--no-inheritance`
-Do not mock/stub parents and grandparents.
-
-###### `--file-prefix` (string)
-Names of generated files in directory will start with this prefix. Only works when output path is directory.
-
-###### `--no-class-mocking`
-Do not generate mocks for classes.
-
-###### `--regex` (string)
-A regular expression pattern that is used to match Classes and Protocols. All that do not match are excluded. Can be used alongside `--exclude` in which case the `--exclude` has higher priority.
-
-###### `-g` or `--glob`
-Activate [glob](https://en.wikipedia.org/wiki/Glob_(programming)) parsing for specified input paths.
-
-###### `-d` or `--debug`
-Run generator in debug mode. There is more info output as well as included in the generated mocks (e.g. method parameter info).
-
-#### `version` command
-Prints the version of this generator.
-
-#### `help` command
-Display general or command-specific help.
-
-After the `help` command you can specify the name of another command for displaying command-specific information.
 
 ## Objective-C Support
 Cuckoo subspec `Cuckoo/OCMock` brings support for mocking Objective-C classes and protocols.
 
 Example usage:
-```Swift
+```swift
 let tableView = UITableView()
 // stubbing the class is very similar to stubbing with Cuckoo
 let mock = objcStub(for: UITableViewController.self) { stubber, mock in
@@ -560,7 +500,7 @@ objcVerify(mock.tableView(tableView, accessoryButtonTappedForRowWith: IndexPath(
 Detailed usage is available in Cuckoo tests along with DOs and DON'Ts of this Swift-ObjC bridge.
 
 So far, only CocoaPods is supported. To install, simply add this line to your `Podfile`:
-```Ruby
+```ruby
 pod 'Cuckoo/OCMock'
 ```
 
@@ -576,7 +516,7 @@ Cuckoo is open for everyone and we'd like you to help us make the best Swift moc
 The project consists of two parts - runtime and code generator. When you open the `Cuckoo.xcworkspace` in Xcode, you'll see these directories:
     - `Source` - runtime sources
     - `Tests` - tests for the runtime part
-    - `CuckoGenerator.xcodeproj` - project containing Generator source code (use the `cuckoonator` scheme)
+    - `Generator.xcodeproj` - project containing generator source code (use the `Generator` scheme)
 
 Thank you for your help!
 
@@ -585,9 +525,8 @@ Thank you for your help!
 - [Hamcrest](http://hamcrest.org/) - Matcher API
 
 ## Used libraries
-- [Commandant](https://github.com/Carthage/Commandant)
+- [ArgumentParser](https://github.com/apple/swift-argument-parser)
 - [FileKit](https://github.com/nvzqz/FileKit)
-- [SourceKitten](https://github.com/jpsim/SourceKitten)
 - [SwiftSyntax](https://github.com/apple/swift-syntax)
 
 ## License

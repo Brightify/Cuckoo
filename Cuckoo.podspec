@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'Cuckoo'
-  s.version          = '2.0.0'
+  s.version          = '1.10.4'
   s.summary          = 'Cuckoo - first boilerplate-free Swift mocking framework.'
   s.description      = <<-DESC
                         Cuckoo is a mocking framework with an easy to use API (inspired by Mockito).
@@ -12,10 +12,10 @@ Pod::Spec.new do |s|
   s.author           = { 'Matyas Kriz' => 'm@tyas.cz', 'Tadeas Kriz' => 'tadeas@brightify.org', 'Filip Dolnik' => 'filip@brightify.org' }
   s.source           = { :git => 'https://github.com/Brightify/Cuckoo.git', :tag => s.version.to_s }
 
-  s.ios.deployment_target       = '12.0'
+  s.ios.deployment_target       = '13.0'
   s.osx.deployment_target       = '11'
   #s.watchos.deployment_target   = '2.0' # watchos does not include XCTest framework :(
-  s.tvos.deployment_target      = '12.0'
+  s.tvos.deployment_target      = '13.0'
   generator_name                = 'cuckoonator'
   s.swift_version               = '5.0'
   s.preserve_paths              = ['Generator/**/*', 'version', 'run', 'build_generator', generator_name]
