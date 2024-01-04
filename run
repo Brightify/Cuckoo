@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 
 SCRIPT_PATH="$(cd "$(dirname "$0")" && pwd)"
-FILE_NAME="cuckoonator"
-FILE_PATH="$SCRIPT_PATH/$FILE_NAME"
+GENERATOR_NAME="cuckoonator"
+GENERATOR_PATH="$SCRIPT_PATH/$GENERATOR_NAME"
 GREP_OPTIONS=""
+
+echo "Script path: $SCRIPT_PATH"
+echo "Generator path: $GENERATOR_PATH"
 
 function download_generator {
   echo "Downloading generator version $1..."
@@ -12,16 +15,16 @@ function download_generator {
   fi
 
   URL="https://api.github.com/repos/Brightify/Cuckoo/releases/tags/$1"
-  DOWNLOAD_URL=$(curl "${CURL_OPTIONS[@]}" "$URL" | grep -oe '"browser_download_url":\s*"[^" ]*"' | grep -oe 'http[^" ]*' | grep "$FILE_NAME" | head -1)
+  DOWNLOAD_URL=$(curl "${CURL_OPTIONS[@]}" "$URL" | grep -oe '"browser_download_url":\s*"[^" ]*"' | grep -oe 'http[^" ]*' | grep "$GENERATOR_NAME" | head -1)
 
   if [[ -z "$DOWNLOAD_URL" ]]; then
     echo "Error: Failed to fetch download URL for the Cuckoo Generator."
     exit 1
   else
     echo "Downloading Cuckoo Generator from URL: $DOWNLOAD_URL"
-    curl "${CURL_OPTIONS[@]}" -Lo "$FILE_PATH" "$DOWNLOAD_URL"
+    curl "${CURL_OPTIONS[@]}" -Lo "$GENERATOR_PATH" "$DOWNLOAD_URL"
   fi
-  chmod +x "$FILE_NAME"
+  chmod +x "$GENERATOR_NAME"
 }
 
 function get_generator {
@@ -36,7 +39,7 @@ function get_generator {
         echo "Build seems to have failed for some reason. Please file an issue on GitHub."
         exit 1
       fi
-      mv "$SCRIPT_PATH/Generator/bin/$FILE_NAME" "$FILE_PATH"
+      mv "$SCRIPT_PATH/Generator/bin/$GENERATOR_NAME" "$GENERATOR_PATH"
     else
       echo "Couldn't build generator – source code not found. (expected in the 'Generator' directory)"
       echo "Pass the --download option to fetch the binary from GitHub."
@@ -61,8 +64,6 @@ function ver_lt {
   [[ $(ver_cmp "$1" "$2") -eq -1 ]]
 }
 
-echo "Script path: $SCRIPT_PATH"
-
 # parse arguments
 POSITIONAL=()
 while [[ $# -gt 0 ]]; do
@@ -79,34 +80,18 @@ case $1 in
   ;;
 
   *)
-    POSITIONAL+=("$1") # save it in an array for later
+    POSITIONAL+=("$1")
     shift
   ;;
 esac; done
-set -- "${POSITIONAL[@]}" # restore positional parameters
+set -- "${POSITIONAL[@]}"
 
 LIB_VERSION=$(<version)
-LIB_VERSION="1.10.3"
-GEN_VERSION=$("$FILE_PATH" --version)
+GEN_VERSION=$("$GENERATOR_PATH" --version)
 
-# Procure a generator if there's none available, clean build is requested, or the generator version is older than library version.
-if [[ ! -e "$FILE_PATH" ]] || [[ ! -z "$CLEAN" ]] || ver_lt "$GEN_VERSION" "$LIB_VERSION"; then
+# Procure a generator if it's not available, if clean build is requested, or if the generator version is older than library version.
+if [[ ! -e "$GENERATOR_PATH" ]] || [[ ! -z "$CLEAN" ]] || ver_lt "$GEN_VERSION" "$LIB_VERSION"; then
   get_generator
 fi
 
-# Run the generator and pass in the rest of the arguments.
-INPUT_FILES=""
-if [[ "$#" > 0 ]]; then
-  INPUT_FILES=$(printf '%q ' "$@")
-fi
-
-if [[ -z "$SCRIPT_INPUT_FILE_COUNT" ]]; then
-  SCRIPT_INPUT_FILE_COUNT=0
-fi
-
-for (( i=0; i<"$SCRIPT_INPUT_FILE_COUNT"; i++ )); do
-  INPUT_FILE="SCRIPT_INPUT_FILE_$i"
-  INPUT_FILES+=" $(printf '%q' "${!INPUT_FILE}")"
-done
-
-echo $INPUT_FILES | xargs "$FILE_PATH"
+"$GENERATOR_PATH" $@
