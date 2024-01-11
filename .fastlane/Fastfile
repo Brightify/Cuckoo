@@ -83,7 +83,11 @@ platform :mac do
     upload_response = JSON.parse(`curl -X POST --data-binary "@#{cuckoo_gen_path}" -u "#{auth_string}" "#{upload_url}?name=#{binary_name}" -H "Content-Type:application/octet-stream"`)
     UI.crash! 'Release draft upload failed!' unless upload_response
 
-    pod_push(path: 'Cuckoo.podspec', allow_warnings: true)
+    pod_push(
+      path: 'Cuckoo.podspec',
+      allow_warnings: true,
+      use_bundle_exec: true,
+    )
 
     UI.success "All done!\nYou can now visit #{creation_response['url']} (command+click) and release the thing."
   end
