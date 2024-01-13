@@ -2,26 +2,20 @@ import Foundation
 
 class ClassWithUnavailablePlatformMembers {
     @available(tvOS, unavailable)
-    var unavailableProperty: Int = 0
+    var unavailableProperty: Int { 0 }
 
     @available(tvOS, unavailable)
     @available(macCatalyst, unavailable)
-    var multiUnavailableProperty: Int = 1
+    var multiUnavailableProperty: Int { 1 }
 
     var availableProperty: Bool = false
 
     @available(tvOS, unavailable)
-    init(unavailableProperty: Int, multiUnavailableProperty: Int) {
-        self.unavailableProperty = unavailableProperty
-        self.multiUnavailableProperty = multiUnavailableProperty
-    }
+    init(unavailableProperty: Int, multiUnavailableProperty: Int) {}
 
     @available(tvOS, unavailable)
     @available(macCatalyst, unavailable)
-    init(multiUnavailableProperty: Int) {
-        self.unavailableProperty = 0
-        self.multiUnavailableProperty = multiUnavailableProperty
-    }
+    init(multiUnavailableProperty: Int) {}
 
     @available(iOS, unavailable)
     init() {}
