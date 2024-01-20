@@ -93,7 +93,7 @@ echo "Mocks Input Directory = ${INPUT_DIR}"
 
 **NOTE**: To avoid race condition errors when Xcode parallelizes build phases, add the path of the `OUTPUT_FILE` into the "Output Files" section of the build phase. If you find that `OUTPUT_FILE` still doesn't regenerate with new changes, adding mocked files to the "Input Files" section of the build phase might help.
 
-**NOTE**: From Xcode 15 flag `ENABLE_USER_SCRIPT_SANDBOXING` in Build Settings is `Yes` by default. That means Xcode will sandbox the script so reading input files and writing output file will be permitted. As a result running above script may fail to access the files. To prevent Xcode from sandboxing the script, change this option to `No`.
+**NOTE**: From Xcode 15 flag `ENABLE_USER_SCRIPT_SANDBOXING` in Build Settings is `Yes` by default. That means Xcode will sandbox the script so reading input files and writing output file will be forbidden. As a result running above script may fail to access the files. To prevent Xcode from sandboxing the script, change this option to `No`.
 
 Input files can be also specified directly in `Run script` in `Input Files` form.
 
