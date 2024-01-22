@@ -1,15 +1,7 @@
-//
-//  ProtocolTest.swift
-//  Cuckoo
-//
-//  Created by Filip Dolnik on 04.07.16.
-//  Copyright © 2016 Brightify. All rights reserved.
-//
-
 import XCTest
 import Cuckoo
 
-class ProtocolTest: XCTestCase {
+final class ProtocolTest: XCTestCase {
 
     private var mock: MockTestedProtocol!
 

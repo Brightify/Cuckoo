@@ -1,10 +1,3 @@
-//
-//  NSValueConvertible.swift
-//  Cuckoo+OCMock-iOS
-//
-//  Created by Matyáš Kříž on 28/05/2019.
-//
-
 import Foundation
 import CoreGraphics
 

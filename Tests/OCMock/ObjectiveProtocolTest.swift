@@ -1,17 +1,10 @@
-//
-//  ObjectiveProtocolTest.swift
-//  Cuckoo+OCMock_iOSTests
-//
-//  Created by Matyáš Kříž on 28/05/2019.
-//
-
 import XCTest
 import Cuckoo
 
 #if os(iOS)
 import WebKit
 
-class ObjectiveProtocolTest: XCTestCase {
+final class ObjectiveProtocolTest: XCTestCase {
     func testThenDoNothing() {
         let mock = objcStub(for: UIScrollViewDelegate.self) { stubber, mock in
             stubber.when(mock.scrollViewDidScrollToTop!(objcAny())).thenDoNothing()
@@ -36,9 +29,9 @@ class ObjectiveProtocolTest: XCTestCase {
 
         objcVerify(mock.tableView!(objcAny(), canFocusRowAt: IndexPath(row: 0, section: 22)))
         objcVerify(mock.tableView!(tableView, canFocusRowAt: IndexPath(row: 0, section: 22)))
-        objcVerify(mock.tableView!(objcAny(), canFocusRowAt: IndexPath(row: 1, section: 22)))
+        objcVerify(mock.tableView!(objcAny(), canFocusRowAt: IndexPath(row: 1, section: 22)), .atLeast(1))
         objcVerify(mock.tableView!(tableView, canFocusRowAt: IndexPath(row: 1, section: 22)))
-        objcVerify(mock.tableView!(objcAny(), canFocusRowAt: IndexPath(row: 1, section: 22)))
+        objcVerify(mock.tableView!(objcAny(), canFocusRowAt: IndexPath(row: 1, section: 22)), .atLeast(1))
         objcVerify(mock.tableView!(tableView, canFocusRowAt: IndexPath(row: 1, section: 22)))
     }
 
@@ -72,7 +65,7 @@ class ObjectiveProtocolTest: XCTestCase {
 
         objcVerify(mock.textField!(objcAny(), shouldChangeCharactersIn: range, replacementString: "Hello from the other side, ObjC!"))
         objcVerify(mock.textField!(objcAny(), shouldChangeCharactersIn: range, replacementString: "TadeasKriz is a HaXoR."))
-        objcVerify(mock.textField!(objcAny(), shouldChangeCharactersIn: range, replacementString: objcAny()))
+        objcVerify(mock.textField!(objcAny(), shouldChangeCharactersIn: range, replacementString: objcAny()), .atLeast(1))
     }
 
     // NOTE: This is an example of a wrong way to test an optional method.

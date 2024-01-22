@@ -1,15 +1,7 @@
-//
-//  ArgumentCaptorTest.swift
-//  Cuckoo
-//
-//  Created by Filip Dolnik on 04.07.16.
-//  Copyright © 2016 Brightify. All rights reserved.
-//
-
 import XCTest
 import Cuckoo
 
-class ArgumentCaptorTest: XCTestCase {
+final class ArgumentCaptorTest: XCTestCase {
     func testMultipleCalls() {
         let mock = MockTestedClass()
         stub(mock) { mock in

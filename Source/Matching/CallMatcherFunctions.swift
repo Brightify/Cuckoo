@@ -1,11 +1,3 @@
-//
-//  CallMatcherFunctions.swift
-//  Cuckoo
-//
-//  Created by Filip Dolnik on 04.07.16.
-//  Copyright © 2016 Brightify. All rights reserved.
-//
-
 /// Returns a matcher ensuring a call was made **`count`** times.
 public func times(_ count: Int) -> CallMatcher {
     let name = count == 0 ? "never" : "\(count) times"

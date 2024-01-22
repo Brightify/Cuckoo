@@ -1,15 +1,7 @@
-//
-//  CallMatcherFunctionsTest.swift
-//  Cuckoo
-//
-//  Created by Filip Dolnik on 04.07.16.
-//  Copyright © 2016 Brightify. All rights reserved.
-//
-
 import XCTest
 import Cuckoo
 
-class CallMatcherFunctionsTest: XCTestCase {
+final class CallMatcherFunctionsTest: XCTestCase {
     private let tests: [(message: String, matcher: CallMatcher, argument: Int, expected: Bool)] = [
         ("times(2) - true", times(2), 2, true),
         ("times(2) - false", times(2), 3, false),

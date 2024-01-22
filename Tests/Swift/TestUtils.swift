@@ -1,11 +1,3 @@
-//
-//  TestUtils.swift
-//  Cuckoo
-//
-//  Created by Filip Dolnik on 04.07.16.
-//  Copyright © 2016 Brightify. All rights reserved.
-//
-
 @testable import Cuckoo
 
 struct TestUtils {
@@ -15,7 +7,6 @@ struct TestUtils {
         MockManager.fail = { (parameters) in
             let (message, _) = parameters
             msg = message
-            
         }
         closure()
         MockManager.fail = fail

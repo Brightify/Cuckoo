@@ -1,11 +1,3 @@
-//
-//  TestedClass.swift
-//  Cuckoo
-//
-//  Created by Tadeas Kriz on 09/02/16.
-//  Copyright © 2016 Brightify. All rights reserved.
-//
-
 #warning("TODO: Create a new library and move this file to the library to ensure the use case is the same as our users'")
 import class Foundation.NSArray ;import Foundation
 
@@ -58,10 +50,12 @@ class TestedClass {
         ) -> String
     ) -> () = { i in }
 
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     var asyncProperty: Int {
         get async { 0 }
     }
 
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     var asyncThrowsProperty: Int {
         get async throws { 0 }
     }
@@ -152,6 +146,10 @@ class TestedClass {
 
     func withEscape(_ a: String, action closure: @escaping (String) -> Void) {
         closure(a)
+    }
+
+    func withConvention(work: @escaping @convention(block) () -> Void) {
+        work()
     }
 
     func withOptionalClosure(_ a: String, closure: ((String) -> Void)?) {

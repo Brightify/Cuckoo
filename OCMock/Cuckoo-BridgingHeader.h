@@ -1,10 +1,3 @@
-//
-//  Cuckoo-BridgingHeader.h
-//  Cuckoo
-//
-//  Created by Matyáš Kříž on 28/05/2019.
-//
-
 #ifndef Cuckoo_BridgingHeader_h
 #define Cuckoo_BridgingHeader_h
 

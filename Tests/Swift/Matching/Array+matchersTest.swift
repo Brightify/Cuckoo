@@ -1,10 +1,3 @@
-//
-//  Array+matchersTest.swift
-//  Cuckoo
-//
-//  Created by Matyáš Kříž on 05/09/2019.
-//
-
 import XCTest
 import Cuckoo
 
@@ -20,7 +13,7 @@ struct TestStructs {
     }
 }
 
-class ArrayMatcherTest: XCTestCase {
+final class ArrayMatcherTest: XCTestCase {
     // MARK: Contains ANY of the elements.
     func testContainsAnyOf() {
         // Variadic parameters.

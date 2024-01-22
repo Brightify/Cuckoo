@@ -1,11 +1,5 @@
-//
-//  MultiNestedInNestedClass.swift
-//  Cuckoo
-//
-//  Created by Tyler Thompson on 9/18/20.
-//
-
 import Foundation
+
 @available(swift 4.0)
 class Multi {
     class Nested {
@@ -24,5 +18,9 @@ class Multi {
                 var property: Int?
             }
         }
+    }
+
+    class NestedSubclass: Nested {
+        
     }
 }

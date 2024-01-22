@@ -1,15 +1,7 @@
-//
-//  VerificationTest.swift
-//  Cuckoo
-//
-//  Created by Filip Dolnik on 04.07.16.
-//  Copyright © 2016 Brightify. All rights reserved.
-//
-
 import XCTest
 import Cuckoo
 
-class VerificationTest: XCTestCase {
+final class VerificationTest: XCTestCase {
     func testVerify() {
         let mock = MockTestedClass()
         stub(mock) { mock in

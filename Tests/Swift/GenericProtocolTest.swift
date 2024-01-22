@@ -1,10 +1,3 @@
-//
-//  GenericProtocolTest.swift
-//  Cuckoo
-//
-//  Created by Matyáš Kříž on 26/11/2018.
-//
-
 import XCTest
 import Cuckoo
 
@@ -63,6 +56,8 @@ private class GenericProtocolConformerClass<C: AnyObject, V>: GenericProtocol {
         }
         return testyClassy as! C
     }
+
+    func closureParameter(closure: @escaping () -> Void) {}
 }
 
 private struct GenericProtocolConformerStruct<C: AnyObject, V>: GenericProtocol {
@@ -96,9 +91,11 @@ private struct GenericProtocolConformerStruct<C: AnyObject, V>: GenericProtocol 
     }
     
     func noReturnAsync() async {}
+
+    func closureParameter(closure: @escaping () -> Void) {}
 }
 
-class GenericProtocolTest: XCTestCase {
+final class GenericProtocolTest: XCTestCase {
     private func createMock<V>(value: V, classy: MockTestedClass = MockTestedClass()) -> MockGenericProtocol<MockTestedClass, V> {
         return MockGenericProtocol(theC: classy, theV: value)
     }

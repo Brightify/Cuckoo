@@ -1,14 +1,7 @@
-//
-//  Dictionary+matchersTest.swift
-//  Cuckoo
-//
-//  Created by Matyáš Kříž on 05/09/2019.
-//
-
 import XCTest
 import Cuckoo
 
-class DictionaryParameterMatcherTest: XCTestCase {
+final class DictionaryParameterMatcherTest: XCTestCase {
     // MARK: Contains ANY of the elements as key-value pairs.
     func testContainsAnyOf() {
         // With keys identical to values.

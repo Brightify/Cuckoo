@@ -1,11 +1,3 @@
-//
-//  Utils.swift
-//  Cuckoo
-//
-//  Created by Tadeas Kriz on 13/01/16.
-//  Copyright © 2016 Brightify. All rights reserved.
-//
-
 internal func getterName(_ property: String) -> String {
     return property + "#get"
 }
