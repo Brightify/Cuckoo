@@ -398,20 +398,33 @@ extension Crawler {
     }
 
     private func attributes(from attributeList: AttributeListSyntax?) -> [Attribute] {
-        attributeList?.children(viewMode: .fixedUp).compactMap { attribute -> Attribute? in
-            guard let attribute = attribute.as(AttributeSyntax.self) else { return nil }
+        attributeList?.children(viewMode: .fixedUp)
+            .compactMap { $0.as(AttributeSyntax.self).flatMap(attribute(from:)) }
+            ?? []
+    }
 
-            if attribute.attributeName.as(IdentifierTypeSyntax.self)?.name.tokenKind == .identifier("available") {
+    private func attribute(from attribute: AttributeSyntax) -> Attribute? {
+        if case .identifier(let identifier) = attribute.attributeName.as(IdentifierTypeSyntax.self)?.name.tokenKind {
+            switch identifier {
+            case "available":
                 return .available(
                     arguments: attribute.arguments?.description
                         .split(separator: ",")
                         .map { String($0).trimmed } ?? []
                 )
-            } else {
-                print("Unsupported attribute '\(attribute.attributeName.trimmedDescription)'")
+            // These will need some more work, not sure if worth the effort.
+//            case "objc":
+//                return .objc
+//            case "objcMembers":
+//                return .objcMembers
+            default:
+                print("Ignoring unsupported attribute '\(attribute.attributeName.trimmedDescription)'")
                 return nil
             }
-        } ?? []
+        } else {
+            print("Ignoring unsupported attribute '\(attribute.attributeName.trimmedDescription)'")
+            return nil
+        }
     }
 
     private func accessibility(from modifierList: DeclModifierListSyntax?) -> Accessibility? {
@@ -481,6 +494,7 @@ extension Crawler {
     private static let testString =
 """
 // DUDE
+@objcMembers
 class Multi {
 //    @available(iOS 42.0, *)
 //    var gg: Bool = false
@@ -490,6 +504,7 @@ class Multi {
 //    @available(*, renamed: "sameInstance(as:)")
 //    private(set) var geg: Stool
 
+    @objc
     var hammo: Tpikulka!
 
     var heya: @escaping @convention(block) (_ jenda: Bool, _ dav: Krekr) async throws -> Void

@@ -34,7 +34,9 @@ final class Generator {
 
         let files: [FileRepresentation] = inputFiles.compactMap { file in
             do {
+                log(.verbose, message: "Processing file: \(file.path)")
                 let crawler = try Crawler.crawl(url: file.path.url)
+                log(.verbose, message: "Successfully processed file: \(file.path)")
                 return FileRepresentation(file: file, imports: crawler.imports, tokens: crawler.tokens)
             } catch {
                 log(.error, message: "Failed to crawl file at '\(file.path)':", error)

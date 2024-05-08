@@ -3,7 +3,8 @@ import XCTest
 #endif
 
 public class MockManager {
-    public static func fail(message: String, sourceLocation: SourceLocation) {
+    public static var fail: ((message: String, sourceLocation: SourceLocation)) -> Void = { arg in
+        let (message, sourceLocation) = arg
         #if canImport(XCTest)
         XCTFail(message, file: sourceLocation.file, line: sourceLocation.line)
         #else
@@ -214,7 +215,7 @@ public class MockManager {
         
         if callMatcher.matches(calls) == false {
             let message = "Wanted \(callMatcher.name) but \(calls.count == 0 ? "not invoked" : "invoked \(calls.count) times")."
-            MockManager.fail(message: message, sourceLocation: sourceLocation)
+            MockManager.fail((message: message, sourceLocation: sourceLocation))
         }
         return __DoNotUse()
     }
@@ -272,12 +273,12 @@ public class MockManager {
                     }
                 }.enumerated().map { "\($0 + 1). " + $1 }.joined(separator: "\n")
             let message = "No more interactions wanted but some found:\n"
-            MockManager.fail(message: message + unverifiedCalls, sourceLocation:  sourceLocation)
+            MockManager.fail((message: message + unverifiedCalls, sourceLocation:  sourceLocation))
         }
     }
 
     private func failAndCrash(_ message: String, file: StaticString = #file, line: UInt = #line) -> Never  {
-        MockManager.fail(message: message, sourceLocation: (file, line))
+        MockManager.fail((message: message, sourceLocation: (file, line)))
 
         #if _runtime(_ObjC)
         NSException(name: .internalInconsistencyException, reason: message, userInfo: nil).raise()

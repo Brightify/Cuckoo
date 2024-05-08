@@ -2,11 +2,17 @@ import Foundation
 
 enum Attribute: Hashable, CustomStringConvertible {
     case available(arguments: [String])
+    case objc
+    case objcMembers
 
     var description: String {
         switch self {
         case .available(let arguments):
-            return "@available(\(arguments.joined(separator: ", ")))"
+            "@available(\(arguments.joined(separator: ", ")))"
+        case .objc:
+            "@objc"
+        case .objcMembers:
+            "@objcMembers"
         }
     }
 

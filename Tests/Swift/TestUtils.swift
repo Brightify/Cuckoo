@@ -1,10 +1,10 @@
 @testable import Cuckoo
 
 struct TestUtils {
-    static func catchCuckooFail(inClosure closure: () -> ()) -> String? {
+    static func catchCuckooFail(inClosure closure: () -> Void) -> String? {
         let fail = MockManager.fail
         var msg: String?
-        MockManager.fail = { (parameters) in
+        MockManager.fail = { parameters in
             let (message, _) = parameters
             msg = message
         }
