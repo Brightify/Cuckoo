@@ -76,7 +76,7 @@ final class Crawler: SyntaxVisitor {
             attributes: attributes(from: node.attributes),
             accessibility: accessibility(from: node.modifiers) ?? (container as? HasAccessibility)?.accessibility ?? .internal,
             name: node.name.trimmed.description,
-            genericParameters: genericParameters(from: node.primaryAssociatedTypeClause?.primaryAssociatedTypes) + associatedTypes(from: node.memberBlock.members),
+            genericParameters: (genericParameters(from: node.primaryAssociatedTypeClause?.primaryAssociatedTypes) + associatedTypes(from: node.memberBlock.members)).merged(),
             genericRequirements: genericRequirements(from: node.genericWhereClause?.requirements),
             inheritedTypes: inheritedTypes,
             members: []

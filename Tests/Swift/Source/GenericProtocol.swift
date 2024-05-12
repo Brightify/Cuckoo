@@ -28,3 +28,9 @@ protocol GenericProtocol {
     /// Requires change from WrappableType to ComplexType.
     func closureParameter(closure: @escaping () -> Void)
 }
+
+protocol PrimaryAssociatedTypeProtocol<Output> {
+    associatedtype Output: Equatable
+    
+    func connect() -> Output
+}

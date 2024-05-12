@@ -165,3 +165,23 @@ extension GeneratorHelper {
         return [stencilExtension]
     }
 }
+
+/// Reserved keywords that are not allowed as function names, function parameters, or local variables, etc.
+fileprivate let reservedKeywords: Set = [
+    // Keywords used in declarations:
+    "associatedtype", "class", "deinit", "enum", "extension", "fileprivate", "func", "import", "init", "inout",
+    "internal", "let", "operator", "private", "precedencegroup", "protocol", "public", "rethrows", "static",
+    "struct", "subscript", "typealias", "var",
+    // Keywords used in statements:
+    "break", "case", "catch", "continue", "default", "defer", "do", "else", "fallthrough", "for", "guard", "if", "in",
+    "repeat", "return", "throw", "switch", "where", "while",
+    // Keywords used in expressions and types:
+    "Any", "as", "catch", "false", "is", "nil", "rethrows", "self", "super", "throw", "throws", "true", "try", "async",
+    // Keywords used in patterns:
+    "_",
+]
+
+/// Utility function for escaping reserved keywords for a symbol name.
+func escapeReservedKeywords(for name: String) -> String {
+    reservedKeywords.contains(name) ? "`\(name)`" : name
+}

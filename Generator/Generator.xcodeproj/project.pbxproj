@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -35,6 +35,8 @@
 		44A72AF2F6D6D2E1D371C50F /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 82A76F6C4BC47C860A90EFA7 /* ArgumentParser */; };
 		46D9663497017BFABAA09B66 /* SwiftSyntax in Frameworks */ = {isa = PBXBuildFile; productRef = 10B6A078051BAD502FBAC752 /* SwiftSyntax */; };
 		48205DE8188B258737270530 /* ModifierListSyntax+common.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF4E1D009F8E0D6988EA56E9 /* ModifierListSyntax+common.swift */; };
+		4857D1542BF0A9B400E3CAB3 /* Array+uniquing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4857D1532BF0A9B400E3CAB3 /* Array+uniquing.swift */; };
+		4857D1552BF0A9B400E3CAB3 /* Array+uniquing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4857D1532BF0A9B400E3CAB3 /* Array+uniquing.swift */; };
 		4871C1D4211262913FE7E23A /* TOMLKit in Frameworks */ = {isa = PBXBuildFile; productRef = CF01AE9B482B793213C15803 /* TOMLKit */; };
 		4A04C8DABB34967D6D2EDB49 /* OrderedSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1F3CD491EFD856B4C96AC7 /* OrderedSet.swift */; };
 		4A2BFBD3DA28E395A3D05946 /* Attribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8A800560013CEEAC82BDD3 /* Attribute.swift */; };
@@ -180,8 +182,9 @@
 		2FDFA6B78881951ACDF56D44 /* VerificationProxyTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationProxyTemplate.swift; sourceTree = "<group>"; };
 		32D7CD1899844A58C727A50D /* GeneratorHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorHelper.swift; sourceTree = "<group>"; };
 		41C5C09640B2E1C7C8FB4CD7 /* HasName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasName.swift; sourceTree = "<group>"; };
+		4857D1532BF0A9B400E3CAB3 /* Array+uniquing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+uniquing.swift"; sourceTree = "<group>"; };
 		4F1F3CD491EFD856B4C96AC7 /* OrderedSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderedSet.swift; sourceTree = "<group>"; };
-		50316F84EA0A5C89C1ED8932 /* cuckoonator */ = {isa = PBXFileReference; includeInIndex = 0; path = cuckoonator; sourceTree = BUILT_PRODUCTS_DIR; };
+		50316F84EA0A5C89C1ED8932 /* cuckoonator */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = text; path = cuckoonator; sourceTree = BUILT_PRODUCTS_DIR; };
 		50E0C10D6BFAE96A0A700D06 /* FileRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileRepresentation.swift; sourceTree = "<group>"; };
 		52CE2A36ADBCB7B533AB0FDB /* TypeGuesser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeGuesser.swift; sourceTree = "<group>"; };
 		5BE01B4BF58360B997B65AAD /* HasMembers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasMembers.swift; sourceTree = "<group>"; };
@@ -388,6 +391,11 @@
 			isa = PBXGroup;
 			children = (
 				61D4E2D59CBA725E92818DF5 /* String+convenience.swift */,
+				BCAECEA6462A2F4AE3EBC92C /* Async+convenience.swift */,
+				D3A2C9C1C9FA19A2D8F5B32D /* FileKit+convenience.swift */,
+				898566C0937C1E5B25F9D20D /* SwiftSyntax+convenience.swift */,
+				1B5623B43A07101C33A57999 /* Utils.swift */,
+				4857D1532BF0A9B400E3CAB3 /* Array+uniquing.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -417,15 +425,11 @@
 				7491C1B037168249BAB64867 /* Helpers */,
 				596D8101D8DCD33F0E4B908B /* Templates */,
 				0344172C0F1DB7F02FDC7CD5 /* Tokens */,
-				BCAECEA6462A2F4AE3EBC92C /* Async+convenience.swift */,
 				F0CA1F2E31C4D1F4D7E7AFCF /* FileHeaderHandler.swift */,
-				D3A2C9C1C9FA19A2D8F5B32D /* FileKit+convenience.swift */,
 				32D7CD1899844A58C727A50D /* GeneratorHelper.swift */,
 				4F1F3CD491EFD856B4C96AC7 /* OrderedSet.swift */,
 				2038E75371E9914C0057A429 /* Reference.swift */,
-				898566C0937C1E5B25F9D20D /* SwiftSyntax+convenience.swift */,
 				52CE2A36ADBCB7B533AB0FDB /* TypeGuesser.swift */,
-				1B5623B43A07101C33A57999 /* Utils.swift */,
 			);
 			path = Internal;
 			sourceTree = "<group>";
@@ -503,8 +507,6 @@
 		F2651F151B1E7A48BD28E107 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = 7EAFB2B59860D61E8F4A757F /* Build configuration list for PBXProject "Generator" */;
 			compatibilityVersion = "Xcode 13.0";
@@ -560,6 +562,7 @@
 				5952ACA075CB38A94D93705F /* CuckooGeneratorError.swift in Sources */,
 				365A0CD5CA0829527545FA46 /* GenerateCommand.swift in Sources */,
 				FEA8AD46EE5CF6745F088EAD /* Generator.swift in Sources */,
+				4857D1552BF0A9B400E3CAB3 /* Array+uniquing.swift in Sources */,
 				972AEC7F5453E8364CCE396E /* Glob.swift in Sources */,
 				2C97DFA9D3E23CCA7F52A69F /* Logger.swift in Sources */,
 				BD95D074E86979BDBBAC53A1 /* Module.swift in Sources */,
@@ -643,6 +646,7 @@
 				A81CBA6691D31B0CCCFC0B03 /* MockTemplate.swift in Sources */,
 				377E989A267F25F31F1B464E /* NopImplStubTemplate.swift in Sources */,
 				9B2F0AE7C751D3A72BEF7663 /* StubbingProxyTemplate.swift in Sources */,
+				4857D1542BF0A9B400E3CAB3 /* Array+uniquing.swift in Sources */,
 				874D43E3025261D20346F043 /* Templates.swift in Sources */,
 				C55F92ED81B9431A914475D2 /* TypeErasureTemplate.swift in Sources */,
 				1E52E97EB5004CFAB912F34E /* VerificationProxyTemplate.swift in Sources */,

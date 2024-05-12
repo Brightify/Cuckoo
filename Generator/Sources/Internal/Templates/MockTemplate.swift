@@ -3,6 +3,7 @@ import Foundation
 extension Templates {
     static let staticGenericParameter = "_CUCKOO$$GENERIC"
     static let typeErasureClassName = "DefaultImplCaller"
+    static let typeErasureGenericParameterPrefix = "\(staticGenericParameter)_"
     static let mock = """
 {% for container in containers %}
 {% if debug %}
@@ -16,7 +17,7 @@ extension {{ container.parentFullyQualifiedName }} {
 {% endif %}
 {{ container.accessibility|withSpace }}class {{ container.mockName }}{{ container.genericParameters }}:{% if container.isNSObjectProtocol %} NSObject,{% endif %} {{ container.name }}{% if container.isImplementation %}{{ container.genericArguments }}{% endif %},{% if container.isImplementation %} Cuckoo.ClassMock{% else %} Cuckoo.ProtocolMock{% endif %} {
     {% if container.isGeneric and not container.isImplementation %}
-    {{ container.accessibility|withSpace }}typealias MocksType = \(typeErasureClassName){{ container.genericArguments }}
+    {{ container.accessibility|withSpace }}typealias MocksType = \(typeErasureClassName)
     {% else %}
     {{ container.accessibility|withSpace }}typealias MocksType = {{ container.name }}{{ container.genericArguments }}
     {% endif %}
@@ -28,7 +29,7 @@ extension {{ container.parentFullyQualifiedName }} {
     {% if container.isGeneric and not container.isImplementation %}
 \(Templates.typeErasure.indented())
 
-    private var __defaultImplStub: \(typeErasureClassName){{ container.genericArguments }}?
+    private var __defaultImplStub: \(typeErasureClassName)?
 
     {{ container.accessibility|withSpace }}func enableDefaultImplementation<\(staticGenericParameter): {{ container.name }}>(_ stub: \(staticGenericParameter)) where {{ container.genericProtocolIdentity }} {
         var mutableStub = stub

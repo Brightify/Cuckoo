@@ -17,4 +17,20 @@ extension Array where Element == GenericParameter {
     var sourceDescription: String {
         "<\(map { $0.description }.joined(separator: ", "))>"
     }
+
+    func merged() -> [GenericParameter] {
+        var seenNames: Set<String> = []
+        var mergedParameters: [GenericParameter] = []
+        for parameterName in self.map(\.name) where !seenNames.contains(parameterName) {
+            seenNames.insert(parameterName)
+            let mergedInheritedTypes = filter { $0.name == parameterName }.flatMap(\.inheritedTypes).uniquing()
+            mergedParameters.append(
+                GenericParameter(
+                    name: parameterName,
+                    inheritedTypes: mergedInheritedTypes
+                )
+            )
+        }
+        return mergedParameters
+    }
 }
