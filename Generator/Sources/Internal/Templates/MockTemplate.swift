@@ -42,9 +42,13 @@ extension {{ container.parentFullyQualifiedName }} {
         cuckoo_manager.enableDefaultStubImplementation()
     }
     {% else %}
+    {% if container.isImplementation %}
     private var __defaultImplStub: {{ container.name }}{{ container.genericArguments }}?
+    {% else %}
+    private var __defaultImplStub: (any {{ container.name }}{{ container.genericArguments }})?
+    {% endif %}
 
-    {{ container.accessibility|withSpace }}func enableDefaultImplementation(_ stub: {{ container.name }}{{ container.genericArguments }}) {
+    {{ container.accessibility|withSpace }}func enableDefaultImplementation(_ stub: {%+ if not container.isImplementation %}any {%+ endif %}{{ container.name }}{{ container.genericArguments }}) {
         __defaultImplStub = stub
         cuckoo_manager.enableDefaultStubImplementation()
     }

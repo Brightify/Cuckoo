@@ -163,6 +163,9 @@
 		47B22527170C086EAD229243 /* NSInvocation+OCMockWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = C61C355CDFD7F0A7C0F32A25 /* NSInvocation+OCMockWrapper.m */; };
 		47BCB19CC5172FBA13E138EF /* StubFunctionThenThrowTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201DFAD306F0F1B18CE9EFBE /* StubFunctionThenThrowTrait.swift */; };
 		47BE7D80679B03932C8393C3 /* StringProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = C0A3B9B776340082AC6DDE9A /* StringProxy.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4857D1572BF13D9E00E3CAB3 /* SwiftUIProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4857D1562BF13D9E00E3CAB3 /* SwiftUIProtocols.swift */; };
+		4857D1582BF13D9E00E3CAB3 /* SwiftUIProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4857D1562BF13D9E00E3CAB3 /* SwiftUIProtocols.swift */; };
+		4857D1592BF13D9E00E3CAB3 /* SwiftUIProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4857D1562BF13D9E00E3CAB3 /* SwiftUIProtocols.swift */; };
 		4866F4208420B1828C6C39B2 /* ToBeStubbedReadOnlyProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375E2C8E10768E1A9A04C362 /* ToBeStubbedReadOnlyProperty.swift */; };
 		48B80CA9723D7DC6241B88CA /* StubFunctionThenTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C749F49256DDA51A9C96C9 /* StubFunctionThenTrait.swift */; };
 		48C1BD8F4E0BA4C6CA1D76D3 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AEF1D77E05D83F84ADE7A87 /* XCTest.framework */; };
@@ -747,6 +750,7 @@
 		40FB9A410020B1B90952823C /* StubTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubTest.swift; sourceTree = "<group>"; };
 		411E675E3332CB3C8D02567A /* FailTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailTest.swift; sourceTree = "<group>"; };
 		413C820C0EB93F0E9C0DFCB7 /* Cuckoo-tvOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Cuckoo-tvOS-Info.plist"; sourceTree = "<group>"; };
+		4857D1562BF13D9E00E3CAB3 /* SwiftUIProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIProtocols.swift; sourceTree = "<group>"; };
 		492606B334C561F93ABBE0A3 /* UnicodeTestProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnicodeTestProtocol.swift; sourceTree = "<group>"; };
 		511DD0B1EA1EAF535C598A8C /* __DoNotUse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = __DoNotUse.swift; sourceTree = "<group>"; };
 		5319F82EEAE3868CE8F23172 /* StubFunctionThenCallRealImplementationTrait.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubFunctionThenCallRealImplementationTrait.swift; sourceTree = "<group>"; };
@@ -1264,6 +1268,7 @@
 				6665FD7C16558B821564AADB /* UnavailablePlatformClass.swift */,
 				9DE5DC1B6EC0BF686019517B /* UnavailablePlatformProtocol.swift */,
 				492606B334C561F93ABBE0A3 /* UnicodeTestProtocol.swift */,
+				4857D1562BF13D9E00E3CAB3 /* SwiftUIProtocols.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -2066,6 +2071,7 @@
 				ED2DFFFD32E3D5EC061C89DA /* ClassWithUnavailablePlatformMembers.swift in Sources */,
 				4A91D2B262ED9EC2EAC65D85 /* ExcludedTestClass.swift in Sources */,
 				BA6739666F5DDC4ADA564E2C /* GenericClass.swift in Sources */,
+				4857D1582BF13D9E00E3CAB3 /* SwiftUIProtocols.swift in Sources */,
 				F2048BABD17B13EB53D9FB28 /* GenericMethodClass.swift in Sources */,
 				00E2BA604E1E453D285A420D /* GenericProtocol.swift in Sources */,
 				9AACD9DB55A2EC0CC1080E1C /* MultiNestedInExtensionFromClass.swift in Sources */,
@@ -2260,6 +2266,7 @@
 				10CCBEFA966D4F86F4B09318 /* ClassWithUnavailablePlatformMembers.swift in Sources */,
 				8AEC76DECB68343825159FB1 /* ExcludedTestClass.swift in Sources */,
 				5EE0A57E2B90191B395C84E8 /* GenericClass.swift in Sources */,
+				4857D1572BF13D9E00E3CAB3 /* SwiftUIProtocols.swift in Sources */,
 				BA5FFE5076C1E8B3CD590D77 /* GenericMethodClass.swift in Sources */,
 				3F65D111D17BD0FADEF199CC /* GenericProtocol.swift in Sources */,
 				98833B16634285BFDA764222 /* MultiNestedInExtensionFromClass.swift in Sources */,
@@ -2440,6 +2447,7 @@
 				24EAA09EA90350CD757C2726 /* ClassWithUnavailablePlatformMembers.swift in Sources */,
 				8B704B099E1FEA7F97ECEAE0 /* ExcludedTestClass.swift in Sources */,
 				68666AF31756DE755BED16A0 /* GenericClass.swift in Sources */,
+				4857D1592BF13D9E00E3CAB3 /* SwiftUIProtocols.swift in Sources */,
 				74D3B95277DBED7324B72ADA /* GenericMethodClass.swift in Sources */,
 				1C26D4A759E527279D1C431D /* GenericProtocol.swift in Sources */,
 				69FA65887F767A4AB431E19A /* MultiNestedInExtensionFromClass.swift in Sources */,
