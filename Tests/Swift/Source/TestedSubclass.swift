@@ -99,6 +99,8 @@ class TestedSubclass: TestedClass, TestedProtocol {
     func asyncMethod() async {
         try? await Task.sleep(nanoseconds: 10)
     }
+
+    func compositionalParameters(param1: any Numeric, param2: OnlyLabelProtocol & Codable) {}
 }
 
 class TestedSubSubClass: TestedSubclass {

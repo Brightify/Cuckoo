@@ -3,7 +3,7 @@
 dev:
 	(killall Xcode || true)
 	# Generate Xcode structure.
-	tuist generate --no-open
+	TUIST_PROJECT_DIR=$(PWD) tuist generate --no-open
 	# Use Bundler if available, otherwise just call system-wide CocoaPods.
 	if ! command -v bundle &> /dev/null; then bundle install && bundle exec pod install; else pod install; fi
 	xed Cuckoo.xcworkspace

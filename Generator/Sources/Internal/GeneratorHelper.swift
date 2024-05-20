@@ -10,6 +10,7 @@ struct GeneratorHelper {
     @StaticActor
     private static let extensions = createExtensions()
 
+    @StaticActor
     static func generate(tokens: [Token], debug: Bool = false) throws -> String {
         let containers = tokens.map { $0.serialize() }
 
@@ -76,7 +77,11 @@ struct GeneratorHelper {
         var fullString = ""
         for (index, parameter) in method.signature.parameters.enumerated() {
             if !parameter.type.containsAttribute(named: "@escaping"), let closure = parameter.type.findClosure() {
-                let indents = String(repeating: "\t", count: index)
+                if fullString.isEmpty {
+                    fullString = "\n"
+                }
+
+                let indents = String(repeating: "\t", count: index + 2)
                 let tries = method.isThrowing ? "try " : ""
                 let awaits = method.isAsync ? "await " : ""
 
@@ -90,7 +95,6 @@ struct GeneratorHelper {
                 fullString += "\(indents)return \(tries)\(awaits)withoutActuallyEscaping(\(parameter.usableName), do: { (\(parameter.usableName): @escaping \(parameter.type))\(returnSignature) in\n"
             }
         }
-
         return fullString
     }
 
@@ -98,7 +102,10 @@ struct GeneratorHelper {
         var fullString = ""
         for (index, parameter) in parameters.enumerated() {
             if !parameter.type.containsAttribute(named: "@escaping"), parameter.type.isClosure {
-                let indents = String(repeating: "\t", count: index)
+                if fullString.isEmpty {
+                    fullString = "\n"
+                }
+                let indents = String(repeating: "\t", count: index + 2)
                 fullString += "\(indents)})\n"
             }
         }

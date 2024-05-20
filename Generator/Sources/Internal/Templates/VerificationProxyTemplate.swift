@@ -12,8 +12,8 @@ extension Templates {
         self.callMatcher = callMatcher
         self.sourceLocation = sourceLocation
     }
-
     {% for property in container.properties %}
+    
     {% for attribute in property.attributes %}
     {{ attribute }}
     {% endfor %}
@@ -21,8 +21,8 @@ extension Templates {
         return .init(manager: cuckoo_manager, name: "{{property.name}}", callMatcher: callMatcher, sourceLocation: sourceLocation)
     }
     {% endfor %}
-
     {% for method in container.methods %}
+    
     {{ method.unavailablePlatformsCheck }}
     {% for attribute in method.attributes %}
     {{ attribute }}

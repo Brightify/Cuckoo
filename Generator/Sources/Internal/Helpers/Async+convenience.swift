@@ -14,6 +14,20 @@ extension Sequence {
 
         return values
     }
+
+    func asyncCompactMap<T>(
+        _ transform: (Element) async throws -> T?
+    ) async rethrows -> [T] {
+        var values = [T]()
+
+        for element in self {
+            if let value = try await transform(element) {
+                values.append(value)
+            }
+        }
+
+        return values
+    }
 }
 
 extension Sequence {
@@ -56,7 +70,7 @@ extension Sequence {
 extension Sequence {
     func concurrentMap<T>(
         _ transform: @escaping (Element) async throws -> T
-    ) async throws -> [T] {
+    ) async rethrows -> [T] {
         let tasks = map { element in
             Task {
                 try await transform(element)
@@ -64,6 +78,20 @@ extension Sequence {
         }
 
         return try await tasks.asyncMap { task in
+            try await task.value
+        }
+    }
+
+    func concurrentCompactMap<T>(
+        _ transform: @escaping (Element) async throws -> T?
+    ) async rethrows -> [T] {
+        let tasks = map { element in
+            Task {
+                try await transform(element)
+            }
+        }
+
+        return try await tasks.asyncCompactMap { task in
             try await task.value
         }
     }

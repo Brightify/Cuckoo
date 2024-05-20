@@ -23,3 +23,13 @@ extension ExprSyntaxProtocol {
         }
     }
 }
+
+extension IdentifierTypeSyntax {
+    var identifier: String {
+        if case .identifier(let identifier) = name.tokenKind {
+            return identifier
+        } else {
+            fatalError("Cuckoo error: Expected identifier. Please create an issue.")
+        }
+    }
+}

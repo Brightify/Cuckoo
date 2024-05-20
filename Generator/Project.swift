@@ -73,9 +73,12 @@ let project = Project(
             runAction: RunAction.runAction(
                 executable: "Cuckoonator",
                 arguments: Arguments(
+                    environment: [
+                        "PROJECT_DIR": Environment.projectDir.requireString(message: "TUIST_PROJECT_DIR environment property is required."),
+                    ],
                     launchArguments: [
                         // Any changes here should be reflected in `../Project.swift` as well.
-                        LaunchArgument(name: "--configuration ../Cuckoofile", isEnabled: true),
+                        LaunchArgument(name: "--configuration ./Cuckoofile", isEnabled: true),
                         LaunchArgument(name: "--verbose", isEnabled: true),
                     ]
                 )

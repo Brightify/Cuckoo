@@ -32,7 +32,7 @@ final class Generator {
             .filter { $0.exists }
             .map(TextFile.init(path:))
 
-        let files: [FileRepresentation] = inputFiles.compactMap { file in
+        let files: [FileRepresentation] = await inputFiles.concurrentCompactMap { file in
             do {
                 log(.verbose, message: "Processing file: \(file.path)")
                 let crawler = try Crawler.crawl(url: file.path.url)
@@ -66,7 +66,7 @@ final class Generator {
 
         let timestamp = verbose ? Date().description : nil
         return try await mockableFiles.concurrentMap { file in
-            GeneratedFile(
+            await GeneratedFile(
                 path: file.file.path,
                 contents: [
                     module.options.omitHeaders ? nil : FileHeaderHandler.header(for: file, timestamp: timestamp),

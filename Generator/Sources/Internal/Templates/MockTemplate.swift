@@ -55,6 +55,7 @@ extension {{ container.parentFullyQualifiedName }} {
     {% endif -%}
 
     {% for property in container.properties %}
+    
     {% if debug %}
     // {{ property }}
     {% endif %}
@@ -64,7 +65,7 @@ extension {{ container.parentFullyQualifiedName }} {
     {% for attribute in property.attributes %}
     {{ attribute }}
     {% endfor %}
-    {{ property.accessibility|withSpace }}{% if property.isOverriding %}override {% endif %} var {{ property.name|escapeReservedKeywords }}: {{ property.type }} {
+    {{ property.accessibility|withSpace }}{% if property.isOverriding %}override {%+ endif %}var {{ property.name|escapeReservedKeywords }}: {{ property.type }} {
         get {%+ if property.isAsync %}async {%+ endif %}{% if property.isThrowing %}throws {%+ endif %}{
             return {%+ if property.isThrowing %}try {%+ endif %}{% if property.isAsync %}await {%+ endif %}cuckoo_manager.getter{% if property.isThrowing %}Throws{% endif %}(
                 "{{ property.name }}",
@@ -102,8 +103,8 @@ extension {{ container.parentFullyQualifiedName }} {
     {% endfor %}
     {{ initializer.accessibility|withSpace }}required init{{initializer.signature}} {}
     {% endfor %}
-
     {% for method in container.methods %}
+    
     {% if debug %}
     // {{method}}
     {% endif %}
@@ -114,15 +115,13 @@ extension {{ container.parentFullyQualifiedName }} {
     {{ attribute }}
     {% endfor %}
     {{ method.accessibility|withSpace }}{% if method.isOverriding %}override {%+ endif %}func {{ method.name|escapeReservedKeywords }}{{ method.signature }} {
-        {{ method.self|openNestedClosure }}
-        return{% if method.isThrowing %} try{% endif %}{% if method.isAsync %} await{% endif %} cuckoo_manager.call{% if method.isThrowing %}{{ method.throwType|capitalize }}{% endif %}(
+        {{ method.self|openNestedClosure }}return{% if method.isThrowing %} try{% endif %}{% if method.isAsync %} await{% endif %} cuckoo_manager.call{% if method.isThrowing %}{{ method.throwType|capitalize }}{% endif %}(
             "{{method.fullyQualifiedName}}",
             parameters: ({{method.parameterNames}}),
             escapingParameters: ({{method.escapingParameterNames}}),
             superclassCall: {%+ if container.isImplementation %}{% if method.isAsync %}await {%+ endif %}super.{{method.name}}({{method.call}}){% else %}Cuckoo.MockManager.crashOnProtocolSuperclassCall(){% endif %},
             defaultCall: {%+ if method.isAsync %}await {%+ endif %}__defaultImplStub!.{{method.name}}{%if method.isOptional %}!{%endif%}({{method.call}})
-        )
-        {{ method.parameters|closeNestedClosure }}
+        ){{ method.parameters|closeNestedClosure }}
     }
     {% endfor %}
 

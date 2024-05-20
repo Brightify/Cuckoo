@@ -267,7 +267,7 @@ extension Crawler {
         } else if let initializer = binding.initializer?.value.trimmed.description, let guessedType = TypeGuesser.guessType(from: initializer) {
             type = .type(guessedType)
         } else {
-            fatalError("Can't infer type: \(url)")
+            fatalError("Can't infer type of property '\(identifier)' in file \(url)")
         }
 
         let isReadOnly: Bool
@@ -504,6 +504,11 @@ class Multi {
 //    @available(*, renamed: "sameInstance(as:)")
 //    private(set) var geg: Stool
 
+    var gg: Dictionary<Int, String>
+    var ggwp: Array<String>
+
+    func compositionalParameters(param1: any Equatable & Numeric, param2: OnlyLabelProtocol & Codable)
+
     @objc
     var hammo: Tpikulka!
 
@@ -523,11 +528,11 @@ class Multi {
 
     #if DEBUG
     var pravda: Cool {
-        prdel
+        thing
     }
     #elseif RELEASE
     var pravda: Cool {
-        prdel
+        some
     }
     #endif
 
@@ -540,7 +545,7 @@ class Multi {
 }
 
 protocol Brek<Crack: Codable> {
-    associatedtype gag: Encodable
+    associatedtype plak: Encodable
 
     var asyncThrowsProperty: Int { get async throws }
     var mutableProperty: Int { get set }

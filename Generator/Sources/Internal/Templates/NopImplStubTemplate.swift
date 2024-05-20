@@ -12,7 +12,7 @@ extension Templates {
     {% for attribute in property.attributes %}
     {{ attribute }}
     {% endfor %}
-    {{ property.accessibility|withSpace }}{% if property.isOverriding %}override{% endif %} var {{ property.name }}: {{ property.type }} {
+    {{ property.accessibility|withSpace }}{% if property.isOverriding %}override {%+ endif %}var {{ property.name }}: {{ property.type }} {
         get {
             return DefaultValueRegistry.defaultValue(for: ({{property.type|genericSafe|removeClosureArgumentNames}}).self)
         }
@@ -41,7 +41,7 @@ extension Templates {
     {% for attribute in method.attributes %}
     {{ attribute }}
     {% endfor %}
-    {{ method.accessibility|withSpace }}{% if method.isOverriding %}override{% endif %} func {{ method.name|escapeReservedKeywords }}{{ method.signature }} {
+    {{ method.accessibility|withSpace }}{% if method.isOverriding %}override {%+ endif %}func {{ method.name|escapeReservedKeywords }}{{ method.signature }} {
         return DefaultValueRegistry.defaultValue(for: ({{method.returnType|genericSafe}}).self)
     }
     {% if method.hasUnavailablePlatforms %}

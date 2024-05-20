@@ -94,6 +94,8 @@ protocol TestedProtocol {
     @available(tvOS 13.0, *)
     @available(macOS 10.15, *)
     func asyncMethod() async
+
+    func compositionalParameters(param1: any Numeric, param2: OnlyLabelProtocol & Codable)
 }
 
 extension TestedProtocol {

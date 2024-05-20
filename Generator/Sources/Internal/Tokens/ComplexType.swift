@@ -4,16 +4,18 @@ import SwiftParser
 enum ComplexType {
     indirect case attributed(attributes: [String], baseType: ComplexType)
     indirect case optional(wrappedType: ComplexType, isImplicit: Bool)
+    indirect case array(elementType: ComplexType)
+    indirect case dictionary(keyType: ComplexType, valueType: ComplexType)
     case closure(Closure)
     case type(String)
 
     init(syntax: TypeSyntax) {
-        self = if let implicitOptionalType = syntax.as(ImplicitlyUnwrappedOptionalTypeSyntax.self) {
-            .optional(wrappedType: ComplexType(syntax: implicitOptionalType.wrappedType), isImplicit: true)
+        if let implicitOptionalType = syntax.as(ImplicitlyUnwrappedOptionalTypeSyntax.self) {
+            self = .optional(wrappedType: ComplexType(syntax: implicitOptionalType.wrappedType), isImplicit: true)
         } else if let optionalType = syntax.as(OptionalTypeSyntax.self) {
-            .optional(wrappedType: ComplexType(syntax: optionalType.wrappedType), isImplicit: false)
+            self = .optional(wrappedType: ComplexType(syntax: optionalType.wrappedType), isImplicit: false)
         } else if let attributedType = syntax.as(AttributedTypeSyntax.self) {
-            .attributed(
+            self = .attributed(
                 attributes: [
                     attributedType.attributes.map { $0.trimmedDescription },
                     attributedType.specifier.map { [$0.trimmedDescription] } ?? [],
@@ -21,7 +23,7 @@ enum ComplexType {
                 baseType: ComplexType(syntax: attributedType.baseType)
             )
         } else if let functionType = syntax.as(FunctionTypeSyntax.self) {
-            .closure(
+            self = .closure(
                 Closure(
                     parameters: functionType.parameters.map {
                         Closure.Parameter(
@@ -33,8 +35,28 @@ enum ComplexType {
                     returnType: ComplexType(syntax: functionType.returnClause.type)
                 )
             )
+        } else if let identifierType = syntax.as(IdentifierTypeSyntax.self) {
+            switch identifierType.identifier {
+            case "Dictionary":
+                let arguments = identifierType.genericArgumentClause?.arguments
+                guard let keyType = arguments?.first?.argument, let valueType = arguments?.last?.argument else {
+                    fatalError("Cuckoo error: Failed to get Dictionary type, please open an issue.")
+                }
+                self = .dictionary(
+                    keyType: ComplexType(syntax: keyType),
+                    valueType: ComplexType(syntax: valueType)
+                )
+            case "Array":
+                let arguments = identifierType.genericArgumentClause?.arguments
+                guard let elementType = arguments?.first?.argument else {
+                    fatalError("Cuckoo error: Failed to get Array type, please open an issue.")
+                }
+                self = .array(elementType: ComplexType(syntax: elementType))
+            default:
+                self = .type(syntax.trimmedDescription)
+            }
         } else {
-            .type(syntax.trimmedDescription)
+            self = .type(syntax.trimmedDescription)
         }
     }
 
@@ -104,12 +126,16 @@ extension ComplexType: Equatable {
         switch (lhs, rhs) {
         case (.attributed(let lhsAttributes, let lhsBaseType), .attributed(let rhsAttributes, let rhsBaseType)):
             lhsAttributes == rhsAttributes && lhsBaseType == rhsBaseType
-        case (.optional(let lhsWrappedType), .optional(let rhsWrappedType)):
+        case (.optional(let lhsWrappedType, _), .optional(let rhsWrappedType, _)):
             lhsWrappedType == rhsWrappedType
+        case (.array(let lhsElementType), .array(let rhsElementType)):
+            lhsElementType == rhsElementType
+        case (.dictionary(let lhsKeyType, let lhsValueType), .dictionary(let rhsKeyType, let rhsValueType)):
+            lhsKeyType == rhsKeyType && lhsValueType == rhsValueType
         case (.closure(let lhsClosure), .closure(let rhsClosure)):
             lhsClosure == rhsClosure
         case (.type(let lhsIdentifier), .type(let rhsIdentifier)):
-            lhsIdentifier.components(separatedBy: .whitespacesAndNewlines).joined() == rhsIdentifier.components(separatedBy: .whitespacesAndNewlines).joined()
+            lhsIdentifier.filter { !$0.isWhitespace } == rhsIdentifier.filter { !$0.isWhitespace }
         default:
             false
         }
@@ -139,7 +165,7 @@ extension ComplexType {
             true
         case .attributed(_, let baseType):
             baseType.isOptional
-        case .closure, .type:
+        case .array, .dictionary, .closure, .type:
             false
         }
     }
@@ -176,11 +202,11 @@ extension ComplexType {
         switch self {
         case .attributed(_, let baseType):
             baseType.findClosure()
-        case .closure(let closure):
-            closure
         case .optional(let wrappedType, _):
             wrappedType.findClosure()
-        case .type:
+        case .closure(let closure):
+            closure
+        case .type, .array, .dictionary:
             nil
         }
     }
@@ -215,10 +241,33 @@ extension ComplexType: CustomStringConvertible {
             } else {
                 return "\(wrappedType.description)\(suffix)"
             }
+        case .array(let elementType):
+            return "[\(elementType)]"
+        case .dictionary(let keyType, let valueType):
+            return "[\(keyType): \(valueType)]"
         case .closure(let closure):
             return closure.description
         case .type(let type):
             return type
+        }
+    }
+}
+
+extension ComplexType: CustomDebugStringConvertible {
+    var debugDescription: String {
+        switch self {
+        case .attributed(let attributes, let baseType):
+            ".attributed(\(attributes.map(\.quoted)) \(baseType.debugDescription)"
+        case .optional(let wrappedType, let isImplicit):
+            ".optional(\(wrappedType.debugDescription), isImplicit: \(isImplicit)"
+        case .array(let elementType):
+            ".array(\(elementType.debugDescription))"
+        case .dictionary(let keyType, let valueType):
+            ".dictionary(\(keyType.debugDescription), \(valueType.debugDescription))"
+        case .closure(let closure):
+            ".closure(\(closure.description.quoted))"
+        case .type(let type):
+            type.quoted
         }
     }
 }

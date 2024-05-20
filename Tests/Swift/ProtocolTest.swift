@@ -229,6 +229,22 @@ final class ProtocolTest: XCTestCase {
         _ = verify(mock).empty(any()) as __DoNotUse<Bool, Bool>
     }
 
+    func testCompositionalParameters() {
+        let mock = MockTestedProtocol()
+        stub(mock) { mock in
+            when(mock.compositionalParameters(param1: any(), param2: any())).thenDoNothing()
+        }
+        mock.compositionalParameters(param1: 0, param2: CompositionalTest(g: "gg"))
+    }
+
+    private struct CompositionalTest: OnlyLabelProtocol, Codable {
+        let g: String
+
+        func empty(_: String) {}
+        func some(some: Int) {}
+        func double(here there: Bool) {}
+    }
+
     private enum TestError: Error {
         case unknown
     }
