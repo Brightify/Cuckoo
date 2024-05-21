@@ -24,6 +24,11 @@ extension {{ container.parentFullyQualifiedName }} {
     {{ container.accessibility|withSpace }}typealias Stubbing = __StubbingProxy_{{ container.name }}
     {{ container.accessibility|withSpace }}typealias Verification = __VerificationProxy_{{ container.name }}
 
+    // Original typealiases
+    {% for typealias in container.typealiases %}
+    {{ typealias }}
+    {% endfor %}
+
     {{ container.accessibility|withSpace }}let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: {{ container.isImplementation }})
 
     {% if container.isGeneric and not container.isImplementation %}

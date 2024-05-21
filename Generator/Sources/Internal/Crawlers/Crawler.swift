@@ -181,6 +181,11 @@ final class Crawler: SyntaxVisitor {
         return .visitChildren
     }
 
+    override func visit(_ node: TypeAliasDeclSyntax) -> SyntaxVisitorContinueKind {
+        tokens.append(Typealias(syntax: node))
+        return .skipChildren
+    }
+
     private func walk(members: MemberBlockSyntax) {
         for member in members.members {
             walk(member)
@@ -503,6 +508,9 @@ class Multi {
 //    let g: Bool
 //    @available(*, renamed: "sameInstance(as:)")
 //    private(set) var geg: Stool
+
+    typealias MyInt = Int
+    typealias MyIntGen<Generics> = Int<Generics>
 
     var gg: Dictionary<Int, String>
     var ggwp: Array<String>

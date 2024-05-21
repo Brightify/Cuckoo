@@ -6,6 +6,13 @@ protocol UnavailableProtocol { }
 
 @available(swift 4.0)
 class TestedClass {
+    typealias NormalTypealias = Int
+    typealias ClosureTypealias = () -> Int
+    typealias ClosureTypealias2 = (String, Array<Int>) -> Int
+    typealias GenericTypealias<Value> = Array<Value>
+    typealias GenericTypealiasArray<Value> = [Value]
+    typealias SemigenericTypealias = Array<Int>
+    typealias SemigenericTypealiasArray = [Int]
 
     let constant: Float = 0.0
 
@@ -184,6 +191,12 @@ class TestedClass {
     deinit {
 
     }
+
+    func typealiasMethod() -> NormalTypealias {
+        0
+    }
+
+    func genericTypealiasMethod(typealias: GenericTypealias<String>) {}
 }
 
 private class ThisClassShouldNotBeMocked1 {

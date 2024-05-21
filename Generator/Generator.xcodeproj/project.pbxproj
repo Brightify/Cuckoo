@@ -3,11 +3,10 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		029AE21A6F2451C44AD5191C /* ChildToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01D8487E10CBAB2F8BEE25 /* ChildToken.swift */; };
 		052790A76E0F6ABA96C9A3E0 /* String+convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D4E2D59CBA725E92818DF5 /* String+convenience.swift */; };
 		0590D5E1059A7678C601109F /* NopImplStubTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C20D1025E21DF0396A5DF8E /* NopImplStubTemplate.swift */; };
 		06E7ED0443C87639FFAC9011 /* HasInheritance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B412F01A6E876AC66967055 /* HasInheritance.swift */; };
@@ -40,6 +39,8 @@
 		44A72AF2F6D6D2E1D371C50F /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 82A76F6C4BC47C860A90EFA7 /* ArgumentParser */; };
 		46D9663497017BFABAA09B66 /* SwiftSyntax in Frameworks */ = {isa = PBXBuildFile; productRef = 10B6A078051BAD502FBAC752 /* SwiftSyntax */; };
 		48205DE8188B258737270530 /* ModifierListSyntax+common.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF4E1D009F8E0D6988EA56E9 /* ModifierListSyntax+common.swift */; };
+		483BE5542BFD109F00B202E0 /* Typealias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483BE5532BFD109F00B202E0 /* Typealias.swift */; };
+		483BE5552BFD109F00B202E0 /* Typealias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483BE5532BFD109F00B202E0 /* Typealias.swift */; };
 		4871C1D4211262913FE7E23A /* TOMLKit in Frameworks */ = {isa = PBXBuildFile; productRef = CF01AE9B482B793213C15803 /* TOMLKit */; };
 		4A04C8DABB34967D6D2EDB49 /* OrderedSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1F3CD491EFD856B4C96AC7 /* OrderedSet.swift */; };
 		4A2BFBD3DA28E395A3D05946 /* Attribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8A800560013CEEAC82BDD3 /* Attribute.swift */; };
@@ -81,7 +82,6 @@
 		8B73D3D43ACA1CEF23CC6101 /* HasName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C5C09640B2E1C7C8FB4CD7 /* HasName.swift */; };
 		8D1AA9575B15BDBF9044515D /* GenerateCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB34C26A626E82EECF23380 /* GenerateCommand.swift */; };
 		90D41AE72F82B430759E34F8 /* VerificationProxyTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDFA6B78881951ACDF56D44 /* VerificationProxyTemplate.swift */; };
-		90FBE14B957259BF1CE1644A /* ChildToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01D8487E10CBAB2F8BEE25 /* ChildToken.swift */; };
 		91F3C9952FD50B00004D5C56 /* HasGenerics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4E27DFBE13069E59BF33FB /* HasGenerics.swift */; };
 		92BBACC8AC2B5D8B99667EEA /* ClassDeclaration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5A4FB3A15D4BAD7313A22F /* ClassDeclaration.swift */; };
 		93BFD80D6B554649BC03A321 /* Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC807C1DDEFBABC6EFCF3007 /* Initializer.swift */; };
@@ -177,13 +177,13 @@
 		29D7296FB5088F0711596882 /* Variable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variable.swift; sourceTree = "<group>"; };
 		2B0CEC0E6BC2F8FDDCB86A7C /* MethodParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MethodParameter.swift; sourceTree = "<group>"; };
 		2D950A7A41DA6F8B7AAC81E7 /* ComplexType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplexType.swift; sourceTree = "<group>"; };
-		2E01D8487E10CBAB2F8BEE25 /* ChildToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildToken.swift; sourceTree = "<group>"; };
 		2F5A4FB3A15D4BAD7313A22F /* ClassDeclaration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassDeclaration.swift; sourceTree = "<group>"; };
 		2FDFA6B78881951ACDF56D44 /* VerificationProxyTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationProxyTemplate.swift; sourceTree = "<group>"; };
 		32D7CD1899844A58C727A50D /* GeneratorHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorHelper.swift; sourceTree = "<group>"; };
 		41C5C09640B2E1C7C8FB4CD7 /* HasName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasName.swift; sourceTree = "<group>"; };
+		483BE5532BFD109F00B202E0 /* Typealias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typealias.swift; sourceTree = "<group>"; };
 		4F1F3CD491EFD856B4C96AC7 /* OrderedSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderedSet.swift; sourceTree = "<group>"; };
-		50316F84EA0A5C89C1ED8932 /* cuckoonator */ = {isa = PBXFileReference; includeInIndex = 0; path = cuckoonator; sourceTree = BUILT_PRODUCTS_DIR; };
+		50316F84EA0A5C89C1ED8932 /* cuckoonator */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = text; path = cuckoonator; sourceTree = BUILT_PRODUCTS_DIR; };
 		50E0C10D6BFAE96A0A700D06 /* FileRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileRepresentation.swift; sourceTree = "<group>"; };
 		52CE2A36ADBCB7B533AB0FDB /* TypeGuesser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeGuesser.swift; sourceTree = "<group>"; };
 		5A484A998FE2183BF6ADAA94 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
@@ -269,9 +269,9 @@
 				20DEC997DE9F9A496DC55AF3 /* Accessibility.swift */,
 				63ECADC8A9E870A97EB490B5 /* AsyncType.swift */,
 				9B8A800560013CEEAC82BDD3 /* Attribute.swift */,
-				2E01D8487E10CBAB2F8BEE25 /* ChildToken.swift */,
 				2F5A4FB3A15D4BAD7313A22F /* ClassDeclaration.swift */,
 				2D950A7A41DA6F8B7AAC81E7 /* ComplexType.swift */,
+				483BE5532BFD109F00B202E0 /* Typealias.swift */,
 				B6A041658EC750F648A2D193 /* ContainerToken.swift */,
 				C4C67E266FAB582D3E30F6DF /* Deinitializer.swift */,
 				50E0C10D6BFAE96A0A700D06 /* FileRepresentation.swift */,
@@ -507,8 +507,6 @@
 		F2651F151B1E7A48BD28E107 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = 7EAFB2B59860D61E8F4A757F /* Build configuration list for PBXProject "Generator" */;
 			compatibilityVersion = "Xcode 13.0";
@@ -597,7 +595,6 @@
 				06E7ED0443C87639FFAC9011 /* HasInheritance.swift in Sources */,
 				9DE5F7B984049D095AA4074C /* HasMembers.swift in Sources */,
 				CC766E6609048FAD7D7094E5 /* HasName.swift in Sources */,
-				029AE21A6F2451C44AD5191C /* ChildToken.swift in Sources */,
 				92BBACC8AC2B5D8B99667EEA /* ClassDeclaration.swift in Sources */,
 				F9D4D3624CF450DAF961A852 /* ComplexType.swift in Sources */,
 				751578C4C568784899DC919A /* ContainerToken.swift in Sources */,
@@ -608,6 +605,7 @@
 				4EAC0C297D3C3B19EB3809D7 /* Inheritable.swift in Sources */,
 				93BFD80D6B554649BC03A321 /* Initializer.swift in Sources */,
 				436B1158A6ED217E8D5B05A2 /* Method.swift in Sources */,
+				483BE5552BFD109F00B202E0 /* Typealias.swift in Sources */,
 				440C1F66A6749F51752B99FB /* MethodParameter.swift in Sources */,
 				5ECC262B02106A314D1EC39F /* MethodSignature.swift in Sources */,
 				56798F6712767CD2176C6877 /* NamespaceDeclaration.swift in Sources */,
@@ -662,7 +660,6 @@
 				9D8817E4FA17640C46159854 /* HasInheritance.swift in Sources */,
 				A726E94D443E854CF233AB3B /* HasMembers.swift in Sources */,
 				8B73D3D43ACA1CEF23CC6101 /* HasName.swift in Sources */,
-				90FBE14B957259BF1CE1644A /* ChildToken.swift in Sources */,
 				579A5DF5F9933D773D792DD5 /* ClassDeclaration.swift in Sources */,
 				150B7AB135AA60B0C15A6517 /* ComplexType.swift in Sources */,
 				C4B82C54CDB43FB6DA808E2D /* ContainerToken.swift in Sources */,
@@ -670,6 +667,7 @@
 				6FFF3BC006C1006E4415AFDD /* FileRepresentation.swift in Sources */,
 				E00B187D2F98F753236CA25F /* GenericParameter.swift in Sources */,
 				698C1052721737ADF27ABB0A /* Import.swift in Sources */,
+				483BE5542BFD109F00B202E0 /* Typealias.swift in Sources */,
 				2AE7D1FED2533686F9BCA0AE /* Inheritable.swift in Sources */,
 				88DC61F066E5D5A5C0BB3317 /* Initializer.swift in Sources */,
 				17A2954EF62AC448248369BC /* Method.swift in Sources */,

@@ -15,6 +15,8 @@ extension ContainerToken {
             return withAdjustedAccessibility(token: memberWithAccessibility)
         }
 
+        let typealiases = members.compactMap { ($0 as? Typealias)?.description }
+
         let properties = accessibilityAdjustedMembers
             .compactMap { $0 as? Variable }
             .map { $0.serialize() }
@@ -33,6 +35,7 @@ extension ContainerToken {
 
         return [
             "accessibility": accessibility.sourceName,
+            "typealiases": typealiases,
             "properties": properties,
             "initializers": initializers,
             "methods": methods,
