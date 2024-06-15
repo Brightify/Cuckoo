@@ -137,6 +137,7 @@ keepDocumentation = false
 
 # If specified, Cuckoo can also get sources for the module from an Xcode target.
 [modules.MyProject.xcodeproj]
+# Path to folder with .xcodeproj, omit this if it's at the same level as Cuckoofile.
 path = "Generator"
 target = "Cuckoonator"
 ```

@@ -43,7 +43,7 @@ final class Module {
                 self.xcodeproj = Xcodeproj(
                     path: xcodeproj.path.map {
                         Path($0, expandingTilde: true).relative(to: configurationPath.parent)
-                    } ?? configurationPath,
+                    } ?? configurationPath.parent,
                     target: target
                 )
             } else {
