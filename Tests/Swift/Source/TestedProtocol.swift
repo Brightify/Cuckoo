@@ -144,3 +144,13 @@ public protocol PublicoProtocolo {
 
     func internalMethod()
 }
+
+protocol SimpleProtocol {
+    var constant: Int { get }
+}
+
+class SimpleClass: SimpleProtocol {
+    let constant = 0
+}
+
+class SimpleSubclass: SimpleClass {}

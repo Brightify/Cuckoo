@@ -221,7 +221,7 @@ extension Crawler {
     private func parse(_ variableGroup: VariableDeclSyntax) -> [Variable] {
         let isConstant = variableGroup.bindingSpecifier.tokenKind == .keyword(.let)
 
-        guard !isConstant && !variableGroup.modifiers.isStatic && !variableGroup.modifiers.isFinal else { return [] }
+        guard !variableGroup.modifiers.isStatic && !variableGroup.modifiers.isFinal else { return [] }
 
         let attributes = attributes(from: variableGroup.attributes)
 
@@ -258,7 +258,8 @@ extension Crawler {
                     setterAccessibility: $0.isReadOnly ? nil : setterAccessibility ?? (container as? HasAccessibility)?.accessibility ?? .internal,
                     name: $0.identifier,
                     type: $0.type,
-                    effects: $0.effects
+                    effects: $0.effects,
+                    isConstant: isConstant
                 )
             }
     }
@@ -511,6 +512,8 @@ class Multi {
 
     typealias MyInt = Int
     typealias MyIntGen<Generics> = Int<Generics>
+
+    let constant = 3
 
     var gg: Dictionary<Int, String>
     var ggwp: Array<String>

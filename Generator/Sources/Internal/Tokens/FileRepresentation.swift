@@ -56,12 +56,13 @@ extension Token {
             .compactMap { $0 as? HasMembers }
             .flatMap { $0.members }
             .reduce(token.members) { tokens, inheritedToken in
-                if let inheritedInheritable = inheritedToken as? Inheritable,
-                   tokens.compactMap({ $0 as? Inheritable }).contains(where: { $0.isEqual(to: inheritedInheritable) }) {
-                    return tokens
-                } else {
+                guard let inheritedInheritable = inheritedToken as? Inheritable else {
                     return tokens + [inheritedToken]
                 }
+
+                let isAlreadyPresent = tokens.compactMap({ $0 as? Inheritable }).contains(where: { $0.isEqual(to: inheritedInheritable) })
+
+                return isAlreadyPresent || !inheritedInheritable.isInheritable ? tokens : tokens + [inheritedToken]
             }
 
         switch token {

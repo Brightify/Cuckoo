@@ -19,6 +19,7 @@ extension ContainerToken {
 
         let properties = accessibilityAdjustedMembers
             .compactMap { $0 as? Variable }
+            .filter { !$0.isConstant }
             .map { $0.serialize() }
 
         let initializers = if isClass {

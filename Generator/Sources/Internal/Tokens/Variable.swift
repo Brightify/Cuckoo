@@ -16,6 +16,9 @@ struct Variable: Token, HasAccessibility, HasAttributes {
     var isReadOnly: Bool {
         setterAccessibility?.isAccessible != true
     }
+    // This flag is used to block generating inherited variables if the property to be overridden
+    // is a constant, which Swift doesn't allow.
+    var isConstant: Bool
 
     func serialize() -> [String: Any] {
         let readOnlyVerifyString = isReadOnly ? "ReadOnly" : ""
@@ -47,6 +50,10 @@ struct Variable: Token, HasAccessibility, HasAttributes {
 }
 
 extension Variable: Inheritable {
+    var isInheritable: Bool {
+        !isConstant
+    }
+
     func isEqual(to other: Inheritable) -> Bool {
         guard let other = other as? Variable else { return false }
         return name == other.name
