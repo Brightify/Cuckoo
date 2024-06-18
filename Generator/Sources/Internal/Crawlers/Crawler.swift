@@ -440,7 +440,7 @@ extension Crawler {
     private func genericParameters(from genericParameterList: GenericParameterListSyntax?) -> [GenericParameter] {
         genericParameterList?.map { genericParameter in
             GenericParameter(
-                name: genericParameter.name.trimmed.description,
+                name: genericParameter.name.identifier,
                 inheritedTypes: inheritedTypes(from: genericParameter.inheritedType?.trimmed)
             )
         } ?? []
@@ -479,18 +479,10 @@ extension Crawler {
 
     private func inheritedTypes(from inheritedType: TypeSyntax?) -> [String] {
         guard let inheritedType else { return [] }
-        if let simpleType = inheritedType.as(IdentifierTypeSyntax.self) {
-            return [simpleType.trimmed.description]
-        } else if let compositeType = inheritedType.as(CompositionTypeSyntax.self) {
-            return compositeType.elements.compactMap { element in
-                guard let simpleType = element.type
-                    .as(IdentifierTypeSyntax.self) else {
-                    return nil
-                }
-                return simpleType.trimmed.description
-            }
+        if let compositeType = inheritedType.as(CompositionTypeSyntax.self) {
+            return compositeType.elements.compactMap { $0.type.trimmedDescription }
         } else {
-            return []
+            return [inheritedType.trimmedDescription]
         }
     }
 }
@@ -517,6 +509,8 @@ class Multi {
 
     var gg: Dictionary<Int, String>
     var ggwp: Array<String>
+
+    func generico<G: APIManager.GraphQLSomething>(plek: inout Gaga) {}
 
     func compositionalParameters(param1: any Equatable & Numeric, param2: OnlyLabelProtocol & Codable)
 

@@ -17,6 +17,8 @@ class GenericClass<T: CustomStringConvertible, U: Codable & CustomStringConverti
 
     func genericMethodParameter<G: GenericClass<T, U, V>>(g: G) {}
 
+    func genericMethodParameterComposite<G: Namespace.Custom<Int>>(g: G) {}
+
     func genericMethodParameterNested<G: GenericClass<T, [Int], Array<String>>>(g: G) {}
 
     func genericWhereMethodParameter<G>(g: G) where G: GenericClass<T, [Int], V> {}
@@ -49,4 +51,8 @@ class GenericClass<T: CustomStringConvertible, U: Codable & CustomStringConverti
     func genericClosure(gg: String, closure: (GenericClass<String, Int, Bool>) -> Void) {
         closure(GenericClass<String, Int, Bool>(theT: "gg", theU: 0, theV: false))
     }
+}
+
+enum Namespace {
+    final class Custom<T: Equatable> {}
 }

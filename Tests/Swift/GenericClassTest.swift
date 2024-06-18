@@ -177,4 +177,13 @@ final class GenericClassTest: XCTestCase {
         mock.genericClosure(gg: "gg", closure: { print($0.readWritePropertyT) })
         verify(mock).genericClosure(gg: "gg", closure: anyClosure())
     }
+
+    func testCompositeGenericParameter() {
+        stub(mock) { mock in
+            when(mock.genericMethodParameterComposite(g: any())).thenDoNothing()
+        }
+
+        mock.genericMethodParameterComposite(g: Namespace.Custom())
+        verify(mock).genericMethodParameterComposite(g: any())
+    }
 }
