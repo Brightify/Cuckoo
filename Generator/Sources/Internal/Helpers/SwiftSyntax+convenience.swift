@@ -26,22 +26,28 @@ extension ExprSyntaxProtocol {
 
 extension TokenSyntax {
     var identifier: String {
-        tokenKind.identifier
+        get throws {
+            try tokenKind.identifier
+        }
     }
 }
 
 extension IdentifierTypeSyntax {
     var identifier: String {
-        name.tokenKind.identifier
+        get throws {
+            try name.tokenKind.identifier
+        }
     }
 }
 
 extension TokenKind {
     var identifier: String {
-        if case .identifier(let identifier) = self {
-            return identifier
-        } else {
-            fatalError("Cuckoo error: Expected identifier. Please create an issue.")
+        get throws {
+            if case .identifier(let identifier) = self {
+                return identifier
+            } else {
+                fatalError("Cuckoo error: Expected identifier. Please create an issue.")
+            }
         }
     }
 }

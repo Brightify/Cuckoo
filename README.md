@@ -118,14 +118,16 @@ output = "Tests/Swift/Generated/GeneratedMocks.swift"
 
 [modules.MyProject]
 output = "Tests/Swift/Generated/GeneratedMocks+MyProject.swift"
+# Standard imports added to the generated file(s).
 imports = ["Foundation"]
+# @testable imports if needed.
 testableImports = ["RxSwift"]
 sources = [
     "Tests/Swift/Source/*.swift",
 ]
 exclude = ["ExcludedTestClass"]
 # Optionally you can use a regular expression to filter only specific classes/protocols.
-regex = ""
+# regex = ""
 
 [modules.MyProject.options]
 # glob = false
@@ -140,6 +142,10 @@ keepDocumentation = false
 # Path to folder with .xcodeproj, omit this if it's at the same level as Cuckoofile.
 path = "Generator"
 target = "Cuckoonator"
+
+# You can define as many modules as you need, each with different sources/options/output.
+[modules.AnotherProject]
+# ...
 ```
 
 ### 3. Usage

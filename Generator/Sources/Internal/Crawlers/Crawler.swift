@@ -182,7 +182,11 @@ final class Crawler: SyntaxVisitor {
     }
 
     override func visit(_ node: TypeAliasDeclSyntax) -> SyntaxVisitorContinueKind {
-        tokens.append(Typealias(syntax: node))
+        do {
+            try tokens.append(Typealias(syntax: node))
+        } catch {
+            log(.error, message: "Error \(url.path):\n\tCan't parse typealias '\(node.trimmedDescription)'.")
+        }
         return .skipChildren
     }
 
@@ -269,7 +273,12 @@ extension Crawler {
 
         let type: ComplexType
         if let explicitType = binding.typeAnnotation?.type {
-            type = ComplexType(syntax: explicitType)
+            do {
+                type = try ComplexType(syntax: explicitType)
+            } catch {
+                log(.error, message: "Error \(url.path):\n\tCan't parse explicit type '\(explicitType.trimmedDescription)'.")
+                return nil
+            }
         } else if let initializer = binding.initializer?.value.trimmed.description, let guessedType = TypeGuesser.guessType(from: initializer) {
             type = .type(guessedType)
         } else {
@@ -318,6 +327,14 @@ extension Crawler {
 
         guard accessibility.isAccessible else { return nil }
 
+        let parameters: [MethodParameter]
+        do {
+            parameters = try self.parameters(from: initializer.signature.parameterClause.parameters)
+        } catch {
+            log(.error, message: "Error \(url.path):\n\tCan't parse method parameters '\(initializer.signature.parameterClause.parameters.trimmedDescription)'.")
+            return nil
+        }
+
         return Initializer(
             parent: container,
             documentation: documentation(from: initializer.leadingTrivia),
@@ -325,7 +342,7 @@ extension Crawler {
             accessibility: accessibility,
             signature: Method.Signature(
                 genericParameters: genericParameters(from: initializer.genericParameterClause?.parameters),
-                parameters: parameters(from: initializer.signature.parameterClause.parameters),
+                parameters: parameters,
                 asyncType: nil,
                 throwType: initializer.signature.effectSpecifiers?.throwsSpecifier.flatMap { ThrowType(rawValue: $0.trimmed.description) },
                 returnType: nil,
@@ -349,6 +366,22 @@ extension Crawler {
 
         guard accessibility.isAccessible else { return nil }
 
+        let parameters: [MethodParameter]
+        do {
+            parameters = try self.parameters(from: method.signature.parameterClause.parameters)
+        } catch {
+            log(.error, message: "Error \(url.path):\n\tCan't parse method parameters '\(method.signature.parameterClause.parameters.trimmedDescription)'.")
+            return nil
+        }
+
+        let returnType: ComplexType?
+        do {
+            returnType = try method.signature.returnClause.flatMap { try ComplexType(syntax: $0.type) }
+        } catch {
+            log(.error, message: "Error \(url.path):\n\tCan't parse return type '\(method.signature.returnClause?.type.trimmedDescription ?? "")'.")
+            return nil
+        }
+
         return Method(
             parent: container,
             documentation: documentation(from: method.leadingTrivia),
@@ -357,10 +390,10 @@ extension Crawler {
             name: identifier,
             signature: Method.Signature(
                 genericParameters: genericParameters(from: method.genericParameterClause?.parameters),
-                parameters: parameters(from: method.signature.parameterClause.parameters),
+                parameters: parameters,
                 asyncType: method.signature.effectSpecifiers?.asyncSpecifier.flatMap { AsyncType(rawValue: $0.trimmed.description) },
                 throwType: method.signature.effectSpecifiers?.throwsSpecifier.flatMap { ThrowType(rawValue: $0.trimmed.description) },
-                returnType: method.signature.returnClause.flatMap { ComplexType(syntax: $0.type) } ?? ComplexType.type("Void"),
+                returnType: returnType ?? ComplexType.type("Void"),
                 whereConstraints: genericRequirements(from: method.genericWhereClause?.requirements)
             ),
             isOptional: method.modifiers.contains { $0.name.tokenKind == .keyword(.optional) }
@@ -369,12 +402,12 @@ extension Crawler {
 }
 
 extension Crawler {
-    private func parameters(from parameterList: FunctionParameterListSyntax) -> [MethodParameter] {
-        parameterList.map { parameter in
+    private func parameters(from parameterList: FunctionParameterListSyntax) throws -> [MethodParameter] {
+        try parameterList.map { parameter in
             MethodParameter(
                 name: parameter.firstName.trimmed.description,
                 innerName: nil,
-                type: ComplexType(syntax: parameter.type)
+                type: try ComplexType(syntax: parameter.type)
             )
         }
     }
@@ -424,11 +457,11 @@ extension Crawler {
 //            case "objcMembers":
 //                return .objcMembers
             default:
-                print("Ignoring unsupported attribute '\(attribute.attributeName.trimmedDescription)'")
+                log(.verbose, message: "Ignoring unsupported attribute '\(attribute.attributeName.trimmedDescription)'")
                 return nil
             }
         } else {
-            print("Ignoring unsupported attribute '\(attribute.attributeName.trimmedDescription)'")
+            log(.verbose, message: "Ignoring unsupported attribute '\(attribute.attributeName.trimmedDescription)'")
             return nil
         }
     }
@@ -440,7 +473,7 @@ extension Crawler {
     private func genericParameters(from genericParameterList: GenericParameterListSyntax?) -> [GenericParameter] {
         genericParameterList?.map { genericParameter in
             GenericParameter(
-                name: genericParameter.name.identifier,
+                name: try! genericParameter.name.identifier,
                 inheritedTypes: inheritedTypes(from: genericParameter.inheritedType?.trimmed)
             )
         } ?? []
