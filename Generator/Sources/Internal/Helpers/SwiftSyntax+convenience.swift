@@ -46,7 +46,7 @@ extension TokenKind {
             if case .identifier(let identifier) = self {
                 return identifier
             } else {
-                fatalError("Cuckoo error: Expected identifier. Please create an issue.")
+                throw GeneralError.identifierParseFailed
             }
         }
     }
