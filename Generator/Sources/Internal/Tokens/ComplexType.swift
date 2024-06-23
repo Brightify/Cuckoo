@@ -9,49 +9,49 @@ enum ComplexType {
     case closure(Closure)
     case type(String)
 
-    init(syntax: TypeSyntax) throws {
+    init(syntax: TypeSyntax) {
         if let implicitOptionalType = syntax.as(ImplicitlyUnwrappedOptionalTypeSyntax.self) {
-            self = .optional(wrappedType: try ComplexType(syntax: implicitOptionalType.wrappedType), isImplicit: true)
+            self = .optional(wrappedType: ComplexType(syntax: implicitOptionalType.wrappedType), isImplicit: true)
         } else if let optionalType = syntax.as(OptionalTypeSyntax.self) {
-            self = .optional(wrappedType: try ComplexType(syntax: optionalType.wrappedType), isImplicit: false)
+            self = .optional(wrappedType: ComplexType(syntax: optionalType.wrappedType), isImplicit: false)
         } else if let attributedType = syntax.as(AttributedTypeSyntax.self) {
             self = .attributed(
                 attributes: [
                     attributedType.attributes.map { $0.trimmedDescription },
                     attributedType.specifier.map { [$0.trimmedDescription] } ?? [],
                 ].flatMap { $0 },
-                baseType: try ComplexType(syntax: attributedType.baseType)
+                baseType: ComplexType(syntax: attributedType.baseType)
             )
         } else if let functionType = syntax.as(FunctionTypeSyntax.self) {
             self = .closure(
                 Closure(
-                    parameters: try functionType.parameters.map {
+                    parameters: functionType.parameters.map {
                         Closure.Parameter(
                             label: $0.secondName?.trimmedDescription,
-                            type: try ComplexType(syntax: $0.type)
+                            type: ComplexType(syntax: $0.type)
                         )
                     },
                     effects: Closure.Effects(effectSpecifiers: functionType.effectSpecifiers),
-                    returnType: try ComplexType(syntax: functionType.returnClause.type)
+                    returnType: ComplexType(syntax: functionType.returnClause.type)
                 )
             )
         } else if let identifierType = syntax.as(IdentifierTypeSyntax.self) {
-            switch try identifierType.identifier {
+            switch identifierType.filteredDescription {
             case "Dictionary":
                 let arguments = identifierType.genericArgumentClause?.arguments
                 guard let keyType = arguments?.first?.argument, let valueType = arguments?.last?.argument else {
                     fatalError("Cuckoo error: Failed to get Dictionary type, please open an issue.")
                 }
                 self = .dictionary(
-                    keyType: try ComplexType(syntax: keyType),
-                    valueType: try ComplexType(syntax: valueType)
+                    keyType: ComplexType(syntax: keyType),
+                    valueType: ComplexType(syntax: valueType)
                 )
             case "Array":
                 let arguments = identifierType.genericArgumentClause?.arguments
                 guard let elementType = arguments?.first?.argument else {
                     fatalError("Cuckoo error: Failed to get Array type, please open an issue.")
                 }
-                self = .array(elementType: try ComplexType(syntax: elementType))
+                self = .array(elementType: ComplexType(syntax: elementType))
             default:
                 self = .type(syntax.trimmedDescription)
             }

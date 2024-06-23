@@ -197,6 +197,8 @@ class TestedClass {
     }
 
     func genericTypealiasMethod(typealias: GenericTypealias<String>) {}
+
+    func keywordTypeParameters(any: Any) {}
 }
 
 private class ThisClassShouldNotBeMocked1 {

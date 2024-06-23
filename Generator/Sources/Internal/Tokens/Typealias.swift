@@ -13,10 +13,10 @@ struct Typealias: Token, CustomStringConvertible {
 }
 
 extension Typealias {
-    init(syntax: TypeAliasDeclSyntax) throws {
+    init(syntax: TypeAliasDeclSyntax) {
         self.init(
             alias: [
-                try syntax.name.identifier,
+                syntax.name.filteredDescription,
                 syntax.genericParameterClause?.trimmedDescription
             ]
             .compactMap { $0 }

@@ -24,30 +24,8 @@ extension ExprSyntaxProtocol {
     }
 }
 
-extension TokenSyntax {
-    var identifier: String {
-        get throws {
-            try tokenKind.identifier
-        }
-    }
-}
-
-extension IdentifierTypeSyntax {
-    var identifier: String {
-        get throws {
-            try name.tokenKind.identifier
-        }
-    }
-}
-
-extension TokenKind {
-    var identifier: String {
-        get throws {
-            if case .identifier(let identifier) = self {
-                return identifier
-            } else {
-                throw GeneralError.identifierParseFailed
-            }
-        }
+extension SyntaxProtocol {
+    var filteredDescription: String {
+        trimmedDescription.replacingOccurrences(of: "\n", with: " ")
     }
 }

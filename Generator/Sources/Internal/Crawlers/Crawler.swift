@@ -52,7 +52,7 @@ final class Crawler: SyntaxVisitor {
             parent: container,
             attributes: attributes(from: node.attributes),
             accessibility: accessibility(from: node.modifiers) ?? (container as? HasAccessibility)?.accessibility ?? .internal,
-            name: node.name.trimmed.description,
+            name: node.name.filteredDescription,
             genericParameters: genericParameters(from: node.genericParameterClause?.parameters),
             genericRequirements: genericRequirements(from: node.genericWhereClause?.requirements),
             inheritedTypes: inheritedTypes(from: node.inheritanceClause?.inheritedTypes),
@@ -75,7 +75,7 @@ final class Crawler: SyntaxVisitor {
             parent: container,
             attributes: attributes(from: node.attributes),
             accessibility: accessibility(from: node.modifiers) ?? (container as? HasAccessibility)?.accessibility ?? .internal,
-            name: node.name.trimmed.description,
+            name: node.name.filteredDescription,
             genericParameters: (genericParameters(from: node.primaryAssociatedTypeClause?.primaryAssociatedTypes) + associatedTypes(from: node.memberBlock.members)).merged(),
             genericRequirements: genericRequirements(from: node.genericWhereClause?.requirements),
             inheritedTypes: inheritedTypes,
@@ -98,7 +98,7 @@ final class Crawler: SyntaxVisitor {
             parent: container,
             attributes: attributes(from: node.attributes),
             accessibility: accessibility(from: node.modifiers) ?? (container as? HasAccessibility)?.accessibility ?? .internal,
-            name: node.name.trimmed.description,
+            name: node.name.filteredDescription,
             members: []
         )
 
@@ -118,7 +118,7 @@ final class Crawler: SyntaxVisitor {
             parent: container,
             attributes: attributes(from: node.attributes),
             accessibility: accessibility(from: node.modifiers) ?? (container as? HasAccessibility)?.accessibility ?? .internal,
-            name: node.extendedType.trimmed.description,
+            name: node.extendedType.filteredDescription,
             members: []
         )
 
@@ -138,7 +138,7 @@ final class Crawler: SyntaxVisitor {
             parent: container,
             attributes: attributes(from: node.attributes),
             accessibility: accessibility(from: node.modifiers) ?? (container as? HasAccessibility)?.accessibility ?? .internal,
-            name: node.name.trimmed.description,
+            name: node.name.filteredDescription,
             members: []
         )
 
@@ -182,11 +182,7 @@ final class Crawler: SyntaxVisitor {
     }
 
     override func visit(_ node: TypeAliasDeclSyntax) -> SyntaxVisitorContinueKind {
-        do {
-            try tokens.append(Typealias(syntax: node))
-        } catch {
-            log(.error, message: "Error \(url.path):\n\tCan't parse typealias '\(node.trimmedDescription)'.")
-        }
+        tokens.append(Typealias(syntax: node))
         return .skipChildren
     }
 
@@ -200,17 +196,17 @@ final class Crawler: SyntaxVisitor {
         let description: String
         switch node {
         case let node as ClassDeclSyntax:
-            description = "class \(node.name.trimmed.description)"
+            description = "class \(node.name.filteredDescription)"
         case let node as ProtocolDeclSyntax:
-            description = "protocol \(node.name.trimmed.description)"
+            description = "protocol \(node.name.filteredDescription)"
         case let node as StructDeclSyntax:
-            description = "struct \(node.name.trimmed.description)"
+            description = "struct \(node.name.filteredDescription)"
         case let node as ExtensionDeclSyntax:
-            description = "extension \(node.extendedType.trimmed.description)"
+            description = "extension \(node.extendedType.filteredDescription)"
         case let node as EnumDeclSyntax:
-            description = "enum \(node.name.trimmed.description)"
+            description = "enum \(node.name.filteredDescription)"
         default:
-            description = "Unknown declaration \(node.trimmed.description)"
+            description = "Unknown declaration \(node.filteredDescription)"
         }
 
         log(
@@ -273,13 +269,8 @@ extension Crawler {
 
         let type: ComplexType
         if let explicitType = binding.typeAnnotation?.type {
-            do {
-                type = try ComplexType(syntax: explicitType)
-            } catch {
-                log(.error, message: "Error \(url.path):\n\tCan't parse explicit type '\(explicitType.trimmedDescription)'.")
-                return nil
-            }
-        } else if let initializer = binding.initializer?.value.trimmed.description, let guessedType = TypeGuesser.guessType(from: initializer) {
+            type = ComplexType(syntax: explicitType)
+        } else if let initializer = binding.initializer?.value.filteredDescription, let guessedType = TypeGuesser.guessType(from: initializer) {
             type = .type(guessedType)
         } else {
             fatalError("Can't infer type of property '\(identifier)' in file \(url)")
@@ -327,13 +318,7 @@ extension Crawler {
 
         guard accessibility.isAccessible else { return nil }
 
-        let parameters: [MethodParameter]
-        do {
-            parameters = try self.parameters(from: initializer.signature.parameterClause.parameters)
-        } catch {
-            log(.error, message: "Error \(url.path):\n\tCan't parse method parameters '\(initializer.signature.parameterClause.parameters.trimmedDescription)'.")
-            return nil
-        }
+        let parameters = self.parameters(from: initializer.signature.parameterClause.parameters)
 
         return Initializer(
             parent: container,
@@ -344,7 +329,7 @@ extension Crawler {
                 genericParameters: genericParameters(from: initializer.genericParameterClause?.parameters),
                 parameters: parameters,
                 asyncType: nil,
-                throwType: initializer.signature.effectSpecifiers?.throwsSpecifier.flatMap { ThrowType(rawValue: $0.trimmed.description) },
+                throwType: initializer.signature.effectSpecifiers?.throwsSpecifier.flatMap { ThrowType(rawValue: $0.filteredDescription) },
                 returnType: nil,
                 whereConstraints: genericRequirements(from: initializer.genericWhereClause?.requirements)
             ),
@@ -366,21 +351,8 @@ extension Crawler {
 
         guard accessibility.isAccessible else { return nil }
 
-        let parameters: [MethodParameter]
-        do {
-            parameters = try self.parameters(from: method.signature.parameterClause.parameters)
-        } catch {
-            log(.error, message: "Error \(url.path):\n\tCan't parse method parameters '\(method.signature.parameterClause.parameters.trimmedDescription)'.")
-            return nil
-        }
-
-        let returnType: ComplexType?
-        do {
-            returnType = try method.signature.returnClause.flatMap { try ComplexType(syntax: $0.type) }
-        } catch {
-            log(.error, message: "Error \(url.path):\n\tCan't parse return type '\(method.signature.returnClause?.type.trimmedDescription ?? "")'.")
-            return nil
-        }
+        let parameters = self.parameters(from: method.signature.parameterClause.parameters)
+        let returnType = method.signature.returnClause.flatMap { ComplexType(syntax: $0.type) }
 
         return Method(
             parent: container,
@@ -391,8 +363,8 @@ extension Crawler {
             signature: Method.Signature(
                 genericParameters: genericParameters(from: method.genericParameterClause?.parameters),
                 parameters: parameters,
-                asyncType: method.signature.effectSpecifiers?.asyncSpecifier.flatMap { AsyncType(rawValue: $0.trimmed.description) },
-                throwType: method.signature.effectSpecifiers?.throwsSpecifier.flatMap { ThrowType(rawValue: $0.trimmed.description) },
+                asyncType: method.signature.effectSpecifiers?.asyncSpecifier.flatMap { AsyncType(rawValue: $0.filteredDescription) },
+                throwType: method.signature.effectSpecifiers?.throwsSpecifier.flatMap { ThrowType(rawValue: $0.filteredDescription) },
                 returnType: returnType ?? ComplexType.type("Void"),
                 whereConstraints: genericRequirements(from: method.genericWhereClause?.requirements)
             ),
@@ -402,12 +374,12 @@ extension Crawler {
 }
 
 extension Crawler {
-    private func parameters(from parameterList: FunctionParameterListSyntax) throws -> [MethodParameter] {
-        try parameterList.map { parameter in
+    private func parameters(from parameterList: FunctionParameterListSyntax) -> [MethodParameter] {
+        parameterList.map { parameter in
             MethodParameter(
-                name: parameter.firstName.trimmed.description,
+                name: parameter.firstName.filteredDescription,
                 innerName: nil,
-                type: try ComplexType(syntax: parameter.type)
+                type: ComplexType(syntax: parameter.type)
             )
         }
     }
@@ -473,7 +445,7 @@ extension Crawler {
     private func genericParameters(from genericParameterList: GenericParameterListSyntax?) -> [GenericParameter] {
         genericParameterList?.map { genericParameter in
             GenericParameter(
-                name: try! genericParameter.name.identifier,
+                name: genericParameter.name.filteredDescription,
                 inheritedTypes: inheritedTypes(from: genericParameter.inheritedType?.trimmed)
             )
         } ?? []
@@ -501,7 +473,7 @@ extension Crawler {
     }
 
     private func genericRequirements(from genericRequirementList: GenericRequirementListSyntax?) -> [String] {
-        genericRequirementList?.map { $0.requirement.trimmed.description } ?? []
+        genericRequirementList?.map { $0.requirement.filteredDescription } ?? []
     }
 
     private func inheritedTypes(from inheritedTypesList: InheritedTypeListSyntax?) -> [String] {
@@ -524,6 +496,14 @@ extension Crawler {
 extension Crawler {
     private static let testString =
 """
+public struct Prefs {}
+
+public extension Prefs {
+enum Key: String {
+case blabla
+}
+}
+
 // DUDE
 @objcMembers
 class Multi {
@@ -543,7 +523,9 @@ class Multi {
     var gg: Dictionary<Int, String>
     var ggwp: Array<String>
 
-    func generico<G: APIManager.GraphQLSomething>(plek: inout Gaga) {}
+    func gg(_ value: Any?, forKey: Prefs.Key) -> Jedna.Dva {}
+
+    func generico<G: APIManager.GraphQLSomething>(plek: inout Enum.Gaga) {}
 
     func compositionalParameters(param1: any Equatable & Numeric, param2: OnlyLabelProtocol & Codable)
 
