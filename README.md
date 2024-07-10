@@ -8,7 +8,7 @@
 [![Platform](https://img.shields.io/cocoapods/p/Cuckoo.svg?style=flat)](http://cocoapods.org/pods/Cuckoo)
 
 ## Introduction
-Cuckoo was created due to lack of a proper Swift mocking framework. We built the DSL to be very similar to [Mockito](http://mockito.org/), so anyone coming from Java/Android can immediately pick it up and use it.
+
 
 ## How does it work
 Cuckoo has two parts. One is the **runtime** and the other one is an OS X command-line tool simply called **Cuckoonator**.
