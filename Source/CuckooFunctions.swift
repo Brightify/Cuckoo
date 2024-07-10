@@ -13,13 +13,6 @@ public func verify<M: Mock>(_ mock: M, _ callMatcher: CallMatcher = times(1), fi
     return mock.getVerificationProxy(callMatcher, sourceLocation: (file, line))
 }
 
-/// Clears all invocations and stubs of mocks.
-public func reset(_ mocks: HasMockManager...) {
-    mocks.forEach { mock in
-        mock.cuckoo_manager.reset()
-    }
-}
-
 /// Clears all stubs of mocks.
 public func clearStubs<M: Mock>(_ mocks: M...) {
     mocks.forEach { mock in
