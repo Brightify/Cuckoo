@@ -280,8 +280,9 @@ extension Crawler {
         let effects: Variable.Effects
         switch binding.accessorBlock?.accessors {
         case .accessors(let accessors):
+            let accessorsContainGet = accessors.contains { $0.accessorSpecifier.tokenKind == .keyword(.get) }
             let accessorsContainSet = accessors.contains { $0.accessorSpecifier.tokenKind == .keyword(.set) }
-            isReadOnly = !accessorsContainSet
+            isReadOnly = accessorsContainGet && !accessorsContainSet
 
             let getAccessor = accessors.first { $0.accessorSpecifier.tokenKind == .keyword(.get) }
             effects = Variable.Effects(
@@ -517,6 +518,10 @@ class Multi {
 
     typealias MyInt = Int
     typealias MyIntGen<Generics> = Int<Generics>
+
+    var didSet: Int = 3 {
+        didSet {}
+    }
 
     let constant = 3
 

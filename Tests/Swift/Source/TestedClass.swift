@@ -71,6 +71,27 @@ class TestedClass {
         get throws { 0 }
     }
 
+    var willSetProperty: String = "gg" {
+        willSet {
+            print("willSet \(willSetProperty)")
+        }
+    }
+
+    var didSetProperty: Int = 0 {
+        didSet {
+            print("\(didSetProperty)")
+        }
+    }
+
+    var willSetDidSetProperty: String = "gg" {
+        willSet {
+            print("willSet \(willSetDidSetProperty)")
+        }
+        didSet {
+            print("didSet \(willSetDidSetProperty)")
+        }
+    }
+
     func noReturn() {
     }
 
