@@ -26,7 +26,7 @@ extension {{ container.parentFullyQualifiedName }} {
 
     // Original typealiases
     {% for typealias in container.typealiases %}
-    {{ typealias }}
+    {{ container.accessibility|withSpace }}{{ typealias }}
     {% endfor %}
 
     {{ container.accessibility|withSpace }}let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: {{ container.isImplementation }})
