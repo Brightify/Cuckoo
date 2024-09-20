@@ -1,5 +1,6 @@
 import XCTest
 import Cuckoo
+@testable import CuckooMocks
 
 final class ArgumentCaptorTest: XCTestCase {
     func testMultipleCalls() {

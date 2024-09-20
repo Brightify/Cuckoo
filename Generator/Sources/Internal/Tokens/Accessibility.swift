@@ -38,7 +38,7 @@ extension Accessibility {
             self = .private
         case .keyword(.fileprivate):
             self = .fileprivate
-        case .identifier("open"):
+        case .keyword(.open):
             self = .open
         default:
             return nil

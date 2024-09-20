@@ -1,6 +1,7 @@
 import Foundation
 import XCTest
 import Cuckoo
+@testable import CuckooMocks
 
 final class NestedStructExtensionClassTests: XCTestCase {
 

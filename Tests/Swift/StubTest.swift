@@ -1,5 +1,6 @@
 import XCTest
 import Cuckoo
+@testable import CuckooMocks
 
 final class StubTest: XCTestCase {
     private var stub: ClassForStubTestingStub!

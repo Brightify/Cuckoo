@@ -5,11 +5,16 @@ let commonBuildSettingsBase: [String: SettingValue] = [
     "PRODUCT_NAME": .string("Cuckoo"),
     "SYSTEM_FRAMEWORK_SEARCH_PATHS": .string("$(PLATFORM_DIR)/Developer/Library/Frameworks"),
 ]
+let mocksBuildSettingsBase: [String: SettingValue] = [
+    "PRODUCT_NAME": .string("CuckooMocks"),
+    "SYSTEM_FRAMEWORK_SEARCH_PATHS": .string("$(PLATFORM_DIR)/Developer/Library/Frameworks"),
+]
 let objCBuildSettingsBase: [String: SettingValue] = [
     "SWIFT_OBJC_BRIDGING_HEADER": .string("$(PROJECT_DIR)/OCMock/Cuckoo-BridgingHeader.h"),
 ]
 
 let defaultBuildSettings = Settings.settings(base: commonBuildSettingsBase)
+let mocksBuildSettings = Settings.settings(base: mocksBuildSettingsBase)
 let objCBuildSettings = Settings.settings(base: commonBuildSettingsBase.merging(objCBuildSettingsBase, uniquingKeysWith: { $1 }))
 
 func platformSet(platform: PlatformType) -> (targets: [Target], schemes: [Scheme]) {
@@ -32,16 +37,16 @@ func platformSet(platform: PlatformType) -> (targets: [Target], schemes: [Scheme
     )
     targets.append(defaultTarget)
 
-    let defaultTestTarget = Target(
-        name: "Cuckoo-\(platform)Tests",
+    let mocksTarget = Target(
+        name: "CuckooMocks-\(platform)",
         platform: platform.platform,
-        product: .unitTests,
+        product: .framework,
         bundleId: "org.brightify.Cuckoo",
-        deploymentTarget: platform.testDeploymentTarget,
+        deploymentTarget: platform.libraryDeploymentTarget,
         infoPlist: .default,
         sources: [
-            "Tests/Common/**",
-            "Tests/Swift/**",
+            "Tests/Swift/Generated/*.swift",
+            "Tests/Swift/Source/*.swift",
         ],
         scripts: [
             .pre(
@@ -65,6 +70,29 @@ func platformSet(platform: PlatformType) -> (targets: [Target], schemes: [Scheme
         ],
         dependencies: [
             .target(name: defaultTarget.name),
+            .sdk(name: "XCTest", type: .framework, status: .required),
+        ],
+        settings: mocksBuildSettings
+    )
+    targets.append(mocksTarget)
+
+    let defaultTestTarget = Target(
+        name: "Cuckoo-\(platform)Tests",
+        platform: platform.platform,
+        product: .unitTests,
+        bundleId: "org.brightify.Cuckoo",
+        deploymentTarget: platform.testDeploymentTarget,
+        infoPlist: .default,
+        sources: .init(globs: [
+            .glob("Tests/Common/**"),
+            .glob("Tests/Swift/**", excluding: [
+                "Tests/Swift/Generated/*.swift",
+                "Tests/Swift/Source/*.swift",
+            ]),
+        ]),
+        dependencies: [
+            .target(name: defaultTarget.name),
+            .target(name: mocksTarget.name),
         ]
     )
     targets.append(defaultTestTarget)
@@ -110,7 +138,7 @@ func platformSet(platform: PlatformType) -> (targets: [Target], schemes: [Scheme
     schemes.append(
         Scheme(
             name: defaultTarget.name,
-            buildAction: BuildAction.buildAction(targets: [defaultTarget.reference]),
+            buildAction: BuildAction.buildAction(targets: [defaultTarget.reference, mocksTarget.reference]),
             testAction: TestAction.targets([.init(target: defaultTestTarget.reference)])
         )
     )

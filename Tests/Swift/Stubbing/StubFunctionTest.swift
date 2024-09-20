@@ -1,5 +1,6 @@
 import XCTest
 @testable import Cuckoo
+@testable import CuckooMocks
 
 final class StubFunctionTest: XCTestCase {
     func testThen() {
