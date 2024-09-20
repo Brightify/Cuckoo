@@ -20,6 +20,20 @@
                ReferencedContainer = "container:Cuckoo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "73EC770DC5A36FD5F1FB299E"
+               BuildableName = "CuckooMocks.framework"
+               BlueprintName = "Cuckoo-iOSTests-Mocks"
+               ReferencedContainer = "container:Cuckoo.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction

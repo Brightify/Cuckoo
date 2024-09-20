@@ -1,9 +1,10 @@
 import Foundation
 import XCTest
 import Cuckoo
+@testable import CuckooMocks
 
 extension Nested.NestedExtensionTestedClass: Mocked {
-    typealias MockType = Nested.MockNestedExtensionTestedClass
+    public typealias MockType = Nested.MockNestedExtensionTestedClass
 }
 
 final class NestedExtensionClassTests: XCTestCase {
