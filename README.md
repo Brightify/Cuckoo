@@ -127,7 +127,7 @@ sources = [
 ]
 exclude = ["ExcludedTestClass"]
 
-s# Optionally you can use a regular expression to filter only specific classes/protocols.
+# Optionally you can use a regular expression to filter only specific classes/protocols.
 # regex = ""
 
 [modules.MyProject.options]
