@@ -10,11 +10,13 @@ enum ComplexType {
     case type(String)
 
     init(syntax: TypeSyntax) {
-        if let implicitOptionalType = syntax.as(ImplicitlyUnwrappedOptionalTypeSyntax.self) {
+        let normalizedSyntax = syntax.recursivelyNormalizingTrivia()
+
+        if let implicitOptionalType = normalizedSyntax.as(ImplicitlyUnwrappedOptionalTypeSyntax.self) {
             self = .optional(wrappedType: ComplexType(syntax: implicitOptionalType.wrappedType), isImplicit: true)
-        } else if let optionalType = syntax.as(OptionalTypeSyntax.self) {
+        } else if let optionalType = normalizedSyntax.as(OptionalTypeSyntax.self) {
             self = .optional(wrappedType: ComplexType(syntax: optionalType.wrappedType), isImplicit: false)
-        } else if let attributedType = syntax.as(AttributedTypeSyntax.self) {
+        } else if let attributedType = normalizedSyntax.as(AttributedTypeSyntax.self) {
             self = .attributed(
                 attributes: [
                     attributedType.attributes.map { $0.trimmedDescription },
@@ -22,7 +24,7 @@ enum ComplexType {
                 ].flatMap { $0 },
                 baseType: ComplexType(syntax: attributedType.baseType)
             )
-        } else if let functionType = syntax.as(FunctionTypeSyntax.self) {
+        } else if let functionType = normalizedSyntax.as(FunctionTypeSyntax.self) {
             self = .closure(
                 Closure(
                     parameters: functionType.parameters.map {
@@ -35,8 +37,8 @@ enum ComplexType {
                     returnType: ComplexType(syntax: functionType.returnClause.type)
                 )
             )
-        } else if let identifierType = syntax.as(IdentifierTypeSyntax.self) {
-            switch identifierType.filteredDescription {
+        } else if let identifierType = normalizedSyntax.as(IdentifierTypeSyntax.self) {
+            switch identifierType.trimmedDescription {
             case "Dictionary":
                 let arguments = identifierType.genericArgumentClause?.arguments
                 guard let keyType = arguments?.first?.argument, let valueType = arguments?.last?.argument else {
@@ -53,10 +55,10 @@ enum ComplexType {
                 }
                 self = .array(elementType: ComplexType(syntax: elementType))
             default:
-                self = .type(syntax.trimmedDescription)
+                self = .type(normalizedSyntax.description)
             }
         } else {
-            self = .type(syntax.trimmedDescription)
+            self = .type(normalizedSyntax.description)
         }
     }
 

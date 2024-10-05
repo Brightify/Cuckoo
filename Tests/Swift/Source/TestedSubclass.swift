@@ -93,6 +93,31 @@ class TestedSubclass: TestedClass, TestedProtocol {
     ) {
     }
 
+    // Don't fix method line breaks.
+    // This method is for testing generic multiline arguments.
+    func genericMultilineMethod<
+        T,
+        U,
+        V
+    >(
+        completion: @escaping (
+            _ bar: V,
+            _ baz: U,
+            _ qux: T
+        ) -> Void
+    ) {
+
+    }
+
+    func frobnicate() -> LongType<
+      Int,
+      String,
+      Bool,
+      Void
+    > {
+        LongType()
+    }
+
     @available(iOS 13.0, *)
     @available(tvOS 13.0, *)
     @available(macOS 10.15, *)

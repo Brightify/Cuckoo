@@ -1,3 +1,5 @@
+struct LongType<T, U, V, X> {}
+
 protocol TestedProtocol {
 
     var readOnlyProperty: String { get }
@@ -81,7 +83,7 @@ protocol TestedProtocol {
     func genericReturn() -> Dictionary<Int,Void>
 
     // Don't fix method line breaks.
-    // This method is for testing multiline argument.
+    // This method is for testing multiline arguments.
     func multilineMethod(
         completion: @escaping (
             _ bar: Int,
@@ -89,6 +91,27 @@ protocol TestedProtocol {
             _ qux: Int
         ) -> Void
     )
+
+    // Don't fix method line breaks.
+    // This method is for testing generic multiline arguments.
+    func genericMultilineMethod<
+        T,
+        U,
+        V
+    >(
+        completion: @escaping (
+            _ bar: V,
+            _ baz: U,
+            _ qux: T
+        ) -> Void
+    )
+
+    func frobnicate() -> LongType<
+      Int,
+      String,
+      Bool,
+      Void
+    >
 
     @available(iOS 13.0, *)
     @available(tvOS 13.0, *)
