@@ -13,10 +13,6 @@ let objCBuildSettingsBase: [String: SettingValue] = [
     "SWIFT_OBJC_BRIDGING_HEADER": .string("$(PROJECT_DIR)/OCMock/Cuckoo-BridgingHeader.h"),
 ]
 
-let defaultBuildSettings = Settings.settings(base: commonBuildSettingsBase)
-let mocksBuildSettings = Settings.settings(base: mocksBuildSettingsBase)
-let objCBuildSettings = Settings.settings(base: commonBuildSettingsBase.merging(objCBuildSettingsBase, uniquingKeysWith: { $1 }))
-
 func platformSet(platform: PlatformType) -> (targets: [Target], schemes: [Scheme]) {
     var targets: [Target] = []
     var schemes: [Scheme] = []
@@ -33,7 +29,7 @@ func platformSet(platform: PlatformType) -> (targets: [Target], schemes: [Scheme
         dependencies: [
             .sdk(name: "XCTest", type: .framework, status: .required),
         ],
-        settings: defaultBuildSettings
+        settings: Settings.settings(base: commonBuildSettingsBase)
     )
     targets.append(defaultTarget)
 
@@ -72,7 +68,7 @@ func platformSet(platform: PlatformType) -> (targets: [Target], schemes: [Scheme
             .target(name: defaultTarget.name),
             .sdk(name: "XCTest", type: .framework, status: .required),
         ],
-        settings: mocksBuildSettings
+        settings: Settings.settings(base: mocksBuildSettingsBase)
     )
     targets.append(mocksTarget)
 
@@ -113,7 +109,7 @@ func platformSet(platform: PlatformType) -> (targets: [Target], schemes: [Scheme
         dependencies: [
             .sdk(name: "XCTest", type: .framework, status: .required),
         ],
-        settings: objCBuildSettings
+        settings: Settings.settings(base: mocksBuildSettingsBase)
     )
     targets.append(objCTarget)
 
