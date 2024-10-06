@@ -28,9 +28,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F2FA9FB91879B3508E1DE385"
+               BlueprintIdentifier = "ECC84E921A9EEB4969E82DDC"
                BuildableName = "CuckooMocks.framework"
-               BlueprintName = "CuckooMocks-tvOS"
+               BlueprintName = "Cuckoo-tvOSTests-Mocks"
                ReferencedContainer = "container:Cuckoo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

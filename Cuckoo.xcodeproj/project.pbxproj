@@ -17,7 +17,6 @@
 		023F8564E2E6BDC0C3740D15 /* CollisionClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDB969240E4E2B12FF93284 /* CollisionClasses.swift */; };
 		027DED339330E4451AA31673 /* OCMockObject+Workaround.h in Headers */ = {isa = PBXBuildFile; fileRef = 95B3E26DA5700FCAF7286B16 /* OCMockObject+Workaround.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		02875C2B85ADB62F8FC2A2F1 /* ThreadLocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB65661C2188A3E830EEBF72 /* ThreadLocal.swift */; };
-		02C805ED29F512D52CD196B2 /* TestedProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFDD79179243CBB217358C7 /* TestedProtocol.swift */; };
 		03393CDA9320B79B75A2DE1D /* StubbingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D65D2B6FD44C2CC59D6C7F4 /* StubbingTest.swift */; };
 		03A4D5D6AD8F138F78FCD672 /* StubNoReturnThrowingFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D920573D13B938FEACFF82C6 /* StubNoReturnThrowingFunction.swift */; };
 		04E28EE2A8202CD0CED3586F /* MultiNestedExtensionClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F29DC9C5F5CCE01FEAE648D /* MultiNestedExtensionClassTest.swift */; };
@@ -25,13 +24,13 @@
 		058A9F8DD1AB5B5064A014AD /* ObjectiveMatchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70C4FAE3318E21F0A87531A /* ObjectiveMatchers.swift */; };
 		061991F996D7C014B67647A9 /* StubbingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D65D2B6FD44C2CC59D6C7F4 /* StubbingTest.swift */; };
 		067C75AE9B22AADA3E3D9538 /* MockManager+preconfigured.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83C4A633699E5B88D9A9C1B /* MockManager+preconfigured.swift */; };
+		06C6FAB00D9A62963B2ECEBD /* NestedInExtensionFromClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9699C3284544FE817C78E474 /* NestedInExtensionFromClass.swift */; };
 		0729FED9AB2D2CE2D5B33DDA /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AEF1D77E05D83F84ADE7A87 /* XCTest.framework */; };
 		09143764B3A284D07EEE8A25 /* ObjectiveCatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C3E2B1C12FF95C6DCA418D5 /* ObjectiveCatcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		09A153DBE558B447A9317FCE /* VerificationProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21CD7B8ADE5ABE0295581D4 /* VerificationProxy.swift */; };
 		09C45035E8B83C11AF029E91 /* Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4758812545462B94DAB7A4 /* Stub.swift */; };
 		0A3DB4FDAAF378953FE620F2 /* CallMatcherFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC319F6F55C00CFD3D0AF96 /* CallMatcherFunctions.swift */; };
 		0A63C1802D5BBDCCFB91DE3A /* StubFunctionThenCallRealImplementationTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5319F82EEAE3868CE8F23172 /* StubFunctionThenCallRealImplementationTrait.swift */; };
-		0AB048F31925EC6CBA6589A0 /* TestedSubclass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0F20F08A3C63CB00D2E7E4 /* TestedSubclass.swift */; };
 		0BEB6AA4984EF02EA3A6AA00 /* NestedSubclassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4A20137742161D649D3E3B /* NestedSubclassTest.swift */; };
 		0BFE2DDD3E06D51F9B297E07 /* ToBeStubbedReadOnlyProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375E2C8E10768E1A9A04C362 /* ToBeStubbedReadOnlyProperty.swift */; };
 		0C2B108704AEB93556C4B0CE /* StubNoReturnFunctionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7635A46FDE48804E6E21EC0 /* StubNoReturnFunctionTest.swift */; };
@@ -40,42 +39,40 @@
 		0E1FCB036532650DB5A01306 /* NSValueConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989EFADEC10AB6D627A5FAE6 /* NSValueConvertible.swift */; };
 		0ED91F9FF12BDC78CF963829 /* StubFunctionThenDoNothingTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C68FC814ACBD3D5E1C7ED1B /* StubFunctionThenDoNothingTrait.swift */; };
 		0EE27CA2F8F0510ADB304A5C /* DefaultValueRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190FB7FABF7486D2963F4B44 /* DefaultValueRegistry.swift */; };
+		0FC2FEE1A515144EA6835A4B /* GenericProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A398D6337F320A5F78FA4A5A /* GenericProtocol.swift */; };
 		1084D7D892810CFF15A4DA37 /* StringProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = C0A3B9B776340082AC6DDE9A /* StringProxy.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		10D511ECE4BC50F18CC552B7 /* NSObjectProtocolInheritanceTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866CED1C72D1F35C10251CCC /* NSObjectProtocolInheritanceTesting.swift */; };
+		10D9AC6397DF491A9BE11FDA /* ObjcProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355C36C0536DBF7EDA3C2B96 /* ObjcProtocol.swift */; };
 		1133AAA472C4E463566D0BC5 /* ObjectiveProtocolTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D36A00ADFA42CC4C411F3E /* ObjectiveProtocolTest.swift */; };
 		114CF61041FB579920C5B7E0 /* ExcludedStubTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F2852ABE97CC059DD98D13 /* ExcludedStubTest.swift */; };
 		116D8FBB03787C2D7F7C99CC /* TestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F1FB05574F9DB1A4CE7AB3 /* TestError.swift */; };
 		11700496E1D2DF02E9CD49BE /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B81133817083F2B8122BE188 /* XCTest.framework */; };
-		11986463F90271E859698805 /* MultiNestedInExtensionFromClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB894FF725838C4DE9FFDC9A /* MultiNestedInExtensionFromClass.swift */; };
 		11B3B5F6FFF87351410F8B43 /* ToBeStubbedReadOnlyProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375E2C8E10768E1A9A04C362 /* ToBeStubbedReadOnlyProperty.swift */; };
 		11B3F573CEAEDBC88BDC8AFF /* NestedSubclassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4A20137742161D649D3E3B /* NestedSubclassTest.swift */; };
+		125BC664FD3C4EE06EEF38D5 /* ClassForStubTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DE1954C1D6E94F2911830A /* ClassForStubTesting.swift */; };
 		1261E976B71C9A806A73DA9D /* CreateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44692276AAFF9261EDD5D75 /* CreateMock.swift */; };
+		128FDBAD91BAF47A5749E00C /* ClassWithUnavailablePlatformMembers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB937EA0F029B222D748FED /* ClassWithUnavailablePlatformMembers.swift */; };
+		12F5F953C1DEF9160F947A83 /* NestedPrivateExtensionClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECFED3C29F5CA48398AF0C5B /* NestedPrivateExtensionClass.swift */; };
 		138FB34F332E9076D2C30FDC /* NSObjectProtocolInheritanceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBE411D64C1D2B056E42C52 /* NSObjectProtocolInheritanceTest.swift */; };
 		13A6FF70A68C12E237C85B4C /* StubFunctionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBF18CC12259A96D05F579B /* StubFunctionTest.swift */; };
-		143E6A2C0543F54D50D88BCC /* NestedInNestedClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6003DBCF1B0CB5014D232663 /* NestedInNestedClass.swift */; };
-		145517D8A5E765B4B185944A /* TestedSubProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3E7F562DC17ECF3B32CBB3 /* TestedSubProtocol.swift */; };
 		14A6A85FCC306AB5CB4D009E /* ObjectiveCatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C3E2B1C12FF95C6DCA418D5 /* ObjectiveCatcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		15464C72B2E02BE3B83BF860 /* Array+matchersTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D3EE02CEB715D5543ACFFC /* Array+matchersTest.swift */; };
 		154BD32BF798FBE545A1FD02 /* ObjectiveArgumentClosure.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D63F5E63DF9302E70BF764 /* ObjectiveArgumentClosure.swift */; };
-		154EA5649332351970BA31DC /* TestedSubclass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0F20F08A3C63CB00D2E7E4 /* TestedSubclass.swift */; };
 		15D32901EDE1203F89FC4274 /* StubFunctionThenThrowTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201DFAD306F0F1B18CE9EFBE /* StubFunctionThenThrowTrait.swift */; };
 		15E9D1A7448F3BFCCB0468CF /* Mocked.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30A194A634E5972418D171E /* Mocked.swift */; };
 		1614CD448C7ED6C0DE767AE6 /* MockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91992FE8D38A6900C005B0A4 /* MockManager.swift */; };
 		1639356977967F0E0A7EED2F /* TestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F1FB05574F9DB1A4CE7AB3 /* TestError.swift */; };
-		17DFA895BED85C82381F9EE9 /* NestedInNestedStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90E9A4C6A1716C6D219D26E /* NestedInNestedStruct.swift */; };
 		180D5C1F534E9515ED222201 /* StringProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA242F7A830953CD5E4AC4A /* StringProxy.m */; };
+		184515DD02B62ACF5A34C284 /* NSObjectProtocolInheritanceTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866CED1C72D1F35C10251CCC /* NSObjectProtocolInheritanceTesting.swift */; };
+		185F12620D87BE6F3A2C76C7 /* TestedSubProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3E7F562DC17ECF3B32CBB3 /* TestedSubProtocol.swift */; };
 		18870F91A89191478A8F39E2 /* StubFunctionThenTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C749F49256DDA51A9C96C9 /* StubFunctionThenTrait.swift */; };
 		18A8AA3E4C7365AB6658D626 /* Dictionary+matchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6975D97C79395805A3BB3B04 /* Dictionary+matchers.swift */; };
-		18ADDA55715100DC983FEF4D /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 648E1DCC3FA05944AC970663 /* XCTest.framework */; };
 		18C023F1B3908132B136F579 /* ToBeStubbedThrowingProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6907AAE792A71E6883252CD6 /* ToBeStubbedThrowingProperty.swift */; };
-		19152B86B59FF7767E1FD20C /* UnicodeTestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492606B334C561F93ABBE0A3 /* UnicodeTestProtocol.swift */; };
 		1B0F180FCABE289F64EF37B6 /* DefaultValueRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190FB7FABF7486D2963F4B44 /* DefaultValueRegistry.swift */; };
 		1B425DF3B416C5E4FA04532C /* ArgumentCaptorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76DE925DA03AAA0FD9734CFE /* ArgumentCaptorTest.swift */; };
 		1B57B5A8CEAD3FFB218A379B /* Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4758812545462B94DAB7A4 /* Stub.swift */; };
 		1B6BDFF7EF9B2385D50910C3 /* MultiNestedClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002B2852C62F702127A3D24E /* MultiNestedClassTest.swift */; };
-		1C2DC5FA3CC0E685F565BA9E /* ClassWithTypeAlias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C9897340BC8FFA2CDF8239F /* ClassWithTypeAlias.swift */; };
 		1C4AA2DF5E70BB9FD5E9194B /* StubFunctionThenReturnTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3191519C8ED4DD5B3D439A93 /* StubFunctionThenReturnTrait.swift */; };
-		1C56B93434A32013244D9A38 /* TestedSubclass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0F20F08A3C63CB00D2E7E4 /* TestedSubclass.swift */; };
+		1C4EE7013FE3A2CF89A3C955 /* ClassWithTypeAlias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C9897340BC8FFA2CDF8239F /* ClassWithTypeAlias.swift */; };
 		1CE3A49EACCC191EB23BE391 /* StubFunctionThenReturnTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3191519C8ED4DD5B3D439A93 /* StubFunctionThenReturnTrait.swift */; };
 		1D8728BE9FB6E9897B429110 /* CuckooFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938B3F655E8E20AB6D341A0D /* CuckooFunctions.swift */; };
 		1D9770B856D4B32E73E50CCA /* ObjectiveCatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 654DD2C28B20B62C30F20699 /* ObjectiveCatcher.m */; };
@@ -83,14 +80,14 @@
 		1E89325C9E97C1144888E5D1 /* __DoNotUse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511DD0B1EA1EAF535C598A8C /* __DoNotUse.swift */; };
 		1EB2647496FF4AF01E443E35 /* StubCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA3EB970DE7CF1D83AC121F /* StubCall.swift */; };
 		1ED21520D8C22FD5C73460EC /* Cuckoo_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86D638696C1458550D4524F1 /* Cuckoo_tvOS.framework */; };
-		1F184730AFC59B834F38EF67 /* ExcludedTestClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB36E482FF288D775B744A02 /* ExcludedTestClass.swift */; };
-		22279D4B7DE804E061F8B7C7 /* ExcludedTestClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB36E482FF288D775B744A02 /* ExcludedTestClass.swift */; };
 		229B26FA9C1E4FC1BFB2F921 /* StubAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C647EAE09B6AB55FF6C0CE /* StubAction.swift */; };
+		22A3C3B75357DA37E7147E68 /* TestedProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFDD79179243CBB217358C7 /* TestedProtocol.swift */; };
 		22F2AC6DA18E3B9944BF8351 /* CreateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44692276AAFF9261EDD5D75 /* CreateMock.swift */; };
 		23C5D1EEC532541512E33C80 /* VerificationProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21CD7B8ADE5ABE0295581D4 /* VerificationProxy.swift */; };
 		2436B5D39FA7BD5AA551E7EE /* StubRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AF60404FD2D5FD3198825E /* StubRecorder.swift */; };
 		24563D4813663AB15D24B790 /* NestedStructTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F73FBA37EA0E055BA4EA2 /* NestedStructTest.swift */; };
 		25328F4C5AD244EB5D8C1868 /* TestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F1FB05574F9DB1A4CE7AB3 /* TestError.swift */; };
+		254028BF34C0E9A582500935 /* MultiNestedInPrivateNestedClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CF3EE4189F2010800E2511 /* MultiNestedInPrivateNestedClass.swift */; };
 		25611F1843D374BB1840D16B /* NestedStructExtensionClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0512EFCB8EDE906B3E54057B /* NestedStructExtensionClassTest.swift */; };
 		25B3658FB7569F94794BC8E7 /* StubNoReturnFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700931036CB43C60AEFB7FEB /* StubNoReturnFunction.swift */; };
 		25D818649F9686990D6E25AF /* StubTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FB9A410020B1B90952823C /* StubTest.swift */; };
@@ -100,27 +97,30 @@
 		277266573087574C196FE840 /* CallMatcherFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC319F6F55C00CFD3D0AF96 /* CallMatcherFunctions.swift */; };
 		2794938C670EBC6DD5B724BE /* Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4758812545462B94DAB7A4 /* Stub.swift */; };
 		279670BCE126CBCD5FAFA463 /* StubThrowingFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808091A975F4E8BDDF0C80D9 /* StubThrowingFunction.swift */; };
-		27ABBADC2587204DC2769211 /* OpenClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7FBE9F67D8DC4EDBD98FCC /* OpenClass.swift */; };
 		2815413A02C4D193FB9296FC /* StubbingProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A9BEFC601EF66DF42D5022 /* StubbingProxy.swift */; };
+		282405FC094198A9D5DE2DE5 /* NestedInNestedStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90E9A4C6A1716C6D219D26E /* NestedInNestedStruct.swift */; };
 		283F668C4BDE15F7B7DA8D63 /* StringProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA242F7A830953CD5E4AC4A /* StringProxy.m */; };
 		28EEBD56103D2CC8CF7A9149 /* VerifyReadOnlyProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A08AF20C937EF4EB98795B /* VerifyReadOnlyProperty.swift */; };
 		29B206A3798C3C8A3F6B791D /* VerifyReadOnlyProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A08AF20C937EF4EB98795B /* VerifyReadOnlyProperty.swift */; };
 		29CF5B2BA743C0E892855550 /* CallMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C854CC76B478ED72B6D3A65 /* CallMatcher.swift */; };
+		2A2D6CAFF53E214E8FEB2BF3 /* ClassWithTypeAlias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C9897340BC8FFA2CDF8239F /* ClassWithTypeAlias.swift */; };
+		2AF068BE01A2F31EE3D814EE /* NSObjectProtocolInheritanceTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866CED1C72D1F35C10251CCC /* NSObjectProtocolInheritanceTesting.swift */; };
+		2CD7892C3299B24F187B7254 /* UnicodeTestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492606B334C561F93ABBE0A3 /* UnicodeTestProtocol.swift */; };
 		2D657648CE8D73B96D8CAF63 /* ObjectiveClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFD10D2F5491D90D226ED78 /* ObjectiveClassTest.swift */; };
+		2DF5CDB4581FDA6E1DC61FE6 /* UnicodeTestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492606B334C561F93ABBE0A3 /* UnicodeTestProtocol.swift */; };
+		2E47719FFA648D2B10B1C936 /* NestedInNestedStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90E9A4C6A1716C6D219D26E /* NestedInNestedStruct.swift */; };
 		2E54AB548933FF3D2F7E1384 /* DefaultValueRegistryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80D1401CB6046B1AEDBE204 /* DefaultValueRegistryTest.swift */; };
+		2EB9D11D5BB4147B6ED66280 /* TestedProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFDD79179243CBB217358C7 /* TestedProtocol.swift */; };
 		2FA8B5B7D3DBD836A3FE9694 /* ObjectiveArgumentClosure.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D63F5E63DF9302E70BF764 /* ObjectiveArgumentClosure.swift */; };
 		2FB87BFE2FFBCF459D35DF5E /* MockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91992FE8D38A6900C005B0A4 /* MockManager.swift */; };
-		30C40E301C77D677794D68BB /* MultiNestedPrivateExtensionClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B40CC43D7A77DFD4702178A /* MultiNestedPrivateExtensionClass.swift */; };
 		3172B5B4F28F82A9393194EE /* StubCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA3EB970DE7CF1D83AC121F /* StubCall.swift */; };
 		31968C424EAAE213191924C0 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 648E1DCC3FA05944AC970663 /* XCTest.framework */; };
 		31EC7665C1236E34B1B21642 /* OCMockObject+CuckooMockObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 9EE3E19406E96533EBBBD138 /* OCMockObject+CuckooMockObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		321E47D01856F868090EEC95 /* UnavailablePlatformClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6665FD7C16558B821564AADB /* UnavailablePlatformClass.swift */; };
 		322F32E04F570CD3C8DB85DB /* Dictionary+matchersTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B79F4A07874A92D5E117ED8 /* Dictionary+matchersTest.swift */; };
 		32AB9CCED877D173F4ADCC17 /* Dictionary+matchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6975D97C79395805A3BB3B04 /* Dictionary+matchers.swift */; };
 		33502F09CA1B81FB70666DCA /* MockBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0889A597AF4CCA8841B471 /* MockBuilder.swift */; };
 		33DEA21A68DAC9A5ADAD0999 /* CreateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44692276AAFF9261EDD5D75 /* CreateMock.swift */; };
 		34465E38954BFF6E973AFBC4 /* MatchableTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBE505B4B98BE6289678CD1 /* MatchableTest.swift */; };
-		347002E06C470329F89E4268 /* GeneratedMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A99A2173E7F7743145B11B /* GeneratedMocks.swift */; };
 		355E1D135C0ABDEE2521647D /* ToBeStubbedReadOnlyProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375E2C8E10768E1A9A04C362 /* ToBeStubbedReadOnlyProperty.swift */; };
 		35A2CEA0553DFBABD2391BBB /* NestedExtensionClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F42B443F090072DFF751FD /* NestedExtensionClassTest.swift */; };
 		35AB01E0F9979120DD4E385A /* CallMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C854CC76B478ED72B6D3A65 /* CallMatcher.swift */; };
@@ -130,39 +130,35 @@
 		360F056E5B1803C9CFE68DA3 /* StubAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C647EAE09B6AB55FF6C0CE /* StubAction.swift */; };
 		36405FCB8405237673588D42 /* ToBeStubbedProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE705433C346CA3DF4E2AB96 /* ToBeStubbedProperty.swift */; };
 		36BFBE84FEC2856C30634B1B /* ThreadLocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB65661C2188A3E830EEBF72 /* ThreadLocal.swift */; };
-		38949FEA977716E3AECE1C9B /* TestedClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119D4E6C9798F70CEBDBB1F2 /* TestedClass.swift */; };
 		3986ACF12E0726C77025D550 /* StubTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FB9A410020B1B90952823C /* StubTest.swift */; };
+		39D86E7038217C4617FE541B /* GenericClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01C5ABA73DC1B0CCE088669 /* GenericClass.swift */; };
 		3A558B4AEDCF3278D13FCD88 /* StubNoReturnThrowingFunctionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A67E79E73B4710B3C846F96 /* StubNoReturnThrowingFunctionTest.swift */; };
+		3A700C95E0993FD244EFA33B /* NestedPrivateExtensionClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECFED3C29F5CA48398AF0C5B /* NestedPrivateExtensionClass.swift */; };
 		3AF6BD5E95ADD23FA7DE22D8 /* StubCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA3EB970DE7CF1D83AC121F /* StubCall.swift */; };
 		3B233086E3384730CA60AACE /* BaseStubFunctionTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B55AC80C790F69750B2F80 /* BaseStubFunctionTrait.swift */; };
 		3C69017AB8370DB6FDA071CC /* OpenClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCC7F90178D001A4D54CC46 /* OpenClassTest.swift */; };
 		3C8740FA3D76887850A5A5B7 /* StubFunctionThenReturnTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3191519C8ED4DD5B3D439A93 /* StubFunctionThenReturnTrait.swift */; };
-		3CEBDF7675CFED9DE8F9A58F /* PropertyWrappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D394400A6216C16C31E8436 /* PropertyWrappers.swift */; };
 		3CFAA76E52C3382D06DDDB7A /* Cuckoo_OCMock_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F981A41C0D53F5AF59BD7202 /* Cuckoo_OCMock_tvOS.framework */; };
-		3CFE39CBBBA1FF1716B102ED /* MultiNestedInExtensionFromClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB894FF725838C4DE9FFDC9A /* MultiNestedInExtensionFromClass.swift */; };
+		3DAC7E5CE46609E4CE69E6C2 /* GenericProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A398D6337F320A5F78FA4A5A /* GenericProtocol.swift */; };
 		3DF2A489251B19E409BF29D2 /* ObjectiveStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A933D33D55AE257FE9B1097 /* ObjectiveStub.swift */; };
 		3EFA10C51ED8950665A63B3A /* NestedClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3646D56C8005FB7E1B11B67 /* NestedClassTest.swift */; };
+		3F8703048FD3469C82B13F8C /* TestedClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119D4E6C9798F70CEBDBB1F2 /* TestedClass.swift */; };
 		4057EA6FCC9D876491EA32BF /* StubNoReturnFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700931036CB43C60AEFB7FEB /* StubNoReturnFunction.swift */; };
 		4107AB080C2B17D1DC212ADC /* StubNoReturnThrowingFunctionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A67E79E73B4710B3C846F96 /* StubNoReturnThrowingFunctionTest.swift */; };
 		41D237ED493522E1E35DC1D1 /* VerifyReadOnlyProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A08AF20C937EF4EB98795B /* VerifyReadOnlyProperty.swift */; };
 		42084A0ADB2C500C64053ABD /* StubFunctionThenDoNothingTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C68FC814ACBD3D5E1C7ED1B /* StubFunctionThenDoNothingTrait.swift */; };
 		425152422F1760E234924797 /* ToBeStubbedProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE705433C346CA3DF4E2AB96 /* ToBeStubbedProperty.swift */; };
-		428EAB2E56BF6F5B1A4F6FCB /* NestedPrivateExtensionClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECFED3C29F5CA48398AF0C5B /* NestedPrivateExtensionClass.swift */; };
 		4301C2E6EF759A7A3DB797BA /* ObjectiveAssertThrows.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9525C20EA498D59BFCE3F7B /* ObjectiveAssertThrows.swift */; };
 		430AB856081FCFADC6EEDF85 /* ToBeStubbedThrowingProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6907AAE792A71E6883252CD6 /* ToBeStubbedThrowingProperty.swift */; };
 		4387E6947861A3071AF51499 /* ArgumentCaptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FEF459CF7A13B3FC66D390 /* ArgumentCaptor.swift */; };
-		43CB59F1DFB8BB74052EAD71 /* NestedInNestedClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6003DBCF1B0CB5014D232663 /* NestedInNestedClass.swift */; };
-		45115CB6924F37808BB94AB0 /* ClassWithOptionals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A299482E4D2B7B774373A1 /* ClassWithOptionals.swift */; };
 		4527DEBC031E1029CFEE711D /* Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4758812545462B94DAB7A4 /* Stub.swift */; };
 		453EA0CE5ABEA62595596C6F /* ParameterMatcherTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AE18F5D3419D1025D081CA /* ParameterMatcherTest.swift */; };
 		4570B0F63086A0AF7C682CE9 /* GenericClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83908D3F58736F1C6DA7B2CA /* GenericClassTest.swift */; };
+		45B862C50C14C9DDA24A92FD /* TestedClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119D4E6C9798F70CEBDBB1F2 /* TestedClass.swift */; };
 		45F54ED0DCEA4B27352C8EF6 /* StubFunctionThenThrowingTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = F398C1D87D71EE8DED0C6EA3 /* StubFunctionThenThrowingTrait.swift */; };
 		464E68CC6E5374ED4E9CA925 /* Mocked.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30A194A634E5972418D171E /* Mocked.swift */; };
-		4664CDEEC6548CCEA0666FD0 /* MultiNestedPrivateExtensionClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B40CC43D7A77DFD4702178A /* MultiNestedPrivateExtensionClass.swift */; };
-		46798482B6EC96CFD8CDCD97 /* PropertyWrappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D394400A6216C16C31E8436 /* PropertyWrappers.swift */; };
 		46987394D9525FE5DEFD089D /* NSObject+TrustMe.h in Headers */ = {isa = PBXBuildFile; fileRef = E5D1F1DDD3B24CEC8D8495BC /* NSObject+TrustMe.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		470373F47D5732EE007957BE /* CuckooFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938B3F655E8E20AB6D341A0D /* CuckooFunctions.swift */; };
-		470C93EBA89AAF8FDF37531D /* CuckooMocks_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA8BE42BAE70CFC30C20F017 /* CuckooMocks_iOS.framework */; platformFilter = ios; };
 		47B22527170C086EAD229243 /* NSInvocation+OCMockWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = C61C355CDFD7F0A7C0F32A25 /* NSInvocation+OCMockWrapper.m */; };
 		47BCB19CC5172FBA13E138EF /* StubFunctionThenThrowTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201DFAD306F0F1B18CE9EFBE /* StubFunctionThenThrowTrait.swift */; };
 		47BE7D80679B03932C8393C3 /* StringProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = C0A3B9B776340082AC6DDE9A /* StringProxy.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -171,21 +167,24 @@
 		48C1BD8F4E0BA4C6CA1D76D3 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AEF1D77E05D83F84ADE7A87 /* XCTest.framework */; };
 		48EC22FB5D3E4C80F9A62AFE /* CallMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C854CC76B478ED72B6D3A65 /* CallMatcher.swift */; };
 		49397518100C50FB12E4D57E /* ParameterMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A843913B61AB11A80097F51 /* ParameterMatcher.swift */; };
-		4940A15A978FA4F2C40403FC /* NestedInExtensionFromClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9699C3284544FE817C78E474 /* NestedInExtensionFromClass.swift */; };
 		4979C7CD6F921D3627A7DB83 /* NestedStructTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F73FBA37EA0E055BA4EA2 /* NestedStructTest.swift */; };
 		4A0037995B682F70C67C1839 /* StubFunctionThenCallRealImplementationTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5319F82EEAE3868CE8F23172 /* StubFunctionThenCallRealImplementationTrait.swift */; };
 		4A6C033747BA78251DE47F48 /* ParameterMatcherFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CA2236A30B54754F335DC3 /* ParameterMatcherFunctions.swift */; };
 		4B94FF7B55E04D0177ED4770 /* ThreadLocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB65661C2188A3E830EEBF72 /* ThreadLocal.swift */; };
 		4C5633619E1E58D34CFEDF2A /* CallMatcherFunctionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5673B933A24CA65D15B3FD3A /* CallMatcherFunctionsTest.swift */; };
-		4C9A1325BFCD8E1D27309337 /* GenericClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01C5ABA73DC1B0CCE088669 /* GenericClass.swift */; };
 		4CE1999C6502F7BE89DB9C9A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B81133817083F2B8122BE188 /* XCTest.framework */; };
 		4D779C83E3C15319175DCAB1 /* ToBeStubbedProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE705433C346CA3DF4E2AB96 /* ToBeStubbedProperty.swift */; };
 		4E22DA57BAF5DE8A492D2F5D /* __DoNotUse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511DD0B1EA1EAF535C598A8C /* __DoNotUse.swift */; };
-		4E7D11BFDB768CBB72DBF035 /* ClassForStubTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DE1954C1D6E94F2911830A /* ClassForStubTesting.swift */; };
 		4EB79BE67C370C4BD74B4604 /* ObjectiveClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFD10D2F5491D90D226ED78 /* ObjectiveClassTest.swift */; };
+		4EE1EE4722DEEBCCF742097C /* MultiNestedInPrivateNestedClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CF3EE4189F2010800E2511 /* MultiNestedInPrivateNestedClass.swift */; };
+		4EF86A2EF512239AEE313340 /* OpenClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7FBE9F67D8DC4EDBD98FCC /* OpenClass.swift */; };
+		4EFDB6851E3A9BCC2B185639 /* SwiftUIProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37168E50C5A33F171ACACB37 /* SwiftUIProtocols.swift */; };
+		4F2A1A7CC176B2E9F238A5BF /* ExcludedTestClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB36E482FF288D775B744A02 /* ExcludedTestClass.swift */; };
 		4F490D8457B9919E2E6A05B0 /* ClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6873C8013002AFEA7565BDAC /* ClassTest.swift */; };
 		4F54A21CB7FD421600582798 /* StubRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AF60404FD2D5FD3198825E /* StubRecorder.swift */; };
 		4F6C9E05D07BCD12B278D901 /* __DoNotUse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511DD0B1EA1EAF535C598A8C /* __DoNotUse.swift */; };
+		4FF9C53E95DD3C3B4555103D /* MultiNestedInNestedClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7054833FFF0D253B1E2379FA /* MultiNestedInNestedClass.swift */; };
+		511229D3662171FCF501534B /* SwiftUIProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37168E50C5A33F171ACACB37 /* SwiftUIProtocols.swift */; };
 		51FFD6002AA495B73F81D018 /* CreateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44692276AAFF9261EDD5D75 /* CreateMock.swift */; };
 		5204EFA3DC99492148523342 /* MultiNestedClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002B2852C62F702127A3D24E /* MultiNestedClassTest.swift */; };
 		5290A06644BA9B7046E81643 /* CuckooFunctionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BEF42DC82FC0EF50E83E6CA /* CuckooFunctionsTest.swift */; };
@@ -196,49 +195,50 @@
 		54082A1A8221EB778CD2266A /* CallMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C854CC76B478ED72B6D3A65 /* CallMatcher.swift */; };
 		541AE789BEF0830BBBB0A691 /* NestedStructExtensionClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0512EFCB8EDE906B3E54057B /* NestedStructExtensionClassTest.swift */; };
 		545ECF2AFE95F923C9E82F63 /* ThreadLocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB65661C2188A3E830EEBF72 /* ThreadLocal.swift */; };
+		5536E2DF14917B6A789F520E /* NestedInNestedClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6003DBCF1B0CB5014D232663 /* NestedInNestedClass.swift */; };
 		55651D3E22A612DED373B20C /* StubThrowingFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808091A975F4E8BDDF0C80D9 /* StubThrowingFunction.swift */; };
-		58A99DAC64748D727E7B0FCD /* GeneratedMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A99A2173E7F7743145B11B /* GeneratedMocks.swift */; };
+		556D3E4E45EECAF63630F301 /* ObjcProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355C36C0536DBF7EDA3C2B96 /* ObjcProtocol.swift */; };
+		56DFD22A2F1AF52419EB0E76 /* MultiNestedInPrivateNestedClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CF3EE4189F2010800E2511 /* MultiNestedInPrivateNestedClass.swift */; };
+		570336BBDB934360FE479D3C /* TestedSubProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3E7F562DC17ECF3B32CBB3 /* TestedSubProtocol.swift */; };
+		57CDC17DA7EBED2FDCF31770 /* TestedSubclass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0F20F08A3C63CB00D2E7E4 /* TestedSubclass.swift */; };
+		57E4CE02A1CA1BB40E2FA062 /* GeneratedMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A99A2173E7F7743145B11B /* GeneratedMocks.swift */; };
+		57E757CC5F929A4DBE9E3503 /* GeneratedMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A99A2173E7F7743145B11B /* GeneratedMocks.swift */; };
+		59BBDFEF259FC1623AF70C25 /* PropertyWrappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D394400A6216C16C31E8436 /* PropertyWrappers.swift */; };
 		5A064F7C721704411B145927 /* MockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91992FE8D38A6900C005B0A4 /* MockManager.swift */; };
+		5B33BD005E3E7A7E949C09A6 /* MultiNestedInNestedClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7054833FFF0D253B1E2379FA /* MultiNestedInNestedClass.swift */; };
 		5B50032766FD487D60BCB600 /* ParameterMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A843913B61AB11A80097F51 /* ParameterMatcher.swift */; };
-		5CD9C64519DB0C354BA4D37C /* MultiNestedInExtensionFromClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB894FF725838C4DE9FFDC9A /* MultiNestedInExtensionFromClass.swift */; };
-		5CF37EA2B799A80A9A67A118 /* NSObjectProtocolInheritanceTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866CED1C72D1F35C10251CCC /* NSObjectProtocolInheritanceTesting.swift */; };
-		5D348147D1517769BF4EA943 /* MultiNestedInPrivateNestedClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CF3EE4189F2010800E2511 /* MultiNestedInPrivateNestedClass.swift */; };
-		5D3FE44E7EA36A67C7667A25 /* UnavailablePlatformProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE5DC1B6EC0BF686019517B /* UnavailablePlatformProtocol.swift */; };
-		5E0C7C9BCA06850E417925DE /* MultiNestedInNestedClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7054833FFF0D253B1E2379FA /* MultiNestedInNestedClass.swift */; };
+		5CDABAE86DA6F25234F8484C /* UnavailablePlatformClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6665FD7C16558B821564AADB /* UnavailablePlatformClass.swift */; };
 		5E7D1CB26C8CE71269F025E9 /* MockBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0889A597AF4CCA8841B471 /* MockBuilder.swift */; };
-		5ECEF4D6F0C5BA40061D3A5D /* TestedProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFDD79179243CBB217358C7 /* TestedProtocol.swift */; };
 		5F89B038A87B788853E2D366 /* Cuckoo_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C29A6852598014A495CF05BF /* Cuckoo_iOS.framework */; platformFilter = ios; };
 		5FA6BE80AA9CE9BD3BA16111 /* Cuckoo-BridgingHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = A78767AF78A5705F914CB5F1 /* Cuckoo-BridgingHeader.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		609C806B23DE0C82A771965C /* CuckooMocks_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98BEA8421199E8472F11D588 /* CuckooMocks_tvOS.framework */; };
-		60A04E1E043E73628D331B77 /* ClassForStubTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DE1954C1D6E94F2911830A /* ClassForStubTesting.swift */; };
-		6145CB8740E1E691D17C1A3A /* NestedPrivateExtensionClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECFED3C29F5CA48398AF0C5B /* NestedPrivateExtensionClass.swift */; };
 		6185ED8EF7CDC1EB4A859B6B /* GenericMethodClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B965102D09D6B0E94CDA8EA /* GenericMethodClassTest.swift */; };
+		61DC0BB3C368CDE5317CAE02 /* UnavailablePlatformProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE5DC1B6EC0BF686019517B /* UnavailablePlatformProtocol.swift */; };
 		620292525840DE035421240A /* CallMatcherTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F445E0EFD2FD1FBC888DB72 /* CallMatcherTest.swift */; };
 		6219F3D0C0FBDB14133C00B6 /* StubFunctionThenThrowingTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = F398C1D87D71EE8DED0C6EA3 /* StubFunctionThenThrowingTrait.swift */; };
 		6267428B4DD7814945E11B1C /* NSInvocation+OCMockWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = F3C87227E4CAE60FD9202D6F /* NSInvocation+OCMockWrapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		63E990EB0DEE6A4873F30538 /* ProtocolTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6978339A31BEDF22A4115E81 /* ProtocolTest.swift */; };
 		64725C719F048F677075C20E /* FailTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411E675E3332CB3C8D02567A /* FailTest.swift */; };
 		64F2D4BD0781A403442A4157 /* BaseStubFunctionTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B55AC80C790F69750B2F80 /* BaseStubFunctionTrait.swift */; };
+		6535C4D9A786C5D7DCA3FD7D /* MultiNestedInExtensionFromClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB894FF725838C4DE9FFDC9A /* MultiNestedInExtensionFromClass.swift */; };
 		653C6B1B0884C6D58E624D2E /* GenericMethodClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B965102D09D6B0E94CDA8EA /* GenericMethodClassTest.swift */; };
 		65955AE3A217F62C6A3C9731 /* OCMockObject+Workaround.m in Sources */ = {isa = PBXBuildFile; fileRef = C8D7931D2C7E8A64861A1863 /* OCMockObject+Workaround.m */; };
 		65FCE0D9EFC6BB52A78B03AD /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09B97C65DA87366B8605109 /* Utils.swift */; };
 		668937F0B68030E6EE526579 /* StubAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C647EAE09B6AB55FF6C0CE /* StubAction.swift */; };
 		6767946AF36C2A279F53D3FC /* ToBeStubbedProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE705433C346CA3DF4E2AB96 /* ToBeStubbedProperty.swift */; };
 		67BC45751E3361D5B2EE6C47 /* Array+matchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1D814F035D5D39FC84D26C /* Array+matchers.swift */; };
+		6804F22E9F81C3A259B6062F /* UnavailablePlatformProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE5DC1B6EC0BF686019517B /* UnavailablePlatformProtocol.swift */; };
+		684CB77DD59BA9F50ED69B2C /* NestedInPrivateNestedClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919EA0D2C416F1E4F22DAC20 /* NestedInPrivateNestedClass.swift */; };
 		68696CFDFD67F6D77057F64D /* CallMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C854CC76B478ED72B6D3A65 /* CallMatcher.swift */; };
 		689E3852D2B5C6C81837A08F /* StubFunctionThenTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C749F49256DDA51A9C96C9 /* StubFunctionThenTrait.swift */; };
-		69007928032C6824F7C5BF0D /* NestedInExtensionFromClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9699C3284544FE817C78E474 /* NestedInExtensionFromClass.swift */; };
 		69558A49969AD82F30643F24 /* ObjectiveMatchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70C4FAE3318E21F0A87531A /* ObjectiveMatchers.swift */; };
 		6A0909A8389463A30E8AF4D1 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09B97C65DA87366B8605109 /* Utils.swift */; };
 		6AE2BCD9B5DEE44A770ED5A3 /* CuckooFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938B3F655E8E20AB6D341A0D /* CuckooFunctions.swift */; };
-		6AF7C11314501D26CB46DC28 /* NestedInPrivateNestedClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919EA0D2C416F1E4F22DAC20 /* NestedInPrivateNestedClass.swift */; };
 		6B6134AC1149C4BA6374DC5F /* Matchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C633EBD6E6E6568FE9B40567 /* Matchable.swift */; };
-		6BADC8A017E44CE60A22928D /* GenericClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01C5ABA73DC1B0CCE088669 /* GenericClass.swift */; };
 		6BAE868EB51D85115719DA33 /* CallMatcherFunctionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5673B933A24CA65D15B3FD3A /* CallMatcherFunctionsTest.swift */; };
 		6BBF76BDA080CF1E8CA5D380 /* Cuckoo_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E13C3DFFA9A3676F92404B7 /* Cuckoo_macOS.framework */; };
-		6BFCDEFE9A76691CEB1E4060 /* OpenClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7FBE9F67D8DC4EDBD98FCC /* OpenClass.swift */; };
 		6C069F8AB990BB0181FFF235 /* Stubber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0DC4D2D6B0E6C61B27E90E /* Stubber.swift */; };
 		6CA344AA81601FD986725AF1 /* StubCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA3EB970DE7CF1D83AC121F /* StubCall.swift */; };
+		6CED372560E4E4004BFBD746 /* Cuckoo_tvOSTests_Mocks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABF561054515DE7662AB233B /* Cuckoo_tvOSTests_Mocks.framework */; };
 		6D16156115CF9E9CDF48FEF4 /* ArgumentCaptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FEF459CF7A13B3FC66D390 /* ArgumentCaptor.swift */; };
 		6D280577520C906C474727EC /* StubThrowingFunctionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7432F97D87C063CB4923E570 /* StubThrowingFunctionTest.swift */; };
 		6D9C4E09B9E0AC6BD5AED4DA /* ArgumentCaptorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76DE925DA03AAA0FD9734CFE /* ArgumentCaptorTest.swift */; };
@@ -246,33 +246,32 @@
 		6F1F29352EBA0ED747F43CE2 /* StubAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C647EAE09B6AB55FF6C0CE /* StubAction.swift */; };
 		6F4D00C3311EE9D9C758DBD5 /* StubFunctionThenDoNothingTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C68FC814ACBD3D5E1C7ED1B /* StubFunctionThenDoNothingTrait.swift */; };
 		7091ABD6BDE504B074B38F79 /* CallMatcherFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC319F6F55C00CFD3D0AF96 /* CallMatcherFunctions.swift */; };
-		70C61E076D6272AD9864724C /* ClassWithTypeAlias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C9897340BC8FFA2CDF8239F /* ClassWithTypeAlias.swift */; };
 		70D56B03BA7D46E0961B996E /* StubNoReturnThrowingFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D920573D13B938FEACFF82C6 /* StubNoReturnThrowingFunction.swift */; };
 		71390C75B9DC8ECD458064CB /* StubFunctionThenReturnTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3191519C8ED4DD5B3D439A93 /* StubFunctionThenReturnTrait.swift */; };
 		7152543E5FB5C27BFBF1AD54 /* StubFunctionThenReturnTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3191519C8ED4DD5B3D439A93 /* StubFunctionThenReturnTrait.swift */; };
 		718886B6E9C79E094F9A472B /* ParameterMatcherFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CA2236A30B54754F335DC3 /* ParameterMatcherFunctions.swift */; };
 		71C2BCE31CA3B6FCD55224AA /* Dictionary+matchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6975D97C79395805A3BB3B04 /* Dictionary+matchers.swift */; };
 		71E5A49D8F6F49CFDECEA3D5 /* StubbingProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A9BEFC601EF66DF42D5022 /* StubbingProxy.swift */; };
-		7223A57E6DDA635AD25F217A /* TestedProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFDD79179243CBB217358C7 /* TestedProtocol.swift */; };
+		72B05604B62547D28913124C /* NestedInExtensionFromClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9699C3284544FE817C78E474 /* NestedInExtensionFromClass.swift */; };
 		73B01B742C366190692DC3F2 /* VerifyReadOnlyProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A08AF20C937EF4EB98795B /* VerifyReadOnlyProperty.swift */; };
 		73C243460EAE2D834DA55E94 /* ObjectiveCatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 654DD2C28B20B62C30F20699 /* ObjectiveCatcher.m */; };
 		73ECEBE34D54DE64870F9020 /* StubThrowingFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808091A975F4E8BDDF0C80D9 /* StubThrowingFunction.swift */; };
+		73EF80C89CE1824FD7BB3AF8 /* TestedClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119D4E6C9798F70CEBDBB1F2 /* TestedClass.swift */; };
 		73FFAFFBF7DBE46E2B8D05A0 /* NSObjectProtocolInheritanceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBE411D64C1D2B056E42C52 /* NSObjectProtocolInheritanceTest.swift */; };
 		74017FD3D4D00BC1A7E8B3B2 /* CallMatcherFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC319F6F55C00CFD3D0AF96 /* CallMatcherFunctions.swift */; };
-		740ED863BAD8F3E4F71FCFB6 /* NestedPrivateExtensionClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECFED3C29F5CA48398AF0C5B /* NestedPrivateExtensionClass.swift */; };
 		7412DCEF30F117E77A9C3D96 /* ToBeStubbedThrowingProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6907AAE792A71E6883252CD6 /* ToBeStubbedThrowingProperty.swift */; };
 		749D92CA8AAF73824D8EED26 /* ObjectiveProtocolTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D36A00ADFA42CC4C411F3E /* ObjectiveProtocolTest.swift */; };
-		749E38D4DD40C825E75333FA /* GenericMethodClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E584CAC626A3E38BC45E773 /* GenericMethodClass.swift */; };
-		74ECF89EB4FDD20E6F0E616D /* UnicodeTestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492606B334C561F93ABBE0A3 /* UnicodeTestProtocol.swift */; };
+		751391121077371D273BC0AC /* NestedInNestedClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6003DBCF1B0CB5014D232663 /* NestedInNestedClass.swift */; };
+		75498293A0DA7CD9A62AF1A6 /* PropertyWrappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D394400A6216C16C31E8436 /* PropertyWrappers.swift */; };
 		758B410849CDB31C084CA96D /* Dictionary+matchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6975D97C79395805A3BB3B04 /* Dictionary+matchers.swift */; };
 		75E17151CB0691DA58FA4EA7 /* StubFunctionThenReturnTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3191519C8ED4DD5B3D439A93 /* StubFunctionThenReturnTrait.swift */; };
 		7722763845EAFAD0075BBC25 /* NSInvocation+OCMockWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = F3C87227E4CAE60FD9202D6F /* NSInvocation+OCMockWrapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		777044221950768E729B16B3 /* ClassWithUnavailablePlatformMembers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB937EA0F029B222D748FED /* ClassWithUnavailablePlatformMembers.swift */; };
+		77272D9A57F0EAF6FC84977B /* MultiNestedInNestedClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7054833FFF0D253B1E2379FA /* MultiNestedInNestedClass.swift */; };
 		7793C04BC11EFAD75F09EF5F /* StubFunctionThenThrowTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201DFAD306F0F1B18CE9EFBE /* StubFunctionThenThrowTrait.swift */; };
 		7882E7AA79ADA3A6DCBC95F2 /* StubFunctionThenCallRealImplementationTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5319F82EEAE3868CE8F23172 /* StubFunctionThenCallRealImplementationTrait.swift */; };
 		78D27D2AD38E87B228AF0556 /* GenericClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83908D3F58736F1C6DA7B2CA /* GenericClassTest.swift */; };
-		7B2FECED5E43757A88F0DA22 /* ObjcProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355C36C0536DBF7EDA3C2B96 /* ObjcProtocol.swift */; };
-		7B40ED8BAB53FA81AA3D2F8C /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AEF1D77E05D83F84ADE7A87 /* XCTest.framework */; };
+		7905779380C6C309CD206DAA /* Cuckoo_iOSTests_Mocks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8181863550B213F78331A9E6 /* Cuckoo_iOSTests_Mocks.framework */; platformFilter = ios; };
+		79926F96790F85E2D87F5E45 /* NestedInPrivateNestedClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919EA0D2C416F1E4F22DAC20 /* NestedInPrivateNestedClass.swift */; };
 		7BBB90925DB403DBCFF1C21B /* NSObject+TrustMe.h in Headers */ = {isa = PBXBuildFile; fileRef = E5D1F1DDD3B24CEC8D8495BC /* NSObject+TrustMe.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7C739BDCFE5EEC051A505646 /* ExcludedStubTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F2852ABE97CC059DD98D13 /* ExcludedStubTest.swift */; };
 		7D3C8D3967B30D9ABEB663BE /* VerificationProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21CD7B8ADE5ABE0295581D4 /* VerificationProxy.swift */; };
@@ -283,14 +282,14 @@
 		7E47BA8244092F2DFBD684DF /* StubRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AF60404FD2D5FD3198825E /* StubRecorder.swift */; };
 		7EAB21FAD9FC8BB4C36501D2 /* StubbingProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A9BEFC601EF66DF42D5022 /* StubbingProxy.swift */; };
 		7F28892D8977749CAF6F213E /* ObjectiveAssertThrows.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9525C20EA498D59BFCE3F7B /* ObjectiveAssertThrows.swift */; };
-		7F76D068E7088766978E9886 /* GenericProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A398D6337F320A5F78FA4A5A /* GenericProtocol.swift */; };
-		803BD7D105FBC934AE078EE1 /* ClassWithUnavailablePlatformMembers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB937EA0F029B222D748FED /* ClassWithUnavailablePlatformMembers.swift */; };
 		8044011621DC5C7C4A3933E5 /* StubFunctionThenCallRealImplementationTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5319F82EEAE3868CE8F23172 /* StubFunctionThenCallRealImplementationTrait.swift */; };
+		80485015844E7BAEBC5C46F8 /* Cuckoo_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E13C3DFFA9A3676F92404B7 /* Cuckoo_macOS.framework */; };
 		80817F0A64404E5F7D8B5A10 /* ParameterMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A843913B61AB11A80097F51 /* ParameterMatcher.swift */; };
 		814F1CB3BA613673666FB02E /* StubFunctionThenCallRealImplementationTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5319F82EEAE3868CE8F23172 /* StubFunctionThenCallRealImplementationTrait.swift */; };
 		8172956AE6AEC35C8946F3D7 /* Array+matchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1D814F035D5D39FC84D26C /* Array+matchers.swift */; };
 		820828627DA50955D0670823 /* Matchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C633EBD6E6E6568FE9B40567 /* Matchable.swift */; };
 		827A670BF9391A7C01822AF1 /* TestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F1FB05574F9DB1A4CE7AB3 /* TestError.swift */; };
+		828270E527D5752620E928EA /* ClassWithOptionals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A299482E4D2B7B774373A1 /* ClassWithOptionals.swift */; };
 		83A5A8205205BF4D44F93CD0 /* ArgumentCaptorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76DE925DA03AAA0FD9734CFE /* ArgumentCaptorTest.swift */; };
 		84307C5EB5AC2703492D6EE3 /* OpenClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCC7F90178D001A4D54CC46 /* OpenClassTest.swift */; };
 		8443421090DA81C2C68570A1 /* Cuckoo_OCMock_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD83449ACABE73EE786CA3E3 /* Cuckoo_OCMock_macOS.framework */; };
@@ -298,38 +297,41 @@
 		84E115FC5DA7BC43B2751E6E /* GenericProtocolTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905EC88A402004B01C6FE73E /* GenericProtocolTest.swift */; };
 		8582278A2B8F3112C45C433F /* Matchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C633EBD6E6E6568FE9B40567 /* Matchable.swift */; };
 		85BB583C1F89B50DC88999F2 /* ProtocolTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6978339A31BEDF22A4115E81 /* ProtocolTest.swift */; };
+		862342DC1641C8BE429681B4 /* UnavailablePlatformProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE5DC1B6EC0BF686019517B /* UnavailablePlatformProtocol.swift */; };
 		86ABC48D24FB4F74473FE0A4 /* BaseStubFunctionTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B55AC80C790F69750B2F80 /* BaseStubFunctionTrait.swift */; };
+		86AE3DFC0058831EE34CA121 /* UnicodeTestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492606B334C561F93ABBE0A3 /* UnicodeTestProtocol.swift */; };
 		86DC58F15DB5895F933B1B69 /* BaseStubFunctionTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B55AC80C790F69750B2F80 /* BaseStubFunctionTrait.swift */; };
 		8745260094FA2C8F12D77A22 /* Array+matchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1D814F035D5D39FC84D26C /* Array+matchers.swift */; };
 		8805AE37A66F847C9DF3206E /* NestedStructExtensionClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0512EFCB8EDE906B3E54057B /* NestedStructExtensionClassTest.swift */; };
 		8853FDF4F72BAD6B90816BB6 /* NSInvocation+OCMockWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = C61C355CDFD7F0A7C0F32A25 /* NSInvocation+OCMockWrapper.m */; };
 		88617CE83766576EC22E851F /* NSObject+TrustMe.m in Sources */ = {isa = PBXBuildFile; fileRef = E0656C5164A529DCCADBA8F1 /* NSObject+TrustMe.m */; };
 		890656235A725D4007EC7E6B /* CallMatcherTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F445E0EFD2FD1FBC888DB72 /* CallMatcherTest.swift */; };
+		89A58E70015F290684614655 /* ObjcProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355C36C0536DBF7EDA3C2B96 /* ObjcProtocol.swift */; };
 		89D45ECD764B0F6DC9E8A934 /* ParameterMatcherFunctionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B86DCAC6958FF36DF3639C /* ParameterMatcherFunctionsTest.swift */; };
 		89E3269347D80DD666EAB7DD /* Dictionary+matchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6975D97C79395805A3BB3B04 /* Dictionary+matchers.swift */; };
 		8A7127D0E93C3654495D6150 /* ParameterMatcherFunctionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B86DCAC6958FF36DF3639C /* ParameterMatcherFunctionsTest.swift */; };
-		8B845985FA7D6DEAA7337E4A /* NestedInExtensionFromClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9699C3284544FE817C78E474 /* NestedInExtensionFromClass.swift */; };
-		8BF3994D77A8843B44751FF7 /* PropertyWrappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D394400A6216C16C31E8436 /* PropertyWrappers.swift */; };
 		8BFF3E0D27FA8E37EAFB649C /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EBD5D113A20F38FCE13BDC /* Mock.swift */; };
 		8C61162C8AFDB8D153798DBC /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 648E1DCC3FA05944AC970663 /* XCTest.framework */; };
 		8CB6ABE1F6EB68B5F081CD2A /* NestedClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3646D56C8005FB7E1B11B67 /* NestedClassTest.swift */; };
 		8D80FA22DC7306DD02A3E6E0 /* StubNoReturnThrowingFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D920573D13B938FEACFF82C6 /* StubNoReturnThrowingFunction.swift */; };
+		8E65E2396B959590556EFA01 /* MultiNestedInExtensionFromClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB894FF725838C4DE9FFDC9A /* MultiNestedInExtensionFromClass.swift */; };
 		8EC6901E5D2329815A954132 /* BaseStubFunctionTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B55AC80C790F69750B2F80 /* BaseStubFunctionTrait.swift */; };
-		8EDCAF31CFA5801D6E348DBA /* UnavailablePlatformClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6665FD7C16558B821564AADB /* UnavailablePlatformClass.swift */; };
 		8F64666ABEA12593621A1E5B /* StubFunctionThenTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C749F49256DDA51A9C96C9 /* StubFunctionThenTrait.swift */; };
 		8FCE701ABF6436EA73A75767 /* CallMatcherFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC319F6F55C00CFD3D0AF96 /* CallMatcherFunctions.swift */; };
+		8FD4E28934C3BBB61B3D1519 /* TestedSubclass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0F20F08A3C63CB00D2E7E4 /* TestedSubclass.swift */; };
 		915E0D355991BC4F6948270F /* MultiNestedClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002B2852C62F702127A3D24E /* MultiNestedClassTest.swift */; };
 		91A62655AA1840F2C43960A7 /* StubFunctionThenTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C749F49256DDA51A9C96C9 /* StubFunctionThenTrait.swift */; };
 		928FE5CCF9DEBC62FACF4C46 /* DefaultValueRegistryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80D1401CB6046B1AEDBE204 /* DefaultValueRegistryTest.swift */; };
 		9368231E7428DF22BAE3AEE9 /* StubThrowingFunctionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7432F97D87C063CB4923E570 /* StubThrowingFunctionTest.swift */; };
+		941B31D89F4281750EC84CAC /* NestedInExtensionFromClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9699C3284544FE817C78E474 /* NestedInExtensionFromClass.swift */; };
+		9423A764F9BFE5A0B54E8F16 /* TestedProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFDD79179243CBB217358C7 /* TestedProtocol.swift */; };
 		94F590D84BE76886AE98EAD0 /* VerifyProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753FC6D19235B2C8F2DBAA7B /* VerifyProperty.swift */; };
-		950738B17CF311EF1463BE68 /* GenericMethodClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E584CAC626A3E38BC45E773 /* GenericMethodClass.swift */; };
 		954E54FCE165C68B179E344B /* StringProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA242F7A830953CD5E4AC4A /* StringProxy.m */; };
 		95D2EF56DE4359E935DA8881 /* FailTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411E675E3332CB3C8D02567A /* FailTest.swift */; };
 		963824F815E19D340043C872 /* MockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91992FE8D38A6900C005B0A4 /* MockManager.swift */; };
 		965DF7FC59C5252C8E915785 /* ObjectiveProtocolTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D36A00ADFA42CC4C411F3E /* ObjectiveProtocolTest.swift */; };
 		968F5345D4C4CEE2E7CA7F33 /* StubThrowingFunctionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7432F97D87C063CB4923E570 /* StubThrowingFunctionTest.swift */; };
-		9784D6A195C265914EAFAA24 /* GenericProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A398D6337F320A5F78FA4A5A /* GenericProtocol.swift */; };
+		96D89A60AE9E420B7EE05C97 /* MultiNestedPrivateExtensionClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B40CC43D7A77DFD4702178A /* MultiNestedPrivateExtensionClass.swift */; };
 		9788E81C8493431FB83A7E15 /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EBD5D113A20F38FCE13BDC /* Mock.swift */; };
 		97F6BD5C658631C6B86F13E8 /* ArgumentCaptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FEF459CF7A13B3FC66D390 /* ArgumentCaptor.swift */; };
 		9820ACF2D223E8C1DE7CB9CE /* StubNoReturnThrowingFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D920573D13B938FEACFF82C6 /* StubNoReturnThrowingFunction.swift */; };
@@ -340,52 +342,60 @@
 		9B2C828687E210FBA520DDFD /* ObjectiveAssertThrows.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9525C20EA498D59BFCE3F7B /* ObjectiveAssertThrows.swift */; };
 		9B43D00AE620FC13BC6CDD3B /* Array+matchersTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D3EE02CEB715D5543ACFFC /* Array+matchersTest.swift */; };
 		9BCB829A9367D2969E8C0B15 /* StubFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D83797450CB57EC3E0A693 /* StubFunction.swift */; };
+		9C1D8F8C0C7DCCFC660006D9 /* ExcludedTestClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB36E482FF288D775B744A02 /* ExcludedTestClass.swift */; };
 		9C88BF5A1599ACBAC03A2BEA /* DefaultValueRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190FB7FABF7486D2963F4B44 /* DefaultValueRegistry.swift */; };
-		9C9655810E9BC147E8F064FE /* OpenClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7FBE9F67D8DC4EDBD98FCC /* OpenClass.swift */; };
-		9D22857A1D2959D5A24A9AEF /* GeneratedMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A99A2173E7F7743145B11B /* GeneratedMocks.swift */; };
 		9E323FB95FB7952A8DD85981 /* ParameterMatcherFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CA2236A30B54754F335DC3 /* ParameterMatcherFunctions.swift */; };
 		9EAF1E992E94374BEC7E991F /* GenericProtocolTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905EC88A402004B01C6FE73E /* GenericProtocolTest.swift */; };
 		9EDED0FA34387A55168C5E9A /* ArgumentCaptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FEF459CF7A13B3FC66D390 /* ArgumentCaptor.swift */; };
 		9F315C759A53B4765706C631 /* StubbingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D65D2B6FD44C2CC59D6C7F4 /* StubbingTest.swift */; };
 		9F5610FAD63C5F21240BD983 /* MockBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0889A597AF4CCA8841B471 /* MockBuilder.swift */; };
+		9FA4C1E6A2C890D7740A7D74 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AEF1D77E05D83F84ADE7A87 /* XCTest.framework */; };
 		9FFAC02139D8C438E7AC2398 /* MockBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0889A597AF4CCA8841B471 /* MockBuilder.swift */; };
 		A1853B97980BE907FC4D3317 /* CuckooFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938B3F655E8E20AB6D341A0D /* CuckooFunctions.swift */; };
-		A2B0E2D51EACBBCEEB6FEB03 /* GenericMethodClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E584CAC626A3E38BC45E773 /* GenericMethodClass.swift */; };
+		A2F8BF6BA0FE0C8A36CFF80D /* ClassWithTypeAlias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C9897340BC8FFA2CDF8239F /* ClassWithTypeAlias.swift */; };
+		A309ECF3099EAA325AA3063B /* TestedSubProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3E7F562DC17ECF3B32CBB3 /* TestedSubProtocol.swift */; };
 		A3DF069D9E3DF22ACFCAD93B /* ObjectiveVerify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107C9243167200396831A18F /* ObjectiveVerify.swift */; };
 		A4CBD40075880FC30EC458F7 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09B97C65DA87366B8605109 /* Utils.swift */; };
+		A55E3CF238D1AC0964915900 /* ClassWithOptionals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A299482E4D2B7B774373A1 /* ClassWithOptionals.swift */; };
 		A60190967F7ABAC6EEEBEAD0 /* StubFunctionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBF18CC12259A96D05F579B /* StubFunctionTest.swift */; };
 		A62A193B39F441EDB152B0A4 /* ObjectiveVerify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107C9243167200396831A18F /* ObjectiveVerify.swift */; };
 		A633B98B4FE0062447B79F5C /* Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4758812545462B94DAB7A4 /* Stub.swift */; };
-		A6AEA98E2B7FDEA197BAA04F /* TestedClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119D4E6C9798F70CEBDBB1F2 /* TestedClass.swift */; };
+		A7BAD7B50BDDD276BA1C14AF /* Cuckoo_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86D638696C1458550D4524F1 /* Cuckoo_tvOS.framework */; };
 		A800AEB75115BD8B681A4C3E /* Set+matchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D535CF4BAE6BA1CA7220CDB7 /* Set+matchers.swift */; };
 		A80124A724B5E674BDA97273 /* ParameterMatcherFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CA2236A30B54754F335DC3 /* ParameterMatcherFunctions.swift */; };
 		A8E04F9A72B068B4D7C3D292 /* StubFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D83797450CB57EC3E0A693 /* StubFunction.swift */; };
 		A983C68015E99296880C1E09 /* StubNoReturnThrowingFunctionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A67E79E73B4710B3C846F96 /* StubNoReturnThrowingFunctionTest.swift */; };
 		A98B094AF56BE63E7E4D2164 /* ParameterMatcherTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AE18F5D3419D1025D081CA /* ParameterMatcherTest.swift */; };
+		A98B9DA470515E54DB512F71 /* NestedInNestedStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90E9A4C6A1716C6D219D26E /* NestedInNestedStruct.swift */; };
+		A9DADCB206FB3F8D5D49FB8B /* GenericMethodClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E584CAC626A3E38BC45E773 /* GenericMethodClass.swift */; };
 		AA44A452C1782A96B6784B1A /* MockBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0889A597AF4CCA8841B471 /* MockBuilder.swift */; };
 		AB3A869091F2C1705FCC5645 /* CallMatcherFunctionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5673B933A24CA65D15B3FD3A /* CallMatcherFunctionsTest.swift */; };
 		AB4D73B2AF7C45B055A0909E /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55014A1A85497F2153371D7 /* TestUtils.swift */; };
 		AB592B6FB3361E611C3E710C /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09B97C65DA87366B8605109 /* Utils.swift */; };
+		ABC12288879271F94B86F4FB /* ClassForStubTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DE1954C1D6E94F2911830A /* ClassForStubTesting.swift */; };
 		ACE132DAD743208533557637 /* OCMockObject+CuckooMockObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D732D63C18B4DE267CB365CF /* OCMockObject+CuckooMockObject.m */; };
 		ACEB3D4D47A97027E321FDBE /* StubFunctionThenTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C749F49256DDA51A9C96C9 /* StubFunctionThenTrait.swift */; };
+		ACEF261C1A5F656A314D7C06 /* GeneratedMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A99A2173E7F7743145B11B /* GeneratedMocks.swift */; };
+		AD4E67C8FE69388312FF4B5E /* MultiNestedInExtensionFromClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB894FF725838C4DE9FFDC9A /* MultiNestedInExtensionFromClass.swift */; };
 		AE8E55BEA54BCB10A0468188 /* VerifyProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753FC6D19235B2C8F2DBAA7B /* VerifyProperty.swift */; };
 		AED029328B9DBA81108F8A43 /* Set+matchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D535CF4BAE6BA1CA7220CDB7 /* Set+matchers.swift */; };
 		AF177857763EFD043D96C0D8 /* Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4758812545462B94DAB7A4 /* Stub.swift */; };
 		AF6A22D34D3918E5E731F2A4 /* ObjectiveCatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 654DD2C28B20B62C30F20699 /* ObjectiveCatcher.m */; };
+		AF93D7CD4F0BA78EC4E673C4 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 648E1DCC3FA05944AC970663 /* XCTest.framework */; };
 		AFBB202448EE8B1FDF859650 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09B97C65DA87366B8605109 /* Utils.swift */; };
 		AFBDD93079F30AE78FA0213A /* NestedExtensionClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F42B443F090072DFF751FD /* NestedExtensionClassTest.swift */; };
 		B03739C75A3A4D38D7C16B55 /* ParameterMatcherFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CA2236A30B54754F335DC3 /* ParameterMatcherFunctions.swift */; };
-		B1BAF3359FE9EA8CE5DA0612 /* MultiNestedInPrivateNestedClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CF3EE4189F2010800E2511 /* MultiNestedInPrivateNestedClass.swift */; };
 		B20EB3B628D5F51BE8623575 /* Stubber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0DC4D2D6B0E6C61B27E90E /* Stubber.swift */; };
 		B210B6A3EDD5F0807CB635BD /* NestedExtensionClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F42B443F090072DFF751FD /* NestedExtensionClassTest.swift */; };
 		B2A0F9714DD9CCCDED6C0974 /* ParameterMatcherFunctionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B86DCAC6958FF36DF3639C /* ParameterMatcherFunctionsTest.swift */; };
 		B35A528C2DA3EDD27AF9ED6D /* Dictionary+matchersTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B79F4A07874A92D5E117ED8 /* Dictionary+matchersTest.swift */; };
 		B396D31FA7D0409EF4AF7F8D /* ObjectiveStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A933D33D55AE257FE9B1097 /* ObjectiveStub.swift */; };
+		B3E6E30A9EBB49B556E52717 /* TestedSubclass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0F20F08A3C63CB00D2E7E4 /* TestedSubclass.swift */; };
+		B41A59134EF44714929B88D3 /* Cuckoo_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C29A6852598014A495CF05BF /* Cuckoo_iOS.framework */; platformFilter = ios; };
 		B452F6F8E31A3B0D7C460B79 /* StubFunctionThenThrowTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201DFAD306F0F1B18CE9EFBE /* StubFunctionThenThrowTrait.swift */; };
 		B4CABEBF620374BC06D2823B /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55014A1A85497F2153371D7 /* TestUtils.swift */; };
 		B4D4670EAA09DA5A79BB11AB /* MockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91992FE8D38A6900C005B0A4 /* MockManager.swift */; };
 		B4FFDFFB75D194453AE2D175 /* StubCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA3EB970DE7CF1D83AC121F /* StubCall.swift */; };
-		B614D377B7B01A5EBD05F6E5 /* Cuckoo_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86D638696C1458550D4524F1 /* Cuckoo_tvOS.framework */; };
 		B626F2DA221BF968E127B54A /* VerifyReadOnlyProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A08AF20C937EF4EB98795B /* VerifyReadOnlyProperty.swift */; };
 		B648456E51B3FF8CB037B3B5 /* Matchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C633EBD6E6E6568FE9B40567 /* Matchable.swift */; };
 		B6C4CC5A967C0CC567A9F454 /* MockManager+preconfigured.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83C4A633699E5B88D9A9C1B /* MockManager+preconfigured.swift */; };
@@ -395,6 +405,7 @@
 		B814D550E3464500F775C91A /* GenericProtocolTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905EC88A402004B01C6FE73E /* GenericProtocolTest.swift */; };
 		B884848EBEDF80F1DBAD3C6A /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EBD5D113A20F38FCE13BDC /* Mock.swift */; };
 		B89DC8BEF25D0A07FC7AB353 /* GenericClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83908D3F58736F1C6DA7B2CA /* GenericClassTest.swift */; };
+		B8CA7A802F79B550FB78534F /* MultiNestedPrivateExtensionClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B40CC43D7A77DFD4702178A /* MultiNestedPrivateExtensionClass.swift */; };
 		B8D4C89A105E32099C8F6099 /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EBD5D113A20F38FCE13BDC /* Mock.swift */; };
 		BA14903547F97B83C49B708D /* Stubber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0DC4D2D6B0E6C61B27E90E /* Stubber.swift */; };
 		BAA6262023C7BBD7F945FA91 /* ObjectiveVerify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107C9243167200396831A18F /* ObjectiveVerify.swift */; };
@@ -403,62 +414,54 @@
 		BBAC0B12C70D9B414A0E93E1 /* VerifyProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753FC6D19235B2C8F2DBAA7B /* VerifyProperty.swift */; };
 		BD1A024D8CFAF378B9D107A4 /* BaseStubFunctionTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B55AC80C790F69750B2F80 /* BaseStubFunctionTrait.swift */; };
 		BD1D677D1328C8469A1924BC /* Array+matchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1D814F035D5D39FC84D26C /* Array+matchers.swift */; };
-		BD72793C0F56BBAE9C33E4C0 /* CuckooMocks_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D9F5C233CC956DE8ACDEEF3 /* CuckooMocks_macOS.framework */; };
-		BF2941FE5C3E3B49C75FD983 /* TestedSubProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3E7F562DC17ECF3B32CBB3 /* TestedSubProtocol.swift */; };
+		BDB33FF32C82DCF06C377E66 /* UnavailablePlatformClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6665FD7C16558B821564AADB /* UnavailablePlatformClass.swift */; };
+		BF0657CF0F119AE8DEC3B729 /* SwiftUIProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37168E50C5A33F171ACACB37 /* SwiftUIProtocols.swift */; };
 		BFA75D644CFA48DC58830F96 /* MultiNestedExtensionClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F29DC9C5F5CCE01FEAE648D /* MultiNestedExtensionClassTest.swift */; };
 		BFDB46EBA43CC56D0D6EDFA5 /* OCMockObject+Workaround.h in Headers */ = {isa = PBXBuildFile; fileRef = 95B3E26DA5700FCAF7286B16 /* OCMockObject+Workaround.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C034D094E39979BDC376E749 /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EBD5D113A20F38FCE13BDC /* Mock.swift */; };
 		C0A2CECBE10264C6BDD92010 /* ObjectiveClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFD10D2F5491D90D226ED78 /* ObjectiveClassTest.swift */; };
 		C1152F7976001DDB1205BD00 /* StubAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C647EAE09B6AB55FF6C0CE /* StubAction.swift */; };
-		C1D5D1CE68F400805B337BFC /* MultiNestedPrivateExtensionClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B40CC43D7A77DFD4702178A /* MultiNestedPrivateExtensionClass.swift */; };
 		C1F68F0EFDA0265EB51F584D /* StubFunctionThenCallRealImplementationTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5319F82EEAE3868CE8F23172 /* StubFunctionThenCallRealImplementationTrait.swift */; };
-		C1F92E4B1D2A0757BC4ADAEE /* UnicodeTestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492606B334C561F93ABBE0A3 /* UnicodeTestProtocol.swift */; };
 		C27FBF639C486230CE73BE8D /* Set+matchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D535CF4BAE6BA1CA7220CDB7 /* Set+matchers.swift */; };
-		C32CF013A3AA732EA8456820 /* ObjcProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355C36C0536DBF7EDA3C2B96 /* ObjcProtocol.swift */; };
 		C34AF747ED1E79CD10793AA9 /* DefaultValueRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190FB7FABF7486D2963F4B44 /* DefaultValueRegistry.swift */; };
 		C35D17FDE020548743985C7B /* CallMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C854CC76B478ED72B6D3A65 /* CallMatcher.swift */; };
 		C3B192ADC6F5D53BA4D1B82C /* ToBeStubbedReadOnlyProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375E2C8E10768E1A9A04C362 /* ToBeStubbedReadOnlyProperty.swift */; };
-		C3D5FEB508E2DEF492910215 /* ClassWithOptionals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A299482E4D2B7B774373A1 /* ClassWithOptionals.swift */; };
-		C3E51334B80F77469A8E4DDB /* MultiNestedInNestedClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7054833FFF0D253B1E2379FA /* MultiNestedInNestedClass.swift */; };
+		C40048BE9C07B69299EB28B3 /* Cuckoo_macOSTests_Mocks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 171982E327560747753FE636 /* Cuckoo_macOSTests_Mocks.framework */; };
 		C40DE5DDD7A6B6566E11EC1E /* FailTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411E675E3332CB3C8D02567A /* FailTest.swift */; };
 		C417ADDC838785223571AE56 /* StubFunctionThenThrowTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201DFAD306F0F1B18CE9EFBE /* StubFunctionThenThrowTrait.swift */; };
 		C4897A1967455B4F92143684 /* Set+matchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D535CF4BAE6BA1CA7220CDB7 /* Set+matchers.swift */; };
 		C5344E4F47B45F5FADB16656 /* StubThrowingFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808091A975F4E8BDDF0C80D9 /* StubThrowingFunction.swift */; };
+		C5947F0B557E282036916D4E /* ClassWithOptionals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A299482E4D2B7B774373A1 /* ClassWithOptionals.swift */; };
 		C6FF45EBE23DE0012F5AB94B /* Set+matchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D535CF4BAE6BA1CA7220CDB7 /* Set+matchers.swift */; };
-		C77719FE39D964297A8E8B28 /* NSObjectProtocolInheritanceTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866CED1C72D1F35C10251CCC /* NSObjectProtocolInheritanceTesting.swift */; };
-		C8893A69F705F8E855D383B3 /* ClassForStubTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DE1954C1D6E94F2911830A /* ClassForStubTesting.swift */; };
+		C897EA176B1A0220C3F019C8 /* UnavailablePlatformClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6665FD7C16558B821564AADB /* UnavailablePlatformClass.swift */; };
 		C918EF1A82AE3300CFD0178C /* Cuckoo-BridgingHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = A78767AF78A5705F914CB5F1 /* Cuckoo-BridgingHeader.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C9842C46FFD2D75272DA7FC9 /* NSObjectProtocolInheritanceTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866CED1C72D1F35C10251CCC /* NSObjectProtocolInheritanceTesting.swift */; };
 		C98DD2231948D6D9486E3C1C /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55014A1A85497F2153371D7 /* TestUtils.swift */; };
 		CA88A2D7512A9EE0D64D6879 /* StubbingProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A9BEFC601EF66DF42D5022 /* StubbingProxy.swift */; };
 		CB95B245036865240B20E448 /* MultiLayeredNestedTestedSubclassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F0DF66BC063943C91FB2C3 /* MultiLayeredNestedTestedSubclassTest.swift */; };
 		CBB7017EE143A38098AD7287 /* GenericMethodClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B965102D09D6B0E94CDA8EA /* GenericMethodClassTest.swift */; };
 		CC2BA5A130CB61216E489D99 /* VerifyProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753FC6D19235B2C8F2DBAA7B /* VerifyProperty.swift */; };
 		CC60D01D5BD4771A8EC08F6A /* CreateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44692276AAFF9261EDD5D75 /* CreateMock.swift */; };
-		CDA6ADDCE44A0B8091B5F7EE /* MultiNestedInNestedClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7054833FFF0D253B1E2379FA /* MultiNestedInNestedClass.swift */; };
 		CDB0BA16695C98931589704D /* Dictionary+matchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6975D97C79395805A3BB3B04 /* Dictionary+matchers.swift */; };
 		CF9317F413BD20D13E4502F1 /* OCMockObject+Workaround.m in Sources */ = {isa = PBXBuildFile; fileRef = C8D7931D2C7E8A64861A1863 /* OCMockObject+Workaround.m */; };
-		CFEAC3A7235FC831C21A5C5C /* UnavailablePlatformClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6665FD7C16558B821564AADB /* UnavailablePlatformClass.swift */; };
+		CFA2C89191103D49CB6A9B09 /* NestedPrivateExtensionClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECFED3C29F5CA48398AF0C5B /* NestedPrivateExtensionClass.swift */; };
 		D0C7BB10C63B6DF32AAB155F /* MockManager+preconfigured.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83C4A633699E5B88D9A9C1B /* MockManager+preconfigured.swift */; };
 		D177C67F898B7880F9F52B79 /* DefaultValueRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190FB7FABF7486D2963F4B44 /* DefaultValueRegistry.swift */; };
 		D1B2F1EDB5D69085D038C754 /* MultiLayeredNestedTestedSubclassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F0DF66BC063943C91FB2C3 /* MultiLayeredNestedTestedSubclassTest.swift */; };
 		D275AEED9B225F30135FFF66 /* StubThrowingFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808091A975F4E8BDDF0C80D9 /* StubThrowingFunction.swift */; };
-		D2D57331ACDFE0B8AA81D168 /* Cuckoo_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E13C3DFFA9A3676F92404B7 /* Cuckoo_macOS.framework */; };
-		D30B4E812CDB2BC7EBB869DF /* UnavailablePlatformProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE5DC1B6EC0BF686019517B /* UnavailablePlatformProtocol.swift */; };
 		D3C9DF9D6A359FD9E9625013 /* StubNoReturnFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700931036CB43C60AEFB7FEB /* StubNoReturnFunction.swift */; };
 		D477FC12C92D54376DA507B5 /* ClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6873C8013002AFEA7565BDAC /* ClassTest.swift */; };
 		D4AB2487A9A71CAC5C873251 /* VerificationProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21CD7B8ADE5ABE0295581D4 /* VerificationProxy.swift */; };
 		D592614C68488F8BDEFA963C /* VerifyProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753FC6D19235B2C8F2DBAA7B /* VerifyProperty.swift */; };
-		D5C28A510C1B976A2AC89012 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B81133817083F2B8122BE188 /* XCTest.framework */; };
+		D6C959FC5EEFB1ED4B8BFA19 /* GenericClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01C5ABA73DC1B0CCE088669 /* GenericClass.swift */; };
 		D704EBE1834FBD51B71A3B3A /* StubCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA3EB970DE7CF1D83AC121F /* StubCall.swift */; };
 		D7312FFFE42B8FE881D9BBE0 /* NSValueConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989EFADEC10AB6D627A5FAE6 /* NSValueConvertible.swift */; };
 		D737BFC28DAC74248B747CA8 /* ParameterMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A843913B61AB11A80097F51 /* ParameterMatcher.swift */; };
 		D7A448F2EFBD49C4B098C7E9 /* StubAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C647EAE09B6AB55FF6C0CE /* StubAction.swift */; };
-		D7EA0D2C321F2E751BDD0E6C /* MultiNestedInPrivateNestedClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CF3EE4189F2010800E2511 /* MultiNestedInPrivateNestedClass.swift */; };
 		D7F382B3F851359B8E560C77 /* Cuckoo-BridgingHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = A78767AF78A5705F914CB5F1 /* Cuckoo-BridgingHeader.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D83964E231813287F3085F45 /* GenericClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01C5ABA73DC1B0CCE088669 /* GenericClass.swift */; };
 		D83F61C4CAD4B8E87FE6088F /* StubFunctionThenDoNothingTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C68FC814ACBD3D5E1C7ED1B /* StubFunctionThenDoNothingTrait.swift */; };
-		D8D042ACA89726F31FFC5342 /* NestedInNestedClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6003DBCF1B0CB5014D232663 /* NestedInNestedClass.swift */; };
 		D941197401297EB373330953 /* ToBeStubbedProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE705433C346CA3DF4E2AB96 /* ToBeStubbedProperty.swift */; };
+		D9478388423F877FE26C0AEC /* OpenClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7FBE9F67D8DC4EDBD98FCC /* OpenClass.swift */; };
 		D971F19A9D0981DAA7D15FCC /* NSObject+TrustMe.h in Headers */ = {isa = PBXBuildFile; fileRef = E5D1F1DDD3B24CEC8D8495BC /* NSObject+TrustMe.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D9FD55769EF2C1C52E07D037 /* ToBeStubbedReadOnlyProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375E2C8E10768E1A9A04C362 /* ToBeStubbedReadOnlyProperty.swift */; };
 		DA005B81565742306622E7C4 /* ToBeStubbedThrowingProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6907AAE792A71E6883252CD6 /* ToBeStubbedThrowingProperty.swift */; };
@@ -467,35 +470,31 @@
 		DAA2F77DD7D51DF39A6F121F /* StringProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = C0A3B9B776340082AC6DDE9A /* StringProxy.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DAB35BAC05BFC9F90970DA61 /* CuckooFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938B3F655E8E20AB6D341A0D /* CuckooFunctions.swift */; };
 		DBFF421C1991EA03F8DFCF7C /* MockBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0889A597AF4CCA8841B471 /* MockBuilder.swift */; };
+		DC188B783568843F9F5C12ED /* ClassForStubTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DE1954C1D6E94F2911830A /* ClassForStubTesting.swift */; };
 		DC954AFA6EEBCD4CE60891BE /* StubbingProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A9BEFC601EF66DF42D5022 /* StubbingProxy.swift */; };
 		DCCC78C7E31161EA0CCAA1FF /* Set+matchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D535CF4BAE6BA1CA7220CDB7 /* Set+matchers.swift */; };
 		DD0595709253A1058AAD17D7 /* MatchableTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBE505B4B98BE6289678CD1 /* MatchableTest.swift */; };
-		DD8E7DFF2A60268A09CC5886 /* SwiftUIProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37168E50C5A33F171ACACB37 /* SwiftUIProtocols.swift */; };
 		DDA3F74ECE9980BC0F403273 /* NSObject+TrustMe.m in Sources */ = {isa = PBXBuildFile; fileRef = E0656C5164A529DCCADBA8F1 /* NSObject+TrustMe.m */; };
 		DEC57D478533E80AF83D2743 /* StubFunctionThenThrowingTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = F398C1D87D71EE8DED0C6EA3 /* StubFunctionThenThrowingTrait.swift */; };
+		DF5C0E055B1F121045A0FAE0 /* GenericMethodClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E584CAC626A3E38BC45E773 /* GenericMethodClass.swift */; };
 		DF80E10853093C087BC804D3 /* VerifyReadOnlyProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A08AF20C937EF4EB98795B /* VerifyReadOnlyProperty.swift */; };
 		DF8CE37383F4AE5F5CF0C6BD /* OpenClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCC7F90178D001A4D54CC46 /* OpenClassTest.swift */; };
-		DFFE787B8495565110C8B091 /* NestedInPrivateNestedClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919EA0D2C416F1E4F22DAC20 /* NestedInPrivateNestedClass.swift */; };
-		E034BCA3774D9941DA098524 /* UnavailablePlatformProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE5DC1B6EC0BF686019517B /* UnavailablePlatformProtocol.swift */; };
 		E0A082507429D675FD362155 /* ParameterMatcherFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CA2236A30B54754F335DC3 /* ParameterMatcherFunctions.swift */; };
-		E1A44831B386BB8E319A72DF /* TestedClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119D4E6C9798F70CEBDBB1F2 /* TestedClass.swift */; };
 		E1ECD09A053038A89DC4BC0E /* NSInvocation+OCMockWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = F3C87227E4CAE60FD9202D6F /* NSInvocation+OCMockWrapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E22E749D0A0B44EC528CB38F /* ProtocolTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6978339A31BEDF22A4115E81 /* ProtocolTest.swift */; };
 		E28273B64BC1C3C73331A168 /* VerificationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01496A793103612242EE7A04 /* VerificationTest.swift */; };
 		E2D62D3393599003755F59F6 /* CollisionClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDB969240E4E2B12FF93284 /* CollisionClasses.swift */; };
 		E37116F9692A45F7ECF6E8EA /* StubNoReturnFunctionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7635A46FDE48804E6E21EC0 /* StubNoReturnFunctionTest.swift */; };
 		E39A67FBC1DD4826E4E22ECB /* Dictionary+matchersTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B79F4A07874A92D5E117ED8 /* Dictionary+matchersTest.swift */; };
-		E3A1FC807731141711A88755 /* ObjcProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355C36C0536DBF7EDA3C2B96 /* ObjcProtocol.swift */; };
 		E433CF0AECC850CC4A8A0207 /* StubFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D83797450CB57EC3E0A693 /* StubFunction.swift */; };
 		E43CC1CA72418C35F7FC5262 /* Array+matchersTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D3EE02CEB715D5543ACFFC /* Array+matchersTest.swift */; };
-		E48F41F2AB8845C83BEEF829 /* Cuckoo_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C29A6852598014A495CF05BF /* Cuckoo_iOS.framework */; platformFilter = ios; };
 		E4EDCB7B18A50B2EDEBA4DB4 /* StubNoReturnThrowingFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D920573D13B938FEACFF82C6 /* StubNoReturnThrowingFunction.swift */; };
-		E52B92B70A9C2E0217AFD4CD /* ClassWithTypeAlias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C9897340BC8FFA2CDF8239F /* ClassWithTypeAlias.swift */; };
 		E54372352D4AF59507465244 /* StubFunctionThenThrowingTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = F398C1D87D71EE8DED0C6EA3 /* StubFunctionThenThrowingTrait.swift */; };
+		E5472BD567D3B02D47CD9C00 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B81133817083F2B8122BE188 /* XCTest.framework */; };
 		E5724382ECAA05E394B569CA /* ObjectiveCatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C3E2B1C12FF95C6DCA418D5 /* ObjectiveCatcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E5F74103A5924E45829670F6 /* ThreadLocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB65661C2188A3E830EEBF72 /* ThreadLocal.swift */; };
 		E61B1327BCAFC0E041FDD864 /* StubNoReturnFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700931036CB43C60AEFB7FEB /* StubNoReturnFunction.swift */; };
-		E64E0C83111116696D1488EE /* NestedInNestedStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90E9A4C6A1716C6D219D26E /* NestedInNestedStruct.swift */; };
+		E61EAB5A40D9AFB2144B195F /* GenericClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01C5ABA73DC1B0CCE088669 /* GenericClass.swift */; };
 		E742BE2A69A5807070E873D0 /* ToBeStubbedProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE705433C346CA3DF4E2AB96 /* ToBeStubbedProperty.swift */; };
 		E760A444C6C0B06AF07FB52D /* MultiNestedExtensionClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F29DC9C5F5CCE01FEAE648D /* MultiNestedExtensionClassTest.swift */; };
 		E8CE88DD377BB4EE8233AAFB /* TestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F1FB05574F9DB1A4CE7AB3 /* TestError.swift */; };
@@ -504,17 +503,17 @@
 		EAFA72896871E0A2629AC784 /* ClassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6873C8013002AFEA7565BDAC /* ClassTest.swift */; };
 		EB12D8BACB131BD4DF064AF0 /* ObjectiveMatchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70C4FAE3318E21F0A87531A /* ObjectiveMatchers.swift */; };
 		EB3BC2A3CB2C8FA24CA01B18 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09B97C65DA87366B8605109 /* Utils.swift */; };
+		EB8868625E401618202B37B0 /* OpenClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7FBE9F67D8DC4EDBD98FCC /* OpenClass.swift */; };
 		ED34902303F797CACE7C47FC /* StubFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D83797450CB57EC3E0A693 /* StubFunction.swift */; };
 		EDD2EDC801189CF637948AA4 /* DefaultValueRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190FB7FABF7486D2963F4B44 /* DefaultValueRegistry.swift */; };
+		EDE0EBC6A6B3DE4D2999F611 /* GenericMethodClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E584CAC626A3E38BC45E773 /* GenericMethodClass.swift */; };
 		EEF3DC22DC7212C654EF328D /* __DoNotUse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511DD0B1EA1EAF535C598A8C /* __DoNotUse.swift */; };
 		EFB5C46F8B4DFE1801EA6114 /* StubThrowingFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808091A975F4E8BDDF0C80D9 /* StubThrowingFunction.swift */; };
-		EFFC0EB22474FF3657CEA371 /* ClassWithOptionals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A299482E4D2B7B774373A1 /* ClassWithOptionals.swift */; };
+		EFBA930D0ED6ED0CCA3741B2 /* ClassWithUnavailablePlatformMembers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB937EA0F029B222D748FED /* ClassWithUnavailablePlatformMembers.swift */; };
 		F01B6FF9BCFEED923AFCE5FC /* CallMatcherTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F445E0EFD2FD1FBC888DB72 /* CallMatcherTest.swift */; };
 		F06F58CC006ADA94DE776EC5 /* ToBeStubbedThrowingProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6907AAE792A71E6883252CD6 /* ToBeStubbedThrowingProperty.swift */; };
-		F0D9186E12C7556A471457FF /* TestedSubProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3E7F562DC17ECF3B32CBB3 /* TestedSubProtocol.swift */; };
-		F10B0409C2E2E211A62FDCD1 /* ExcludedTestClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB36E482FF288D775B744A02 /* ExcludedTestClass.swift */; };
 		F191F17A741759B8031CB6D5 /* VerificationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01496A793103612242EE7A04 /* VerificationTest.swift */; };
-		F205CF01B2BD04593F5D0B6A /* NestedInNestedStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90E9A4C6A1716C6D219D26E /* NestedInNestedStruct.swift */; };
+		F1DE4D9BFE0A510530FE8409 /* ClassWithUnavailablePlatformMembers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB937EA0F029B222D748FED /* ClassWithUnavailablePlatformMembers.swift */; };
 		F22196061D37E66590633818 /* DefaultValueRegistryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80D1401CB6046B1AEDBE204 /* DefaultValueRegistryTest.swift */; };
 		F23C1AB2E119F8427D5AA0F2 /* StubNoReturnFunctionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7635A46FDE48804E6E21EC0 /* StubNoReturnFunctionTest.swift */; };
 		F24314E1234140A2ECF98BE0 /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EBD5D113A20F38FCE13BDC /* Mock.swift */; };
@@ -523,28 +522,29 @@
 		F356B957AEAFF882F46684D6 /* StubFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D83797450CB57EC3E0A693 /* StubFunction.swift */; };
 		F3872B22B555157CE27A99DE /* StubFunctionThenDoNothingTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C68FC814ACBD3D5E1C7ED1B /* StubFunctionThenDoNothingTrait.swift */; };
 		F3A1E204BDEA6EA43075BA0D /* MultiLayeredNestedTestedSubclassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F0DF66BC063943C91FB2C3 /* MultiLayeredNestedTestedSubclassTest.swift */; };
-		F3AC4CECB6EBB320202E230A /* SwiftUIProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37168E50C5A33F171ACACB37 /* SwiftUIProtocols.swift */; };
 		F4D5A2D8B531EE28E22D5F1F /* MatchableTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBE505B4B98BE6289678CD1 /* MatchableTest.swift */; };
+		F59BFA4D45CE6E812BD00E1B /* NestedInNestedClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6003DBCF1B0CB5014D232663 /* NestedInNestedClass.swift */; };
 		F5A898BF6176D5883FF3650E /* StubFunctionThenThrowingTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = F398C1D87D71EE8DED0C6EA3 /* StubFunctionThenThrowingTrait.swift */; };
 		F5D8EFD1A09D40833C39F949 /* OCMockObject+CuckooMockObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 9EE3E19406E96533EBBBD138 /* OCMockObject+CuckooMockObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F6343F1BE844186255E51ECE /* ExcludedTestClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB36E482FF288D775B744A02 /* ExcludedTestClass.swift */; };
 		F643E385AC319E386C7580D8 /* Array+matchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1D814F035D5D39FC84D26C /* Array+matchers.swift */; };
 		F6B1FB0020B7C4A1742F9DAA /* MockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91992FE8D38A6900C005B0A4 /* MockManager.swift */; };
 		F6B89908643B244F1DB8BE55 /* OCMockObject+CuckooMockObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 9EE3E19406E96533EBBBD138 /* OCMockObject+CuckooMockObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F713219CB9579070209F289B /* VerificationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01496A793103612242EE7A04 /* VerificationTest.swift */; };
 		F74DCCB9BA8FD80A92650D9D /* ParameterMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A843913B61AB11A80097F51 /* ParameterMatcher.swift */; };
 		F7F9CC2F71A29EFD3670D387 /* NSObjectProtocolInheritanceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBE411D64C1D2B056E42C52 /* NSObjectProtocolInheritanceTest.swift */; };
+		F7FAE4F1755EE5BFF3C28767 /* MultiNestedPrivateExtensionClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B40CC43D7A77DFD4702178A /* MultiNestedPrivateExtensionClass.swift */; };
 		F8540250669374FFC11720A2 /* StubbingProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A9BEFC601EF66DF42D5022 /* StubbingProxy.swift */; };
 		F98A5E661D992AB274733FAF /* MockManager+preconfigured.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83C4A633699E5B88D9A9C1B /* MockManager+preconfigured.swift */; };
-		F99BC34B272FC45745B9EF54 /* ClassWithUnavailablePlatformMembers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB937EA0F029B222D748FED /* ClassWithUnavailablePlatformMembers.swift */; };
-		FA338B77C3DD00015A2C817E /* GenericProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A398D6337F320A5F78FA4A5A /* GenericProtocol.swift */; };
+		F9A512C87906C5E025BB59D9 /* PropertyWrappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D394400A6216C16C31E8436 /* PropertyWrappers.swift */; };
 		FA4E1EA6ED897418E81B360F /* StubFunctionThenThrowingTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = F398C1D87D71EE8DED0C6EA3 /* StubFunctionThenThrowingTrait.swift */; };
 		FA7B45FA1AD8F9CA07CC8506 /* NSObject+TrustMe.m in Sources */ = {isa = PBXBuildFile; fileRef = E0656C5164A529DCCADBA8F1 /* NSObject+TrustMe.m */; };
+		FA85468FDB9D9AA3CE377D8F /* NestedInPrivateNestedClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919EA0D2C416F1E4F22DAC20 /* NestedInPrivateNestedClass.swift */; };
 		FB2F76D95E7A236EFE2428D7 /* Mocked.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30A194A634E5972418D171E /* Mocked.swift */; };
 		FC3E563A8C25A5EBC6EDE1D1 /* TestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F1FB05574F9DB1A4CE7AB3 /* TestError.swift */; };
-		FC82B7EDF580A86CCCD7FFC9 /* NestedInPrivateNestedClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919EA0D2C416F1E4F22DAC20 /* NestedInPrivateNestedClass.swift */; };
-		FDA0B3D7010322CB9BAC37A9 /* SwiftUIProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37168E50C5A33F171ACACB37 /* SwiftUIProtocols.swift */; };
 		FE479A853297E45321FFF68D /* __DoNotUse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511DD0B1EA1EAF535C598A8C /* __DoNotUse.swift */; };
 		FEC386FA1E00B232E1C7E431 /* ParameterMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A843913B61AB11A80097F51 /* ParameterMatcher.swift */; };
+		FF34BB3B77921F1AF2EC8BA7 /* GenericProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A398D6337F320A5F78FA4A5A /* GenericProtocol.swift */; };
 		FFBE58E5F81E9E7F173A96A2 /* StubNoReturnThrowingFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D920573D13B938FEACFF82C6 /* StubNoReturnThrowingFunction.swift */; };
 		FFCC5303B4F31B8CE8C14BA1 /* NestedStructTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245F73FBA37EA0E055BA4EA2 /* NestedStructTest.swift */; };
 /* End PBXBuildFile section */
@@ -556,6 +556,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = AC1E5664C17BDCFB45CF1DF4;
 			remoteInfo = "Cuckoo-tvOS";
+		};
+		258CFE2D93FC8604F2F8809A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D1E04C06DFE6AEAC5A2984A2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ECC84E921A9EEB4969E82DDC;
+			remoteInfo = "Cuckoo-tvOSTests-Mocks";
 		};
 		2AF58C0508FF9E33505B7953 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -571,6 +578,13 @@
 			remoteGlobalIDString = 1DC56D8212E4351521A57BD1;
 			remoteInfo = "Cuckoo-macOS";
 		};
+		4EA3DF994352A1ABAC2B7A38 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D1E04C06DFE6AEAC5A2984A2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6A8F12C3A778933132EBA10D;
+			remoteInfo = "Cuckoo-iOS";
+		};
 		5DA9654B8C41D28710B1C687 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D1E04C06DFE6AEAC5A2984A2 /* Project object */;
@@ -578,14 +592,14 @@
 			remoteGlobalIDString = A1CC2E751EAE08C9DC904C5A;
 			remoteInfo = "Cuckoo_OCMock-iOS";
 		};
-		5F16900E2943DCA4C5406B35 /* PBXContainerItemProxy */ = {
+		7A27882F66C4AB5BFE67967E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D1E04C06DFE6AEAC5A2984A2 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 1DC56D8212E4351521A57BD1;
 			remoteInfo = "Cuckoo-macOS";
 		};
-		9A1E5C611C36EF19EF39D447 /* PBXContainerItemProxy */ = {
+		9A50A52BCE214B47F8A5F353 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D1E04C06DFE6AEAC5A2984A2 /* Project object */;
 			proxyType = 1;
@@ -599,19 +613,12 @@
 			remoteGlobalIDString = A43A4248BF15EA2D5C5EE3C5;
 			remoteInfo = "Cuckoo_OCMock-tvOS";
 		};
-		A8E6290AC731A70B5D1BF37F /* PBXContainerItemProxy */ = {
+		BE8B8F061E409FD6493C1103 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D1E04C06DFE6AEAC5A2984A2 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = F2FA9FB91879B3508E1DE385;
-			remoteInfo = "CuckooMocks-tvOS";
-		};
-		C4EB3E2723E796670849066A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D1E04C06DFE6AEAC5A2984A2 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AD31A50419A911043CFC433F;
-			remoteInfo = "CuckooMocks-macOS";
+			remoteGlobalIDString = 73EC770DC5A36FD5F1FB299E;
+			remoteInfo = "Cuckoo-iOSTests-Mocks";
 		};
 		CCF9446E960262BE1D95988C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -620,19 +627,12 @@
 			remoteGlobalIDString = 4AC7031E1F3DC8D205DCCA3B;
 			remoteInfo = "Cuckoo_OCMock-macOS";
 		};
-		DA209B541F00617C85733233 /* PBXContainerItemProxy */ = {
+		E1AB159FCE8402D7824EF5F4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D1E04C06DFE6AEAC5A2984A2 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6A8F12C3A778933132EBA10D;
-			remoteInfo = "Cuckoo-iOS";
-		};
-		EA96000B8E96E660FF0856D8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D1E04C06DFE6AEAC5A2984A2 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = CA0F4E148ADA4CDDDB8464B4;
-			remoteInfo = "CuckooMocks-iOS";
+			remoteGlobalIDString = 2CECDC945031DDC90F0E86E2;
+			remoteInfo = "Cuckoo-macOSTests-Mocks";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -667,26 +667,6 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		24C6B19150B5EB0EA0E04063 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2A60459855AEF7F938556055 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		68E44358177518A3D67EB284 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -708,6 +688,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		74631F38043FB77C8BF186D1 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		83E6D256B0088E90F98A5A03 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84EE728CBC37AA3E66959246 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		89C412146A60371F8A05CDF4 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
@@ -757,16 +767,6 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EAD746D36BF46E8DC53AADAF /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		EBE25D5DF2CC2AF1AACF74DF /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -800,15 +800,15 @@
 		07D6520BB134155D690D0D0C /* Cuckoo_OCMock_macOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Cuckoo_OCMock_macOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		09F0DF66BC063943C91FB2C3 /* MultiLayeredNestedTestedSubclassTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiLayeredNestedTestedSubclassTest.swift; sourceTree = "<group>"; };
 		0A933D33D55AE257FE9B1097 /* ObjectiveStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectiveStub.swift; sourceTree = "<group>"; };
-		0ABE036096D506DD0E9A7AAB /* CuckooMocks-tvOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "CuckooMocks-tvOS-Info.plist"; sourceTree = "<group>"; };
 		0BEF42DC82FC0EF50E83E6CA /* CuckooFunctionsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuckooFunctionsTest.swift; sourceTree = "<group>"; };
 		0D394400A6216C16C31E8436 /* PropertyWrappers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyWrappers.swift; sourceTree = "<group>"; };
+		1058C78BDD869E5E0F6AED74 /* Cuckoo-macOSTests-Mocks-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Cuckoo-macOSTests-Mocks-Info.plist"; sourceTree = "<group>"; };
 		107C9243167200396831A18F /* ObjectiveVerify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectiveVerify.swift; sourceTree = "<group>"; };
 		119D4E6C9798F70CEBDBB1F2 /* TestedClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestedClass.swift; sourceTree = "<group>"; };
+		171982E327560747753FE636 /* Cuckoo_macOSTests_Mocks.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cuckoo_macOSTests_Mocks.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		190FB7FABF7486D2963F4B44 /* DefaultValueRegistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultValueRegistry.swift; sourceTree = "<group>"; };
 		1A843913B61AB11A80097F51 /* ParameterMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterMatcher.swift; sourceTree = "<group>"; };
 		1B965102D09D6B0E94CDA8EA /* GenericMethodClassTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericMethodClassTest.swift; sourceTree = "<group>"; };
-		1D9F5C233CC956DE8ACDEEF3 /* CuckooMocks_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CuckooMocks_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E13C3DFFA9A3676F92404B7 /* Cuckoo_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cuckoo_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		201DFAD306F0F1B18CE9EFBE /* StubFunctionThenThrowTrait.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubFunctionThenThrowTrait.swift; sourceTree = "<group>"; };
 		245F73FBA37EA0E055BA4EA2 /* NestedStructTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedStructTest.swift; sourceTree = "<group>"; };
@@ -820,6 +820,7 @@
 		2F445E0EFD2FD1FBC888DB72 /* CallMatcherTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallMatcherTest.swift; sourceTree = "<group>"; };
 		30EE51B1225328733D4F5DBA /* Cuckoo_OCMock-macOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Cuckoo_OCMock-macOS-Info.plist"; sourceTree = "<group>"; };
 		3191519C8ED4DD5B3D439A93 /* StubFunctionThenReturnTrait.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubFunctionThenReturnTrait.swift; sourceTree = "<group>"; };
+		3207ABCA590B543876E61C90 /* Cuckoo-iOSTests-Mocks-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Cuckoo-iOSTests-Mocks-Info.plist"; sourceTree = "<group>"; };
 		32A299482E4D2B7B774373A1 /* ClassWithOptionals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassWithOptionals.swift; sourceTree = "<group>"; };
 		33EBD5D113A20F38FCE13BDC /* Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mock.swift; sourceTree = "<group>"; };
 		355C36C0536DBF7EDA3C2B96 /* ObjcProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjcProtocol.swift; sourceTree = "<group>"; };
@@ -865,6 +866,7 @@
 		7CBF18CC12259A96D05F579B /* StubFunctionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubFunctionTest.swift; sourceTree = "<group>"; };
 		7F29DC9C5F5CCE01FEAE648D /* MultiNestedExtensionClassTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiNestedExtensionClassTest.swift; sourceTree = "<group>"; };
 		808091A975F4E8BDDF0C80D9 /* StubThrowingFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubThrowingFunction.swift; sourceTree = "<group>"; };
+		8181863550B213F78331A9E6 /* Cuckoo_iOSTests_Mocks.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cuckoo_iOSTests_Mocks.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		82D83797450CB57EC3E0A693 /* StubFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubFunction.swift; sourceTree = "<group>"; };
 		83908D3F58736F1C6DA7B2CA /* GenericClassTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericClassTest.swift; sourceTree = "<group>"; };
 		866CED1C72D1F35C10251CCC /* NSObjectProtocolInheritanceTesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSObjectProtocolInheritanceTesting.swift; sourceTree = "<group>"; };
@@ -886,8 +888,6 @@
 		9699C3284544FE817C78E474 /* NestedInExtensionFromClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedInExtensionFromClass.swift; sourceTree = "<group>"; };
 		96C749F49256DDA51A9C96C9 /* StubFunctionThenTrait.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubFunctionThenTrait.swift; sourceTree = "<group>"; };
 		989EFADEC10AB6D627A5FAE6 /* NSValueConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSValueConvertible.swift; sourceTree = "<group>"; };
-		98BEA8421199E8472F11D588 /* CuckooMocks_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CuckooMocks_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9BBA97B8D970F46F656BA7DC /* CuckooMocks-macOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "CuckooMocks-macOS-Info.plist"; sourceTree = "<group>"; };
 		9C0889A597AF4CCA8841B471 /* MockBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockBuilder.swift; sourceTree = "<group>"; };
 		9DD5D3471880E656BEA0A210 /* Cuckoo_OCMock_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cuckoo_OCMock_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DE5DC1B6EC0BF686019517B /* UnavailablePlatformProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnavailablePlatformProtocol.swift; sourceTree = "<group>"; };
@@ -897,9 +897,11 @@
 		A21CD7B8ADE5ABE0295581D4 /* VerificationProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationProxy.swift; sourceTree = "<group>"; };
 		A398D6337F320A5F78FA4A5A /* GenericProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericProtocol.swift; sourceTree = "<group>"; };
 		A78767AF78A5705F914CB5F1 /* Cuckoo-BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Cuckoo-BridgingHeader.h"; sourceTree = "<group>"; };
+		ABF561054515DE7662AB233B /* Cuckoo_tvOSTests_Mocks.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cuckoo_tvOSTests_Mocks.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC30579DC4B1D5D5CC959724 /* Cuckoo-iOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Cuckoo-iOS-Info.plist"; sourceTree = "<group>"; };
 		AD3E7F562DC17ECF3B32CBB3 /* TestedSubProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestedSubProtocol.swift; sourceTree = "<group>"; };
 		AE4758812545462B94DAB7A4 /* Stub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stub.swift; sourceTree = "<group>"; };
+		B1D8B1FD25DB96C85E2B6804 /* Cuckoo-tvOSTests-Mocks-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Cuckoo-tvOSTests-Mocks-Info.plist"; sourceTree = "<group>"; };
 		B30A194A634E5972418D171E /* Mocked.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocked.swift; sourceTree = "<group>"; };
 		B6B86DCAC6958FF36DF3639C /* ParameterMatcherFunctionsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterMatcherFunctionsTest.swift; sourceTree = "<group>"; };
 		B81133817083F2B8122BE188 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -940,14 +942,12 @@
 		E80D1401CB6046B1AEDBE204 /* DefaultValueRegistryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultValueRegistryTest.swift; sourceTree = "<group>"; };
 		E83C4A633699E5B88D9A9C1B /* MockManager+preconfigured.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MockManager+preconfigured.swift"; sourceTree = "<group>"; };
 		E8F1FB05574F9DB1A4CE7AB3 /* TestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestError.swift; sourceTree = "<group>"; };
-		EA8BE42BAE70CFC30C20F017 /* CuckooMocks_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CuckooMocks_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAFD10D2F5491D90D226ED78 /* ObjectiveClassTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectiveClassTest.swift; sourceTree = "<group>"; };
 		ECFED3C29F5CA48398AF0C5B /* NestedPrivateExtensionClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedPrivateExtensionClass.swift; sourceTree = "<group>"; };
 		EE5F4691EE101415724C1D73 /* Cuckoo_OCMock-iOSTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Cuckoo_OCMock-iOSTests-Info.plist"; sourceTree = "<group>"; };
 		F01C5ABA73DC1B0CCE088669 /* GenericClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericClass.swift; sourceTree = "<group>"; };
 		F398C1D87D71EE8DED0C6EA3 /* StubFunctionThenThrowingTrait.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubFunctionThenThrowingTrait.swift; sourceTree = "<group>"; };
 		F3C87227E4CAE60FD9202D6F /* NSInvocation+OCMockWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSInvocation+OCMockWrapper.h"; sourceTree = "<group>"; };
-		F48E69A7A218FD27F0944ADF /* CuckooMocks-iOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "CuckooMocks-iOS-Info.plist"; sourceTree = "<group>"; };
 		F6CA2236A30B54754F335DC3 /* ParameterMatcherFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterMatcherFunctions.swift; sourceTree = "<group>"; };
 		F70C4FAE3318E21F0A87531A /* ObjectiveMatchers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectiveMatchers.swift; sourceTree = "<group>"; };
 		F81B5143E65D60134B59CFA4 /* Cuckoo_OCMock-tvOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Cuckoo_OCMock-tvOS-Info.plist"; sourceTree = "<group>"; };
@@ -978,7 +978,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F89B038A87B788853E2D366 /* Cuckoo_iOS.framework in Frameworks */,
-				470C93EBA89AAF8FDF37531D /* CuckooMocks_iOS.framework in Frameworks */,
+				7905779380C6C309CD206DAA /* Cuckoo_iOSTests_Mocks.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -987,15 +987,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C61162C8AFDB8D153798DBC /* XCTest.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		49AD49415E8477503168A85F /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				18ADDA55715100DC983FEF4D /* XCTest.framework in Frameworks */,
-				D2D57331ACDFE0B8AA81D168 /* Cuckoo_macOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1023,6 +1014,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5C208488DC8AD6BD8149F036 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E5472BD567D3B02D47CD9C00 /* XCTest.framework in Frameworks */,
+				B41A59134EF44714929B88D3 /* Cuckoo_iOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5F5FC6AB06D28C4ACCCBBD81 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AF93D7CD4F0BA78EC4E673C4 /* XCTest.framework in Frameworks */,
+				80485015844E7BAEBC5C46F8 /* Cuckoo_macOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7C198A31B5EFFDC8D5D884AC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1036,7 +1045,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1ED21520D8C22FD5C73460EC /* Cuckoo_tvOS.framework in Frameworks */,
-				609C806B23DE0C82A771965C /* CuckooMocks_tvOS.framework in Frameworks */,
+				6CED372560E4E4004BFBD746 /* Cuckoo_tvOSTests_Mocks.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1056,12 +1065,12 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DBBA1A3CD14B4B3708A9CA1A /* Frameworks */ = {
+		CE51B7C1D666E098914F1DC6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B40ED8BAB53FA81AA3D2F8C /* XCTest.framework in Frameworks */,
-				B614D377B7B01A5EBD05F6E5 /* Cuckoo_tvOS.framework in Frameworks */,
+				9FA4C1E6A2C890D7740A7D74 /* XCTest.framework in Frameworks */,
+				A7BAD7B50BDDD276BA1C14AF /* Cuckoo_tvOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1070,16 +1079,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6BBF76BDA080CF1E8CA5D380 /* Cuckoo_macOS.framework in Frameworks */,
-				BD72793C0F56BBAE9C33E4C0 /* CuckooMocks_macOS.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F940E8A19A3F62BD2FB20EFA /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D5C28A510C1B976A2AC89012 /* XCTest.framework in Frameworks */,
-				E48F41F2AB8845C83BEEF829 /* Cuckoo_iOS.framework in Frameworks */,
+				C40048BE9C07B69299EB28B3 /* Cuckoo_macOSTests_Mocks.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1198,8 +1198,10 @@
 			isa = PBXGroup;
 			children = (
 				C29A6852598014A495CF05BF /* Cuckoo_iOS.framework */,
+				8181863550B213F78331A9E6 /* Cuckoo_iOSTests_Mocks.framework */,
 				078A8096CCC31B331AA8D537 /* Cuckoo_iOSTests.xctest */,
 				1E13C3DFFA9A3676F92404B7 /* Cuckoo_macOS.framework */,
+				171982E327560747753FE636 /* Cuckoo_macOSTests_Mocks.framework */,
 				2776FBCC90C18A2F8C28CB85 /* Cuckoo_macOSTests.xctest */,
 				9DD5D3471880E656BEA0A210 /* Cuckoo_OCMock_iOS.framework */,
 				BE8D6304542FA91BF6FB258B /* Cuckoo_OCMock_iOSTests.xctest */,
@@ -1208,10 +1210,8 @@
 				F981A41C0D53F5AF59BD7202 /* Cuckoo_OCMock_tvOS.framework */,
 				3CD1EF95EED208CF56D123F8 /* Cuckoo_OCMock_tvOSTests.xctest */,
 				86D638696C1458550D4524F1 /* Cuckoo_tvOS.framework */,
+				ABF561054515DE7662AB233B /* Cuckoo_tvOSTests_Mocks.framework */,
 				90CA6A2E0084041FD2CA4DD9 /* Cuckoo_tvOSTests.xctest */,
-				EA8BE42BAE70CFC30C20F017 /* CuckooMocks_iOS.framework */,
-				1D9F5C233CC956DE8ACDEEF3 /* CuckooMocks_macOS.framework */,
-				98BEA8421199E8472F11D588 /* CuckooMocks_tvOS.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1323,13 +1323,13 @@
 				C43E9DFB27189A8D16B0601D /* Cuckoo_OCMock-tvOSTests-Info.plist */,
 				AC30579DC4B1D5D5CC959724 /* Cuckoo-iOS-Info.plist */,
 				B9813FA38F8AB71BEE454CF4 /* Cuckoo-iOSTests-Info.plist */,
+				3207ABCA590B543876E61C90 /* Cuckoo-iOSTests-Mocks-Info.plist */,
 				6DBE7A13FEE1B8C7EE8DA363 /* Cuckoo-macOS-Info.plist */,
 				C8EEC51ACDE645FA676CB016 /* Cuckoo-macOSTests-Info.plist */,
+				1058C78BDD869E5E0F6AED74 /* Cuckoo-macOSTests-Mocks-Info.plist */,
 				413C820C0EB93F0E9C0DFCB7 /* Cuckoo-tvOS-Info.plist */,
 				E216B22B63CECBFA5F681510 /* Cuckoo-tvOSTests-Info.plist */,
-				F48E69A7A218FD27F0944ADF /* CuckooMocks-iOS-Info.plist */,
-				9BBA97B8D970F46F656BA7DC /* CuckooMocks-macOS-Info.plist */,
-				0ABE036096D506DD0E9A7AAB /* CuckooMocks-tvOS-Info.plist */,
+				B1D8B1FD25DB96C85E2B6804 /* Cuckoo-tvOSTests-Mocks-Info.plist */,
 			);
 			path = InfoPlists;
 			sourceTree = "<group>";
@@ -1549,6 +1549,26 @@
 			productReference = 1E13C3DFFA9A3676F92404B7 /* Cuckoo_macOS.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		2CECDC945031DDC90F0E86E2 /* Cuckoo-macOSTests-Mocks */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6F8A4D0163C8F2EA9E10FD81 /* Build configuration list for PBXNativeTarget "Cuckoo-macOSTests-Mocks" */;
+			buildPhases = (
+				E559D4AC819B0538CB28892D /* Generate mocks */,
+				845DD31E4CB3D44386E9711C /* Sources */,
+				95E6DB174B49D531AAECCBF9 /* Resources */,
+				89C412146A60371F8A05CDF4 /* Embed Frameworks */,
+				5F5FC6AB06D28C4ACCCBBD81 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1D6BA3E4809E769EFA21D23D /* PBXTargetDependency */,
+			);
+			name = "Cuckoo-macOSTests-Mocks";
+			productName = Cuckoo_macOSTests_Mocks;
+			productReference = 171982E327560747753FE636 /* Cuckoo_macOSTests_Mocks.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		362F98B48959E1D7172FD65B /* Cuckoo_OCMock-iOSTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4975D1A314DF2F3B03921C05 /* Build configuration list for PBXNativeTarget "Cuckoo_OCMock-iOSTests" */;
@@ -1618,12 +1638,32 @@
 			);
 			dependencies = (
 				5D16ABCA23CE5E7B1A53E1F6 /* PBXTargetDependency */,
-				5D4CA39B4A0F2DEF746F5A05 /* PBXTargetDependency */,
+				9FEDAFB73AAC00365814D4E9 /* PBXTargetDependency */,
 			);
 			name = "Cuckoo-tvOSTests";
 			productName = Cuckoo_tvOSTests;
 			productReference = 90CA6A2E0084041FD2CA4DD9 /* Cuckoo_tvOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		73EC770DC5A36FD5F1FB299E /* Cuckoo-iOSTests-Mocks */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 821071A62844C127FB363449 /* Build configuration list for PBXNativeTarget "Cuckoo-iOSTests-Mocks" */;
+			buildPhases = (
+				F3C3BF6F37CEDE62E8727857 /* Generate mocks */,
+				356C9D9DB0532D93EA78F198 /* Sources */,
+				43B4097A68A57180927C6109 /* Resources */,
+				84EE728CBC37AA3E66959246 /* Embed Frameworks */,
+				5C208488DC8AD6BD8149F036 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C34A62E94CA521B24BB2E05D /* PBXTargetDependency */,
+			);
+			name = "Cuckoo-iOSTests-Mocks";
+			productName = Cuckoo_iOSTests_Mocks;
+			productReference = 8181863550B213F78331A9E6 /* Cuckoo_iOSTests_Mocks.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 		92C74015545203C1F4395DD4 /* Cuckoo-iOSTests */ = {
 			isa = PBXNativeTarget;
@@ -1638,7 +1678,7 @@
 			);
 			dependencies = (
 				38F1F9605CB22E52D6A4AE9A /* PBXTargetDependency */,
-				31A8051A033F86FE50D4CE6C /* PBXTargetDependency */,
+				B156735A82CCABA68FB16712 /* PBXTargetDependency */,
 			);
 			name = "Cuckoo-iOSTests";
 			productName = Cuckoo_iOSTests;
@@ -1701,46 +1741,6 @@
 			productReference = 86D638696C1458550D4524F1 /* Cuckoo_tvOS.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		AD31A50419A911043CFC433F /* CuckooMocks-macOS */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 7698F5285B2A06D058BEF7E9 /* Build configuration list for PBXNativeTarget "CuckooMocks-macOS" */;
-			buildPhases = (
-				7090C11268544DF69E2A539E /* Generate mocks */,
-				72768A111B6649487EFD5908 /* Sources */,
-				766BBE197EA0FD77C28067CF /* Resources */,
-				24C6B19150B5EB0EA0E04063 /* Embed Frameworks */,
-				49AD49415E8477503168A85F /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				960BB502ACF2D775D863B2D2 /* PBXTargetDependency */,
-			);
-			name = "CuckooMocks-macOS";
-			productName = CuckooMocks_macOS;
-			productReference = 1D9F5C233CC956DE8ACDEEF3 /* CuckooMocks_macOS.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		CA0F4E148ADA4CDDDB8464B4 /* CuckooMocks-iOS */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 7107D21B59F7EB49A4832AD1 /* Build configuration list for PBXNativeTarget "CuckooMocks-iOS" */;
-			buildPhases = (
-				58FB5A3EB41F7230939158A7 /* Generate mocks */,
-				6EDF9F46C0F767863E3F65A0 /* Sources */,
-				98C98B45A56E4CA67CDD79F0 /* Resources */,
-				EAD746D36BF46E8DC53AADAF /* Embed Frameworks */,
-				F940E8A19A3F62BD2FB20EFA /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				472E028C81B33117AD14BE4A /* PBXTargetDependency */,
-			);
-			name = "CuckooMocks-iOS";
-			productName = CuckooMocks_iOS;
-			productReference = EA8BE42BAE70CFC30C20F017 /* CuckooMocks_iOS.framework */;
-			productType = "com.apple.product-type.framework";
-		};
 		D1D9ED40B0DCFD564F7B741F /* Cuckoo_OCMock-macOSTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 419AB8BB7268955611576ABC /* Build configuration list for PBXNativeTarget "Cuckoo_OCMock-macOSTests" */;
@@ -1773,31 +1773,31 @@
 			);
 			dependencies = (
 				9F5C8F9C8664CF0C8CC69A7F /* PBXTargetDependency */,
-				0B81292668A65C316CE84CDD /* PBXTargetDependency */,
+				C25238B2621B0280E1EB727B /* PBXTargetDependency */,
 			);
 			name = "Cuckoo-macOSTests";
 			productName = Cuckoo_macOSTests;
 			productReference = 2776FBCC90C18A2F8C28CB85 /* Cuckoo_macOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		F2FA9FB91879B3508E1DE385 /* CuckooMocks-tvOS */ = {
+		ECC84E921A9EEB4969E82DDC /* Cuckoo-tvOSTests-Mocks */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DBE1A51B0D1781309CF799FC /* Build configuration list for PBXNativeTarget "CuckooMocks-tvOS" */;
+			buildConfigurationList = 56A28F90D6904C13ED93502A /* Build configuration list for PBXNativeTarget "Cuckoo-tvOSTests-Mocks" */;
 			buildPhases = (
-				31D5018F2B72CBF9C11ABC15 /* Generate mocks */,
-				593C316E4AB7EA6B70A63AF7 /* Sources */,
-				95F8A79975DA93190D6E2AA8 /* Resources */,
-				2A60459855AEF7F938556055 /* Embed Frameworks */,
-				DBBA1A3CD14B4B3708A9CA1A /* Frameworks */,
+				37DF3DF4005D0D872C211A14 /* Generate mocks */,
+				8B90CC359728FB7047B24073 /* Sources */,
+				D69B1DA1DA68DAD0392EE98D /* Resources */,
+				83E6D256B0088E90F98A5A03 /* Embed Frameworks */,
+				CE51B7C1D666E098914F1DC6 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				F87737BAA554025FE24D2EDD /* PBXTargetDependency */,
+				66AA6765B5973AF595646964 /* PBXTargetDependency */,
 			);
-			name = "CuckooMocks-tvOS";
-			productName = CuckooMocks_tvOS;
-			productReference = 98BEA8421199E8472F11D588 /* CuckooMocks_tvOS.framework */;
+			name = "Cuckoo-tvOSTests-Mocks";
+			productName = Cuckoo_tvOSTests_Mocks;
+			productReference = ABF561054515DE7662AB233B /* Cuckoo_tvOSTests_Mocks.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -1823,17 +1823,17 @@
 			projectRoot = "";
 			targets = (
 				6A8F12C3A778933132EBA10D /* Cuckoo-iOS */,
-				CA0F4E148ADA4CDDDB8464B4 /* CuckooMocks-iOS */,
+				73EC770DC5A36FD5F1FB299E /* Cuckoo-iOSTests-Mocks */,
 				92C74015545203C1F4395DD4 /* Cuckoo-iOSTests */,
 				A1CC2E751EAE08C9DC904C5A /* Cuckoo_OCMock-iOS */,
 				362F98B48959E1D7172FD65B /* Cuckoo_OCMock-iOSTests */,
 				1DC56D8212E4351521A57BD1 /* Cuckoo-macOS */,
-				AD31A50419A911043CFC433F /* CuckooMocks-macOS */,
+				2CECDC945031DDC90F0E86E2 /* Cuckoo-macOSTests-Mocks */,
 				DBDB2DD4E7BE487EEB257CC8 /* Cuckoo-macOSTests */,
 				4AC7031E1F3DC8D205DCCA3B /* Cuckoo_OCMock-macOS */,
 				D1D9ED40B0DCFD564F7B741F /* Cuckoo_OCMock-macOSTests */,
 				AC1E5664C17BDCFB45CF1DF4 /* Cuckoo-tvOS */,
-				F2FA9FB91879B3508E1DE385 /* CuckooMocks-tvOS */,
+				ECC84E921A9EEB4969E82DDC /* Cuckoo-tvOSTests-Mocks */,
 				6AD4A9670FA783A1EC213000 /* Cuckoo-tvOSTests */,
 				A43A4248BF15EA2D5C5EE3C5 /* Cuckoo_OCMock-tvOS */,
 				05F906FDC36D67A5E1CB8CF6 /* Cuckoo_OCMock-tvOSTests */,
@@ -1870,14 +1870,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		44A58B8F3B45191E95CE2650 /* Resources */ = {
+		43B4097A68A57180927C6109 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		766BBE197EA0FD77C28067CF /* Resources */ = {
+		44A58B8F3B45191E95CE2650 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1905,14 +1905,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		95F8A79975DA93190D6E2AA8 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		98C98B45A56E4CA67CDD79F0 /* Resources */ = {
+		95E6DB174B49D531AAECCBF9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1927,6 +1920,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		C98B7B5F7FB1DE08F97EFFA8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D69B1DA1DA68DAD0392EE98D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1950,7 +1950,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		31D5018F2B72CBF9C11ABC15 /* Generate mocks */ = {
+		37DF3DF4005D0D872C211A14 /* Generate mocks */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -1969,7 +1969,7 @@
 			shellPath = /bin/sh;
 			shellScript = "if [ \"$GENERATE_TEST_MOCKS\" = \"NO\" ] ; then exit; fi\n\n# Make sure the generator is up-to-date.\necho 'Building generator.'\n\"$PROJECT_DIR\"/build_generator\n\necho 'Generating mocks.'\n\"$PROJECT_DIR\"/Generator/bin/cuckoonator \\\n\t--verbose";
 		};
-		58FB5A3EB41F7230939158A7 /* Generate mocks */ = {
+		E559D4AC819B0538CB28892D /* Generate mocks */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -1988,7 +1988,7 @@
 			shellPath = /bin/sh;
 			shellScript = "if [ \"$GENERATE_TEST_MOCKS\" = \"NO\" ] ; then exit; fi\n\n# Make sure the generator is up-to-date.\necho 'Building generator.'\n\"$PROJECT_DIR\"/build_generator\n\necho 'Generating mocks.'\n\"$PROJECT_DIR\"/Generator/bin/cuckoonator \\\n\t--verbose";
 		};
-		7090C11268544DF69E2A539E /* Generate mocks */ = {
+		F3C3BF6F37CEDE62E8727857 /* Generate mocks */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -2051,6 +2051,43 @@
 				C98DD2231948D6D9486E3C1C /* TestUtils.swift in Sources */,
 				83A5A8205205BF4D44F93CD0 /* ArgumentCaptorTest.swift in Sources */,
 				F191F17A741759B8031CB6D5 /* VerificationTest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		356C9D9DB0532D93EA78F198 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ACEF261C1A5F656A314D7C06 /* GeneratedMocks.swift in Sources */,
+				DC188B783568843F9F5C12ED /* ClassForStubTesting.swift in Sources */,
+				A55E3CF238D1AC0964915900 /* ClassWithOptionals.swift in Sources */,
+				1C4EE7013FE3A2CF89A3C955 /* ClassWithTypeAlias.swift in Sources */,
+				128FDBAD91BAF47A5749E00C /* ClassWithUnavailablePlatformMembers.swift in Sources */,
+				F6343F1BE844186255E51ECE /* ExcludedTestClass.swift in Sources */,
+				E61EAB5A40D9AFB2144B195F /* GenericClass.swift in Sources */,
+				DF5C0E055B1F121045A0FAE0 /* GenericMethodClass.swift in Sources */,
+				FF34BB3B77921F1AF2EC8BA7 /* GenericProtocol.swift in Sources */,
+				AD4E67C8FE69388312FF4B5E /* MultiNestedInExtensionFromClass.swift in Sources */,
+				4FF9C53E95DD3C3B4555103D /* MultiNestedInNestedClass.swift in Sources */,
+				4EE1EE4722DEEBCCF742097C /* MultiNestedInPrivateNestedClass.swift in Sources */,
+				F7FAE4F1755EE5BFF3C28767 /* MultiNestedPrivateExtensionClass.swift in Sources */,
+				184515DD02B62ACF5A34C284 /* NSObjectProtocolInheritanceTesting.swift in Sources */,
+				72B05604B62547D28913124C /* NestedInExtensionFromClass.swift in Sources */,
+				F59BFA4D45CE6E812BD00E1B /* NestedInNestedClass.swift in Sources */,
+				2E47719FFA648D2B10B1C936 /* NestedInNestedStruct.swift in Sources */,
+				684CB77DD59BA9F50ED69B2C /* NestedInPrivateNestedClass.swift in Sources */,
+				3A700C95E0993FD244EFA33B /* NestedPrivateExtensionClass.swift in Sources */,
+				10D9AC6397DF491A9BE11FDA /* ObjcProtocol.swift in Sources */,
+				EB8868625E401618202B37B0 /* OpenClass.swift in Sources */,
+				75498293A0DA7CD9A62AF1A6 /* PropertyWrappers.swift in Sources */,
+				4EFDB6851E3A9BCC2B185639 /* SwiftUIProtocols.swift in Sources */,
+				3F8703048FD3469C82B13F8C /* TestedClass.swift in Sources */,
+				22A3C3B75357DA37E7147E68 /* TestedProtocol.swift in Sources */,
+				570336BBDB934360FE479D3C /* TestedSubProtocol.swift in Sources */,
+				57CDC17DA7EBED2FDCF31770 /* TestedSubclass.swift in Sources */,
+				BDB33FF32C82DCF06C377E66 /* UnavailablePlatformClass.swift in Sources */,
+				862342DC1641C8BE429681B4 /* UnavailablePlatformProtocol.swift in Sources */,
+				86AE3DFC0058831EE34CA121 /* UnicodeTestProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2178,43 +2215,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		593C316E4AB7EA6B70A63AF7 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				58A99DAC64748D727E7B0FCD /* GeneratedMocks.swift in Sources */,
-				C8893A69F705F8E855D383B3 /* ClassForStubTesting.swift in Sources */,
-				EFFC0EB22474FF3657CEA371 /* ClassWithOptionals.swift in Sources */,
-				1C2DC5FA3CC0E685F565BA9E /* ClassWithTypeAlias.swift in Sources */,
-				777044221950768E729B16B3 /* ClassWithUnavailablePlatformMembers.swift in Sources */,
-				F10B0409C2E2E211A62FDCD1 /* ExcludedTestClass.swift in Sources */,
-				4C9A1325BFCD8E1D27309337 /* GenericClass.swift in Sources */,
-				A2B0E2D51EACBBCEEB6FEB03 /* GenericMethodClass.swift in Sources */,
-				FA338B77C3DD00015A2C817E /* GenericProtocol.swift in Sources */,
-				5CD9C64519DB0C354BA4D37C /* MultiNestedInExtensionFromClass.swift in Sources */,
-				5E0C7C9BCA06850E417925DE /* MultiNestedInNestedClass.swift in Sources */,
-				B1BAF3359FE9EA8CE5DA0612 /* MultiNestedInPrivateNestedClass.swift in Sources */,
-				C1D5D1CE68F400805B337BFC /* MultiNestedPrivateExtensionClass.swift in Sources */,
-				10D511ECE4BC50F18CC552B7 /* NSObjectProtocolInheritanceTesting.swift in Sources */,
-				69007928032C6824F7C5BF0D /* NestedInExtensionFromClass.swift in Sources */,
-				D8D042ACA89726F31FFC5342 /* NestedInNestedClass.swift in Sources */,
-				F205CF01B2BD04593F5D0B6A /* NestedInNestedStruct.swift in Sources */,
-				DFFE787B8495565110C8B091 /* NestedInPrivateNestedClass.swift in Sources */,
-				740ED863BAD8F3E4F71FCFB6 /* NestedPrivateExtensionClass.swift in Sources */,
-				E3A1FC807731141711A88755 /* ObjcProtocol.swift in Sources */,
-				27ABBADC2587204DC2769211 /* OpenClass.swift in Sources */,
-				3CEBDF7675CFED9DE8F9A58F /* PropertyWrappers.swift in Sources */,
-				DD8E7DFF2A60268A09CC5886 /* SwiftUIProtocols.swift in Sources */,
-				E1A44831B386BB8E319A72DF /* TestedClass.swift in Sources */,
-				02C805ED29F512D52CD196B2 /* TestedProtocol.swift in Sources */,
-				145517D8A5E765B4B185944A /* TestedSubProtocol.swift in Sources */,
-				154EA5649332351970BA31DC /* TestedSubclass.swift in Sources */,
-				CFEAC3A7235FC831C21A5C5C /* UnavailablePlatformClass.swift in Sources */,
-				5D3FE44E7EA36A67C7667A25 /* UnavailablePlatformProtocol.swift in Sources */,
-				74ECF89EB4FDD20E6F0E616D /* UnicodeTestProtocol.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		686DC8070A1EBB4AD659FA81 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2256,43 +2256,6 @@
 				AB4D73B2AF7C45B055A0909E /* TestUtils.swift in Sources */,
 				6D9C4E09B9E0AC6BD5AED4DA /* ArgumentCaptorTest.swift in Sources */,
 				E28273B64BC1C3C73331A168 /* VerificationTest.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6EDF9F46C0F767863E3F65A0 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				347002E06C470329F89E4268 /* GeneratedMocks.swift in Sources */,
-				60A04E1E043E73628D331B77 /* ClassForStubTesting.swift in Sources */,
-				45115CB6924F37808BB94AB0 /* ClassWithOptionals.swift in Sources */,
-				E52B92B70A9C2E0217AFD4CD /* ClassWithTypeAlias.swift in Sources */,
-				803BD7D105FBC934AE078EE1 /* ClassWithUnavailablePlatformMembers.swift in Sources */,
-				1F184730AFC59B834F38EF67 /* ExcludedTestClass.swift in Sources */,
-				D83964E231813287F3085F45 /* GenericClass.swift in Sources */,
-				749E38D4DD40C825E75333FA /* GenericMethodClass.swift in Sources */,
-				7F76D068E7088766978E9886 /* GenericProtocol.swift in Sources */,
-				3CFE39CBBBA1FF1716B102ED /* MultiNestedInExtensionFromClass.swift in Sources */,
-				C3E51334B80F77469A8E4DDB /* MultiNestedInNestedClass.swift in Sources */,
-				D7EA0D2C321F2E751BDD0E6C /* MultiNestedInPrivateNestedClass.swift in Sources */,
-				30C40E301C77D677794D68BB /* MultiNestedPrivateExtensionClass.swift in Sources */,
-				5CF37EA2B799A80A9A67A118 /* NSObjectProtocolInheritanceTesting.swift in Sources */,
-				4940A15A978FA4F2C40403FC /* NestedInExtensionFromClass.swift in Sources */,
-				43CB59F1DFB8BB74052EAD71 /* NestedInNestedClass.swift in Sources */,
-				17DFA895BED85C82381F9EE9 /* NestedInNestedStruct.swift in Sources */,
-				FC82B7EDF580A86CCCD7FFC9 /* NestedInPrivateNestedClass.swift in Sources */,
-				428EAB2E56BF6F5B1A4F6FCB /* NestedPrivateExtensionClass.swift in Sources */,
-				C32CF013A3AA732EA8456820 /* ObjcProtocol.swift in Sources */,
-				6BFCDEFE9A76691CEB1E4060 /* OpenClass.swift in Sources */,
-				46798482B6EC96CFD8CDCD97 /* PropertyWrappers.swift in Sources */,
-				FDA0B3D7010322CB9BAC37A9 /* SwiftUIProtocols.swift in Sources */,
-				A6AEA98E2B7FDEA197BAA04F /* TestedClass.swift in Sources */,
-				7223A57E6DDA635AD25F217A /* TestedProtocol.swift in Sources */,
-				F0D9186E12C7556A471457FF /* TestedSubProtocol.swift in Sources */,
-				0AB048F31925EC6CBA6589A0 /* TestedSubclass.swift in Sources */,
-				8EDCAF31CFA5801D6E348DBA /* UnavailablePlatformClass.swift in Sources */,
-				D30B4E812CDB2BC7EBB869DF /* UnavailablePlatformProtocol.swift in Sources */,
-				19152B86B59FF7767E1FD20C /* UnicodeTestProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2344,40 +2307,77 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		72768A111B6649487EFD5908 /* Sources */ = {
+		845DD31E4CB3D44386E9711C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9D22857A1D2959D5A24A9AEF /* GeneratedMocks.swift in Sources */,
-				4E7D11BFDB768CBB72DBF035 /* ClassForStubTesting.swift in Sources */,
-				C3D5FEB508E2DEF492910215 /* ClassWithOptionals.swift in Sources */,
-				70C61E076D6272AD9864724C /* ClassWithTypeAlias.swift in Sources */,
-				F99BC34B272FC45745B9EF54 /* ClassWithUnavailablePlatformMembers.swift in Sources */,
-				22279D4B7DE804E061F8B7C7 /* ExcludedTestClass.swift in Sources */,
-				6BADC8A017E44CE60A22928D /* GenericClass.swift in Sources */,
-				950738B17CF311EF1463BE68 /* GenericMethodClass.swift in Sources */,
-				9784D6A195C265914EAFAA24 /* GenericProtocol.swift in Sources */,
-				11986463F90271E859698805 /* MultiNestedInExtensionFromClass.swift in Sources */,
-				CDA6ADDCE44A0B8091B5F7EE /* MultiNestedInNestedClass.swift in Sources */,
-				5D348147D1517769BF4EA943 /* MultiNestedInPrivateNestedClass.swift in Sources */,
-				4664CDEEC6548CCEA0666FD0 /* MultiNestedPrivateExtensionClass.swift in Sources */,
-				C77719FE39D964297A8E8B28 /* NSObjectProtocolInheritanceTesting.swift in Sources */,
-				8B845985FA7D6DEAA7337E4A /* NestedInExtensionFromClass.swift in Sources */,
-				143E6A2C0543F54D50D88BCC /* NestedInNestedClass.swift in Sources */,
-				E64E0C83111116696D1488EE /* NestedInNestedStruct.swift in Sources */,
-				6AF7C11314501D26CB46DC28 /* NestedInPrivateNestedClass.swift in Sources */,
-				6145CB8740E1E691D17C1A3A /* NestedPrivateExtensionClass.swift in Sources */,
-				7B2FECED5E43757A88F0DA22 /* ObjcProtocol.swift in Sources */,
-				9C9655810E9BC147E8F064FE /* OpenClass.swift in Sources */,
-				8BF3994D77A8843B44751FF7 /* PropertyWrappers.swift in Sources */,
-				F3AC4CECB6EBB320202E230A /* SwiftUIProtocols.swift in Sources */,
-				38949FEA977716E3AECE1C9B /* TestedClass.swift in Sources */,
-				5ECEF4D6F0C5BA40061D3A5D /* TestedProtocol.swift in Sources */,
-				BF2941FE5C3E3B49C75FD983 /* TestedSubProtocol.swift in Sources */,
-				1C56B93434A32013244D9A38 /* TestedSubclass.swift in Sources */,
-				321E47D01856F868090EEC95 /* UnavailablePlatformClass.swift in Sources */,
-				E034BCA3774D9941DA098524 /* UnavailablePlatformProtocol.swift in Sources */,
-				C1F92E4B1D2A0757BC4ADAEE /* UnicodeTestProtocol.swift in Sources */,
+				57E4CE02A1CA1BB40E2FA062 /* GeneratedMocks.swift in Sources */,
+				125BC664FD3C4EE06EEF38D5 /* ClassForStubTesting.swift in Sources */,
+				828270E527D5752620E928EA /* ClassWithOptionals.swift in Sources */,
+				2A2D6CAFF53E214E8FEB2BF3 /* ClassWithTypeAlias.swift in Sources */,
+				F1DE4D9BFE0A510530FE8409 /* ClassWithUnavailablePlatformMembers.swift in Sources */,
+				9C1D8F8C0C7DCCFC660006D9 /* ExcludedTestClass.swift in Sources */,
+				39D86E7038217C4617FE541B /* GenericClass.swift in Sources */,
+				A9DADCB206FB3F8D5D49FB8B /* GenericMethodClass.swift in Sources */,
+				3DAC7E5CE46609E4CE69E6C2 /* GenericProtocol.swift in Sources */,
+				6535C4D9A786C5D7DCA3FD7D /* MultiNestedInExtensionFromClass.swift in Sources */,
+				77272D9A57F0EAF6FC84977B /* MultiNestedInNestedClass.swift in Sources */,
+				254028BF34C0E9A582500935 /* MultiNestedInPrivateNestedClass.swift in Sources */,
+				96D89A60AE9E420B7EE05C97 /* MultiNestedPrivateExtensionClass.swift in Sources */,
+				2AF068BE01A2F31EE3D814EE /* NSObjectProtocolInheritanceTesting.swift in Sources */,
+				06C6FAB00D9A62963B2ECEBD /* NestedInExtensionFromClass.swift in Sources */,
+				5536E2DF14917B6A789F520E /* NestedInNestedClass.swift in Sources */,
+				282405FC094198A9D5DE2DE5 /* NestedInNestedStruct.swift in Sources */,
+				FA85468FDB9D9AA3CE377D8F /* NestedInPrivateNestedClass.swift in Sources */,
+				12F5F953C1DEF9160F947A83 /* NestedPrivateExtensionClass.swift in Sources */,
+				89A58E70015F290684614655 /* ObjcProtocol.swift in Sources */,
+				4EF86A2EF512239AEE313340 /* OpenClass.swift in Sources */,
+				59BBDFEF259FC1623AF70C25 /* PropertyWrappers.swift in Sources */,
+				511229D3662171FCF501534B /* SwiftUIProtocols.swift in Sources */,
+				45B862C50C14C9DDA24A92FD /* TestedClass.swift in Sources */,
+				2EB9D11D5BB4147B6ED66280 /* TestedProtocol.swift in Sources */,
+				A309ECF3099EAA325AA3063B /* TestedSubProtocol.swift in Sources */,
+				B3E6E30A9EBB49B556E52717 /* TestedSubclass.swift in Sources */,
+				5CDABAE86DA6F25234F8484C /* UnavailablePlatformClass.swift in Sources */,
+				61DC0BB3C368CDE5317CAE02 /* UnavailablePlatformProtocol.swift in Sources */,
+				2CD7892C3299B24F187B7254 /* UnicodeTestProtocol.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8B90CC359728FB7047B24073 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				57E757CC5F929A4DBE9E3503 /* GeneratedMocks.swift in Sources */,
+				ABC12288879271F94B86F4FB /* ClassForStubTesting.swift in Sources */,
+				C5947F0B557E282036916D4E /* ClassWithOptionals.swift in Sources */,
+				A2F8BF6BA0FE0C8A36CFF80D /* ClassWithTypeAlias.swift in Sources */,
+				EFBA930D0ED6ED0CCA3741B2 /* ClassWithUnavailablePlatformMembers.swift in Sources */,
+				4F2A1A7CC176B2E9F238A5BF /* ExcludedTestClass.swift in Sources */,
+				D6C959FC5EEFB1ED4B8BFA19 /* GenericClass.swift in Sources */,
+				EDE0EBC6A6B3DE4D2999F611 /* GenericMethodClass.swift in Sources */,
+				0FC2FEE1A515144EA6835A4B /* GenericProtocol.swift in Sources */,
+				8E65E2396B959590556EFA01 /* MultiNestedInExtensionFromClass.swift in Sources */,
+				5B33BD005E3E7A7E949C09A6 /* MultiNestedInNestedClass.swift in Sources */,
+				56DFD22A2F1AF52419EB0E76 /* MultiNestedInPrivateNestedClass.swift in Sources */,
+				B8CA7A802F79B550FB78534F /* MultiNestedPrivateExtensionClass.swift in Sources */,
+				C9842C46FFD2D75272DA7FC9 /* NSObjectProtocolInheritanceTesting.swift in Sources */,
+				941B31D89F4281750EC84CAC /* NestedInExtensionFromClass.swift in Sources */,
+				751391121077371D273BC0AC /* NestedInNestedClass.swift in Sources */,
+				A98B9DA470515E54DB512F71 /* NestedInNestedStruct.swift in Sources */,
+				79926F96790F85E2D87F5E45 /* NestedInPrivateNestedClass.swift in Sources */,
+				CFA2C89191103D49CB6A9B09 /* NestedPrivateExtensionClass.swift in Sources */,
+				556D3E4E45EECAF63630F301 /* ObjcProtocol.swift in Sources */,
+				D9478388423F877FE26C0AEC /* OpenClass.swift in Sources */,
+				F9A512C87906C5E025BB59D9 /* PropertyWrappers.swift in Sources */,
+				BF0657CF0F119AE8DEC3B729 /* SwiftUIProtocols.swift in Sources */,
+				73EF80C89CE1824FD7BB3AF8 /* TestedClass.swift in Sources */,
+				9423A764F9BFE5A0B54E8F16 /* TestedProtocol.swift in Sources */,
+				185F12620D87BE6F3A2C76C7 /* TestedSubProtocol.swift in Sources */,
+				8FD4E28934C3BBB61B3D1519 /* TestedSubclass.swift in Sources */,
+				C897EA176B1A0220C3F019C8 /* UnavailablePlatformClass.swift in Sources */,
+				6804F22E9F81C3A259B6062F /* UnavailablePlatformProtocol.swift in Sources */,
+				2DF5CDB4581FDA6E1DC61FE6 /* UnicodeTestProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2616,11 +2616,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		0B81292668A65C316CE84CDD /* PBXTargetDependency */ = {
+		1D6BA3E4809E769EFA21D23D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = "CuckooMocks-macOS";
-			target = AD31A50419A911043CFC433F /* CuckooMocks-macOS */;
-			targetProxy = C4EB3E2723E796670849066A /* PBXContainerItemProxy */;
+			name = "Cuckoo-macOS";
+			target = 1DC56D8212E4351521A57BD1 /* Cuckoo-macOS */;
+			targetProxy = 7A27882F66C4AB5BFE67967E /* PBXContainerItemProxy */;
 		};
 		1FD27269F87713E22A717596 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2628,23 +2628,11 @@
 			target = A1CC2E751EAE08C9DC904C5A /* Cuckoo_OCMock-iOS */;
 			targetProxy = 5DA9654B8C41D28710B1C687 /* PBXContainerItemProxy */;
 		};
-		31A8051A033F86FE50D4CE6C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "CuckooMocks-iOS";
-			target = CA0F4E148ADA4CDDDB8464B4 /* CuckooMocks-iOS */;
-			targetProxy = EA96000B8E96E660FF0856D8 /* PBXContainerItemProxy */;
-		};
 		38F1F9605CB22E52D6A4AE9A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Cuckoo-iOS";
 			target = 6A8F12C3A778933132EBA10D /* Cuckoo-iOS */;
 			targetProxy = 2AF58C0508FF9E33505B7953 /* PBXContainerItemProxy */;
-		};
-		472E028C81B33117AD14BE4A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "Cuckoo-iOS";
-			target = 6A8F12C3A778933132EBA10D /* Cuckoo-iOS */;
-			targetProxy = DA209B541F00617C85733233 /* PBXContainerItemProxy */;
 		};
 		5D16ABCA23CE5E7B1A53E1F6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2652,11 +2640,11 @@
 			target = AC1E5664C17BDCFB45CF1DF4 /* Cuckoo-tvOS */;
 			targetProxy = 23155390A8DBFF317CD22503 /* PBXContainerItemProxy */;
 		};
-		5D4CA39B4A0F2DEF746F5A05 /* PBXTargetDependency */ = {
+		66AA6765B5973AF595646964 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = "CuckooMocks-tvOS";
-			target = F2FA9FB91879B3508E1DE385 /* CuckooMocks-tvOS */;
-			targetProxy = A8E6290AC731A70B5D1BF37F /* PBXContainerItemProxy */;
+			name = "Cuckoo-tvOS";
+			target = AC1E5664C17BDCFB45CF1DF4 /* Cuckoo-tvOS */;
+			targetProxy = 9A50A52BCE214B47F8A5F353 /* PBXContainerItemProxy */;
 		};
 		7B0DD786CA2C4A5AB974DFF1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2664,17 +2652,35 @@
 			target = A43A4248BF15EA2D5C5EE3C5 /* Cuckoo_OCMock-tvOS */;
 			targetProxy = A71022FE4E04B2902BBDFC50 /* PBXContainerItemProxy */;
 		};
-		960BB502ACF2D775D863B2D2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "Cuckoo-macOS";
-			target = 1DC56D8212E4351521A57BD1 /* Cuckoo-macOS */;
-			targetProxy = 5F16900E2943DCA4C5406B35 /* PBXContainerItemProxy */;
-		};
 		9F5C8F9C8664CF0C8CC69A7F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Cuckoo-macOS";
 			target = 1DC56D8212E4351521A57BD1 /* Cuckoo-macOS */;
 			targetProxy = 4A308AF7719C51E5971BF56E /* PBXContainerItemProxy */;
+		};
+		9FEDAFB73AAC00365814D4E9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Cuckoo-tvOSTests-Mocks";
+			target = ECC84E921A9EEB4969E82DDC /* Cuckoo-tvOSTests-Mocks */;
+			targetProxy = 258CFE2D93FC8604F2F8809A /* PBXContainerItemProxy */;
+		};
+		B156735A82CCABA68FB16712 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Cuckoo-iOSTests-Mocks";
+			target = 73EC770DC5A36FD5F1FB299E /* Cuckoo-iOSTests-Mocks */;
+			targetProxy = BE8B8F061E409FD6493C1103 /* PBXContainerItemProxy */;
+		};
+		C25238B2621B0280E1EB727B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Cuckoo-macOSTests-Mocks";
+			target = 2CECDC945031DDC90F0E86E2 /* Cuckoo-macOSTests-Mocks */;
+			targetProxy = E1AB159FCE8402D7824EF5F4 /* PBXContainerItemProxy */;
+		};
+		C34A62E94CA521B24BB2E05D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Cuckoo-iOS";
+			target = 6A8F12C3A778933132EBA10D /* Cuckoo-iOS */;
+			targetProxy = 4EA3DF994352A1ABAC2B7A38 /* PBXContainerItemProxy */;
 		};
 		D471CC9D4FB17FB55B5202E7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2682,46 +2688,9 @@
 			target = 4AC7031E1F3DC8D205DCCA3B /* Cuckoo_OCMock-macOS */;
 			targetProxy = CCF9446E960262BE1D95988C /* PBXContainerItemProxy */;
 		};
-		F87737BAA554025FE24D2EDD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "Cuckoo-tvOS";
-			target = AC1E5664C17BDCFB45CF1DF4 /* Cuckoo-tvOS */;
-			targetProxy = 9A1E5C611C36EF19EF39D447 /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		010B8DD7B2E5FAB21A25CD54 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Derived/InfoPlists/CuckooMocks-tvOS-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.brightify.Cuckoo;
-				PRODUCT_NAME = CuckooMocks;
-				SDKROOT = appletvos;
-				SKIP_INSTALL = YES;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 5.0;
-				SYSTEM_FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
-				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 13.0;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 		09A17ABB9CE8D5E803DBC7E5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2762,48 +2731,14 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = org.brightify.Cuckoo;
-				PRODUCT_NAME = Cuckoo;
+				PRODUCT_NAME = CuckooMocks;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_COMPILATION_MODE = singlefile;
-				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/OCMock/Cuckoo-BridgingHeader.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				SYSTEM_FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		1D50F1F877C3A135AC9C3042 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Derived/InfoPlists/CuckooMocks-iOS-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.brightify.Cuckoo;
-				PRODUCT_NAME = CuckooMocks;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_COMPILATION_MODE = singlefile;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				SYSTEM_FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -2842,34 +2777,33 @@
 			};
 			name = Debug;
 		};
-		37BB3D5E9726C81640A411D7 /* Debug */ = {
+		3155FCAD569A573D8D4F4443 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
-				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = "Derived/InfoPlists/CuckooMocks-macOS-Info.plist";
+				INFOPLIST_FILE = "Derived/InfoPlists/Cuckoo-tvOSTests-Mocks-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = org.brightify.Cuckoo;
 				PRODUCT_NAME = CuckooMocks;
-				SDKROOT = macosx;
+				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				SYSTEM_FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 13.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -2893,6 +2827,39 @@
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		4383D6C0567CDC0081BB739F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "Derived/InfoPlists/Cuckoo-macOSTests-Mocks-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = org.brightify.Cuckoo;
+				PRODUCT_NAME = CuckooMocks;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_COMPILATION_MODE = singlefile;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				SYSTEM_FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
@@ -3014,6 +2981,38 @@
 			};
 			name = Debug;
 		};
+		74A4AC9A8C5D5CFABCBE9514 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "Derived/InfoPlists/Cuckoo-macOSTests-Mocks-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = org.brightify.Cuckoo;
+				PRODUCT_NAME = CuckooMocks;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+				SYSTEM_FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		77F3B7D0430A3CCEB80D264B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3045,38 +3044,6 @@
 			};
 			name = Release;
 		};
-		8371712715542ADEF9B1BBE0 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Derived/InfoPlists/CuckooMocks-tvOS-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.brightify.Cuckoo;
-				PRODUCT_NAME = CuckooMocks;
-				SDKROOT = appletvos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_COMPILATION_MODE = singlefile;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				SYSTEM_FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
-				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 13.0;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 		88C896DF3C7EA2C24B2A7B9E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3095,13 +3062,12 @@
 					"@loader_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.brightify.Cuckoo;
-				PRODUCT_NAME = Cuckoo;
+				PRODUCT_NAME = CuckooMocks;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_COMPILATION_MODE = singlefile;
-				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/OCMock/Cuckoo-BridgingHeader.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				SYSTEM_FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
@@ -3131,11 +3097,10 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = org.brightify.Cuckoo;
-				PRODUCT_NAME = Cuckoo;
+				PRODUCT_NAME = CuckooMocks;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/OCMock/Cuckoo-BridgingHeader.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
 				SYSTEM_FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
@@ -3209,6 +3174,39 @@
 			};
 			name = Release;
 		};
+		95BD739EC47A58B9CAD4CEF6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Derived/InfoPlists/Cuckoo-iOSTests-Mocks-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.brightify.Cuckoo;
+				PRODUCT_NAME = CuckooMocks;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_COMPILATION_MODE = singlefile;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				SYSTEM_FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 		98CF4BE73C92148ECD835DEF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3261,6 +3259,38 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
+		};
+		B4582FAA42C8462F14622593 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Derived/InfoPlists/Cuckoo-iOSTests-Mocks-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.brightify.Cuckoo;
+				PRODUCT_NAME = CuckooMocks;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+				SYSTEM_FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
 		};
 		BD81CA3830E11A59ED4ED9F0 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -3394,48 +3424,15 @@
 					"@loader_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.brightify.Cuckoo;
-				PRODUCT_NAME = Cuckoo;
+				PRODUCT_NAME = CuckooMocks;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/OCMock/Cuckoo-BridgingHeader.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
 				SYSTEM_FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		D2DFA0722BB267ACB2305A9C /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = "Derived/InfoPlists/CuckooMocks-macOS-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				PRODUCT_BUNDLE_IDENTIFIER = org.brightify.Cuckoo;
-				PRODUCT_NAME = CuckooMocks;
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 5.0;
-				SYSTEM_FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -3522,12 +3519,11 @@
 					"@loader_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.brightify.Cuckoo;
-				PRODUCT_NAME = Cuckoo;
+				PRODUCT_NAME = CuckooMocks;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_COMPILATION_MODE = singlefile;
-				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/OCMock/Cuckoo-BridgingHeader.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				SYSTEM_FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
@@ -3537,38 +3533,6 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
-		};
-		DFFB3BC93B7F65BB35C1F8D5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Derived/InfoPlists/CuckooMocks-iOS-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.brightify.Cuckoo;
-				PRODUCT_NAME = CuckooMocks;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 5.0;
-				SYSTEM_FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
 		};
 		E47126E2203C1F39581247FF /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -3592,6 +3556,37 @@
 			};
 			name = Release;
 		};
+		EF38EDC56D59B31C6250C609 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Derived/InfoPlists/Cuckoo-tvOSTests-Mocks-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.brightify.Cuckoo;
+				PRODUCT_NAME = CuckooMocks;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+				SYSTEM_FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 13.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		F46AC1AF8E41D78201C5BDE9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3609,11 +3604,10 @@
 					"@loader_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.brightify.Cuckoo;
-				PRODUCT_NAME = Cuckoo;
+				PRODUCT_NAME = CuckooMocks;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/OCMock/Cuckoo-BridgingHeader.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
 				SYSTEM_FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
@@ -3701,6 +3695,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		56A28F90D6904C13ED93502A /* Build configuration list for PBXNativeTarget "Cuckoo-tvOSTests-Mocks" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3155FCAD569A573D8D4F4443 /* Debug */,
+				EF38EDC56D59B31C6250C609 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		63A29DC5329F2930576CC7B6 /* Build configuration list for PBXNativeTarget "Cuckoo-iOSTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -3710,20 +3713,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7107D21B59F7EB49A4832AD1 /* Build configuration list for PBXNativeTarget "CuckooMocks-iOS" */ = {
+		6F8A4D0163C8F2EA9E10FD81 /* Build configuration list for PBXNativeTarget "Cuckoo-macOSTests-Mocks" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1D50F1F877C3A135AC9C3042 /* Debug */,
-				DFFB3BC93B7F65BB35C1F8D5 /* Release */,
+				4383D6C0567CDC0081BB739F /* Debug */,
+				74A4AC9A8C5D5CFABCBE9514 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7698F5285B2A06D058BEF7E9 /* Build configuration list for PBXNativeTarget "CuckooMocks-macOS" */ = {
+		821071A62844C127FB363449 /* Build configuration list for PBXNativeTarget "Cuckoo-iOSTests-Mocks" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				37BB3D5E9726C81640A411D7 /* Debug */,
-				D2DFA0722BB267ACB2305A9C /* Release */,
+				95BD739EC47A58B9CAD4CEF6 /* Debug */,
+				B4582FAA42C8462F14622593 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -3769,15 +3772,6 @@
 			buildConfigurations = (
 				68C3608166DB6A5DCC142D0A /* Debug */,
 				09A17ABB9CE8D5E803DBC7E5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		DBE1A51B0D1781309CF799FC /* Build configuration list for PBXNativeTarget "CuckooMocks-tvOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8371712715542ADEF9B1BBE0 /* Debug */,
-				010B8DD7B2E5FAB21A25CD54 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

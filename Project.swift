@@ -34,7 +34,7 @@ func platformSet(platform: PlatformType) -> (targets: [Target], schemes: [Scheme
     targets.append(defaultTarget)
 
     let mocksTarget = Target(
-        name: "CuckooMocks-\(platform)",
+        name: "Cuckoo-\(platform)Tests-Mocks",
         platform: platform.platform,
         product: .framework,
         bundleId: "org.brightify.Cuckoo",
