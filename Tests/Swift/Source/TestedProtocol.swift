@@ -172,6 +172,8 @@ protocol SimpleProtocol {
     var constant: Int { get }
 }
 
+protocol SendableProtocol: Sendable {}
+
 class SimpleClass: SimpleProtocol {
     let constant = 0
 }

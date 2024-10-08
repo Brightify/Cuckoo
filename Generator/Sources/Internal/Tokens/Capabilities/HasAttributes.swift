@@ -14,4 +14,10 @@ extension HasAttributes {
     var unavailablePlatformsCheck: String {
         hasUnavailablePlatforms ? "#if !os(\(unavailablePlatforms.joined(separator: ") && !os(")))" : ""
     }
+
+    func attributesSerialize() -> GeneratorContext {
+        [
+            "attributes": attributes,
+        ]
+    }
 }
