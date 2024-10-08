@@ -2,7 +2,7 @@ import Foundation
 
 extension Templates {
     static let typeErasure = """
-    {{ container.accessibility|withSpace }}class \(typeErasureClassName): {{ container.name }} {
+    {{ container.accessibility|withSpace }}class \(typeErasureClassName): {{ container.name }}, @unchecked Sendable {
         private let reference: Any
 
         {% for property in container.properties %}
