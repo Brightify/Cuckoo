@@ -3,7 +3,7 @@ extension Templates {
 {% for attribute in container.attributes %}
 {{ attribute }}
 {% endfor %}
-{{container.accessibility|withSpace}}class {{ container.name }}Stub{{ container.genericParameters }}: {% if container.isNSObjectProtocol %}NSObject, {% endif %}{{ container.name }}{% if container.isImplementation %}{{ container.genericArguments }}{% endif %} {
+{{container.accessibility|withSpace}}class {{ container.name }}Stub{{ container.genericParameters }}: {% if container.isNSObjectProtocol %}NSObject, {% endif %}{{ container.name }}{% if container.isImplementation %}{{ container.genericArguments }}{% endif %}, @unchecked Sendable {
     {% for property in container.properties %}
     {{ property.unavailablePlatformsCheck }}
     {% if debug %}
