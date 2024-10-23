@@ -1,3 +1,6 @@
+#if canImport(Testing)
+import Testing
+#endif
 #if canImport(XCTest)
 import XCTest
 #endif
@@ -6,8 +9,20 @@ public class MockManager {
     public static var fail: ((message: String, sourceLocation: SourceLocation)) -> Void = { arg in
         let (message, sourceLocation) = arg
         #if canImport(XCTest)
-        XCTFail(message, file: sourceLocation.file, line: sourceLocation.line)
-        #else
+        XCTFail(message, file: sourceLocation.file, line: UInt(sourceLocation.line))
+        #endif
+        #if canImport(Testing)
+        Issue.record(
+            Comment(rawValue: message),
+            sourceLocation: Testing.SourceLocation(
+                fileID: sourceLocation.fileID,
+                filePath: sourceLocation.filePath,
+                line: sourceLocation.line,
+                column: sourceLocation.column
+            )
+        )
+        #endif
+        #if !canImport(XCTest) && !canImport(Testing)
         print("\(Self.self).fail:", message, sourceLocation)
         #endif
     }
@@ -277,8 +292,8 @@ public class MockManager {
         }
     }
 
-    private func failAndCrash(_ message: String, file: StaticString = #file, line: UInt = #line) -> Never  {
-        MockManager.fail((message: message, sourceLocation: (file, line)))
+    private func failAndCrash(_ message: String, file: StaticString = #file, fileID: String = #fileID, filePath: String = #filePath, line: Int = #line, column: Int = #column) -> Never  {
+        MockManager.fail((message: message, sourceLocation: (file, fileID, filePath, line, column)))
 
         #if _runtime(_ObjC)
         NSException(name: .internalInconsistencyException, reason: message, userInfo: nil).raise()
