@@ -17,8 +17,8 @@ public class MockManager {
             sourceLocation: Testing.SourceLocation(
                 fileID: sourceLocation.fileID,
                 filePath: sourceLocation.filePath,
-                line: Int(sourceLocation.line),
-                column: 0
+                line: sourceLocation.line,
+                column: sourceLocation.column
             )
         )
         #endif
