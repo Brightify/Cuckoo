@@ -9,8 +9,8 @@ public func when<F: BaseStubFunctionTrait>(_ function: F) -> F {
 }
 
 /// Creates object used for verification of calls.
-public func verify<M: Mock>(_ mock: M, _ callMatcher: CallMatcher = times(1), file: StaticString = #file, line: UInt = #line) -> M.Verification {
-    return mock.getVerificationProxy(callMatcher, sourceLocation: (file, line))
+public func verify<M: Mock>(_ mock: M, _ callMatcher: CallMatcher = times(1), file: StaticString = #file, fileID: String = #fileID, filePath: String = #filePath, line: Int = #line, column: Int = #column) -> M.Verification {
+    return mock.getVerificationProxy(callMatcher, sourceLocation: (file, fileID, filePath, line, column))
 }
 
 /// Clears all invocations and stubs of mocks.
@@ -35,8 +35,8 @@ public func clearInvocations<M: Mock>(_ mocks: M...) {
 }
 
 /// Checks if there are no more uverified calls.
-public func verifyNoMoreInteractions<M: Mock>(_ mocks: M..., file: StaticString = #file, line: UInt = #line) {
+public func verifyNoMoreInteractions<M: Mock>(_ mocks: M..., file: StaticString = #file, fileID: String = #fileID, filePath: String = #filePath, line: Int = #line, column: Int = #column) {
     mocks.forEach { mock in
-        mock.cuckoo_manager.verifyNoMoreInteractions((file, line))
+        mock.cuckoo_manager.verifyNoMoreInteractions((file, fileID, filePath, line, column))
     }
 }

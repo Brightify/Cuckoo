@@ -18,4 +18,4 @@ public func wrap<M: OptionalMatchable, IN, O>(matchable: M, mapping: @escaping (
     }
 }
 
-public typealias SourceLocation = (file: StaticString, line: UInt)
+public typealias SourceLocation = (file: StaticString, fileID: String, filePath: String, line: Int, column: Int)
