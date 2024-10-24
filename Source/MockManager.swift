@@ -9,8 +9,8 @@ public class MockManager {
     public static var fail: ((message: String, sourceLocation: SourceLocation)) -> Void = { arg in
         let (message, sourceLocation) = arg
         #if canImport(XCTest)
-        #endif
         XCTFail(message, file: sourceLocation.file, line: UInt(sourceLocation.line))
+        #endif
         #if canImport(Testing)
         Issue.record(
             Comment(rawValue: message),
