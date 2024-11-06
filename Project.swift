@@ -109,7 +109,7 @@ func platformSet(platform: PlatformType) -> (targets: [Target], schemes: [Scheme
         dependencies: [
             .sdk(name: "XCTest", type: .framework, status: .required),
         ],
-        settings: Settings.settings(base: mocksBuildSettingsBase)
+        settings: Settings.settings(base: commonBuildSettingsBase.merging(objCBuildSettingsBase, uniquingKeysWith: { $1 }))
     )
     targets.append(objCTarget)
 
