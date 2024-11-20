@@ -54,11 +54,11 @@ platform :mac do
       username = UI.input "Please type in your GitHub username or cancel the release and define enviroment variable \"#{username_var_name}\" with your GitHub username."
     end
 
+    # Update version files to sync generator version by.
+    File.write('../version', version)
+    File.write('../Generator/Sources/CLI/Version.swift', "let version = \"#{version}\"")
+
     # Build Cuckoonator
-    version_file = '../Generator/Sources/CLI/Version.swift'
-    text = File.read(version_file)
-    content = text.gsub(/^\w*let\w*version\w*=\w*".*"\w*$/, "let version = \"#{version}\"")
-    File.open(version_file, 'w') { |file| file << content }
     sh('../build_generator')
 
     # URL variables
@@ -67,9 +67,6 @@ platform :mac do
     api_url = "https://api.#{base_url}"
     auth_string = "#{username}:#{access_token}"
     changelog = create_changelog.gsub(/`/, '``').gsub(/'/, '&#39;').gsub(/"/, '&#34;').gsub(/\n/, '\\n')
-
-    # Create a version file to sync generator version by.
-    File.open('../version', 'w') { |file| file << version }
 
     # Make sure the changed podspec is valid.
     pod_lib_lint(allow_warnings: true)
