@@ -13,8 +13,8 @@ Pod::Spec.new do |s|
   s.source           = { :git => 'https://github.com/Brightify/Cuckoo.git', :tag => s.version.to_s }
 
   s.ios.deployment_target       = '13.0'
-  s.osx.deployment_target       = '11'
-  #s.watchos.deployment_target   = '2.0' # watchos does not include XCTest framework :(
+  s.osx.deployment_target       = '10.15'
+  s.watchos.deployment_target   = '8.0'
   s.tvos.deployment_target      = '13.0'
   generator_name                = 'cuckoonator'
   s.swift_version               = '5.0'
@@ -33,12 +33,14 @@ Pod::Spec.new do |s|
   s.default_subspec             = 'Swift'
 
   s.subspec 'Swift' do |sub|
-    sub.source_files = 'Source/**/*.swift'
+    sub.source_files = [
+      'Source/**/*.swift',
+      'OCMock/**/*.{h,m,swift}',
+    ]
   end
 
   s.subspec 'OCMock' do |sub|
-    sub.source_files = 'OCMock/**/*.{h,m,swift}'
+    sub.source_files = []
     sub.dependency 'Cuckoo/Swift'
-    sub.dependency 'OCMock', '3.9.3'
   end
 end

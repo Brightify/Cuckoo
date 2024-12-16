@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "OCMock",
+        "repositoryURL": "https://github.com/erikdoe/ocmock.git",
+        "state": {
+          "branch": null,
+          "revision": "2c0bfd373289f4a7716db5d6db471640f91a6507",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}

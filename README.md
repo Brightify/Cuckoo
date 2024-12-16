@@ -1,11 +1,11 @@
 # Cuckoo
 ## Mock your Swift objects!
 
-[![Version](https://img.shields.io/cocoapods/v/Cuckoo.svg?style=flat)](http://cocoapods.org/pods/Cuckoo)
-[![SwiftPM compatible](https://img.shields.io/badge/SwiftPM-compatible-brightgreen?style=flat)](https://swift.org/package-manager)
-[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-brightgreen?style=flat)](https://github.com/Carthage/Carthage)
-[![License](https://img.shields.io/cocoapods/l/Cuckoo.svg?style=flat)](http://cocoapods.org/pods/Cuckoo)
 [![Platform](https://img.shields.io/cocoapods/p/Cuckoo.svg?style=flat)](http://cocoapods.org/pods/Cuckoo)
+[![CocoaPods ready](https://img.shields.io/badge/CocoaPods-ready-brightgreen?style=flat)](http://cocoapods.org/pods/Cuckoo)
+[![SPM ready](https://img.shields.io/badge/SwiftPM-ready-brightgreen?style=flat)](https://swift.org/package-manager)
+[![Carthage ready](https://img.shields.io/badge/Carthage-ready-brightgreen?style=flat)](https://github.com/Carthage/Carthage)
+[![License](https://img.shields.io/cocoapods/l/Cuckoo.svg?style=flat)](http://cocoapods.org/pods/Cuckoo)
 
 ## Introduction
 Cuckoo was created due to lack of a proper Swift mocking framework. We built the DSL to be very similar to [Mockito](http://mockito.org/), so anyone coming from Java/Android can immediately pick it up and use it.
@@ -39,13 +39,20 @@ Due to the limitations mentioned above, unoverridable code structures are not su
 Cuckoo works on the following platforms:
 
 - **iOS 13+**
-- **Mac OSX 11+**
+- **macOS 10.15+**
 - **tvOS 13+**
-
-**watchOS** support is not yet possible due to missing XCTest library.
+- **watchOS 8+**
 
 ## Cuckoo
 ### 1. Installation
+#### Swift Package Manager
+
+URL: `https://github.com/Brightify/Cuckoo.git`
+
+**WARNING**: Make sure to add Cuckoo to test targets only.
+
+When you're all set, go to your test target's Build Phases and add plug-in `CuckooPluginSingleFile` to the **Run Build Tool Plug-ins**.
+
 #### CocoaPods
 Cuckoo runtime is available through [CocoaPods](http://cocoapods.org). To install it, simply add the following line to your **test target** in your Podfile:
 
@@ -73,24 +80,12 @@ After running once, locate `GeneratedMocks.swift` and drag it into your Xcode te
 
 **IMPORTANT**: To make your mocking journey easier, make absolutely sure that the run script is above the `Compile Sources` phase.
 
-**NOTE**: To avoid race condition errors when Xcode parallelizes build phases, add the path of the `OUTPUT_FILE` into the "Output Files" section of the build phase. If you find that `OUTPUT_FILE` still doesn't regenerate with new changes, adding mocked files to the "Input Files" section of the build phase might help.
-
-**NOTE**: From Xcode 15 flag `ENABLE_USER_SCRIPT_SANDBOXING` in Build Settings is `Yes` by default. That means Xcode will sandbox the script so reading input files and writing output file will be forbidden. As a result running above script may fail to access the files. To prevent Xcode from sandboxing the script, change this option to `No`.
+**NOTE**: From Xcode 15 the flag `ENABLE_USER_SCRIPT_SANDBOXING` in Build Settings is `Yes` by default. That means Xcode will sandbox the script so reading input files and writing output file will be forbidden. As a result running above script may fail to access the files. To prevent Xcode from sandboxing the script, change this option to `No`.
 
 Input files can be also specified directly in `Run script` in `Input Files` form.
 
 Note: All paths in the Run script must be absolute. Variable `PROJECT_DIR` automatically points to your project directory.
 **Remember to include paths to inherited Classes and Protocols for mocking/stubbing parent and grandparents.**
-
-#### Swift Package Manager
-
-1. In Xcode, navigate in menu: File > Swift Packages > Add Package Dependency
-2. Add `https://github.com/Brightify/Cuckoo.git`
-3. For the Dependency Rule, Select "Up to Next Major" with `2.0.0`. Click Add Package.
-4. On the 'Choose Package Products for Cuckoo' dialog, under 'Add to Target', please ensure you select your Test target as it will not compile on the app target.
-5. Click Add Package.
-
-When you're all set, go to your test target's Build Phases and add `CuckooPluginSingleFile` to the **Run Build Tool Plug-ins**.
 
 #### Carthage
 To use Cuckoo with [Carthage](https://github.com/Carthage/Carthage) add this line to your Cartfile:
@@ -312,26 +307,7 @@ As you can see, method `capture()` is used to create matcher for the call and th
 Cuckoo makes use of *matchers* to connect your mocks to your code under test.
 
 #### A) Automatic matchers for known types
-You can mock any object that conforms to the `Matchable` protocol.
-These basic values are extended to conform to `Matchable`:
-
-- `Bool`
-- `String`
-- `Float`
-- `Double`
-- `Character`
-- `Int`
-- `Int8`
-- `Int16`
-- `Int32`
-- `Int64`
-- `UInt`
-- `UInt8`
-- `UInt16`
-- `UInt32`
-- `UInt64`
-
-Matchers for `Array`, `Dictionary`, and `Set` are automatically synthesized as long as the type of the element conforms to `Matchable`.
+You can mock any object that conforms to the `Matchable` protocol. Standard built-in types like `Int`, `String`, already conform thanks to Cuckoo. Automatic conformance synthesis applies for `Array` and the like.
 
 #### B) Custom matchers
 If Cuckoo doesn't know the type you are trying to compare, you have to write your own method `equal(to:)` using a `ParameterMatcher`. Add this method to your test file:
@@ -340,6 +316,7 @@ If Cuckoo doesn't know the type you are trying to compare, you have to write you
 func equal(to value: YourCustomType) -> ParameterMatcher<YourCustomType> {
   return ParameterMatcher { tested in
     // Implementation of equality test for your custom type.
+
   }
 }
 ```
@@ -480,50 +457,46 @@ The run script also syncs the generator to the correct version (either by buildi
 We recommend only using `--clean` when you're trying to fix a compile problem as it forces the build (or download) every time which makes the testing way longer than it needs to be.
 
 ## Objective-C Support
-Cuckoo subspec `Cuckoo/OCMock` brings support for mocking Objective-C classes and protocols.
+For Objective-C support, Cuckoo wraps `OCMock` and uses its battle-tested functionality to bring support for mocking various Objective-C classes and protocols to Swift.
 
-Example usage:
+For example:
 ```swift
 let tableView = UITableView()
-// stubbing the class is very similar to stubbing with Cuckoo
+// stubbing the class is very similar to stubbing with Cuckoo, note the `objcStub` method.
 let mock = objcStub(for: UITableViewController.self) { stubber, mock in
   stubber.when(mock.numberOfSections(in: tableView)).thenReturn(1)
   stubber.when(mock.tableView(tableView, accessoryButtonTappedForRowWith: IndexPath(row: 14, section: 2))).then { args in
-    // `args` is [Any] of the arguments passed and the closure needs to cast them manually
+    // An unfortunate drawback is that arguments will miss type information, so the closure needs to cast them manually.
     let (tableView, indexPath) = (args[0] as! UITableView, args[1] as! IndexPath)
     print(tableView, indexPath)
   }
 }
 
-// calling stays the same
+// Invoking is exactly the same as you'd expect.
 XCTAssertEqual(mock.numberOfSections(in: tableView), 1)
 mock.tableView(tableView, accessoryButtonTappedForRowWith: IndexPath(row: 14, section: 2))
 
-// `objcVerify` is used to verify the interaction with the methods/variables
+// `objcVerify` replaces `verify` to test the interaction with methods/variables.
 objcVerify(mock.numberOfSections(in: tableView))
 objcVerify(mock.tableView(tableView, accessoryButtonTappedForRowWith: IndexPath(row: 14, section: 2)))
 ```
 
 Detailed usage is available in Cuckoo tests along with DOs and DON'Ts of this Swift-ObjC bridge.
 
-So far, only CocoaPods is supported. To install, simply add this line to your `Podfile`:
-```ruby
-pod 'Cuckoo/OCMock'
-```
-
 ## Contribute
 Cuckoo is open for everyone and we'd like you to help us make the best Swift mocking library. For Cuckoo development, follow these steps:
 1. Make sure you have the latest stable version of Xcode installed.
 2. Clone the **Cuckoo** repository.
 3. In terminal, run `make` at the root of the cloned **Cuckoo** repository, this will generate the project, install dependencies, and open the project in Xcode.
-4. Select any scheme of `Cuckoo-iOS`, `Cuckoo-tvOS`, or `Cuckoo-macOS` ([OCMock](https://github.com/erikdoe/ocmock) schemes contain `Cuckoo_OCMock` instead) and verify by running the tests (⌘+U).
+4. Select any scheme of `Cuckoo-iOS`, `Cuckoo-tvOS`, or `Cuckoo-macOS` and verify by running the tests (⌘+U).
 5. Peek around or file a pull request with your changes.
-6. Make sure to run `make` again whenever you checkout another branch.
+
+**NOTE**: Make sure to run `make` again whenever you checkout another branch, the project utilizes [Tuist](https://github.com/tuist/tuist) for project generation.
 
 The project consists of two parts - runtime and code generator. When you open the `Cuckoo.xcworkspace` in Xcode, you'll see these directories:
     - `Source` - runtime sources
     - `Tests` - tests for the runtime part
-    - `Generator.xcodeproj` - project containing generator source code (use the `Generator` scheme)
+    - `Generator.xcodeproj` - project containing generator source code (use the `Generator` scheme to run it)
 
 Thank you for your help!
 

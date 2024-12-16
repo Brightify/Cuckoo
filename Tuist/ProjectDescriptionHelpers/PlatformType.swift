@@ -4,6 +4,7 @@ public enum PlatformType: String {
     case iOS
     case macOS
     case tvOS
+    case watchOS
 
     public var platform: Platform {
         switch self {
@@ -13,6 +14,8 @@ public enum PlatformType: String {
             return .macOS
         case .tvOS:
             return .tvOS
+        case .watchOS:
+            return .watchOS
         }
     }
 
@@ -24,6 +27,8 @@ public enum PlatformType: String {
             return .macOS(targetVersion: "10.15")
         case .tvOS:
             return .tvOS(targetVersion: "13.0")
+        case .watchOS:
+            return .watchOS(targetVersion: "8.0")
         }
     }
 
@@ -35,6 +40,8 @@ public enum PlatformType: String {
             return .macOS(targetVersion: "10.15")
         case .tvOS:
             return .tvOS(targetVersion: "13.0")
+        case .watchOS:
+            return .watchOS(targetVersion: "8.0")
         }
     }
 }

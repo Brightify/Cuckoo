@@ -25,11 +25,16 @@ func platformSet(platform: PlatformType) -> (targets: [Target], schemes: [Scheme
         bundleId: "org.brightify.Cuckoo",
         deploymentTarget: platform.libraryDeploymentTarget,
         infoPlist: .default,
-        sources: "Source/**",
-        dependencies: [
-            .sdk(name: "XCTest", type: .framework, status: .required),
+        sources: [
+            "Source/**",
+            "OCMock/**",
         ],
-        settings: Settings.settings(base: commonBuildSettingsBase)
+        headers: .headers(public: ["OCMock/**"]),
+        dependencies: [
+            .sdk(name: "XCTest", type: .framework, status: .optional),
+            .package(product: "OCMock"),
+        ],
+        settings: Settings.settings(base: commonBuildSettingsBase.merging(objCBuildSettingsBase, uniquingKeysWith: { $1 }))
     )
     targets.append(defaultTarget)
 
@@ -66,7 +71,7 @@ func platformSet(platform: PlatformType) -> (targets: [Target], schemes: [Scheme
         ],
         dependencies: [
             .target(name: defaultTarget.name),
-            .sdk(name: "XCTest", type: .framework, status: .required),
+            .sdk(name: "XCTest", type: .framework, status: .optional),
         ],
         settings: Settings.settings(base: mocksBuildSettingsBase)
     )
@@ -81,6 +86,7 @@ func platformSet(platform: PlatformType) -> (targets: [Target], schemes: [Scheme
         infoPlist: .default,
         sources: .init(globs: [
             .glob("Tests/Common/**"),
+            .glob("Tests/OCMock/**"),
             .glob("Tests/Swift/**", excluding: [
                 "Tests/Swift/Generated/*.swift",
                 "Tests/Swift/Source/*.swift",
@@ -89,46 +95,10 @@ func platformSet(platform: PlatformType) -> (targets: [Target], schemes: [Scheme
         dependencies: [
             .target(name: defaultTarget.name),
             .target(name: mocksTarget.name),
+            .package(product: "OCMock"),
         ]
     )
     targets.append(defaultTestTarget)
-
-    // MARK: ObjC targets.
-    let objCTarget = Target(
-        name: "Cuckoo_OCMock-\(platform)",
-        platform: platform.platform,
-        product: .framework,
-        bundleId: "org.brightify.Cuckoo",
-        deploymentTarget: platform.libraryDeploymentTarget,
-        infoPlist: .default,
-        sources: [
-            "Source/**",
-            "OCMock/**",
-        ],
-        headers: .headers(public: ["OCMock/**"]),
-        dependencies: [
-            .sdk(name: "XCTest", type: .framework, status: .required),
-        ],
-        settings: Settings.settings(base: commonBuildSettingsBase.merging(objCBuildSettingsBase, uniquingKeysWith: { $1 }))
-    )
-    targets.append(objCTarget)
-
-    let objCTestTarget = Target(
-        name: "Cuckoo_OCMock-\(platform)Tests",
-        platform: platform.platform,
-        product: .unitTests,
-        bundleId: "org.brightify.Cuckoo",
-        deploymentTarget: platform.testDeploymentTarget,
-        infoPlist: .default,
-        sources: [
-            "Tests/Common/**",
-            "Tests/OCMock/**",
-        ],
-        dependencies: [
-            .target(name: objCTarget.name),
-        ]
-    )
-    targets.append(objCTestTarget)
 
     // MARK: Schemes.
     schemes.append(
@@ -139,30 +109,22 @@ func platformSet(platform: PlatformType) -> (targets: [Target], schemes: [Scheme
         )
     )
 
-    schemes.append(
-        Scheme(
-            name: objCTarget.name,
-            shared: false,
-            buildAction: .init(targets: [.init(stringLiteral: objCTarget.name)]),
-            testAction: TestAction.targets([.init(target: objCTestTarget.reference)])
-        )
-    )
-
     return (targets, schemes)
 }
 
 let (iOSTargets, iOSSchemes) = platformSet(platform: .iOS)
 let (macOSTargets, macOSSchemes) = platformSet(platform: .macOS)
 let (tvOSTargets, tvOSSchemes) = platformSet(platform: .tvOS)
+let (watchOSTargets, watchOSSchemes) = platformSet(platform: .watchOS)
 
 // MARK: project definition
 let project = Project(
     name: "Cuckoo",
     options: .options(automaticSchemesOptions: .disabled, disableSynthesizedResourceAccessors: true),
     packages: [
-        // .remote(url: "https://github.com/erikdoe/ocmock", .revision("21cce26d223d49a9ab5ae47f28864f422bfe3951")),
+        .local(path: "OCMockWrapper"),
     ],
     settings: Settings.settings(base: ["GENERATE_TEST_MOCKS": "YES"]),
-    targets: iOSTargets + macOSTargets + tvOSTargets,
-    schemes: iOSSchemes + macOSSchemes + tvOSSchemes
+    targets: iOSTargets + macOSTargets + tvOSTargets + watchOSTargets,
+    schemes: iOSSchemes + macOSSchemes + tvOSSchemes + watchOSSchemes
 )

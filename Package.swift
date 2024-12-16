@@ -8,6 +8,7 @@ let package = Package(
         .iOS("13.0"),
         .tvOS("13.0"),
         .macOS("10.15"),
+        .watchOS("8.0"),
     ],
     products: [
         .library(
@@ -34,16 +35,17 @@ let package = Package(
         .package(url: "https://github.com/LebJe/TOMLKit.git", exact: "0.5.5"),
         .package(url: "https://github.com/tuist/XcodeProj.git", exact: "8.15.0"),
         .package(url: "https://github.com/onevcat/Rainbow", exact: "4.0.1"),
+        .package(path: "./OCMockWrapper"),
     ],
     targets: [
         .target(
             name: "Cuckoo",
-            dependencies: [],
+            dependencies: ["OCMockWrapper"],
             path: "Source"
         ),
         .testTarget(
             name: "CuckooTests",
-            dependencies: ["Cuckoo"],
+            dependencies: ["Cuckoo", "OCMockWrapper"],
             path: "Tests"
         ),
         .executableTarget(
