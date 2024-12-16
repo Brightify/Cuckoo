@@ -4,7 +4,6 @@
 [![Platform](https://img.shields.io/cocoapods/p/Cuckoo.svg?style=flat)](http://cocoapods.org/pods/Cuckoo)
 [![CocoaPods ready](https://img.shields.io/badge/CocoaPods-ready-brightgreen?style=flat)](http://cocoapods.org/pods/Cuckoo)
 [![SPM ready](https://img.shields.io/badge/SwiftPM-ready-brightgreen?style=flat)](https://swift.org/package-manager)
-[![Carthage ready](https://img.shields.io/badge/Carthage-ready-brightgreen?style=flat)](https://github.com/Carthage/Carthage)
 [![License](https://img.shields.io/cocoapods/l/Cuckoo.svg?style=flat)](http://cocoapods.org/pods/Cuckoo)
 
 ## Introduction
@@ -86,23 +85,6 @@ Input files can be also specified directly in `Run script` in `Input Files` form
 
 Note: All paths in the Run script must be absolute. Variable `PROJECT_DIR` automatically points to your project directory.
 **Remember to include paths to inherited Classes and Protocols for mocking/stubbing parent and grandparents.**
-
-#### Carthage
-To use Cuckoo with [Carthage](https://github.com/Carthage/Carthage) add this line to your Cartfile:
-```
-github "Brightify/Cuckoo"
-```
-
-Then use the `Run script` from above and replace
-```bash
-"${PODS_ROOT}/Cuckoo/run"
-```
-with
-```bash
-"Carthage/Checkouts/Cuckoo/run"
-```
-
-Don't forget to add the Framework into your project.
 
 ### 2. Cuckoofile customization
 At the root of your project, create `Cuckoofile.toml` configuration file:

@@ -1,5 +1,3 @@
-# Changelog
-
 ## 1.4.1
 - Sidestep `SourceKit`'s off-by-one bug when parsing generic parameter inheritance.
 - Fix incorrect `where` clause parsing.
@@ -130,7 +128,7 @@
 - This release works with Swift 3.1
 
 ## 0.8.4
-- Added support for inheritance mocking.  
+- Added support for inheritance mocking.
 
 ## 0.8.3
 - Added support for `fileprivate` (thanks to lvdstam for implementation).
