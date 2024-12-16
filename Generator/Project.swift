@@ -1,13 +1,13 @@
 import ProjectDescription
 import ProjectDescriptionHelpers
 
-let target = Target(
+let target = Target.target(
     name: "Cuckoonator",
-    platform: .macOS,
+    destinations: .macOS,
     product: .commandLineTool,
     productName: "cuckoonator",
     bundleId: "Cuckoonator",
-    deploymentTarget: .macOS(targetVersion: "12.0"),
+    deploymentTargets: .macOS("12.0"),
     sources: "Sources/**",
     dependencies: [
         "FileKit",
@@ -18,16 +18,16 @@ let target = Target(
         "TOMLKit",
         "XcodeProj",
         "Rainbow",
-    ].map(TargetDependency.package(product:))
+    ].map { TargetDependency.package(product: $0) }
 )
 
-let testTarget = Target(
+let testTarget = Target.target(
     name: "CuckoonatorTests",
-    platform: .macOS,
+    destinations: .macOS,
     product: .unitTests,
     bundleId: "CuckoonatorTests",
-    deploymentTarget: target.deploymentTarget,
-    sources: SourceFilesList(globs: [
+    deploymentTargets: target.deploymentTargets,
+    sources: SourceFilesList.sourceFilesList(globs: [
         // TODO: This is wrong but testing CLI is not supported, must separate generator into CLI and internal targets.
         target.sources?.globs,
         ["Tests/**"],
@@ -56,12 +56,12 @@ let project = Project(
         testTarget,
     ],
     schemes: [
-        Scheme(
+        Scheme.scheme(
             name: "Generator",
             buildAction: BuildAction.buildAction(
                 targets: ["Cuckoonator"],
                 postActions: [
-                    ExecutionAction(
+                    ExecutionAction.executionAction(
                         title: "Copy executable",
                         scriptText: #"\cp "$BUILT_PRODUCTS_DIR/$EXECUTABLE_NAME" "$PROJECT_DIR/bin/cuckoonator""#,
                         target: "Cuckoonator"
@@ -69,17 +69,17 @@ let project = Project(
                 ],
                 runPostActionsOnFailure: false
             ),
-            testAction: TestAction.targets([TestableTarget(target: testTarget.reference)]),
+            testAction: TestAction.targets([TestableTarget.testableTarget(target: testTarget.reference)]),
             runAction: RunAction.runAction(
                 executable: "Cuckoonator",
-                arguments: Arguments(
-                    environment: [
+                arguments: Arguments.arguments(
+                    environmentVariables: [
                         "PROJECT_DIR": Environment.projectDir.requireString(message: "TUIST_PROJECT_DIR environment property is required."),
                     ],
                     launchArguments: [
                         // Any changes here should be reflected in `../Project.swift` as well.
-                        LaunchArgument(name: "--configuration ./Cuckoofile", isEnabled: true),
-                        LaunchArgument(name: "--verbose", isEnabled: true),
+                        LaunchArgument.launchArgument(name: "--configuration ./Cuckoofile", isEnabled: true),
+                        LaunchArgument.launchArgument(name: "--verbose", isEnabled: true),
                     ]
                 )
             )

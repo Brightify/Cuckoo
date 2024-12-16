@@ -1,17 +1,9 @@
 import ProjectDescription
 
 public extension Optional<Environment.Value> {
-    func requireString(message: String) -> String {
+    func requireString(message: String, isEnabled: Bool = true) -> EnvironmentVariable {
         if case .string(let value) = self {
-            return value
-        } else {
-            fatalError(message)
-        }
-    }
-
-    func requireBool(message: String) -> Bool {
-        if case .boolean(let value) = self {
-            return value
+            return EnvironmentVariable.environmentVariable(value: value, isEnabled: isEnabled)
         } else {
             fatalError(message)
         }

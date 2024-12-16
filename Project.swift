@@ -18,12 +18,12 @@ func platformSet(platform: PlatformType) -> (targets: [Target], schemes: [Scheme
     var schemes: [Scheme] = []
 
     // MARK: Swift targets.
-    let defaultTarget = Target(
+    let defaultTarget = Target.target(
         name: "Cuckoo-\(platform)",
-        platform: platform.platform,
+        destinations: platform.destinations,
         product: .framework,
         bundleId: "org.brightify.Cuckoo",
-        deploymentTarget: platform.libraryDeploymentTarget,
+        deploymentTargets: platform.deploymentTargets,
         infoPlist: .default,
         sources: [
             "Source/**",
@@ -38,12 +38,12 @@ func platformSet(platform: PlatformType) -> (targets: [Target], schemes: [Scheme
     )
     targets.append(defaultTarget)
 
-    let mocksTarget = Target(
+    let mocksTarget = Target.target(
         name: "Cuckoo-\(platform)Tests-Mocks",
-        platform: platform.platform,
+        destinations: platform.destinations,
         product: .framework,
         bundleId: "org.brightify.Cuckoo",
-        deploymentTarget: platform.libraryDeploymentTarget,
+        deploymentTargets: platform.deploymentTargets,
         infoPlist: .default,
         sources: [
             "Tests/Swift/Generated/*.swift",
@@ -70,21 +70,21 @@ func platformSet(platform: PlatformType) -> (targets: [Target], schemes: [Scheme
             ),
         ],
         dependencies: [
-            .target(name: defaultTarget.name),
+            .target(defaultTarget),
             .sdk(name: "XCTest", type: .framework, status: .optional),
         ],
         settings: Settings.settings(base: mocksBuildSettingsBase)
     )
     targets.append(mocksTarget)
 
-    let defaultTestTarget = Target(
+    let defaultTestTarget = Target.target(
         name: "Cuckoo-\(platform)Tests",
-        platform: platform.platform,
+        destinations: platform.destinations,
         product: .unitTests,
         bundleId: "org.brightify.Cuckoo",
-        deploymentTarget: platform.testDeploymentTarget,
+        deploymentTargets: platform.deploymentTargets,
         infoPlist: .default,
-        sources: .init(globs: [
+        sources: SourceFilesList.sourceFilesList(globs: [
             .glob("Tests/Common/**"),
             .glob("Tests/OCMock/**"),
             .glob("Tests/Swift/**", excluding: [
@@ -93,8 +93,8 @@ func platformSet(platform: PlatformType) -> (targets: [Target], schemes: [Scheme
             ]),
         ]),
         dependencies: [
-            .target(name: defaultTarget.name),
-            .target(name: mocksTarget.name),
+            .target(defaultTarget),
+            .target(mocksTarget),
             .package(product: "OCMock"),
         ]
     )
@@ -102,10 +102,10 @@ func platformSet(platform: PlatformType) -> (targets: [Target], schemes: [Scheme
 
     // MARK: Schemes.
     schemes.append(
-        Scheme(
+        Scheme.scheme(
             name: defaultTarget.name,
             buildAction: BuildAction.buildAction(targets: [defaultTarget.reference, mocksTarget.reference]),
-            testAction: TestAction.targets([.init(target: defaultTestTarget.reference)])
+            testAction: TestAction.targets([TestableTarget.testableTarget(target: defaultTestTarget.reference)])
         )
     )
 

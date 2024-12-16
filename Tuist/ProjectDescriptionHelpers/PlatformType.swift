@@ -6,42 +6,29 @@ public enum PlatformType: String {
     case tvOS
     case watchOS
 
-    public var platform: Platform {
+    public var destinations: Destinations {
         switch self {
         case .iOS:
-            return .iOS
+            return [.iPhone, .iPad]
         case .macOS:
-            return .macOS
+            return [.mac]
         case .tvOS:
-            return .tvOS
+            return [.appleTv]
         case .watchOS:
-            return .watchOS
+            return [.appleWatch]
         }
     }
 
-    public var libraryDeploymentTarget: DeploymentTarget {
+    public var deploymentTargets: DeploymentTargets {
         switch self {
         case .iOS:
-            return .iOS(targetVersion: "13.0", devices: [.iphone, .ipad])
+            return .iOS("13.0")
         case .macOS:
-            return .macOS(targetVersion: "10.15")
+            return .macOS("10.15")
         case .tvOS:
-            return .tvOS(targetVersion: "13.0")
+            return .tvOS("13.0")
         case .watchOS:
-            return .watchOS(targetVersion: "8.0")
-        }
-    }
-
-    public var testDeploymentTarget: DeploymentTarget {
-        switch self {
-        case .iOS:
-            return .iOS(targetVersion: "13.0", devices: [.iphone, .ipad])
-        case .macOS:
-            return .macOS(targetVersion: "10.15")
-        case .tvOS:
-            return .tvOS(targetVersion: "13.0")
-        case .watchOS:
-            return .watchOS(targetVersion: "8.0")
+            return .watchOS("8.0")
         }
     }
 }
