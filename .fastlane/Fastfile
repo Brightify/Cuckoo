@@ -1,5 +1,3 @@
-fastlane_version '2.54.1'
-
 default_platform :mac
 
 fastlane_require 'json'
@@ -66,18 +64,21 @@ platform :mac do
     base_url = "github.com/repos/#{repo_path}/releases"
     api_url = "https://api.#{base_url}"
     auth_string = "#{username}:#{access_token}"
-    changelog = create_changelog.gsub(/`/, '``').gsub(/'/, '&#39;').gsub(/"/, '&#34;').gsub(/\n/, '\\n')
+    changelog = create_changelog
 
     # Make sure the changed podspec is valid.
     pod_lib_lint(allow_warnings: true)
 
-    git_commit(path: ['./Cuckoo.podspec', 'version'], message: "Bump version.")
+    sh(%Q[echo "$(echo '#{changelog}\\n' | cat - ../CHANGELOG.md)" > ../CHANGELOG.md])
+
+    git_commit(path: ['./Cuckoo.podspec', 'version', 'CHANGELOG.md'], message: "Bump version.")
     add_git_tag(tag: version)
     push_to_git_remote
 
     # https://developer.github.com/v3/repos/releases/#create-a-release
     release_title = "#{version}"
-    release_body = "#{changelog}"
+    prepared_changelog = changelog.gsub(/`/, '``').gsub(/'/, '&#39;').gsub(/"/, '&#34;').gsub(/\n/, '\\n')
+    release_body = "#{prepared_changelog}"
     creation_body = "'{\"tag_name\":\"#{version}\",\"target_commitish\":\"master\", \"name\":\"#{release_title}\", \"body\":\"#{release_body}\", \"draft\":false, \"prerelease\":false}'"
     creation_response = JSON.parse(`curl -X POST -d #{creation_body} -u #{auth_string} #{api_url} -v`)
     UI.crash! 'Release creation failed!' unless creation_response
