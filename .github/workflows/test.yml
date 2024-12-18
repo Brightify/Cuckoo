@@ -1,0 +1,44 @@
+name: Run tests
+on: [push]
+# on:
+  # push:
+  #   branches: [$default-branch]
+  # pull_request:
+  #   branches: [$default-branch]
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test_macOS:
+    name: Build and Test on macOS
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: List available Xcode versions
+        run: ls /Applications | grep Xcode
+      - name: Show current version of Xcode
+        run: xcodebuild -version
+      - name: Test
+        run: |
+          make ci
+          xcodebuild test -scheme "Cuckoo-macOS" -workspace Cuckoo.xcworkspace \
+            | xcbeautify --renderer github-actions
+
+  test_iOS:
+    name: Build and Test on iOS simulator
+    runs-on: macos-15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: List available Xcode versions
+        run: ls /Applications | grep Xcode
+      - name: Show current version of Xcode
+        run: xcodebuild -version
+      - name: Test
+        run: |
+          make ci
+          xcodebuild test -scheme "Cuckoo-iOS" -workspace Cuckoo.xcworkspace \
+            -destination "platform=iOS Simulator,name=iPhone 16,OS=18.0" \
+            | xcbeautify -–renderer github-actions

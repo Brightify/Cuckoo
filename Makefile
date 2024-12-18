@@ -20,3 +20,13 @@ init:
 
 	# Generate Cuckoo workspace.
 	make dev
+
+ci:
+	# Install Tuist if not present.
+	if ! command -v tuist &> /dev/null; then curl -Ls https://install.tuist.io | bash; fi
+
+	# Create generated mocks file which will be populated later.
+	touch "Tests/Swift/Generated/GeneratedMocks.swift"
+
+	# Generate Cuckoo workspace.
+	make dev
