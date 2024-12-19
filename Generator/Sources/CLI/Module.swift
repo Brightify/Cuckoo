@@ -35,7 +35,9 @@ final class Module {
             keepDocumentation: dto.options?.keepDocumentation ?? true,
             enableInheritance: dto.options?.enableInheritance ?? true,
             protocolsOnly: dto.options?.protocolsOnly ?? false,
-            omitHeaders: dto.options?.omitHeaders ?? false
+            omitHeaders: dto.options?.omitHeaders ?? false,
+            filePrefix: dto.options?.filePrefix?.joined(separator: "\n").appending("\n") ?? "",
+            fileSuffix: dto.options?.fileSuffix?.joined(separator: "\n").appending("\n") ?? ""
         )
 
         if let xcodeproj = dto.xcodeproj {
@@ -64,6 +66,8 @@ final class Module {
         let enableInheritance: Bool
         let protocolsOnly: Bool
         let omitHeaders: Bool
+        let filePrefix: String
+        let fileSuffix: String
     }
 
     struct Xcodeproj {
@@ -107,6 +111,8 @@ extension Module {
             let enableInheritance: Bool?
             let protocolsOnly: Bool?
             let omitHeaders: Bool?
+            let filePrefix: [String]?
+            let fileSuffix: [String]?
         }
 
         struct Xcodeproj: Decodable {
