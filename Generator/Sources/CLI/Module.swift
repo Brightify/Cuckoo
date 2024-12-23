@@ -6,6 +6,7 @@ final class Module {
 
     let name: String
     let imports: [String]
+    let publicImports: [String]
     let testableImports: [String]
     let sources: [Path]?
     let exclude: [String]
@@ -22,6 +23,7 @@ final class Module {
 
         self.name = name
         self.imports = dto.imports?.map(\.trimmed) ?? []
+        self.publicImports = dto.publicImports?.map(\.trimmed) ?? []
         self.testableImports = dto.testableImports?.map(\.trimmed) ?? []
         self.sources = dto.sources?.map(\.trimmed).map { source in
             Path(source, expandingTilde: true).relative(to: configurationPath.parent)
@@ -92,6 +94,7 @@ final class Module {
 extension Module {
     struct DTO: Decodable {
         let imports: [String]?
+        let publicImports: [String]?
         let testableImports: [String]?
         let sources: [String]?
         let exclude: [String]?
