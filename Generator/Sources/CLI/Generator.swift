@@ -70,7 +70,7 @@ final class Generator {
                 path: file.file.path,
                 contents: [
                     module.options.omitHeaders ? nil : FileHeaderHandler.header(for: file, timestamp: timestamp),
-                    FileHeaderHandler.imports(for: file, imports: module.imports, testableImports: module.testableImports),
+                    FileHeaderHandler.imports(for: file, imports: module.imports, publicImports: module.publicImports, testableImports: module.testableImports),
                     try GeneratorHelper.generate(tokens: file.tokens),
                 ]
                 .compactMap { $0 }

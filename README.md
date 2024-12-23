@@ -97,6 +97,8 @@ output = "Tests/Swift/Generated/GeneratedMocks.swift"
 output = "Tests/Swift/Generated/GeneratedMocks+MyProject.swift"
 # Standard imports added to the generated file(s).
 imports = ["Foundation"]
+# Public imports if needed due to imports being internal by default from Swift 6.
+publicImports = ["ExampleModule"]
 # @testable imports if needed.
 testableImports = ["RxSwift"]
 sources = [
