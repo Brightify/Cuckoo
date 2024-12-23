@@ -123,6 +123,7 @@ extension Module: CustomDebugStringConvertible {
     var debugDescription: String {
         [
             "imports:\(imports.map { "\n\t-\($0.bold)" }.joined(separator: ", "))",
+            "public imports:\(publicImports.map { "\n\t-\($0.bold)" }.joined(separator: ", "))",
             "testable imports:\(testableImports.map { "\n\t-\($0.bold)" }.joined(separator: ", "))",
             sources.map { "sources:\($0.map { "\n\t-\($0.rawValue.bold)" }.joined())" },
             "excluded types:\(exclude.map { "\n\t-\($0.bold)" }.joined())",
