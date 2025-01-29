@@ -41,7 +41,10 @@ let package = Package(
         .target(
             name: "Cuckoo",
             dependencies: ["OCMockWrapper"],
-            path: "Source"
+            path: "Source",
+            swiftSettings: [
+                .unsafeFlags(["-enable-library-evolution"]),
+            ]
         ),
         .testTarget(
             name: "CuckooTests",
