@@ -33,14 +33,13 @@ Pod::Spec.new do |s|
   s.default_subspec             = 'Swift'
 
   s.subspec 'Swift' do |sub|
-    sub.source_files = [
-      'Source/**/*.swift',
-      'OCMock/**/*.{h,m,swift}',
-    ]
+    sub.source_files = ['Source/**/*.swift']
   end
 
   s.subspec 'OCMock' do |sub|
+    sub.source_files = 'OCMock/**/*.{h,m,swift}'
     sub.source_files = []
     sub.dependency 'Cuckoo/Swift'
+    sub.dependency 'OCMock', '3.9.3'
   end
 end
