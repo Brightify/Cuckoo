@@ -1,3 +1,17 @@
+- Fix podspec.
+- Improve code readability.
+- Add GitHub test action.
+- docs: update README.md for contribute section
+- Add public imports to configuration
+- Update Tuist.
+- Automatically prepend changelog.
+- Remove Carthage support.
+- Simplify project and add watchOS support.
+- Fixed typeErasure template when method.isThrowing
+- Fix automatic version file generation during release.
+- Update Version.swift
+- Fix OCMock integration not working properly.
+
 ## 1.4.1
 - Sidestep `SourceKit`'s off-by-one bug when parsing generic parameter inheritance.
 - Fix incorrect `where` clause parsing.
