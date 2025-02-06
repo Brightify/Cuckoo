@@ -1,6 +1,6 @@
 import Foundation
 
-// MARK: Closures without any return value
+// MARK: - Closures without any return value
 public func objectiveArgumentClosure<IN1>(from: Any) -> (IN1) -> Void {
     return { in1 in
         var arg = from

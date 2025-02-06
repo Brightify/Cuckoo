@@ -14,7 +14,7 @@ struct TestStructs {
 }
 
 final class ArrayMatcherTest: XCTestCase {
-    // MARK: Contains ANY of the elements.
+    // MARK: - Contains ANY of the elements.
     func testContainsAnyOf() {
         // Variadic parameters.
         XCTAssertFalse(containsAnyOf(values: .init(g: 1), .init(g: 3), where: { $0.g == $1.g }).matches([2].map(TestStructs.N.init)))
@@ -59,7 +59,7 @@ final class ArrayMatcherTest: XCTestCase {
         XCTAssertFalse(containsAnyOf((1...3).map(TestStructs.H.init)).matches([].map(TestStructs.H.init)))
     }
 
-    // MARK: Contains ALL of the elements.
+    // MARK: - Contains ALL of the elements.
     func testContainsAllOf() {
         XCTAssertFalse(containsAllOf(values: .init(g: 1), .init(g: 3), where: { $0.g == $1.g }).matches([2].map(TestStructs.N.init)))
         XCTAssertTrue(containsAllOf(values: .init(g: 1), .init(g: 3), where: { $0.g == $1.g }).matches([1, 2, 3].map(TestStructs.N.init)))
@@ -114,7 +114,7 @@ final class ArrayMatcherTest: XCTestCase {
         XCTAssertTrue(containsAllOf([1, 3, 2, 2, 1]).matches([1, 3, 2, 2, 1]))
     }
 
-    // MARK: Contains NONE of the elements.
+    // MARK: - Contains NONE of the elements.
     func testContainsNoneOf() {
         // Variadic parameters.
         XCTAssertTrue(containsNoneOf(values: .init(g: 1), .init(g: 3), where: { $0.g == $1.g }).matches([2].map(TestStructs.N.init)))
@@ -159,7 +159,7 @@ final class ArrayMatcherTest: XCTestCase {
         XCTAssertTrue(containsNoneOf((1...3).map(TestStructs.H.init)).matches([].map(TestStructs.H.init)))
     }
 
-    // MARK: Has length N (exact, at least, at most).
+    // MARK: - Has length N (exact, at least, at most).
     func testHasLengthExact() {
         XCTAssertTrue(hasLength(exactly: 4).matches([1, 2, 3, 4]))
         XCTAssertFalse(hasLength(exactly: 2).matches([1, 2, 3, 4]))

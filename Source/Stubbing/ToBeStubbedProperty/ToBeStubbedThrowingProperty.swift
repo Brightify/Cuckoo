@@ -1,10 +1,3 @@
-//
-//  ToBeStubbedThrowingProperty.swift
-//  Cuckoo
-//
-//  Created by Kabir Oberai on 2023-03-27.
-//
-
 public protocol ToBeStubbedThrowingProperty {
     associatedtype GetterType: StubThrowingFunction
 
@@ -16,8 +9,13 @@ public struct ProtocolToBeStubbedThrowingProperty<MOCK: ProtocolMock, T>: ToBeSt
     private let name: String
 
     public var get: ProtocolStubThrowingFunction<Void, T> {
-        return ProtocolStubThrowingFunction(stub:
-            manager.createStub(for: MOCK.self, method: getterName(name), parameterMatchers: []))
+        ProtocolStubThrowingFunction(
+            stub: manager.createStub(
+                for: MOCK.self,
+                method: getterName(name),
+                parameterMatchers: []
+            )
+        )
     }
 
     public init(manager: MockManager, name: String) {
@@ -31,8 +29,13 @@ public struct ClassToBeStubbedThrowingProperty<MOCK: ClassMock, T>: ToBeStubbedT
     private let name: String
 
     public var get: ClassStubThrowingFunction<Void, T> {
-        return ClassStubThrowingFunction(stub:
-            manager.createStub(for: MOCK.self, method: getterName(name), parameterMatchers: []))
+        ClassStubThrowingFunction(
+            stub: manager.createStub(
+                for: MOCK.self,
+                method: getterName(name),
+                parameterMatchers: []
+            )
+        )
     }
 
     public init(manager: MockManager, name: String) {

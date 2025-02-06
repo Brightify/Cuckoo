@@ -2,8 +2,8 @@ extension Set: Matchable where Element: Matchable, Element == Element.MatchedTyp
     public typealias MatchedType = Set<Element>
 
     public var matcher: ParameterMatcher<Set<Element>> {
-        return ParameterMatcher<Set<Element>> { other in
-            return self == other
+        ParameterMatcher<Set<Element>> { other in
+            self == other
         }
     }
 }

@@ -1,10 +1,16 @@
 import Foundation
 
-public func createMock<MOCKED: Mocked>(for mockedType: MOCKED.Type, configuration: (MockBuilder, MOCKED.MockType.Stubbing) -> MOCKED.MockType) -> MOCKED.MockType {
-    return createMock(MOCKED.MockType.self, configuration: configuration)
+public func createMock<MOCKED: Mocked>(
+    for mockedType: MOCKED.Type,
+    configuration: (MockBuilder, MOCKED.MockType.Stubbing) -> MOCKED.MockType
+) -> MOCKED.MockType {
+    createMock(MOCKED.MockType.self, configuration: configuration)
 }
 
-public func createMock<MOCK: Mock>(_ mockType: MOCK.Type, configuration: (MockBuilder, MOCK.Stubbing) -> MOCK) -> MOCK {
+public func createMock<MOCK: Mock>(
+    _ mockType: MOCK.Type,
+    configuration: (MockBuilder, MOCK.Stubbing) -> MOCK
+) -> MOCK {
     let manager = MockManager(hasParent: MOCK.cuckoo_hasSuperclass)
 
     MockManager.preconfiguredManagerThreadLocal.value = manager

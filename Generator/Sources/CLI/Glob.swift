@@ -74,7 +74,7 @@ final class Glob: Collection {
         clearCaches()
     }
 
-    // MARK: Private
+    // MARK: - Private
 
     private var globalFlags = GLOB_TILDE | GLOB_BRACE | GLOB_MARK
 
@@ -166,7 +166,7 @@ final class Glob: Collection {
         }
     }
 
-    // MARK: Subscript Support
+    // MARK: - Subscript Support
 
     subscript(i: Int) -> String {
         return paths[i]

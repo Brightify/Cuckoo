@@ -12,7 +12,12 @@ struct FileHeaderHandler {
         .joined(separator: " ")
     }
 
-    static func imports(for file: FileRepresentation, imports: [String], publicImports: [String], testableImports: [String]) -> String {
+    static func imports(
+        for file: FileRepresentation,
+        imports: [String],
+        publicImports: [String],
+        testableImports: [String]
+    ) -> String {
         [
             !publicImports.contains("Cuckoo") ? ["import Cuckoo"] : [],
             OrderedSet(file.imports.map { $0.description } + imports).values

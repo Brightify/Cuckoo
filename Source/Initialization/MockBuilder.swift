@@ -6,6 +6,7 @@ public class MockBuilder {
     init(manager: MockManager) {
         self.manager = manager
     }
+
     public func enableSuperclassSpy() {
         manager.enableSuperclassSpy()
     }

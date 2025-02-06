@@ -2,7 +2,7 @@ extension Array: Matchable where Element: Matchable, Element == Element.MatchedT
     public typealias MatchedType = [Element]
 
     public var matcher: ParameterMatcher<[Element]> {
-        return ParameterMatcher<[Element]> { other in
+        ParameterMatcher<[Element]> { other in
             guard self.count == other.count else { return false }
             return zip(self, other).allSatisfy { $0.matcher.matches($1) }
         }
@@ -10,15 +10,18 @@ extension Array: Matchable where Element: Matchable, Element == Element.MatchedT
 }
 
 
-// MARK: Contains ANY of the elements.
+// MARK: - Contains ANY of the elements.
 /**
  * Matcher for sequences of elements that checks if at least one of the passed elements matches the passed sequence.
  * - parameter values: Variadic elements that are used for matching.
  * - parameter where: Closure for determining equality of elements that don't conform to `Equatable`.
  * - returns: ParameterMatcher object.
  */
-public func containsAnyOf<T, S: Sequence>(values elements: T..., where equality: @escaping (T, T) -> Bool) -> ParameterMatcher<S> where T == S.Element {
-    return containsAnyOf(elements, where: equality)
+public func containsAnyOf<T, S: Sequence>(
+    values elements: T...,
+    where equality: @escaping (T, T) -> Bool
+) -> ParameterMatcher<S> where T == S.Element {
+    containsAnyOf(elements, where: equality)
 }
 /**
  * Matcher for sequences of elements that checks if at least one of the passed elements matches the passed sequence.
@@ -26,8 +29,11 @@ public func containsAnyOf<T, S: Sequence>(values elements: T..., where equality:
  * - parameter where: Closure for determining equality of elements that don't conform to `Equatable`.
  * - returns: ParameterMatcher object.
  */
-public func containsAnyOf<IN: Sequence, OUT: Sequence>(_ elements: IN, where equality: @escaping (IN.Element, IN.Element) -> Bool) -> ParameterMatcher<OUT> where IN.Element == OUT.Element {
-    return ParameterMatcher { sequence in
+public func containsAnyOf<IN: Sequence, OUT: Sequence>(
+    _ elements: IN,
+    where equality: @escaping (IN.Element, IN.Element) -> Bool
+) -> ParameterMatcher<OUT> where IN.Element == OUT.Element {
+    ParameterMatcher { sequence in
         elements.contains { element in
             sequence.contains {
                 equality($0, element)
@@ -41,16 +47,20 @@ public func containsAnyOf<IN: Sequence, OUT: Sequence>(_ elements: IN, where equ
  * - parameter values: Variadic elements that are used for matching.
  * - returns: ParameterMatcher object.
  */
-public func containsAnyOf<T: Equatable, S: Sequence>(values elements: T...) -> ParameterMatcher<S> where T == S.Element {
-    return containsAnyOf(elements)
+public func containsAnyOf<T: Equatable, S: Sequence>(
+    values elements: T...
+) -> ParameterMatcher<S> where T == S.Element {
+    containsAnyOf(elements)
 }
 /**
  * Matcher for sequences of `Equatable` elements that checks if at least one of the passed elements matches the passed sequence.
  * - parameter elements: Elements that are used for matching.
  * - returns: ParameterMatcher object.
  */
-public func containsAnyOf<IN: Sequence, OUT: Sequence>(_ elements: IN) -> ParameterMatcher<OUT> where IN.Element: Equatable, IN.Element == OUT.Element {
-    return containsAnyOf(elements, where: ==)
+public func containsAnyOf<IN: Sequence, OUT: Sequence>(
+    _ elements: IN
+) -> ParameterMatcher<OUT> where IN.Element: Equatable, IN.Element == OUT.Element {
+    containsAnyOf(elements, where: ==)
 }
 
 /**
@@ -58,16 +68,20 @@ public func containsAnyOf<IN: Sequence, OUT: Sequence>(_ elements: IN) -> Parame
  * - parameter values: Variadic elements that are used for matching.
  * - returns: ParameterMatcher object.
  */
-public func containsAnyOf<T: Hashable, S: Sequence>(values elements: T...) -> ParameterMatcher<S> where T == S.Element {
-    return containsAnyOf(elements)
+public func containsAnyOf<T: Hashable, S: Sequence>(
+    values elements: T...
+) -> ParameterMatcher<S> where T == S.Element {
+    containsAnyOf(elements)
 }
 /**
  * Matcher for sequences of `Hashable` elements that checks if at least one of the passed elements matches the passed sequence.
  * - parameter elements: Elements that are used for matching.
  * - returns: ParameterMatcher object.
  */
-public func containsAnyOf<IN: Sequence, OUT: Sequence>(_ elements: IN) -> ParameterMatcher<OUT> where IN.Element: Hashable, IN.Element == OUT.Element {
-    return ParameterMatcher { sequence in
+public func containsAnyOf<IN: Sequence, OUT: Sequence>(
+    _ elements: IN
+) -> ParameterMatcher<OUT> where IN.Element: Hashable, IN.Element == OUT.Element {
+    ParameterMatcher { sequence in
         let set = Set(sequence)
         let elementsSet = Set(elements)
         return !set.isDisjoint(with: elementsSet)
@@ -75,7 +89,7 @@ public func containsAnyOf<IN: Sequence, OUT: Sequence>(_ elements: IN) -> Parame
 }
 
 
-// MARK: Contains ALL of the elements.
+// MARK: - Contains ALL of the elements.
 /**
  * Matcher for sequences of elements that checks if all of the passed elements match the passed sequence.
  * - parameter values: Variadic elements that are used for matching.
@@ -83,8 +97,11 @@ public func containsAnyOf<IN: Sequence, OUT: Sequence>(_ elements: IN) -> Parame
  * - returns: ParameterMatcher object.
  * - NOTE: When matching an Array, this matcher expects items as many times as they are present in the passed elements.
  */
-public func containsAllOf<T, S: Sequence>(values elements: T..., where equality: @escaping (T, T) -> Bool) -> ParameterMatcher<S> where T == S.Element {
-    return containsAllOf(elements, where: equality)
+public func containsAllOf<T, S: Sequence>(
+    values elements: T...,
+    where equality: @escaping (T, T) -> Bool
+) -> ParameterMatcher<S> where T == S.Element {
+    containsAllOf(elements, where: equality)
 }
 /**
  * Matcher for sequences of elements that checks if all of the passed elements match the passed sequence.
@@ -93,8 +110,11 @@ public func containsAllOf<T, S: Sequence>(values elements: T..., where equality:
  * - returns: ParameterMatcher object.
  * - NOTE: When passing an Array, this matcher expects items as many times as they are present in the passed elements.
  */
-public func containsAllOf<IN: Sequence, OUT: Sequence>(_ elements: IN, where equality: @escaping (IN.Element, IN.Element) -> Bool) -> ParameterMatcher<OUT> where IN.Element == OUT.Element {
-    return ParameterMatcher { sequence in
+public func containsAllOf<IN: Sequence, OUT: Sequence>(
+    _ elements: IN,
+    where equality: @escaping (IN.Element, IN.Element) -> Bool
+) -> ParameterMatcher<OUT> where IN.Element == OUT.Element {
+    ParameterMatcher { sequence in
         var matchedSequence = sequence.map { (element: $0, matched: false) }
         for element in elements {
             if let matchedIndex = matchedSequence.firstIndex(where: { !$0.matched && equality($0.element, element) }) {
@@ -113,8 +133,10 @@ public func containsAllOf<IN: Sequence, OUT: Sequence>(_ elements: IN, where equ
  * - returns: ParameterMatcher object.
  * - NOTE: When passing an Array, this matcher expects items as many times as they are present in the passed elements.
  */
-public func containsAllOf<T: Equatable, S: Sequence>(values elements: T...) -> ParameterMatcher<S> where T == S.Element {
-    return containsAllOf(elements)
+public func containsAllOf<T: Equatable, S: Sequence>(
+    values elements: T...
+) -> ParameterMatcher<S> where T == S.Element {
+    containsAllOf(elements)
 }
 /**
  * Matcher for sequences of `Equatable` elements that checks if all of the passed elements match the passed sequence.
@@ -122,8 +144,10 @@ public func containsAllOf<T: Equatable, S: Sequence>(values elements: T...) -> P
  * - returns: ParameterMatcher object.
  * - NOTE: When passing an Array, this matcher expects items as many times as they are present in the passed elements.
  */
-public func containsAllOf<IN: Sequence, OUT: Sequence>(_ elements: IN) -> ParameterMatcher<OUT> where IN.Element: Equatable, IN.Element == OUT.Element {
-    return containsAllOf(elements, where: ==)
+public func containsAllOf<IN: Sequence, OUT: Sequence>(
+    _ elements: IN
+) -> ParameterMatcher<OUT> where IN.Element: Equatable, IN.Element == OUT.Element {
+    containsAllOf(elements, where: ==)
 }
 
 /**
@@ -133,7 +157,7 @@ public func containsAllOf<IN: Sequence, OUT: Sequence>(_ elements: IN) -> Parame
  * - NOTE: When passing an Array, this matcher expects items as many times as they are present in the passed elements.
  */
 public func containsAllOf<T: Hashable>(values elements: T...) -> ParameterMatcher<[T]> {
-    return containsAllOf(elements)
+    containsAllOf(elements)
 }
 /**
  * Matcher for sequences of `Hashable` elements that checks if all of the passed elements match the passed sequence.
@@ -141,8 +165,10 @@ public func containsAllOf<T: Hashable>(values elements: T...) -> ParameterMatche
  * - returns: ParameterMatcher object.
  * - NOTE: When passing an Array, this matcher expects items as many times as they are present in the passed elements.
  */
-public func containsAllOf<IN: Sequence, OUT: Sequence>(_ elements: IN) -> ParameterMatcher<OUT> where IN.Element: Hashable, IN.Element == OUT.Element {
-    return ParameterMatcher { sequence in
+public func containsAllOf<IN: Sequence, OUT: Sequence>(
+    _ elements: IN
+) -> ParameterMatcher<OUT> where IN.Element: Hashable, IN.Element == OUT.Element {
+    ParameterMatcher { sequence in
         let sequenceDictionary: [IN.Element: Int] = sequence.reduce(into: [:]) { dictionary, element in
             dictionary[element, default: 0] += 1
         }
@@ -160,7 +186,9 @@ public func containsAllOf<IN: Sequence, OUT: Sequence>(_ elements: IN) -> Parame
  * - parameter elements: Elements that are used for matching.
  * - returns: ParameterMatcher object.
  */
-public func containsAllOf<IN: Sequence, OUT: Sequence>(_ elements: IN) -> ParameterMatcher<OUT> where IN.Element: Hashable, IN.Element == OUT.Element, IN: SetAlgebra {
+public func containsAllOf<IN: Sequence, OUT: Sequence>(
+    _ elements: IN
+) -> ParameterMatcher<OUT> where IN.Element: Hashable, IN.Element == OUT.Element, IN: SetAlgebra {
     return ParameterMatcher { sequence in
         let set = Set(sequence)
         let elementsSet = Set(elements)
@@ -169,15 +197,18 @@ public func containsAllOf<IN: Sequence, OUT: Sequence>(_ elements: IN) -> Parame
 }
 
 
-// MARK: Contains NONE of the elements.
+// MARK: - Contains NONE of the elements.
 /**
  * Matcher for sequences of elements that checks if none of the passed elements match the passed sequence.
  * - parameter values: Variadic elements that are used for matching.
  * - parameter where: Closure for determining equality of elements that don't conform to `Equatable`.
  * - returns: ParameterMatcher object.
  */
-public func containsNoneOf<T, S: Sequence>(values elements: T..., where equality: @escaping (T, T) -> Bool) -> ParameterMatcher<S> where T == S.Element {
-    return containsNoneOf(elements, where: equality)
+public func containsNoneOf<T, S: Sequence>(
+    values elements: T...
+    , where equality: @escaping (T, T) -> Bool
+) -> ParameterMatcher<S> where T == S.Element {
+    containsNoneOf(elements, where: equality)
 }
 /**
  * Matcher for sequences of elements that checks if none of the passed elements match the passed sequence.
@@ -185,8 +216,11 @@ public func containsNoneOf<T, S: Sequence>(values elements: T..., where equality
  * - parameter where: Closure for determining equality of elements that don't conform to `Equatable`.
  * - returns: ParameterMatcher object.
  */
-public func containsNoneOf<IN: Sequence, OUT: Sequence>(_ elements: IN, where equality: @escaping (IN.Element, IN.Element) -> Bool) -> ParameterMatcher<OUT> where IN.Element == OUT.Element {
-    return not(containsAnyOf(elements, where: equality))
+public func containsNoneOf<IN: Sequence, OUT: Sequence>(
+    _ elements: IN,
+    where equality: @escaping (IN.Element, IN.Element) -> Bool
+) -> ParameterMatcher<OUT> where IN.Element == OUT.Element {
+    not(containsAnyOf(elements, where: equality))
 }
 
 /**
@@ -195,8 +229,10 @@ public func containsNoneOf<IN: Sequence, OUT: Sequence>(_ elements: IN, where eq
  * - parameter where: Closure for determining equality of elements that don't conform to `Equatable`.
  * - returns: ParameterMatcher object.
  */
-public func containsNoneOf<T: Equatable, S: Sequence>(values elements: T...) -> ParameterMatcher<S> where T == S.Element {
-    return containsNoneOf(elements)
+public func containsNoneOf<T: Equatable, S: Sequence>(
+    values elements: T...
+) -> ParameterMatcher<S> where T == S.Element {
+    containsNoneOf(elements)
 }
 /**
  * Matcher for sequences of `Equatable` elements that checks if none of the passed elements match the passed sequence.
@@ -204,8 +240,10 @@ public func containsNoneOf<T: Equatable, S: Sequence>(values elements: T...) -> 
  * - parameter where: Closure for determining equality of elements that don't conform to `Equatable`.
  * - returns: ParameterMatcher object.
  */
-public func containsNoneOf<IN: Sequence, OUT: Sequence>(_ elements: IN) -> ParameterMatcher<OUT> where IN.Element: Equatable, IN.Element == OUT.Element {
-    return containsNoneOf(elements, where: ==)
+public func containsNoneOf<IN: Sequence, OUT: Sequence>(
+    _ elements: IN
+) -> ParameterMatcher<OUT> where IN.Element: Equatable, IN.Element == OUT.Element {
+    containsNoneOf(elements, where: ==)
 }
 
 /**
@@ -214,8 +252,10 @@ public func containsNoneOf<IN: Sequence, OUT: Sequence>(_ elements: IN) -> Param
  * - parameter where: Closure for determining equality of elements that don't conform to `Equatable`.
  * - returns: ParameterMatcher object.
  */
-public func containsNoneOf<T: Hashable, S: Sequence>(values elements: T...) -> ParameterMatcher<S> where T == S.Element {
-    return containsNoneOf(elements)
+public func containsNoneOf<T: Hashable, S: Sequence>(
+    values elements: T...
+) -> ParameterMatcher<S> where T == S.Element {
+    containsNoneOf(elements)
 }
 /**
  * Matcher for sequences of `Hashable` elements that checks if none of the passed elements match the passed sequence.
@@ -223,19 +263,21 @@ public func containsNoneOf<T: Hashable, S: Sequence>(values elements: T...) -> P
  * - parameter where: Closure for determining equality of elements that don't conform to `Equatable`.
  * - returns: ParameterMatcher object.
  */
-public func containsNoneOf<IN: Sequence, OUT: Sequence>(_ elements: IN) -> ParameterMatcher<OUT> where IN.Element: Hashable, IN.Element == OUT.Element {
-    return not(containsAnyOf(elements))
+public func containsNoneOf<IN: Sequence, OUT: Sequence>(
+    _ elements: IN
+) -> ParameterMatcher<OUT> where IN.Element: Hashable, IN.Element == OUT.Element {
+    not(containsAnyOf(elements))
 }
 
 
-// MARK: Has length N (exact, at least, at most).
+// MARK: - Has length N (exact, at least, at most).
 /**
  * Matcher for collections of elements that checks if the collection is exactly N elements long.
  * - parameter exactly: Required length of the matching collection.
  * - returns: ParameterMatcher object.
  */
 public func hasLength<C: Collection>(exactly requiredExactLength: Int) -> ParameterMatcher<C> {
-    return ParameterMatcher { collection in
+    ParameterMatcher { collection in
         collection.count == requiredExactLength
     }
 }
@@ -246,8 +288,11 @@ public func hasLength<C: Collection>(exactly requiredExactLength: Int) -> Parame
  * - parameter inclusive: Whether the minimum length itself should be included.
  * - returns: ParameterMatcher object.
  */
-public func hasLength<C: Collection>(atLeast requiredMinimumLength: Int, inclusive: Bool = true) -> ParameterMatcher<C> {
-    return ParameterMatcher { collection in
+public func hasLength<C: Collection>(
+    atLeast requiredMinimumLength: Int,
+    inclusive: Bool = true
+) -> ParameterMatcher<C> {
+    ParameterMatcher { collection in
         collection.count > requiredMinimumLength || (inclusive && collection.count == requiredMinimumLength)
     }
 }
@@ -258,8 +303,11 @@ public func hasLength<C: Collection>(atLeast requiredMinimumLength: Int, inclusi
  * - parameter inclusive: Whether the maximum length itself should be included.
  * - returns: ParameterMatcher object.
  */
-public func hasLength<C: Collection>(atMost requiredMaximumLength: Int, inclusive: Bool = true) -> ParameterMatcher<C> {
-    return ParameterMatcher { collection in
+public func hasLength<C: Collection>(
+    atMost requiredMaximumLength: Int,
+    inclusive: Bool = true
+) -> ParameterMatcher<C> {
+    ParameterMatcher { collection in
         collection.count < requiredMaximumLength || (inclusive && collection.count == requiredMaximumLength)
     }
 }
@@ -270,7 +318,10 @@ public func hasLength<C: Collection>(atMost requiredMaximumLength: Int, inclusiv
  * - parameter inclusive: Whether the length range bounds should be included.
  * - returns: ParameterMatcher object.
  */
-public func hasLength<C: Collection>(inRange requiredLengthRange: CountableRange<Int>, inclusive: Bool = true) -> ParameterMatcher<C> {
-    return hasLength(atLeast: requiredLengthRange.lowerBound, inclusive: inclusive)
+public func hasLength<C: Collection>(
+    inRange requiredLengthRange: CountableRange<Int>,
+    inclusive: Bool = true
+) -> ParameterMatcher<C> {
+    hasLength(atLeast: requiredLengthRange.lowerBound, inclusive: inclusive)
         .and(hasLength(atMost: requiredLengthRange.upperBound, inclusive: inclusive))
 }

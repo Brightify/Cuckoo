@@ -9,8 +9,13 @@ public struct ProtocolToBeStubbedReadOnlyProperty<MOCK: ProtocolMock, T>: ToBeSt
     private let name: String
     
     public var get: ProtocolStubFunction<Void, T> {
-        return ProtocolStubFunction(stub:
-            manager.createStub(for: MOCK.self, method: getterName(name), parameterMatchers: []))
+        ProtocolStubFunction(
+            stub: manager.createStub(
+                for: MOCK.self,
+                method: getterName(name),
+                parameterMatchers: []
+            )
+        )
     }
     
     public init(manager: MockManager, name: String) {
@@ -24,8 +29,13 @@ public struct ClassToBeStubbedReadOnlyProperty<MOCK: ClassMock, T>: ToBeStubbedR
     private let name: String
 
     public var get: ClassStubFunction<Void, T> {
-        return ClassStubFunction(stub:
-            manager.createStub(for: MOCK.self, method: getterName(name), parameterMatchers: []))
+        ClassStubFunction(
+            stub: manager.createStub(
+                for: MOCK.self,
+                method: getterName(name),
+                parameterMatchers: []
+            )
+        )
     }
 
     public init(manager: MockManager, name: String) {

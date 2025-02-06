@@ -20,11 +20,11 @@ public protocol Mock: HasMockManager, HasSuperclass {
 
 public extension Mock {
     func getStubbingProxy() -> Stubbing {
-        return Stubbing(manager: cuckoo_manager)
+        Stubbing(manager: cuckoo_manager)
     }
     
     func getVerificationProxy(_ callMatcher: CallMatcher, sourceLocation: SourceLocation) -> Verification {
-        return Verification(manager: cuckoo_manager, callMatcher: callMatcher, sourceLocation: sourceLocation)
+        Verification(manager: cuckoo_manager, callMatcher: callMatcher, sourceLocation: sourceLocation)
     }
 
     func withEnabledDefaultImplementation(_ stub: MocksType) -> Self {
@@ -52,13 +52,12 @@ public extension ClassMock {
 
 public extension ClassMock {
     static var cuckoo_hasSuperclass: Bool {
-        return true
+        true
     }
 }
 
 public extension ProtocolMock {
     static var cuckoo_hasSuperclass: Bool {
-        return false
+        false
     }
 }
-

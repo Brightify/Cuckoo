@@ -9,13 +9,23 @@ public struct ProtocolToBeStubbedProperty<MOCK: ProtocolMock, T>: ToBeStubbedPro
     private let name: String
     
     public var get: ProtocolStubFunction<Void, T> {
-        return ProtocolStubFunction(stub:
-            manager.createStub(for: MOCK.self, method: getterName(name), parameterMatchers: []))
+        ProtocolStubFunction(
+            stub: manager.createStub(
+                for: MOCK.self,
+                method: getterName(name),
+                parameterMatchers: []
+            )
+        )
     }
     
     public func set<M: Matchable>(_ matcher: M) -> ProtocolStubNoReturnFunction<T> where M.MatchedType == T {
-        return ProtocolStubNoReturnFunction(stub:
-            manager.createStub(for: MOCK.self, method: setterName(name), parameterMatchers: [matcher.matcher]))
+        ProtocolStubNoReturnFunction(
+            stub: manager.createStub(
+                for: MOCK.self,
+                method: setterName(name),
+                parameterMatchers: [matcher.matcher]
+            )
+        )
     }
     
     public init(manager: MockManager, name: String) {
@@ -29,13 +39,23 @@ public struct ClassToBeStubbedProperty<MOCK: ClassMock, T>: ToBeStubbedProperty 
     private let name: String
 
     public var get: ClassStubFunction<Void, T> {
-        return ClassStubFunction(stub:
-            manager.createStub(for: MOCK.self, method: getterName(name), parameterMatchers: []))
+        ClassStubFunction(
+            stub: manager.createStub(
+                for: MOCK.self,
+                method: getterName(name),
+                parameterMatchers: []
+            )
+        )
     }
 
     public func set<M: Matchable>(_ matcher: M) -> ClassStubNoReturnFunction<T> where M.MatchedType == T {
-        return ClassStubNoReturnFunction(stub:
-            manager.createStub(for: MOCK.self, method: setterName(name), parameterMatchers: [matcher.matcher]))
+        ClassStubNoReturnFunction(
+            stub: manager.createStub(
+                for: MOCK.self,
+                method: setterName(name),
+                parameterMatchers: [matcher.matcher]
+            )
+        )
     }
 
     public init(manager: MockManager, name: String) {
@@ -55,13 +75,23 @@ public struct ProtocolToBeStubbedOptionalProperty<MOCK: ProtocolMock, T>: ToBeSt
     private let name: String
 
     public var get: ProtocolStubFunction<Void, T?> {
-        return ProtocolStubFunction(stub:
-            manager.createStub(for: MOCK.self, method: getterName(name), parameterMatchers: []))
+        ProtocolStubFunction(
+            stub: manager.createStub(
+                for: MOCK.self,
+                method: getterName(name),
+                parameterMatchers: []
+            )
+        )
     }
 
     public func set<M: OptionalMatchable>(_ matcher: M) -> ProtocolStubNoReturnFunction<T?> where M.OptionalMatchedType == T {
-        return ProtocolStubNoReturnFunction(stub:
-            manager.createStub(for: MOCK.self, method: setterName(name), parameterMatchers: [matcher.optionalMatcher]))
+        ProtocolStubNoReturnFunction(
+            stub: manager.createStub(
+                for: MOCK.self,
+                method: setterName(name),
+                parameterMatchers: [matcher.optionalMatcher]
+            )
+        )
     }
 
     public init(manager: MockManager, name: String) {
@@ -75,13 +105,23 @@ public struct ClassToBeStubbedOptionalProperty<MOCK: ClassMock, T>: ToBeStubbedO
     private let name: String
 
     public var get: ClassStubFunction<Void, T?> {
-        return ClassStubFunction(stub:
-            manager.createStub(for: MOCK.self, method: getterName(name), parameterMatchers: []))
+        ClassStubFunction(
+            stub: manager.createStub(
+                for: MOCK.self,
+                method: getterName(name),
+                parameterMatchers: []
+            )
+        )
     }
 
     public func set<M: OptionalMatchable>(_ matcher: M) -> ClassStubNoReturnFunction<T?> where M.OptionalMatchedType == T {
-        return ClassStubNoReturnFunction(stub:
-            manager.createStub(for: MOCK.self, method: setterName(name), parameterMatchers: [matcher.optionalMatcher]))
+        ClassStubNoReturnFunction(
+            stub: manager.createStub(
+                for: MOCK.self,
+                method: setterName(name),
+                parameterMatchers: [matcher.optionalMatcher]
+            )
+        )
     }
 
     public init(manager: MockManager, name: String) {

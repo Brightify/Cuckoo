@@ -2,7 +2,7 @@ import XCTest
 import Cuckoo
 
 final class DictionaryParameterMatcherTest: XCTestCase {
-    // MARK: Contains ANY of the elements as key-value pairs.
+    // MARK: - Contains ANY of the elements as key-value pairs.
     func testContainsAnyOf() {
         // With keys identical to values.
         XCTAssertFalse(containsAnyOf([1, 3].toDictionaryAsKeysWithHashable()).matches([2].toDictionaryAsKeysWithHashable()))
@@ -19,7 +19,7 @@ final class DictionaryParameterMatcherTest: XCTestCase {
         XCTAssertTrue(containsAnyOf([1, 3].toDictionaryAsKeysWithHashable({ ($0, .init(g: $0 - 1)) })).matches([1, 2, 3].toDictionaryAsKeysWithHashable({ ($0, .init(g: $0 - 1)) })))
     }
 
-    // MARK: Contains ALL of the elements as key-value pairs.
+    // MARK: - Contains ALL of the elements as key-value pairs.
     func testContainsAllOf() {
         XCTAssertFalse(containsAllOf([1, 3].toDictionaryAsKeysWithHashable()).matches([2].toDictionaryAsKeysWithHashable()))
         XCTAssertFalse(containsAllOf([1, 3].toDictionaryAsKeysWithEquatable()).matches([1, 2].toDictionaryAsKeysWithEquatable()))
@@ -34,7 +34,7 @@ final class DictionaryParameterMatcherTest: XCTestCase {
         XCTAssertTrue(containsAllOf([1, 3].toDictionaryAsKeysWithHashable({ ($0, .init(g: $0 - 1)) })).matches([1, 2, 3].toDictionaryAsKeysWithHashable({ ($0, .init(g: $0 - 1)) })))
     }
 
-    // MARK: Contains NONE of the elements as key-value pairs.
+    // MARK: - Contains NONE of the elements as key-value pairs.
     func testContainsNoneOf() {
         // With keys identical to values.
         XCTAssertTrue(containsNoneOf([1, 3].toDictionaryAsKeysWithHashable()).matches([2].toDictionaryAsKeysWithHashable()))
@@ -51,7 +51,7 @@ final class DictionaryParameterMatcherTest: XCTestCase {
         XCTAssertFalse(containsNoneOf([1, 3].toDictionaryAsKeysWithHashable({ ($0, .init(g: $0 - 1)) })).matches([1, 2, 3].toDictionaryAsKeysWithHashable({ ($0, .init(g: $0 - 1)) })))
     }
 
-    // MARK: Contains ANY of the elements as keys.
+    // MARK: - Contains ANY of the elements as keys.
     func testContainsAnyKeysOf() {
         // Variadic parameters.
         XCTAssertFalse(containsAnyKeysOf(values: 1, 3).matches([2].toDictionaryAsKeysWithHashable()))
@@ -68,7 +68,7 @@ final class DictionaryParameterMatcherTest: XCTestCase {
         XCTAssertTrue(containsAnyKeysOf([1, 3]).matches([1, 2, 3].toDictionaryAsKeysWithHashable()))
     }
 
-    // MARK: Contains ALL of the elements as keys.
+    // MARK: - Contains ALL of the elements as keys.
     func testContainsAllKeysOf() {
         // Variadic parameters.
         XCTAssertFalse(containsAllKeysOf(values: 1, 3).matches([2].toDictionaryAsKeysWithHashable()))
@@ -85,7 +85,7 @@ final class DictionaryParameterMatcherTest: XCTestCase {
         XCTAssertTrue(containsAllKeysOf([1, 3]).matches([1, 2, 3].toDictionaryAsKeysWithHashable()))
     }
 
-    // MARK: Contains NONE of the elements as keys.
+    // MARK: - Contains NONE of the elements as keys.
     func testContainsNoKeysOf() {
         // Variadic parameters.
         XCTAssertTrue(containsNoKeysOf(values: 1, 3).matches([2].toDictionaryAsKeysWithHashable()))
@@ -102,7 +102,7 @@ final class DictionaryParameterMatcherTest: XCTestCase {
         XCTAssertFalse(containsNoKeysOf([1, 3]).matches([1, 2, 3].toDictionaryAsKeysWithHashable()))
     }
 
-    // MARK: Contains ANY of the elements as values.
+    // MARK: - Contains ANY of the elements as values.
     func testContainsAnyValuesOf() {
         // Variadic parameters.
         XCTAssertFalse(containsAnyValuesOf(values: .init(g: 1), .init(g: 3)).matches([2].toDictionaryAsKeysWithHashable()))
@@ -135,7 +135,7 @@ final class DictionaryParameterMatcherTest: XCTestCase {
                 .matches([2: TestStructs.H(g: -3)]))
     }
 
-    // MARK: Contains ALL of the elements as values.
+    // MARK: - Contains ALL of the elements as values.
     func testContainsAllValuesOf() {
         // Variadic parameters.
         XCTAssertFalse(containsAllValuesOf(values: .init(g: 1), .init(g: 3)).matches([2].toDictionaryAsKeysWithHashable()))
@@ -168,7 +168,7 @@ final class DictionaryParameterMatcherTest: XCTestCase {
                 .matches([2: TestStructs.H(g: -3)]))
     }
 
-    // MARK: Contains NONE of the elements as values.
+    // MARK: - Contains NONE of the elements as values.
     func testContainsNoValuesOf() {
         // Variadic parameters.
         XCTAssertTrue(containsNoValuesOf(values: .init(g: 1), .init(g: 3)).matches([2].toDictionaryAsKeysWithHashable()))
@@ -201,7 +201,7 @@ final class DictionaryParameterMatcherTest: XCTestCase {
                 .matches([2: TestStructs.H(g: -3)]))
     }
 
-    // MARK: Has length N (exact, at least, at most).
+    // MARK: - Has length N (exact, at least, at most).
     func testHasLengthExact() {
         XCTAssertTrue(hasLength(exactly: 4).matches([1: 1, 2: 2, 3: 3, 4: 4]))
         XCTAssertFalse(hasLength(exactly: 2).matches([1: 1, 2: 2, 3: 3, 4: 4]))

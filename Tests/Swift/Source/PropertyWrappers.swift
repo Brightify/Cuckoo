@@ -1,10 +1,3 @@
-//
-//  PropertyWrappers.swift
-//  Cuckoo
-//
-//  Created by Kabir Oberai on 2023-03-28.
-//
-
 // wrappers without annotations aren't supported but their
 // existence shouldn't cause the generator to crash
 
