@@ -1,3 +1,5 @@
+- Temporarily omit OCMock from SPM.
+
 - Fix podspec.
 - Improve code readability.
 - Add GitHub test action.

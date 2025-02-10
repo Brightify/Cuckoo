@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'Cuckoo'
-  s.version          = '2.0.11'
+  s.version          = '2.0.12'
   s.summary          = 'Cuckoo - first boilerplate-free Swift mocking framework.'
   s.description      = <<-DESC
                         Cuckoo is a mocking framework with an easy to use API (inspired by Mockito).
