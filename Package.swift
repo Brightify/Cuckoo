@@ -35,17 +35,15 @@ let package = Package(
         .package(url: "https://github.com/LebJe/TOMLKit.git", exact: "0.5.5"),
         .package(url: "https://github.com/tuist/XcodeProj.git", exact: "8.15.0"),
         .package(url: "https://github.com/onevcat/Rainbow", exact: "4.0.1"),
-        .package(path: "./OCMockWrapper"),
     ],
     targets: [
         .target(
             name: "Cuckoo",
-            dependencies: ["OCMockWrapper"],
             path: "Source"
         ),
         .testTarget(
             name: "CuckooTests",
-            dependencies: ["Cuckoo", "OCMockWrapper"],
+            dependencies: ["Cuckoo"],
             path: "Tests"
         ),
         .executableTarget(

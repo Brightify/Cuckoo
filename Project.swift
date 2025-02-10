@@ -9,9 +9,9 @@ let mocksBuildSettingsBase: [String: SettingValue] = [
     "PRODUCT_NAME": .string("CuckooMocks"),
     "SYSTEM_FRAMEWORK_SEARCH_PATHS": .string("$(PLATFORM_DIR)/Developer/Library/Frameworks"),
 ]
-let objCBuildSettingsBase: [String: SettingValue] = [
-    "SWIFT_OBJC_BRIDGING_HEADER": .string("$(PROJECT_DIR)/OCMock/Cuckoo-BridgingHeader.h"),
-]
+// let objCBuildSettingsBase: [String: SettingValue] = [
+//     "SWIFT_OBJC_BRIDGING_HEADER": .string("$(PROJECT_DIR)/OCMock/Cuckoo-BridgingHeader.h"),
+// ]
 
 func platformSet(platform: PlatformType) -> (targets: [Target], schemes: [Scheme]) {
     var targets: [Target] = []
@@ -27,14 +27,14 @@ func platformSet(platform: PlatformType) -> (targets: [Target], schemes: [Scheme
         infoPlist: .default,
         sources: [
             "Source/**",
-            "OCMock/**",
+            // "OCMock/**",
         ],
-        headers: .headers(public: ["OCMock/**"]),
+        // headers: .headers(public: ["OCMock/**"]),
         dependencies: [
             .sdk(name: "XCTest", type: .framework, status: .optional),
-            .package(product: "OCMock"),
+            // .package(product: "OCMock"),
         ],
-        settings: Settings.settings(base: commonBuildSettingsBase.merging(objCBuildSettingsBase, uniquingKeysWith: { $1 }))
+        settings: Settings.settings(base: commonBuildSettingsBase)
     )
     targets.append(defaultTarget)
 
@@ -86,7 +86,7 @@ func platformSet(platform: PlatformType) -> (targets: [Target], schemes: [Scheme
         infoPlist: .default,
         sources: SourceFilesList.sourceFilesList(globs: [
             .glob("Tests/Common/**"),
-            .glob("Tests/OCMock/**"),
+            // .glob("Tests/OCMock/**"),
             .glob("Tests/Swift/**", excluding: [
                 "Tests/Swift/Generated/*.swift",
                 "Tests/Swift/Source/*.swift",
@@ -95,7 +95,7 @@ func platformSet(platform: PlatformType) -> (targets: [Target], schemes: [Scheme
         dependencies: [
             .target(defaultTarget),
             .target(mocksTarget),
-            .package(product: "OCMock"),
+            // .package(product: "OCMock"),
         ]
     )
     targets.append(defaultTestTarget)
@@ -122,7 +122,7 @@ let project = Project(
     name: "Cuckoo",
     options: .options(automaticSchemesOptions: .disabled, disableSynthesizedResourceAccessors: true),
     packages: [
-        .local(path: "OCMockWrapper"),
+        // .local(path: "OCMockWrapper"),
     ],
     settings: Settings.settings(base: ["GENERATE_TEST_MOCKS": "YES"]),
     targets: iOSTargets + macOSTargets + tvOSTargets + watchOSTargets,
