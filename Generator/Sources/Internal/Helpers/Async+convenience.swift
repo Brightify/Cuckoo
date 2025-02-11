@@ -40,9 +40,9 @@ extension Sequence {
     }
 }
 
-extension Sequence {
+extension Sequence where Element: Sendable {
     func concurrentForEach(
-        _ operation: @escaping (Element) async -> Void
+        _ operation: @escaping @Sendable (Element) async -> Void
     ) async {
         // A task group automatically waits for all of its
         // sub-tasks to complete, while also performing those
@@ -67,9 +67,9 @@ extension Sequence {
     }
 }
 
-extension Sequence {
-    func concurrentMap<T>(
-        _ transform: @escaping (Element) async throws -> T
+extension Sequence where Element: Sendable {
+    func concurrentMap<T: Sendable>(
+        _ transform: @escaping @Sendable (Element) async throws -> T
     ) async rethrows -> [T] {
         let tasks = map { element in
             Task {
@@ -82,8 +82,8 @@ extension Sequence {
         }
     }
 
-    func concurrentCompactMap<T>(
-        _ transform: @escaping (Element) async throws -> T?
+    func concurrentCompactMap<T: Sendable>(
+        _ transform: @escaping @Sendable (Element) async throws -> T?
     ) async rethrows -> [T] {
         let tasks = map { element in
             Task {

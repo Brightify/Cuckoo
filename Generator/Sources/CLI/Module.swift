@@ -1,8 +1,8 @@
 import Foundation
 import FileKit
 
-final class Module {
-    static var overriddenOutput: String?
+final class Module: @unchecked Sendable {
+    nonisolated(unsafe) static var overriddenOutput: String?
 
     let name: String
     let imports: [String]

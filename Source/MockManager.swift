@@ -6,7 +6,7 @@ import XCTest
 #endif
 
 public class MockManager {
-    public static var fail: ((message: String, sourceLocation: SourceLocation)) -> Void = { arg in
+    nonisolated(unsafe) public static var fail: ((message: String, sourceLocation: SourceLocation)) -> Void = { arg in
         let (message, sourceLocation) = arg
         #if canImport(XCTest)
         XCTFail(message, file: sourceLocation.file, line: UInt(sourceLocation.line))

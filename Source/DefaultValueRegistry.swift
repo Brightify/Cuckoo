@@ -1,6 +1,6 @@
 public class DefaultValueRegistry {
     
-    private static let defaultRegisteredTypes: [ObjectIdentifier: Any] = [
+    nonisolated(unsafe) private static let defaultRegisteredTypes: [ObjectIdentifier: Any] = [
         ObjectIdentifier(Void.self): Void(),
         ObjectIdentifier(Int.self): Int(),
         ObjectIdentifier(Int8.self): Int8(),
@@ -18,7 +18,7 @@ public class DefaultValueRegistry {
         ObjectIdentifier(Float.self): Float()
     ]
     
-    private static var registeredTypes = defaultRegisteredTypes
+    nonisolated(unsafe) private static var registeredTypes = defaultRegisteredTypes
     
     public static func register<T>(value: T, forType type: T.Type) {
         registeredTypes[ObjectIdentifier(type)] = value

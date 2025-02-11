@@ -26,7 +26,7 @@ final class Glob: Collection {
         let includesFilesInResultsIfTrailingSlash: Bool
     }
 
-    static var defaultBehavior = Glob.Behavior(
+    static let defaultBehavior = Glob.Behavior(
         supportsGlobstar: true,
         includesFilesFromRootOfGlobstar: true,
         includesDirectoriesInResults: false,
