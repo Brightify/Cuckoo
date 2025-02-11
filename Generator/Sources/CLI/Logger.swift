@@ -7,7 +7,7 @@ final class Logger {
         case error
     }
 
-    static let shared = Logger()
+    nonisolated(unsafe) static let shared = Logger()
 
     var logLevel: LogLevel = .info
 
