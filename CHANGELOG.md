@@ -1,3 +1,5 @@
+- Downgrade SwiftPM version.
+
 - Temporarily omit OCMock from SPM.
 
 - Fix podspec.
