@@ -1,7 +1,7 @@
 import Foundation
 import FileKit
 
-struct FileRepresentation {
+struct FileRepresentation: @unchecked Sendable {
     let file: TextFile
     let imports: [Import]
     let tokens: [Token]

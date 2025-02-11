@@ -1,12 +1,12 @@
 import Foundation
 import ArgumentParser
 import TOMLKit
-import FileKit
+@preconcurrency import FileKit
 
 @main
 @available(macOS 12, *)
 struct GenerateCommand: AsyncParsableCommand {
-    static var configuration = CommandConfiguration(
+    nonisolated(unsafe) static var configuration = CommandConfiguration(
         commandName: "Generate",
         abstract: "Cuckoo CLI tool for generating mocks according to the specified configuration.",
         version: version,
