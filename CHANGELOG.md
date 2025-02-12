@@ -1,3 +1,5 @@
+- Add back Generator.xcodeproj for local building.
+
 - Downgrade SwiftPM version.
 
 - Temporarily omit OCMock from SPM.
