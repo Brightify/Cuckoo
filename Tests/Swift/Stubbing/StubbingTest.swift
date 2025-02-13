@@ -186,9 +186,13 @@ final class StubbingTest: XCTestCase {
                 callNoReturnAsyncThrows = true
             }
             when(stub.withAsyncClosure(closure: anyClosure())).thenReturn("async closure")
+            when(stub.withAsyncSendableClosure(closure: anyClosure())).thenReturn("async sendable closure")
             when(stub.withAsyncClosureAsync(closure: anyClosure())).thenReturn("closure async")
+            when(stub.withAsyncSendableClosureAsync(closure: anyClosure())).thenReturn("sendable closure async")
             when(stub.withAsyncEscapingClosure(closure: anyClosure())).thenReturn("escaping async")
+            when(stub.withAsyncEscapingSendableClosure(closure: anyClosure())).thenReturn("escaping sendable async")
             when(stub.withAsyncOptionalClosureAsync(closure: anyClosure())).thenReturn("optional async closure async")
+            when(stub.withAsyncSendableOptionalClosureAsync(closure: anyClosure())).thenReturn("optional async sendable closure async")
         }
         
         let resultAsync = await mock.withAsync()
@@ -202,18 +206,30 @@ final class StubbingTest: XCTestCase {
         XCTAssertEqual(mock.withAsyncClosure { p async in
             return nil
         }, "async closure")
+        XCTAssertEqual(mock.withAsyncSendableClosure { p async in
+            return nil
+        }, "async sendable closure")
         let resultAsyncClosure = await mock.withAsyncClosureAsync(closure: { _ in nil })
         XCTAssertEqual(resultAsyncClosure, "closure async")
+        let resultAsyncSendableClosure = await mock.withAsyncSendableClosureAsync(closure: { _ in nil })
+        XCTAssertEqual(resultAsyncSendableClosure, "sendable closure async")
         XCTAssertEqual(mock.withAsyncEscapingClosure(closure: { _ in nil }), "escaping async")
+        XCTAssertEqual(mock.withAsyncEscapingSendableClosure(closure: { _ in nil }), "escaping sendable async")
         let resultAsyncClosureAsync = await mock.withAsyncOptionalClosureAsync(closure: { _ in nil })
         XCTAssertEqual(resultAsyncClosureAsync, "optional async closure async")
+        let resultAsyncSendableClosureAsync = await mock.withAsyncSendableOptionalClosureAsync(closure: { _ in nil })
+        XCTAssertEqual(resultAsyncClosureAsync, "optional async sendable closure async")
         
         verify(mock, times(1)).withAsync()
         verify(mock, times(1)).withNoReturnAsync()
         verify(mock, times(1)).withAsyncClosure(closure: anyClosure())
+        verify(mock, times(1)).withAsyncSendableClosure(closure: anyClosure())
         verify(mock, times(1)).withAsyncClosureAsync(closure: anyClosure())
+        verify(mock, times(1)).withAsyncSendableClosureAsync(closure: anyClosure())
         verify(mock, times(1)).withAsyncEscapingClosure(closure: anyClosure())
+        verify(mock, times(1)).withAsyncEscapingSendableClosure(closure: anyClosure())
         verify(mock, times(1)).withAsyncOptionalClosureAsync(closure: anyClosure())
+        verify(mock, times(1)).withAsyncSendableOptionalClosureAsync(closure: anyClosure())
     }
 
     func testSubclassWithGrandparentsInheritanceAcceptanceTest() {

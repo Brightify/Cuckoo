@@ -84,6 +84,46 @@ public func anyThrowingClosure<IN1, IN2, IN3, IN4, IN5, IN6, IN7, OUT>() -> Para
     ParameterMatcher()
 }
 
+/// Returns a matcher matching any @Sendable throwing closure.
+public func anyThrowingClosure<OUT>() -> ParameterMatcher<@Sendable () throws -> OUT> {
+    ParameterMatcher()
+}
+
+/// Returns a matcher matching any @Sendable throwing closure.
+public func anyThrowingClosure<IN1, OUT>() -> ParameterMatcher<@Sendable (IN1) throws -> OUT> {
+    ParameterMatcher()
+}
+
+/// Returns a matcher matching any @Sendable throwing closure.
+public func anyThrowingClosure<IN1, IN2, OUT>() -> ParameterMatcher<@Sendable (IN1, IN2) throws -> OUT> {
+    ParameterMatcher()
+}
+
+/// Returns a matcher matching any @Sendable throwing closure.
+public func anyThrowingClosure<IN1, IN2, IN3, OUT>() -> ParameterMatcher<@Sendable (IN1, IN2, IN3) throws -> OUT> {
+    ParameterMatcher()
+}
+
+/// Returns a matcher matching any @Sendable throwing closure.
+public func anyThrowingClosure<IN1, IN2, IN3, IN4, OUT>() -> ParameterMatcher<@Sendable (IN1, IN2, IN3, IN4) throws -> OUT> {
+    ParameterMatcher()
+}
+
+/// Returns a matcher matching any @Sendable throwing closure.
+public func anyThrowingClosure<IN1, IN2, IN3, IN4, IN5, OUT>() -> ParameterMatcher<@Sendable (IN1, IN2, IN3, IN4, IN5) throws -> OUT> {
+    ParameterMatcher()
+}
+
+/// Returns a matcher matching any @Sendable throwing closure.
+public func anyThrowingClosure<IN1, IN2, IN3, IN4, IN5, IN6, OUT>() -> ParameterMatcher<@Sendable (IN1, IN2, IN3, IN4, IN5, IN6) throws -> OUT> {
+    ParameterMatcher()
+}
+
+/// Returns a matcher matching any @Sendable throwing closure.
+public func anyThrowingClosure<IN1, IN2, IN3, IN4, IN5, IN6, IN7, OUT>() -> ParameterMatcher<@Sendable (IN1, IN2, IN3, IN4, IN5, IN6, IN7) throws -> OUT> {
+    ParameterMatcher()
+}
+
 /// Returns a matcher matching any non-throwing closure.
 public func anyClosure<OUT>() -> ParameterMatcher<() -> OUT> {
     ParameterMatcher()
@@ -124,99 +164,235 @@ public func anyClosure<IN1, IN2, IN3, IN4, IN5, IN6, IN7, OUT>() -> ParameterMat
     ParameterMatcher()
 }
 
-/// Returns a matcher matching any throwing closure.
+/// Returns a matcher matching any @Sendable non-throwing closure.
+public func anyClosure<OUT>() -> ParameterMatcher<@Sendable () -> OUT> {
+    ParameterMatcher()
+}
+
+/// Returns a matcher matching any @Sendable non-throwing closure.
+public func anyClosure<IN1, OUT>() -> ParameterMatcher<@Sendable (IN1) -> OUT> {
+    ParameterMatcher()
+}
+
+/// Returns a matcher matching any @Sendable non-throwing closure.
+public func anyClosure<IN1, IN2, OUT>() -> ParameterMatcher<@Sendable (IN1, IN2) -> OUT> {
+    ParameterMatcher()
+}
+
+/// Returns a matcher matching any @Sendable non-throwing closure.
+public func anyClosure<IN1, IN2, IN3, OUT>() -> ParameterMatcher<@Sendable (IN1, IN2, IN3) -> OUT> {
+    ParameterMatcher()
+}
+
+/// Returns a matcher matching any @Sendable non-throwing closure.
+public func anyClosure<IN1, IN2, IN3, IN4, OUT>() -> ParameterMatcher<@Sendable (IN1, IN2, IN3, IN4) -> OUT> {
+    ParameterMatcher()
+}
+
+/// Returns a matcher matching any @Sendable non-throwing closure.
+public func anyClosure<IN1, IN2, IN3, IN4, IN5, OUT>() -> ParameterMatcher<@Sendable (IN1, IN2, IN3, IN4, IN5) -> OUT> {
+    ParameterMatcher()
+}
+
+/// Returns a matcher matching any @Sendable non-throwing closure.
+public func anyClosure<IN1, IN2, IN3, IN4, IN5, IN6, OUT>() -> ParameterMatcher<@Sendable (IN1, IN2, IN3, IN4, IN5, IN6) -> OUT> {
+    ParameterMatcher()
+}
+
+/// Returns a matcher matching any @Sendable non-throwing closure.
+public func anyClosure<IN1, IN2, IN3, IN4, IN5, IN6, IN7, OUT>() -> ParameterMatcher<@Sendable (IN1, IN2, IN3, IN4, IN5, IN6, IN7) -> OUT> {
+    ParameterMatcher()
+}
+
+/// Returns a matcher matching any async throwing closure.
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 public func anyThrowingClosure<OUT>() -> ParameterMatcher<() async throws -> OUT> {
     ParameterMatcher()
 }
 
-/// Returns a matcher matching any throwing closure.
+/// Returns a matcher matching any async throwing closure.
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 public func anyThrowingClosure<IN1, OUT>() -> ParameterMatcher<(IN1) async throws -> OUT> {
     ParameterMatcher()
 }
 
-/// Returns a matcher matching any throwing closure.
+/// Returns a matcher matching any async throwing closure.
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 public func anyThrowingClosure<IN1, IN2, OUT>() -> ParameterMatcher<(IN1, IN2) async throws -> OUT> {
     ParameterMatcher()
 }
 
-/// Returns a matcher matching any throwing closure.
+/// Returns a matcher matching any async throwing closure.
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 public func anyThrowingClosure<IN1, IN2, IN3, OUT>() -> ParameterMatcher<(IN1, IN2, IN3) async throws -> OUT> {
     ParameterMatcher()
 }
 
-/// Returns a matcher matching any throwing closure.
+/// Returns a matcher matching any async throwing closure.
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 public func anyThrowingClosure<IN1, IN2, IN3, IN4, OUT>() -> ParameterMatcher<(IN1, IN2, IN3, IN4) async throws -> OUT> {
     ParameterMatcher()
 }
 
-/// Returns a matcher matching any throwing closure.
+/// Returns a matcher matching any async throwing closure.
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 public func anyThrowingClosure<IN1, IN2, IN3, IN4, IN5, OUT>() -> ParameterMatcher<(IN1, IN2, IN3, IN4, IN5) async throws -> OUT> {
     ParameterMatcher()
 }
 
-/// Returns a matcher matching any throwing closure.
+/// Returns a matcher matching any async throwing closure.
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 public func anyThrowingClosure<IN1, IN2, IN3, IN4, IN5, IN6, OUT>() -> ParameterMatcher<(IN1, IN2, IN3, IN4, IN5, IN6) async throws -> OUT> {
     ParameterMatcher()
 }
 
-/// Returns a matcher matching any throwing closure.
+/// Returns a matcher matching any async throwing closure.
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 public func anyThrowingClosure<IN1, IN2, IN3, IN4, IN5, IN6, IN7, OUT>() -> ParameterMatcher<(IN1, IN2, IN3, IN4, IN5, IN6, IN7) async throws -> OUT> {
     ParameterMatcher()
 }
 
-/// Returns a matcher matching any non-throwing closure.
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+/// Returns a matcher matching any @Sendable async throwing closure.
+public func anyThrowingClosure<OUT>() -> ParameterMatcher<@Sendable () async throws -> OUT> {
+    ParameterMatcher()
+}
+
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+/// Returns a matcher matching any @Sendable async throwing closure.
+public func anyThrowingClosure<IN1, OUT>() -> ParameterMatcher<@Sendable (IN1) async throws -> OUT> {
+    ParameterMatcher()
+}
+
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+/// Returns a matcher matching any @Sendable async throwing closure.
+public func anyThrowingClosure<IN1, IN2, OUT>() -> ParameterMatcher<@Sendable (IN1, IN2) async throws -> OUT> {
+    ParameterMatcher()
+}
+
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+/// Returns a matcher matching any @Sendable async throwing closure.
+public func anyThrowingClosure<IN1, IN2, IN3, OUT>() -> ParameterMatcher<@Sendable (IN1, IN2, IN3) async throws -> OUT> {
+    ParameterMatcher()
+}
+
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+/// Returns a matcher matching any @Sendable async throwing closure.
+public func anyThrowingClosure<IN1, IN2, IN3, IN4, OUT>() -> ParameterMatcher<@Sendable (IN1, IN2, IN3, IN4) async throws -> OUT> {
+    ParameterMatcher()
+}
+
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+/// Returns a matcher matching any @Sendable async throwing closure.
+public func anyThrowingClosure<IN1, IN2, IN3, IN4, IN5, OUT>() -> ParameterMatcher<@Sendable (IN1, IN2, IN3, IN4, IN5) async throws -> OUT> {
+    ParameterMatcher()
+}
+
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+/// Returns a matcher matching any @Sendable async throwing closure.
+public func anyThrowingClosure<IN1, IN2, IN3, IN4, IN5, IN6, OUT>() -> ParameterMatcher<@Sendable (IN1, IN2, IN3, IN4, IN5, IN6) async throws -> OUT> {
+    ParameterMatcher()
+}
+
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+/// Returns a matcher matching any @Sendable async throwing closure.
+public func anyThrowingClosure<IN1, IN2, IN3, IN4, IN5, IN6, IN7, OUT>() -> ParameterMatcher<@Sendable (IN1, IN2, IN3, IN4, IN5, IN6, IN7) async throws -> OUT> {
+    ParameterMatcher()
+}
+
+/// Returns a matcher matching any async non-throwing closure.
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 public func anyClosure<OUT>() -> ParameterMatcher<() async -> OUT> {
     ParameterMatcher()
 }
 
-/// Returns a matcher matching any non-throwing closure.
+/// Returns a matcher matching any async non-throwing closure.
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 public func anyClosure<IN1, OUT>() -> ParameterMatcher<(IN1) async -> OUT> {
     ParameterMatcher()
 }
 
-/// Returns a matcher matching any non-throwing closure.
+/// Returns a matcher matching any async non-throwing closure.
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 public func anyClosure<IN1, IN2, OUT>() -> ParameterMatcher<(IN1, IN2) async -> OUT> {
     ParameterMatcher()
 }
 
-/// Returns a matcher matching any non-throwing closure.
+/// Returns a matcher matching any async non-throwing closure.
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 public func anyClosure<IN1, IN2, IN3, OUT>() -> ParameterMatcher<(IN1, IN2, IN3) async -> OUT> {
     ParameterMatcher()
 }
 
-/// Returns a matcher matching any non-throwing closure.
+/// Returns a matcher matching any async non-throwing closure.
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 public func anyClosure<IN1, IN2, IN3, IN4, OUT>() -> ParameterMatcher<(IN1, IN2, IN3, IN4) async -> OUT> {
     ParameterMatcher()
 }
 
-/// Returns a matcher matching any non-throwing closure.
+/// Returns a matcher matching any async non-throwing closure.
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 public func anyClosure<IN1, IN2, IN3, IN4, IN5, OUT>() -> ParameterMatcher<(IN1, IN2, IN3, IN4, IN5) async -> OUT> {
     ParameterMatcher()
 }
 
-/// Returns a matcher matching any non-throwing closure.
+/// Returns a matcher matching any async non-throwing closure.
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 public func anyClosure<IN1, IN2, IN3, IN4, IN5, IN6, OUT>() -> ParameterMatcher<(IN1, IN2, IN3, IN4, IN5, IN6) async -> OUT> {
     ParameterMatcher()
 }
 
-/// Returns a matcher matching any non-throwing closure.
+/// Returns a matcher matching any async non-throwing closure.
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 public func anyClosure<IN1, IN2, IN3, IN4, IN5, IN6, IN7, OUT>() -> ParameterMatcher<(IN1, IN2, IN3, IN4, IN5, IN6, IN7) async -> OUT> {
+    ParameterMatcher()
+}
+
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+/// Returns a matcher matching any @Sendable async non-throwing closure.
+public func anyClosure<OUT>() -> ParameterMatcher<@Sendable () async -> OUT> {
+    ParameterMatcher()
+}
+
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+/// Returns a matcher matching any @Sendable async non-throwing closure.
+public func anyClosure<IN1, OUT>() -> ParameterMatcher<@Sendable (IN1) async -> OUT> {
+    ParameterMatcher()
+}
+
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+/// Returns a matcher matching any @Sendable async non-throwing closure.
+public func anyClosure<IN1, IN2, OUT>() -> ParameterMatcher<@Sendable (IN1, IN2) async -> OUT> {
+    ParameterMatcher()
+}
+
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+/// Returns a matcher matching any @Sendable async non-throwing closure.
+public func anyClosure<IN1, IN2, IN3, OUT>() -> ParameterMatcher<@Sendable (IN1, IN2, IN3) async -> OUT> {
+    ParameterMatcher()
+}
+
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+/// Returns a matcher matching any @Sendable async non-throwing closure.
+public func anyClosure<IN1, IN2, IN3, IN4, OUT>() -> ParameterMatcher<@Sendable (IN1, IN2, IN3, IN4) async -> OUT> {
+    ParameterMatcher()
+}
+
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+/// Returns a matcher matching any @Sendable async non-throwing closure.
+public func anyClosure<IN1, IN2, IN3, IN4, IN5, OUT>() -> ParameterMatcher<@Sendable (IN1, IN2, IN3, IN4, IN5) async -> OUT> {
+    ParameterMatcher()
+}
+
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+/// Returns a matcher matching any @Sendable async non-throwing closure.
+public func anyClosure<IN1, IN2, IN3, IN4, IN5, IN6, OUT>() -> ParameterMatcher<@Sendable (IN1, IN2, IN3, IN4, IN5, IN6) async -> OUT> {
+    ParameterMatcher()
+}
+
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+/// Returns a matcher matching any @Sendable async non-throwing closure.
+public func anyClosure<IN1, IN2, IN3, IN4, IN5, IN6, IN7, OUT>() -> ParameterMatcher<@Sendable (IN1, IN2, IN3, IN4, IN5, IN6, IN7) async -> OUT> {
     ParameterMatcher()
 }
 

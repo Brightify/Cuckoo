@@ -123,7 +123,17 @@ class TestedClass {
     }
     
     @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+    func withAsyncSendableClosure(closure: @Sendable (String) async -> String?) -> String? {
+        return nil
+    }
+    
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     func withAsyncClosureAsync(closure: (String) async -> String?) async -> String? {
+        return nil
+    }
+    
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+    func withAsyncSendableClosureAsync(closure: @Sendable (String) async -> String?) async -> String? {
         return nil
     }
     
@@ -133,10 +143,20 @@ class TestedClass {
     }
     
     @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+    func withAsyncEscapingSendableClosure(closure: @escaping @Sendable (String) async -> String?) -> String? {
+        return nil
+    }
+    
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     func withAsyncOptionalClosureAsync(closure: ((String) async -> String?)?) async -> String? {
         return nil
     }
 
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+    func withAsyncSendableOptionalClosureAsync(closure: @Sendable ((String) async -> String?)?) async -> String? {
+        return nil
+    }
+    
     func withThrows() throws -> Int {
         return 0
     }
