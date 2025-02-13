@@ -46,7 +46,6 @@ public class MockManager {
         return callRethrowsInternal(method, parameters: parameters, escapingParameters: escapingParameters, superclassCall: superclassCall, defaultCall: defaultCall)
     }
     
-    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     private func callInternal<IN, OUT>(_ method: String, parameters: IN, escapingParameters: IN, superclassCall: () async -> OUT, defaultCall: () async -> OUT) async -> OUT {
         return await callRethrowsInternal(method, parameters: parameters, escapingParameters: escapingParameters, superclassCall: superclassCall, defaultCall: defaultCall)
     }
@@ -91,7 +90,6 @@ public class MockManager {
         }
     }
     
-    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     private func callRethrowsInternal<IN, OUT>(_ method: String, parameters: IN, escapingParameters: IN, superclassCall: () async throws -> OUT, defaultCall: () async throws -> OUT) async rethrows -> OUT {
         let stubCall = ConcreteStubCall(method: method, parameters: escapingParameters)
         queue.sync {
@@ -168,7 +166,6 @@ public class MockManager {
         }
     }
     
-    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     private func callThrowsInternal<IN, OUT>(_ method: String, parameters: IN, escapingParameters: IN, superclassCall: () async throws -> OUT, defaultCall: () async throws -> OUT) async throws -> OUT {
         let stubCall = ConcreteStubCall(method: method, parameters: escapingParameters)
         queue.sync {
@@ -363,7 +360,6 @@ extension MockManager {
         return try callRethrowsInternal(method, parameters: parameters, escapingParameters: escapingParameters, superclassCall: superclassCall, defaultCall: defaultCall)
     }
     
-    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     public func callRethrows<IN, OUT>(_ method: String, parameters: IN, escapingParameters: IN, superclassCall: @autoclosure () async throws -> OUT, defaultCall: @autoclosure () async throws -> OUT) async rethrows -> OUT {
         return try await callRethrowsInternal(method, parameters: parameters, escapingParameters: escapingParameters, superclassCall: superclassCall, defaultCall: defaultCall)
     }

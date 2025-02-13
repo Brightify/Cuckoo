@@ -71,6 +71,17 @@ final class ParameterMatcherFunctionsTest: XCTestCase {
         XCTAssertTrue((anyClosure() as ParameterMatcher<(Int, Int, Int, Int, Int, Int, Int) -> Int>).matches { _, _, _, _, _, _, _ in 0 })
     }
 
+    func testAnySendableClosure() {
+        XCTAssertTrue((anyClosure() as ParameterMatcher<@Sendable () -> Int>).matches { 0 })
+        XCTAssertTrue((anyClosure() as ParameterMatcher<@Sendable (Int) -> Int>).matches { _ in 0 })
+        XCTAssertTrue((anyClosure() as ParameterMatcher<@Sendable (Int, Int) -> Int>).matches { _, _ in 0 })
+        XCTAssertTrue((anyClosure() as ParameterMatcher<@Sendable (Int, Int, Int) -> Int>).matches { _, _, _ in 0 })
+        XCTAssertTrue((anyClosure() as ParameterMatcher<@Sendable (Int, Int, Int, Int) -> Int>).matches { _, _, _, _ in 0 })
+        XCTAssertTrue((anyClosure() as ParameterMatcher<@Sendable (Int, Int, Int, Int, Int) -> Int>).matches { _, _, _, _, _ in 0 })
+        XCTAssertTrue((anyClosure() as ParameterMatcher<@Sendable (Int, Int, Int, Int, Int, Int) -> Int>).matches { _, _, _, _, _, _ in 0 })
+        XCTAssertTrue((anyClosure() as ParameterMatcher<@Sendable (Int, Int, Int, Int, Int, Int, Int) -> Int>).matches { _, _, _, _, _, _, _ in 0 })
+    }
+
     func testAnyThrowingClosure() {
         struct MockError: Error { }
         
@@ -91,6 +102,27 @@ final class ParameterMatcherFunctionsTest: XCTestCase {
         XCTAssertTrue((anyThrowingClosure() as ParameterMatcher<(Int, Int, Int, Int, Int) throws -> Int>).matches { _, _, _, _, _ in throw MockError() })
         XCTAssertTrue((anyThrowingClosure() as ParameterMatcher<(Int, Int, Int, Int, Int, Int) throws -> Int>).matches { _, _, _, _, _, _ in throw MockError() })
         XCTAssertTrue((anyThrowingClosure() as ParameterMatcher<(Int, Int, Int, Int, Int, Int, Int) throws -> Int>).matches { _, _, _, _, _, _, _ in throw MockError() })
+    }
+
+    func testAnySendableThrowingClosure() {
+        struct MockError: Error { }
+
+        XCTAssertTrue((anyThrowingClosure() as ParameterMatcher<@Sendable () throws -> Int>).matches { 0 })
+        XCTAssertTrue((anyThrowingClosure() as ParameterMatcher<@Sendable (Int) throws -> Int>).matches { _ in 0 })
+        XCTAssertTrue((anyThrowingClosure() as ParameterMatcher<@Sendable (Int, Int) throws -> Int>).matches { _, _ in 0 })
+        XCTAssertTrue((anyThrowingClosure() as ParameterMatcher<@Sendable (Int, Int, Int) throws -> Int>).matches { _, _, _ in 0 })
+        XCTAssertTrue((anyThrowingClosure() as ParameterMatcher<@Sendable (Int, Int, Int, Int) throws -> Int>).matches { _, _, _, _ in 0 })
+        XCTAssertTrue((anyThrowingClosure() as ParameterMatcher<@Sendable (Int, Int, Int, Int, Int) throws -> Int>).matches { _, _, _, _, _ in 0 })
+        XCTAssertTrue((anyThrowingClosure() as ParameterMatcher<@Sendable (Int, Int, Int, Int, Int, Int) throws -> Int>).matches { _, _, _, _, _, _ in 0 })
+
+        XCTAssertTrue((anyThrowingClosure() as ParameterMatcher<@Sendable () throws -> Int>).matches { throw MockError() })
+        XCTAssertTrue((anyThrowingClosure() as ParameterMatcher<@Sendable (Int) throws -> Int>).matches { _ in throw MockError() })
+        XCTAssertTrue((anyThrowingClosure() as ParameterMatcher<@Sendable (Int, Int) throws -> Int>).matches { _, _ in throw MockError() })
+        XCTAssertTrue((anyThrowingClosure() as ParameterMatcher<@Sendable (Int, Int, Int) throws -> Int>).matches { _, _, _ in throw MockError() })
+        XCTAssertTrue((anyThrowingClosure() as ParameterMatcher<@Sendable (Int, Int, Int, Int) throws -> Int>).matches { _, _, _, _ in throw MockError() })
+        XCTAssertTrue((anyThrowingClosure() as ParameterMatcher<@Sendable (Int, Int, Int, Int, Int) throws -> Int>).matches { _, _, _, _, _ in throw MockError() })
+        XCTAssertTrue((anyThrowingClosure() as ParameterMatcher<@Sendable (Int, Int, Int, Int, Int, Int) throws -> Int>).matches { _, _, _, _, _, _ in throw MockError() })
+        XCTAssertTrue((anyThrowingClosure() as ParameterMatcher<@Sendable (Int, Int, Int, Int, Int, Int, Int) throws -> Int>).matches { _, _, _, _, _, _, _ in throw MockError() })
     }
 
     func testAnyOptionalThrowingClosure() {
