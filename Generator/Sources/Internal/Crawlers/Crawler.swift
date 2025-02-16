@@ -11,7 +11,7 @@ final class Crawler: SyntaxVisitor {
         // The `testString` is at the bottom of this file.
 //        let syntaxTree = Parser.parse(source: testString)
         #endif
-        let crawler = Self(container: nil, url: url)
+        let crawler : Crawler = Crawler(container: nil, url: url)
         crawler.walk(syntaxTree)
         return crawler
     }

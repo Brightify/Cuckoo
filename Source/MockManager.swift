@@ -4,6 +4,8 @@ import Testing
 #if canImport(XCTest)
 import XCTest
 #endif
+import Foundation
+import ObjectiveC 
 
 public class MockManager {
     public static var fail: ((message: String, sourceLocation: SourceLocation)) -> Void = { arg in

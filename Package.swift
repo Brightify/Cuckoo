@@ -43,9 +43,10 @@ let package = Package(
         ),
         .testTarget(
             name: "CuckooTests",
-            dependencies: ["Cuckoo"],
+            dependencies: ["Cuckoo"], // ✅ Sirf Cuckoo rakh
             path: "Tests"
         ),
+
         .executableTarget(
             name: "CuckooGenerator",
             dependencies: [

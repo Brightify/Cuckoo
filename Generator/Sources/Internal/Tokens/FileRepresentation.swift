@@ -37,7 +37,7 @@ extension FileRepresentation {
 
 extension Token {
     // TODO: This would be much better as a dictionary instead of going through all the files for every inheritance type.
-    private static func findToken(forClassOrProtocol name: String, in files: [FileRepresentation]) -> Token? {
+    internal static func findToken(forClassOrProtocol name: String, in files: [FileRepresentation]) -> Token? {
         files.lazy
             .flatMap { $0.tokens }
             .filter { $0.isClass || $0.isProtocol }
@@ -49,7 +49,7 @@ extension Token {
         guard let token = self as? Token & HasMembers & HasInheritance else { return self }
 
         let inheritedRepresentations = token.inheritedTypes
-            .compactMap { Self.findToken(forClassOrProtocol: $0, in: files) }
+            .compactMap { (name: String) in Self.findToken(forClassOrProtocol: name, in: files) } // ✅ Fixed `Self` Issue
             .compactMap { $0.mergingInheritance(with: files) }
 
         let mergedTokens = inheritedRepresentations
