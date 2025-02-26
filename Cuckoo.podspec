@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
   s.watchos.deployment_target   = '8.0'
   s.tvos.deployment_target      = '13.0'
   generator_name                = 'cuckoonator'
-  s.swift_version               = '5.0'
+  s.swift_version               = '6.0'
   s.preserve_paths              = ['Generator/**/*', 'version', 'run', 'build_generator', generator_name]
   s.prepare_command             = <<-CMD
                                     curl -Lo #{generator_name} https://github.com/Brightify/Cuckoo/releases/download/#{s.version}/#{generator_name}
