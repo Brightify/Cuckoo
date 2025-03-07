@@ -12,10 +12,17 @@ exclude = [
 ]
 # regex = ""
 output = "Tests/Swift/Generated/GeneratedMocks.swift"
+# output = "Tests/Swift/Generated/"
 
 [modules.Cuckoo.options]
 glob = true
 keepDocumentation = false
+filePrefix = [
+    "// swiftlint:disable all",
+]
+fileSuffix = [
+    "// swiftlint:enable all",
+]
 
 [modules.Cuckoo.xcodeproj]
 path = "Generator"
