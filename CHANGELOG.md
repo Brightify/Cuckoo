@@ -1,3 +1,7 @@
+- Fix crash when stubbing function that takes Sendable closure
+- Make `make` more reliable.
+- Fix errors when using Swift 6 strict concurrency checking
+
 - Add back Generator.xcodeproj for local building.
 
 - Downgrade SwiftPM version.
