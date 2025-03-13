@@ -44,8 +44,8 @@ let project = Project(
         // Any dependency changes must also be reflected in ../Package.swift.
         .package(url: "https://github.com/nvzqz/FileKit.git", .exact("6.1.0")),
         .package(url: "https://github.com/kylef/Stencil.git", .exact("0.15.1")),
-        .package(url: "https://github.com/apple/swift-syntax.git", .exact("509.0.0")),
-        .package(url: "https://github.com/apple/swift-format.git", .exact("509.0.0")),
+        .package(url: "https://github.com/swiftlang/swift-syntax", .exact("509.0.0")),
+        .package(url: "https://github.com/swiftlang/swift-format", .exact("509.0.0")),
         .package(url: "https://github.com/apple/swift-argument-parser", .exact("1.2.3")),
         .package(url: "https://github.com/LebJe/TOMLKit.git", .exact("0.5.5")),
         .package(url: "https://github.com/tuist/XcodeProj.git", .exact("8.15.0")),
