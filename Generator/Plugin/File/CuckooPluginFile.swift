@@ -21,10 +21,10 @@ struct CuckooPluginFile: BuildToolPlugin {
             .filter { $0.type == .source }
 
         return try commands(
-            sources: sources.map(\.path),
+            sources: sources.map(\.url),
             executableFactory: context.tool(named:),
-            projectDir: context.package.directory,
-            derivedSourcesDir: context.pluginWorkDirectory
+            projectDir: context.package.directoryURL,
+            derivedSourcesDir: context.pluginWorkDirectoryURL
         )
     }
 }
@@ -52,35 +52,36 @@ extension CuckooPluginFile: XcodeBuildToolPlugin {
             }
 
         return try commands(
-            sources: sources.map(\.path),
+            sources: sources.map(\.url),
             executableFactory: context.tool(named:),
-            projectDir: context.xcodeProject.directory,
-            derivedSourcesDir: context.pluginWorkDirectory
+            projectDir: context.xcodeProject.directoryURL,
+            derivedSourcesDir: context.pluginWorkDirectoryURL
         )
     }
 }
 #endif
 
 func commands(
-    sources: [Path],
+    sources: [URL],
     executableFactory: (String) throws -> PluginContext.Tool,
-    projectDir: Path,
-    derivedSourcesDir: Path
+    projectDir: URL,
+    derivedSourcesDir: URL
 ) throws -> [Command] {
-    let configurationPath = projectDir.appending("Cuckoofile.toml")
-    let output = derivedSourcesDir.appending("GeneratedMocks.swift")
+    let configurationURL = projectDir.appending(path: "Cuckoofile.toml")
+    let outputURL = derivedSourcesDir.appending(component: "GeneratedMocks.swift")
+
     return [
         .buildCommand(
             displayName: "Run Cuckoonator (single file)",
-            executable: try executableFactory("CuckooGenerator").path,
+            executable: try executableFactory("CuckooGenerator").url,
             arguments: [],
             environment: [
-                "PROJECT_DIR": projectDir,
-                "DERIVED_SOURCES_DIR": derivedSourcesDir,
-                "CUCKOO_OVERRIDE_OUTPUT": output,
+                "PROJECT_DIR": projectDir.absoluteString,
+                "DERIVED_SOURCES_DIR": derivedSourcesDir.absoluteString,
+                "CUCKOO_OVERRIDE_OUTPUT": outputURL.absoluteString,
             ],
-            inputFiles: [configurationPath] + sources,
-            outputFiles: [output]
+            inputFiles: [configurationURL] + sources,
+            outputFiles: [outputURL]
         )
     ]
 }
