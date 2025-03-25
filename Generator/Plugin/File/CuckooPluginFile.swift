@@ -76,9 +76,9 @@ func commands(
             executable: try executableFactory("CuckooGenerator").url,
             arguments: [],
             environment: [
-                "PROJECT_DIR": projectDir.absoluteString,
-                "DERIVED_SOURCES_DIR": derivedSourcesDir.absoluteString,
-                "CUCKOO_OVERRIDE_OUTPUT": outputURL.absoluteString,
+                "PROJECT_DIR": projectDir.path(),
+                "DERIVED_SOURCES_DIR": derivedSourcesDir.path(),
+                "CUCKOO_OVERRIDE_OUTPUT": outputURL.path(),
             ],
             inputFiles: [configurationURL] + sources,
             outputFiles: [outputURL]
