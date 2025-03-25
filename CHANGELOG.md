@@ -1,3 +1,7 @@
+- Fix Path-related warnings from CuckooPluginFile
+- Run GHA for pull requests.
+- Fix swiftlang dependencies
+
 - Fix crash when stubbing function that takes Sendable closure
 - Make `make` more reliable.
 - Fix errors when using Swift 6 strict concurrency checking
