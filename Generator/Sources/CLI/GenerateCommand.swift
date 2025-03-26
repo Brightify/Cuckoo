@@ -88,7 +88,7 @@ struct GenerateCommand: AsyncParsableCommand {
                             ?? originalFileName
                         let outputFile = TextFile(path: absoluteOutputPath + "\(fileNameWithoutExtension).swift")
                         do {
-                            try outputFile.write(generatedFile.contents)
+                            try outputFile.write(module.options.filePrefix + generatedFile.contents + module.options.fileSuffix)
                         } catch {
                             log(.error, message: "Failed to write to file '\(outputFile)':", error)
                         }
@@ -96,7 +96,7 @@ struct GenerateCommand: AsyncParsableCommand {
                 } else {
                     let outputFile = TextFile(path: absoluteOutputPath)
                     do {
-                        try outputFile.write(generatedFiles.map(\.contents).joined(separator: "\n\n"))
+                        try outputFile.write(module.options.filePrefix + generatedFiles.map(\.contents).joined(separator: "\n\n") + module.options.filePrefix)
                     } catch {
                         log(.error, message: "Failed to write to file '\(outputFile)':", error)
                     }
