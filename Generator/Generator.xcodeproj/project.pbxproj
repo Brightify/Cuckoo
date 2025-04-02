@@ -515,11 +515,11 @@
 			packageReferences = (
 				654FDF5DDCA8E00AB30C627C /* XCRemoteSwiftPackageReference "TOMLKit" */,
 				3353184D432ADAA3A1181227 /* XCRemoteSwiftPackageReference "swift-argument-parser" */,
-				4F2286D2C3C81C45B632B917 /* XCRemoteSwiftPackageReference "swift-format" */,
-				363029939C5CBC4C8DBF3C5A /* XCRemoteSwiftPackageReference "swift-syntax" */,
 				8B21E241BF00E2E25C38BB43 /* XCRemoteSwiftPackageReference "Stencil" */,
 				12B435B0A49E5C757FE0FC38 /* XCRemoteSwiftPackageReference "FileKit" */,
 				94DB3AD2FF77CD1231BF7E6C /* XCRemoteSwiftPackageReference "Rainbow" */,
+				610CDB7DFE32B92210967C0D /* XCRemoteSwiftPackageReference "swift-format" */,
+				4D7FC2EFCFF8100C810E9030 /* XCRemoteSwiftPackageReference "swift-syntax" */,
 				626B8647C363F00FE034AC55 /* XCRemoteSwiftPackageReference "XcodeProj" */,
 			);
 			productRefGroup = 81F0FD8DFF45C31EFB709CAF /* Products */;
@@ -909,64 +909,66 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/nvzqz/FileKit.git";
 			requirement = {
-				kind = exactVersion;
-				version = 6.1.0;
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.1.0;
 			};
 		};
 		3353184D432ADAA3A1181227 /* XCRemoteSwiftPackageReference "swift-argument-parser" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-argument-parser";
 			requirement = {
-				kind = exactVersion;
-				version = 1.2.3;
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.3;
 			};
 		};
-		363029939C5CBC4C8DBF3C5A /* XCRemoteSwiftPackageReference "swift-syntax" */ = {
+		4D7FC2EFCFF8100C810E9030 /* XCRemoteSwiftPackageReference "swift-syntax" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/apple/swift-syntax.git";
+			repositoryURL = "https://github.com/swiftlang/swift-syntax";
 			requirement = {
-				kind = exactVersion;
-				version = 509.0.0;
+				kind = versionRange;
+				maximumVersion = 602.0.0;
+				minimumVersion = 509.0.0;
 			};
 		};
-		4F2286D2C3C81C45B632B917 /* XCRemoteSwiftPackageReference "swift-format" */ = {
+		610CDB7DFE32B92210967C0D /* XCRemoteSwiftPackageReference "swift-format" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/apple/swift-format.git";
+			repositoryURL = "https://github.com/swiftlang/swift-format";
 			requirement = {
-				kind = exactVersion;
-				version = 509.0.0;
+				kind = versionRange;
+				maximumVersion = 602.0.0;
+				minimumVersion = 509.0.0;
 			};
 		};
 		626B8647C363F00FE034AC55 /* XCRemoteSwiftPackageReference "XcodeProj" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/tuist/XcodeProj.git";
 			requirement = {
-				kind = exactVersion;
-				version = 8.15.0;
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.15.0;
 			};
 		};
 		654FDF5DDCA8E00AB30C627C /* XCRemoteSwiftPackageReference "TOMLKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/LebJe/TOMLKit.git";
 			requirement = {
-				kind = exactVersion;
-				version = 0.5.5;
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.5.5;
 			};
 		};
 		8B21E241BF00E2E25C38BB43 /* XCRemoteSwiftPackageReference "Stencil" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kylef/Stencil.git";
 			requirement = {
-				kind = exactVersion;
-				version = 0.15.1;
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.15.1;
 			};
 		};
 		94DB3AD2FF77CD1231BF7E6C /* XCRemoteSwiftPackageReference "Rainbow" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Rainbow";
 			requirement = {
-				kind = exactVersion;
-				version = 4.0.1;
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
