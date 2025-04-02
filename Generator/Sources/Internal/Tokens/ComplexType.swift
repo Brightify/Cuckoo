@@ -41,6 +41,21 @@ enum ComplexType {
             switch identifierType.trimmedDescription {
             case "Dictionary":
                 let arguments = identifierType.genericArgumentClause?.arguments
+                #if canImport(SwiftSyntax601)
+                guard let keyArgument = arguments?.first?.argument, let valueArgument = arguments?.last?.argument else {
+                    fatalError("Cuckoo error: Failed to get Dictionary type, please open an issue.")
+                }
+                switch (keyArgument, valueArgument) {
+                case (.type(let keyType), .type(let valueType)):
+                    self = .dictionary(
+                        keyType: ComplexType(syntax: keyType),
+                        valueType: ComplexType(syntax: valueType)
+                    )
+                default:
+                    // the other enum value `.expr` requires an @spi(ExperimentalLanguageFeatures) import of SwiftSyntax
+                    fatalError("Cuckoo error: Failed to get Dictionary type, please open an issue.")
+                }
+                #else
                 guard let keyType = arguments?.first?.argument, let valueType = arguments?.last?.argument else {
                     fatalError("Cuckoo error: Failed to get Dictionary type, please open an issue.")
                 }
@@ -48,12 +63,26 @@ enum ComplexType {
                     keyType: ComplexType(syntax: keyType),
                     valueType: ComplexType(syntax: valueType)
                 )
+                #endif
             case "Array":
                 let arguments = identifierType.genericArgumentClause?.arguments
+                #if canImport(SwiftSyntax601)
+                guard let elementArgument = arguments?.first?.argument else {
+                    fatalError("Cuckoo error: Failed to get Array type, please open an issue.")
+                }
+                switch elementArgument {
+                case .type(let elementType):
+                    self = .array(elementType: ComplexType(syntax: elementType))
+                default:
+                    // the other enum value `.expr` requires an @spi(ExperimentalLanguageFeatures) import of SwiftSyntax
+                    fatalError("Cuckoo error: Failed to get Array type, please open an issue.")
+                }
+                #else
                 guard let elementType = arguments?.first?.argument else {
                     fatalError("Cuckoo error: Failed to get Array type, please open an issue.")
                 }
                 self = .array(elementType: ComplexType(syntax: elementType))
+                #endif
             default:
                 self = .type(normalizedSyntax.description)
             }
