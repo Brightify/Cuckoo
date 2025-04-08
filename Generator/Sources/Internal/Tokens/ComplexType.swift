@@ -46,7 +46,7 @@ enum ComplexType {
                     fatalError("Cuckoo error: Failed to get Dictionary type, please open an issue.")
                 }
                 switch (keyArgument, valueArgument) {
-                case let (.type(keyType), .type(valueType)):
+                case (.type(let keyType), .type(let valueType)):
                     self = .dictionary(
                         keyType: ComplexType(syntax: keyType),
                         valueType: ComplexType(syntax: valueType)
@@ -71,7 +71,7 @@ enum ComplexType {
                     fatalError("Cuckoo error: Failed to get Array type, please open an issue.")
                 }
                 switch elementArgument {
-                case let .type(elementType):
+                case .type(let elementType):
                     self = .array(elementType: ComplexType(syntax: elementType))
                 default:
                     // the other enum value `.expr` requires an @spi(ExperimentalLanguageFeatures) import of SwiftSyntax
