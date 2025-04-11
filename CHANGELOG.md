@@ -1,3 +1,5 @@
+- Loosen dependency requirements to make updating cuckoo versions easier
+
 - Fix Path-related warnings from CuckooPluginFile
 - Run GHA for pull requests.
 - Fix swiftlang dependencies
