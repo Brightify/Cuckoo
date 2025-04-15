@@ -1,13 +1,13 @@
-// swift-tools-version:6.0
+// swift-tools-version:5.10
 
 import PackageDescription
 
 let package = Package(
     name: "Cuckoo",
     platforms: [
-        .iOS("16.0"),
+        .iOS("13.0"),
         .tvOS("13.0"),
-        .macOS("13.0"),
+        .macOS("10.15"),
         .watchOS("8.0"),
     ],
     products: [
@@ -29,8 +29,8 @@ let package = Package(
         // Any dependency changes must also be reflected in Generator/Project.swift.
         .package(url: "https://github.com/nvzqz/FileKit.git", from: "6.1.0"),
         .package(url: "https://github.com/kylef/Stencil.git", from: "0.15.1"),
-        .package(url: "https://github.com/swiftlang/swift-syntax", "509.0.0"..<"602.0.0"),
-        .package(url: "https://github.com/swiftlang/swift-format", "509.0.0"..<"602.0.0"),
+        .package(url: "https://github.com/swiftlang/swift-syntax", "509.0.0"..<"600.0.0"),
+        .package(url: "https://github.com/swiftlang/swift-format", "509.0.0"..<"600.0.0"),
         .package(url: "https://github.com/apple/swift-argument-parser", from: "1.2.3"),
         .package(url: "https://github.com/LebJe/TOMLKit.git", from: "0.5.5"),
         .package(url: "https://github.com/tuist/XcodeProj.git", from: "8.15.0"),
