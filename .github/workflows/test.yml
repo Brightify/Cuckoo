@@ -5,9 +5,25 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test_macOS:
-    name: Build and Test on macOS
+  test_macOS_xcode_16:
+    name: Build and Test on macOS with Xcode 16
     runs-on: macos-15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: List available Xcode versions
+        run: ls /Applications | grep Xcode
+      - name: Show current version of Xcode
+        run: xcodebuild -version
+      - name: Test
+        run: |
+          make ci
+          xcodebuild test -scheme "Cuckoo-macOS" -workspace Cuckoo.xcworkspace \
+            | xcbeautify --renderer github-actions
+
+  test_macOS_xcode_15:
+    name: Build and Test on macOS with Xcode 15
+    runs-on: macos-14
     steps:
       - name: Checkout
         uses: actions/checkout@v4
