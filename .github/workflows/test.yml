@@ -18,7 +18,7 @@ jobs:
       - name: Test
         run: |
           make ci
-          xcodebuild test -scheme "Cuckoo-macOS" -workspace Cuckoo.xcworkspace \
+          set -o pipefail && xcodebuild test -scheme "Cuckoo-macOS" -workspace Cuckoo.xcworkspace \
             | xcbeautify --renderer github-actions
 
   test_macOS_xcode_15:
@@ -34,7 +34,7 @@ jobs:
       - name: Test
         run: |
           make ci
-          xcodebuild test -scheme "Cuckoo-macOS" -workspace Cuckoo.xcworkspace \
+          set -o pipefail && xcodebuild test -scheme "Cuckoo-macOS" -workspace Cuckoo.xcworkspace \
             | xcbeautify --renderer github-actions
 
   test_iOS:
@@ -50,6 +50,6 @@ jobs:
       - name: Test
         run: |
           make ci
-          xcodebuild test -scheme "Cuckoo-iOS" -workspace Cuckoo.xcworkspace \
+          set -o pipefail && xcodebuild test -scheme "Cuckoo-iOS" -workspace Cuckoo.xcworkspace \
             -destination "platform=iOS Simulator,name=iPhone 16,OS=18.0" \
             | xcbeautify --renderer github-actions
