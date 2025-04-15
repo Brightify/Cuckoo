@@ -1,4 +1,6 @@
+#if canImport(Testing)
 import Testing
+#endif
 import XCTest
 @testable import Cuckoo
 @testable import CuckooMocks
@@ -125,6 +127,7 @@ final class FailTest: XCTestCase {
     }
 }
 
+#if canImport(Testing)
 struct FailSwiftTestingTests {
     @Test
     func missingInvocation() {
@@ -271,3 +274,4 @@ struct FailSwiftTestingTests {
         }
     }
 }
+#endif
