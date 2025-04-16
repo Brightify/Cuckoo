@@ -1,7 +1,5 @@
 import Cuckoo
-#if canImport(Testing)
 import Testing
-#endif
 import XCTest
 @testable import CuckooMocks
 
@@ -90,7 +88,6 @@ final class StubTest: XCTestCase {
     }
 }
 
-#if canImport(Testing)
 struct StubSwiftTestingTests {
     let stub = ClassForStubTestingStub()
 
@@ -184,4 +181,3 @@ struct StubSwiftTestingTests {
         stub.voidFunction()
     }
 }
-#endif
