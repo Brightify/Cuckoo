@@ -5,6 +5,19 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  build_macOS:
+    name: Build Package on macOS
+    runs-on: macos-15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: List available Xcode versions
+        run: ls /Applications | grep Xcode
+      - name: Show current version of Xcode
+        run: xcodebuild -version
+      - name: Build Package
+        run: swift build
+
   test_macOS:
     name: Build and Test on macOS
     runs-on: macos-15
@@ -18,7 +31,7 @@ jobs:
       - name: Test
         run: |
           make ci
-          xcodebuild test -scheme "Cuckoo-macOS" -workspace Cuckoo.xcworkspace \
+          set -o pipefail && xcodebuild test -scheme "Cuckoo-macOS" -workspace Cuckoo.xcworkspace \
             | xcbeautify --renderer github-actions
 
   test_iOS:
@@ -34,6 +47,6 @@ jobs:
       - name: Test
         run: |
           make ci
-          xcodebuild test -scheme "Cuckoo-iOS" -workspace Cuckoo.xcworkspace \
+          set -o pipefail && xcodebuild test -scheme "Cuckoo-iOS" -workspace Cuckoo.xcworkspace \
             -destination "platform=iOS Simulator,name=iPhone 16,OS=18.0" \
             | xcbeautify --renderer github-actions
