@@ -5,9 +5,9 @@ import PackageDescription
 let package = Package(
     name: "Cuckoo",
     platforms: [
-        .iOS("16.0"),
+        .iOS("13.0"),
         .tvOS("13.0"),
-        .macOS("13.0"),
+        .macOS("10.15"),
         .watchOS("8.0"),
     ],
     products: [

@@ -22,9 +22,9 @@ public enum PlatformType: String {
     public var deploymentTargets: DeploymentTargets {
         switch self {
         case .iOS:
-            return .iOS("16.0")
+            return .iOS("13.0")
         case .macOS:
-            return .macOS("13.0")
+            return .macOS("10.15")
         case .tvOS:
             return .tvOS("13.0")
         case .watchOS:
