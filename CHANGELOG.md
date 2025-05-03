@@ -1,3 +1,6 @@
+- Fix macOS support post swift-format dependency range increase
+- Remove SwiftFormat dependency for now.
+
 - Loosen dependency requirements to make updating cuckoo versions easier
 
 - Fix Path-related warnings from CuckooPluginFile
