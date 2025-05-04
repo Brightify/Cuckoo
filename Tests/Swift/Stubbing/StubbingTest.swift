@@ -18,7 +18,7 @@ final class StubbingTest: XCTestCase {
     func testReturningArray() {
         let mock = MockTestedClass()
         stub(mock) { mock in
-            when(mock.readOnlyProperty.get).thenReturn(["a", "b", "c"])
+            when(mock.readOnlyProperty.get).thenReturn(inOrder: ["a", "b", "c"])
         }
 
         XCTAssertEqual(mock.readOnlyProperty, "a")
