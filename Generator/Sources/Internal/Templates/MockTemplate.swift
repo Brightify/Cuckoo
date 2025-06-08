@@ -124,6 +124,7 @@ extension {{ container.parentFullyQualifiedName }} {
             "{{method.fullyQualifiedName}}",
             parameters: ({{method.parameterNames}}),
             escapingParameters: ({{method.escapingParameterNames}}),
+            {% if method.throwsOnly %}errorType: {{ method.throwTypeError }}.self,{% endif %}
             superclassCall: {%+ if container.isImplementation %}{% if method.isAsync %}await {%+ endif %}super.{{method.name}}({{method.call}}){% else %}Cuckoo.MockManager.crashOnProtocolSuperclassCall(){% endif %},
             defaultCall: {%+ if method.isAsync %}await {%+ endif %}__defaultImplStub!.{{method.name}}{%if method.isOptional %}!{%endif%}({{method.call}})
         ){{ method.parameters|closeNestedClosure }}

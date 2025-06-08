@@ -286,7 +286,7 @@ extension Crawler {
 
             let getAccessor = accessors.first { $0.accessorSpecifier.tokenKind == .keyword(.get) }
             effects = Variable.Effects(
-                isThrowing: getAccessor?.effectSpecifiers?.throwsSpecifier?.isPresent == true,
+                isThrowing: getAccessor?.effectSpecifiers?.throwsClause != nil,
                 isAsync: getAccessor?.effectSpecifiers?.asyncSpecifier?.isPresent == true
             )
         case .getter:
@@ -330,7 +330,7 @@ extension Crawler {
                 genericParameters: genericParameters(from: initializer.genericParameterClause?.parameters),
                 parameters: parameters,
                 asyncType: nil,
-                throwType: initializer.signature.effectSpecifiers?.throwsSpecifier.flatMap { ThrowType(rawValue: $0.filteredDescription) },
+                throwType: ThrowType(syntax: initializer.signature.effectSpecifiers?.throwsClause),
                 returnType: nil,
                 whereConstraints: genericRequirements(from: initializer.genericWhereClause?.requirements)
             ),
@@ -365,7 +365,7 @@ extension Crawler {
                 genericParameters: genericParameters(from: method.genericParameterClause?.parameters),
                 parameters: parameters,
                 asyncType: method.signature.effectSpecifiers?.asyncSpecifier.flatMap { AsyncType(rawValue: $0.filteredDescription) },
-                throwType: method.signature.effectSpecifiers?.throwsSpecifier.flatMap { ThrowType(rawValue: $0.filteredDescription) },
+                throwType: ThrowType(syntax: method.signature.effectSpecifiers?.throwsClause),
                 returnType: returnType ?? ComplexType.type("Void"),
                 whereConstraints: genericRequirements(from: method.genericWhereClause?.requirements)
             ),

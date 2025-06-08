@@ -2,19 +2,19 @@ public protocol Stub {
     var method: String { get }
 }
 
-public class ConcreteStub<IN, OUT>: Stub {
+public class ConcreteStub<IN, OUT, ERROR>: Stub {
     public let method: String
     let parameterMatchers: [ParameterMatcher<IN>]
-    var actions: [StubAction<IN, OUT>] = []
+    var actions: [StubAction<IN, OUT, ERROR>] = []
     
     init(method: String, parameterMatchers: [ParameterMatcher<IN>]) {
         self.method = method
         self.parameterMatchers = parameterMatchers
     }
     
-    func appendAction(_ action: StubAction<IN, OUT>) {
+    func appendAction(_ action: StubAction<IN, OUT, ERROR>) {
         actions.append(action)
     }
 }
 
-public class ClassConcreteStub<IN, OUT>: ConcreteStub<IN, OUT> { }
+public class ClassConcreteStub<IN, OUT, ERROR>: ConcreteStub<IN, OUT, ERROR> { }

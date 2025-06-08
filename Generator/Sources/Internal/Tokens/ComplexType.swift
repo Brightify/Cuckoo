@@ -253,7 +253,7 @@ extension ComplexType.Closure.Effects {
         if effectSpecifiers.asyncSpecifier?.isPresent == true {
             effects.insert(.async)
         }
-        if effectSpecifiers.throwsSpecifier?.isPresent == true {
+        if effectSpecifiers.throwsClause != nil {
             effects.insert(.throws)
         }
         self = effects
