@@ -1,6 +1,6 @@
-enum StubAction<IN, OUT> {
-    case callImplementation((IN) throws -> OUT)
+enum StubAction<IN, OUT, ERROR> {
+    case callImplementation((IN) throws(ERROR) -> OUT)
     case returnValue(OUT)
-    case throwError(Error)
+    case throwError(ERROR)
     case callRealImplementation
 }

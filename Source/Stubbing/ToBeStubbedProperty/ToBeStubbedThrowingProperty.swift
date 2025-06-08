@@ -8,7 +8,7 @@ public struct ProtocolToBeStubbedThrowingProperty<MOCK: ProtocolMock, T>: ToBeSt
     private let manager: MockManager
     private let name: String
 
-    public var get: ProtocolStubThrowingFunction<Void, T> {
+    public var get: ProtocolStubThrowingFunction<Void, T, Error> {
         ProtocolStubThrowingFunction(
             stub: manager.createStub(
                 for: MOCK.self,
@@ -28,7 +28,7 @@ public struct ClassToBeStubbedThrowingProperty<MOCK: ClassMock, T>: ToBeStubbedT
     private let manager: MockManager
     private let name: String
 
-    public var get: ClassStubThrowingFunction<Void, T> {
+    public var get: ClassStubThrowingFunction<Void, T, Error> {
         ClassStubThrowingFunction(
             stub: manager.createStub(
                 for: MOCK.self,

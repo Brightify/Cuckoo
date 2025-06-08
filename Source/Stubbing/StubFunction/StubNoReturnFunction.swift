@@ -2,17 +2,17 @@ public protocol StubNoReturnFunction: StubFunctionThenTrait, StubFunctionThenDoN
 }
 
 public struct ProtocolStubNoReturnFunction<IN>: StubNoReturnFunction {
-    public let stub: ConcreteStub<IN, Void>
+    public let stub: ConcreteStub<IN, Void, Never>
     
-    public init(stub: ConcreteStub<IN, Void>) {
+    public init(stub: ConcreteStub<IN, Void, Never>) {
         self.stub = stub
     }
 }
 
 public struct ClassStubNoReturnFunction<IN>: StubNoReturnFunction, StubFunctionThenCallRealImplementationTrait {
-    public let stub: ConcreteStub<IN, Void>
+    public let stub: ConcreteStub<IN, Void, Never>
 
-    public init(stub: ClassConcreteStub<IN, Void>) {
+    public init(stub: ClassConcreteStub<IN, Void, Never>) {
         self.stub = stub
     }
 }

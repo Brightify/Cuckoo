@@ -50,14 +50,14 @@ public class MockManager {
         return await callRethrowsInternal(method, parameters: parameters, escapingParameters: escapingParameters, superclassCall: superclassCall, defaultCall: defaultCall)
     }
     
-    private func callRethrowsInternal<IN, OUT>(_ method: String, parameters: IN, escapingParameters: IN, superclassCall: () throws -> OUT, defaultCall: () throws -> OUT) rethrows -> OUT {
+    private func callRethrowsInternal<IN, OUT, ERROR>(_ method: String, parameters: IN, escapingParameters: IN, superclassCall: () throws(ERROR) -> OUT, defaultCall: () throws(ERROR) -> OUT) rethrows -> OUT {
         let stubCall = ConcreteStubCall(method: method, parameters: escapingParameters)
         queue.sync {
             stubCalls.append(stubCall)
             unverifiedStubCallsIndexes.append(stubCalls.count - 1)
         }
 
-        if let stub = (stubs.filter { $0.method == method }.compactMap { $0 as? ConcreteStub<IN, OUT> }.filter { $0.parameterMatchers.reduce(true) { $0 && $1.matches(parameters) } }.first) {
+        if let stub = (stubs.filter { $0.method == method }.compactMap { $0 as? ConcreteStub<IN, OUT, ERROR> }.filter { $0.parameterMatchers.reduce(true) { $0 && $1.matches(parameters) } }.first) {
             
             guard let action = queue.sync(execute: {
                 return stub.actions.count > 1 ? stub.actions.removeFirst() : stub.actions.first
@@ -90,14 +90,14 @@ public class MockManager {
         }
     }
     
-    private func callRethrowsInternal<IN, OUT>(_ method: String, parameters: IN, escapingParameters: IN, superclassCall: () async throws -> OUT, defaultCall: () async throws -> OUT) async rethrows -> OUT {
+    private func callRethrowsInternal<IN, OUT, ERROR>(_ method: String, parameters: IN, escapingParameters: IN, superclassCall: () async throws(ERROR) -> OUT, defaultCall: () async throws(ERROR) -> OUT) async rethrows -> OUT {
         let stubCall = ConcreteStubCall(method: method, parameters: escapingParameters)
         queue.sync {
             stubCalls.append(stubCall)
             unverifiedStubCallsIndexes.append(stubCalls.count - 1)
         }
 
-        if let stub = (stubs.filter { $0.method == method }.compactMap { $0 as? ConcreteStub<IN, OUT> }.filter { $0.parameterMatchers.reduce(true) { $0 && $1.matches(parameters) } }.first) {
+        if let stub = (stubs.filter { $0.method == method }.compactMap { $0 as? ConcreteStub<IN, OUT, ERROR> }.filter { $0.parameterMatchers.reduce(true) { $0 && $1.matches(parameters) } }.first) {
             
             guard let action = queue.sync(execute: {
                 return stub.actions.count > 1 ? stub.actions.removeFirst() : stub.actions.first
@@ -130,14 +130,14 @@ public class MockManager {
         }
     }
     
-    private func callThrowsInternal<IN, OUT>(_ method: String, parameters: IN, escapingParameters: IN, superclassCall: () throws -> OUT, defaultCall: () throws -> OUT) throws -> OUT {
+    private func callThrowsInternal<IN, OUT, ERROR>(_ method: String, parameters: IN, escapingParameters: IN, superclassCall: () throws(ERROR) -> OUT, defaultCall: () throws(ERROR) -> OUT) throws(ERROR) -> OUT {
         let stubCall = ConcreteStubCall(method: method, parameters: escapingParameters)
         queue.sync {
             stubCalls.append(stubCall)
             unverifiedStubCallsIndexes.append(stubCalls.count - 1)
         }
         
-        if let stub = (stubs.filter { $0.method == method }.compactMap { $0 as? ConcreteStub<IN, OUT> }.filter { $0.parameterMatchers.reduce(true) { $0 && $1.matches(parameters) } }.first) {
+        if let stub = (stubs.filter { $0.method == method }.compactMap { $0 as? ConcreteStub<IN, OUT, ERROR> }.filter { $0.parameterMatchers.reduce(true) { $0 && $1.matches(parameters) } }.first) {
             
             guard let action = queue.sync(execute: {
                 return stub.actions.count > 1 ? stub.actions.removeFirst() : stub.actions.first
@@ -166,14 +166,14 @@ public class MockManager {
         }
     }
     
-    private func callThrowsInternal<IN, OUT>(_ method: String, parameters: IN, escapingParameters: IN, superclassCall: () async throws -> OUT, defaultCall: () async throws -> OUT) async throws -> OUT {
+    private func callThrowsInternal<IN, OUT, ERROR>(_ method: String, parameters: IN, escapingParameters: IN, superclassCall: () async throws(ERROR) -> OUT, defaultCall: () async throws(ERROR) -> OUT) async throws(ERROR) -> OUT {
         let stubCall = ConcreteStubCall(method: method, parameters: escapingParameters)
         queue.sync {
             stubCalls.append(stubCall)
             unverifiedStubCallsIndexes.append(stubCalls.count - 1)
         }
         
-        if let stub = (stubs.filter { $0.method == method }.compactMap { $0 as? ConcreteStub<IN, OUT> }.filter { $0.parameterMatchers.reduce(true) { $0 && $1.matches(parameters) } }.first) {
+        if let stub = (stubs.filter { $0.method == method }.compactMap { $0 as? ConcreteStub<IN, OUT, ERROR> }.filter { $0.parameterMatchers.reduce(true) { $0 && $1.matches(parameters) } }.first) {
             
             guard let action = queue.sync(execute: {
                 return stub.actions.count > 1 ? stub.actions.removeFirst() : stub.actions.first
@@ -202,14 +202,14 @@ public class MockManager {
         }
     }
     
-    public func createStub<MOCK: ClassMock, IN, OUT>(for _: MOCK.Type, method: String, parameterMatchers: [ParameterMatcher<IN>]) -> ClassConcreteStub<IN, OUT> {
-        let stub = ClassConcreteStub<IN, OUT>(method: method, parameterMatchers: parameterMatchers)
+    public func createStub<MOCK: ClassMock, IN, OUT, ERROR>(for _: MOCK.Type, method: String, parameterMatchers: [ParameterMatcher<IN>]) -> ClassConcreteStub<IN, OUT, ERROR> {
+        let stub = ClassConcreteStub<IN, OUT, ERROR>(method: method, parameterMatchers: parameterMatchers)
         stubs.insert(stub, at: 0)
         return stub
     }
 
-    public func createStub<MOCK: ProtocolMock, IN, OUT>(for _: MOCK.Type, method: String, parameterMatchers: [ParameterMatcher<IN>]) -> ConcreteStub<IN, OUT> {
-        let stub = ConcreteStub<IN, OUT>(method: method, parameterMatchers: parameterMatchers)
+    public func createStub<MOCK: ProtocolMock, IN, OUT, ERROR>(for _: MOCK.Type, method: String, parameterMatchers: [ParameterMatcher<IN>]) -> ConcreteStub<IN, OUT, ERROR> {
+        let stub = ConcreteStub<IN, OUT, ERROR>(method: method, parameterMatchers: parameterMatchers)
         stubs.insert(stub, at: 0)
         return stub
     }
@@ -327,11 +327,11 @@ extension MockManager {
 
 extension MockManager {
     public func getterThrows<T>(_ property: String, superclassCall: @autoclosure () throws -> T, defaultCall: @autoclosure () throws -> T) throws -> T {
-        return try callThrows(getterName(property), parameters: Void(), escapingParameters: Void(), superclassCall: try superclassCall(), defaultCall: try defaultCall())
+        return try callThrows(getterName(property), parameters: Void(), escapingParameters: Void(), errorType: (Error).self, superclassCall: try superclassCall(), defaultCall: try defaultCall())
     }
 
     public func getterThrows<T>(_ property: String, superclassCall: @autoclosure () async throws -> T, defaultCall: @autoclosure () async throws -> T) async throws -> T {
-        return try await callThrows(getterName(property), parameters: Void(), escapingParameters: Void(), superclassCall: try await superclassCall(), defaultCall: try await defaultCall())
+        return try await callThrows(getterName(property), parameters: Void(), escapingParameters: Void(), errorType: (Error).self, superclassCall: try await superclassCall(), defaultCall: try await defaultCall())
     }
 }
 
@@ -346,11 +346,11 @@ extension MockManager {
 }
 
 extension MockManager {
-    public func callThrows<IN, OUT>(_ method: String, parameters: IN, escapingParameters: IN, superclassCall: @autoclosure () throws -> OUT, defaultCall: @autoclosure () throws -> OUT) throws -> OUT {
+    public func callThrows<IN, OUT, ERROR>(_ method: String, parameters: IN, escapingParameters: IN, errorType: ERROR.Type, superclassCall: @autoclosure () throws(ERROR) -> OUT, defaultCall: @autoclosure () throws(ERROR) -> OUT) throws(ERROR) -> OUT {
         return try callThrowsInternal(method, parameters: parameters, escapingParameters: escapingParameters, superclassCall: superclassCall, defaultCall: defaultCall)
     }
     
-    public func callThrows<IN, OUT>(_ method: String, parameters: IN, escapingParameters: IN, superclassCall: @autoclosure () async throws -> OUT, defaultCall: @autoclosure () async throws -> OUT) async throws -> OUT {
+    public func callThrows<IN, OUT, ERROR>(_ method: String, parameters: IN, escapingParameters: IN, errorType: ERROR.Type, superclassCall: @autoclosure () async throws(ERROR) -> OUT, defaultCall: @autoclosure () async throws(ERROR) -> OUT) async throws(ERROR) -> OUT {
         return try await callThrowsInternal(method, parameters: parameters, escapingParameters: escapingParameters, superclassCall: superclassCall, defaultCall: defaultCall)
     }
 }
