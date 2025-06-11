@@ -11,4 +11,12 @@ public extension StubFunctionThenReturnTrait {
         }
         return self
     }
+
+    @discardableResult
+    func thenReturn(inOrder outputs: [OutputType]) -> Self {
+        outputs.forEach { output in
+            stub.appendAction(.returnValue(output))
+        }
+        return self
+    }
 }
