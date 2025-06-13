@@ -66,6 +66,14 @@ final class StubThrowingFunctionTest: XCTestCase {
 
         XCTAssertTrue(catched)
     }
+    
+    func testTypedThrowsThenTypedError() {
+        let mock = MockTestedClass()
+        stub(mock) { mock in
+            when(mock.withTypedThrows())
+                .thenThrow(NSError())
+        }
+    }
 
     private enum TestError: Error {
         case unknown
