@@ -214,6 +214,8 @@ class TestedClass {
     func withReservedKeywords(for: String, in: String) -> String {
         "hello"
     }
+    
+    func withTypedThrows() throws(NSError) {}
 
     func callingCountCharactersMethodWithHello() -> Int {
         return count(characters: "Hello")
