@@ -1,3 +1,8 @@
+- Integrate Mise.
+- Fix typed-throws compilation issue with Swift 6.2
+- Add support for typed-throws methods
+- Allow passing an array of values to stub
+
 - Fix macOS support post swift-format dependency range increase
 - Remove SwiftFormat dependency for now.
 
