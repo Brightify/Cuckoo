@@ -28,9 +28,13 @@ jobs:
         run: ls /Applications | grep Xcode
       - name: Show current version of Xcode
         run: xcodebuild -version
+      - uses: jdx/mise-action@v2
+        with:
+          install: false
+          experimental: true
       - name: Test
         run: |
-          make ci
+          make
           set -o pipefail && xcodebuild test -scheme "Cuckoo-macOS" -workspace Cuckoo.xcworkspace \
             | xcbeautify --renderer github-actions
 
@@ -44,9 +48,13 @@ jobs:
         run: ls /Applications | grep Xcode
       - name: Show current version of Xcode
         run: xcodebuild -version
+      - uses: jdx/mise-action@v2
+        with:
+          install: false
+          experimental: true
       - name: Test
         run: |
-          make ci
+          make
           set -o pipefail && xcodebuild test -scheme "Cuckoo-iOS" -workspace Cuckoo.xcworkspace \
             -destination "platform=iOS Simulator,name=iPhone 16,OS=18.0" \
             | xcbeautify --renderer github-actions
