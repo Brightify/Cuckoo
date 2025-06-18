@@ -469,12 +469,11 @@ Detailed usage is available in Cuckoo tests along with DOs and DON'Ts of this Sw
 
 ## Contribute
 Cuckoo is open for everyone and we'd like you to help us make the best Swift mocking library. For Cuckoo development, follow these steps:
-1. Make sure you have the latest stable version of Xcode installed.
-2. Clone the **Cuckoo** repository.
-3. **For the initial setup**, open a terminal and run `make init` at the root of the cloned **Cuckoo** repository. This will install necessary tools (including Tuist if not already installed), generate the project, install dependencies, and open it in Xcode.
-4. **For subsequent usage or when switching branches**, run `make` at the root of the cloned **Cuckoo** repository. This will generate the project, install dependencies, and open it in Xcode.
-5. Select any scheme of `Cuckoo-iOS`, `Cuckoo-tvOS`, or `Cuckoo-macOS` and verify by running the tests (⌘+U).
-6. Peek around or file a pull request with your changes.
+1. Clone the **Cuckoo** repository.
+2. Make sure you have [Mise](https://mise.jdx.dev/getting-started.html) installed.
+3. Run `make` at the root of the repository. This will install dependencies, generate the project, and open it in Xcode.
+4. Select any scheme of `Cuckoo-iOS`, `Cuckoo-tvOS`, or `Cuckoo-macOS` and verify by running the tests (⌘+U).
+5. Peek around or file a pull request with your changes.
 
 **NOTE**: Make sure to run `make` again whenever you checkout another branch, the project utilizes [Tuist](https://github.com/tuist/tuist) for project generation.
 
