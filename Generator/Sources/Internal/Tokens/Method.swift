@@ -39,6 +39,10 @@ extension Method {
     var isThrowing: Bool {
         signature.throwType.map { $0.isThrowing || $0.isRethrowing } ?? false
     }
+    
+    var throwsOnly: Bool {
+        signature.throwType.map { $0.isThrowing } ?? false
+    }
 
     var returnType: ComplexType? {
         signature.returnType
@@ -99,7 +103,9 @@ extension Method {
             "returnType": returnType?.description ?? "",
             "isAsync": isAsync,
             "isThrowing": isThrowing,
-            "throwType": signature.throwType?.description ?? "",
+            "throwsOnly": throwsOnly,
+            "throwType": signature.throwType?.keyword ?? "",
+            "throwTypeError": signature.throwType?.type ?? "",
             "fullyQualifiedName": fullyQualifiedName,
             "call": call,
             "parameterSignature": signature.parameters.map { $0.description }.joined(separator: ", "),
