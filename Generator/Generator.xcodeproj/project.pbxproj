@@ -944,7 +944,7 @@
 			repositoryURL = "https://github.com/tuist/XcodeProj.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 8.15.0;
+				minimumVersion = 9.0.0;
 			};
 		};
 		654FDF5DDCA8E00AB30C627C /* XCRemoteSwiftPackageReference "TOMLKit" */ = {
