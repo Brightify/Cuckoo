@@ -48,7 +48,7 @@ let project = Project(
         .package(url: "https://github.com/swiftlang/swift-format", "509.0.0"..<"602.0.0"),
         .package(url: "https://github.com/apple/swift-argument-parser", from: "1.2.3"),
         .package(url: "https://github.com/LebJe/TOMLKit.git", from: "0.5.5"),
-        .package(url: "https://github.com/tuist/XcodeProj.git", from: "8.15.0"),
+        .package(url: "https://github.com/tuist/XcodeProj.git", from: "9.0.0"),
         .package(url: "https://github.com/onevcat/Rainbow", from: "4.0.1"),
     ],
     targets: [
