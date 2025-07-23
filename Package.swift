@@ -29,8 +29,8 @@ let package = Package(
         // Any dependency changes must also be reflected in Generator/Project.swift.
         .package(url: "https://github.com/nvzqz/FileKit.git", from: "6.1.0"),
         .package(url: "https://github.com/kylef/Stencil.git", from: "0.15.1"),
-        .package(url: "https://github.com/swiftlang/swift-syntax", "509.0.0"..<"603.0.0"),
-        // .package(url: "https://github.com/swiftlang/swift-format", "509.0.0"..<"602.0.0"),
+        .package(url: "https://github.com/swiftlang/swift-syntax", "600.1.0"..<"603.0.0"),
+        // .package(url: "https://github.com/swiftlang/swift-format", "600.1.0"..<"603.0.0"),
         .package(url: "https://github.com/apple/swift-argument-parser", from: "1.2.3"),
         .package(url: "https://github.com/LebJe/TOMLKit.git", from: "0.5.5"),
         .package(url: "https://github.com/tuist/XcodeProj.git", from: "9.0.0"),
