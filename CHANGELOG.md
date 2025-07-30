@@ -1,3 +1,8 @@
+- Update Cocoapods and change Ruby version.
+- Update SwiftSyntax.
+- Update Xcodeproj to 9.0.0
+- Update contribution instructions.
+
 - Integrate Mise.
 - Fix typed-throws compilation issue with Swift 6.2
 - Add support for typed-throws methods
