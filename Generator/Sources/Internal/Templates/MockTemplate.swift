@@ -60,7 +60,7 @@ extension {{ container.parentFullyQualifiedName }} {
     {% endif -%}
 
     {% for property in container.properties %}
-    
+
     {% if debug %}
     // {{ property }}
     {% endif %}
@@ -109,7 +109,7 @@ extension {{ container.parentFullyQualifiedName }} {
     {{ initializer.accessibility|withSpace }}required init{{initializer.signature}} {}
     {% endfor %}
     {% for method in container.methods %}
-    
+
     {% if debug %}
     // {{method}}
     {% endif %}
@@ -124,7 +124,9 @@ extension {{ container.parentFullyQualifiedName }} {
             "{{method.fullyQualifiedName}}",
             parameters: ({{method.parameterNames}}),
             escapingParameters: ({{method.escapingParameterNames}}),
-            {% if method.throwsOnly %}errorType: {{ method.throwTypeError }}.self,{% endif %}
+            {% if method.throwsOnly %}
+            errorType: {{ method.throwTypeError }}.self,
+            {% endif %}
             superclassCall: {%+ if container.isImplementation %}{% if method.isAsync %}await {%+ endif %}super.{{method.name}}({{method.call}}){% else %}Cuckoo.MockManager.crashOnProtocolSuperclassCall(){% endif %},
             defaultCall: {%+ if method.isAsync %}await {%+ endif %}__defaultImplStub!.{{method.name}}{%if method.isOptional %}!{%endif%}({{method.call}})
         ){{ method.parameters|closeNestedClosure }}

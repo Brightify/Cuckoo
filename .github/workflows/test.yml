@@ -56,5 +56,5 @@ jobs:
         run: |
           make
           set -o pipefail && xcodebuild test -scheme "Cuckoo-iOS" -workspace Cuckoo.xcworkspace \
-            -destination "platform=iOS Simulator,name=iPhone 16,OS=18.0" \
+            -destination "platform=iOS Simulator,name=iPhone 16,OS=18.6" \
             | xcbeautify --renderer github-actions
