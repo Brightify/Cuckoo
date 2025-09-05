@@ -38,7 +38,7 @@
 		436B1158A6ED217E8D5B05A2 /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200EDE7B95DE3AE27C29CC42 /* Method.swift */; };
 		440C1F66A6749F51752B99FB /* MethodParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0CEC0E6BC2F8FDDCB86A7C /* MethodParameter.swift */; };
 		44A72AF2F6D6D2E1D371C50F /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 82A76F6C4BC47C860A90EFA7 /* ArgumentParser */; };
-		46D9663497017BFABAA09B66 /* SwiftSyntax in Frameworks */ = {isa = PBXBuildFile; productRef = 10B6A078051BAD502FBAC752 /* SwiftSyntax */; };
+		46D9663497017BFABAA09B66 /* SwiftParser in Frameworks */ = {isa = PBXBuildFile; productRef = 8EE13525838522D454E8E20E /* SwiftParser */; };
 		48205DE8188B258737270530 /* ModifierListSyntax+common.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF4E1D009F8E0D6988EA56E9 /* ModifierListSyntax+common.swift */; };
 		4871C1D4211262913FE7E23A /* TOMLKit in Frameworks */ = {isa = PBXBuildFile; productRef = CF01AE9B482B793213C15803 /* TOMLKit */; };
 		4A04C8DABB34967D6D2EDB49 /* OrderedSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1F3CD491EFD856B4C96AC7 /* OrderedSet.swift */; };
@@ -70,7 +70,7 @@
 		7BA0A80747083052F5C13CFA /* Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DEC997DE9F9A496DC55AF3 /* Accessibility.swift */; };
 		7CD4072067DCEE2A688103E8 /* Attribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8A800560013CEEAC82BDD3 /* Attribute.swift */; };
 		7E252699C077ACF9FD291F1A /* Module.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5104F422D2332A72E71E80 /* Module.swift */; };
-		7EA8FCCFD03F056EC363708E /* SwiftFormat in Frameworks */ = {isa = PBXBuildFile; productRef = 2690FAF509B9294F9963CFC6 /* SwiftFormat */; };
+		7EA8FCCFD03F056EC363708E /* SwiftSyntax in Frameworks */ = {isa = PBXBuildFile; productRef = 10B6A078051BAD502FBAC752 /* SwiftSyntax */; };
 		846FF44141EAE708431788F6 /* FileHeaderHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CA1F2E31C4D1F4D7E7AFCF /* FileHeaderHandler.swift */; };
 		8540D535F2845A4E702C641C /* GenericParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63889180D5687BDF03C5808D /* GenericParameter.swift */; };
 		874D43E3025261D20346F043 /* Templates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FF786D71666C925DDDD02F /* Templates.swift */; };
@@ -98,7 +98,7 @@
 		A287B2FC91838CF47C1A402E /* HasAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE812E30DAE3B6E5EBCFA786 /* HasAttributes.swift */; };
 		A614B3D353A1FB249B44205F /* Array+uniquing.swift in Sources */ = {isa = PBXBuildFile; fileRef = C87364DB21521E529206C4AF /* Array+uniquing.swift */; };
 		A726E94D443E854CF233AB3B /* HasMembers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE01B4BF58360B997B65AAD /* HasMembers.swift */; };
-		A7D8BECC5EFE87BCEA01B0ED /* SwiftFormat in Frameworks */ = {isa = PBXBuildFile; productRef = 40FBF1EF4588DEF0C34CC5AA /* SwiftFormat */; };
+		A7D8BECC5EFE87BCEA01B0ED /* SwiftSyntax in Frameworks */ = {isa = PBXBuildFile; productRef = 62225DF9A023014F74823A4D /* SwiftSyntax */; };
 		A81CBA6691D31B0CCCFC0B03 /* MockTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C7A2FE3DED070B31815AB8 /* MockTemplate.swift */; };
 		A82BA9AE98522CF4D219B107 /* Reference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2038E75371E9914C0057A429 /* Reference.swift */; };
 		A863F7D5DA2F1E539178451B /* MethodParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0CEC0E6BC2F8FDDCB86A7C /* MethodParameter.swift */; };
@@ -134,7 +134,7 @@
 		F9D4D3624CF450DAF961A852 /* ComplexType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D950A7A41DA6F8B7AAC81E7 /* ComplexType.swift */; };
 		FAB2366C273E3BC994A8C856 /* Generator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17570DCB8ED56FAA7B60FFEE /* Generator.swift */; };
 		FCB132A3412E852A169DD034 /* OrderedSetTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E931623865980B964DF83AC /* OrderedSetTest.swift */; };
-		FCF3348DBE14EB308918B32E /* SwiftSyntax in Frameworks */ = {isa = PBXBuildFile; productRef = 62225DF9A023014F74823A4D /* SwiftSyntax */; };
+		FCF3348DBE14EB308918B32E /* SwiftParser in Frameworks */ = {isa = PBXBuildFile; productRef = 94019ED73D1D548332CF9AA4 /* SwiftParser */; };
 		FE1CA1D2D68ECCD53D48698E /* StubbingProxyTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E923EEB246D54BC00305580 /* StubbingProxyTemplate.swift */; };
 		FEA8AD46EE5CF6745F088EAD /* Generator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17570DCB8ED56FAA7B60FFEE /* Generator.swift */; };
 		FFCD2B1E9E235ED6BC916487 /* Serializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85B33943FFC685132859E72 /* Serializable.swift */; };
@@ -235,8 +235,8 @@
 			files = (
 				66D182220FD1D33F11E28562 /* FileKit in Frameworks */,
 				5A27FB878DCF33CFC25C7D58 /* Stencil in Frameworks */,
-				7EA8FCCFD03F056EC363708E /* SwiftFormat in Frameworks */,
-				46D9663497017BFABAA09B66 /* SwiftSyntax in Frameworks */,
+				7EA8FCCFD03F056EC363708E /* SwiftSyntax in Frameworks */,
+				46D9663497017BFABAA09B66 /* SwiftParser in Frameworks */,
 				44A72AF2F6D6D2E1D371C50F /* ArgumentParser in Frameworks */,
 				4871C1D4211262913FE7E23A /* TOMLKit in Frameworks */,
 				C51F0249FFE7914B0C2F5979 /* XcodeProj in Frameworks */,
@@ -250,8 +250,8 @@
 			files = (
 				8A928827A40634B369221352 /* FileKit in Frameworks */,
 				95E7D0B5A6F8DC6D520B6763 /* Stencil in Frameworks */,
-				A7D8BECC5EFE87BCEA01B0ED /* SwiftFormat in Frameworks */,
-				FCF3348DBE14EB308918B32E /* SwiftSyntax in Frameworks */,
+				A7D8BECC5EFE87BCEA01B0ED /* SwiftSyntax in Frameworks */,
+				FCF3348DBE14EB308918B32E /* SwiftParser in Frameworks */,
 				E6C0036B6154EEDA485EB5A6 /* ArgumentParser in Frameworks */,
 				DB3FE43AF21614D7910CEBC9 /* TOMLKit in Frameworks */,
 				51EC7E8DFC26826B44E514C9 /* XcodeProj in Frameworks */,
@@ -454,8 +454,8 @@
 			packageProductDependencies = (
 				AC6685255D5370BF08A7BA31 /* FileKit */,
 				FA3FEB96551B01B3B12795B5 /* Stencil */,
-				40FBF1EF4588DEF0C34CC5AA /* SwiftFormat */,
 				62225DF9A023014F74823A4D /* SwiftSyntax */,
+				94019ED73D1D548332CF9AA4 /* SwiftParser */,
 				0461AA3DA9DB4A68910D1B97 /* ArgumentParser */,
 				C443144D2084F752ABD40F7D /* TOMLKit */,
 				7E00179A8BA49B9C8D4230FB /* XcodeProj */,
@@ -482,8 +482,8 @@
 			packageProductDependencies = (
 				AD2D7CEA740A2A8B936746A3 /* FileKit */,
 				874C86044871C521F0D50492 /* Stencil */,
-				2690FAF509B9294F9963CFC6 /* SwiftFormat */,
 				10B6A078051BAD502FBAC752 /* SwiftSyntax */,
+				8EE13525838522D454E8E20E /* SwiftParser */,
 				82A76F6C4BC47C860A90EFA7 /* ArgumentParser */,
 				CF01AE9B482B793213C15803 /* TOMLKit */,
 				D2BFBD8FD405A61AC715D4A9 /* XcodeProj */,
@@ -518,7 +518,6 @@
 				8B21E241BF00E2E25C38BB43 /* XCRemoteSwiftPackageReference "Stencil" */,
 				12B435B0A49E5C757FE0FC38 /* XCRemoteSwiftPackageReference "FileKit" */,
 				94DB3AD2FF77CD1231BF7E6C /* XCRemoteSwiftPackageReference "Rainbow" */,
-				610CDB7DFE32B92210967C0D /* XCRemoteSwiftPackageReference "swift-format" */,
 				4D7FC2EFCFF8100C810E9030 /* XCRemoteSwiftPackageReference "swift-syntax" */,
 				626B8647C363F00FE034AC55 /* XCRemoteSwiftPackageReference "XcodeProj" */,
 			);
@@ -926,17 +925,8 @@
 			repositoryURL = "https://github.com/swiftlang/swift-syntax";
 			requirement = {
 				kind = versionRange;
-				maximumVersion = 602.0.0;
-				minimumVersion = 509.0.0;
-			};
-		};
-		610CDB7DFE32B92210967C0D /* XCRemoteSwiftPackageReference "swift-format" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/swiftlang/swift-format";
-			requirement = {
-				kind = versionRange;
-				maximumVersion = 602.0.0;
-				minimumVersion = 509.0.0;
+				maximumVersion = 603.0.0;
+				minimumVersion = 600.1.0;
 			};
 		};
 		626B8647C363F00FE034AC55 /* XCRemoteSwiftPackageReference "XcodeProj" */ = {
@@ -982,14 +972,6 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = SwiftSyntax;
 		};
-		2690FAF509B9294F9963CFC6 /* SwiftFormat */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = SwiftFormat;
-		};
-		40FBF1EF4588DEF0C34CC5AA /* SwiftFormat */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = SwiftFormat;
-		};
 		45417D207C5B670A21479EA0 /* Rainbow */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Rainbow;
@@ -1013,6 +995,14 @@
 		874C86044871C521F0D50492 /* Stencil */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Stencil;
+		};
+		8EE13525838522D454E8E20E /* SwiftParser */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SwiftParser;
+		};
+		94019ED73D1D548332CF9AA4 /* SwiftParser */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SwiftParser;
 		};
 		AC6685255D5370BF08A7BA31 /* FileKit */ = {
 			isa = XCSwiftPackageProductDependency;

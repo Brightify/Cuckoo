@@ -58,9 +58,9 @@ enum ThrowType: CustomStringConvertible, Equatable {
     var type: String {
         switch self {
         case .throws(let type):
-            return type ?? "Error"
+            return type ?? "Swift.Error"
         case .rethrows:
-            return "Error"
+            return "Swift.Error"
         }
     }
 }
