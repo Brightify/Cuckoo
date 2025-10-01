@@ -400,7 +400,7 @@ Stubs are used for suppressing real code. Stubs are different from Mocks in that
 let stub = GreeterStub()
 ```
 
-When a method is called or a property accessed/set on a stub, nothing happens. If a value is to be returned from a method or a property, `DefaultValueRegistry` provides a default value. Stubs can be used to set implicit (no) behavior to mocks without the need to use `thenDoNothing()` like this: `MockGreeter().spy(on: GreeterStub())`.
+When a method is called or a property accessed/set on a stub, nothing happens. If a value is to be returned from a method or a property, `DefaultValueRegistry` provides a default value. Stubs can be used to set implicit (no) behavior to mocks without the need to use `thenDoNothing()` like this: `MockGreeter().withEnabledDefaultImplementation(GreeterStub())`.
 
 ##### DefaultValueRegistry
 `DefaultValueRegistry` is used by Stubs to get default values for return types. It knows only default Swift types, sets, arrays, dictionaries, optionals, and tuples (up to 6 values). Tuples for more values can be added through extensions. Custom types must be registered before use with `DefaultValueRegistry.register<T>(value: T, forType: T.Type)`. Furthermore, default values set by Cuckoo can also be overridden by this method. Sets, arrays, etc. do not have to be registered if their generic type is already registered.
