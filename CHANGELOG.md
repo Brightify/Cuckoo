@@ -1,3 +1,6 @@
+- Update README stub instructions.
+- Fix typed throws
+
 - Update Cocoapods and change Ruby version.
 - Update SwiftSyntax.
 - Update Xcodeproj to 9.0.0
