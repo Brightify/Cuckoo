@@ -25,6 +25,27 @@ struct MethodParameter: Token {
     var isEscaping: Bool {
         type.isClosure && (type.containsAttribute(named: "@escaping") || type.isOptional)
     }
+    
+    var call: String {
+        let escapedName = escapeReservedKeywords(for: usableName)
+        let value = "\(isInout ? "&" : "")\(escapedName)\(type.containsAttribute(named: "@autoclosure") ? "()" : "")"
+        if name == "_" {
+            return value
+        } else {
+            return "\(name): \(value)"
+        }
+    }
+    
+    func callAndCastTypes(named typeNames: [String], as replacement: (String) -> String) -> String {
+        let replaced = type.replaceTypes(named: typeNames, with: replacement)
+        
+        let callToCast = call
+        if let replaced {
+            return callToCast.forceCast(as: replaced)
+        } else {
+            return callToCast
+        }
+    }
 
     func serialize() -> [String: Any] {
         return [

@@ -55,24 +55,41 @@ extension Method {
     var hasOptionalParams: Bool {
         signature.parameters.contains { $0.type.isOptional }
     }
+    
+    var hasGenericParams: Bool {
+        !signature.genericParameters.isEmpty
+    }
+    
+    var hasNonPrimaryAssociatedTypeParams: Bool {
+        guard let parent = parent?.asProtocol else { return false }
+        return signature.containsTypes(named: parent.nonPrimaryAssociatedTypes.map(\.name))
+    }
 
     func serialize() -> [String : Any] {
-        let call = signature.parameters
-            .map { parameter in
-                let name = escapeReservedKeywords(for: parameter.usableName)
-                let value = "\(parameter.isInout ? "&" : "")\(name)\(parameter.type.containsAttribute(named: "@autoclosure") ? "()" : "")"
-                if parameter.name == "_" {
-                    return value
-                } else {
-                    return "\(parameter.name): \(value)"
-                }
-            }
-            .joined(separator: ", ")
-
         guard let parent else {
             fatalError("Failed to find parent of method \(fullSignature). Please file a bug.")
         }
-
+        
+        let call = signature.parameters
+            .map(\.call)
+            .joined(separator: ", ")
+        
+        var staticGenericCall = "(\(call))"
+            
+        if let parent = parent.asProtocol, !parent.nonPrimaryAssociatedTypes.isEmpty {
+            let nonPrimary = parent.nonPrimaryAssociatedTypes.map(\.name)
+            
+            let staticGenericCallableParameters = signature.parameters
+                .map { $0.callAndCastTypes(named: nonPrimary, as: { Templates.staticGenericParameter + ".\($0)" }) }
+                .joined(separator: ", ")
+            
+            staticGenericCall = "(\(staticGenericCallableParameters))"
+            
+            if let returnType, returnType.containsTypes(named: nonPrimary) {
+                staticGenericCall = staticGenericCall.forceCast(as: returnType)
+            }
+        }
+        
         let stubFunctionPrefix = parent.isClass ? "Class" : "Protocol"
         let returnString = returnType?.isVoid == false ? "" : "NoReturn"
         let throwingString = isThrowing ? "Throwing" : ""
@@ -108,16 +125,19 @@ extension Method {
             "throwTypeError": signature.throwType?.type ?? "",
             "fullyQualifiedName": fullyQualifiedName,
             "call": call,
+            "staticGenericCall": staticGenericCall,
             "parameterSignature": signature.parameters.map { $0.description }.joined(separator: ", "),
             "parameterSignatureWithoutNames": signature.parameters.map { "\($0.name): \($0.type)" }.joined(separator: ", "),
             "argumentSignature": signature.parameters.map { $0.type.description }.joined(separator: ", "),
             "stubFunction": stubFunction,
-            "inputTypes": signature.parameters.map { $0.type.withoutAttributes(except: ["@escaping", "@Sendable"]).description }.joined(separator: ", "),
-            "genericInputTypes": signature.parameters.map { $0.type.withoutAttributes(except: ["@Sendable"]).description }.joined(separator: ", "),
+            "inputTypes": signature.parameters.map { $0.type.withoutAttributes(except: ["@escaping", "@MainActor", "@Sendable"]).description }.joined(separator: ", "),
+            "genericInputTypes": signature.parameters.map { $0.type.withoutAttributes(except: ["@MainActor", "@Sendable"]).description }.joined(separator: ", "),
             "isOptional": isOptional,
             "hasClosureParams": hasClosureParams,
             "hasOptionalParams": hasOptionalParams,
+            "hasGenericParams": hasGenericParams,
             "genericParameters": signature.genericParameters.sourceDescription,
+            "hasNonPrimaryAssociatedTypeParams": hasNonPrimaryAssociatedTypeParams,
             "hasUnavailablePlatforms": hasUnavailablePlatforms,
             "unavailablePlatformsCheck": unavailablePlatformsCheck,
         ]

@@ -3,7 +3,7 @@ import Foundation
 extension Templates {
     static let typeErasure = """
     {{ container.accessibility|withSpace }}class \(typeErasureClassName): {{ container.name }}, @unchecked Sendable {
-        private let reference: Any
+        private let reference: () -> any {{ container.name }}{{ container.genericPrimaryAssociatedTypeArguments }}
 
         {% for property in container.properties %}
         private let _getter_storage$${{ property.name }}: () -> {{ property.type }}
@@ -18,9 +18,9 @@ extension Templates {
         }
 
         {% endfor %}
-        {# For developers: The `keeping reference: Any?` is necessary because when called from the `enableDefaultImplementation(stub:)` method
+        {# For developers: The `keeping reference: Any` is necessary because when called from the `enableDefaultImplementation(stub:)` method
         instead of `enableDefaultImplementation(mutating:)`, we need to prevent the struct getting deallocated. #}
-        init<\(staticGenericParameter): {{ container.name }}>(from defaultImpl: UnsafeMutablePointer<\(staticGenericParameter)>, keeping reference: @escaping @autoclosure () -> Any?) where {{ container.genericProtocolIdentity }} {
+        init<\(staticGenericParameter): {{ container.name }}>(from defaultImpl: UnsafeMutablePointer<\(staticGenericParameter)>, keeping reference: @escaping @autoclosure () -> \(staticGenericParameter)) where {{ container.genericProtocolIdentity }} {
             self.reference = reference
 
             {% for property in container.properties %}
@@ -30,7 +30,9 @@ extension Templates {
             {% endif %}
             {% endfor %}
             {% for method in container.methods %}
+            {% if not method.hasGenericParams %}
             _storage${{ forloop.counter }}${{ method.name }} = defaultImpl.pointee.{{ method.name }}
+            {% endif %}
             {% endfor %}
         }
         {% if container.initializers %}
@@ -43,9 +45,20 @@ extension Templates {
         {% endfor %}
 
         {% for method in container.methods +%}
+        {% if not method.hasGenericParams %}
         private let _storage${{ forloop.counter }}${{ method.name }}: ({{ method.inputTypes }}) {% if method.isAsync %} async{% endif %} {% if method.isThrowing %} throws{% endif %} -> {{ method.returnType }}
+        {% endif %}
         {{ container.accessibility|withSpace }}func {{ method.name|escapeReservedKeywords }}{{ method.signature }} {
+            {% if method.hasGenericParams and method.hasNonPrimaryAssociatedTypeParams %}
+            func openExistential<\(staticGenericParameter): {{ container.name }}{{ container.genericPrimaryAssociatedTypeArguments }}>(_ opened: \(staticGenericParameter)) {% if method.isAsync %} async{% endif %} {% if method.isThrowing %} throws{% endif %} -> {{ method.returnType }} {
+                return {% if method.isThrowing %} try{% endif %} {% if method.isAsync %} await{% endif %} opened.{{ method.name }}{{ method.staticGenericCall }}
+            }
+            return {% if method.isThrowing %} try{% endif %} {% if method.isAsync %} await{% endif %} openExistential(reference())
+            {% elif method.hasGenericParams %}
+            return {% if method.isThrowing %} try{% endif %} {% if method.isAsync %} await{% endif %} reference().{{ method.name }}({{ method.call }})
+            {% else %}
             return {% if method.isThrowing %} try{% endif %} {% if method.isAsync %} await{% endif %} _storage${{ forloop.counter }}${{ method.name }}({{ method.parameterNames }})
+            {% endif %}
         }
         {% endfor %}
     }

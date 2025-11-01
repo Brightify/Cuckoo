@@ -1,6 +1,6 @@
 import Foundation
 
-protocol GenericProtocol {
+protocol GenericProtocol<C> {
     associatedtype C: AnyObject
     associatedtype V
 
@@ -27,10 +27,29 @@ protocol GenericProtocol {
     /// Test for a bug that produces uncompilable code when associated types are used along with closures.
     /// Requires change from WrappableType to ComplexType.
     func closureParameter(closure: @escaping () -> Void)
+    
+    /// Test for a bug that produces uncompilable code when generic functions are used in protocols with associated types.
+    func genericParameter<T>(value: T)
+    
+    /// Test for a bug that produces uncompilable code when generic functions are used in protocols with associated types and function has associated type parameters.
+    func genericAndAassociatedTypeParameters<T>(value: T, theC: C, theV: V) -> (C?) -> V
 }
 
 protocol PrimaryAssociatedTypeProtocol<Output> {
     associatedtype Output: Equatable
     
     func connect() -> Output
+}
+
+protocol MixedPrimaryAssociatedTypeProtocol<Input> {
+    associatedtype Input: Equatable
+    associatedtype Output: Equatable
+    
+    var defaultOutput: Output { get }
+    
+    func convertToOutput<T>(
+        value: sending T,
+        input: sending Input,
+        convert: @escaping @MainActor @Sendable (T, Input) async throws -> Output?
+    ) async rethrows -> Output
 }

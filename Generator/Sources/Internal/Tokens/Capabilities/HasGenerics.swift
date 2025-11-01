@@ -19,15 +19,37 @@ extension HasGenerics {
     var isGeneric: Bool {
         !genericParameters.isEmpty
     }
+    
+    var hasPrimaryAssociatedTypes: Bool {
+        guard let protocolDeclaration = asProtocol else { return false }
+        return !protocolDeclaration.primaryAssociatedTypes.isEmpty
+    }
+    
+    var hasOnlyPrimaryAssociatedTypes: Bool {
+        guard let protocolDeclaration = asProtocol else { return false }
+        return protocolDeclaration.primaryAssociatedTypes.count == protocolDeclaration.genericParameters.count
+    }
 
     func genericsSerialize() -> GeneratorContext {
-        let genericProtocolIdentity = isProtocol ? genericParameters.map { "\(Templates.staticGenericParameter).\($0.name) == \($0.name)" }.joined(separator: ", ") : nil
-
+        var genericProtocolIdentity: String?
+        var genericPrimaryAssociatedTypeArguments: String?
+        
+        if let protocolDeclaration = asProtocol {
+            genericProtocolIdentity = genericParameters.map { "\(Templates.staticGenericParameter).\($0.name) == \($0.name)" }.joined(separator: ", ")
+            if !protocolDeclaration.primaryAssociatedTypes.isEmpty {
+                let arguments = protocolDeclaration.primaryAssociatedTypes.map { $0.name }.joined(separator: ", ")
+                genericPrimaryAssociatedTypeArguments = "<\(arguments)>"
+            }
+        }
+        
         return [
             "isGeneric": isGeneric,
             "genericParameters": genericParametersString,
             "genericArguments": genericArgumentsString,
+            "hasPrimaryAssociatedTypes": hasPrimaryAssociatedTypes,
+            "hasOnlyPrimaryAssociatedTypes": hasOnlyPrimaryAssociatedTypes,
             "genericProtocolIdentity": genericProtocolIdentity,
+            "genericPrimaryAssociatedTypeArguments": genericPrimaryAssociatedTypeArguments,
         ]
         .compactMapValues { $0 }
     }
