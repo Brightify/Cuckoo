@@ -4,7 +4,8 @@ struct ProtocolDeclaration: ContainerToken {
     var attributes: [Attribute]
     var accessibility: Accessibility
     var name: String
-    var genericParameters: [GenericParameter]
+    var associatedTypes: [GenericParameter]
+    var primaryAssociatedTypes: [GenericParameter]
     var genericRequirements: [String]
     var inheritedTypes: [String]
     var members: [Token]
@@ -16,7 +17,8 @@ struct ProtocolDeclaration: ContainerToken {
             attributes: attributes,
             accessibility: accessibility,
             name: name,
-            genericParameters: genericParameters,
+            associatedTypes: associatedTypes,
+            primaryAssociatedTypes: primaryAssociatedTypes,
             genericRequirements: genericRequirements,
             inheritedTypes: inheritedTypes,
             members: members,
@@ -30,11 +32,20 @@ struct ProtocolDeclaration: ContainerToken {
             attributes: attributes,
             accessibility: accessibility,
             name: name,
-            genericParameters: genericParameters,
+            associatedTypes: associatedTypes,
+            primaryAssociatedTypes: primaryAssociatedTypes,
             genericRequirements: genericRequirements,
             inheritedTypes: inheritedTypes,
             members: members,
             isNSObjectProtocol: isNSObjectProtocol
         )
+    }
+    
+    var genericParameters: [GenericParameter] {
+        (associatedTypes + primaryAssociatedTypes).merged()
+    }
+    
+    var nonPrimaryAssociatedTypes: [GenericParameter] {
+        associatedTypes.filter { !primaryAssociatedTypes.map(\.name).contains($0.name) }
     }
 }

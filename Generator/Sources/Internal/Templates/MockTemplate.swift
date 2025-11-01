@@ -15,11 +15,17 @@ extension Templates {
 {% if container.hasParent %}
 extension {{ container.parentFullyQualifiedName }} {
 {% endif %}
+{% if container.hasPrimaryAssociatedTypes %}
+// runtime support for constrained protocols with primary associated types
+@available(iOS 16, macOS 13, watchOS 9, tvOS 16, *)
+{% endif %}
 {{ container.accessibility|withSpace }}class {{ container.mockName }}{{ container.genericParameters }}:{% if container.isNSObjectProtocol %} NSObject,{% endif %} {{ container.name }}{% if container.isImplementation %}{{ container.genericArguments }}{% endif %},{% if container.isImplementation %} Cuckoo.ClassMock{% else %} Cuckoo.ProtocolMock{% endif %}, @unchecked Sendable {
-    {% if container.isGeneric and not container.isImplementation %}
+    {% if container.isGeneric and not container.isImplementation and not container.hasOnlyPrimaryAssociatedTypes %}
     {{ container.accessibility|withSpace }}typealias MocksType = \(typeErasureClassName)
-    {% else %}
+    {% elif container.isImplementation %}
     {{ container.accessibility|withSpace }}typealias MocksType = {{ container.name }}{{ container.genericArguments }}
+    {% else %}
+    {{ container.accessibility|withSpace }}typealias MocksType = any {{ container.name }}{{ container.genericArguments }}
     {% endif %}
     {{ container.accessibility|withSpace }}typealias Stubbing = __StubbingProxy_{{ container.name }}
     {{ container.accessibility|withSpace }}typealias Verification = __VerificationProxy_{{ container.name }}
@@ -31,7 +37,7 @@ extension {{ container.parentFullyQualifiedName }} {
 
     {{ container.accessibility|withSpace }}let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: {{ container.isImplementation }})
 
-    {% if container.isGeneric and not container.isImplementation %}
+    {% if container.isGeneric and not container.isImplementation and not container.hasOnlyPrimaryAssociatedTypes %}
 \(Templates.typeErasure.indented())
 
     private var __defaultImplStub: \(typeErasureClassName)?
@@ -43,7 +49,7 @@ extension {{ container.parentFullyQualifiedName }} {
     }
 
     {{ container.accessibility|withSpace }}func enableDefaultImplementation<\(staticGenericParameter): {{ container.name }}>(mutating stub: UnsafeMutablePointer<\(staticGenericParameter)>) where {{ container.genericProtocolIdentity }} {
-        __defaultImplStub = \(typeErasureClassName)(from: stub, keeping: nil)
+        __defaultImplStub = \(typeErasureClassName)(from: stub, keeping: stub.pointee)
         cuckoo_manager.enableDefaultStubImplementation()
     }
     {% else %}

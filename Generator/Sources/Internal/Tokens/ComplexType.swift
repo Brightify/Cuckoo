@@ -241,6 +241,83 @@ extension ComplexType {
             nil
         }
     }
+    
+    func replaceType(named typeName: String, with replacement: String) -> ComplexType? {
+        switch self {
+        case .attributed(let attributes, let baseType):
+            return baseType.replaceType(named: typeName, with: replacement)
+                .map { ComplexType.attributed(attributes: attributes, baseType: $0) }
+        case .optional(let wrappedType, let isImplicit):
+            return wrappedType.replaceType(named: typeName, with: replacement)
+                .map { ComplexType.optional(wrappedType: $0, isImplicit: isImplicit) }
+        case .array(let elementType):
+            return elementType.replaceType(named: typeName, with: replacement)
+                .map { ComplexType.array(elementType: $0) }
+        case .dictionary(let keyType, let valueType):
+            let newKey = keyType.replaceType(named: typeName, with: replacement)
+            let newValue = valueType.replaceType(named: typeName, with: replacement)
+            if newKey == nil && newValue == nil { return nil }
+            return .dictionary(
+                keyType: newKey ?? keyType,
+                valueType: newValue ?? valueType
+            )
+        case .closure(let closure):
+            var changed = false
+            let newParams: [ComplexType.Closure.Parameter] = closure.parameters.map { param in
+                if let newType = param.type.replaceType(named: typeName, with: replacement) {
+                    changed = true
+                    return ComplexType.Closure.Parameter(label: param.label, type: newType)
+                } else {
+                    return param
+                }
+            }
+            let newReturn = closure.returnType.replaceType(named: typeName, with: replacement)
+            if !changed && newReturn == nil { return nil }
+            return .closure(.init(parameters: newParams, effects: closure.effects, returnType: newReturn ?? closure.returnType))
+        case .type(let name):
+            return name == typeName ? ComplexType.type(replacement) : nil
+        }
+    }
+    
+    func replaceTypes(named typeNames: [String], with replacement: (String) -> String) -> ComplexType? {
+        var changed = false
+        var type = self
+        for typeName in typeNames {
+            if let replaced = type.replaceType(named: typeName, with: replacement(typeName)) {
+                changed = true
+                type = replaced
+            }
+        }
+        
+        return changed ? type : nil
+    }
+    
+    func containsType(named typeName: String) -> Bool {
+        switch self {
+        case .attributed(_, let baseType):
+            baseType.containsType(named: typeName)
+        case .optional(let wrappedType, _):
+            wrappedType.containsType(named: typeName)
+        case .array(let elementType):
+            elementType.containsType(named: typeName)
+        case .dictionary(let keyType, let valueType):
+            keyType.containsType(named: typeName) || valueType.containsType(named: typeName)
+        case .closure(let closure):
+            (closure.parameters.map(\.type) + [closure.returnType]).contains(where: { $0.containsType(named: typeName)})
+        case .type(let name):
+            name == typeName
+        }
+    }
+    
+    func containsTypes(named typeNames: [String]) -> Bool {
+        typeNames.contains(where: { containsType(named: $0) })
+    }
+}
+
+extension String {
+    func forceCast(as type: ComplexType) -> String {
+        "\(self) as! \(type.withoutAttributes(except: ["@MainActor", "@Sendable"]).description)"
+    }
 }
 
 extension ComplexType.Closure.Effects {

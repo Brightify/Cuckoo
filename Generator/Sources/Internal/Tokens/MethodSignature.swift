@@ -64,3 +64,14 @@ extension Method.Signature {
         && whereConstraints == other.whereConstraints
     }
 }
+
+extension Method.Signature {
+    func containsType(named typeName: String) -> Bool {
+        parameters.map(\.type)
+            .contains(where: { $0.containsType(named: typeName) })
+    }
+    
+    func containsTypes(named typeNames: [String]) -> Bool {
+        typeNames.contains(where: { containsType(named: $0) })
+    }
+}
