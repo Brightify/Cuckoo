@@ -16,7 +16,8 @@ extension Templates {
 extension {{ container.parentFullyQualifiedName }} {
 {% endif %}
 {% if container.hasPrimaryAssociatedTypes %}
-@available(iOS 16.0.0, macOS 13.0.0, watchOS 9.0, tvOS 16, *) // runtime support for constrained protocols with primary associated types
+// runtime support for constrained protocols with primary associated types
+@available(iOS 16, macOS 13, watchOS 9, tvOS 16, *)
 {% endif %}
 {{ container.accessibility|withSpace }}class {{ container.mockName }}{{ container.genericParameters }}:{% if container.isNSObjectProtocol %} NSObject,{% endif %} {{ container.name }}{% if container.isImplementation %}{{ container.genericArguments }}{% endif %},{% if container.isImplementation %} Cuckoo.ClassMock{% else %} Cuckoo.ProtocolMock{% endif %}, @unchecked Sendable {
     {% if container.isGeneric and not container.isImplementation and not container.hasOnlyPrimaryAssociatedTypes %}

@@ -74,8 +74,7 @@ extension Method {
             .map(\.call)
             .joined(separator: ", ")
         
-        var staticGenericCall = "(\(call))"
-            
+        let staticGenericCall: String
         if let parent = parent.asProtocol, !parent.nonPrimaryAssociatedTypes.isEmpty {
             let nonPrimary = parent.nonPrimaryAssociatedTypes.map(\.name)
             
@@ -83,11 +82,13 @@ extension Method {
                 .map { $0.callAndCastTypes(named: nonPrimary, as: { Templates.staticGenericParameter + ".\($0)" }) }
                 .joined(separator: ", ")
             
-            staticGenericCall = "(\(staticGenericCallableParameters))"
-            
-            if let returnType, returnType.containsTypes(named: nonPrimary) {
-                staticGenericCall = staticGenericCall.forceCast(as: returnType)
+            staticGenericCall = if let returnType, returnType.containsTypes(named: nonPrimary) {
+                "(\(staticGenericCallableParameters))".forceCast(as: returnType)
+            } else {
+                "(\(staticGenericCallableParameters))"
             }
+        } else {
+            staticGenericCall = "(\(call))"
         }
         
         let stubFunctionPrefix = parent.isClass ? "Class" : "Protocol"
