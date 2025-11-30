@@ -244,16 +244,16 @@ extension ComplexType {
     
     func replaceType(named typeName: String, with replacement: String) -> ComplexType? {
         switch self {
-        case .attributed(attributes: let attributes, baseType: let baseType):
+        case .attributed(let attributes, let baseType):
             return baseType.replaceType(named: typeName, with: replacement)
                 .map { ComplexType.attributed(attributes: attributes, baseType: $0) }
-        case .optional(wrappedType: let wrappedType, isImplicit: let isImplicit):
+        case .optional(let wrappedType, let isImplicit):
             return wrappedType.replaceType(named: typeName, with: replacement)
                 .map { ComplexType.optional(wrappedType: $0, isImplicit: isImplicit) }
-        case .array(elementType: let elementType):
+        case .array(let elementType):
             return elementType.replaceType(named: typeName, with: replacement)
                 .map { ComplexType.array(elementType: $0) }
-        case .dictionary(keyType: let keyType, valueType: let valueType):
+        case .dictionary(let keyType, let valueType):
             let newKey = keyType.replaceType(named: typeName, with: replacement)
             let newValue = valueType.replaceType(named: typeName, with: replacement)
             if newKey == nil && newValue == nil { return nil }
@@ -294,13 +294,13 @@ extension ComplexType {
     
     func containsType(named typeName: String) -> Bool {
         switch self {
-        case .attributed(attributes: _, baseType: let baseType):
+        case .attributed(_, let baseType):
             baseType.containsType(named: typeName)
-        case .optional(wrappedType: let wrappedType, isImplicit: _):
+        case .optional(let wrappedType, _):
             wrappedType.containsType(named: typeName)
-        case .array(elementType: let elementType):
+        case .array(let elementType):
             elementType.containsType(named: typeName)
-        case .dictionary(keyType: let keyType, valueType: let valueType):
+        case .dictionary(let keyType, let valueType):
             keyType.containsType(named: typeName) || valueType.containsType(named: typeName)
         case .closure(let closure):
             (closure.parameters.map(\.type) + [closure.returnType]).contains(where: { $0.containsType(named: typeName)})

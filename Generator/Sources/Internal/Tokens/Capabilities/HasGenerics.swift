@@ -31,15 +31,17 @@ extension HasGenerics {
     }
 
     func genericsSerialize() -> GeneratorContext {
-        var genericProtocolIdentity: String?
-        var genericPrimaryAssociatedTypeArguments: String?
-        
-        if let protocolDeclaration = asProtocol {
-            genericProtocolIdentity = genericParameters.map { "\(Templates.staticGenericParameter).\($0.name) == \($0.name)" }.joined(separator: ", ")
-            if !protocolDeclaration.primaryAssociatedTypes.isEmpty {
-                let arguments = protocolDeclaration.primaryAssociatedTypes.map { $0.name }.joined(separator: ", ")
-                genericPrimaryAssociatedTypeArguments = "<\(arguments)>"
-            }
+        let genericProtocolIdentity = isProtocol
+            ? genericParameters
+                .map { "\(Templates.staticGenericParameter).\($0.name) == \($0.name)" }
+                .joined(separator: ", ")
+            : nil
+        let genericPrimaryAssociatedTypeArguments: String?
+        if let protocolDeclaration = asProtocol, hasPrimaryAssociatedTypes {
+            let arguments = protocolDeclaration.primaryAssociatedTypes.map { $0.name }.joined(separator: ", ")
+            genericPrimaryAssociatedTypeArguments = "<\(arguments)>"
+        } else {
+            genericPrimaryAssociatedTypeArguments = nil
         }
         
         return [
