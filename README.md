@@ -105,6 +105,7 @@ sources = [
     "Tests/Swift/Source/*.swift",
 ]
 exclude = ["ExcludedTestClass"]
+
 # Optionally you can use a regular expression to filter only specific classes/protocols.
 # regex = ""
 
@@ -115,6 +116,15 @@ keepDocumentation = false
 # enableInheritance = false
 # protocolsOnly = true
 # omitHeaders = true
+
+# You can add prefix lines to the beginning of each file written, and suffix lines to the end
+# For example, this config can be used to turn swiftlint off at the start and back on at the end
+prefixLines = [
+    "// swiftlint:disable all",
+]
+SuffixLines = [
+    "// swiftlint:enable all",
+]
 
 # If specified, Cuckoo can also get sources for the module from an Xcode target.
 [modules.MyProject.xcodeproj]
