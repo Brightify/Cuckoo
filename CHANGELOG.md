@@ -1,3 +1,6 @@
+- Fix protocol DefaultImpl with associated types + generic functions
+- fix(podspec): remove sub.source_files = [] which caused OCMock subspec to fetch no source files
+
 - Update README stub instructions.
 - Fix typed throws
 
