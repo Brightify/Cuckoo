@@ -15,6 +15,10 @@ let package = Package(
             name: "Cuckoo",
             targets: ["Cuckoo"]
         ),
+        .executable(
+            name: "CuckooGenerator",
+            targets: ["CuckooGenerator"]
+        ),
         .plugin(
             name: "CuckooPluginSingleFile",
             targets: ["CuckooPluginSingleFile"]
