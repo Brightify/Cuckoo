@@ -47,7 +47,7 @@ extension Sequence where Element: Sendable {
         // A task group automatically waits for all of its
         // sub-tasks to complete, while also performing those
         // tasks in parallel:
-        if #available(macOS 14.0, *) {
+        if #available(macOS 14.0, iOS 17.0, *) {
             await withDiscardingTaskGroup { group in
                 for element in self {
                     group.addTask {
