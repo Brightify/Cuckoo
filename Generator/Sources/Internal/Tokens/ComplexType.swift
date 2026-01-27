@@ -20,7 +20,7 @@ enum ComplexType {
             self = .attributed(
                 attributes: [
                     attributedType.attributes.map { $0.trimmedDescription },
-                    attributedType.specifier.map { [$0.trimmedDescription] } ?? [],
+                    attributedType.specifiers.map { $0.trimmedDescription },
                 ].flatMap { $0 },
                 baseType: ComplexType(syntax: attributedType.baseType)
             )
