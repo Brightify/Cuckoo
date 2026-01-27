@@ -44,7 +44,7 @@ extension SyntaxProtocol {
                     )
                 )
             }
-            return identifierType.as(Self.self)!
+            return Self.init(identifierType) ?? mutableSelf
         } else {
             return mutableSelf
         }

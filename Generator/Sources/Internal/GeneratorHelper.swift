@@ -76,7 +76,7 @@ struct GeneratorHelper {
     private static func openNestedClosure(for method: Method) -> String {
         var fullString = ""
         for (index, parameter) in method.signature.parameters.enumerated() {
-            if !parameter.type.containsAttribute(named: "@escaping"), let closure = parameter.type.findClosure() {
+            if !parameter.type.containsAttribute(named: "@escaping"), parameter.type.findClosure() != nil {
                 if fullString.isEmpty {
                     fullString = "\n"
                 }
