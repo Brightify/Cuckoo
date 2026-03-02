@@ -1,3 +1,5 @@
+- Set exact versions for dependencies to prevent future compile errors.
+
 - Fix protocol DefaultImpl with associated types + generic functions
 - fix(podspec): remove sub.source_files = [] which caused OCMock subspec to fetch no source files
 
