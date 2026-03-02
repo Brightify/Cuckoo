@@ -1,5 +1,5 @@
 {
-  "originHash" : "08253ad95e06fd2ddea0a7079824be964ff9c20b5ed3cb6537147ae01ccffd00",
+  "originHash" : "56435a5ee34a0880cd334d8501491902482701af75e23031558e8d751a0ff571",
   "pins" : [
     {
       "identity" : "aexml",
@@ -33,8 +33,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/onevcat/Rainbow",
       "state" : {
-        "revision" : "0c627a4f8a39ef37eadec1ceec02e4a7f55561ac",
-        "version" : "4.1.0"
+        "revision" : "cdf146ae671b2624917648b61c908d1244b98ca1",
+        "version" : "4.2.1"
       }
     },
     {
@@ -60,8 +60,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-argument-parser",
       "state" : {
-        "revision" : "41982a3656a71c768319979febd796c6fd111d5c",
-        "version" : "1.5.0"
+        "revision" : "c5d11a805e765f52ba34ec7284bd4fcd6ba68615",
+        "version" : "1.7.0"
       }
     },
     {
@@ -87,8 +87,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/tuist/XcodeProj.git",
       "state" : {
-        "revision" : "b1caa062d4aaab3e3d2bed5fe0ac5f8ce9bf84f4",
-        "version" : "8.27.7"
+        "revision" : "77ee0721798186f71b7ee8f7e29be8495d28360f",
+        "version" : "9.9.0"
       }
     }
   ],
