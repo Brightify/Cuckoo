@@ -50,8 +50,8 @@ extension HasGenerics {
             "genericArguments": genericArgumentsString,
             "hasPrimaryAssociatedTypes": hasPrimaryAssociatedTypes,
             "hasOnlyPrimaryAssociatedTypes": hasOnlyPrimaryAssociatedTypes,
-            "genericProtocolIdentity": genericProtocolIdentity,
-            "genericPrimaryAssociatedTypeArguments": genericPrimaryAssociatedTypeArguments,
+            "genericProtocolIdentity": genericProtocolIdentity as Any,
+            "genericPrimaryAssociatedTypeArguments": genericPrimaryAssociatedTypeArguments as Any,
         ]
         .compactMapValues { $0 }
     }
