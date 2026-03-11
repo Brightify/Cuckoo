@@ -55,6 +55,19 @@ struct GenerateCommand: AsyncParsableCommand {
             contents: configurationFile.contents
         )
 
+        if modules.isEmpty {
+            let requestedModuleName = ProcessInfo.processInfo.environment["CUCKOO_MODULE_NAME"]
+            if let requestedModuleName {
+                log(.info, message: "No module named '\(requestedModuleName)' found in Cuckoofile, skipping generation.")
+            }
+            if let outputPath = overriddenOutput {
+                let path = Path(outputPath, expandingTilde: true)
+                try? path.parent.createDirectory(withIntermediateDirectories: true)
+                try? TextFile(path: path).write("")
+            }
+            return
+        }
+
         // To not capture mutating self.
         let verbose = self.verbose
 
@@ -108,9 +121,11 @@ struct GenerateCommand: AsyncParsableCommand {
     }
 
     func modules(configurationPath: Path, contents: String) throws -> [Module] {
+        let requestedModuleName = ProcessInfo.processInfo.environment["CUCKOO_MODULE_NAME"]
+
         var errorMessages: [String] = []
         var globalOutput: String? = overriddenOutput
-        var modules: [Module] = []
+        var allModules: [Module] = []
         let table = try TOMLTable(string: contents)
 
         // Sorting to make sure global properties are evaluated first to be available as fallbacks.
@@ -156,7 +171,7 @@ struct GenerateCommand: AsyncParsableCommand {
                             dto: dto
                         )
                         log(.verbose, message: "Module \(moduleName):", module)
-                        modules.append(module)
+                        allModules.append(module)
                     } catch {
                         errorMessages.append(String(describing: error))
                     }
@@ -170,7 +185,10 @@ struct GenerateCommand: AsyncParsableCommand {
             throw GenerateError.configurationErrors(details: errorMessages)
         }
 
-        return modules
+        if let requestedModuleName {
+            return allModules.filter { $0.name == requestedModuleName }
+        }
+        return allModules
     }
 
     private enum GenerateError: Error, CustomStringConvertible {
