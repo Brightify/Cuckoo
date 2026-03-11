@@ -19,6 +19,10 @@ let package = Package(
             name: "CuckooPluginSingleFile",
             targets: ["CuckooPluginSingleFile"]
         ),
+        .plugin(
+            name: "CuckooPluginPerModule",
+            targets: ["CuckooPluginPerModule"]
+        ),
         // FIXME: Currently unusable because Xcode doesn't allow using prebuild commands with executable targets
         // .plugin(
         //     name: "CuckooPluginIndividualFiles",
@@ -66,6 +70,12 @@ let package = Package(
             capability: .buildTool(),
             dependencies: ["CuckooGenerator"],
             path: "Generator/Plugin/File"
+        ),
+        .plugin(
+            name: "CuckooPluginPerModule",
+            capability: .buildTool(),
+            dependencies: ["CuckooGenerator"],
+            path: "Generator/Plugin/PerModule"
         ),
         // .plugin(
         //     name: "CuckooPluginIndividualFiles",

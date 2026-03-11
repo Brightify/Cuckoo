@@ -50,10 +50,28 @@ struct GenerateCommand: AsyncParsableCommand {
         overriddenOutput = ProcessInfo.processInfo.environment["CUCKOO_OVERRIDE_OUTPUT"]
         Module.overriddenOutput = overriddenOutput
 
-        let modules = try modules(
+        let requestedModuleName = ProcessInfo.processInfo.environment["CUCKOO_MODULE_NAME"]
+
+        var modules = try modules(
             configurationPath: configurationFile.path,
             contents: configurationFile.contents
         )
+
+        if let requestedModuleName {
+            modules = modules.filter { $0.name == requestedModuleName }
+            if modules.isEmpty {
+                log(.info, message: "No module named '\(requestedModuleName)' found in Cuckoofile, skipping generation.")
+                if let outputPath = overriddenOutput {
+                    let path = Path(outputPath, expandingTilde: true)
+                    try? path.parent.createDirectory(withIntermediateDirectories: true)
+                    let existing = try? String(contentsOfFile: path.rawValue, encoding: .utf8)
+                    if existing != "" {
+                        try? TextFile(path: path).write("")
+                    }
+                }
+                return
+            }
+        }
 
         // To not capture mutating self.
         let verbose = self.verbose
@@ -88,7 +106,10 @@ struct GenerateCommand: AsyncParsableCommand {
                             ?? originalFileName
                         let outputFile = TextFile(path: absoluteOutputPath + "\(fileNameWithoutExtension).swift")
                         do {
-                            try outputFile.write(generatedFile.contents)
+                            let existing = try? outputFile.read()
+                            if existing != generatedFile.contents {
+                                try outputFile.write(generatedFile.contents)
+                            }
                         } catch {
                             log(.error, message: "Failed to write to file '\(outputFile)':", error)
                         }
@@ -96,7 +117,11 @@ struct GenerateCommand: AsyncParsableCommand {
                 } else {
                     let outputFile = TextFile(path: absoluteOutputPath)
                     do {
-                        try outputFile.write(generatedFiles.map(\.contents).joined(separator: "\n\n"))
+                        let newContents = generatedFiles.map(\.contents).joined(separator: "\n\n")
+                        let existing = try? outputFile.read()
+                        if existing != newContents {
+                            try outputFile.write(newContents)
+                        }
                     } catch {
                         log(.error, message: "Failed to write to file '\(outputFile)':", error)
                     }
