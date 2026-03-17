@@ -50,10 +50,48 @@ struct GenerateCommand: AsyncParsableCommand {
         overriddenOutput = ProcessInfo.processInfo.environment["CUCKOO_OVERRIDE_OUTPUT"]
         Module.overriddenOutput = overriddenOutput
 
-        let modules = try modules(
+        let requestedModuleName = ProcessInfo.processInfo.environment["CUCKOO_MODULE_NAME"]
+        let compoundModuleName = ProcessInfo.processInfo.environment["CUCKOO_COMPOUND_MODULE_NAME"]
+
+        let allModules = try modules(
             configurationPath: configurationFile.path,
             contents: configurationFile.contents
         )
+
+        var modules: [Module]
+        if let compoundModuleName {
+            let compoundMatches = allModules.filter { $0.name == compoundModuleName }
+            if !compoundMatches.isEmpty {
+                // Compound key (TARGET/MODULE) found – use it exclusively.
+                // An entry with empty sources acts as a suppressor, producing an empty output file.
+                modules = compoundMatches
+            } else if let requestedModuleName {
+                // No compound override – fall back to the plain module name.
+                modules = allModules.filter { $0.name == requestedModuleName }
+            } else {
+                modules = []
+            }
+        } else if let requestedModuleName {
+            modules = allModules.filter { $0.name == requestedModuleName }
+        } else {
+            modules = allModules
+        }
+
+        if modules.isEmpty {
+            let effectiveName = compoundModuleName ?? requestedModuleName
+            if let effectiveName {
+                log(.info, message: "No module named '\(effectiveName)' found in Cuckoofile, skipping generation.")
+            }
+            if let outputPath = overriddenOutput {
+                let path = Path(outputPath, expandingTilde: true)
+                try? path.parent.createDirectory(withIntermediateDirectories: true)
+                let existing = try? String(contentsOfFile: path.rawValue, encoding: .utf8)
+                if existing != "" {
+                    try? TextFile(path: path).write("")
+                }
+            }
+            return
+        }
 
         // To not capture mutating self.
         let verbose = self.verbose
@@ -88,7 +126,10 @@ struct GenerateCommand: AsyncParsableCommand {
                             ?? originalFileName
                         let outputFile = TextFile(path: absoluteOutputPath + "\(fileNameWithoutExtension).swift")
                         do {
-                            try outputFile.write(generatedFile.contents)
+                            let existing = try? outputFile.read()
+                            if existing != generatedFile.contents {
+                                try outputFile.write(generatedFile.contents)
+                            }
                         } catch {
                             log(.error, message: "Failed to write to file '\(outputFile)':", error)
                         }
@@ -96,7 +137,11 @@ struct GenerateCommand: AsyncParsableCommand {
                 } else {
                     let outputFile = TextFile(path: absoluteOutputPath)
                     do {
-                        try outputFile.write(generatedFiles.map(\.contents).joined(separator: "\n\n"))
+                        let newContents = generatedFiles.map(\.contents).joined(separator: "\n\n")
+                        let existing = try? outputFile.read()
+                        if existing != newContents {
+                            try outputFile.write(newContents)
+                        }
                     } catch {
                         log(.error, message: "Failed to write to file '\(outputFile)':", error)
                     }
