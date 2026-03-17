@@ -24,8 +24,21 @@ struct CuckooPluginPerModule: BuildToolPlugin {
                 )
             }
 
+        // For test targets, also emit a build command keyed by the test target's own name.
+        // This allows Cuckoofile.toml to have a [modules.TestTargetName] entry that mocks
+        // specific files from any dependency, independently of per-dependency mock generation.
+        var allSourceModules = sourceModules
+        if let testTarget = target as? SourceModuleTarget, testTarget.kind == .test {
+            let selfModule = SourceModule(
+                name: target.name,
+                sources: sourceModules.flatMap(\.sources)
+            )
+            allSourceModules.append(selfModule)
+        }
+
         return try commandsPerModule(
-            sourceModules: sourceModules,
+            targetName: target.name,
+            sourceModules: allSourceModules,
             executableFactory: context.tool(named:),
             projectDir: context.package.directoryURL,
             derivedSourcesDir: context.pluginWorkDirectoryURL
@@ -62,8 +75,19 @@ extension CuckooPluginPerModule: XcodeBuildToolPlugin {
                 }
             }
 
+        // For test targets, also emit a build command keyed by the test target's own name.
+        // This allows Cuckoofile.toml to have a [modules.TestTargetName] entry that mocks
+        // specific files from any dependency, independently of per-dependency mock generation.
+        var allSourceModules = sourceModules
+        let selfModule = SourceModule(
+            name: target.displayName,
+            sources: sourceModules.flatMap(\.sources)
+        )
+        allSourceModules.append(selfModule)
+
         return try commandsPerModule(
-            sourceModules: sourceModules,
+            targetName: target.displayName,
+            sourceModules: allSourceModules,
             executableFactory: context.tool(named:),
             projectDir: context.xcodeProject.directoryURL,
             derivedSourcesDir: context.pluginWorkDirectoryURL
@@ -78,6 +102,7 @@ struct SourceModule {
 }
 
 private func commandsPerModule(
+    targetName: String,
     sourceModules: [SourceModule],
     executableFactory: (String) throws -> PluginContext.Tool,
     projectDir: URL,
@@ -98,6 +123,7 @@ private func commandsPerModule(
                 "DERIVED_SOURCES_DIR": derivedSourcesDir.path(),
                 "CUCKOO_OVERRIDE_OUTPUT": outputURL.path(),
                 "CUCKOO_MODULE_NAME": sourceModule.name,
+                "CUCKOO_COMPOUND_MODULE_NAME": "\(targetName)/\(sourceModule.name)",
             ],
             inputFiles: [configurationURL] + sourceModule.sources,
             outputFiles: [outputURL]
