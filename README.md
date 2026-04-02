@@ -52,6 +52,8 @@ URL: `https://github.com/Brightify/Cuckoo.git`
 
 When you're all set, go to your test target's Build Phases and add plug-in `CuckooPluginSingleFile` to the **Run Build Tool Plug-ins**.
 
+Alternatively, if your project has multiple modules and you want to generate separate mock files per dependency, use `CuckooPluginModular` instead. This plugin automatically detects source modules from your test target's dependencies and generates a dedicated mock file for each one (`GeneratedMocks_<ModuleName>.swift`). See [section 2](#2-cuckoofile-customization) for configuration details.
+
 #### CocoaPods
 Cuckoo runtime is available through [CocoaPods](http://cocoapods.org). To install it, simply add the following line to your **test target** in your Podfile:
 
@@ -87,7 +89,9 @@ Note: All paths in the Run script must be absolute. Variable `PROJECT_DIR` autom
 **Remember to include paths to inherited Classes and Protocols for mocking/stubbing parent and grandparents.**
 
 ### 2. Cuckoofile customization
-At the root of your project, create `Cuckoofile.toml` configuration file:
+At the root of your project, create `Cuckoofile.toml` configuration file.
+
+#### For CuckooPluginSingleFile
 
 ```toml
 # You can define a fallback output for all modules that don't define their own.
@@ -126,6 +130,65 @@ target = "Cuckoonator"
 [modules.AnotherProject]
 # ...
 ```
+
+#### For CuckooPluginModular
+
+When using `CuckooPluginModular`, the plugin automatically detects source modules from your test target's dependencies and generates a dedicated mock file for each one (`GeneratedMocks_<ModuleName>.swift`). It supports compound module names (`TARGET/MODULE`) in `Cuckoofile.toml` so that different test targets can customize mock generation for shared dependencies.
+
+**Example `Cuckoofile.toml` for modular projects:**
+
+```toml
+# CoreModule mocks
+[modules.CoreModuleTests]
+imports = ["Foundation"]
+testableImports = ["CoreModule"]
+sources = [
+    "Sources/CoreModule/ServiceProtocol.swift"
+]
+
+# NetworkAPI module mocks
+[modules.FirstNetworkAPITests]
+imports = ["Foundation"]
+testableImports = ["FirstNetworkAPI"]
+sources = [
+    "Sources/FirstNetworkAPI/Generated/Client.swift"
+]
+
+# SecondNetworkAPI module mocks
+[modules.SecondNetworkAPITests]
+imports = ["Foundation"]
+testableImports = ["SecondNetworkAPI"]
+sources = [
+    "Sources/SecondNetworkAPI/Generated/Client.swift"
+]
+
+# FeatureModule mocks - demonstrates multiple testableImports
+[modules.FeatureModuleTests]
+imports = ["Foundation"]
+testableImports = ["FirstNetworkAPI", "SecondNetworkAPI"]
+sources = [
+    "Sources/FirstNetworkAPI/FirstNetworkAPI.swift",
+    "Sources/SecondNetworkAPI/SecondNetworkAPI.swift"
+]
+```
+
+**Note:** The modules specified in `testableImports` must be added as dependencies of your test target in `Package.swift`. For example:
+
+```swift
+.testTarget(
+    name: "CoreModuleTests",
+    dependencies: ["CoreModule", "Cuckoo"]
+),
+.testTarget(
+    name: "FeatureModuleTests",
+    dependencies: ["FirstNetworkAPI", "SecondNetworkAPI", "Cuckoo"]
+)
+```
+
+This approach is essential when:
+- **Multiple modules define protocols/types with identical names** (e.g., both `ModuleA` and `ModuleB` have a `ServiceProtocol`)
+- Different test targets need different subsets of mocks from the same module
+- You want to organize and namespace mocks by test target for clarity
 
 ### 3. Usage
 Usage of Cuckoo is similar to [Mockito](http://mockito.org/) and [Hamcrest](http://hamcrest.org/). However, there are some differences and limitations caused by generating the mocks and Swift language itself. List of all the supported features can be found below. You can find complete examples in [tests](Tests).
