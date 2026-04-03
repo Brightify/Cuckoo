@@ -37,7 +37,6 @@ struct CuckooPluginModular: BuildToolPlugin {
         }
 
         return try commandsPerModule(
-            targetName: target.name,
             sourceModules: allSourceModules,
             executableFactory: context.tool(named:),
             projectDir: context.package.directoryURL,
@@ -86,7 +85,6 @@ extension CuckooPluginModular: XcodeBuildToolPlugin {
         allSourceModules.append(selfModule)
 
         return try commandsPerModule(
-            targetName: target.displayName,
             sourceModules: allSourceModules,
             executableFactory: context.tool(named:),
             projectDir: context.xcodeProject.directoryURL,
@@ -102,7 +100,6 @@ struct SourceModule {
 }
 
 private func commandsPerModule(
-    targetName: String,
     sourceModules: [SourceModule],
     executableFactory: (String) throws -> PluginContext.Tool,
     projectDir: URL,
@@ -123,7 +120,6 @@ private func commandsPerModule(
                 "DERIVED_SOURCES_DIR": derivedSourcesDir.path(),
                 "CUCKOO_OVERRIDE_OUTPUT": outputURL.path(),
                 "CUCKOO_MODULE_NAME": sourceModule.name,
-                "CUCKOO_COMPOUND_MODULE_NAME": "\(targetName)/\(sourceModule.name)",
             ],
             inputFiles: [configurationURL] + sourceModule.sources,
             outputFiles: [outputURL]

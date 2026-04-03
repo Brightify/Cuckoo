@@ -56,11 +56,9 @@ struct GenerateCommand: AsyncParsableCommand {
         )
 
         if modules.isEmpty {
-            let compoundModuleName = ProcessInfo.processInfo.environment["CUCKOO_COMPOUND_MODULE_NAME"]
             let requestedModuleName = ProcessInfo.processInfo.environment["CUCKOO_MODULE_NAME"]
-            let effectiveName = compoundModuleName ?? requestedModuleName
-            if let effectiveName {
-                log(.info, message: "No module named '\(effectiveName)' found in Cuckoofile, skipping generation.")
+            if let requestedModuleName {
+                log(.info, message: "No module named '\(requestedModuleName)' found in Cuckoofile, skipping generation.")
             }
             if let outputPath = overriddenOutput {
                 let path = Path(outputPath, expandingTilde: true)
@@ -124,7 +122,6 @@ struct GenerateCommand: AsyncParsableCommand {
 
     func modules(configurationPath: Path, contents: String) throws -> [Module] {
         let requestedModuleName = ProcessInfo.processInfo.environment["CUCKOO_MODULE_NAME"]
-        let compoundModuleName = ProcessInfo.processInfo.environment["CUCKOO_COMPOUND_MODULE_NAME"]
 
         var errorMessages: [String] = []
         var globalOutput: String? = overriddenOutput
@@ -188,39 +185,9 @@ struct GenerateCommand: AsyncParsableCommand {
             throw GenerateError.configurationErrors(details: errorMessages)
         }
 
-        let filteredModules = filterModulesByEnvironment(
-            allModules: allModules,
-            compoundModuleName: compoundModuleName,
-            requestedModuleName: requestedModuleName
-        )
-
-        return filteredModules
-    }
-
-    /// Filter modules based on environment variables set by the plugin.
-    /// Priority: compound module name (TARGET/MODULE) > plain module name > all modules.
-    /// This allows test targets to override shared dependency mock generation.
-    private func filterModulesByEnvironment(
-        allModules: [Module],
-        compoundModuleName: String?,
-        requestedModuleName: String?
-    ) -> [Module] {
-        if let compoundModuleName {
-            let compoundMatches = allModules.filter { $0.name == compoundModuleName }
-            if !compoundMatches.isEmpty {
-                // Compound key (TARGET/MODULE) found – use it exclusively.
-                // An entry with empty sources acts as a suppressor, producing an empty output file.
-                return compoundMatches
-            } else if let requestedModuleName {
-                // No compound override – fall back to the plain module name.
-                return allModules.filter { $0.name == requestedModuleName }
-            } else {
-                return []
-            }
-        } else if let requestedModuleName {
+        if let requestedModuleName {
             return allModules.filter { $0.name == requestedModuleName }
         }
-
         return allModules
     }
 

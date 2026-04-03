@@ -133,62 +133,48 @@ target = "Cuckoonator"
 
 #### For CuckooPluginModular
 
-When using `CuckooPluginModular`, the plugin automatically detects source modules from your test target's dependencies and generates a dedicated mock file for each one (`GeneratedMocks_<ModuleName>.swift`). It supports compound module names (`TARGET/MODULE`) in `Cuckoofile.toml` so that different test targets can customize mock generation for shared dependencies.
+`CuckooPluginSingleFile` puts all mocks into a single `GeneratedMocks.swift` file in derived data. In a Swift Package with multiple targets this is problematic because each test target compiles independently and may not have visibility into types from unrelated modules. Use `CuckooPluginModular` instead: it inspects your test target's dependencies and runs the generator once per dependency module, producing a separate `GeneratedMocks_<ModuleName>.swift` for each.
+
+A `Cuckoofile.toml` entry is required for each module you want to generate mocks for. The plugin looks up the test target's own name (e.g. `[modules.TargetATests]`), letting you specify which source files to mock and which imports to add. Modules without a matching entry produce an empty file and no mocks.
 
 **Example `Cuckoofile.toml` for modular projects:**
 
 ```toml
-# CoreModule mocks
-[modules.CoreModuleTests]
+# TargetA mocks
+[modules.TargetATests]
 imports = ["Foundation"]
-testableImports = ["CoreModule"]
+testableImports = ["TargetA"] #ProtocolA is internal to TargetA
 sources = [
-    "Sources/CoreModule/ServiceProtocol.swift"
+    "Sources/TargetA/InternalProtocolA.swift"
 ]
 
-# NetworkAPI module mocks
-[modules.FirstNetworkAPITests]
-imports = ["Foundation"]
-testableImports = ["FirstNetworkAPI"]
+# AggregationTarget mocks - demonstrates multiple testableImports
+[modules.AggregationTargetTests]
+imports = ["Foundation", "TargetA", "TargetB"]
 sources = [
-    "Sources/FirstNetworkAPI/Generated/Client.swift"
-]
-
-# SecondNetworkAPI module mocks
-[modules.SecondNetworkAPITests]
-imports = ["Foundation"]
-testableImports = ["SecondNetworkAPI"]
-sources = [
-    "Sources/SecondNetworkAPI/Generated/Client.swift"
-]
-
-# FeatureModule mocks - demonstrates multiple testableImports
-[modules.FeatureModuleTests]
-imports = ["Foundation"]
-testableImports = ["FirstNetworkAPI", "SecondNetworkAPI"]
-sources = [
-    "Sources/FirstNetworkAPI/FirstNetworkAPI.swift",
-    "Sources/SecondNetworkAPI/SecondNetworkAPI.swift"
+    "Sources/TargetA/ProtocolA.swift",
+    "Sources/TargetB/ProtocolB.swift",
 ]
 ```
 
-**Note:** The modules specified in `testableImports` must be added as dependencies of your test target in `Package.swift`. For example:
+`Package.swift`:
 
 ```swift
 .testTarget(
-    name: "CoreModuleTests",
-    dependencies: ["CoreModule", "Cuckoo"]
+    name: "TargetATests",
+    dependencies: ["TargetA", "Cuckoo"],
+    plugins: [
+        .plugin(name: "CuckooPluginModular", package: "Cuckoo"),
+    ]
 ),
 .testTarget(
-    name: "FeatureModuleTests",
-    dependencies: ["FirstNetworkAPI", "SecondNetworkAPI", "Cuckoo"]
+    name: "AggregationTargetTests",
+    dependencies: ["AggregationTarget", "Cuckoo"],
+    plugins: [
+        .plugin(name: "CuckooPluginModular", package: "Cuckoo"),
+    ]
 )
 ```
-
-This approach is essential when:
-- **Multiple modules define protocols/types with identical names** (e.g., both `ModuleA` and `ModuleB` have a `ServiceProtocol`)
-- Different test targets need different subsets of mocks from the same module
-- You want to organize and namespace mocks by test target for clarity
 
 ### 3. Usage
 Usage of Cuckoo is similar to [Mockito](http://mockito.org/) and [Hamcrest](http://hamcrest.org/). However, there are some differences and limitations caused by generating the mocks and Swift language itself. List of all the supported features can be found below. You can find complete examples in [tests](Tests).
