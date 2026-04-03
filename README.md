@@ -52,6 +52,8 @@ URL: `https://github.com/Brightify/Cuckoo.git`
 
 When you're all set, go to your test target's Build Phases and add plug-in `CuckooPluginSingleFile` to the **Run Build Tool Plug-ins**.
 
+Alternatively, if your project has multiple modules and you want to generate separate mock files per dependency, use `CuckooPluginModular` instead. This plugin automatically detects source modules from your test target's dependencies and generates a dedicated mock file for each one (`GeneratedMocks_<ModuleName>.swift`). See [section 2](#2-cuckoofile-customization) for configuration details.
+
 #### CocoaPods
 Cuckoo runtime is available through [CocoaPods](http://cocoapods.org). To install it, simply add the following line to your **test target** in your Podfile:
 
@@ -87,7 +89,9 @@ Note: All paths in the Run script must be absolute. Variable `PROJECT_DIR` autom
 **Remember to include paths to inherited Classes and Protocols for mocking/stubbing parent and grandparents.**
 
 ### 2. Cuckoofile customization
-At the root of your project, create `Cuckoofile.toml` configuration file:
+At the root of your project, create `Cuckoofile.toml` configuration file.
+
+#### For CuckooPluginSingleFile
 
 ```toml
 # You can define a fallback output for all modules that don't define their own.
@@ -125,6 +129,51 @@ target = "Cuckoonator"
 # You can define as many modules as you need, each with different sources/options/output.
 [modules.AnotherProject]
 # ...
+```
+
+#### For CuckooPluginModular
+
+`CuckooPluginSingleFile` puts all mocks into a single `GeneratedMocks.swift` file in derived data. In a Swift Package with multiple targets this is problematic because each test target compiles independently and may not have visibility into types from unrelated modules. Use `CuckooPluginModular` instead: it inspects your test target's dependencies and runs the generator once per dependency module, producing a separate `GeneratedMocks_<ModuleName>.swift` for each.
+
+A `Cuckoofile.toml` entry is required for each module you want to generate mocks for. The plugin looks up the test target's own name (e.g. `[modules.TargetATests]`), letting you specify which source files to mock and which imports to add. Modules without a matching entry produce an empty file and no mocks.
+
+**Example `Cuckoofile.toml` for modular projects:**
+
+```toml
+# TargetA mocks
+[modules.TargetATests]
+imports = ["Foundation"]
+testableImports = ["TargetA"] #ProtocolA is internal to TargetA
+sources = [
+    "Sources/TargetA/InternalProtocolA.swift"
+]
+
+# AggregationTarget mocks - demonstrates multiple testableImports
+[modules.AggregationTargetTests]
+imports = ["Foundation", "TargetA", "TargetB"]
+sources = [
+    "Sources/TargetA/ProtocolA.swift",
+    "Sources/TargetB/ProtocolB.swift",
+]
+```
+
+`Package.swift`:
+
+```swift
+.testTarget(
+    name: "TargetATests",
+    dependencies: ["TargetA", "Cuckoo"],
+    plugins: [
+        .plugin(name: "CuckooPluginModular", package: "Cuckoo"),
+    ]
+),
+.testTarget(
+    name: "AggregationTargetTests",
+    dependencies: ["AggregationTarget", "Cuckoo"],
+    plugins: [
+        .plugin(name: "CuckooPluginModular", package: "Cuckoo"),
+    ]
+)
 ```
 
 ### 3. Usage
