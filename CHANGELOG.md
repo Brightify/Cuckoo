@@ -1,3 +1,6 @@
+- Add CuckooPluginPerModule for per-module mock generation
+- Address compilation warnings
+
 - Set exact versions for dependencies to prevent future compile errors.
 
 - Fix protocol DefaultImpl with associated types + generic functions
