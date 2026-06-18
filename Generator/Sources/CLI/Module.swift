@@ -15,6 +15,7 @@ final class Module: @unchecked Sendable {
     let filenameFormat: String?
     let options: Options
     let xcodeproj: Xcodeproj?
+    let buildConditions: Set<String>
 
     init(name: String, output: String?, configurationPath: Path, dto: DTO) throws {
         guard Module.overriddenOutput != nil || output != nil || dto.output != nil else {
@@ -39,6 +40,7 @@ final class Module: @unchecked Sendable {
             protocolsOnly: dto.options?.protocolsOnly ?? false,
             omitHeaders: dto.options?.omitHeaders ?? false
         )
+        self.buildConditions = Set(dto.buildConditions ?? [])
 
         if let xcodeproj = dto.xcodeproj {
             if let target = xcodeproj.target {
@@ -103,6 +105,7 @@ extension Module {
         let filenameFormat: String?
         let options: Options?
         let xcodeproj: Xcodeproj?
+        let buildConditions: [String]?
 
         struct Options: Decodable {
             let glob: Bool?
@@ -132,6 +135,7 @@ extension Module: CustomDebugStringConvertible {
             filenameFormat.map { "filename format: \($0.bold)" },
             "options:\(options.debugDescription.components(separatedBy: "\n").map { "\n\t- \($0)" }.joined())",
             xcodeproj.map { "xcodeproj:\($0.debugDescription.components(separatedBy: "\n").map { "\n\t- \($0)" }.joined())" },
+            buildConditions.isEmpty ? nil : "build conditions:\(buildConditions.sorted().map { "\n\t-\($0.bold)" }.joined())",
         ]
         .compactMap { $0 }
         .joined(separator: "\n")

@@ -14,6 +14,7 @@ let target = Target.target(
         "Stencil",
         "SwiftSyntax",
         "SwiftParser",
+        "SwiftIfConfig",
         "ArgumentParser",
         "TOMLKit",
         "XcodeProj",

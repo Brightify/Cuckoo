@@ -58,6 +58,7 @@ let package = Package(
                 // .product(name: "SwiftFormat", package: "swift-format"),
                 .product(name: "SwiftSyntax", package: "swift-syntax"),
                 .product(name: "SwiftParser", package: "swift-syntax"),
+                .product(name: "SwiftIfConfig", package: "swift-syntax"),
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
                 .product(name: "TOMLKit", package: "TOMLKit"),
                 .product(name: "XcodeProj", package: "XcodeProj"),
