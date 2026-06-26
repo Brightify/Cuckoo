@@ -3,6 +3,7 @@ import FileKit
 
 final class Module: @unchecked Sendable {
     nonisolated(unsafe) static var overriddenOutput: String?
+    nonisolated(unsafe) static var mockPrefix: String = "Mock"
 
     let name: String
     let imports: [String]
@@ -37,7 +38,8 @@ final class Module: @unchecked Sendable {
             keepDocumentation: dto.options?.keepDocumentation ?? true,
             enableInheritance: dto.options?.enableInheritance ?? true,
             protocolsOnly: dto.options?.protocolsOnly ?? false,
-            omitHeaders: dto.options?.omitHeaders ?? false
+            omitHeaders: dto.options?.omitHeaders ?? false,
+            mockPrefix: dto.options?.mockPrefix ?? Module.mockPrefix
         )
 
         if let xcodeproj = dto.xcodeproj {
@@ -66,6 +68,7 @@ final class Module: @unchecked Sendable {
         let enableInheritance: Bool
         let protocolsOnly: Bool
         let omitHeaders: Bool
+        let mockPrefix: String
     }
 
     struct Xcodeproj {
@@ -110,6 +113,7 @@ extension Module {
             let enableInheritance: Bool?
             let protocolsOnly: Bool?
             let omitHeaders: Bool?
+            let mockPrefix: String?
         }
 
         struct Xcodeproj: Decodable {
@@ -146,6 +150,7 @@ extension Module.Options: CustomDebugStringConvertible {
             "enable inheritance: \(String(enableInheritance).bold)",
             "protocols only: \(String(protocolsOnly).bold)",
             "omit headers: \(String(omitHeaders).bold)",
+            "mock prefix: \(mockPrefix.bold)",
         ]
         .compactMap { $0 }
         .joined(separator: "\n")

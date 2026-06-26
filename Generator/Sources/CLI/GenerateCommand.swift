@@ -154,6 +154,11 @@ struct GenerateCommand: AsyncParsableCommand {
                 } else {
                     errorMessages.append("Multiple global `output` parameters. Behavior is undefined.")
                 }
+            case "mockPrefix":
+                if let prefix = value.string {
+                    Module.mockPrefix = prefix
+                    log(.verbose, message: "Global mock prefix:", prefix)
+                }
             case "modules":
                 guard let modulesTable = value.table else {
                     throw GenerateError.modulesMustBeTable

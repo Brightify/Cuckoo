@@ -1,5 +1,10 @@
 # output = "Tests/Swift/Generated/GeneratedMocks.swift"
 
+# Custom prefix for generated mock classes (default: "Mock").
+# When set, mock classes will be named <prefix><TypeName> instead of Mock<TypeName>.
+# Example: mockPrefix = "Fake" generates FakeGreeter instead of MockGreeter.
+# mockPrefix = "Mock"
+
 [modules.Cuckoo]
 imports = ["Foundation"]
 testableImports = ["Cuckoo"]
