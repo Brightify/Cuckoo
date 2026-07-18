@@ -7,7 +7,7 @@ let package = Package(
     platforms: [
         .iOS("13.0"),
         .tvOS("13.0"),
-        .macOS("10.15"),
+        .macOS("11.0"),
         .watchOS("8.0"),
     ],
     products: [
@@ -41,7 +41,7 @@ let package = Package(
         // .package(url: "https://github.com/swiftlang/swift-format", "600.1.0"..<"603.0.0"),
         .package(url: "https://github.com/apple/swift-argument-parser", exact: "1.7.0"),
         .package(url: "https://github.com/LebJe/TOMLKit", exact: "0.6.0"),
-        .package(url: "https://github.com/tuist/XcodeProj", exact: "9.9.0"),
+        .package(url: "https://github.com/tuist/XcodeProj", exact: "9.14.0"),
         .package(url: "https://github.com/onevcat/Rainbow", exact: "4.2.1"),
     ],
     targets: [
