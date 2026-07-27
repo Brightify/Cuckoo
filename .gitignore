@@ -45,3 +45,5 @@ Tuist/Dependencies/Cocoapods
 Generator/GeneratedMocks.swift
 Generator/Generator.xcodeproj
 .vscode
+.agents
+skills-lock.json
