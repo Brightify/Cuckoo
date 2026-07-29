@@ -1,6 +1,7 @@
 - Skip `class`/`static` methods and properties while crawling, since mocking them is not supported.
 - Wrap mocks of `@available(..., unavailable)` members in `#if !os(...)` guards again (regression from 1.x).
 - Generate `actor` mocks for protocols requiring `Actor`/`AnyActor` conformance (directly or transitively).
+- Allow stub implementations to mutate `inout` parameters (e.g. `.then { value in value = 999 }`).
 
 - Revert exact versions in CuckooGenerator dependencies.
 - Expose CuckooGenerator as executable product

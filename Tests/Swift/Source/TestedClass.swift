@@ -445,6 +445,12 @@ class InoutMethodClass {
     func inoutkoClosure(param: (inout Int) -> Void) { }
 }
 
+protocol InoutProtocol {
+    func doSomething(inoutValue: inout Int)
+
+    func doSomethingThrowing(inoutValue: inout Int) throws
+}
+
 class ClosureNClass {
     func f0(closure: () -> Void) { }
 

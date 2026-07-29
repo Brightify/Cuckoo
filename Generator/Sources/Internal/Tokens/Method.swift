@@ -107,6 +107,31 @@ extension Method {
             }
         }.joined(separator: ", ")
 
+        // `boxedParameterNames`/`boxedEscapingParameterNames`/`boxedCall` mirror `parameterNames`/
+        // `escapingParameterNames`/`call` above, but route `inout` parameters through an
+        // `Cuckoo.InoutContainer` box so a matched stub's `then` implementation can mutate them.
+        // They're only used by the mock's own method body (see MockTemplate); the type erasure
+        // caller keeps using the unboxed variants since it never goes through `cuckoo_manager`.
+        let boxedParameterNames = signature.parameters.map { parameter in
+            let name = escapeReservedKeywords(for: parameter.usableName)
+            return parameter.isInout ? "\(name)Box" : name
+        }.joined(separator: ", ")
+
+        let boxedEscapingParameterNames = signature.parameters.map { parameter in
+            if parameter.isInout {
+                return "Cuckoo.InoutContainer(\(escapeReservedKeywords(for: parameter.usableName)))"
+            } else if !parameter.type.containsAttribute(named: "@escaping"), let closure = parameter.type.findClosure() {
+                let parameterCount = closure.parameters.count
+                let parameterSignature = parameterCount > 0 ? (1...parameterCount).map { _ in "_" }.joined(separator: ", ") : "()"
+
+                return "{ \(parameterSignature) in fatalError(\"This is a stub! It's not supposed to be called!\") }"
+            } else {
+                return parameter.usableName
+            }
+        }.joined(separator: ", ")
+
+        let boxedCall = signature.parameters.map(\.boxedCall).joined(separator: ", ")
+
         return [
             "self": self,
             "documentation": documentation,
@@ -118,6 +143,9 @@ extension Method {
             "parameters": signature.parameters,
             "parameterNames": signature.parameters.map { escapeReservedKeywords(for: $0.usableName) }.joined(separator: ", "),
             "escapingParameterNames": escapingParameterNames,
+            "boxedParameterNames": boxedParameterNames,
+            "boxedEscapingParameterNames": boxedEscapingParameterNames,
+            "boxedCall": boxedCall,
             "returnType": returnType?.description ?? "",
             "isAsync": isAsync,
             "isThrowing": isThrowing,
@@ -132,7 +160,10 @@ extension Method {
             "argumentSignature": signature.parameters.map { $0.type.description }.joined(separator: ", "),
             "stubFunction": stubFunction,
             "inputTypes": signature.parameters.map { $0.type.withoutAttributes(except: ["@escaping", "@MainActor", "@Sendable"]).description }.joined(separator: ", "),
-            "genericInputTypes": signature.parameters.map { $0.type.withoutAttributes(except: ["@MainActor", "@Sendable"]).description }.joined(separator: ", "),
+            "genericInputTypes": signature.parameters.map { parameter -> String in
+                let typeDescription = parameter.type.withoutAttributes(except: ["@MainActor", "@Sendable"]).description
+                return parameter.isInout ? "Cuckoo.InoutContainer<\(typeDescription.trimmed)>" : typeDescription
+            }.joined(separator: ", "),
             "isOptional": isOptional,
             "hasClosureParams": hasClosureParams,
             "hasOptionalParams": hasOptionalParams,

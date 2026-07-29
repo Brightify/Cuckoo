@@ -35,6 +35,20 @@ struct MethodParameter: Token {
             return "\(name): \(value)"
         }
     }
+
+    /// Like `call`, but routes `inout` arguments through their boxed `InoutContainer` local
+    /// (e.g. `&p0Box.value` instead of `&p0`) so the mock body can call the stub's implementation
+    /// through the same box it exposes for matching, without touching the caller's real variable.
+    var boxedCall: String {
+        guard isInout else { return call }
+        let escapedName = escapeReservedKeywords(for: usableName)
+        let value = "&\(escapedName)Box.value"
+        if name == "_" {
+            return value
+        } else {
+            return "\(name): \(value)"
+        }
+    }
     
     func callAndCastTypes(named typeNames: [String], as replacement: (String) -> String) -> String {
         let replaced = type.replaceTypes(named: typeNames, with: replacement)

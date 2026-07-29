@@ -246,6 +246,36 @@ final class ProtocolTest: XCTestCase {
         func double(here there: Bool) {}
     }
 
+    func testInoutProtocolMethodMutation() {
+        let mock = MockInoutProtocol()
+        stub(mock) { mock in
+            when(mock.doSomething(inoutValue: any())).then { passedValue in
+                passedValue = 999
+            }
+        }
+
+        var value = 1
+        mock.doSomething(inoutValue: &value)
+        XCTAssertEqual(value, 999)
+
+        verify(mock).doSomething(inoutValue: any())
+    }
+
+    func testInoutProtocolThrowingMethodMutation() throws {
+        let mock = MockInoutProtocol()
+        stub(mock) { mock in
+            when(mock.doSomethingThrowing(inoutValue: any())).then { passedValue in
+                passedValue = 999
+            }
+        }
+
+        var value = 1
+        try mock.doSomethingThrowing(inoutValue: &value)
+        XCTAssertEqual(value, 999)
+
+        verify(mock).doSomethingThrowing(inoutValue: any())
+    }
+
     private enum TestError: Error {
         case unknown
     }

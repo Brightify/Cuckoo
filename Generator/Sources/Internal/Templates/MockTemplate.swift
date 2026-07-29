@@ -133,15 +133,15 @@ extension {{ container.parentFullyQualifiedName }} {
     {{ attribute }}
     {% endfor %}
     {{ method.accessibility|withSpace }}{% if method.isOverriding %}override {%+ endif %}func {{ method.name|escapeReservedKeywords }}{{ method.signature }} {
-        {{ method.self|openNestedClosure }}return{% if method.isThrowing %} try{% endif %}{% if method.isAsync %} await{% endif %} cuckoo_manager.call{% if method.isThrowing %}{{ method.throwType|capitalize }}{% endif %}(
+        {{ method.parameters|inoutBoxDeclarations }}{{ method.parameters|inoutWriteBack }}{{ method.self|openNestedClosure }}return{% if method.isThrowing %} try{% endif %}{% if method.isAsync %} await{% endif %} cuckoo_manager.call{% if method.isThrowing %}{{ method.throwType|capitalize }}{% endif %}(
             "{{method.fullyQualifiedName}}",
-            parameters: ({{method.parameterNames}}),
-            escapingParameters: ({{method.escapingParameterNames}}),
+            parameters: ({{method.boxedParameterNames}}),
+            escapingParameters: ({{method.boxedEscapingParameterNames}}),
             {% if method.throwsOnly %}
             errorType: {{ method.throwTypeError }}.self,
             {% endif %}
-            superclassCall: {%+ if container.isImplementation %}{% if method.isAsync %}await {%+ endif %}super.{{method.name}}({{method.call}}){% else %}Cuckoo.MockManager.crashOnProtocolSuperclassCall(){% endif %},
-            defaultCall: {%+ if container.isActorRequirement and not method.isAsync %}Cuckoo.MockManager.crashOnProtocolSuperclassCall(){% else %}{%+ if method.isAsync %}await {%+ endif %}__defaultImplStub!.{{method.name}}{%if method.isOptional %}!{%endif%}({{method.call}}){% endif +%}
+            superclassCall: {%+ if container.isImplementation %}{% if method.isAsync %}await {%+ endif %}super.{{method.name}}({{method.boxedCall}}){% else %}Cuckoo.MockManager.crashOnProtocolSuperclassCall(){% endif %},
+            defaultCall: {%+ if container.isActorRequirement and not method.isAsync %}Cuckoo.MockManager.crashOnProtocolSuperclassCall(){% else %}{%+ if method.isAsync %}await {%+ endif %}__defaultImplStub!.{{method.name}}{%if method.isOptional %}!{%endif%}({{method.boxedCall}}){% endif +%}
         ){{ method.parameters|closeNestedClosure }}
     }
     {% if method.hasUnavailablePlatforms %}
