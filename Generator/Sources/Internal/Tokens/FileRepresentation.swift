@@ -30,6 +30,10 @@ extension FileRepresentation {
         replacing(tokens: tokens.map { $0.inheritingNSObject(protocols: protocols) })
     }
 
+    func inheritActorRequirement(protocols: [ProtocolDeclaration]) -> FileRepresentation {
+        replacing(tokens: tokens.map { $0.inheritingActorRequirement(protocols: protocols) })
+    }
+
     func flatMappingMemberContainers() -> FileRepresentation {
         replacing(tokens: tokens.flatMap { $0.flatMappingMemberContainers() })
     }
@@ -79,6 +83,11 @@ extension Token {
     fileprivate func inheritingNSObject(protocols: [ProtocolDeclaration]) -> Token {
         guard let protocolToken = self as? ProtocolDeclaration, !protocolToken.isNSObjectProtocol else { return self }
         return protocols.contains { $0.name == protocolToken.name } ? protocolToken.replacing(isNSObjectProtocol: true) : self
+    }
+
+    fileprivate func inheritingActorRequirement(protocols: [ProtocolDeclaration]) -> Token {
+        guard let protocolToken = self as? ProtocolDeclaration, !protocolToken.isActorRequirement else { return self }
+        return protocols.contains { $0.name == protocolToken.name } ? protocolToken.replacing(isActorRequirement: true) : self
     }
 }
 

@@ -10,6 +10,7 @@ struct ProtocolDeclaration: ContainerToken {
     var inheritedTypes: [String]
     var members: [Token]
     var isNSObjectProtocol = false
+    var isActorRequirement = false
 
     func replacing(members: [Token]) -> ProtocolDeclaration {
         ProtocolDeclaration(
@@ -22,7 +23,8 @@ struct ProtocolDeclaration: ContainerToken {
             genericRequirements: genericRequirements,
             inheritedTypes: inheritedTypes,
             members: members,
-            isNSObjectProtocol: isNSObjectProtocol
+            isNSObjectProtocol: isNSObjectProtocol,
+            isActorRequirement: isActorRequirement
         )
     }
 
@@ -37,7 +39,24 @@ struct ProtocolDeclaration: ContainerToken {
             genericRequirements: genericRequirements,
             inheritedTypes: inheritedTypes,
             members: members,
-            isNSObjectProtocol: isNSObjectProtocol
+            isNSObjectProtocol: isNSObjectProtocol,
+            isActorRequirement: isActorRequirement
+        )
+    }
+
+    func replacing(isActorRequirement: Bool) -> ProtocolDeclaration {
+        ProtocolDeclaration(
+            parent: parent,
+            attributes: attributes,
+            accessibility: accessibility,
+            name: name,
+            associatedTypes: associatedTypes,
+            primaryAssociatedTypes: primaryAssociatedTypes,
+            genericRequirements: genericRequirements,
+            inheritedTypes: inheritedTypes,
+            members: members,
+            isNSObjectProtocol: isNSObjectProtocol,
+            isActorRequirement: isActorRequirement
         )
     }
     
