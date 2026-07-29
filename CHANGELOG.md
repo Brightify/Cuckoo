@@ -1,3 +1,7 @@
+- Revert exact versions in CuckooGenerator dependencies.
+- Expose CuckooGenerator as executable product
+- Ignore LLM files.
+
 - Add CuckooPluginPerModule for per-module mock generation
 - Address compilation warnings
 
