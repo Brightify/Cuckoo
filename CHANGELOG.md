@@ -1,4 +1,5 @@
 - Skip `class`/`static` methods and properties while crawling, since mocking them is not supported.
+- Wrap mocks of `@available(..., unavailable)` members in `#if !os(...)` guards again (regression from 1.x).
 
 - Revert exact versions in CuckooGenerator dependencies.
 - Expose CuckooGenerator as executable product

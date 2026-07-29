@@ -66,7 +66,7 @@ extension {{ container.parentFullyQualifiedName }} {
     {% endif -%}
 
     {% for property in container.properties %}
-
+    {{ property.unavailablePlatformsCheck }}
     {% if debug %}
     // {{ property }}
     {% endif %}
@@ -103,9 +103,13 @@ extension {{ container.parentFullyQualifiedName }} {
         }
         {% endif %}
     }
+    {% if property.hasUnavailablePlatforms %}
+    #endif
+    {% endif %}
     {% endfor %}
 
     {% for initializer in container.initializers %}
+    {{ initializer.unavailablePlatformsCheck }}
     {% if debug %}
     // {{ initializer }}
     {% endif %}
@@ -113,9 +117,12 @@ extension {{ container.parentFullyQualifiedName }} {
     /// {{ docString }}
     {% endfor %}
     {{ initializer.accessibility|withSpace }}required init{{initializer.signature}} {}
+    {% if initializer.hasUnavailablePlatforms %}
+    #endif
+    {% endif %}
     {% endfor %}
     {% for method in container.methods %}
-
+    {{ method.unavailablePlatformsCheck }}
     {% if debug %}
     // {{method}}
     {% endif %}
@@ -137,6 +144,9 @@ extension {{ container.parentFullyQualifiedName }} {
             defaultCall: {%+ if method.isAsync %}await {%+ endif %}__defaultImplStub!.{{method.name}}{%if method.isOptional %}!{%endif%}({{method.call}})
         ){{ method.parameters|closeNestedClosure }}
     }
+    {% if method.hasUnavailablePlatforms %}
+    #endif
+    {% endif %}
     {% endfor %}
 
 \(Templates.stubbingProxy.indented())

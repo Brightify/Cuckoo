@@ -29,6 +29,8 @@ extension Initializer: Serializable {
             "accessibility": accessibility.sourceName,
             "attributes": attributes,
             "signature": signature.description,
+            "hasUnavailablePlatforms": hasUnavailablePlatforms,
+            "unavailablePlatformsCheck": unavailablePlatformsCheck,
         ]
     }
 }
