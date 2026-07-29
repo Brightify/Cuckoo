@@ -1,3 +1,5 @@
+- Skip `class`/`static` methods and properties while crawling, since mocking them is not supported.
+
 - Revert exact versions in CuckooGenerator dependencies.
 - Expose CuckooGenerator as executable product
 - Ignore LLM files.

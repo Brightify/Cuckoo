@@ -427,6 +427,16 @@ class FinalFields {
     final func function() { }
 }
 
+class ClassAndStaticFields {
+    class var classProperty: Int { 0 }
+
+    static var staticProperty: Int? = nil
+
+    class func classFunction() { }
+
+    static func staticFunction() { }
+}
+
 class InoutMethodClass {
     func inoutko(param: inout Int) { }
 
