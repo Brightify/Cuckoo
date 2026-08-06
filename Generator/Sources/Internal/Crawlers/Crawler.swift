@@ -1,9 +1,10 @@
 import Foundation
 import SwiftSyntax
 import SwiftParser
+import SwiftIfConfig
 
 final class Crawler: SyntaxVisitor {
-    static func crawl(url: URL) throws -> Crawler {
+    static func crawl(url: URL, buildConfiguration: CuckooGeneratorBuildConfiguration = .init(customConditions: [])) throws -> Crawler {
         let file = try String(contentsOf: url)
         let syntaxTree = Parser.parse(source: file)
         #if DEBUG
@@ -11,7 +12,7 @@ final class Crawler: SyntaxVisitor {
         // The `testString` is at the bottom of this file.
 //        let syntaxTree = Parser.parse(source: testString)
         #endif
-        let crawler = Self(container: nil, url: url)
+        let crawler = Self(container: nil, url: url, buildConfiguration: buildConfiguration)
         crawler.walk(syntaxTree)
         return crawler
     }
@@ -22,10 +23,12 @@ final class Crawler: SyntaxVisitor {
     private var container: Reference<Token>?
 
     private let url: URL
+    private let buildConfiguration: CuckooGeneratorBuildConfiguration
 
-    private init(container: Reference<Token>?, url: URL) {
+    private init(container: Reference<Token>?, url: URL, buildConfiguration: CuckooGeneratorBuildConfiguration) {
         self.container = container
         self.url = url
+        self.buildConfiguration = buildConfiguration
 
         super.init(viewMode: .sourceAccurate)
     }
@@ -61,7 +64,7 @@ final class Crawler: SyntaxVisitor {
 
         guard token.accessibility.isAccessible else { return .skipChildren }
 
-        let crawler = Crawler(container: Reference(token), url: url)
+        let crawler = Crawler(container: Reference(token), url: url, buildConfiguration: buildConfiguration)
         crawler.walk(members: node.memberBlock)
         token.members = crawler.tokens
         tokens.append(token)
@@ -85,7 +88,7 @@ final class Crawler: SyntaxVisitor {
 
         guard token.accessibility.isAccessible else { return .skipChildren }
 
-        let crawler = Crawler(container: Reference(token), url: url)
+        let crawler = Crawler(container: Reference(token), url: url, buildConfiguration: buildConfiguration)
         crawler.walk(members: node.memberBlock)
         token.members = crawler.tokens
         tokens.append(token)
@@ -105,7 +108,7 @@ final class Crawler: SyntaxVisitor {
 
         guard token.accessibility.isAccessible else { return .skipChildren }
 
-        let crawler = Crawler(container: Reference(token), url: url)
+        let crawler = Crawler(container: Reference(token), url: url, buildConfiguration: buildConfiguration)
         crawler.walk(members: node.memberBlock)
         token.members = crawler.tokens
         tokens.append(token)
@@ -125,7 +128,7 @@ final class Crawler: SyntaxVisitor {
 
         guard token.accessibility.isAccessible else { return .skipChildren }
 
-        let crawler = Crawler(container: Reference(token), url: url)
+        let crawler = Crawler(container: Reference(token), url: url, buildConfiguration: buildConfiguration)
         crawler.walk(members: node.memberBlock)
         token.members = crawler.tokens
         tokens.append(token)
@@ -145,7 +148,7 @@ final class Crawler: SyntaxVisitor {
 
         guard token.accessibility.isAccessible else { return .skipChildren }
 
-        let crawler = Crawler(container: Reference(token), url: url)
+        let crawler = Crawler(container: Reference(token), url: url, buildConfiguration: buildConfiguration)
         crawler.walk(members: node.memberBlock)
         token.members = crawler.tokens
         tokens.append(token)
@@ -178,8 +181,21 @@ final class Crawler: SyntaxVisitor {
     }
 
     override func visit(_ node: IfConfigDeclSyntax) -> SyntaxVisitorContinueKind {
-        // TODO: Implement #if functionality.
-        return .visitChildren
+        let (activeClause, _) = node.activeClause(in: buildConfiguration)
+        guard let elements = activeClause?.elements else { return .skipChildren }
+        switch elements {
+        case .decls(let memberList):
+            for member in memberList {
+                walk(member)
+            }
+        case .statements(let stmtList):
+            for stmt in stmtList {
+                walk(stmt)
+            }
+        default:
+            break
+        }
+        return .skipChildren
     }
 
     override func visit(_ node: TypeAliasDeclSyntax) -> SyntaxVisitorContinueKind {

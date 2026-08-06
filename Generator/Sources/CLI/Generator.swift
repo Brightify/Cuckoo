@@ -32,10 +32,11 @@ final class Generator {
             .filter { $0.exists }
             .map(TextFile.init(path:))
 
+        let buildConfiguration = CuckooGeneratorBuildConfiguration(customConditions: module.buildConditions)
         let files: [FileRepresentation] = await inputFiles.concurrentCompactMap { file in
             do {
                 log(.verbose, message: "Processing file: \(file.path)")
-                let crawler = try Crawler.crawl(url: file.path.url)
+                let crawler = try Crawler.crawl(url: file.path.url, buildConfiguration: buildConfiguration)
                 log(.verbose, message: "Successfully processed file: \(file.path)")
                 return FileRepresentation(file: file, imports: crawler.imports, tokens: crawler.tokens)
             } catch {
