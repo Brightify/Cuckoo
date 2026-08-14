@@ -37,6 +37,10 @@ jobs:
           make
           set -o pipefail && xcodebuild test -scheme "Cuckoo-macOS" -workspace Cuckoo.xcworkspace \
             | xcbeautify --renderer github-actions
+      - name: Test generator
+        run: |
+          set -o pipefail && xcodebuild test -scheme "Generator" -workspace Cuckoo.xcworkspace \
+            | xcbeautify --renderer github-actions
 
   test_iOS:
     name: Build and Test on iOS simulator
