@@ -13,13 +13,16 @@ extension Templates {
         self.sourceLocation = sourceLocation
     }
     {% for property in container.properties %}
-    
+    {{ property.unavailablePlatformsCheck }}
     {% for attribute in property.attributes %}
     {{ attribute }}
     {% endfor %}
     var {{property.name}}: Cuckoo.{{property.verifyType}}<{% if property.isReadOnly %}{{property.type|genericSafe}}{% else %}{{property.nonOptionalType|genericSafe}}{% endif %}> {
         return .init(manager: cuckoo_manager, name: "{{property.name}}", callMatcher: callMatcher, sourceLocation: sourceLocation)
     }
+    {% if property.hasUnavailablePlatforms %}
+    #endif
+    {% endif %}
     {% endfor %}
     {% for method in container.methods %}
     

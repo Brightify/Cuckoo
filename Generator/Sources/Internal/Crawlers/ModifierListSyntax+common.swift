@@ -8,6 +8,10 @@ extension Optional where Wrapped == DeclModifierListSyntax {
     var isStatic: Bool {
         self?.isStatic ?? false
     }
+
+    var isClass: Bool {
+        self?.isClass ?? false
+    }
 }
 
 extension DeclModifierListSyntax {
@@ -17,5 +21,9 @@ extension DeclModifierListSyntax {
 
     var isStatic: Bool {
         contains { $0.name.tokenKind == .keyword(.static) }
+    }
+
+    var isClass: Bool {
+        contains { $0.name.tokenKind == .keyword(.class) }
     }
 }

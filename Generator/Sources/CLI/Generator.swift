@@ -44,11 +44,12 @@ final class Generator {
             }
         }
         let flatMappedFiles = files.map { $0.flatMappingMemberContainers() }
-        let finalFiles = if module.options.enableInheritance {
+        let inheritedFiles = if module.options.enableInheritance {
             inheritNSObject(mergingInheritance(flatMappedFiles))
         } else {
             flatMappedFiles
         }
+        let finalFiles = inheritActorRequirement(inheritedFiles)
 
         // filter classes/protocols based on the settings passed to the generator
         var typeFilters: [TokenFilter] = []
@@ -144,6 +145,39 @@ final class Generator {
         }
 
         return filesRepresentation.map { $0.inheritNSObject(protocols: nsObjectProtocols) }
+    }
+
+    private static func inheritActorRequirement(_ filesRepresentation: [FileRepresentation]) -> [FileRepresentation] {
+        func containsRecursively(name: String) -> Bool {
+            guard let protocolDeclaration = protocolDeclarationDictionary[name] else { return false }
+            let collapsedInheritedTypesName = protocolDeclaration.inheritedTypes
+            if collapsedInheritedTypesName.contains(where: { $0 == "Actor" || $0 == "AnyActor" }) {
+                return true
+            } else {
+                return protocolDeclaration.inheritedTypes.contains { inheritanceType in
+                    containsRecursively(name: inheritanceType)
+                }
+            }
+        }
+
+        let protocolDeclarationDictionary: [String: ProtocolDeclaration] = Dictionary(
+            filesRepresentation.flatMap { file in
+                file.tokens.compactMap { token -> (name: String, protocolDeclaration: ProtocolDeclaration)? in
+                    guard let protocolDeclaration = token as? ProtocolDeclaration else { return nil }
+                    return (name: protocolDeclaration.name, protocolDeclaration: protocolDeclaration)
+                }
+            }
+        ) { former, latter in
+            log(.info, message: "Duplicate protocol '\(former.name)' in source set, behavior is undefined.")
+            return latter
+        }
+
+        let actorProtocols: [ProtocolDeclaration] = protocolDeclarationDictionary.values.reduce(into: []) { protocols, protocolDeclaration in
+            guard containsRecursively(name: protocolDeclaration.name) else { return }
+            protocols.append(protocolDeclaration)
+        }
+
+        return filesRepresentation.map { $0.inheritActorRequirement(protocols: actorProtocols) }
     }
 
     private static func removeTypes(from files: [FileRepresentation], using filters: [TokenFilter]) -> [FileRepresentation] {

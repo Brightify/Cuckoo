@@ -57,16 +57,43 @@ struct GeneratorHelper {
     private static func parameterMatchers(for parameters: [MethodParameter]) -> String {
         guard parameters.isEmpty == false else { return "let matchers: [Cuckoo.ParameterMatcher<Void>] = []" }
 
-        let tupleType = parameters.map { $0.type.withoutAttributes(except: ["@MainActor", "@Sendable"]).description }.joined(separator: ", ")
+        // `inout` parameters are boxed in `Cuckoo.InoutContainer` on the mock's `IN` type (see
+        // MockTemplate/Method.genericInputTypes), so the matcher tuple type and the value each
+        // matcher is applied against both need to unwrap `.value` for those positions. Matching
+        // happens before the stub's action runs, so this always sees the initial (pre-mutation) value.
+        let tupleType = parameters.map { parameter -> String in
+            let typeDescription = genericSafeType(from: parameter.type.withoutAttributes(except: ["@MainActor", "@Sendable"]).description)
+            return parameter.isInout ? "Cuckoo.InoutContainer<\(typeDescription.trimmed)>" : typeDescription
+        }.joined(separator: ", ")
         let matchers = parameters
             // Enumeration is done after filtering out parameters without usable names.
             .enumerated()
             .compactMap { index, parameter in
                 let name = escapeReservedKeywords(for: parameter.usableName)
-                return "wrap(matchable: \(name)) { $0\(parameters.count > 1 ? ".\(index)" : "") }"
+                let indexAccessor = parameters.count > 1 ? ".\(index)" : ""
+                let valueAccessor = parameter.isInout ? "\(indexAccessor).value" : indexAccessor
+                return "wrap(matchable: \(name)) { $0\(valueAccessor) }"
             }
             .joined(separator: ", ")
-        return "let matchers: [Cuckoo.ParameterMatcher<(\(genericSafeType(from: tupleType)))>] = [\(matchers)]"
+        return "let matchers: [Cuckoo.ParameterMatcher<(\(tupleType))>] = [\(matchers)]"
+    }
+
+    private static func inoutBoxDeclarations(for parameters: [MethodParameter]) -> String {
+        let declarations = parameters.filter(\.isInout).map { parameter -> String in
+            let name = escapeReservedKeywords(for: parameter.usableName)
+            return "let \(name)Box = Cuckoo.InoutContainer(\(name))"
+        }
+        guard !declarations.isEmpty else { return "" }
+        return declarations.joined(separator: "\n\t\t") + "\n\t\t"
+    }
+
+    private static func inoutWriteBack(for parameters: [MethodParameter]) -> String {
+        let assignments = parameters.filter(\.isInout).map { parameter -> String in
+            let name = escapeReservedKeywords(for: parameter.usableName)
+            return "\(name) = \(name)Box.value"
+        }
+        guard !assignments.isEmpty else { return "" }
+        return "defer {\n" + assignments.map { "\t\t\t\($0)" }.joined(separator: "\n") + "\n\t\t}\n\t\t"
     }
 
     private static func genericSafeType(from type: String) -> String {
@@ -152,6 +179,14 @@ extension GeneratorHelper {
         stencilExtension.registerFilter("closeNestedClosure") { (value: Any?) in
             guard let parameters = value as? [MethodParameter] else { return value }
             return closeNestedClosure(for: parameters)
+        }
+        stencilExtension.registerFilter("inoutBoxDeclarations") { (value: Any?) in
+            guard let parameters = value as? [MethodParameter] else { return value }
+            return inoutBoxDeclarations(for: parameters)
+        }
+        stencilExtension.registerFilter("inoutWriteBack") { (value: Any?) in
+            guard let parameters = value as? [MethodParameter] else { return value }
+            return inoutWriteBack(for: parameters)
         }
         stencilExtension.registerFilter("escapeReservedKeywords") { (value: Any?) in
             guard let name = value as? String else { return value }

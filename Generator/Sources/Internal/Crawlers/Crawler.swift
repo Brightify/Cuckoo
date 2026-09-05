@@ -222,7 +222,12 @@ extension Crawler {
     private func parse(_ variableGroup: VariableDeclSyntax) -> [Variable] {
         let isConstant = variableGroup.bindingSpecifier.tokenKind == .keyword(.let)
 
-        guard !variableGroup.modifiers.isStatic && !variableGroup.modifiers.isFinal else { return [] }
+        guard !variableGroup.modifiers.isFinal else { return [] }
+
+        guard !variableGroup.modifiers.isStatic && !variableGroup.modifiers.isClass else {
+            log(.verbose, message: "Ignoring static/class variable(s), mocking static members is not supported.")
+            return []
+        }
 
         let attributes = attributes(from: variableGroup.attributes)
 
@@ -344,10 +349,14 @@ extension Crawler {
 // MARK: - Method crawling.
 extension Crawler {
     private func parse(_ method: FunctionDeclSyntax) -> Method? {
-        // Can't mock static and final members.
-        guard !method.modifiers.isStatic && !method.modifiers.isFinal else { return nil }
+        guard !method.modifiers.isFinal else { return nil }
 
         guard case .identifier(let identifier) = method.name.tokenKind else { return nil }
+
+        guard !method.modifiers.isStatic && !method.modifiers.isClass else {
+            log(.verbose, message: "Ignoring static/class method '\(identifier)', mocking static members is not supported.")
+            return nil
+        }
 
         let accessibility = method.modifiers.lazy.compactMap { Accessibility(tokenKind: $0.name.tokenKind) }.first ?? (container as? HasAccessibility)?.accessibility ?? .internal
 

@@ -427,12 +427,28 @@ class FinalFields {
     final func function() { }
 }
 
+class ClassAndStaticFields {
+    class var classProperty: Int { 0 }
+
+    static var staticProperty: Int? = nil
+
+    class func classFunction() { }
+
+    static func staticFunction() { }
+}
+
 class InoutMethodClass {
     func inoutko(param: inout Int) { }
 
     func inoutkoMultiple(param1: inout Int, param2: inout String, param3: Void) { }
 
     func inoutkoClosure(param: (inout Int) -> Void) { }
+}
+
+protocol InoutProtocol {
+    func doSomething(inoutValue: inout Int)
+
+    func doSomethingThrowing(inoutValue: inout Int) throws
 }
 
 class ClosureNClass {

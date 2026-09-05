@@ -3,7 +3,7 @@ extension Templates {
 {% for attribute in container.attributes %}
 {{ attribute }}
 {% endfor %}
-{{container.accessibility|withSpace}}class {{ container.name }}Stub{{ container.genericParameters }}: {% if container.isNSObjectProtocol %}NSObject, {% endif %}{{ container.name }}{% if container.isImplementation %}{{ container.genericArguments }}{% endif %}, @unchecked Sendable {
+{{container.accessibility|withSpace}}{% if container.isActorRequirement %}actor{% else %}class{% endif %} {{ container.name }}Stub{{ container.genericParameters }}: {% if container.isNSObjectProtocol %}NSObject, {% endif %}{{ container.name }}{% if container.isImplementation %}{{ container.genericArguments }}{% endif %}{% if not container.isActorRequirement %}, @unchecked Sendable{% endif %} {
     {% for property in container.properties %}
     {{ property.unavailablePlatformsCheck }}
     {% if debug %}
@@ -27,7 +27,7 @@ extension Templates {
 
     {% for initializer in container.initializers %}
     {{ initializer.unavailablePlatformsCheck }}
-    {{ initializer.accessibility|withSpace }}required init{{initializer.signature}} {}
+    {{ initializer.accessibility|withSpace }}{% if not container.isActorRequirement %}required {%+ endif %}init{{initializer.signature}} {}
     {% if initializer.hasUnavailablePlatforms %}
     #endif
     {% endif %}

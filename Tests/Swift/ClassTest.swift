@@ -232,12 +232,63 @@ final class ClassTest: XCTestCase {
         let mock = MockInoutMethodClass()
         stub(mock) { mock in
             when(mock.inoutko(param: anyInt())).then { param in
-                print(param)
+                param = 999
             }
         }
 
         var integer = 12
         mock.inoutko(param: &integer)
+        XCTAssertEqual(integer, 999)
+    }
+
+    func testInoutMatchesOnInitialValue() {
+        let mock = MockInoutMethodClass()
+        stub(mock) { mock in
+            when(mock.inoutko(param: equal(to: 12))).then { param in
+                param = 111
+            }
+            when(mock.inoutko(param: equal(to: 34))).then { param in
+                param = 222
+            }
+        }
+
+        var first = 12
+        mock.inoutko(param: &first)
+        XCTAssertEqual(first, 111)
+
+        var second = 34
+        mock.inoutko(param: &second)
+        XCTAssertEqual(second, 222)
+
+        verify(mock).inoutko(param: equal(to: 12))
+        verify(mock).inoutko(param: equal(to: 34))
+    }
+
+    func testInoutThenDoNothingLeavesValueUnchanged() {
+        let mock = MockInoutMethodClass()
+        stub(mock) { mock in
+            when(mock.inoutko(param: anyInt())).thenDoNothing()
+        }
+
+        var integer = 12
+        mock.inoutko(param: &integer)
+        XCTAssertEqual(integer, 12)
+    }
+
+    func testInoutMultipleParameters() {
+        let mock = MockInoutMethodClass()
+        stub(mock) { mock in
+            when(mock.inoutkoMultiple(param1: anyInt(), param2: any(), param3: any())).then { (params: (Cuckoo.InoutContainer<Int>, Cuckoo.InoutContainer<String>, Void)) in
+                params.0.value = 999
+                params.1.value = "mutated"
+            }
+        }
+
+        var integer = 12
+        var string = "hello"
+        mock.inoutkoMultiple(param1: &integer, param2: &string, param3: ())
+        XCTAssertEqual(integer, 999)
+        XCTAssertEqual(string, "mutated")
     }
 
     func testOptionals() {

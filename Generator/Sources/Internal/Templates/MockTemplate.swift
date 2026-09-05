@@ -19,7 +19,7 @@ extension {{ container.parentFullyQualifiedName }} {
 // runtime support for constrained protocols with primary associated types
 @available(iOS 16, macOS 13, watchOS 9, tvOS 16, *)
 {% endif %}
-{{ container.accessibility|withSpace }}class {{ container.mockName }}{{ container.genericParameters }}:{% if container.isNSObjectProtocol %} NSObject,{% endif %} {{ container.name }}{% if container.isImplementation %}{{ container.genericArguments }}{% endif %},{% if container.isImplementation %} Cuckoo.ClassMock{% else %} Cuckoo.ProtocolMock{% endif %}, @unchecked Sendable {
+{{ container.accessibility|withSpace }}{% if container.isActorRequirement %}actor{% else %}class{% endif %} {{ container.mockName }}{{ container.genericParameters }}:{% if container.isNSObjectProtocol %} NSObject,{% endif %} {{ container.name }}{% if container.isImplementation %}{{ container.genericArguments }}{% endif %},{% if container.isImplementation %} Cuckoo.ClassMock{% else %} Cuckoo.ProtocolMock{% endif %}{% if not container.isActorRequirement %}, @unchecked Sendable{% endif %} {
     {% if container.isGeneric and not container.isImplementation and not container.hasOnlyPrimaryAssociatedTypes %}
     {{ container.accessibility|withSpace }}typealias MocksType = \(typeErasureClassName)
     {% elif container.isImplementation %}
@@ -35,38 +35,38 @@ extension {{ container.parentFullyQualifiedName }} {
     {{ container.accessibility|withSpace }}{{ typealias }}
     {% endfor %}
 
-    {{ container.accessibility|withSpace }}let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: {{ container.isImplementation }})
+    {{ container.accessibility|withSpace }}{% if container.isActorRequirement %}nonisolated(unsafe) {%+ endif %}let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: {{ container.isImplementation }})
 
     {% if container.isGeneric and not container.isImplementation and not container.hasOnlyPrimaryAssociatedTypes %}
 \(Templates.typeErasure.indented())
 
-    private var __defaultImplStub: \(typeErasureClassName)?
+    {% if container.isActorRequirement %}nonisolated(unsafe) {%+ endif %}private var __defaultImplStub: \(typeErasureClassName)?
 
-    {{ container.accessibility|withSpace }}func enableDefaultImplementation<\(staticGenericParameter): {{ container.name }}>(_ stub: \(staticGenericParameter)) where {{ container.genericProtocolIdentity }} {
+    {{ container.accessibility|withSpace }}{% if container.isActorRequirement %}nonisolated {%+ endif %}func enableDefaultImplementation<\(staticGenericParameter): {{ container.name }}>(_ stub: \(staticGenericParameter)) where {{ container.genericProtocolIdentity }} {
         var mutableStub = stub
         __defaultImplStub = \(typeErasureClassName)(from: &mutableStub, keeping: mutableStub)
         cuckoo_manager.enableDefaultStubImplementation()
     }
 
-    {{ container.accessibility|withSpace }}func enableDefaultImplementation<\(staticGenericParameter): {{ container.name }}>(mutating stub: UnsafeMutablePointer<\(staticGenericParameter)>) where {{ container.genericProtocolIdentity }} {
+    {{ container.accessibility|withSpace }}{% if container.isActorRequirement %}nonisolated {%+ endif %}func enableDefaultImplementation<\(staticGenericParameter): {{ container.name }}>(mutating stub: UnsafeMutablePointer<\(staticGenericParameter)>) where {{ container.genericProtocolIdentity }} {
         __defaultImplStub = \(typeErasureClassName)(from: stub, keeping: stub.pointee)
         cuckoo_manager.enableDefaultStubImplementation()
     }
     {% else %}
     {% if container.isImplementation %}
-    private var __defaultImplStub: {{ container.name }}{{ container.genericArguments }}?
+    {% if container.isActorRequirement %}nonisolated(unsafe) {%+ endif %}private var __defaultImplStub: {{ container.name }}{{ container.genericArguments }}?
     {% else %}
-    private var __defaultImplStub: (any {{ container.name }}{{ container.genericArguments }})?
+    {% if container.isActorRequirement %}nonisolated(unsafe) {%+ endif %}private var __defaultImplStub: (any {{ container.name }}{{ container.genericArguments }})?
     {% endif %}
 
-    {{ container.accessibility|withSpace }}func enableDefaultImplementation(_ stub: {%+ if not container.isImplementation %}any {%+ endif %}{{ container.name }}{{ container.genericArguments }}) {
+    {{ container.accessibility|withSpace }}{% if container.isActorRequirement %}nonisolated {%+ endif %}func enableDefaultImplementation(_ stub: {%+ if not container.isImplementation %}any {%+ endif %}{{ container.name }}{{ container.genericArguments }}) {
         __defaultImplStub = stub
         cuckoo_manager.enableDefaultStubImplementation()
     }
     {% endif -%}
 
     {% for property in container.properties %}
-
+    {{ property.unavailablePlatformsCheck }}
     {% if debug %}
     // {{ property }}
     {% endif %}
@@ -85,7 +85,7 @@ extension {{ container.parentFullyQualifiedName }} {
                     {%- else -%}
                     Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                     {%- endif -%},
-                defaultCall: {%+ if property.isThrowing %}try {%+ endif %}{% if property.isAsync %}await {%+ endif %}__defaultImplStub!.{{property.name}}
+                defaultCall: {%+ if container.isActorRequirement and not property.isAsync %}Cuckoo.MockManager.crashOnProtocolSuperclassCall(){% else %}{%+ if property.isThrowing %}try {%+ endif %}{% if property.isAsync %}await {%+ endif %}__defaultImplStub!.{{property.name}}{% endif +%}
             )
         }
         {% ifnot property.isReadOnly %}
@@ -98,24 +98,31 @@ extension {{ container.parentFullyQualifiedName }} {
                     {%- else -%}
                     Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                     {%- endif -%},
-                defaultCall: __defaultImplStub!.{{property.name}} = newValue
+                defaultCall: {%+ if container.isActorRequirement %}Cuckoo.MockManager.crashOnProtocolSuperclassCall(){% else %}__defaultImplStub!.{{property.name}} = newValue{% endif +%}
             )
         }
         {% endif %}
     }
+    {% if property.hasUnavailablePlatforms %}
+    #endif
+    {% endif %}
     {% endfor %}
 
     {% for initializer in container.initializers %}
+    {{ initializer.unavailablePlatformsCheck }}
     {% if debug %}
     // {{ initializer }}
     {% endif %}
     {% for docString in initializer.documentation %}
     /// {{ docString }}
     {% endfor %}
-    {{ initializer.accessibility|withSpace }}required init{{initializer.signature}} {}
+    {{ initializer.accessibility|withSpace }}{% if not container.isActorRequirement %}required {%+ endif %}init{{initializer.signature}} {}
+    {% if initializer.hasUnavailablePlatforms %}
+    #endif
+    {% endif %}
     {% endfor %}
     {% for method in container.methods %}
-
+    {{ method.unavailablePlatformsCheck }}
     {% if debug %}
     // {{method}}
     {% endif %}
@@ -126,17 +133,20 @@ extension {{ container.parentFullyQualifiedName }} {
     {{ attribute }}
     {% endfor %}
     {{ method.accessibility|withSpace }}{% if method.isOverriding %}override {%+ endif %}func {{ method.name|escapeReservedKeywords }}{{ method.signature }} {
-        {{ method.self|openNestedClosure }}return{% if method.isThrowing %} try{% endif %}{% if method.isAsync %} await{% endif %} cuckoo_manager.call{% if method.isThrowing %}{{ method.throwType|capitalize }}{% endif %}(
+        {{ method.parameters|inoutBoxDeclarations }}{{ method.parameters|inoutWriteBack }}{{ method.self|openNestedClosure }}return{% if method.isThrowing %} try{% endif %}{% if method.isAsync %} await{% endif %} cuckoo_manager.call{% if method.isThrowing %}{{ method.throwType|capitalize }}{% endif %}(
             "{{method.fullyQualifiedName}}",
-            parameters: ({{method.parameterNames}}),
-            escapingParameters: ({{method.escapingParameterNames}}),
+            parameters: ({{method.boxedParameterNames}}),
+            escapingParameters: ({{method.boxedEscapingParameterNames}}),
             {% if method.throwsOnly %}
             errorType: {{ method.throwTypeError }}.self,
             {% endif %}
-            superclassCall: {%+ if container.isImplementation %}{% if method.isAsync %}await {%+ endif %}super.{{method.name}}({{method.call}}){% else %}Cuckoo.MockManager.crashOnProtocolSuperclassCall(){% endif %},
-            defaultCall: {%+ if method.isAsync %}await {%+ endif %}__defaultImplStub!.{{method.name}}{%if method.isOptional %}!{%endif%}({{method.call}})
+            superclassCall: {%+ if container.isImplementation %}{% if method.isAsync %}await {%+ endif %}super.{{method.name}}({{method.boxedCall}}){% else %}Cuckoo.MockManager.crashOnProtocolSuperclassCall(){% endif %},
+            defaultCall: {%+ if container.isActorRequirement and not method.isAsync %}Cuckoo.MockManager.crashOnProtocolSuperclassCall(){% else %}{%+ if method.isAsync %}await {%+ endif %}__defaultImplStub!.{{method.name}}{%if method.isOptional %}!{%endif%}({{method.boxedCall}}){% endif +%}
         ){{ method.parameters|closeNestedClosure }}
     }
+    {% if method.hasUnavailablePlatforms %}
+    #endif
+    {% endif %}
     {% endfor %}
 
 \(Templates.stubbingProxy.indented())
