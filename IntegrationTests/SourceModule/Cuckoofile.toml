@@ -1,0 +1,7 @@
+[modules.SourceModuleTests]
+sourceModule = "OriginalTypes"
+imports = ["Foundation", "OriginalTypes", "OtherTypes"]
+sources = ["Sources/OriginalTypes/Types.swift"]
+
+[modules.SourceModuleTests.options]
+omitHeaders = true

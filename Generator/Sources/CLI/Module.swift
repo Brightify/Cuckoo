@@ -5,6 +5,7 @@ final class Module: @unchecked Sendable {
     nonisolated(unsafe) static var overriddenOutput: String?
 
     let name: String
+    let sourceModule: String?
     let imports: [String]
     let publicImports: [String]
     let testableImports: [String]
@@ -22,6 +23,7 @@ final class Module: @unchecked Sendable {
         }
 
         self.name = name
+        self.sourceModule = dto.sourceModule?.trimmed
         self.imports = dto.imports?.map(\.trimmed) ?? []
         self.publicImports = dto.publicImports?.map(\.trimmed) ?? []
         self.testableImports = dto.testableImports?.map(\.trimmed) ?? []
@@ -94,6 +96,7 @@ final class Module: @unchecked Sendable {
 extension Module {
     struct DTO: Decodable {
         let imports: [String]?
+        let sourceModule: String?
         let publicImports: [String]?
         let testableImports: [String]?
         let sources: [String]?

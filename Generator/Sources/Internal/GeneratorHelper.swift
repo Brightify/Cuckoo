@@ -11,8 +11,19 @@ struct GeneratorHelper {
     private static let extensions = createExtensions()
 
     @StaticActor
-    static func generate(tokens: [Token], debug: Bool = false) throws -> String {
-        let containers = tokens.map { $0.serialize() }
+    static func generate(tokens: [Token], sourceModule: String? = nil, debug: Bool = false) throws -> String {
+        let containers = tokens.map { token in
+            var context = token.serialize()
+            if let sourceModule, !sourceModule.isEmpty, let named = token as? HasName {
+                context["originalName"] = "\(sourceModule).\(named.fullyQualifiedName)"
+                if let parentName = context["parentFullyQualifiedName"] as? String {
+                    context["parentFullyQualifiedName"] = "\(sourceModule).\(parentName)"
+                }
+            } else {
+                context["originalName"] = context["name"]
+            }
+            return context
+        }
 
         let environment = Environment(
             extensions: extensions,

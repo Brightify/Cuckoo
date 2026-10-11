@@ -17,6 +17,9 @@ jobs:
         run: xcodebuild -version
       - name: Build Package
         run: swift build
+      - name: Test source module qualification
+        working-directory: IntegrationTests/SourceModule
+        run: swift test --force-resolved-versions
 
   test_macOS:
     name: Build and Test on macOS

@@ -19,13 +19,13 @@ extension {{ container.parentFullyQualifiedName }} {
 // runtime support for constrained protocols with primary associated types
 @available(iOS 16, macOS 13, watchOS 9, tvOS 16, *)
 {% endif %}
-{{ container.accessibility|withSpace }}class {{ container.mockName }}{{ container.genericParameters }}:{% if container.isNSObjectProtocol %} NSObject,{% endif %} {{ container.name }}{% if container.isImplementation %}{{ container.genericArguments }}{% endif %},{% if container.isImplementation %} Cuckoo.ClassMock{% else %} Cuckoo.ProtocolMock{% endif %}, @unchecked Sendable {
+{{ container.accessibility|withSpace }}class {{ container.mockName }}{{ container.genericParameters }}:{% if container.isNSObjectProtocol %} NSObject,{% endif %} {{ container.originalName }}{% if container.isImplementation %}{{ container.genericArguments }}{% endif %},{% if container.isImplementation %} Cuckoo.ClassMock{% else %} Cuckoo.ProtocolMock{% endif %}, @unchecked Sendable {
     {% if container.isGeneric and not container.isImplementation and not container.hasOnlyPrimaryAssociatedTypes %}
     {{ container.accessibility|withSpace }}typealias MocksType = \(typeErasureClassName)
     {% elif container.isImplementation %}
-    {{ container.accessibility|withSpace }}typealias MocksType = {{ container.name }}{{ container.genericArguments }}
+    {{ container.accessibility|withSpace }}typealias MocksType = {{ container.originalName }}{{ container.genericArguments }}
     {% else %}
-    {{ container.accessibility|withSpace }}typealias MocksType = any {{ container.name }}{{ container.genericArguments }}
+    {{ container.accessibility|withSpace }}typealias MocksType = any {{ container.originalName }}{{ container.genericArguments }}
     {% endif %}
     {{ container.accessibility|withSpace }}typealias Stubbing = __StubbingProxy_{{ container.name }}
     {{ container.accessibility|withSpace }}typealias Verification = __VerificationProxy_{{ container.name }}
@@ -42,24 +42,24 @@ extension {{ container.parentFullyQualifiedName }} {
 
     private var __defaultImplStub: \(typeErasureClassName)?
 
-    {{ container.accessibility|withSpace }}func enableDefaultImplementation<\(staticGenericParameter): {{ container.name }}>(_ stub: \(staticGenericParameter)) where {{ container.genericProtocolIdentity }} {
+    {{ container.accessibility|withSpace }}func enableDefaultImplementation<\(staticGenericParameter): {{ container.originalName }}>(_ stub: \(staticGenericParameter)) where {{ container.genericProtocolIdentity }} {
         var mutableStub = stub
         __defaultImplStub = \(typeErasureClassName)(from: &mutableStub, keeping: mutableStub)
         cuckoo_manager.enableDefaultStubImplementation()
     }
 
-    {{ container.accessibility|withSpace }}func enableDefaultImplementation<\(staticGenericParameter): {{ container.name }}>(mutating stub: UnsafeMutablePointer<\(staticGenericParameter)>) where {{ container.genericProtocolIdentity }} {
+    {{ container.accessibility|withSpace }}func enableDefaultImplementation<\(staticGenericParameter): {{ container.originalName }}>(mutating stub: UnsafeMutablePointer<\(staticGenericParameter)>) where {{ container.genericProtocolIdentity }} {
         __defaultImplStub = \(typeErasureClassName)(from: stub, keeping: stub.pointee)
         cuckoo_manager.enableDefaultStubImplementation()
     }
     {% else %}
     {% if container.isImplementation %}
-    private var __defaultImplStub: {{ container.name }}{{ container.genericArguments }}?
+    private var __defaultImplStub: {{ container.originalName }}{{ container.genericArguments }}?
     {% else %}
-    private var __defaultImplStub: (any {{ container.name }}{{ container.genericArguments }})?
+    private var __defaultImplStub: (any {{ container.originalName }}{{ container.genericArguments }})?
     {% endif %}
 
-    {{ container.accessibility|withSpace }}func enableDefaultImplementation(_ stub: {%+ if not container.isImplementation %}any {%+ endif %}{{ container.name }}{{ container.genericArguments }}) {
+    {{ container.accessibility|withSpace }}func enableDefaultImplementation(_ stub: {%+ if not container.isImplementation %}any {%+ endif %}{{ container.originalName }}{{ container.genericArguments }}) {
         __defaultImplStub = stub
         cuckoo_manager.enableDefaultStubImplementation()
     }

@@ -2,8 +2,8 @@ import Foundation
 
 extension Templates {
     static let typeErasure = """
-    {{ container.accessibility|withSpace }}class \(typeErasureClassName): {{ container.name }}, @unchecked Sendable {
-        private let reference: () -> any {{ container.name }}{{ container.genericPrimaryAssociatedTypeArguments }}
+    {{ container.accessibility|withSpace }}class \(typeErasureClassName): {{ container.originalName }}, @unchecked Sendable {
+        private let reference: () -> any {{ container.originalName }}{{ container.genericPrimaryAssociatedTypeArguments }}
 
         {% for property in container.properties %}
         private let _getter_storage$${{ property.name }}: () -> {{ property.type }}
@@ -20,7 +20,7 @@ extension Templates {
         {% endfor %}
         {# For developers: The `keeping reference: Any` is necessary because when called from the `enableDefaultImplementation(stub:)` method
         instead of `enableDefaultImplementation(mutating:)`, we need to prevent the struct getting deallocated. #}
-        init<\(staticGenericParameter): {{ container.name }}>(from defaultImpl: UnsafeMutablePointer<\(staticGenericParameter)>, keeping reference: @escaping @autoclosure () -> \(staticGenericParameter)) where {{ container.genericProtocolIdentity }} {
+        init<\(staticGenericParameter): {{ container.originalName }}>(from defaultImpl: UnsafeMutablePointer<\(staticGenericParameter)>, keeping reference: @escaping @autoclosure () -> \(staticGenericParameter)) where {{ container.genericProtocolIdentity }} {
             self.reference = reference
 
             {% for property in container.properties %}
@@ -50,7 +50,7 @@ extension Templates {
         {% endif %}
         {{ container.accessibility|withSpace }}func {{ method.name|escapeReservedKeywords }}{{ method.signature }} {
             {% if method.hasGenericParams and method.hasNonPrimaryAssociatedTypeParams %}
-            func openExistential<\(staticGenericParameter): {{ container.name }}{{ container.genericPrimaryAssociatedTypeArguments }}>(_ opened: \(staticGenericParameter)) {% if method.isAsync %} async{% endif %} {% if method.isThrowing %} throws{% endif %} -> {{ method.returnType }} {
+            func openExistential<\(staticGenericParameter): {{ container.originalName }}{{ container.genericPrimaryAssociatedTypeArguments }}>(_ opened: \(staticGenericParameter)) {% if method.isAsync %} async{% endif %} {% if method.isThrowing %} throws{% endif %} -> {{ method.returnType }} {
                 return {% if method.isThrowing %} try{% endif %} {% if method.isAsync %} await{% endif %} opened.{{ method.name }}{{ method.staticGenericCall }}
             }
             return {% if method.isThrowing %} try{% endif %} {% if method.isAsync %} await{% endif %} openExistential(reference())

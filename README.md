@@ -98,6 +98,8 @@ At the root of your project, create `Cuckoofile.toml` configuration file.
 output = "Tests/Swift/Generated/GeneratedMocks.swift"
 
 [modules.MyProject]
+# Optional source module used to qualify mocked declarations when imports share type names.
+# sourceModule = "MyProject"
 output = "Tests/Swift/Generated/GeneratedMocks+MyProject.swift"
 # Standard imports added to the generated file(s).
 imports = ["Foundation"]
@@ -132,6 +134,14 @@ target = "Cuckoonator"
 ```
 
 #### For CuckooPluginModular
+
+Set `sourceModule` explicitly when a mocked declaration has the same name as a type
+in another imported module. For example, `sourceModule = "MyLibrary"` makes mocks
+and stubs refer to `MyLibrary.Timer` while their generated names remain `MockTimer`
+and `TimerStub`. This applies to the mocked declarations, not arbitrary member
+types. The configuration section name is not used as the source module: it can
+name a test target or group sources from multiple modules. Use a separate entry
+for each source module when qualification is needed.
 
 `CuckooPluginSingleFile` puts all mocks into a single `GeneratedMocks.swift` file in derived data. In a Swift Package with multiple targets this is problematic because each test target compiles independently and may not have visibility into types from unrelated modules. Use `CuckooPluginModular` instead: it inspects your test target's dependencies and runs the generator once per dependency module, producing a separate `GeneratedMocks_<ModuleName>.swift` for each.
 
